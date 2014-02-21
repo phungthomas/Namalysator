@@ -115,4 +115,13 @@ std::string dump_alto_rect2str(const Block &r)
 	return os.str();
 }
 
-
+const char *safe_sqlite3_column_text(sqlite3_stmt *pStmt, int iCol)
+{
+	static const char *g_sz_empty = "";
+	const char *res = (const char *) sqlite3_column_text(pStmt, iCol);
+	if (res) {
+		return res;
+	} else {
+		return g_sz_empty;
+	}
+}
