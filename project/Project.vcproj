@@ -309,6 +309,42 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="mets"
+					>
+					<File
+						RelativePath="..\Validating Parsers\dc-pimpl.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\dc-pskel.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\mets-pimpl.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\mets-pskel.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\rdf-pimpl.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\rdf-pskel.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\xml-pimpl.cxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\xml-pskel.cxx"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="datafactory"
@@ -547,6 +583,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\Validating Parsers\mix-pskel.ixx"
+						>
+					</File>
+					<File
 						RelativePath=".\schema_validatormix.h"
 						>
 					</File>
@@ -587,6 +627,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\Validating Parsers\mods-3-0-pskel.ixx"
+						>
+					</File>
+					<File
 						RelativePath=".\schema_validatordmdsec.h"
 						>
 					</File>
@@ -620,6 +664,58 @@
 					</File>
 					<File
 						RelativePath=".\schema_validator_bnl_serial.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="mets"
+					>
+					<File
+						RelativePath="..\Validating Parsers\dc-pimpl.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\dc-pskel.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\dc-pskel.ixx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\mets-pimpl.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\mets-pskel.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\mets-pskel.ixx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\rdf-pimpl.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\rdf-pskel.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\rdf-pskel.ixx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\xml-pimpl.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\xml-pskel.hxx"
+						>
+					</File>
+					<File
+						RelativePath="..\Validating Parsers\xml-pskel.ixx"
 						>
 					</File>
 				</Filter>
@@ -751,6 +847,10 @@
 			<Filter
 				Name="common_files"
 				>
+				<File
+					RelativePath="..\common_files\precisiontimer.h"
+					>
+				</File>
 				<File
 					RelativePath=".\schemavalidator.h"
 					>
