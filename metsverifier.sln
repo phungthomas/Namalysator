@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "metsverifier", "Project\Project.vcproj", "{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{FC105D8C-AB16-4172-979D-3E55578EEA91}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "namalysator", "namalysator\namalysator.vcproj", "{80B6A0C6-EA9D-349F-B3E8-0756871F7982}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "inventory", "inventory\inventory.vcproj", "{50C205A2-12CE-47AA-B507-A1A2E0C18CD2}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}.Debug|Win32.Build.0 = Debug|Win32
+		{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}.Release|Win32.ActiveCfg = Release|Win32
+		{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}.Release|Win32.Build.0 = Release|Win32
+		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Debug|Win32.ActiveCfg = Debug|Win32
+		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Debug|Win32.Build.0 = Debug|Win32
+		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Release|Win32.ActiveCfg = Release|Win32
+		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Release|Win32.Build.0 = Release|Win32
+		{50C205A2-12CE-47AA-B507-A1A2E0C18CD2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{50C205A2-12CE-47AA-B507-A1A2E0C18CD2}.Debug|Win32.Build.0 = Debug|Win32
+		{50C205A2-12CE-47AA-B507-A1A2E0C18CD2}.Release|Win32.ActiveCfg = Release|Win32
+		{50C205A2-12CE-47AA-B507-A1A2E0C18CD2}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
