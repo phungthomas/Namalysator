@@ -8,7 +8,6 @@
 #include <QDate>
 #include "../common_files/utilities.h"
 
-std::vector<int> getIssueNumber(const std::string &issueNumber);
 std::vector<int> getIssueNumberExcel(const std::string &issueNumber);
 bool createdir(const std::string dir);
 std::string convertToStringIssueNumber(std::vector<int> vIssueNumber);

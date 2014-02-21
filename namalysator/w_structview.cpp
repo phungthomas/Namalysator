@@ -177,9 +177,8 @@ void w_structview::previous()
 	if (currentPage>1)
 		currentPage--;
 	showCurrentPage();
-	drawRect(currentSelectedArticle, 0);
 	// If the current article is still on the new current page, redraw its rectangles
-	if (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end()) {
+	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
 		drawRect(currentSelectedArticle, 0);
 	}
 //	paintAllStructure(currentAltoFile);
@@ -191,7 +190,7 @@ void w_structview::next()
 	currentPage++;
 	showCurrentPage();
 	// If the current article is still on the new current page, redraw its rectangles
-	if (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end()) {
+	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
 		drawRect(currentSelectedArticle, 0);
 	}
 //	paintAllStructure(currentAltoFile);

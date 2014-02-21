@@ -2,62 +2,6 @@
 #include <stdio.h>
 #include <sstream>
 bool endline = false;
-std::vector<int> getIssueNumber(const std::string &issueNumber)
-{
-	std::vector<int> result;
-	// issue_numbers (take every single number behind n°)
-	static const char sz_find[4] = {110, -62, -80, 0}; // 0x6E, 0xC2, 0xB0  This is n° in UTF-8
-	std::string::size_type p = issueNumber.find(sz_find);
-	//std::string::size_type p = issueNumber.find("n°");
-	char lastspacer = 0;
-	if (p != std::string::npos) {
-		const char *c = issueNumber.c_str() + p;
-		int v = 0;
-		while (*c) {
-			if (*c >= '0' && *c <= '9') {
-				v *= 10;
-				v += *c - '0';
-			} else {
-				if (v > 0) {
-					if (lastspacer == '-') { // handle a range
-						if (!result.empty()) {
-							if (v - result.back() > 0 && v - result.back() < 10) {
-								for (int i = result.back() + 1; i < v; ++i) {
-									result.push_back(i);
-								}
-							}
-						}
-					}
-					result.push_back(v);
-					lastspacer = 0;
-				}
-				if (*c == '-') {
-					lastspacer = '-';
-				}
-				v = 0;
-			}
-			++c;
-		}
-		if (v > 0) {
-			if (lastspacer == '-') { // handle a range
-				if (!result.empty()) {
-					if (v - result.back() > 0 && v - result.back() < 10) {
-						for (int i = result.back() + 1; i < v; ++i) {
-							result.push_back(i);
-						}
-					}
-				}
-			}
-			result.push_back(v);
-		}
-	} else 
-	{
-		result.push_back(1);
-	}
-	return result;
-}
-
-
 
 std::vector<int> getIssueNumberExcel(const std::string &issueNumber)
 {
@@ -143,21 +87,6 @@ bool createdir(const std::string &output_dir)
 	}
 	return true;
 }
-
-
-std::string slash_path(std::string message)
-{
-	size_t j;	
-	std::string str2 ("\\"); 
-	
-	for ( ; (j = message.find( str2 )) != std::string::npos ; ) 
-	{	
-		message.replace( j, str2.length(), "/" );	
-	}
-	return message;
-}
-
-
 
 std::string messageMisisngIssue(DateError dateError)
 {

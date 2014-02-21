@@ -477,10 +477,6 @@
 			<Filter
 				Name="common_files"
 				>
-				<File
-					RelativePath="..\common_files\xmlparser.cpp"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="parser"
