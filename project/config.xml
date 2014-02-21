@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<database>C:/Namalysator/DB/bnl2013-pilot-serials-trial</database>  
+	<batchName>pilot</batchName>
+	<input>E:/BNL_2013_pilot_20130821/socnatfauna</input>
+	<verifiers>
+		<xml>
+			<schemaValidation>1</schemaValidation>		
+		</xml>
+		<dataintegrity >
+			<checkFile>1</checkFile>
+			<checkSum>1</checkSum>
+			<divs>1</divs>
+			<oddsPages>1</oddsPages>
+			<unlinkedIdentifier>1</unlinkedIdentifier>	
+		</dataintegrity>
+		<semanticchecks>	
+				<identifierMix>1</identifierMix>
+				<dateFolderIssue>1</dateFolderIssue>
+				<noIssueDefined>1</noIssueDefined>
+				<invalidSupplement>1</invalidSupplement>
+				<divs>1</divs>
+		</semanticchecks>
+		<blocks>
+			<altoblockPerPage>1</altoblockPerPage>
+			<blockStructure>1</blockStructure>
+			<coveragePercentAlto>1</coveragePercentAlto>
+			<multipleBlockUse>1</multipleBlockUse>			
+		</blocks>
+	</verifiers>
+	<checkTitle>5</checkTitle> <!-- per 1000 -->
+	<sampling>5</sampling> <!-- per 1000 -->
+	<dates>1</dates>
+	<issueNumber>1</issueNumber>
+</config>
