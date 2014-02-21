@@ -147,7 +147,7 @@ std::vector<std::string> dbrequest::getvTestSet()
 	{		
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			vect.push_back((const char *)sqlite3_column_text(pStmt, 0));
+			vect.push_back(safe_sqlite3_column_text(pStmt, 0));
 		}
 	}
 	sqlite3_finalize(pStmt);
@@ -175,7 +175,7 @@ std::vector<std::pair<int,std::string> > dbrequest::getvDateTestset(std::string 
 		{
 			std::pair<int,std::string> p;
 			p.first = sqlite3_column_int(pStmt, 0);
-			p.second = (const char *) sqlite3_column_text(pStmt, 1);
+			p.second = safe_sqlite3_column_text(pStmt, 1);
 			vect.push_back(p);	
 		}
 	}
@@ -202,11 +202,11 @@ BatchDetail dbrequest::getBatch(int id_testset)
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			std::pair<std::string,std::string> p;
-			bdetail.minDate = (const char *)sqlite3_column_text(pStmt, 0);
-			bdetail.maxDate = (const char *)sqlite3_column_text(pStmt, 1);
+			bdetail.minDate = safe_sqlite3_column_text(pStmt, 0);
+			bdetail.maxDate = safe_sqlite3_column_text(pStmt, 1);
 			bdetail.count = sqlite3_column_int(pStmt, 2);
-			bdetail.batchName = (const char *)sqlite3_column_text(pStmt, 3);
-			bdetail.testDate = (const char *)sqlite3_column_text(pStmt, 4);
+			bdetail.batchName = safe_sqlite3_column_text(pStmt, 3);
+			bdetail.testDate = safe_sqlite3_column_text(pStmt, 4);
 		}
 	}
 	sqlite3_finalize(pStmt);
@@ -238,15 +238,15 @@ MetsFile dbrequest::getMets(int id_mets)
 			mets.mapLinked["ALTOGRP"] = getMapLinkedFiles(mets.idMets, "ALTOGRP");
 			mets.mapLinked["PDFGRP"] = getMapLinkedFiles(mets.idMets, "PDFGRP");
 			mets.idTestSet = sqlite3_column_int(pStmt, 1);
-			mets.path = (const char *) sqlite3_column_text(pStmt, 2);
-			mets.fileName = (const char *) sqlite3_column_text(pStmt, 3);
-			mets.issueNumber = (const char *) sqlite3_column_text(pStmt, 4);
+			mets.path = safe_sqlite3_column_text(pStmt, 2);
+			mets.fileName = safe_sqlite3_column_text(pStmt, 3);
+			mets.issueNumber = safe_sqlite3_column_text(pStmt, 4);
 			mets.vectIssueNumber = getIssueNumber(mets.issueNumber);
-			mets.title = (const char *) sqlite3_column_text(pStmt, 5);
+			mets.title = safe_sqlite3_column_text(pStmt, 5);
 			mets.pages = sqlite3_column_int(pStmt, 6);
-			mets.date =  mets.date.fromString((const char *) sqlite3_column_text(pStmt, 7), "yyyy-MM-dd");
+			mets.date =  mets.date.fromString(safe_sqlite3_column_text(pStmt, 7), "yyyy-MM-dd");
 			mets.year = sqlite3_column_int(pStmt, 8);
-			mets.docType = (const char *) sqlite3_column_text(pStmt, 9);
+			mets.docType = safe_sqlite3_column_text(pStmt, 9);
 		}	  
     }
 	sqlite3_finalize(pStmt);
@@ -258,7 +258,7 @@ MetsFile dbrequest::getMets(int id_mets)
 	{	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			mets.supplements.push_back((const char *) sqlite3_column_text(pStmt, 0));
+			mets.supplements.push_back(safe_sqlite3_column_text(pStmt, 0));
 		}
 	}
 	sqlite3_finalize(pStmt);
@@ -287,7 +287,7 @@ LinkedFiles dbrequest::getLinkedFiles(int id,std::string file_part)
 		int count = sqlite3_data_count(pStmt);		
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+			const char *result = safe_sqlite3_column_text(pStmt, i);			
 			if (i==0) lf.id = atoi(result);									
 			else if (i==1) lf.idMets = atoi(result);
 			else if (i==2) lf.type = atoi(result);
@@ -327,7 +327,7 @@ Parameters dbrequest::getParameterVerifiers(int id_testset)
 		std::pair<int,DateError> p;
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
 			if (i==0) param.checkFile = result;								
 			else if (i==1) 	param.checkSum = result;	
@@ -366,7 +366,7 @@ std::vector<int> dbrequest::getIdTestset(std::string batchName)
 	{	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			const char *result = (const char *)sqlite3_column_text(pStmt, 0);			
+			const char *result = safe_sqlite3_column_text(pStmt, 0);			
 			v.push_back(atoi(result));
 		}		 
 	} 
@@ -397,7 +397,7 @@ std::vector<ErrorSummary> dbrequest::getvErrorSummary(int id_testset)
 			int count = sqlite3_data_count(pStmt);		
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+				const char *result = safe_sqlite3_column_text(pStmt, i);			
 				if (i==0) es.errorType = getErrorTypeWithId(atoi(result));						
 				else if (i==1) es.count = atoi(result);					
 			}		
@@ -432,7 +432,7 @@ std::vector<ErrorSummary> dbrequest::getvErrorDate(int id_testset)
 		
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+			const char *result = safe_sqlite3_column_text(pStmt, i);			
 			if (i==0) es.errorType = getErrorTypeWithId(atoi(result));							
 			else if (i==1) es.count = atoi(result);					
 		 }		
@@ -467,7 +467,7 @@ ErrorType dbrequest::getErrorTypeWithId(int id)
 			int count = sqlite3_data_count(pStmt);		
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+				const char *result = safe_sqlite3_column_text(pStmt, i);			
 				if (i==0) et.id = atoi(result);		
 				else if (i==1) et.id_type = atoi(result);					
 				else if (i==2) et.error = result;
@@ -504,7 +504,7 @@ ErrorSeverity dbrequest::getErrorSeverityWithId(int id)
 			int count = sqlite3_data_count(pStmt);		
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+				const char *result = safe_sqlite3_column_text(pStmt, i);			
 				if (i==0) es.id = atoi(result);							
 				else if (i==1) es.id_sevrity =atoi(result);
 				else if (i==2) es.gravity = result;							
@@ -537,7 +537,7 @@ ErrorCategory dbrequest::getErrorCategoryWithId(int id)
 			int count = sqlite3_data_count(pStmt);		
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+				const char *result = safe_sqlite3_column_text(pStmt, i);			
 				if (i==0) ec.id = atoi(result);							
 				else if (i==1) ec.id_category =atoi(result);
 				else if (i==2) ec.name = result;							
@@ -570,7 +570,7 @@ std::vector<ErrorType> dbrequest::getErrorType()
 			int count = sqlite3_data_count(pStmt);		
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+				const char *result = safe_sqlite3_column_text(pStmt, i);			
 				if (i==0) et.id = atoi(result);	
 				else if (i==1) et.id_type = atoi(result);						
 				else if (i==2) et.error = result;
@@ -615,7 +615,7 @@ int dbrequest::getErrorTypeCountWithTestset(int idError,int id_testset)
 	{	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{			
-			const char *result = (const char *)sqlite3_column_text(pStmt, 0);			
+			const char *result = safe_sqlite3_column_text(pStmt, 0);			
 			count = atoi(result);	
 		}		
    }
@@ -646,7 +646,7 @@ int dbrequest::getErrorTypeCountWithTestsetDates(int idError,int id_testset)
 	{	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{			
-			const char *result = (const char *)sqlite3_column_text(pStmt, 0);			
+			const char *result = safe_sqlite3_column_text(pStmt, 0);			
 			count = atoi(result);	
 		}		
 	}
@@ -674,7 +674,7 @@ std::map<QDate,std::vector<int> > dbrequest::getmMetsDate(int id_testset)
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			int result_id_mets = sqlite3_column_int(pStmt, 0);
-			const char *result_date = (const char *) sqlite3_column_text(pStmt, 1);
+			const char *result_date = safe_sqlite3_column_text(pStmt, 1);
 		    QDate date = date.fromString(result_date, "yyyy-MM-dd");
 			if (mapMetsDate.find(date) == mapMetsDate.end())
 			{
@@ -717,7 +717,7 @@ std::map<int,LinkedFiles> dbrequest::getMapLinkedFiles(int idMets,std::string fi
 			int count = sqlite3_data_count(pStmt);		
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+				const char *result = safe_sqlite3_column_text(pStmt, i);			
 				if (i==0)lf.id = atoi(result);							
 				else if (i==1) lf.idMets = atoi(result);
 				else if (i==2) lf.type = (result);
@@ -762,7 +762,7 @@ std::map<int,std::pair<int,int>> dbrequest::getSumMetsYear(int id_testset)
 			std::pair<int,int> pair;
 			for (int i =0;i<  count ;i++)
 			{			
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);
+				const char *result = safe_sqlite3_column_text(pStmt, i);
 				if (result!=NULL)
 				{			
 					if (i==0) year = atoi(result);											
@@ -802,7 +802,7 @@ int dbrequest::getSumSupplYear(int id_testset,int year)
 	{	  
       while(sqlite3_step(pStmt) == SQLITE_ROW)
       {				
-		const char *result = (const char *)sqlite3_column_text(pStmt, 0);			
+		const char *result = safe_sqlite3_column_text(pStmt, 0);			
 		numberSuppl = atoi(result);			 
 	  }
    } 
@@ -835,7 +835,7 @@ std::map<QDate,DateComment> dbrequest::getDateComment(int id_testset)
 			int count = sqlite3_data_count(pStmt);		
 			for (int i =0;i<  count ;i++)
 			{			
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);								
+				const char *result = safe_sqlite3_column_text(pStmt, i);								
 				if (i==0) dateComment.id = atoi(result);
 				else if (i==1) dateComment.id_DateError = atoi(result);
 				else if (i==2) dateComment.date = dateComment.date.fromString(result,"yyyy-MM-dd");
@@ -874,7 +874,7 @@ std::vector<std::pair<int,DateError>> dbrequest::getvDateError(int id_testset)
 		std::pair<int,DateError> p;
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
 			if (i==0)
 			{ 
@@ -973,7 +973,7 @@ int dbrequest::getcountMetsErrorForEachErrorType(int idTestset,int errortype)
 			    
 			for (int i =0;i<  count ;i++)
 			{	
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);						
+				const char *result = safe_sqlite3_column_text(pStmt, i);						
 				if (pileMets.find(atoi(result)) == pileMets.end())
 				{
 					pileMets.insert(atoi(result));
@@ -993,7 +993,7 @@ int dbrequest::getcountMetsErrorForEachErrorType(int idTestset,int errortype)
 			int count = sqlite3_data_count(pStmt);		    
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);		
+				const char *result = safe_sqlite3_column_text(pStmt, i);		
 				if (pileMets.find(atoi(result)) == pileMets.end())
 				{
 					pileMets.insert(atoi(result));
@@ -1032,7 +1032,7 @@ int dbrequest::getcountMetsError(int idTestset)
 			    
 			for (int i =0;i<  count ;i++)
 			{	
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);						
+				const char *result = safe_sqlite3_column_text(pStmt, i);						
 				if (pileMets.find(atoi(result)) == pileMets.end())
 				{
 					pileMets.insert(atoi(result));
@@ -1053,7 +1053,7 @@ int dbrequest::getcountMetsError(int idTestset)
 			int count = sqlite3_data_count(pStmt);		    
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);		
+				const char *result = safe_sqlite3_column_text(pStmt, i);		
 				if (pileMets.find(atoi(result)) == pileMets.end())
 				{
 					pileMets.insert(atoi(result));
@@ -1086,7 +1086,7 @@ int dbrequest::getcountTitleCheck(int id_testset)
 	{	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{			
-			const char *result = (const char *)sqlite3_column_text(pStmt, 0);			
+			const char *result = safe_sqlite3_column_text(pStmt, 0);			
 			count = atoi(result);	
 		}		
     }
@@ -1122,7 +1122,7 @@ std::vector<MetsError> dbrequest::getvErrorPerCategory(int id_cat, int idTestset
 		
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			if (i==0) es.id= atoi(result); 							
 			else if (i==1) es.idRelatedFile = atoi(result);
 			else if (i==2) es.relatedType = result;	
@@ -1174,7 +1174,7 @@ std::vector<ErrorType> dbrequest::getDistinctErrorType(int id_cat,int id_testset
 	{	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{				
-			const char *result = (const char *)sqlite3_column_text(pStmt, 0);			
+			const char *result = safe_sqlite3_column_text(pStmt, 0);			
 			v.push_back(getErrorTypeWithId(atoi(result)));		 
 		}
    } 
@@ -1202,7 +1202,7 @@ std::vector<ErrorCategory> dbrequest::getErrorCategory()
 			int count = sqlite3_data_count(pStmt);		
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);
+				const char *result = safe_sqlite3_column_text(pStmt, i);
 				if (i==0) ec.id= atoi(result); 							
 				else if (i==1) ec.id_category = atoi(result);
 				else if (i==2) ec.name = result;				
@@ -1246,7 +1246,7 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 		int count = sqlite3_data_count(pStmt);		
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			if (i==0) es.id= atoi(result); 							
 			else if (i==1) es.idRelatedFile = atoi(result);
 			else if (i==2) es.relatedType = result;	
@@ -1303,7 +1303,7 @@ std::vector<DateError> dbrequest::getDateError(int id_testset)
 		std::pair<int,DateError> p;
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
 			if (i==0)
 			{ 
@@ -1345,7 +1345,7 @@ std::vector<std::string> dbrequest::getDistinctErrorTypeDateError(int id_cat,int
     {	  
       while(sqlite3_step(pStmt) == SQLITE_ROW)
       {			
-		const char *result = (const char *)sqlite3_column_text(pStmt, 0);			
+		const char *result = safe_sqlite3_column_text(pStmt, 0);			
 		v.push_back(result);		 
 	  }
    } 
@@ -1377,7 +1377,7 @@ std::vector<DateComment> dbrequest::getDateCommentid(int idError)
 		std::pair<int,DateError> p;
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+			const char *result = safe_sqlite3_column_text(pStmt, i);			
 			if (i==0)
 			{ 
 				dc.id = atoi(result);				
@@ -1416,7 +1416,7 @@ std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
 			int count = sqlite3_data_count(pStmt);		
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+				const char *result = safe_sqlite3_column_text(pStmt, i);			
 				if (i==0) se.id = atoi(result);							
 				else if (i==1) se.id_mets = atoi(result);
 				else if (i==2) se.pathImage = result; 
@@ -1454,7 +1454,7 @@ std::vector<Sampling_Structure> dbrequest::getListSamplingStructure(int id_tests
 		int count = sqlite3_data_count(pStmt);		
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
 			if (i==0)
 			{ 
@@ -1511,7 +1511,7 @@ std::vector<ErrorType> dbrequest::getErrorTypeCatStructure()
 			int count = sqlite3_data_count(pStmt);		
 			for (int i =0;i<  count ;i++)
 			{
-				const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+				const char *result = safe_sqlite3_column_text(pStmt, i);			
 				if (i==0) et.id = atoi(result);	
 				else if (i==1) et.id_type = atoi(result);						
 				else if (i==2) et.error = result;
@@ -1574,7 +1574,7 @@ std::vector<Title> dbrequest::getvTitle(int id_testset)
 		std::pair<int,DateError> p;
 		for (int i =0;i<  count ;i++)
 		{
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
 			if (i==0)title.id = atoi(result);							
 			else if (i==1)
@@ -1625,7 +1625,7 @@ Article a;
 		std::pair<int,DateError> p;
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
 			if (i==0)
 			{ 
@@ -1674,7 +1674,7 @@ std::pair<int,int> dbrequest::getSumCharacter(int id)
 		std::pair<int,DateError> p;
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);			
+			const char *result = safe_sqlite3_column_text(pStmt, i);			
 			if (i==0){ pair.first = atoi(result);}							
 			else if (i==1) pair.second = atoi(result);	
 		 }		
@@ -1724,7 +1724,7 @@ std::vector<Excel> dbrequest::getInventaire(int id)
 		int count = sqlite3_data_count(pStmt);		
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
 			if (i==0) excel.id = atoi(result);								
 			else if (i==1) 	excel.id_sheet = atoi(result);	
@@ -1772,7 +1772,7 @@ std::map<QDate,std::vector<Excel> > dbrequest::getMapInventaire(int id)
 		 vExcel.clear();	
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
 			if (i==0) excel.id = atoi(result);								
 			else if (i==1) 	excel.id_sheet = atoi(result);	
@@ -1826,7 +1826,7 @@ std::vector<Inventaire> dbrequest::getNameInventaire()
 		int count = sqlite3_data_count(pStmt);		
 		 for (int i =0;i<  count ;i++)
 		 {
-			const char *result = (const char *)sqlite3_column_text(pStmt, i);
+			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
 			if (i==0) inv.id = atoi(result);								
 			else if (i==1) 	inv.code = result;	
@@ -1885,7 +1885,7 @@ std::vector<QDate> dbrequest::getMetsDateInPeriod(int id_testset, int year_from,
 	{	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			const char * result = (const char *) sqlite3_column_text(pStmt, 0);
+			const char * result = safe_sqlite3_column_text(pStmt, 0);
 			v.push_back(temp.fromString(result, "yyyy-MM-dd"));
 		}
 	}
@@ -1921,7 +1921,7 @@ std::vector<QDate> dbrequest::getMetsDateInMonth(int id_testset, int year, int m
 	{	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			const char * result = (const char *) sqlite3_column_text(pStmt, 0);
+			const char * result = safe_sqlite3_column_text(pStmt, 0);
 			v.push_back(temp.fromString(result, "yyyy-MM-dd"));
 		}
 	}
@@ -1946,7 +1946,7 @@ std::vector<QDate> dbrequest::getMetsDates(int id_testset)
 	{	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			const char * result = (const char *) sqlite3_column_text(pStmt, 0);
+			const char * result = safe_sqlite3_column_text(pStmt, 0);
 			v.push_back(temp.fromString(result, "yyyy-MM-dd"));
 		}
 	}
@@ -2052,8 +2052,8 @@ std::string dbrequest::getFirstMetsFilename(int id_testset)
 	{	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			const char *path = (const char *) sqlite3_column_text(pStmt, 0);
-			const char *filename = (const char *) sqlite3_column_text(pStmt, 1);
+			const char *path = safe_sqlite3_column_text(pStmt, 0);
+			const char *filename = safe_sqlite3_column_text(pStmt, 1);
 			res = path + std::string("/") + filename;
 		}
 		
