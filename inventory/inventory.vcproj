@@ -195,10 +195,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\project\structmaphysicalparser.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\xmlparser.cpp"
 				>
 			</File>
@@ -218,10 +214,6 @@
 			</File>
 			<File
 				RelativePath=".\inventaireparser.h"
-				>
-			</File>
-			<File
-				RelativePath="..\project\structmaphysicalparser.h"
 				>
 			</File>
 			<File
