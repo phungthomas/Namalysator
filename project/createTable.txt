@@ -81,8 +81,8 @@ create table ERRORTYPE (
 );
 
 
-INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('1','Schema Error','','1','1'); 
-INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('2','XML Error','could not parse file','1','1'); 
+INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('1','XML Error','could not parse file','1','1'); 
+INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('2','Schema Error','','1','1'); 
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('3','Wrong Folder Name','folder name not equals mets name','1','2'); 
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('4','Missing File','','1','2'); 
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('5','Sequence incorrect','','1','2'); 
