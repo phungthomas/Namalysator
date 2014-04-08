@@ -88,6 +88,7 @@ void exportdata::writeCatError(odswriter *ow, BatchDetail *bdetail,dbrequest *db
 			ow->open_row();
 			ow->add_text("Severity");
 			ow->add_text("Type");
+			ow->add_text("Related File");
 			ow->add_text("Message");
 			ow->add_text("Info");
 			ow->close_row();
@@ -97,6 +98,7 @@ void exportdata::writeCatError(odswriter *ow, BatchDetail *bdetail,dbrequest *db
 				ow->open_row();
 				ow->add_text(vSchemaE[i].errorType.severity.gravity);
 				ow->add_text(vSchemaE[i].errorType.error);
+				ow->add_text(vSchemaE[i].filePart);
 				ow->add_text(vSchemaE[i].message);				
 				ow->add_text(vSchemaE[i].mets.fileName);							
 				ow->close_row();				
