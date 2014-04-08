@@ -111,6 +111,15 @@ void odswriter::add_text(const std::string &text)
 	delete [] szTmp;
 }
 
+void odswriter::add_text_with_link(const std::string &text, const std::string &link)
+{
+	std::string tmp = to_xml(text);
+	char *szTmp = new char[tmp.length() + link.length() + strlen(ods_content_cell_text_with_link) + 1];
+	sprintf(szTmp, ods_content_cell_text_with_link, link.c_str(), tmp.c_str());
+	mainfile += szTmp;
+	delete [] szTmp;
+}
+
 void odswriter::add_number(double d)
 {
 	char *szTmp = new char[80 + strlen(ods_content_cell_number) + 1];

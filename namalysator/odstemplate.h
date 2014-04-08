@@ -18,6 +18,8 @@ extern const char ods_content_row_open[];
 extern const char ods_content_row_open_style[];
 // Need to insert the text to be placed inside (with xml escapes for ", < and >)
 extern const char ods_content_cell_text[];
+// Need to insert first the link and then the text (with xml escapes for ", < and >)
+extern const char ods_content_cell_text_with_link[];
 // Need to insert (f_value, f_value) i.e. the value twice
 extern const char ods_content_cell_number[];
 // Need to insert (i_counter, f_width, f_height, s_picfile) where width and height are in cm (72 dpi monitor)

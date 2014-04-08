@@ -109,6 +109,12 @@ const char ods_content_row_open_style[] =
 const char ods_content_cell_text[] =
 	"<table:table-cell office:value-type=\"string\"><text:p>%s</text:p></table:table-cell>";
 
+// Need to insert first the link and then the text (with xml escapes for ", < and >)
+const char ods_content_cell_text_with_link[] =
+	"<table:table-cell office:value-type=\"string\">"
+		"<text:p><text:a xlink:href=\"%s\" xlink:type=\"simple\">%s</text:a></text:p>"
+	"</table:table-cell>";
+
 // Need to insert (f_value, f_value) i.e. the value twice
 const char ods_content_cell_number[] =
 	"<table:table-cell office:value-type=\"float\" office:value=\"%f\">"

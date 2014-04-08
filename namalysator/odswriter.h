@@ -24,6 +24,7 @@ public:
 	// Opens a new row, the height given is in 1000th of a cm
 	void open_row(int row_height = 0);
 	void add_text(const std::string &text);
+	void add_text_with_link(const std::string &text, const std::string &link);
 	void add_text_or_number(const std::string &text);
 	void add_number(double d);
 	void add_picture(const std::string &filename);
