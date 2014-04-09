@@ -65,7 +65,8 @@ struct File_Group : public dataitem
 struct AmdSec : public dataitem
 {
 	static const size_t DATAITEM_ID =7;
-	std::string  amdSecId;
+	std::string amdSecId;
+	std::string sourceData;				// mix:ChangeHistory/mix:ImageProcessing/mix:SourceData for cut-outs
 	int dpi;
 };
 //! structure of a block type
