@@ -18,8 +18,8 @@ class amdsecparser :  public delegatedparser
 	private :
 		state actualState;	
 		AmdSec amdsec;
-		bool inDpi;
-		std::string dpistring;
+		bool extract_cData;
+		std::string cData;
 	public:	
 		amdsecparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,ErrorHandler *h,std::string validation);
 		virtual void startElement(const char *name, const char **atts);

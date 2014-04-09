@@ -3,16 +3,18 @@
 #include "../common_files/utilities.h"
 #include "../common_files/xmltostr.h"
 #include "metsverifier.h"
+#include <boost/algorithm/string.hpp>
 
 // the item of section where the dpi has to be extracted
-const char* dpiToextract = "mix:XphysScanResolution";
+const char* dpiToExtract = "mix:XphysScanResolution";
+const char* sourceDataToExtract = "mix:SourceData";
 
 //!parse the amdsec section with xml validation
 amdsecparser::amdsecparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,ErrorHandler *h,std::string validation)
 {	
 	actualState = state_amd;
 	setDelegatedparameters(df,orig_expat_parser,mets_fname,h,validation);	
-	inDpi= false;	
+	extract_cData = false;	
 }
 void amdsecparser::startElement(const char *name, const char **atts)
 {		
@@ -36,10 +38,12 @@ void amdsecparser::startElement(const char *name, const char **atts)
 	} 	
 	else if (actualState == state_mix)
 	{
-		xml += 	xml2stringBegin(name,atts);	
-		if (strcmp(name, dpiToextract) == 0) { // section to extract to extract dpi
-			inDpi = true;
-		}	
+		xml += xml2stringBegin(name,atts);	
+		if (strcmp(name, dpiToExtract) == 0) {
+			extract_cData = true;
+		} else if (strcmp(name, sourceDataToExtract) == 0) {
+			extract_cData = true;
+		}
 	} 	
 }
 
@@ -60,9 +64,14 @@ bool amdsecparser::endElement(const char *name)
 	else if (actualState == state_mix)
 	{
 		xml += xml2stringEnd(name);
-		if (strcmp(name, dpiToextract) == 0) {
-			amdsec.dpi = atoi(dpistring.c_str());
-			inDpi = false;
+		if (strcmp(name, dpiToExtract) == 0) {
+			boost::algorithm::trim(cData);
+			amdsec.dpi = atoi(cData.c_str());
+			extract_cData = false;
+		} else if (strcmp(name, sourceDataToExtract) == 0) {
+			boost::algorithm::trim(cData);
+			amdsec.sourceData = cData;
+			extract_cData = false;
 		}
 	} 	
 	else if (actualState == state_amd)
@@ -89,13 +98,10 @@ void amdsecparser::characterData(const char *s, int len)
 {				
 	if (actualState == state_mix )
 	{	
-		//if ( (s[0] >= 'a') && (s[0] <= 'z')|| (s[0] >= 'A' && s[0] <= 'Z')||(s[0] >= '0') ||(s[0] == '(') ||(s[0] == ')')||(s[0] =='&')||(s[0] ==';') ||(s[0] =='\"') || (s[0]== ' ' ) )
-		//{		
-			xml +=	xml2stringData(s,len);
-		//}
-		if (inDpi == true)
+		xml +=	xml2stringData(s,len);
+		if (extract_cData == true)
 		{
-			dpistring += std::string(s, len);
+			cData += std::string(s, len);
 		}
 	}
 }
@@ -107,6 +113,6 @@ void amdsecparser::initialize(const char *name,const char **atts)
 	const char *val = get_named_attr("ID", atts);
 	if (val!=0)
 	{
-		amdsec.amdSecId =val;					
+		amdsec.amdSecId =val;
 	}
 }

@@ -34,6 +34,7 @@
 #include "verifyoddspages.h"
 #include "verifydatefolder.h"
 #include "verifychecksum.h"
+#include "verifycutouts.h"
 #include "titletocheck.h"
 #include "datehelper.h"
 #include "configparser.h"
@@ -307,9 +308,10 @@ int main()
 			}								
 			if (parameter->issueNumber =="1")
 			{
-				verifyinvalidissuenumber(&df,&hError,currentMetsFile);				
+				verifyinvalidissuenumber(&df,&hError,currentMetsFile);
 			}		
 			
+			verifycutouts(&df,&hError,currentMetsFile);
 			titletocheck(&df,&hError,currentMetsFile);	
 			verifytitles vt(&df,&hError,currentMetsFile);
 

@@ -282,6 +282,7 @@ const static int cat_odds = 32;
 const static int cat_actualcoverage = 33;
 const static int cat_incorrectBlock=  34;
 const static int cat_partnumber =  35;
+const static int cat_cutoutoriginal =  36;
 
 
 #endif //STRUCT_H_  
