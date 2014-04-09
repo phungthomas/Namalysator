@@ -37,7 +37,6 @@ void ErrorHandler::writeToLog(int category,const std::string &fileName, const st
 	{
 		std::cout << "could not write to log --> Programm will continue " << std::endl; 	
 	}
-	fclose(fp);
 }
 //! get error from Mets during parsing files
 void ErrorHandler::getMetsError(int category,const std::string &relatedType,const std::string &file_part,Error e,const std::string &fName)
