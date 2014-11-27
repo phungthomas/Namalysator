@@ -7,7 +7,7 @@
 //Semantic checks verify :  Multiple block use
 verifyblocks::verifyblocks(datafactory *dfverifiers,ErrorHandler *hError,std::string &fileName)
 {	
-	hError->begin("Verify: multiple block use");		
+	hError->begin("Verify: multiple block use");
 	datafactory_set<Article> dfArticle = dfverifiers->get_set<Article>();	
 	for (datafactory_set<Article>::iterator it = dfArticle.begin(); it != dfArticle.end(); ++it)
 	{

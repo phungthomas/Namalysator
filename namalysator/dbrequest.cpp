@@ -1985,7 +1985,7 @@ std::map<int ,std::pair<int, int> > dbrequest::GetYearSummary(int id_testset)
 	clause.clear();
 	clause.str(std::string());
 	clause << "ID_TESTSET=" << id_testset << " AND S.ID_METS=M.ID_METS GROUP BY YEAR";
-	selectSql = "SELECT M.YEAR, COUNT(S.ID) FROM METS M, SUPPLEMENTS S WHERE " + clause.str();
+	selectSql = "SELECT M.YEAR, COUNT(S.ID_SUPPLEMENT) FROM METS M, SUPPLEMENTS S WHERE " + clause.str();
 	DEBUG_ME
 	rc = sqlite3_prepare_v2(conn.db,selectSql.c_str(),-1, &pStmt,&zErrMsg);	
 	

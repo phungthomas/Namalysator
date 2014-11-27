@@ -64,8 +64,10 @@ public:
     QLabel *label_5;
     QLabel *label_4;
     QLabel *label_3;
+    QVBoxLayout *verticalLayout_5;
     QPushButton *btnError;
     QPushButton *btnStructure;
+    QPushButton *btnViewMets;
 
     void setupUi(QWidget *w_structview)
     {
@@ -300,15 +302,25 @@ public:
 
         horizontalLayout_4->addLayout(verticalLayout_4);
 
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         btnError = new QPushButton(w_structview);
         btnError->setObjectName(QString::fromUtf8("btnError"));
 
-        horizontalLayout_4->addWidget(btnError);
+        verticalLayout_5->addWidget(btnError);
 
         btnStructure = new QPushButton(w_structview);
         btnStructure->setObjectName(QString::fromUtf8("btnStructure"));
 
-        horizontalLayout_4->addWidget(btnStructure);
+        verticalLayout_5->addWidget(btnStructure);
+
+        btnViewMets = new QPushButton(w_structview);
+        btnViewMets->setObjectName(QString::fromUtf8("btnViewMets"));
+
+        verticalLayout_5->addWidget(btnViewMets);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_5);
 
 
         verticalLayout_2->addLayout(horizontalLayout_4);
@@ -341,6 +353,7 @@ public:
         label_3->setText(QApplication::translate("w_structview", "Minor :", 0, QApplication::UnicodeUTF8));
         btnError->setText(QApplication::translate("w_structview", " Error", 0, QApplication::UnicodeUTF8));
         btnStructure->setText(QApplication::translate("w_structview", "Structure", 0, QApplication::UnicodeUTF8));
+        btnViewMets->setText(QApplication::translate("w_structview", "View Mets File", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

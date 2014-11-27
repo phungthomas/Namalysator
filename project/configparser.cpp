@@ -108,6 +108,8 @@ void configparser::XMLendElement(const char *name)
 
 void configparser::XMLcharacterData(const char *s, int len)
 {	
+	// TODO : put the assignements into XMLendElement because XMLcharacterData can be called several times
+	// if the expat buffer is full (see amdSecParser for correct implementation)
 	if (currentState == state_database)
 	{
 		param->database =	xml2stringData(s,len);	

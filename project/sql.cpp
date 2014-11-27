@@ -194,10 +194,10 @@ void database::updateMets(datafactory *df)
 	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt, &szErrMsg);
 	if( rc == SQLITE_OK)
 	{
-		sqlite3_bind_text(pStmt, 1, issue_number.c_str(), issue_number.length(), SQLITE_STATIC);
-		sqlite3_bind_text(pStmt, 2, title.c_str(), title.length(), SQLITE_STATIC);
+		sqlite3_bind_text(pStmt, 1, issue_number.c_str(), -1, SQLITE_STATIC);
+		sqlite3_bind_text(pStmt, 2, title.c_str(), -1, SQLITE_STATIC);
 		sqlite3_bind_int(pStmt, 3, mets->pages);
-		sqlite3_bind_text(pStmt, 4, papertype.c_str(), papertype.length(), SQLITE_STATIC);
+		sqlite3_bind_text(pStmt, 4, papertype.c_str(), -1, SQLITE_STATIC);
 		sqlite3_bind_int(pStmt, 5, id_mets);
 		if (sqlite3_step(pStmt) != SQLITE_DONE) {
 			std::stringstream ss;

@@ -38,7 +38,7 @@ void loadYear(QTableWidget *table,const BatchDetail &batch)
 	table->setColumnWidth(1,79);
 	table->setColumnWidth(2,79);
 	QStringList labelMets;
-	labelMets  << "Year" << "Issues" << "Supplement";
+	labelMets  << "Year" << "Issues" << "Supplement" << "Pages";
 	table->setHorizontalHeaderLabels(labelMets);	
 	table->setShowGrid(false);
 	table->verticalHeader()->hide();

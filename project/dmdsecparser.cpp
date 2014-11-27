@@ -3,6 +3,7 @@
 #include "schema_validatordmdsec.h"
 #include "../common_files/xmltostr.h"
 #include <iostream>
+#include <boost/algorithm/string.hpp>
 
 dmdsecparser::dmdsecparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,ErrorHandler *h,std::string validation)
 {		
@@ -47,12 +48,15 @@ bool dmdsecparser::endElement(const char *name)
 	{
 		xml += xml2stringEnd(name);
 
-		idkeymap = name;				
+		idkeymap = name;
+		// trim whitespace, tabs, newlines from character Data
+		boost::algorithm::trim(addStringData);
 
 		if( dmdSecStruct.mapAddStringData.find(idkeymap) == dmdSecStruct.mapAddStringData.end())
-		{					
-			dmdSecStruct.mapAddStringData[idkeymap] = addStringData;			
-			addStringData.clear();						
+		{
+			boost::algorithm::trim(addStringData);
+			dmdSecStruct.mapAddStringData[idkeymap] = addStringData;
+			addStringData.clear();
 		}
 		else
 		{			
@@ -89,10 +93,10 @@ void dmdsecparser::characterData(const char *s, int len)
 	if (type == type_mods)
 	{			
 		xml +=	xml2str(s,len);		
-		if ( (s[0] >= 'a') && (s[0] <= 'z')|| (s[0] >= 'A' && s[0] <= 'Z')||(s[0] >= '0') ||(s[0] == '(') ||(s[0] == ')')||(s[0] =='&')||(s[0] ==';') ||(s[0] =='\"') || (s[0]== ' ' ) )
-		{		
+		//if ( (s[0] >= 'a') && (s[0] <= 'z')|| (s[0] >= 'A' && s[0] <= 'Z')||(s[0] >= '0') ||(s[0] == '(') ||(s[0] == ')')||(s[0] =='&')||(s[0] ==';') ||(s[0] =='\"') || (s[0]== ' ' ) )
+		//{		
 			addStringData += xml2str(s,len);		
-		}		
+		//}		
 	}
  }
 

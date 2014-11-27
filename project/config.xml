@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<database>C:/Namalysator/DB/bnl2013-pilot-serials-trial</database>  
-	<batchName>pilot</batchName>
-	<input>E:/BNL_2013_pilot_20130821/socnatfauna</input>
+	<database>C:/Namalysator/DB/trial-db</database>  
+	<batchName>deletz_second</batchName>
+	<input>C:/Data/CCS2012/deletz</input>
 	<verifiers>
 		<xml>
 			<schemaValidation>1</schemaValidation>		

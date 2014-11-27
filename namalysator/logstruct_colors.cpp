@@ -48,6 +48,13 @@ void logstruct_colors::set_defaults(const std::string &schema)
 		m_colors.insert(std::make_pair("DEATH_NOTICE_SECTION", QColor(255,100,100)));
 		m_colors.insert(std::make_pair("SHIPPING", QColor(0,255,0)));
 		m_colors.insert(std::make_pair("ILLUSTRATION", QColor(100,100,255)));
+		// Extended version with TITLE_SECTION as well
+		m_colors.insert(std::make_pair("HEADLINE", QColor(200,100,0)));
+		m_colors.insert(std::make_pair("MOTTO", QColor(200,0,100)));
+		m_colors.insert(std::make_pair("PUBLISHING_STMT", QColor(0,200,100)));
+		m_colors.insert(std::make_pair("TEXTBLOCK", QColor(220,255,220)));
+		// More extended with tables too
+		m_colors.insert(std::make_pair("TABLE", QColor(150,0,0)));
 	} else if (m_schema == "Serial") {
 		m_colors.insert(std::make_pair("CHAPTER", QColor(0,255,0)));
 		m_colors.insert(std::make_pair("ILLUSTRATION", QColor(255, 100, 200)));
@@ -68,6 +75,11 @@ void logstruct_colors::set_defaults(const std::string &schema)
 		m_colors.insert(std::make_pair("TABLE_OF_CONTENTS", QColor(170,170,100)));
 		m_colors.insert(std::make_pair("INDEX", QColor(0,170,170)));
 		m_colors.insert(std::make_pair("AUTHOR", QColor(233,150,122)));
+		m_colors.insert(std::make_pair("TITLE_OF_WORK", QColor(200,0,150)));
+		m_colors.insert(std::make_pair("CREATOR_OF_WORK", QColor(200,0,0)));
+		m_colors.insert(std::make_pair("PUBLISHING_STMT", QColor(0,200,100)));
+		m_colors.insert(std::make_pair("STATEMENT", QColor(150,150,150)));
+		m_colors.insert(std::make_pair("PAGE_NUMBER", QColor(255,122,122)));
 	}
 }
 

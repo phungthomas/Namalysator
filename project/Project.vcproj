@@ -373,6 +373,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\verifycutouts.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\verifyinvalidsupplement.cpp"
 						>
 					</File>
@@ -740,6 +744,10 @@
 					>
 					<File
 						RelativePath=".\verifyblocks.h"
+						>
+					</File>
+					<File
+						RelativePath=".\verifycutouts.h"
 						>
 					</File>
 					<File

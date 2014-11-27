@@ -195,7 +195,7 @@ int main()
 		std::string currentMetsPath = vectorMets[i].second;				
 		datafactory df;	
 		std::stringstream tempMessage;
-		tempMessage << "Begin to parse MetsFile : " << i+1 << " " << currentMetsFile;
+		tempMessage << getDate().c_str() << " - Begin to parse MetsFile : " << i+1 << " " << currentMetsFile;
 		hError.begin(tempMessage.str());		
 		std::cout << tempMessage.str() << std::endl;
 		pt.LogTime("\tHousekeeping before mets parser");
@@ -328,6 +328,7 @@ int main()
 		std::cout << "		Insert data finito " <<std::endl;
 #endif // DEBUG		
 	}
+	exit(0);
 	fclose(fpTimingLog);
 	verifymissingissue(&hError,&db);
 	

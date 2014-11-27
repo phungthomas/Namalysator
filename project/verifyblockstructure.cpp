@@ -26,14 +26,10 @@ verifyblockstructure::verifyblockstructure(datafactory *dfverifiers,ErrorHandler
 
 		for (std::map<std::string,Block>::iterator it2 = it->mapalto.begin(); it2 != it->mapalto.end(); ++it2)
 		{			
-			if (it2->second.height < 0 || it2->second.width < 0 )
+			if (it2->second.height <= 0 || it2->second.width <= 0 )
 			{
 				hError->getError(cat_emptyBlock,"LINKEDFILES",it.key(), it2->first + " " + dump_alto_rect2str(it2->second),it.key(),it2->first);			
 
-			}
-			else if( it2->second.height == 0 || it2->second.width == 0 )
-			{
-				hError->getError(cat_emptyBlock,"LINKEDFILES",it.key(), it2->first + " " + dump_alto_rect2str(it2->second),it.key(),it2->first);			
 			}
 			else if 
 				(it2->second.vpos < it->printSpaceVpos ||

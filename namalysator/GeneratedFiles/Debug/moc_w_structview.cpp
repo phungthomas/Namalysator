@@ -22,7 +22,7 @@ static const uint qt_meta_data_w_structview[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      15,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -45,6 +45,7 @@ static const uint qt_meta_data_w_structview[] = {
      228,   13,   13,   13, 0x08,
      238,   13,   13,   13, 0x08,
      245,   13,   13,   13, 0x08,
+     256,   13,   13,   13, 0x08,
 
        0        // eod
 };
@@ -57,7 +58,7 @@ static const char qt_meta_stringdata_w_structview[] = {
     "drawRect(QTreeWidgetItem*,QTreeWidgetItem*)\0"
     "openErrorScreen()\0showListSampling()\0"
     "viewCalendar()\0checked()\0undo()\0"
-    "viewHtml()\0"
+    "viewHtml()\0viewMetsFile()\0"
 };
 
 void w_structview::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -81,6 +82,7 @@ void w_structview::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 12: _t->checked(); break;
         case 13: _t->undo(); break;
         case 14: _t->viewHtml(); break;
+        case 15: _t->viewMetsFile(); break;
         default: ;
         }
     }
@@ -118,9 +120,9 @@ int w_structview::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 15)
+        if (_id < 16)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 15;
+        _id -= 16;
     }
     return _id;
 }

@@ -66,6 +66,7 @@ void w_structview::createConnections()
 	connect(m_ui->rbSampling,SIGNAL(clicked()),this,SLOT(showListSampling()));
 	connect(m_ui->btnChecked, SIGNAL(clicked()), this, SLOT(checked()));
 	connect(m_ui->btnUndo, SIGNAL(clicked()), this, SLOT(undo()));
+	connect(m_ui->btnViewMets, SIGNAL(clicked()), this, SLOT(viewMetsFile()));
 }
 
 w_structview::~w_structview()
@@ -174,26 +175,25 @@ void w_structview::changeEvent(QEvent *e)
 
 void w_structview::previous()
 {
-	if (currentPage>1)
+	if (currentPage > 1) {
 		currentPage--;
-	showCurrentPage();
-	// If the current article is still on the new current page, redraw its rectangles
-	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
-		drawRect(currentSelectedArticle, 0);
+		showCurrentPage();
+		// If the current article is still on the new current page, redraw its rectangles
+		if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
+			drawRect(currentSelectedArticle, 0);
+		}
 	}
-//	paintAllStructure(currentAltoFile);
-
 }
 void w_structview::next()
 {
-	if (currentPage << mapTiffPath.size())
-	currentPage++;
-	showCurrentPage();
-	// If the current article is still on the new current page, redraw its rectangles
-	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
-		drawRect(currentSelectedArticle, 0);
+	if (currentPage < mapTiffPath.size()) {
+		currentPage++;
+		showCurrentPage();
+		// If the current article is still on the new current page, redraw its rectangles
+		if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
+			drawRect(currentSelectedArticle, 0);
+		}
 	}
-//	paintAllStructure(currentAltoFile);
 }
 
 void w_structview::zoomIn()
@@ -287,10 +287,10 @@ void w_structview::paintAllStructure(std::string altoFile)
 // This function should paint the current page with the different lowest-level colors, including headings and captions in yellow
 // It remains to be implemented
 {
-	int x,y,width,height;		
+	int x,y,width,height;
 
 	originalPixmap = QPixmap::fromImage(image);
-	QPainter painter(&originalPixmap);	
+	QPainter painter(&originalPixmap);
 	
 /*	for (std::set<std::pair<std::string,std::string>>::iterator it = blockAltoDmd.begin(); it != blockAltoDmd.end(); it++)
 	{	
@@ -393,9 +393,7 @@ void w_structview::constructTOCrecursively(Item *item,QTreeWidgetItem *widget)
 			currentWidget = widget;			
 			a = new QTreeWidgetItem(currentItem->counter);	
 			if (!currentItem->label.empty()) {
-				a->setText(0, QString::fromUtf8(currentItem->label.c_str()));
-			} else if (!currentItem->dmdId.empty()) {
-				a->setText(0, QString::fromUtf8(currentItem->dmdId.c_str()));
+				a->setText(0, QString::fromUtf8((currentItem->label + " (" + currentItem->type + ")").c_str()));
 			} else {
 				a->setText(0, QString::fromUtf8(currentItem->type.c_str()));
 			}
@@ -409,6 +407,39 @@ void w_structview::constructTOCrecursively(Item *item,QTreeWidgetItem *widget)
 			constructTOCrecursively(currentItem, a);
 		} else {
 			constructTOCrecursively(currentItem, widget);
+		}
+	}
+}
+
+void w_structview::construct_page2blocks()
+// This uses the treeContents as a starting point, so that has to be initialized before calling this function
+{
+	m_page2blocks.clear();
+	std::vector<std::pair<std::string, Item *> > type_stack;
+	std::string topmost_type;
+	
+	//if (
+	//type_stack.push_back(std::make_pair(
+}
+
+void w_structview::construct_page2blocks_recursive(const std::string &current_type, Item *item)
+{
+	size_t i;
+	// First add all the blocks that are at the current level
+	for (std::vector<typeBlock>::const_iterator it = item->vectTypeBlock.begin(); it != item->vectTypeBlock.end(); ++it) {
+		typeBlock b;
+		b.alto = it->alto;
+		b.block = it->block;
+		b.type = current_type;
+		m_page2blocks[it->alto].push_back(b);
+	}
+	// Now call the kids
+	for (i = 0; i< item->children.size(); ++i) {
+		Item *kid = &item->children[i];
+		if (m_colors.is_color_set(kid->type)) {
+			construct_page2blocks_recursive(kid->type, kid);
+		} else {
+			construct_page2blocks_recursive(current_type, kid);
 		}
 	}
 }
@@ -697,5 +728,10 @@ void w_structview::viewHtml()
 		fprintf(fp, "<br>");			
 	}	
 	fclose(fp);	
-	ShellExecuteA(NULL, "open",path.c_str(), NULL, NULL, SW_SHOWNORMAL);	
+	ShellExecuteA(NULL, "open",path.c_str(), NULL, NULL, SW_SHOWNORMAL);
+}
+
+void w_structview::viewMetsFile()
+{
+	ShellExecuteA(NULL, "open", (batch.path + "/" + mets.path + "/" + mets.fileName).c_str(), NULL, NULL, SW_SHOWNORMAL);
 }

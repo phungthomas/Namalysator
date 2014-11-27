@@ -97,6 +97,12 @@ private:
 	//Set up a container for all the qtreeWidgetItem so that we can update the table of contents
 	// It maps the internal counter (unique ID, also used for the mapArticle) to the QTreeWidgetItem*
 	std::map<int ,QTreeWidgetItem*> counter2TreeItem;
+
+	// a map which maps the current page (ALTO0000X) to an array of typeBlock, which tells paintAllStructure which type
+	// of block each ALTO block on that page is. The types of blocks are calculated based the types defined in m_colors.
+	// If a type is in m_colors (e.g. ARTICLE), then all its children will be ARTICLE, unless the children are themselves
+	// in m_colors (e.g. ILLUSTRATION), in which case the color for the child overrides the color for the parent
+	std::map<std::string, std::vector<typeBlock> > m_page2blocks;
 	
 	//update table of contents
 	void updateTableOfContents(std::string currentAlto);
@@ -108,6 +114,8 @@ private:
 	void createConnections();
 	QListWidgetItem *lstSampling;
 	
+	void construct_page2blocks();
+	void construct_page2blocks_recursive(const std::string &current_type, Item *item);
 	 void paintAllStructure(std::string altoFile);   
 private slots :	
 	void getDate(QDate);  
@@ -125,6 +133,7 @@ private slots :
 	void checked();
 	void undo();
 	void viewHtml();
+	void viewMetsFile();
 };
 
 #endif // W_STRUCTVIEW_H

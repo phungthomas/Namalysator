@@ -322,7 +322,6 @@
             <height>817</height>
            </rect>
           </property>
-          <zorder></zorder>
          </widget>
         </widget>
        </item>
@@ -387,18 +386,29 @@
       </layout>
      </item>
      <item>
-      <widget class="QPushButton" name="btnError">
-       <property name="text">
-        <string> Error</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnStructure">
-       <property name="text">
-        <string>Structure</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QPushButton" name="btnError">
+         <property name="text">
+          <string> Error</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnStructure">
+         <property name="text">
+          <string>Structure</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnViewMets">
+         <property name="text">
+          <string>View Mets File</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

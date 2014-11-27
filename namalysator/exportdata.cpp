@@ -88,23 +88,31 @@ void exportdata::writeCatError(odswriter *ow, BatchDetail *bdetail,dbrequest *db
 			ow->open_row();
 			ow->add_text("Severity");
 			ow->add_text("Type");
-			ow->add_text("Related File");
+			ow->add_text("Location");
 			ow->add_text("Message");
-			ow->add_text("Info");
+			ow->add_text("File");
+			ow->add_text("Search for");
+			ow->add_text("Year");
 			ow->close_row();
 			
 			for(size_t i =0;i < vSchemaE.size();i++)
-			{			
+			{
 				ow->open_row();
 				ow->add_text(vSchemaE[i].errorType.severity.gravity);
 				ow->add_text(vSchemaE[i].errorType.error);
 				ow->add_text(vSchemaE[i].filePart);
-				ow->add_text(vSchemaE[i].message);				
-				ow->add_text(vSchemaE[i].mets.fileName);							
-				ow->close_row();				
+				ow->add_text(vSchemaE[i].message);
+				if (vSchemaE[i].linkedFiles.fileName.empty()) {
+					ow->add_text_with_link(vSchemaE[i].mets.fileName, "file://" + bdetail->path + vSchemaE[i].mets.path + vSchemaE[i].mets.fileName);
+				} else {
+					ow->add_text_with_link(vSchemaE[i].linkedFiles.fileName, "file://" + bdetail->path + vSchemaE[i].mets.path + vSchemaE[i].linkedFiles.fileName);
+				}
+				ow->add_text(vSchemaE[i].id_search);
+				ow->add_number(vSchemaE[i].mets.year);
+				ow->close_row();
 			}
 			ow->close_sheet();
-		}		
+		}
 	}
 }
 
