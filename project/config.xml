@@ -2,7 +2,7 @@
 <config>
 	<database>C:/Namalysator/DB/trial-db</database>  
 	<batchName>deletz_second</batchName>
-	<input>C:/Data/CCS2012</input>
+	<input>C:/Data/CCS2012/</input>
 	<verifiers>
 		<xml>
 			<schemaValidation>1</schemaValidation>		
