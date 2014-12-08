@@ -118,7 +118,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(METSVERIFIER)\Headers&quot;;&quot;$(CODESYNTHESIS)\include&quot;"
+				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(METSVERIFIER)\Headers&quot;;C:\Development\metsverifier\commonLib;&quot;$(METSVERIFIER)\commonLib&quot;;&quot;$(CODESYNTHESIS)\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;XML_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -137,9 +137,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libexpatMT.lib sqlite.lib"
+				AdditionalDependencies="xerces-c_3.lib commonLib.lib  libexpatMT.lib sqlite.lib "
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(METSVERIFIER)\Libraries\Release;$(METSVERIFIER)\Libraries\boost-libs,$(CODESYNTHESIS)\lib\VC-9-0"
+				AdditionalLibraryDirectories="C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib;C:\Development\Libraries\boost-libs;C:\Development\metsverifier\Librairies\Release;C:\Development\Libraries\Release;C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib"
 				IgnoreDefaultLibraryNames="LIBCMTD"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -487,10 +487,6 @@
 				>
 				<File
 					RelativePath=".\altoparser.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\configparser.cpp"
 					>
 				</File>
 				<File
@@ -884,10 +880,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\configparser.h"
-					>
-				</File>
-				<File
 					RelativePath=".\metsparser.h"
 					>
 				</File>
@@ -935,6 +927,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\ClassDiagram1.cd"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
