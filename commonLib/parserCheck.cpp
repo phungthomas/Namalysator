@@ -39,8 +39,18 @@ void parserCheck::setContentHandler(ContentHandler* const handler){
 		parser->setContentHandler(handler);
 }
 
-void parserCheck::parse(const   char* const     systemId) {
+int parserCheck::parse(const   char* const     systemId) {
+		 
+		FILE *fp ;
+		fopen_s(&fp,systemId, "r");
+		if (!fp)
+		{			
+			std::cerr << "Couldn't open file: " << systemId << std::endl;
+			return 1;
+		} 
+
 		parser->parse(systemId);
+		return 0;
 }
 
  

@@ -31,9 +31,9 @@ public :
 	virtual int addXSD (std::string fileName); //!< append .xsd files to be parsed 
 	virtual void lockaddXSD();  //!< need to be call before first parse otherwise xsd list could gow during parsing of xml 
 	
-	virtual void parse(const char* const     systemId); //!< parse a file : if file not exist : unknown behaviour
+	virtual int parse(const char* const     systemId); //!< parse a file : if file not exist : unknown behaviour
 
-	virtual void setErrorHandler(ErrorHandler* const handler);
+	virtual void setErrorHandler(xercesc::ErrorHandler* const handler);
 	virtual void setContentHandler(ContentHandler* const handler);
 
 protected: 
