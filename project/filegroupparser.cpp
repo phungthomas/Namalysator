@@ -6,10 +6,10 @@
 #include <iostream>
 
 //parse the Filegroup section of the xml
-filegroupparser::filegroupparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,ErrorHandler *h,std::string validation)
+filegroupparser::filegroupparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,errorHandler *h)
 {
 	actualState = state_fileSec;
-	setDelegatedparameters(df,orig_expat_parser,mets_fname,h,validation);	
+	setDelegatedparameters(df,orig_expat_parser,mets_fname,h);	
 }
 
 void filegroupparser::startElement(const char *name, const char **atts)

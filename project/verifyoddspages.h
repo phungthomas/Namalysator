@@ -8,7 +8,7 @@
 class verifyoddspages
 {
 	public:
-		verifyoddspages(ErrorHandler *h,const std::string &currentMetsFile,const int &size);
+		verifyoddspages(errorHandler *h,const std::string &currentMetsFile,const int &size);
 };
 
 #endif	//VERIFYODDSPAGES_H_

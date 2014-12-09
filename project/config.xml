@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<database>C:/Namalysator/DB/trial-db</database>  
+	<database>C:/Data/db/testbdb</database>  
 	<batchName>deletz_second</batchName>
-	<input>C:/Data/CCS2012/testagain</input>
+	<input>C:/Data/newspaper</input>
 	<verifiers>
 		<xml>
 			<schemaValidation>1</schemaValidation>		

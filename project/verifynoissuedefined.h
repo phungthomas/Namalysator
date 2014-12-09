@@ -9,7 +9,7 @@
 class verifynoissuedefined
 {	
 public:
-	verifynoissuedefined(datafactory *df,ErrorHandler *h,const std::string &fileName);
+	verifynoissuedefined(datafactory *df,errorHandler *h,const std::string &fileName);
 };
 
 #endif	//VERIFYNOISSUEDEFINED_H_

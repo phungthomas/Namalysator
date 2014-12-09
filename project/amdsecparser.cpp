@@ -1,5 +1,5 @@
 #include "amdsecparser.h"
-#include "schema_validatormix.h"
+//#include "schema_validatormix.h"
 #include "../common_files/utilities.h"
 #include "../common_files/xmltostr.h"
 #include "metsverifier.h"
@@ -10,10 +10,10 @@ const char* dpiToExtract = "mix:XphysScanResolution";
 const char* sourceDataToExtract = "mix:SourceData";
 
 //!parse the amdsec section with xml validation
-amdsecparser::amdsecparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,ErrorHandler *h,std::string validation)
+amdsecparser::amdsecparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,errorHandler *h)
 {	
 	actualState = state_amd;
-	setDelegatedparameters(df,orig_expat_parser,mets_fname,h,validation);	
+	setDelegatedparameters(df,orig_expat_parser,mets_fname,h);	
 	extract_cData = false;	
 }
 void amdsecparser::startElement(const char *name, const char **atts)
@@ -79,6 +79,7 @@ bool amdsecparser::endElement(const char *name)
 		if (strcmp(name,"amdSec") == 0)
 		{	
 			dfTemp->set(amdsec.amdSecId,amdsec);
+			/* // No More Validation
 			if (schemaValidation =="1")
 			{				
 				Error error = schema_validatormix(xml,lineError);		    
@@ -86,7 +87,8 @@ bool amdsecparser::endElement(const char *name)
 				{	
 					hError->getMetsError(cat_schema_err,"METS","AMDSEC",error,metsFile);					
 				}								
-			}	
+			}
+			*/
 
 			return false;		
 		}

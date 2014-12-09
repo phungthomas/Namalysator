@@ -8,7 +8,7 @@
 class verifydatefolder
 {
 	public:
-		verifydatefolder(ErrorHandler *h,std::string &fileName,std::string &path);
+		verifydatefolder(errorHandler *h,std::string &fileName,std::string &path);
 };
 
 #endif	//VERIFYDATEFOLDER_H_

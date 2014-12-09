@@ -13,7 +13,7 @@ private :
 	std::set<std::pair<std::string, std::string>> block;	
 	
 public:
-	verifyimg(datafactory *dfverifiers,ErrorHandler *hError,std::string &pathdirectory);
+	verifyimg(datafactory *dfverifiers,errorHandler *hError,std::string &pathdirectory);
 };
 
 

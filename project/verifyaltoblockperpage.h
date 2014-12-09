@@ -13,7 +13,7 @@ private :
 	std::set<std::pair<std::string, std::string>> block;	
 
 public:
-	verifyaltoblockperpage(datafactory *dfverifiers,ErrorHandler *hError,std::string &fname);
+	verifyaltoblockperpage(datafactory *dfverifiers,errorHandler *hError,std::string &fname);
 };
 
 

@@ -10,6 +10,6 @@
 class verifyidentifierinmix
 {
 	public:
-		verifyidentifierinmix(datafactory *df,ErrorHandler *h,std::string &fileName);
+		verifyidentifierinmix(datafactory *df,errorHandler *h,std::string &fileName);
 };
 #endif	//VERIFYIDENTIFIERMIX_H_

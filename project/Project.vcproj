@@ -118,7 +118,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(METSVERIFIER)\Headers&quot;;C:\Development\metsverifier\commonLib;&quot;$(METSVERIFIER)\commonLib&quot;;&quot;$(CODESYNTHESIS)\include&quot;"
+				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;&quot;$(METSVERIFIER)\Headers&quot;;C:\Development\metsverifier\commonLib;&quot;$(METSVERIFIER)\commonLib&quot;;&quot;$(CODESYNTHESIS)\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;XML_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -139,7 +139,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="xerces-c_3.lib commonLib.lib  libexpatMT.lib sqlite.lib "
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib;C:\Development\Libraries\boost-libs;C:\Development\metsverifier\Librairies\Release;C:\Development\Libraries\Release;C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib"
+				AdditionalLibraryDirectories="C:\Development\Libraries\Release;&quot;C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib&quot;;&quot;C:\Development\Libraries\boost-libs&quot;;C:\Development\metsverifier\Libraries\Release"
 				IgnoreDefaultLibraryNames="LIBCMTD"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -224,126 +224,26 @@
 				<Filter
 					Name="mix"
 					>
-					<File
-						RelativePath="..\Validating Parsers\mix-pimpl.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mix-pskel.cxx"
-						>
-					</File>
-					<File
-						RelativePath=".\schema_validatormix.cpp"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="alto"
 					>
-					<File
-						RelativePath="..\Validating Parsers\alto-2-0-pimpl.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\alto-2-0-pskel.cxx"
-						>
-					</File>
-					<File
-						RelativePath=".\schema_validatoralto.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\xlink-pimpl.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\xlink-pskel.cxx"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="mods"
 					>
-					<File
-						RelativePath="..\Validating Parsers\mods-3-0-pimpl.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mods-3-0-pskel.cxx"
-						>
-					</File>
-					<File
-						RelativePath=".\schema_validatordmdsec.cpp"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="bnl_newspaper"
 					>
-					<File
-						RelativePath="..\Validating Parsers\bnl-newspaper_v1.3-pimpl.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\bnl-newspaper_v1.3-pskel.cxx"
-						>
-					</File>
-					<File
-						RelativePath=".\schema_validatorstruct.cpp"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="bnl_serial"
 					>
-					<File
-						RelativePath="..\Validating Parsers\bnl-serial_v1.0-pimpl.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\bnl-serial_v1.0-pskel.cxx"
-						>
-					</File>
-					<File
-						RelativePath=".\schema_validator_bnl_serial.cpp"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="mets"
 					>
-					<File
-						RelativePath="..\Validating Parsers\dc-pimpl.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\dc-pskel.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mets-pimpl.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mets-pskel.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\rdf-pimpl.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\rdf-pskel.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\xml-pimpl.cxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\xml-pskel.cxx"
-						>
-					</File>
 				</Filter>
 			</Filter>
 			<Filter
@@ -570,150 +470,26 @@
 				<Filter
 					Name="mix"
 					>
-					<File
-						RelativePath="..\Validating Parsers\mix-pimpl.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mix-pskel.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mix-pskel.ixx"
-						>
-					</File>
-					<File
-						RelativePath=".\schema_validatormix.h"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="alto"
 					>
-					<File
-						RelativePath="..\Validating Parsers\alto-2-0-pimpl.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\alto-2-0-pskel.hxx"
-						>
-					</File>
-					<File
-						RelativePath=".\schema_validatoralto.h"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\xlink-pimpl.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\xlink-pskel.hxx"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="mods"
 					>
-					<File
-						RelativePath="..\Validating Parsers\mods-3-0-pimpl.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mods-3-0-pskel.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mods-3-0-pskel.ixx"
-						>
-					</File>
-					<File
-						RelativePath=".\schema_validatordmdsec.h"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="bnl_newspaper"
 					>
-					<File
-						RelativePath="..\Validating Parsers\bnl-newspaper_v1.3-pimpl.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\bnl-newspaper_v1.3-pskel.hxx"
-						>
-					</File>
-					<File
-						RelativePath=".\schema_validatorstruct.h"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="bnl_serial"
 					>
-					<File
-						RelativePath="..\Validating Parsers\bnl-serial_v1.0-pimpl.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\bnl-serial_v1.0-pskel.hxx"
-						>
-					</File>
-					<File
-						RelativePath=".\schema_validator_bnl_serial.h"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="mets"
 					>
-					<File
-						RelativePath="..\Validating Parsers\dc-pimpl.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\dc-pskel.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\dc-pskel.ixx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mets-pimpl.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mets-pskel.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\mets-pskel.ixx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\rdf-pimpl.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\rdf-pskel.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\rdf-pskel.ixx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\xml-pimpl.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\xml-pskel.hxx"
-						>
-					</File>
-					<File
-						RelativePath="..\Validating Parsers\xml-pskel.ixx"
-						>
-					</File>
 				</Filter>
 			</Filter>
 			<Filter
@@ -849,10 +625,6 @@
 				>
 				<File
 					RelativePath="..\common_files\precisiontimer.h"
-					>
-				</File>
-				<File
-					RelativePath=".\schemavalidator.h"
 					>
 				</File>
 				<File

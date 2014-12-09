@@ -10,7 +10,7 @@
 class verifydivs
 {
 	public:
-		verifydivs(datafactory *df,ErrorHandler *h,std::string &fileName);
+		verifydivs(datafactory *df,errorHandler *h,std::string &fileName);
 };
 
 #endif	//VERIFYDIVS_H_

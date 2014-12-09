@@ -2,7 +2,7 @@
 #include <sstream>
 
 //verify if pages are odd or even
-verifyoddspages::verifyoddspages(ErrorHandler *hError,const std::string &currentMetsFile,const int &size)
+verifyoddspages::verifyoddspages(errorHandler *hError,const std::string &currentMetsFile,const int &size)
 {
 	hError->begin("Verify : odds pages");
 	if (size % 2 != 0)

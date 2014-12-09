@@ -13,7 +13,7 @@
 #include "metsparser.h"
 #include "sql.h"
 #include "errorhandler.h"
-#include "schema_validatoralto.h"
+
 #include "dataaggregator.h"
 #include "verifytitles.h"
 #include "verifyblocks.h"
@@ -37,7 +37,7 @@
 #include "verifycutouts.h"
 #include "titletocheck.h"
 #include "datehelper.h"
-#include "configparser.h"
+#include <configparser.h>
 #include "metsverifier.h"
 #include "boost/filesystem/operations.hpp"
 #include "boost/filesystem/path.hpp"
@@ -67,7 +67,7 @@ void printCmd(std::string var)
 }
 
 // verify if the input path is correct
-bool validInputPath(std::string path,ErrorHandler *hError)
+bool validInputPath(std::string path,errorHandler *hError)
 {	
 	 if ( !fs::exists(path) )
 	 {
@@ -77,7 +77,7 @@ bool validInputPath(std::string path,ErrorHandler *hError)
 	 return true;	
 }
 // Verify if the database does not exist, create a new database
-bool existDatabase(database *db,ErrorHandler *hError,std::string databasePath,std::string sqlCreateTablePath)
+bool existDatabase(database *db,errorHandler *hError,std::string databasePath,std::string sqlCreateTablePath)
 {	
 	if ( !fs::exists(databasePath) )	
 	{
@@ -90,7 +90,7 @@ bool existDatabase(database *db,ErrorHandler *hError,std::string databasePath,st
 	return true;
 }
 
-int main()
+int start()
 {		
 	
 	//get current path of the folder
@@ -103,9 +103,10 @@ int main()
 
 	configparser config(parameter);
 	//Parse the config file
-	if (ParseDocument(configPath.str().c_str(),&config) !=0 )	
+	
+	if (config.parse(configPath.str().c_str()) !=0 )	
 	{	
-		ErrorHandler hLog;		
+		errorHandler hLog;		
 		hLog.setlogFilePath("commonLog.log");		
 		hLog.begin("Can not parse config file");
 		hLog.begin(" return 1");	
@@ -142,7 +143,7 @@ int main()
 	//create object database and the connections
 	database db(batchName, datab, logFilePath.str());	
 	
-	ErrorHandler hError;		
+	errorHandler hError;		
 	hError.setDatabase(&db);
 	//set path of the log file
 	hError.setlogFilePath(logFilePath.str());
@@ -199,7 +200,7 @@ int main()
 		hError.begin(tempMessage.str());		
 		std::cout << tempMessage.str() << std::endl;
 		pt.LogTime("\tHousekeeping before mets parser");
-		metsParser metsP(currentMetsFile,&hError, &df,parameter->schemaValidation);
+		metsParser metsP(currentMetsFile,&hError, &df);
 		pt.LogTime("METS Parser creation");
 		db.insertMets(batchName,currentMetsPath,currentMetsFile);
 		pt.LogTime("Insrting METS into DB");
@@ -213,26 +214,29 @@ int main()
 		pt.LogTime("Parsing METS file");
 		//Parse all the Altos from Mets		
 		File_Group *fg = 0;
-		fg = df.get<File_Group>("ALTOGRP");				
-		for(size_t j=0;j < fg->vect.size();j++)
-		{	
-			Type_File tf = fg->vect[j];				
-			const std::string &path = currentMetsPath + tf.ref;	
-			altoparser altoP(path,tf.id,&hError,&df,parameter->schemaValidation);
+		fg = df.get<File_Group>("ALTOGRP");
+		if ( fg != NULL ){
+			for(size_t j=0;j < fg->vect.size();j++)
+			{	
+				Type_File tf = fg->vect[j];				
+				const std::string &path = currentMetsPath + tf.ref;	
+				altoparser altoP(path,tf.id,&hError,&df);
 
-			if (ParseDocument(path.c_str() ,&altoP) !=0 )	
-			{						
-				hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
-				parseError = true;		
+				if (ParseDocument(path.c_str() ,&altoP) !=0 )	
+				{						
+					hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
+					parseError = true;		
+				}
+				else
+				{			
+				}		
 			}
-			else
-			{			
-			}		
-		}
+		
 		pt.LogTime("Parsing ALTO files");
 		if (parameter->oddsPages =="1")
 		{
 			verifyoddspages(&hError,currentMetsFile,fg->vect.size());
+		}
 		}
 		pt.LogTime("Verify Odds pages");
 		if (parameter->checkFile =="1")
@@ -328,7 +332,8 @@ int main()
 		std::cout << "		Insert data finito " <<std::endl;
 #endif // DEBUG		
 	}
-	exit(0);
+	
+	//exit(0);
 	fclose(fpTimingLog);
 	verifymissingissue(&hError,&db);
 	
@@ -340,4 +345,13 @@ int main()
 	hError.begin("The End");
 	db.closeDB();
 	return 0;
+}
+
+int main(int argc, char** argv){
+
+	XMLPlatformUtils::Initialize ();
+	
+	start ();
+
+	XMLPlatformUtils::Terminate ();
 }

@@ -1,7 +1,7 @@
 #include "verifynoissuedefined.h"
 
 
-verifynoissuedefined::verifynoissuedefined(datafactory *dfVerifiers,ErrorHandler *hError,const std::string &fileName)
+verifynoissuedefined::verifynoissuedefined(datafactory *dfVerifiers,errorHandler *hError,const std::string &fileName)
 {
 	hError->begin("Verify if issue defined ");
 	bool findIssue =false;

@@ -8,7 +8,7 @@
 class verifychecksum
 {
 	public:
-		verifychecksum(datafactory *df,ErrorHandler *h,const std::string &fileName,const std::string &path);
+		verifychecksum(datafactory *df,errorHandler *h,const std::string &fileName,const std::string &path);
 };
 
 #endif	//VERIFYCHECKSUM_H_

@@ -4,6 +4,6 @@
 #include "datafactory.h"
 #include "errorhandler.h"
 
-void verifycutouts(datafactory *df,ErrorHandler *h,std::string &fileName);
+void verifycutouts(datafactory *df,errorHandler *h,std::string &fileName);
 
 #endif // VERIFYCUTOUTS_H_

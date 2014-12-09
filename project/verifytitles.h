@@ -8,7 +8,7 @@
 class verifytitles 
 {
 	public:
-		verifytitles(datafactory *df,ErrorHandler *h,std::string &fileName);
+		verifytitles(datafactory *df,errorHandler *h,std::string &fileName);
 };
 
 

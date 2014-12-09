@@ -4,7 +4,7 @@
 #include <iostream>
 
 //! check if the titles has to be check or not
-titletocheck::titletocheck(datafactory *df,ErrorHandler *hError,std::string &fname)
+titletocheck::titletocheck(datafactory *df,errorHandler *hError,std::string &fname)
 {
 	dfverifiers = df;
 	datafactory_set<Article> dfArticle= dfverifiers->get_set<Article>();

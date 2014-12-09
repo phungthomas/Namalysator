@@ -28,10 +28,9 @@ private:
 	delegatedparser *current;
 	datafactory *dfMets;	
 	std::string metsfile;	
-	ErrorHandler *hError;
-	std::string xmlvalidation;
+	errorHandler *hError;
 public:
-	metsParser(std::string &mets_fname,ErrorHandler *h,datafactory *df,std::string validation);
+	metsParser(std::string &mets_fname,errorHandler *h,datafactory *df);
 	virtual void XMLstartElement(const char *name, const char **atts);
 	virtual void XMLendElement(const char *name);
 	virtual void XMLcharacterData(const char *s, int len);		

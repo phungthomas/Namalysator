@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-DiskParser::DiskParser(ErrorHandler *h)
+DiskParser::DiskParser(errorHandler *h)
 {
 	hError = h;
 }

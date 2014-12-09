@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 
-verifycoveragepercentagealtoblocks::verifycoveragepercentagealtoblocks(datafactory *dfverifiers,ErrorHandler *hError,std::string &fname)
+verifycoveragepercentagealtoblocks::verifycoveragepercentagealtoblocks(datafactory *dfverifiers,errorHandler *hError,std::string &fname)
 {
 
 	bool supplement= false;

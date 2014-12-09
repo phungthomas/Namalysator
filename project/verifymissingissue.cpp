@@ -3,7 +3,7 @@
 #include "../common_files/struct.h"
 #include <sstream>
 
-verifymissingissue::verifymissingissue(ErrorHandler *hError,database *db)
+verifymissingissue::verifymissingissue(errorHandler *hError,database *db)
 {
 	std::set<int> setIssue;
 	bool findDuplicateIssue = false;	

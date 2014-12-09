@@ -6,7 +6,7 @@
 #include "sql.h"
 
 //! handle errors encountered
-class ErrorHandler
+class errorHandler
 {
 private:
 	std::string logFilePath;		

@@ -1,6 +1,6 @@
 #include "verifycutouts.h"
 
-void verifycutouts(datafactory *df, ErrorHandler *h, std::string &fileName)
+void verifycutouts(datafactory *df, errorHandler *h, std::string &fileName)
 {
 	bool foundOne = false;
 	h->begin("Verify: cut-out references in mix");

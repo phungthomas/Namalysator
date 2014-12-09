@@ -5,7 +5,7 @@
 
 
 //!verify block structure 
-verifyblockstructure::verifyblockstructure(datafactory *dfverifiers,ErrorHandler *hError,const std::string &fname)
+verifyblockstructure::verifyblockstructure(datafactory *dfverifiers,errorHandler *hError,const std::string &fname)
 {	
 	hError->begin("Verify: block structure");
 	datafactory_set<altoblock> dfaltoblock= dfverifiers->get_set<altoblock>();

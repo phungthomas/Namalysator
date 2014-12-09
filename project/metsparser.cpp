@@ -1,14 +1,13 @@
 #include "metsparser.h"
 
 
-metsParser::metsParser(std::string &mets_fname,ErrorHandler *h,datafactory *df,std::string validation)
+metsParser::metsParser(std::string &mets_fname,errorHandler *h,datafactory *df)
 {
 	hError = h;	
 	metsfile = mets_fname;
 	currentstate = root;
 	current = 0;	
 	dfMets = df;
-	xmlvalidation = validation;
 }
 
 void metsParser::XMLstartElement(const char *name, const char **atts)
@@ -22,19 +21,19 @@ void metsParser::XMLstartElement(const char *name, const char **atts)
 			dfMets->set<StringItem>("METS_PAPERTYPE", papertype);
 		} else if (strcmp(name,"dmdSec") == 0)
 		{			
-			current = new dmdsecparser(dfMets, expat_parser,metsfile,hError,xmlvalidation);	
+			current = new dmdsecparser(dfMets, expat_parser,metsfile,hError);	
 			currentstate = delegated;	
 			current->initialize(name,atts);			
 		}
 		else if (strcmp(name,"amdSec") == 0)
 		{							
-			current = new amdsecparser(dfMets, expat_parser,metsfile,hError,xmlvalidation);	
+			current = new amdsecparser(dfMets, expat_parser,metsfile,hError);	
 			currentstate = delegated;	
 			current->initialize(name,atts);			
 		} 
 		else if (strcmp(name,"fileSec") == 0)
 		{			
-			current = new filegroupparser(dfMets, expat_parser,metsfile,hError,xmlvalidation);						
+			current = new filegroupparser(dfMets, expat_parser,metsfile,hError);						
 			currentstate = delegated;
 			current->initialize(name,atts);						
 		} 
@@ -43,7 +42,7 @@ void metsParser::XMLstartElement(const char *name, const char **atts)
 			std::string val = get_named_attr("TYPE", atts);
 			if (val.find("LOGICAL")!=string::npos)
 			{	
-				current = new structmapparser(dfMets, expat_parser,metsfile,hError,xmlvalidation);						
+				current = new structmapparser(dfMets, expat_parser,metsfile,hError);						
 				currentstate = delegated;					
 				current->initialize(name,atts);	
 			}

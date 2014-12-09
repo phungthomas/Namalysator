@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-verifyinvalidissuenumber::verifyinvalidissuenumber(datafactory *df,ErrorHandler *h,const std::string &fileName)
+verifyinvalidissuenumber::verifyinvalidissuenumber(datafactory *df,errorHandler *h,const std::string &fileName)
 {
 	h->begin("Verify: partnumber");
 	Mets *mets = 0;

@@ -11,7 +11,7 @@ private :
 	std::set<std::pair<std::string, std::string>> block;	
 
 public:
-	verifyblocks(datafactory *df,ErrorHandler *h,std::string &fileName);
+	verifyblocks(datafactory *df,errorHandler *h,std::string &fileName);
 };
 
 

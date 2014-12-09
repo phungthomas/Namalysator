@@ -10,7 +10,7 @@ class titletocheck
 {
 
 public:
-	titletocheck(datafactory *dfverifiers,ErrorHandler *hError,std::string &fname);
+	titletocheck(datafactory *dfverifiers,errorHandler *hError,std::string &fname);
 private: 
 	datafactory *dfverifiers;
 

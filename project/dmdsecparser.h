@@ -23,7 +23,7 @@ class dmdsecparser: public delegatedparser
 		dmdsec dmdSecStruct;		
 		std::string addStringData;
 	public:	
-		dmdsecparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,ErrorHandler *h,std::string validation);
+		dmdsecparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,errorHandler *h);
 		virtual void startElement(const char *name, const char **atts);
 		virtual bool endElement(const char *name);
 		virtual void characterData(const char *s, int len);

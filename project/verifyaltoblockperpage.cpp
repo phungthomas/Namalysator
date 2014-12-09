@@ -1,7 +1,7 @@
 #include "verifyaltoblockperpage.h"
 
 
-verifyaltoblockperpage::verifyaltoblockperpage(datafactory *dfverifiers,ErrorHandler *hError,std::string &fname)
+verifyaltoblockperpage::verifyaltoblockperpage(datafactory *dfverifiers,errorHandler *hError,std::string &fname)
 {	
 	hError->begin("Verify: alto block per page");
 	bool supplement= false;

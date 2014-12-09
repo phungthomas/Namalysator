@@ -1,8 +1,8 @@
-#include "errorhandler.h"
+#include "errorHandler.h"
 #include <sstream>
 #include <iostream>
 
-void ErrorHandler::setDatabase(database *database)
+void errorHandler::setDatabase(database *database)
 {
 	db = database;
 }
@@ -21,7 +21,7 @@ std::string convertStringErrorMessage(const Error &error)
 //! \param catagory error category
 //! \param fileName name of the current Mets
 //! \param message the string to write in the log
-void ErrorHandler::writeToLog(int category,const std::string &fileName, const std::string &mess)
+void errorHandler::writeToLog(int category,const std::string &fileName, const std::string &mess)
 {	
 	ErrorTypeMets error =  db->getErrorTypeWithId(category);
 	std::string message = "ERROR: "  + error.error + ": " + mess;
@@ -39,14 +39,14 @@ void ErrorHandler::writeToLog(int category,const std::string &fileName, const st
 	}
 }
 //! get error from Mets during parsing files
-void ErrorHandler::getMetsError(int category,const std::string &relatedType,const std::string &file_part,Error e,const std::string &fName)
+void errorHandler::getMetsError(int category,const std::string &relatedType,const std::string &file_part,Error e,const std::string &fName)
 {		
 	writeToLog(category,fName,convertStringErrorMessage(e));	
 	db->insertMetsError(category,relatedType,file_part,e);
 }
 
 //! write to log where the parser currently is
-void ErrorHandler::begin(const std::string &info)
+void errorHandler::begin(const std::string &info)
 {
 	FILE *fp;
 	fopen_s(&fp,logFilePath.c_str(), "a");
@@ -61,20 +61,20 @@ void ErrorHandler::begin(const std::string &info)
 	}
 }
 //! set path of log
-void ErrorHandler::setlogFilePath(const std::string &pathLog)
+void errorHandler::setlogFilePath(const std::string &pathLog)
 {
 	logFilePath = pathLog;
 }
 
 //! function called when a date error found
-void ErrorHandler::getDateError(int category,std::string dateBegin,std::string dateEnd,std::string issues,std::string comment)
+void errorHandler::getDateError(int category,std::string dateBegin,std::string dateEnd,std::string issues,std::string comment)
 {
 	writeToLog(category,"",comment);		
 	db->insertDateError(category,dateBegin,dateEnd,issues,comment);
 }
 
 //! get Error from the verifiers
-void ErrorHandler::getError(int category,const std::string &relatedType,const std::string &file_part, const std::string &message,const std::string &fName, std::string id)
+void errorHandler::getError(int category,const std::string &relatedType,const std::string &file_part, const std::string &message,const std::string &fName, std::string id)
 {		
 	writeToLog(category,fName,message);		
 	Error e;

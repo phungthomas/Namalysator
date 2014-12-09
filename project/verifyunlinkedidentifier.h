@@ -11,6 +11,6 @@ class verifyunlinkedidentifier
 	private :
 		std::set<std::pair<std::string, std::string>> block;	
 	public:
-		verifyunlinkedidentifier(datafactory *df,ErrorHandler *h,std::string &fileName);
+		verifyunlinkedidentifier(datafactory *df,errorHandler *h,std::string &fileName);
 };
 #endif	//VERIFYUNLINKEDIDENTIFIER_H_

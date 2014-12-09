@@ -11,7 +11,7 @@ private :
 	std::set<std::pair<std::string, std::string>> block;	
 
 public:
-	verifyalto(datafactory *dfverifiers,ErrorHandler *hError,std::string &pathdirectory);
+	verifyalto(datafactory *dfverifiers,errorHandler *hError,std::string &pathdirectory);
 };
 
 

@@ -2,7 +2,7 @@
 #include <set>
 
 
-verifyunlinkedidentifier::verifyunlinkedidentifier(datafactory *dfverifiers,ErrorHandler *hError,std::string &fileName)
+verifyunlinkedidentifier::verifyunlinkedidentifier(datafactory *dfverifiers,errorHandler *hError,std::string &fileName)
 {
 	hError->begin("Verify: unlinked identifier");
 	datafactory_set<Article> dfArticle = dfverifiers->get_set<Article>();

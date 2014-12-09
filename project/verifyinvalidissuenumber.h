@@ -9,7 +9,7 @@
 class verifyinvalidissuenumber
 {
 	public:
-		verifyinvalidissuenumber(datafactory *df,ErrorHandler *h,const std::string &fileName);
+		verifyinvalidissuenumber(datafactory *df,errorHandler *h,const std::string &fileName);
 };
 
 

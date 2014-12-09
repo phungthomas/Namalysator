@@ -1,7 +1,7 @@
 #include "verifychecksum.h"
 #include "md5wrapper.h"
 
-verifychecksum::verifychecksum(datafactory *dfverifiers,ErrorHandler *hError,const std::string &fileName,const std::string &path)
+verifychecksum::verifychecksum(datafactory *dfverifiers,errorHandler *hError,const std::string &fileName,const std::string &path)
 {
 	hError->begin("Verify: checksum");
 	datafactory_set<File_Group> dftypefile = dfverifiers->get_set<File_Group>();		

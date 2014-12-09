@@ -5,7 +5,7 @@ const char *extract_blocks[] = {
 	"Illustration",
 	"ComposedBlock"};
 
-altoparser::altoparser(const std::string &alto_fname,const std::string &altoId,ErrorHandler *h, datafactory *df,std::string validation)
+altoparser::altoparser(const std::string &alto_fname,const std::string &altoId,errorHandler *h, datafactory *df)
 {	
 	xml = initializeXmlValidator();
 	altoFile = alto_fname;
@@ -15,7 +15,6 @@ altoparser::altoparser(const std::string &alto_fname,const std::string &altoId,E
 	hError = h;
 	dfalto = df;	
 	measurement_unit = false;	
-	schemaValidation = validation;
 
 	for (size_t i = 0; i < sizeof(extract_blocks) / sizeof(extract_blocks[0]); ++i)
 	{
@@ -130,6 +129,7 @@ void altoparser::XMLendElement(const char *name)
 	else  if (strcmp(name,"alto") == 0)
 	{	
 		dfalto->set(alto,altoBlock);
+		/* // no more validation
 		if (schemaValidation =="1")
 		{			
 			Error error = schema_validatoralto(xml);	
@@ -139,6 +139,7 @@ void altoparser::XMLendElement(const char *name)
 			}		
 
 		}	
+		*/
 	}
 }
 

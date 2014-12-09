@@ -2,16 +2,16 @@
 #include "../common_files/utilities.h"
 #include <string>
 #include <iostream>
-#include "schema_validatorstruct.h"
+//#include "schema_validatorstruct.h"
 #include "xmlsaverstruct.h"
 #include "errorhandler.h"
 
 const std::string article_identifier = "MODSMD_ARTICLE";
 
 //parse the structmap section of the xml file
-structmapparser::structmapparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,ErrorHandler *h,std::string validation)
+structmapparser::structmapparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,errorHandler *h)
 {		
-	setDelegatedparameters(df,orig_expat_parser,mets_fname,h,validation);	
+	setDelegatedparameters(df,orig_expat_parser,mets_fname,h);	
 	lineError = XML_GetCurrentLineNumber(expat_parser);		
 	currentItem =0;
 	rootItem =0;
@@ -90,6 +90,7 @@ bool structmapparser::endElement(const char *name)
 		t.vectTypeBlock =rootItem->vectTypeBlock;
 		dfTemp->set("Item",t);
 		
+		/* // no more validation
 		if(	actualState == state_logical)
 		{	
 			if (schemaValidation == "1")
@@ -102,6 +103,7 @@ bool structmapparser::endElement(const char *name)
 			}
 			return false; 	
 		}
+		*/
 	}	
    	
 	if (strcmp(name,"div")==0)

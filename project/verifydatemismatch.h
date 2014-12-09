@@ -10,7 +10,7 @@ class verifydatemismatch
 {
 	
 public:
-	verifydatemismatch::verifydatemismatch(ErrorHandler *hError,Mets *mets);
+	verifydatemismatch::verifydatemismatch(errorHandler *hError,Mets *mets);
 	
 };
 

@@ -388,7 +388,7 @@ void database::insertMetsError(int category,const std::string &relatedType,const
 //! insert message into log
 void database::insertLog(std::string message)
 {
-	ErrorHandler h;
+	errorHandler h;
 	h.setlogFilePath(logFilePath);	
 	h.begin(message);	
 
@@ -629,7 +629,7 @@ void database::insertParameterVerifiers(Parameters *param)
 					  '" + param->coveragePercentAlto + "',  \
 					  '" + param->multipleBlockUse + "',  \
 					  '" + param->dates + "',  \
-					  '" + param->schemaValidation + "')";  				
+					  '" + "1" + /*param->schemaValidation*/ + "')"; // always true 				
 
 	int rc = sqlite3_exec(db, sql.c_str(), NULL, 0, &zErrMsg);
 	if( rc )

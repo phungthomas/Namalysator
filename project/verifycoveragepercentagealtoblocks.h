@@ -12,7 +12,7 @@ private :
 	std::set<std::pair<std::string, std::string>> block;	
 
 public:
-	verifycoveragepercentagealtoblocks(datafactory *df,ErrorHandler *h,std::string &fileName);
+	verifycoveragepercentagealtoblocks(datafactory *df,errorHandler *h,std::string &fileName);
 };
 
 

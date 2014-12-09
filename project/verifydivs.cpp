@@ -1,7 +1,7 @@
 #include "verifydivs.h"
 #include "errorhandler.h"
 //Data integrity : verify uniqueness of divs
-verifydivs::verifydivs(datafactory *dfverifiers,ErrorHandler *hError,std::string &fileName)
+verifydivs::verifydivs(datafactory *dfverifiers,errorHandler *hError,std::string &fileName)
 {	
 	hError->begin("Verify: Divs");
 	datafactory_set<DivType> dfDivType = dfverifiers->get_set<DivType>();

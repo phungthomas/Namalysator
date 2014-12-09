@@ -4,7 +4,7 @@
 #include <iostream>
 
 //Data integrity : verify administrative metadata ID from logical structure
-verifyidentifierinmix::verifyidentifierinmix(datafactory *dfverifiers,ErrorHandler *hError,std::string &fileName)
+verifyidentifierinmix::verifyidentifierinmix(datafactory *dfverifiers,errorHandler *hError,std::string &fileName)
 {	
 	File_Group *fg = 0;
 	fg = dfverifiers->get<File_Group>("IMGGRP");

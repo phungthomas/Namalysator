@@ -6,7 +6,7 @@
 const char* unknown = "UNKNOWN";
 
 
-verifytitles::verifytitles(datafactory *dfverifiers,ErrorHandler *hError,std::string &fileName)
+verifytitles::verifytitles(datafactory *dfverifiers,errorHandler *hError,std::string &fileName)
 {
 	hError->begin("Verify: Titles");
 /*		

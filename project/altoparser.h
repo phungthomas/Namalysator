@@ -4,7 +4,7 @@
 #include "../common_files/xmlparser.h"
 #include "../common_files/struct.h"
 #include "../common_files/utilities.h"
-#include "schema_validatoralto.h"
+// #include "schema_validatoralto.h"
 #include "../common_files/xmltostr.h"
 #include "dataitem.h"
 #include "datafactory.h"
@@ -30,12 +30,12 @@ private :
 	std::string altoFile;
 	altoblock altoBlock;
 	std::set<std::string> to_extract;
-	ErrorHandler *hError;
+	errorHandler *hError;
 	bool headerIn,measurement_unit,is_mm10,convert_to_pixels;	
 	int  dpi;
-	std::string schemaValidation;
+
 public:	
-	altoparser(const std::string &altoFile,const std::string &altoId,ErrorHandler *h,datafactory *df,std::string validation);
+	altoparser(const std::string &altoFile,const std::string &altoId,errorHandler *h,datafactory *df);
 	virtual void XMLstartElement(const char *name, const char **atts);
 	virtual void XMLendElement(const char *name);
 	virtual void XMLcharacterData(const char *s, int len);	

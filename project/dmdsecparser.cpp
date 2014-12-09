@@ -5,9 +5,9 @@
 #include <iostream>
 #include <boost/algorithm/string.hpp>
 
-dmdsecparser::dmdsecparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,ErrorHandler *h,std::string validation)
+dmdsecparser::dmdsecparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,errorHandler *h)
 {		
-	setDelegatedparameters(df,orig_expat_parser,mets_fname,h,validation);	
+	setDelegatedparameters(df,orig_expat_parser,mets_fname,h);	
 	type = type_root;	
 	addStringData.clear();
 }
@@ -72,9 +72,10 @@ bool dmdsecparser::endElement(const char *name)
 			 
 	if (strcmp(name,"dmdSec") == 0)
 	{	
-	
-		dfTemp->set(idItem,dmdSecStruct);			
-		
+	    
+		dfTemp->set(idItem,dmdSecStruct);
+
+		/* //No More validation
 		if (schemaValidation =="1")
 		{	
 			Error error = schema_validatordmdsec(xml,lineError);		    
@@ -83,6 +84,7 @@ bool dmdsecparser::endElement(const char *name)
 				hError->getMetsError(cat_schema_err,"METS","DMDSEC",error,metsFile);			
 			}			
 		}
+		*/
 		return false;
 	}	
 	return true;		

@@ -11,7 +11,7 @@ class verifypdf
 {
 
 public:
-	verifypdf(datafactory *df,ErrorHandler *h,std::string &pathdirectory);
+	verifypdf(datafactory *df,errorHandler *h,std::string &pathdirectory);
 };
 
 

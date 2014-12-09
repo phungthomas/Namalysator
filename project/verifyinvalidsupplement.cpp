@@ -4,7 +4,7 @@
 const char* string_issue = "MODSMD_ISSUE";
 const char* string_find = "MODSMD_SUPPLEMENT";
 
-verifyinvalidsupplement::verifyinvalidsupplement(datafactory *dfVerifiers,ErrorHandler *hError,std::string &fileName)
+verifyinvalidsupplement::verifyinvalidsupplement(datafactory *dfVerifiers,errorHandler *hError,std::string &fileName)
 {
 	hError->begin("Verify: invalid supplement");
 	datafactory_set<dmdsec> dfIssue = dfVerifiers->get_set<dmdsec>();

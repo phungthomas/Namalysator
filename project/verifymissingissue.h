@@ -15,7 +15,7 @@ private:
 	int current;
 	std::set<std::pair<std::string, int>> ErrorIssue;	
 public:
-	verifymissingissue(ErrorHandler *hError,database *db);
+	verifymissingissue(errorHandler *hError,database *db);
 };
 
 #endif	//VERIFYMISSINGISSUE_H_

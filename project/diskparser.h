@@ -14,11 +14,11 @@ namespace fs = boost::filesystem;
 class DiskParser 
 {
 private:
-	ErrorHandler *hError;	
+	errorHandler *hError;	
 	std::vector<std::pair<std::string, std::string>> vectMets;		
 public:	
 	//!Constructor
-	DiskParser(ErrorHandler *hError);
+	DiskParser(errorHandler *hError);
 	//! Parse the disk and get all the Mets files. 
 	/*!
       \param path root path of the folder     

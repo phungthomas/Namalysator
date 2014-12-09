@@ -12,7 +12,7 @@ private :
 	std::set<std::pair<std::string, std::string>> block;	
 
 public:
-	verifyinvalidsupplement(datafactory *df,ErrorHandler *h,std::string &fileName);
+	verifyinvalidsupplement(datafactory *df,errorHandler *h,std::string &fileName);
 };
 
 

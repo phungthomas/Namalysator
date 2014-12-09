@@ -118,7 +118,7 @@ struct article_compare
 struct DivType : public dataitem
 {
 	static const size_t DATAITEM_ID =6;
-	std::vector<std::pair<std::string, std::string>> vectDivType;
+	std::vector<std::pair<std::string, std::string> > vectDivType;
 
 };
 
@@ -226,31 +226,7 @@ struct ErrorTypeMets {
 	//ErrorCategory category;
 };
 
-//! structure of a parameter
-struct Parameters
-{
-	std::string input;
-	std::string batchName;
-	std::string database;
-	std::string schemaValidation;
-	std::string dateFolderIssue;
-	std::string dates;
-	std::string checkFile;
-	std::string checkSum;
-	std::string divs;
-	std::string unlinkedIdentifier;
-	std::string identifierMix;	
-	std::string altoblockPerPage;
-	std::string blockStructure;
-	std::string coveragePercentAlto;	
-	std::string multipleBlockUse;
-	std::string invalidSupplement;
-	std::string noIssueDefined;	
-	std::string checkTitle;
-	std::string oddsPages;
-	std::string sampling;
-	std::string issueNumber;
-	};
+#include <common.h>
 
 const static int cat_xml_error=  1;	
 const static int cat_schema_err=  2;
