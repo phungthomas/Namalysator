@@ -49,7 +49,17 @@ int parserCheck::parse(const   char* const     systemId) {
 			return 1;
 		} 
 
-		parser->parse(systemId);
+		
+		try {
+			parser->parse(systemId);
+        }
+        catch (const XMLException& toCatch) {
+            char* message = XMLString::transcode(toCatch.getMessage());
+            cerr << "Exception message is: \n"
+                 << message << "\n";
+            XMLString::release(&message);
+            return -1;
+        }
 		return 0;
 }
 
