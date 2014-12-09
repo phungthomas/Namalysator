@@ -70,10 +70,12 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 	{
 		helpMth->start(& (ctx->input));
 	}
+	/* // No More Validation
 	else if (strcmp(name,"schemaValidation") == 0)		
 	{
 		helpMth->start(& (ctx->schemaValidation));
 	}
+	*/
 	else if (strcmp(name,"checkFile") == 0)		
 	{
 		helpMth->start(& (ctx->checkFile));
