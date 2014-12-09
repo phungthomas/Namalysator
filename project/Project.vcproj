@@ -409,6 +409,10 @@
 						>
 					</File>
 					<File
+						RelativePath=".\structmaphysicalparser.cpp"
+						>
+					</File>
+					<File
 						RelativePath=".\structmapparser.cpp"
 						>
 					</File>

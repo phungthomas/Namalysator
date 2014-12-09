@@ -2,16 +2,16 @@
 #include "../common_files/utilities.h"
 #include <string>
 #include <iostream>
-#include "schema_validatorstruct.h"
+//#include "schema_validatorstruct.h"
 #include "xmlsaverstruct.h"
 #include "errorhandler.h"
 
 
 
 //parse the structmap section of the xml file
-structmaphysicalparser::structmaphysicalparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,ErrorHandler *h,std::string validation)
+structmaphysicalparser::structmaphysicalparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,errorHandler *h)
 {		
-	setDelegatedparameters(df,orig_expat_parser,mets_fname,h,validation);	
+	setDelegatedparameters(df,orig_expat_parser,mets_fname,h);	
 	lineError = XML_GetCurrentLineNumber(expat_parser);		
 	currentItem =0;
 	rootItem =0;
@@ -86,6 +86,7 @@ bool structmaphysicalparser::endElement(const char *name)
 		
 		if(	actualState == state_physical)
 		{	
+			/*
 			if (schemaValidation == "1")
 			{				
 				Error error = schema_validatorstruct(xml,lineError);				
@@ -94,6 +95,7 @@ bool structmaphysicalparser::endElement(const char *name)
 					hError->getMetsError(cat_schema_err,"METS","STRUCTMAP",error,metsFile);					
 				}				
 			}
+			*/
 			return false; 	
 		}
 	}	
