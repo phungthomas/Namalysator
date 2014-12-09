@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <cstdio>
 
 
 #include "../common_files/xmltostr.h"
@@ -13,6 +14,8 @@
 #include "metsparser.h"
 #include "sql.h"
 #include "errorhandler.h"
+
+#include <parserCheck.h>
 
 #include "dataaggregator.h"
 #include "verifytitles.h"
@@ -90,6 +93,9 @@ bool existDatabase(database *db,errorHandler *hError,std::string databasePath,st
 	return true;
 }
 
+void initXSDMets(parserCheck*);
+void initXSDAlto(parserCheck*);
+
 int start()
 {		
 	
@@ -158,6 +164,9 @@ int start()
 	precisiontimer pt(fpTimingLog);
 	pt.Start();
 
+	cerr << "Database File:" << datab << endl;
+	cerr << "Log File:" << sqlCreateTablePath.str() << endl;
+
 	//verify if the database exist or not
 	if (!existDatabase(&db, &hError, datab, sqlCreateTablePath.str()))
 	{
@@ -179,6 +188,21 @@ int start()
 
 	pt.LogTime("Inserting DB parameters");
 	
+
+	parserCheck metsParserCall;
+	parserCheck altoParserCall;
+
+	initXSDMets(&metsParserCall);
+    initXSDAlto(&altoParserCall);
+
+	metsParserCall.setErrorHandler(&hError);
+	altoParserCall.setErrorHandler(&hError);
+
+	xercesc::DefaultHandler dftH;
+
+	metsParserCall.setContentHandler(&dftH);
+	altoParserCall.setContentHandler(&dftH);
+
 	//Get all METS files from input
 	DiskParser dp(&hError);
 	std::vector<std::pair<std::string,std::string> > vectorMets = dp.parseDisk(input);	
@@ -205,12 +229,24 @@ int start()
 		db.insertMets(batchName,currentMetsPath,currentMetsFile);
 		pt.LogTime("Insrting METS into DB");
 		std::string parseString = currentMetsPath + "/" + currentMetsFile;
+		
+		std::cerr << "START Parsing" << std::endl;
+
+		if ( metsParserCall.parse( parseString.c_str())!= 0){
+            hError.getError(cat_xml_error,"METS",currentMetsFile, "Could not parse Mets file %s\n" + currentMetsFile ,currentMetsFile,"");
+            parseError = true;
+		};
+
+		std::cerr << "Next One Parsing" << std::endl;
 
 		if (ParseDocument(parseString.c_str(),&metsP) !=0 )	
 		{						
 			hError.getError(cat_xml_error,"METS",currentMetsFile, "Could not parse Mets file %s\n" + currentMetsFile ,currentMetsFile,"");
 			parseError = true;			
-		}
+		};
+
+		std::cerr << "Finish" << std::endl;
+
 		pt.LogTime("Parsing METS file");
 		//Parse all the Altos from Mets		
 		File_Group *fg = 0;
@@ -221,15 +257,17 @@ int start()
 				Type_File tf = fg->vect[j];				
 				const std::string &path = currentMetsPath + tf.ref;	
 				altoparser altoP(path,tf.id,&hError,&df);
+				
+				if ( altoParserCall.parse(path.c_str()) != 0){
+					hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
+					parseError = true;
+				};
 
 				if (ParseDocument(path.c_str() ,&altoP) !=0 )	
 				{						
 					hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
 					parseError = true;		
-				}
-				else
-				{			
-				}		
+				};		
 			}
 		
 		pt.LogTime("Parsing ALTO files");
@@ -354,4 +392,17 @@ int main(int argc, char** argv){
 	start ();
 
 	XMLPlatformUtils::Terminate ();
+}
+
+void initXSDMets(parserCheck* p){
+	p->addXSD("mets.xsd");
+	p->addXSD("mods-3-2.xsd");
+	p->addXSD("mods-3-3.xsd");
+	p->addXSD("xlink.xsd");
+	p->lockaddXSD();
+}
+void initXSDAlto(parserCheck* p){
+    p->addXSD("alto-1-2.xsd");
+	p->addXSD("nonexistingFile.xsd"); // Test Purpose 
+	p->lockaddXSD();
 }

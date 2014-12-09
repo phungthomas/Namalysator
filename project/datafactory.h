@@ -34,7 +34,7 @@ class datafactory_set
 	typedef std::map<std::string, dataitem *> maptype;
 	maptype *m;
 public:
-	typedef typename datafactory_iterator<T>	iterator;
+	typedef datafactory_iterator<T>	iterator;
 	typedef typename T							value_type;
 	typedef size_t								size_type;
 

@@ -1,6 +1,9 @@
 #include "errorHandler.h"
 #include <sstream>
 #include <iostream>
+#include <sstream>
+
+using namespace xercesc;
 
 void errorHandler::setDatabase(database *database)
 {
@@ -83,3 +86,46 @@ void errorHandler::getError(int category,const std::string &relatedType,const st
 	e.message = message;
 	db->insertMetsErrorWithId(category,relatedType,file_part,e,id);
 }	
+
+void errorHandler::warning (const xercesc::SAXParseException& e){
+  handle (e, s_warning);
+}
+
+void errorHandler::error (const xercesc::SAXParseException& e){
+  handle (e, s_error);
+}
+
+void errorHandler::fatalError (const xercesc::SAXParseException& e){
+  handle (e, s_fatal);
+  //throw new std::exception("Error");
+}
+
+void errorHandler::handle (const xercesc::SAXParseException& e, severity s){
+
+	stringstream ss ;
+  const XMLCh* xid (e.getPublicId ());
+
+  if (xid == 0)
+    xid = e.getSystemId ();
+
+  char* id (XMLString::transcode (xid));
+  char* msg (XMLString::transcode (e.getMessage ()));
+
+  ss << id << ":" << e.getLineNumber () << ":" << e.getColumnNumber ()
+	  << " " << (s == s_warning ? "warning: " : ( s == s_error ? "error: " : "fatal:") ) << msg ;
+
+  int category = cat_xml_error; // todo define in better way
+  string file_part= e.fSystemId;
+  writeToLog(category,file_part,ss.str());		
+  Error ee;
+  ee.errorcolumn = e.getLineNumber ();
+  ee.errorline =e.getColumnNumber ();
+  ee.message = ss.str();
+  string relatedType ="XML"; // todo define correcltly 
+
+  db->insertMetsErrorWithId(category,relatedType,file_part,ee,id);
+ 
+
+  XMLString::release (&id);
+  XMLString::release (&msg);
+}
