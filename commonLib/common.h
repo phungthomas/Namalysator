@@ -5,7 +5,7 @@ struct Parameters
 	std::string input;
 	std::string batchName;
 	std::string database;
-	std::string schemaValidation;
+	// std::string schemaValidation; No more validation like must be done by the parser itself
 	std::string dateFolderIssue;
 	std::string dates;
 	std::string checkFile;
