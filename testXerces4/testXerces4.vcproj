@@ -130,7 +130,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="xerces-c_3.lib commonLib.lib"
-				AdditionalLibraryDirectories="C:\Development\metsverifier\Librairies\Release;&quot;C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib&quot;"
+				AdditionalLibraryDirectories="C:\Development\metsverifier\Libraries\Release;&quot;C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib&quot;"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
