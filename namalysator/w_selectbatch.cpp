@@ -206,15 +206,9 @@ void w_selectBatch::fillBatchDetail()
 
  void w_selectBatch::loadParameters(int id)
  {
-	Parameters param = db.getParameterVerifiers(id);	
-	if ( param.schemaValidation =="1")
-	{			
-		m_ui->lbschema->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbschema->setText("No");	
-	}
+	Parameters param = db.getParameterVerifiers(id);
+	m_ui->lbschema->setText("Yes"); // always yes no more choice 
+
 	if ( param.checkFile =="1")
 	{			
 		m_ui->lbFileCheck->setText("Yes");						
