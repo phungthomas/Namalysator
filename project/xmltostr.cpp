@@ -68,8 +68,7 @@ std::string xml2str(const char *src, int len)
 	}
 }
 
-
-
+/*
 std::string xml2stringHeader(const char *name, const char **atts)
 {
 	std::string xml;
@@ -128,6 +127,8 @@ std::string initializeXmlValidator()
 	std::string xml = "<?xml version=\"1.0\"  encoding=\"UTF-8\" ?>";
 	return xml;
 }
+
+*/
 
 std::string xml2stringData(const char *s, int len)
 {
