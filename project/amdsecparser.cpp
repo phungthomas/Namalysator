@@ -29,16 +29,16 @@ void amdsecparser::startElement(const char *name, const char **atts)
 	else if (strcmp(name,"xmlData")==0)
 	{
 		actualState = state_xmlData;		
-		lineError = XML_GetCurrentLineNumber(expat_parser);	
+//		lineError = XML_GetCurrentLineNumber(expat_parser);	
 	}
 	else if (actualState == state_xmlData)
 	{
-		xml += 	xml2stringHeader(name,atts);
+		//xml += 	xml2stringHeader(name,atts);
 		actualState = state_mix;
 	} 	
 	else if (actualState == state_mix)
 	{
-		xml += xml2stringBegin(name,atts);	
+		//xml += xml2stringBegin(name,atts);	
 		if (strcmp(name, dpiToExtract) == 0) {
 			extract_cData = true;
 		} else if (strcmp(name, sourceDataToExtract) == 0) {
@@ -63,7 +63,7 @@ bool amdsecparser::endElement(const char *name)
 	}
 	else if (actualState == state_mix)
 	{
-		xml += xml2stringEnd(name);
+		//xml += xml2stringEnd(name);
 		if (strcmp(name, dpiToExtract) == 0) {
 			boost::algorithm::trim(cData);
 			amdsec.dpi = atoi(cData.c_str());
@@ -100,7 +100,7 @@ void amdsecparser::characterData(const char *s, int len)
 {				
 	if (actualState == state_mix )
 	{	
-		xml +=	xml2stringData(s,len);
+		//xml +=	xml2stringData(s,len);
 		if (extract_cData == true)
 		{
 			cData += std::string(s, len);
@@ -111,7 +111,7 @@ void amdsecparser::characterData(const char *s, int len)
 
 void amdsecparser::initialize(const char *name,const char **atts)
 {		
-	xml = initializeXmlValidator();	
+//	xml = initializeXmlValidator();	
 	const char *val = get_named_attr("ID", atts);
 	if (val!=0)
 	{

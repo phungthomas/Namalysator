@@ -12,7 +12,7 @@
 structmaphysicalparser::structmaphysicalparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,errorHandler *h)
 {		
 	setDelegatedparameters(df,orig_expat_parser,mets_fname,h);	
-	lineError = XML_GetCurrentLineNumber(expat_parser);		
+//	lineError = XML_GetCurrentLineNumber(expat_parser);		
 	currentItem =0;
 	rootItem =0;
 }
@@ -25,7 +25,7 @@ void structmaphysicalparser::startElement(const char *name, const char **atts)
 	const char *val3 = get_named_attr("LABEL", atts);
 	const char *val4 = get_named_attr("DMDID", atts);	
 
-	xml += saveStartElement(name,atts);		
+	//xml += saveStartElement(name,atts);		
 	
 	if (strcmp(name,"div")==0)
 	{
@@ -105,7 +105,7 @@ bool structmaphysicalparser::endElement(const char *name)
 		currentItem = currentItem->parent;	
 	}	
 
-	xml += saveEndElement(name,pile.top());		
+	//xml += saveEndElement(name,pile.top());		
 	
 	pile.pop();	
 
@@ -119,7 +119,7 @@ void structmaphysicalparser::characterData(const char *s, int len)
 
 void structmaphysicalparser::initialize(const char *name,const char **atts)
 {		
-	xml= initializeXmlValidator();
+	//xml= initializeXmlValidator();
 	const char *val = get_named_attr("TYPE", atts);
 	if (strcmp(val,"PHYSICAL")==0)
 	{

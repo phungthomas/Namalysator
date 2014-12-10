@@ -12,6 +12,7 @@ metsParser::metsParser(std::string &mets_fname,errorHandler *h,datafactory *df)
 
 void metsParser::XMLstartElement(const char *name, const char **atts)
 {		
+	//cout << "metsParser::XMLstartElement" << name << endl;
 	if (currentstate == root)
 	{
 		if (strcmp(name, "mets") == 0) {
@@ -55,7 +56,8 @@ void metsParser::XMLstartElement(const char *name, const char **atts)
 }
 
 void metsParser::XMLendElement(const char *name)
-{	
+{
+	//cout << "metsParser::XMLendElement" << name << endl;
 	if (currentstate == root)
 	{
 	}
@@ -72,6 +74,7 @@ void metsParser::XMLendElement(const char *name)
 
 void metsParser::XMLcharacterData(const char *s, int len)
 {
+	//cout << "metsParser::XMLcharacterData" << s << endl;
 	if (currentstate == delegated)
 	{			
 		current->characterData(s,len);

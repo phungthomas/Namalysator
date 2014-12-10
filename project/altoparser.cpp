@@ -7,7 +7,7 @@ const char *extract_blocks[] = {
 
 altoparser::altoparser(const std::string &alto_fname,const std::string &altoId,errorHandler *h, datafactory *df)
 {	
-	xml = initializeXmlValidator();
+	//xml = initializeXmlValidator();
 	altoFile = alto_fname;
 	alto =altoId;
 	currentstate = state_header;
@@ -57,11 +57,11 @@ void altoparser::XMLstartElement(const char *name, const char **atts)
 {		
 	if (headerIn ==true)
 	{
-		xml += 	xml2stringBegin(name,atts);
+		//xml += 	xml2stringBegin(name,atts);
 	} 
 	if(currentstate == state_header)
 	{
-		xml += 	xml2stringHeader(name,atts);
+		//xml += 	xml2stringHeader(name,atts);
 
 		currentstate = state_alto;
 		headerIn =true;
@@ -121,7 +121,7 @@ void altoparser::XMLstartElement(const char *name, const char **atts)
 
 void altoparser::XMLendElement(const char *name)
 {		
-	xml += xml2stringEnd(name);
+	//xml += xml2stringEnd(name);
 	if (measurement_unit) 
 	{
 		measurement_unit = false;

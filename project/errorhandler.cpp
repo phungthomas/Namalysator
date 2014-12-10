@@ -115,7 +115,10 @@ void errorHandler::handle (const xercesc::SAXParseException& e, severity s){
 	  << " " << (s == s_warning ? "warning: " : ( s == s_error ? "error: " : "fatal:") ) << msg ;
 
   int category = cat_xml_error; // todo define in better way
-  string file_part= e.fSystemId;
+
+  char* systemId ( XMLString::transcode ( e.getSystemId()));
+
+  string file_part= systemId;
   writeToLog(category,file_part,ss.str());		
   Error ee;
   ee.errorcolumn = e.getLineNumber ();
@@ -128,4 +131,5 @@ void errorHandler::handle (const xercesc::SAXParseException& e, severity s){
 
   XMLString::release (&id);
   XMLString::release (&msg);
+  XMLString::release (&systemId);
 }

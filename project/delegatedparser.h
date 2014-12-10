@@ -10,8 +10,8 @@ class delegatedparser
 {
 protected:
 	XML_Parser expat_parser;	
-	std::string xml;
-	int lineError;
+	//std::string xml;
+	//int lineError;
 	std::string metsFile;
 	datafactory *dfTemp;
 	errorHandler *hError;
@@ -26,7 +26,7 @@ public:
 	{
 	dfTemp = df;
 	expat_parser = orig_expat_parser;	
-	lineError = XML_GetCurrentLineNumber(expat_parser);		
+	//lineError = XML_GetCurrentLineNumber(expat_parser);		
 	metsFile = mets_fname;	
 	hError = h;
 	}

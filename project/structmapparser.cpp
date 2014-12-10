@@ -12,7 +12,7 @@ const std::string article_identifier = "MODSMD_ARTICLE";
 structmapparser::structmapparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,errorHandler *h)
 {		
 	setDelegatedparameters(df,orig_expat_parser,mets_fname,h);	
-	lineError = XML_GetCurrentLineNumber(expat_parser);		
+//	lineError = XML_GetCurrentLineNumber(expat_parser);		
 	currentItem =0;
 	rootItem =0;
 }
@@ -24,7 +24,8 @@ void structmapparser::startElement(const char *name, const char **atts)
 	const char *val2 = get_named_attr("TYPE", atts);
 	const char *val3 = get_named_attr("LABEL", atts);
 	const char *val4 = get_named_attr("DMDID", atts);
-	
+
+	/*
 	if (val2 !=0)
 		if (strcmp(val2,"ADVERTISEMENT_SECTION") ==0 || strcmp(val2,"DEATH_NOTICE_SECTION") ==0)
 			xml += "<SECTION>";
@@ -32,7 +33,8 @@ void structmapparser::startElement(const char *name, const char **atts)
 			xml += saveStartElement(name,atts);	
 	else 
 		xml += saveStartElement(name,atts);		
-	
+	*/
+
 	if (strcmp(name,"div")==0)
 	{
 		pile.push(val2);		
@@ -90,9 +92,10 @@ bool structmapparser::endElement(const char *name)
 		t.vectTypeBlock =rootItem->vectTypeBlock;
 		dfTemp->set("Item",t);
 		
-		/* // no more validation
+		
 		if(	actualState == state_logical)
 		{	
+			/* // no more validation
 			if (schemaValidation == "1")
 			{
 				Error error = g_validator_bnl_newspaper_v1_3.validate(xml,lineError);				
@@ -101,20 +104,23 @@ bool structmapparser::endElement(const char *name)
 					hError->getMetsError(cat_schema_err,"METS","STRUCTMAP",error,metsFile);					
 				}				
 			}
+			*/
 			return false; 	
 		}
-		*/
+		
 	}	
    	
 	if (strcmp(name,"div")==0)
 	{
 		currentItem = currentItem->parent;	
 	}	
+    
+	/*
 	if (strcmp(pile.top().c_str(),"ADVERTISEMENT_SECTION") ==0 || strcmp(pile.top().c_str(),"DEATH_NOTICE_SECTION") ==0)
 			xml += "</SECTION>";
 	else 
 		xml += saveEndElement(name,pile.top());		
-	
+	*/
 	pile.pop();	
 
 	return true;
@@ -127,7 +133,7 @@ void structmapparser::characterData(const char *s, int len)
 
 void structmapparser::initialize(const char *name,const char **atts)
 {		
-	xml= initializeXmlValidator();
+	//xml= initializeXmlValidator();
 
 	const char *val = get_named_attr("TYPE", atts);
 	if (strcmp(val,"LOGICAL")==0)

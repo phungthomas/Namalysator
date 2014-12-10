@@ -26,7 +26,7 @@ private :
 	std::string content;	
 	std::string alto;
 	datafactory *dfalto;
-	std::string xml;
+	//std::string xml;
 	std::string altoFile;
 	altoblock altoBlock;
 	std::set<std::string> to_extract;

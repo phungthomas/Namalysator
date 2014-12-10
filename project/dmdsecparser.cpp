@@ -16,7 +16,7 @@ void dmdsecparser::startElement(const char *name, const char **atts)
 {		
 	if (type == type_mods)
 	{	
-		xml += xml2stringBegin(name,atts);
+		//xml += xml2stringBegin(name,atts);
 	}
 	else if (strcmp(name,"mdWrap")==0)
 	{
@@ -24,12 +24,12 @@ void dmdsecparser::startElement(const char *name, const char **atts)
 	}
 	else if (strcmp(name,"xmlData")==0)
 	{
-		lineError = XML_GetCurrentLineNumber(expat_parser);	
+//		lineError = XML_GetCurrentLineNumber(expat_parser);	
 		type = type_xmlData;
 	}
 	else if (type == type_xmlData)
 	{
-		xml += 	xml2stringHeader(name,atts); 
+		//xml += 	xml2stringHeader(name,atts); 
 		type = type_mods;
 	} 
 }
@@ -46,7 +46,7 @@ bool dmdsecparser::endElement(const char *name)
 	}
 	else if (type == type_mods)
 	{
-		xml += xml2stringEnd(name);
+		//xml += xml2stringEnd(name);
 
 		idkeymap = name;
 		// trim whitespace, tabs, newlines from character Data
@@ -94,7 +94,7 @@ void dmdsecparser::characterData(const char *s, int len)
 {	
 	if (type == type_mods)
 	{			
-		xml +=	xml2str(s,len);		
+		//xml +=	xml2str(s,len);		
 		//if ( (s[0] >= 'a') && (s[0] <= 'z')|| (s[0] >= 'A' && s[0] <= 'Z')||(s[0] >= '0') ||(s[0] == '(') ||(s[0] == ')')||(s[0] =='&')||(s[0] ==';') ||(s[0] =='\"') || (s[0]== ' ' ) )
 		//{		
 			addStringData += xml2str(s,len);		
@@ -104,7 +104,7 @@ void dmdsecparser::characterData(const char *s, int len)
 
 void dmdsecparser::initialize(const char *name,const char **atts)
 {			
-	xml = initializeXmlValidator();
+	//xml = initializeXmlValidator();
 	const char *val = get_named_attr("ID", atts);
 	if (val != 0) 
 	{		

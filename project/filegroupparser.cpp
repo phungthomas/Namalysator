@@ -14,7 +14,7 @@ filegroupparser::filegroupparser(datafactory *df, XML_Parser orig_expat_parser,c
 
 void filegroupparser::startElement(const char *name, const char **atts)
 {
-	xml += 	xml2stringBegin(name,atts);
+	//xml += 	xml2stringBegin(name,atts);
 	if (actualState == state_fileSec)
 	{	
 		if ( strcmp(name,"fileGrp") == 0)
@@ -98,7 +98,7 @@ void filegroupparser::startElement(const char *name, const char **atts)
 
 bool filegroupparser::endElement(const char *name)
 { 	
-	xml += xml2stringEnd(name);
+	//xml += xml2stringEnd(name);
 	if (actualState == state_locat)
 	{
 		if (strcmp("FLocat", name) ==0)
@@ -138,5 +138,5 @@ void filegroupparser::characterData(const char *s, int len)
 
 void filegroupparser::initialize(const char *name,const char **atts)
 {	
-	xml = initializeXmlValidator();
+	//xml = initializeXmlValidator();
 }
