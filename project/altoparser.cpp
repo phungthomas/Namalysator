@@ -12,7 +12,7 @@ altoparser::altoparser(const std::string &alto_fname,const std::string &altoId,e
 	alto =altoId;
 	currentstate = state_header;
 	headerIn = false;
-	hError = h;
+	hError = h; // no more usefull like parsing will validate !
 	dfalto = df;	
 	measurement_unit = false;	
 

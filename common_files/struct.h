@@ -9,7 +9,7 @@
 
 using namespace std;
 
-extern const std::string article_identifier;
+//extern const std::string article_identifier;
 
 //! structure of an dmdsec : a map with  : tag name as key, vector of all the item .
 struct dmdsec : public dataitem

@@ -6,7 +6,7 @@
 #include "xmlsaverstruct.h"
 #include "errorhandler.h"
 
-const std::string article_identifier = "MODSMD_ARTICLE";
+//const std::string article_identifier = "MODSMD_ARTICLE";
 
 //parse the structmap section of the xml file
 structmapparser::structmapparser(datafactory *df, XML_Parser orig_expat_parser,const std::string &mets_fname,errorHandler *h)
