@@ -13,22 +13,40 @@
 #include "datafactory.h"
 #include "metsparser.h"
 #include "errorhandler.h"
+#include "stateparser.h"
 
-//! main parser for the mets file
-class metsParser : public xmlparser_with_stack<metsParser>
-{	
+
+class metsparserContext : public StateParserContext{
+
+public :
 	enum state	
 	{
 		root,
 		delegated
 	};
-	
-private:	
 	state currentstate;
 	delegatedparser *current;
 	datafactory *dfMets;	
 	std::string metsfile;	
 	errorHandler *hError;
+};
+
+class StateParserMetsRootState:public StateParserState{
+public:
+	StateParserMetsRootState(){};
+	virtual ~StateParserMetsRootState(){};
+
+	virtual StateParserState* getNext(const char* const name);
+};
+
+//! main parser for the mets file
+class metsParser : public StateParserCH, public xmlparser_with_stack<metsParser>
+{	
+
+	
+private:
+	StateParserMetsRootState _root;
+	metsparserContext ctx;
 public:
 	metsParser(std::string &mets_fname,errorHandler *h,datafactory *df);
 	virtual void XMLstartElement(const char *name, const char **atts);
