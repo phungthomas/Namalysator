@@ -11,7 +11,9 @@ using namespace xercesc;
 
 StateParserCH::StateParserCH(StateParserContext& _ctx,StateParserState& hlp):current(&hlp),ctx(&_ctx){
 	_stack.push(current);
-	//current->setStateParserContext(ctx);
+	//current->setStateParserContext(ctx); // take care the root State has no context 
+	                                       // because could be initilize easly 
+	                                       // in the constructor inheritance tree
 }
 
 StateParserCH::~StateParserCH(){
@@ -43,9 +45,11 @@ void    StateParserCH::endElement (const XMLCh* const uri,const XMLCh* const loc
 	
 	char* name =XMLString::transcode (localname);
 
-	current->endElement( name);
+	current->endElement( name); // play the end of the state
+
+	// come back to the previous state
 	_stack.pop();
-	current = _stack.top();
+	current = _stack.top(); 
 	
 
 	XMLString::release(&name);
@@ -61,49 +65,13 @@ StateParserState::~StateParserState(){};
 
 
 void StateParserState::characters (const char* const chars, const int len){
-	//cout << "StateParserState::characters ->" << chars << endl;
 };
 void StateParserState::startElement (const char* const name, const Attributes &attrs ){
-	//cout << "StateParserState::startElement ->" << name << "<-len:" << attrs.getLength() << endl;
-	
-	/*
-    char* value = getAttributeValue("ID",attrs);
-	if (value != NULL ) {
-		cout << "VALUE_ID:" << value << endl;
-		XMLString::release(&value);
-	}
-
-
-
-	XMLSize_t len = attrs.getLength();
-	for (XMLSize_t i = 0 ; i < len; i++ ){
-		
-		XMLCh* tmp = (XMLCh*) attrs.getLocalName(i);
-		char* _tmp = XMLString::transcode(tmp);
-		cout << "idx:"<<i<<endl<<"localname:"<< _tmp << endl;
-		XMLString::release(&_tmp);
-		
-		tmp = (XMLCh*)  attrs.getValue(i);
-		_tmp = XMLString::transcode(tmp);
-		cout << "Value:" << _tmp << endl;
-		XMLString::release(&_tmp);
-
-		tmp = (XMLCh*) attrs.getQName(i);
-		_tmp = XMLString::transcode(tmp);
-		cout << "QName:" << _tmp << endl;
-		XMLString::release(&_tmp);
-        
-
-
-	}*/ 
-	 
-	
-
 };
 void StateParserState::endElement (const char* const name){
-	//cout << "StateParserState::endElement ->" << name << endl;
 };
 
+// always overloaded for real work
 StateParserState* StateParserState::getNext(const char* const name){
 	cout << "always plaid" << std::endl;
 	static std::map<string,StateParserState*> map;
@@ -117,6 +85,7 @@ StateParserState* StateParserState::getNext(const char* const name){
 	return this;
 }
 
+// helper for start element analysor of attributes
 char* StateParserState::getAttributeValue (const char* qname, const xercesc::Attributes &attrs){
 	char* ret=NULL ;
 	if ( qname != NULL) {
@@ -125,10 +94,7 @@ char* StateParserState::getAttributeValue (const char* qname, const xercesc::Att
 
 		
 		if ( value != NULL ) {
-			
 			ret = XMLString::transcode(value);
-			
-			//cout << "VALUE for " << qname << ":" << ret << endl;
 		}
 		XMLString::release(&_qname);
 	}
