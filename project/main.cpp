@@ -257,17 +257,24 @@ int start()
 				Type_File tf = fg->vect[j];				
 				const std::string &path = currentMetsPath + tf.ref;	
 				altoparser altoP(path,tf.id,&hError,&df);
-				
+				altoParserCall.setContentHandler(&altoP);
+
+				cout << "ALTO FILE :" << path.c_str() << endl;
+				/*
+				if (ParseDocument(path.c_str() ,&altoP) !=0 )	
+				{						
+					hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
+					parseError = true;		
+				};
+				*/
+
+
 				if ( altoParserCall.parse(path.c_str()) != 0){
 					hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
 					parseError = true;
 				};
 
-				if (ParseDocument(path.c_str() ,&altoP) !=0 )	
-				{						
-					hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
-					parseError = true;		
-				};		
+	
 			}
 		
 		pt.LogTime("Parsing ALTO files");
