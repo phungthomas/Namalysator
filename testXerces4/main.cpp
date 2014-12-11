@@ -32,6 +32,7 @@
 #include <xercesc/sax2/DefaultHandler.hpp>
 
 #include "parserCheck.h"
+#include "stateparser.h"
 
 using namespace std;
 using namespace xercesc;
@@ -204,7 +205,13 @@ main (int argc, char* argv[])
 	  parser.lockaddXSD();
       //error_handler eh;
 	  //myContentHandler* tmpch = parser->getContentHandler()  ; 
-	  myContentHandler ch;
+	  
+
+
+	  StateParserContext ctx;
+	  StateParserState hlp;
+	  //myContentHandler ch;
+	  StateParserCH ch(ctx,hlp);
 
       parser.setErrorHandler (&eh);
 	  parser.setContentHandler(&ch);
