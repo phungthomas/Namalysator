@@ -5,7 +5,10 @@
 #include <string>
 #include <stack>
 
-// parsing with state pseudo pattern
+// parsing with state pseudo pattern ( ContentHandler of xerces)
+// there is a context class : StateParserContext
+// state class : StateParserState
+// manager : StateParserCH
 
 
 class StateParserContext {
@@ -47,7 +50,7 @@ public:
 	StateParserCH(StateParserContext&,StateParserState&);
 	virtual ~StateParserCH();
 
-	// adapter from xerces our internal StateParserState
+	// adapter from xerces to our internal StateParserState sub interface
 	virtual void 	characters (const XMLCh *const chars, const XMLSize_t length);
 	virtual void    startElement(const XMLCh *const uri, const XMLCh *const localname, const XMLCh *const qname, const xercesc::Attributes &attrs);
 	virtual void    endElement (const XMLCh* const uri,const XMLCh* const localname,const XMLCh* const qname);
