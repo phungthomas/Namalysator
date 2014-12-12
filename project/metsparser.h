@@ -29,6 +29,25 @@ public :
 	datafactory *dfMets;	
 	std::string metsfile;	
 	errorHandler *hError;
+
+	// need by structMap
+	Item *currentItem;
+	Item *rootItem;
+	typeBlock typeblock; // probably could go outside of the context
+
+	// need by filegroup	
+	std::string idGroup;	
+	Type_File f;
+	File_Group file_group;
+
+	// dmd
+	std::string idItem;
+	std::string addStringData;
+	dmdsec dmdSecStruct;
+
+	// amdsec
+	AmdSec amdsec;
+
 };
 
 class StateParserMetsRootState:public StateParserState{
@@ -40,18 +59,13 @@ public:
 };
 
 //! main parser for the mets file
-class metsParser : public StateParserCH, public xmlparser_with_stack<metsParser>
+class metsParser : public StateParserCH
 {	
-
-	
 private:
 	StateParserMetsRootState _root;
 	metsparserContext ctx;
 public:
-	metsParser(std::string &mets_fname,errorHandler *h,datafactory *df);
-	virtual void XMLstartElement(const char *name, const char **atts);
-	virtual void XMLendElement(const char *name);
-	virtual void XMLcharacterData(const char *s, int len);		
+	metsParser(std::string &mets_fname,errorHandler *h,datafactory *df);		
 };
 
 #endif // METSPARSER_H_

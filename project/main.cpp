@@ -59,7 +59,7 @@ std::string getDate()
 	std::string date =dateStr;	
 	_strtime_s( timeStr );
 	date = date + " " + timeStr;
-	std::cout << "The current time : " << date << std::endl;  	
+	//std::cout << "The current time : " << date << std::endl;  	
 	return  date;
 }
 
@@ -198,11 +198,6 @@ int start()
 	metsParserCall.setErrorHandler(&hError);
 	altoParserCall.setErrorHandler(&hError);
 
-	xercesc::DefaultHandler dftH;
-
-	metsParserCall.setContentHandler(&dftH);
-	altoParserCall.setContentHandler(&dftH);
-
 	//Get all METS files from input
 	DiskParser dp(&hError);
 	std::vector<std::pair<std::string,std::string> > vectorMets = dp.parseDisk(input);	
@@ -230,13 +225,15 @@ int start()
 		pt.LogTime("Insrting METS into DB");
 		std::string parseString = currentMetsPath + "/" + currentMetsFile;
 		
-		std::cerr << "START Parsing" << std::endl;
+		metsParserCall.setContentHandler(&metsP);
+		//std::cerr << "START Parsing" << std::endl;
 
 		if ( metsParserCall.parse( parseString.c_str())!= 0){
             hError.getError(cat_xml_error,"METS",currentMetsFile, "Could not parse Mets file %s\n" + currentMetsFile ,currentMetsFile,"");
             parseError = true;
 		};
 
+		/*
 		std::cerr << "Next One Parsing" << std::endl;
 
 		if (ParseDocument(parseString.c_str(),&metsP) !=0 )	
@@ -244,8 +241,11 @@ int start()
 			hError.getError(cat_xml_error,"METS",currentMetsFile, "Could not parse Mets file %s\n" + currentMetsFile ,currentMetsFile,"");
 			parseError = true;			
 		};
+		*/
 
-		std::cerr << "Finish" << std::endl;
+		
+
+		//std::cerr << "Finish" << std::endl;
 
 		pt.LogTime("Parsing METS file");
 		//Parse all the Altos from Mets		
@@ -259,7 +259,7 @@ int start()
 				altoparser altoP(path,tf.id,&hError,&df);
 				altoParserCall.setContentHandler(&altoP);
 
-				cout << "ALTO FILE :" << path.c_str() << endl;
+				//cout << "ALTO FILE :" << path.c_str() << endl;
 				/*
 				if (ParseDocument(path.c_str() ,&altoP) !=0 )	
 				{						
