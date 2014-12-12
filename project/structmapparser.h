@@ -20,10 +20,10 @@ private :
 	std::string id;	
 	std::string title;
 	state actualState;	
-	std::pair<std::string,std::string> pairPile;		
-	std::stack <std::string> pile;
+	//std::pair<std::string,std::string> pairPile;		
+	//std::stack <std::string> pile;
 	typeBlock typeblock;
-	std::vector<Item*> vectItem;
+	//std::vector<Item*> vectItem;
 	Item *currentItem;
 	Item *rootItem;
 

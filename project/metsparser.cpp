@@ -1,11 +1,11 @@
 #include "metsparser.h"
 #include <boost/algorithm/string.hpp>
+#include "../common_files/xmltostr.h"
+
 
 metsParser::metsParser(std::string &mets_fname,errorHandler *h,datafactory *df):StateParserCH(ctx,_root){
 	ctx.hError = h;	
-	ctx.metsfile = mets_fname;
-	ctx.currentstate = metsparserContext::root;
-	ctx.current = 0;	
+	ctx.metsfile = mets_fname;	
 	ctx.dfMets = df;
 }
 
