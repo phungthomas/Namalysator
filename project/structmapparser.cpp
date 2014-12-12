@@ -37,7 +37,7 @@ void structmapparser::startElement(const char *name, const char **atts)
 
 	if (strcmp(name,"div")==0)
 	{
-		pile.push(val2);		
+		//pile.push(val2);		
 		if (currentItem ==0)
 		{		
 			rootItem = new Item;
@@ -61,7 +61,7 @@ void structmapparser::startElement(const char *name, const char **atts)
 	}	
 	else if (strcmp(name, "area") == 0) 
 	{
-		pile.push(name);
+		//pile.push(name);
 		const char *val1 = get_named_attr("FILEID", atts);
 		const char *val2 = get_named_attr("BEGIN", atts);
 		if (val1 && val2) 
@@ -74,7 +74,7 @@ void structmapparser::startElement(const char *name, const char **atts)
 	}
 	else
 	{
-		pile.push(name);
+		//pile.push(name);
 	}
 }
 
@@ -121,7 +121,7 @@ bool structmapparser::endElement(const char *name)
 	else 
 		xml += saveEndElement(name,pile.top());		
 	*/
-	pile.pop();	
+	//pile.pop();	
 
 	return true;
 }
