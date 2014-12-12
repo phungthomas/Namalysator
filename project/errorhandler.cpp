@@ -93,7 +93,7 @@ void errorHandler::warning (const xercesc::SAXParseException& e){
 
 void errorHandler::error (const xercesc::SAXParseException& e){
   handle (e, s_error);
-  throw new std::exception("Error");
+  //throw new std::exception("Error");
 }
 
 void errorHandler::fatalError (const xercesc::SAXParseException& e){
@@ -120,7 +120,8 @@ void errorHandler::handle (const xercesc::SAXParseException& e, severity s){
   char* systemId ( XMLString::transcode ( e.getSystemId()));
 
   string file_part= systemId;
-  writeToLog(category,file_part,ss.str());		
+  writeToLog(category,file_part,ss.str());
+  std::cerr << "error" << ss.str() << std::endl;
   Error ee;
   ee.errorcolumn = e.getLineNumber ();
   ee.errorline =e.getColumnNumber ();
