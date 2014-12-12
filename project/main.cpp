@@ -12,6 +12,7 @@
 #include <time.h>
 #include <locale.h>
 #include "metsparser.h"
+#include "altoparser.h"
 #include "sql.h"
 #include "errorhandler.h"
 
@@ -230,7 +231,10 @@ int start()
 
 		if ( metsParserCall.parse( parseString.c_str())!= 0){
             hError.getError(cat_xml_error,"METS",currentMetsFile, "Could not parse Mets file %s\n" + currentMetsFile ,currentMetsFile,"");
-            parseError = true;
+			// go to the next file : structure are not provide like the parser has stop
+			cerr << "STOP immediately --> see trace in DB" << endl;
+			parseError = true;
+			return 1;
 		};
 
 		/*
@@ -258,16 +262,6 @@ int start()
 				const std::string &path = currentMetsPath + tf.ref;	
 				altoparser altoP(path,tf.id,&hError,&df);
 				altoParserCall.setContentHandler(&altoP);
-
-				//cout << "ALTO FILE :" << path.c_str() << endl;
-				/*
-				if (ParseDocument(path.c_str() ,&altoP) !=0 )	
-				{						
-					hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
-					parseError = true;		
-				};
-				*/
-
 
 				if ( altoParserCall.parse(path.c_str()) != 0){
 					hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
