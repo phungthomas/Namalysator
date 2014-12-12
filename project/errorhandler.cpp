@@ -93,11 +93,12 @@ void errorHandler::warning (const xercesc::SAXParseException& e){
 
 void errorHandler::error (const xercesc::SAXParseException& e){
   handle (e, s_error);
+  throw new std::exception("Error");
 }
 
 void errorHandler::fatalError (const xercesc::SAXParseException& e){
   handle (e, s_fatal);
-  //throw new std::exception("Error");
+  throw new std::exception("Fatal");
 }
 
 void errorHandler::handle (const xercesc::SAXParseException& e, severity s){
