@@ -60,6 +60,12 @@ int parserCheck::parse(const   char* const     systemId) {
             XMLString::release(&message);
             return -1;
         }
+		// better to remove this catch and add a real exception mechanism in error handler and the main ( application exception )
+		catch (...) {
+            
+            cerr << "Exception message unhandel: \n" << "\n";
+            return -1;
+        }
 		return 0;
 }
 
