@@ -298,7 +298,12 @@ void database::insertLinkedFiles(datafactory *df)
 				if (it.key() == "IMGGRP")
 				{
 					AmdSec *s =	df->get<AmdSec>(tf.admid); // get the dpi of image
-					dpi = s->dpi;			
+					if ( s!= NULL) {
+						dpi = s->dpi;	
+					}else{
+						dpi=0;
+						std::cerr << "Error with Non admid:" << tf.admid << std::endl;
+					}
 				}
 				else
 				{			

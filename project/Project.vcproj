@@ -137,7 +137,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xerces-c_3.lib commonLib.lib  libexpatMT.lib sqlite.lib "
+				AdditionalDependencies="xerces-c_3.lib commonLib.lib  sqlite.lib "
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="C:\Development\Libraries\Release;&quot;C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib&quot;;&quot;C:\Development\Libraries\boost-libs&quot;;C:\Development\metsverifier\Libraries\Release"
 				IgnoreDefaultLibraryNames="LIBCMTD"
@@ -204,10 +204,6 @@
 			</File>
 			<File
 				RelativePath=".\utilities.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\xmlparser.cpp"
 				>
 			</File>
 			<File
@@ -396,26 +392,6 @@
 				<Filter
 					Name="delegatedparser"
 					>
-					<File
-						RelativePath=".\amdsecparser.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\dmdsecparser.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\filegroupparser.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\structmaphysicalparser.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\structmapparser.cpp"
-						>
-					</File>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -662,26 +638,6 @@
 				<Filter
 					Name="delegatedparser"
 					>
-					<File
-						RelativePath=".\amdsecparser.h"
-						>
-					</File>
-					<File
-						RelativePath=".\delegatedparser.h"
-						>
-					</File>
-					<File
-						RelativePath=".\dmdsecparser.h"
-						>
-					</File>
-					<File
-						RelativePath=".\filegroupparser.h"
-						>
-					</File>
-					<File
-						RelativePath=".\structmapparser.h"
-						>
-					</File>
 				</Filter>
 			</Filter>
 		</Filter>
