@@ -1,17 +1,11 @@
 #ifndef METSPARSER_H_
 #define METSPARSER_H_
 
-#include "../common_files/xmlparser.h"
-#include "dmdsecparser.h"
-#include "amdsecparser.h"
-#include "filegroupparser.h"
-#include "altoparser.h"
-#include "structmapparser.h"
-#include "structmaphysicalparser.h"
+
+
 #include <iostream>
 #include <vector>
 #include "datafactory.h"
-#include "metsparser.h"
 #include "errorhandler.h"
 #include "stateparser.h"
 
@@ -19,13 +13,6 @@
 class metsparserContext : public StateParserContext{
 
 public :
-	enum state	
-	{
-		root,
-		delegated
-	};
-	state currentstate;
-	delegatedparser *current;
 	datafactory *dfMets;	
 	std::string metsfile;	
 	errorHandler *hError;
