@@ -87,7 +87,7 @@ void parserCheck::init_feature(){
 	    //
 	    parser->setFeature (XMLUni::fgXercesSchema, true);
 	    parser->setFeature (XMLUni::fgXercesSchemaFullChecking, true);
-	    parser->setFeature (XMLUni::fgXercesValidationErrorAsFatal, true);
+		parser->setFeature (XMLUni::fgXercesValidationErrorAsFatal, false);
 
 	    // Use the loaded grammar during parsing.
 	    //
