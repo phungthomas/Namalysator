@@ -126,9 +126,9 @@ void errorHandler::handle (const xercesc::SAXParseException& e, severity s){
   ee.errorcolumn = e.getLineNumber ();
   ee.errorline =e.getColumnNumber ();
   ee.message = ss.str();
-  string relatedType ="XML"; // todo define correcltly 
+  //string relatedType ="XML"; // todo define correcltly 
 
-  db->insertMetsErrorWithId(category,relatedType,file_part,ee,id);
+  db->insertMetsError(category,_relatedType,_file_part,ee);
  
 
   XMLString::release (&id);

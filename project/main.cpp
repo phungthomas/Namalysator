@@ -228,6 +228,8 @@ int start()
 		
 		metsParserCall.setContentHandler(&metsP);
 		//std::cerr << "START Parsing" << std::endl;
+		hError.setFilePart(currentMetsFile);
+		hError.setRelatedType("METS");
 
 		if ( metsParserCall.parse( parseString.c_str())!= 0){
             hError.getError(cat_xml_error,"METS",currentMetsFile, "Could not parse Mets file %s\n" + currentMetsFile ,currentMetsFile,"");
@@ -404,6 +406,7 @@ void initXSDMets(parserCheck* p){
 }
 void initXSDAlto(parserCheck* p){
     p->addXSD("alto-1-2.xsd");
+	p->addXSD("alto-1-4.xsd");
 	p->addXSD("nonexistingFile.xsd"); // Test Purpose 
 	p->lockaddXSD();
 }

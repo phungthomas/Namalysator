@@ -13,7 +13,8 @@ class errorHandler : public xercesc::ErrorHandler
 private:
 	std::string logFilePath;		
 	database *db;
-
+	std::string _relatedType;
+	std::string _file_part;
 public:
 	enum severity {s_warning, s_error, s_fatal};
 
@@ -33,6 +34,9 @@ public:
     virtual void fatalError (const xercesc::SAXParseException&);
     virtual void resetErrors () { /* failed_ = false; */ };
     void handle (const xercesc::SAXParseException&, severity);
+
+	void setRelatedType(std::string rel){_relatedType=rel;};
+	void setFilePart(std::string filepart){std::string _file_part=filepart;};
 	
 
 };
