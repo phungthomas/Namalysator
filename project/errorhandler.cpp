@@ -115,7 +115,7 @@ void errorHandler::handle (const xercesc::SAXParseException& e, severity s){
   ss << id << ":" << e.getLineNumber () << ":" << e.getColumnNumber ()
 	  << " " << (s == s_warning ? "warning: " : ( s == s_error ? "error: " : "fatal:") ) << msg ;
 
-  int category = cat_xml_error; // todo define in better way
+  int category = cat_schema_err; // todo define in better way
 
   char* systemId ( XMLString::transcode ( e.getSystemId()));
 
@@ -123,8 +123,8 @@ void errorHandler::handle (const xercesc::SAXParseException& e, severity s){
   writeToLog(category,file_part,ss.str());
   std::cerr << "error" << ss.str() << std::endl;
   Error ee;
-  ee.errorcolumn = e.getLineNumber ();
-  ee.errorline =e.getColumnNumber ();
+  ee.errorcolumn = e.getColumnNumber ();
+  ee.errorline =e.getLineNumber ();
   ee.message = ss.str();
   //string relatedType ="XML"; // todo define correcltly 
 

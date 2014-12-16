@@ -46,6 +46,7 @@ struct Type_File
 {		
 	std::string id;
 	std::string checksum;
+	std::string checksumtype;
 	std::string ref;	
 	std::string admid;
 	std::string groupId;		

@@ -189,6 +189,12 @@ public :
 		{				
 			CTX.f.checksum = val3;					
 		}
+		val3 = getAttributeValue("CHECKSUMTYPE", atts);			
+		CTX.f.checksumtype ="";
+		if (val3 != 0) 
+		{				
+			CTX.f.checksumtype = val3;					
+		}
 		const char *val4 = getAttributeValue("SIZE", atts);			
 		CTX.f.size =0;
 		if (val4 != 0) 
