@@ -215,34 +215,6 @@
 				>
 			</File>
 			<Filter
-				Name="schema_validation"
-				>
-				<Filter
-					Name="mix"
-					>
-				</Filter>
-				<Filter
-					Name="alto"
-					>
-				</Filter>
-				<Filter
-					Name="mods"
-					>
-				</Filter>
-				<Filter
-					Name="bnl_newspaper"
-					>
-				</Filter>
-				<Filter
-					Name="bnl_serial"
-					>
-				</Filter>
-				<Filter
-					Name="mets"
-					>
-				</Filter>
-			</Filter>
-			<Filter
 				Name="datafactory"
 				>
 				<File
@@ -363,7 +335,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="md5"
+				Name="cksum"
 				>
 				<File
 					RelativePath=".\md5.cpp"
@@ -397,10 +369,6 @@
 					RelativePath=".\metsparser.cpp"
 					>
 				</File>
-				<Filter
-					Name="delegatedparser"
-					>
-				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -451,34 +419,6 @@
 					RelativePath=".\dataitem.h"
 					>
 				</File>
-			</Filter>
-			<Filter
-				Name="schema_validation"
-				>
-				<Filter
-					Name="mix"
-					>
-				</Filter>
-				<Filter
-					Name="alto"
-					>
-				</Filter>
-				<Filter
-					Name="mods"
-					>
-				</Filter>
-				<Filter
-					Name="bnl_newspaper"
-					>
-				</Filter>
-				<Filter
-					Name="bnl_serial"
-					>
-				</Filter>
-				<Filter
-					Name="mets"
-					>
-				</Filter>
 			</Filter>
 			<Filter
 				Name="sql"
@@ -597,7 +537,7 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="md5"
+				Name="cksum"
 				>
 				<File
 					RelativePath=".\md5.h"
@@ -651,10 +591,6 @@
 					RelativePath=".\metsparser.h"
 					>
 				</File>
-				<Filter
-					Name="delegatedparser"
-					>
-				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
