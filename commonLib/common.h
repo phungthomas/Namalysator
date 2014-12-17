@@ -23,5 +23,6 @@ struct Parameters
 	std::string oddsPages;
 	std::string sampling;
 	std::string issueNumber;
+	std::string measurementSTD;
 };
 #endif

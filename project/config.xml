@@ -25,8 +25,9 @@
 			<altoblockPerPage>1</altoblockPerPage>
 			<blockStructure>1</blockStructure>
 			<coveragePercentAlto>1</coveragePercentAlto>
-			<multipleBlockUse>1</multipleBlockUse>			
-		</blocks>
+			<multipleBlockUse>1</multipleBlockUse>
+      <measurementSTD>1</measurementSTD>
+    </blocks>
 	</verifiers>
 	<checkTitle>5</checkTitle> <!-- per 1000 -->
 	<sampling>5</sampling> <!-- per 1000 -->

@@ -356,7 +356,8 @@ int start()
 			{
 				verifyinvalidissuenumber(&df,&hError,currentMetsFile);
 			}	
-			if (true){
+			if (parameter->measurementSTD == "1"){
+				std::cerr << "ADDING measurement test" << std::endl;
 				verifyMeasurement(&df,&hError,currentMetsFile);
 			}
 			

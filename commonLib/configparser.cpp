@@ -144,6 +144,10 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 	{
 		helpMth->start(& (ctx->issueNumber));
 	}
+	else if (strcmp(name,"measurementSTD") == 0)		
+	{
+		helpMth->start(& (ctx->measurementSTD));
+	}
 
 	XMLString::release(&name);
 }
