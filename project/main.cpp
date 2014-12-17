@@ -39,6 +39,7 @@
 #include "verifydatefolder.h"
 #include "verifychecksum.h"
 #include "verifycutouts.h"
+#include "verifymeasurement.h"
 #include "titletocheck.h"
 #include "datehelper.h"
 #include <configparser.h>
@@ -354,7 +355,10 @@ int start()
 			if (parameter->issueNumber =="1")
 			{
 				verifyinvalidissuenumber(&df,&hError,currentMetsFile);
-			}		
+			}	
+			if (true){
+				verifyMeasurement(&df,&hError,currentMetsFile);
+			}
 			
 			verifycutouts(&df,&hError,currentMetsFile);
 			titletocheck(&df,&hError,currentMetsFile);	

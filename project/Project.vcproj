@@ -316,6 +316,10 @@
 						RelativePath=".\verifycoveragepercentagealtoblocks.cpp"
 						>
 					</File>
+					<File
+						RelativePath=".\verifymeasurement.cpp"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="dates"
@@ -516,6 +520,10 @@
 					</File>
 					<File
 						RelativePath=".\verifycoveragepercentagealtoblocks.h"
+						>
+					</File>
+					<File
+						RelativePath=".\verifymeasurement.h"
 						>
 					</File>
 				</Filter>

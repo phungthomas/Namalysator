@@ -260,6 +260,7 @@ const static int cat_actualcoverage = 33;
 const static int cat_incorrectBlock=  34;
 const static int cat_partnumber =  35;
 const static int cat_cutoutoriginal =  36;
+const static int cat_measurement =  37;
 
 
 #endif //STRUCT_H_  
