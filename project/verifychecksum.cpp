@@ -1,12 +1,14 @@
 #include "verifychecksum.h"
 #include "md5wrapper.h"
+#include "sha512wrapper.h"
+#include <iostream>
 
 verifychecksum::verifychecksum(datafactory *dfverifiers,errorHandler *hError,const std::string &fileName,const std::string &path)
 {
 	hError->begin("Verify: checksum");
 	datafactory_set<File_Group> dftypefile = dfverifiers->get_set<File_Group>();		
 	md5wrapper md5;	// by default md5 
-	md5wrapper sha512; // only if type is SHA512
+	 // only if type is SHA512
 
 	for (datafactory_set<File_Group>::iterator it = dftypefile.begin(); it != dftypefile.end(); ++it)
 	{	
@@ -14,10 +16,15 @@ verifychecksum::verifychecksum(datafactory *dfverifiers,errorHandler *hError,con
 		{
 			Type_File tf = it->vect[i];
 			std::string filePath = path + it->vect[i].ref;
-			if ( tf.checksumtype.compare("SHA512") ){
-				if (strcmp(tf.checksum.c_str(),sha512.getHashFromFile(filePath).c_str())!=0 )
+			
+			if ( tf.checksumtype.compare("SHA-512") == 0 ){
+				
+				sha512wrapper sha512;
+				std::string hashcode = sha512.getHashFromFile(filePath);
+				//std::cerr << filePath << ":" << hashcode <<std::endl;
+				if (strcmp(tf.checksum.c_str(),hashcode.c_str())!=0 )
 				{			
-					hError->getError(cat_wrongChecksum,"METS","FileGrp","SHA512 checksum of " + tf.id + " is " + md5.getHashFromFile(filePath),fileName,tf.checksum);
+					hError->getError(cat_wrongChecksum,"METS","FileGrp","SHA-512 checksum of " + tf.id + " is " + hashcode,fileName,tf.checksum);
 				}
 			} else {
 				if (strcmp(tf.checksum.c_str(),md5.getHashFromFile(filePath).c_str())!=0 )

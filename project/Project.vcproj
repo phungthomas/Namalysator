@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(METSVERIFIER)\Headers&quot;;&quot;$(CODESYNTHESIS)\include&quot;"
+				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;&quot;$(METSVERIFIER)\Headers&quot;;C:\Development\metsverifier\commonLib;&quot;$(METSVERIFIER)\commonLib&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(METSVERIFIER)\Headers&quot;;&quot;$(CODESYNTHESIS)\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;XML_STATIC;QT_LARGEFILE_SUPPORT;QT_DLL;QT_WEBKIT_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libexpatMT.lib sqlite.lib Jpeg.lib zlib.lib jbig.lib jasper.lib mng.lib libdcr.lib"
+				AdditionalDependencies="xerces-c_3.lib commonLib.lib  sqlite.lib libexpatMT.lib sqlite.lib Jpeg.lib zlib.lib jbig.lib jasper.lib mng.lib libdcr.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(METSVERIFIER)\Libraries\Debug&quot;;&quot;$(METSVERIFIER)\Libraries\boost-libs&quot;;&quot;$(QTDIR)\lib&quot;;$(CODESYNTHESIS)\lib\VC-9-0"
+				AdditionalLibraryDirectories="C:\Development\metsverifier\Libraries\Debug;&quot;$(METSVERIFIER)\Libraries\Debug&quot;;C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib;&quot;$(METSVERIFIER)\Libraries\boost-libs&quot;;&quot;$(QTDIR)\lib&quot;;"
 				IgnoreDefaultLibraryNames="LIBCMTD"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -373,6 +373,14 @@
 					RelativePath=".\md5wrapper.cpp"
 					>
 				</File>
+				<File
+					RelativePath=".\sha512.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\sha512wrapper.cpp"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="common_files"
@@ -597,6 +605,14 @@
 				</File>
 				<File
 					RelativePath=".\md5wrapper.h"
+					>
+				</File>
+				<File
+					RelativePath=".\sha512.h"
+					>
+				</File>
+				<File
+					RelativePath=".\sha512wrapper.h"
 					>
 				</File>
 			</Filter>
