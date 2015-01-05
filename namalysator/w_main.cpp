@@ -12,6 +12,8 @@
 #include "w_errors.h"
 #include "exportdata.h"
 #include "w_inventaire.h"
+#include "w_bookbrowser.h"
+#include <iostream>
 
 w_main::w_main(QWidget *parent) :
 QMainWindow(parent),
@@ -48,6 +50,57 @@ void w_main::changeEvent(QEvent *e)
 
 void w_main::createActions()
 {	
+	newsPaperActions();
+}
+
+void w_main::booksActions()
+{	
+	modeBookAct = new QAction(tr("Mode News Paper"), this);  
+	modeBookAct->setToolTip("Mode News Paper");	
+	connect(modeBookAct, SIGNAL(triggered()), this, SLOT(modeNewsPaper()));
+	connect(modeBookAct, SIGNAL(triggered()), this, SLOT(parseBatch()));
+	 
+	openErrorAction = new QAction(tr("Show Errors"),this); 
+	openErrorAction->setToolTip("Show Errors");
+	connect(openErrorAction, SIGNAL(triggered()), this, SLOT(openSummaryErrorsWindow()));
+
+	openBookBrowserAction = new QAction(tr("Book Browser"),this); 
+	openBookBrowserAction->setToolTip("Book Browser");
+	connect(openBookBrowserAction, SIGNAL(triggered()), this, SLOT(openBookBrowser()));
+
+	openSelectBatch = new QAction(tr("Return"),this); 
+	openSelectBatch->setToolTip("Return");
+	connect(openSelectBatch, SIGNAL(triggered()), this, SLOT(openSelectBatchWindow()));
+
+	openInventaire = new QAction(tr("Inventaire"),this); 
+	openInventaire->setToolTip("Inventaire");
+	connect(openInventaire, SIGNAL(triggered()), this, SLOT(openInventaireWindow()));
+
+
+	fileTools = new QToolBar( "file toolbar",this);
+
+	
+	fileTools->addAction(openErrorAction);
+	fileTools->addAction(openBookBrowserAction);
+	
+	
+	if( batch.databaseInv !="")
+	{
+		fileTools->addAction(openInventaire);
+	}
+	fileTools->addAction(modeBookAct);	
+	fileTools->addAction(openSelectBatch);	 
+	fileTools->setAllowedAreas(Qt::TopToolBarArea );
+	addToolBar(Qt::TopToolBarArea, fileTools);
+}
+
+void w_main::newsPaperActions()
+{	
+	modeBookAct = new QAction(tr("Mode Book"), this);  
+	modeBookAct->setToolTip("Mode Book");	
+	connect(modeBookAct, SIGNAL(triggered()), this, SLOT(modeBook()));
+	connect(modeBookAct, SIGNAL(triggered()), this, SLOT(openSummaryErrorsWindow()));
+
 	openDiskAnalyze = new QAction(tr("File Explorer"), this);  
 	openDiskAnalyze->setToolTip("File Explorer");	
 	connect(openDiskAnalyze, SIGNAL(triggered()), this, SLOT(parseBatch()));	 
@@ -79,6 +132,7 @@ void w_main::createActions()
 
 	fileTools = new QToolBar( "file toolbar",this);
 
+	
 	fileTools->addAction(openDiskAnalyze);
 	fileTools->addAction(openErrorAction);
 	fileTools->addAction(openCalendarAction);
@@ -89,15 +143,25 @@ void w_main::createActions()
 		fileTools->addAction(openInventaire);
 	}
 	fileTools->addAction(openTitleCheck);
+	fileTools->addAction(modeBookAct);
 	fileTools->addAction(openSelectBatch);	 
 	fileTools->setAllowedAreas(Qt::TopToolBarArea );
 	addToolBar(Qt::TopToolBarArea, fileTools);
 }
 
+
 void w_main::openSummaryErrorsWindow()
 {
 	w_errors *w = new w_errors();	
 	w->setBatchDetail(batch);
+	this->resize(1050,800);
+	this->setCentralWidget(w); 
+}
+
+void w_main::openBookBrowser()
+{
+	w_bookbrowser *w = new w_bookbrowser();	
+	//w->setBatchDetail(batch);
 	this->resize(1050,800);
 	this->setCentralWidget(w); 
 }
@@ -148,4 +212,16 @@ void w_main::openInventaireWindow()
 	invent->setBatchDetail(batch);	
 	this->resize(1050,910);
 	this->setCentralWidget(invent); 
+}
+
+void w_main::modeBook()
+{
+	removeToolBar(fileTools);
+	booksActions();
+}
+
+void w_main::modeNewsPaper()
+{
+	removeToolBar(fileTools);
+	newsPaperActions();
 }
