@@ -32,7 +32,9 @@ private:
     Ui::w_main *m_ui;
     BatchDetail batch;   
     QAction *openAct;
+	QAction *modeBookAct;
 	QAction *openErrorAction;
+	QAction *openBookBrowserAction;
 	QAction *openDiskAnalyze;
 	QAction *openCalendarAction;	
 	QAction *openStructureAction;
@@ -43,13 +45,18 @@ private:
 
 private slots:
 		void createActions();
+		void newsPaperActions();
+		void booksActions();
 		void openSummaryErrorsWindow();
 		void openCalendarWindow();
 		void parseBatch();
+		void modeBook();
+		void modeNewsPaper();
 		void openStructureWindow();
 		void openTitleCheckWindow();		
 		void openSelectBatchWindow();    
 		void openInventaireWindow();
+		void openBookBrowser();
 };
 
 #endif // W_MAIN_H
