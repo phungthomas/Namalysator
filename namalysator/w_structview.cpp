@@ -55,6 +55,7 @@ void w_structview::createConnections()
 	connect(m_ui->listErrors,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(showError(QListWidgetItem*)));
 	connect(m_ui->btnPrevious,SIGNAL(clicked()),this,SLOT(previous()));
 	connect(m_ui->btnNext,SIGNAL(clicked()),this,SLOT(next()));
+	connect(m_ui->lblPage,SIGNAL(valueChanged(int)),this,SLOT(showPage(int)));
 	connect(m_ui->btnStructure,SIGNAL(clicked()),this,SLOT(structure()));
 	connect(m_ui->btnError,SIGNAL(clicked()),this,SLOT(openErrorScreen()));
 	connect(m_ui->btnClearPainter,SIGNAL(clicked()),this,SLOT(clearPainter()));
@@ -155,7 +156,8 @@ void w_structview::showCurrentPage()
 		scaleFactor = 1.0;
 		m_ui->label->adjustSize();	
 		currentAltoFile = mapAltoPath.find(currentPage)->second.fileId;
-		m_ui->lblPage->setNum(currentPage);	
+		m_ui->lblPage->setValue(currentPage);
+		m_ui->lblPage->setMaximum(mapTiffPath.size());
 		updateTableOfContents(currentAltoFile);	
 		// TODO : Add call to drawRect
 		enableButton(true);		
@@ -194,6 +196,25 @@ void w_structview::next()
 			drawRect(currentSelectedArticle, 0);
 		}
 	}
+}
+
+void w_structview::showPage(int i)
+{
+	if ( i <= mapTiffPath.size() && i >=1 ) {
+		currentPage=i;
+	}else{
+		if ( i <= 1 ) {
+			currentPage=1;
+		}else{
+			currentPage=mapTiffPath.size();
+		}
+	}
+		showCurrentPage();
+		// If the current article is still on the new current page, redraw its rectangles
+		if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
+			drawRect(currentSelectedArticle, 0);
+		}
+	
 }
 
 void w_structview::zoomIn()

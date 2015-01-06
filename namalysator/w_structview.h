@@ -122,6 +122,7 @@ private slots :
 	void getIdMets(QListWidgetItem*);
 	void previous();
 	void next();
+	void showPage(int);
 	void zoomIn();
     void zoomOut();  
 	void structure();

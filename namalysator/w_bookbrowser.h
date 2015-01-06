@@ -15,6 +15,8 @@ public:
     virtual ~w_bookbrowser();
 private:
     Ui::w_bookbrowser *m_ui;
+private slots:
+	void currentPage(int);
 };
 
 #endif
