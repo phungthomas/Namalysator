@@ -63,6 +63,7 @@ void w_structview::createConnections()
 	connect(m_ui->btnViewHtml,SIGNAL(clicked()),this,SLOT(viewHtml()));
 	connect(m_ui->btnZoomIn, SIGNAL(clicked()), this, SLOT(zoomIn()));
     connect(m_ui->btnZoomOut, SIGNAL(clicked()), this, SLOT(zoomOut()));
+	connect(m_ui->zoomNormal, SIGNAL(clicked()), this, SLOT(zoomNon()));
 	connect(m_ui->rbCalendar, SIGNAL(clicked()), this, SLOT(viewCalendar()));
 	connect(m_ui->rbSampling,SIGNAL(clicked()),this,SLOT(showListSampling()));
 	connect(m_ui->btnChecked, SIGNAL(clicked()), this, SLOT(checked()));
@@ -223,8 +224,10 @@ void w_structview::zoomIn()
    divImage = divImage * 0.8;
    multiImage = multiImage / 0.8;
    resizeImage();
-   if (currentSelectedArticle !=0)
-   drawRect(currentSelectedArticle,currentSelectedArticle); 
+
+   if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
+		drawRect(currentSelectedArticle, 0);
+	}
 }
 
  void w_structview::zoomOut()
@@ -233,9 +236,27 @@ void w_structview::zoomIn()
 	multiImage = multiImage * 0.8;
 	resizeImage();
     scaleImage(0.8);
-    if (currentSelectedArticle !=0)
-    drawRect(currentSelectedArticle,currentSelectedArticle);
+
+	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
+		drawRect(currentSelectedArticle, 0);
+	}
  }
+
+ void w_structview::zoomNon()
+ {
+	divImage = 1;
+	multiImage = 1;
+	scaleFactor = 1;
+	resizeImage();
+    scaleImage(1);
+
+	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
+		drawRect(currentSelectedArticle, 0);
+	}
+ }
+
+
+
  
  void w_structview::resizeImage()
  {

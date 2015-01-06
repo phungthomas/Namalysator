@@ -210,6 +210,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="zoomNormal">
+           <property name="text">
+            <string>100%</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="btnZoomOut">
            <property name="text">
             <string>Zoom Out</string>

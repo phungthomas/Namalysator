@@ -124,7 +124,8 @@ private slots :
 	void next();
 	void showPage(int);
 	void zoomIn();
-    void zoomOut();  
+    void zoomOut();
+	void zoomNon();
 	void structure();
 	void clearPainter();	
 	void drawRect(QTreeWidgetItem *item,QTreeWidgetItem *item2);
