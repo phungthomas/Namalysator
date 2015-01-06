@@ -72,7 +72,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton">
+          <widget class="QRadioButton" name="rbList">
            <property name="maximumSize">
             <size>
              <width>150</width>

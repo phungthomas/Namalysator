@@ -132,10 +132,15 @@ private slots :
 	void openErrorScreen();
 	void showListSampling();
 	void viewCalendar();
+	void viewList();
 	void checked();
 	void undo();
 	void viewHtml();
 	void viewMetsFile();
+
+	void rbhelperCalendar(bool);
+	void rbhelperSampling(bool);
+	void rbhelperList(bool);
 };
 
 #endif // W_STRUCTVIEW_H

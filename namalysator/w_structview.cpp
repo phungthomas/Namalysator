@@ -65,6 +65,7 @@ void w_structview::createConnections()
     connect(m_ui->btnZoomOut, SIGNAL(clicked()), this, SLOT(zoomOut()));
 	connect(m_ui->zoomNormal, SIGNAL(clicked()), this, SLOT(zoomNon()));
 	connect(m_ui->rbCalendar, SIGNAL(clicked()), this, SLOT(viewCalendar()));
+	connect(m_ui->rbList, SIGNAL(clicked()), this, SLOT(viewList()));
 	connect(m_ui->rbSampling,SIGNAL(clicked()),this,SLOT(showListSampling()));
 	connect(m_ui->btnChecked, SIGNAL(clicked()), this, SLOT(checked()));
 	connect(m_ui->btnUndo, SIGNAL(clicked()), this, SLOT(undo()));
@@ -678,22 +679,37 @@ void w_structview::fillListSamplingStructure()
 
 void w_structview::showListSampling()
 {
-	m_ui->listSampling->setVisible(true);
-	m_ui->btnChecked->setVisible(true);
-	m_ui->btnUndo->setVisible(true);
-	fillListSamplingStructure();
-	m_ui->calendarWidget->setVisible(false);
-	m_ui->listMets->setVisible(false);
+	rbhelperSampling(true);
+	rbhelperCalendar(false);
+	rbhelperList(false);
 }
 
 void w_structview::viewCalendar()
 {
-	m_ui->calendarWidget->setVisible(true);
-	m_ui->listMets->setVisible(true);
-	m_ui->listSampling->setVisible(false);
-	m_ui->btnChecked->setVisible(false);
-	m_ui->btnUndo->setVisible(false);
+	rbhelperCalendar(true);
+	rbhelperSampling(false);
+	rbhelperList(false);
 }
+void w_structview::viewList()
+{
+	rbhelperCalendar(false);
+	rbhelperSampling(false);
+	rbhelperList(true);
+}
+void w_structview::rbhelperCalendar(bool b){
+	m_ui->calendarWidget->setVisible(b);
+	m_ui->listMets->setVisible(b);
+}
+void w_structview::rbhelperSampling(bool b){
+	m_ui->listSampling->setVisible(b);
+	m_ui->btnChecked->setVisible(b);
+	m_ui->btnUndo->setVisible(b);
+	if ( b ) fillListSamplingStructure();
+}
+void w_structview::rbhelperList(bool b){
+}
+
+
 // checked if the issues was validated
 void::w_structview::checked()
 {
