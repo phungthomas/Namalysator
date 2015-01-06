@@ -123,6 +123,7 @@ void w_structview::getDate(QDate search)
 		metsAltoParser();		
 		fillListErrors();
 		m_colors.set_schema(mets.docType);
+		delete MetsOnDate;
 	}	
 }
 
