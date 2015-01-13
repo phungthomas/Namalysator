@@ -626,9 +626,9 @@ size_t image_utils::count_colours(const std::string &fname, int abs_difference)
     if (!tif) {
 		return 0;
 	}
-	uint16 n_samples = 0;
+	//uint16 n_samples = 0;
 	uint32 tifheight, tifwidth;
-	bool image_ok = true;
+	//bool image_ok = true;
 
 	TIFFGetField(tif, TIFFTAG_IMAGELENGTH, &tifheight);
 	TIFFGetField(tif, TIFFTAG_IMAGEWIDTH, &tifwidth);
