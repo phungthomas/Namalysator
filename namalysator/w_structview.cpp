@@ -6,8 +6,11 @@
 #include <fstream>
 #include "w_screenshoterror.h"
 #include <windows.h>
+ #include <QSortFilterProxyModel>
 #include "gui_utilities.h"
 #include "calendarcommons.h"
+#include "bookModel.h"
+#include "bookColumn.h"
 
 #include "boost/filesystem/operations.hpp"
 #include "boost/filesystem/path.hpp"
@@ -37,6 +40,18 @@ w_structview::w_structview(QWidget *parent) :
     currentSelectedArticle =0;
     m_ui->btnStructure->setVisible(false);
 	viewCalendar();
+	_bookModel = new bookModel();
+	proxyModel = new QSortFilterProxyModel();
+	proxyModel->setSourceModel(_bookModel);
+	m_ui->bookView->setModel(proxyModel);
+	m_ui->bookView->verticalHeader()->hide();
+	m_ui->bookView->setAlternatingRowColors(true);
+	m_ui->bookView->setShowGrid(false);
+	m_ui->bookView->setHorizontalHeader(new bookColumn(Qt::Horizontal));
+	m_ui->bookView->setSortingEnabled(true);
+	//m_ui->bookView->setItemDelegateForRow(0,new bookColumn());
+	
+
     // QSplitter *splitter = new QSplitter(Qt::Horizontal,this);
     // QGridLayout *grid = new QGridLayout();
     // splitter->addWidget(m_ui->groupBox);
@@ -75,6 +90,8 @@ void w_structview::createConnections()
 w_structview::~w_structview()
 {
     delete m_ui;
+	delete _bookModel;
+	delete proxyModel;
 }
 
 //set detail of the batch
@@ -707,6 +724,7 @@ void w_structview::rbhelperSampling(bool b){
 	if ( b ) fillListSamplingStructure();
 }
 void w_structview::rbhelperList(bool b){
+	m_ui->bookView->setVisible(b);
 }
 
 

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1218</width>
+    <width>1217</width>
     <height>877</height>
    </rect>
   </property>
@@ -24,6 +24,22 @@
      </property>
      <property name="text">
       <string>Please select calendar entry for Issue</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableView" name="bookView">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>180</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>65535</width>
+       <height>180</height>
+      </size>
      </property>
     </widget>
    </item>
