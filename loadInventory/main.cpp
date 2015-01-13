@@ -3,8 +3,9 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include "dbconnection.h"
 
-int loadInventory (const char * fileName ){
+int loadInventory (const char * fileName,DbConnection& db ){
 
 	std::ifstream infile(fileName);
 	std::string line = "";
@@ -29,6 +30,16 @@ int loadInventory (const char * fileName ){
 
 
 int main () {
+	int ret;
 	std :: cout << "Inventory loader" << std::endl;
-    return loadInventory("file.csv");
+	DbConnection db ( "test.db","createTable.txt" );
+	try {
+		db.openDB();
+		ret = loadInventory("file.csv", db);
+		db.closeDB();
+		return ret;
+	}catch(DbConnectionException& e){
+		e.print();
+	}
+    return -1;
 }
