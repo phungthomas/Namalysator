@@ -51,6 +51,31 @@ void DbConnection::closeDB(){
 	connected = false;
 }
 
+void DbConnection::startTransaction(){
+	char *sErrMsg=0;
+	
+	// Use a transaction to speed things up
+	int rc=sqlite3_exec(db, "BEGIN TRANSACTION", NULL, NULL, &sErrMsg);
+		if ( rc != SQLITE_OK ){
+		std::string error (sErrMsg);
+		std::cerr << "ERROR BEGIN TRANSATCTION" << error << std::endl;
+		sqlite3_free(sErrMsg);
+	}
+
+}
+void DbConnection::endTransaction(){
+	char *sErrMsg=0;
+	
+	// Use a transaction to speed things up
+	int rc=sqlite3_exec(db, "END TRANSACTION", NULL, NULL, &sErrMsg);
+	if ( rc != SQLITE_OK ){
+		std::string error (sErrMsg);
+		std::cerr << "ERROR END TRANSATCTION" << error << std::endl;
+		sqlite3_free(sErrMsg);
+	}
+
+}
+
 bool DbConnection::isConnected(){
 	return connected;
 }
@@ -81,7 +106,6 @@ bool DbConnection::readVersion(){
 		// no need of log
 		// test of invariant
 
-		sqlite3_free((void *)zErrMsg);
 		return false;
 	}
 	sqlite3_finalize(pStmt);
@@ -118,8 +142,8 @@ void DbConnection::createSchema(){
 		int rc = sqlite3_exec(db, sqlCreate, NULL, 0, &zErrMsg);
 
 		if (rc!=SQLITE_OK ){			
-				sqlite3_free(zErrMsg);		
-				throw DbConnectionException ( "SQL error :" + vect[i] );
+				std::string error ( sqlite3_errmsg(db) );	
+				throw DbConnectionException ( "SQL error :" + error + " ->" + vect[i] );
 		}	
 	}
 	

@@ -9,7 +9,7 @@
 // xxxx;xxxx;"xxxxx";"yyyy;xxxx";"zzzz"" ;""kjhkhkjhkj";xxxxx
 
 void analyse ( const char* line, std::vector<std::string> & vect  ){
-    static char WORD [ 1000 ];
+    static char WORD [ 2000 ]; // not nice
 	const char * ptr ;
 	char * ptrW ;
 	int mode=0;
@@ -72,6 +72,7 @@ int loadInventory (const char * fileName,SQLLoadInventory& db ){
 		std::cerr << "File ["<<fileName<<"] doesn't exist "<< std::endl;
 		return -1;
 	} 
+	db.startTransaction();
 	SQLLoad sql = db.getSQLLoad();
     sql.Start();
 
@@ -86,9 +87,11 @@ int loadInventory (const char * fileName,SQLLoadInventory& db ){
 
 		analyse (line.c_str(),all_words);
 
-		std::cerr << "Ligne :" << skipfirst << " -> ";
+		//std::cerr << "Line :" << skipfirst << " -> " << std::endl;
 		sql.Store(all_words);
     }
+
+	db.endTransaction();
 
 	return 0;
 }

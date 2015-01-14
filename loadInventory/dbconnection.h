@@ -14,6 +14,9 @@ public:
 	virtual void openDB();
 	virtual void closeDB();
 
+	virtual void startTransaction();
+	virtual void endTransaction();
+
 	virtual bool isConnected();
 
 protected : 
