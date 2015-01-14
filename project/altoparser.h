@@ -1,14 +1,8 @@
 #ifndef ALTOPARSER_H_
 #define ALTOPARSER_H_
 
-#include "../common_files/xmlparser.h"
-#include "../common_files/struct.h"
-#include "../common_files/utilities.h"
-#include "../common_files/xmltostr.h"
-#include "dataitem.h"
 #include "datafactory.h"
 #include "errorhandler.h"
-#include "datafactory.h"
 #include "stateparser.h"
 
 

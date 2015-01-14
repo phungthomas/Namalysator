@@ -1,6 +1,7 @@
 #include "altoparser.h"
 #include <string>
 #include <iostream>
+#include "../common_files/xmltostr.h"
 using namespace std;
 
 
