@@ -3,7 +3,12 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <configparser.h>
+#include "boost/filesystem/operations.hpp"
+#include "boost/filesystem/path.hpp"
 #include "sqlloadinventory.h"
+
+namespace fs = boost::filesystem;
 
 // analyse csv file separate by ;
 // xxxx;xxxx;"xxxxx";"yyyy;xxxx";"zzzz"" ;""kjhkhkjhkj";xxxxx
@@ -97,17 +102,41 @@ int loadInventory (const char * fileName,SQLLoadInventory& db ){
 }
 
 
+
 int main () {
+	
+	XMLPlatformUtils::Initialize ();
+	
+	//get current path of the folder
+	fs::path CurrentPath( fs::initial_path<fs::path>());
+	
+	std::stringstream configPath,sqlCreateTablePath;	
+	configPath << CurrentPath << "/config.xml"; 	
+
+	Parameters *parameter = new Parameters;
+
+	configparser config(parameter);
+	//Parse the config file
+	
+	std::cerr << "Config file :" << configPath.str().c_str() << std::endl;
+
+	if (config.parse(configPath.str().c_str()) !=0 )	
+	{	
+		std::cerr << "Unable to parse :" << configPath << std::endl;
+		return 1;				
+	}
+
 	int ret;
 	std :: cout << "Inventory loader" << std::endl;
-	SQLLoadInventory db ( "test.db","createTable.txt" );
+	SQLLoadInventory db ( parameter->database + ".db" ,"createTable.txt" );
 	try {
 		db.openDB();
-		ret = loadInventory("file.csv", db);
+		ret = loadInventory(parameter->inventoryFile.c_str(), db);
 		db.closeDB();
 		return ret;
 	}catch(DbConnectionException& e){
 		e.print();
 	}
+	XMLPlatformUtils::Terminate ();
     return -1;
 }

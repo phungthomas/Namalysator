@@ -112,7 +112,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(METSVERIFIER)\Headers"
+				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;&quot;$(METSVERIFIER)\metsverifier\commonLib&quot;;&quot;$(METSVERIFIER)\Headers&quot;"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -129,8 +129,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sqlite.lib "
-				AdditionalLibraryDirectories="C:\Development\Libraries\Release"
+				AdditionalDependencies="sqlite.lib xerces-c_3.lib commonLib.lib"
+				AdditionalLibraryDirectories="C:\Development\Libraries\Release;C:\Development\metsverifier\Libraries\Release;&quot;C:\Development\Libraries\boost-libs&quot;;&quot;C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib&quot;"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
