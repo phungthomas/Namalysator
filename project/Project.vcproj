@@ -118,7 +118,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;&quot;$(METSVERIFIER)\Headers&quot;;C:\Development\metsverifier\commonLib;&quot;$(METSVERIFIER)\commonLib&quot;;"
+				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;&quot;$(METSVERIFIER)\Headers&quot;;C:\Development\metsverifier\commonLib;&quot;$(METSVERIFIER)\commonLib&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;XML_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -208,10 +208,6 @@
 			</File>
 			<File
 				RelativePath=".\xmlsaverstruct.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\xmltostr.cpp"
 				>
 			</File>
 			<Filter
@@ -581,10 +577,6 @@
 				</File>
 				<File
 					RelativePath="..\common_files\xmlparser.h"
-					>
-				</File>
-				<File
-					RelativePath="..\common_files\xmltostr.h"
 					>
 				</File>
 			</Filter>
