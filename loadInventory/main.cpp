@@ -101,12 +101,7 @@ int loadInventory (const char * fileName,SQLLoadInventory& db ){
 	return 0;
 }
 
-
-
-int main () {
-	
-	XMLPlatformUtils::Initialize ();
-	
+int start(){
 	//get current path of the folder
 	fs::path CurrentPath( fs::initial_path<fs::path>());
 	
@@ -137,6 +132,15 @@ int main () {
 	}catch(DbConnectionException& e){
 		e.print();
 	}
+	return -1;
+}
+
+int main () {
+	int ret;
+	XMLPlatformUtils::Initialize ();
+	
+	ret=start();
+	
 	XMLPlatformUtils::Terminate ();
-    return -1;
+    return ret;
 }

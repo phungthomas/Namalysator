@@ -12,6 +12,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "commonLib", "commonLib\comm
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unittestConfig", "unittestConfig\unittestConfig.vcproj", "{685A49C0-1E33-4AEB-88D8-080A5F9C1296}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadInventory", "loadInventory\loadInventory.vcproj", "{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -122,6 +124,24 @@ Global
 		{685A49C0-1E33-4AEB-88D8-080A5F9C1296}.Static Release|Win32.ActiveCfg = Release|Win32
 		{685A49C0-1E33-4AEB-88D8-080A5F9C1296}.Static Release|Win32.Build.0 = Release|Win32
 		{685A49C0-1E33-4AEB-88D8-080A5F9C1296}.Static Release|x64.ActiveCfg = Release|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Debug|Win32.Build.0 = Debug|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Debug|x64.ActiveCfg = Debug|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.ICU Debug|Win32.ActiveCfg = Debug|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.ICU Debug|Win32.Build.0 = Debug|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.ICU Debug|x64.ActiveCfg = Debug|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.ICU Release|Win32.ActiveCfg = Release|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.ICU Release|Win32.Build.0 = Release|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.ICU Release|x64.ActiveCfg = Release|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Release|Win32.ActiveCfg = Release|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Release|Win32.Build.0 = Release|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Release|x64.ActiveCfg = Release|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Debug|Win32.ActiveCfg = Debug|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Debug|Win32.Build.0 = Debug|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Debug|x64.ActiveCfg = Debug|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Release|Win32.ActiveCfg = Release|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Release|Win32.Build.0 = Release|Win32
+		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
