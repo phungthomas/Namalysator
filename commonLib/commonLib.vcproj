@@ -106,7 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;"
+				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;$(METSVERIFIER)\Headers"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -154,6 +154,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\dbconnection.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\parserCheck.cpp"
 				>
 			</File>
@@ -177,6 +181,10 @@
 			</File>
 			<File
 				RelativePath=".\configparser.h"
+				>
+			</File>
+			<File
+				RelativePath=".\dbconnection.h"
 				>
 			</File>
 			<File
