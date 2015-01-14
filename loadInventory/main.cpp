@@ -23,7 +23,7 @@ void analyse ( const char* line, std::vector<std::string> & vect  ){
 		switch ( *ptr ) {
 		case	';' : 
 			      if ( mode == 2 ){
-					// escape mode : true ; in the content ( not a separator of field )
+					// escape mode : true ';' in the content ( not a separator of field )
 					*ptrW = *ptr; ptrW++;
 				  }else{
 					// new WORD START
@@ -43,7 +43,7 @@ void analyse ( const char* line, std::vector<std::string> & vect  ){
 							mode = 3; // perhaps suite of "", but could be "; 
 							break;
 						case 3 :
-							mode = 2; // but copy the " 
+							mode = 2; // but copy the " like it is a suite "" 
 						case 0 :
 							*ptrW = *ptr; ptrW++;
 							break;
