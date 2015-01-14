@@ -14,7 +14,7 @@ namespace fs = boost::filesystem;
 // xxxx;xxxx;"xxxxx";"yyyy;xxxx";"zzzz"" ;""kjhkhkjhkj";xxxxx
 
 void analyse ( const char* line, std::vector<std::string> & vect  ){
-    static char WORD [ 2000 ]; // not nice
+    static char WORD [ 2000 ]; // not nice -> 500 chinese char on 4 byte in UTF-8
 	const char * ptr ;
 	char * ptrW ;
 	int mode=0;
