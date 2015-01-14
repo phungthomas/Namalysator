@@ -172,6 +172,10 @@
 				RelativePath=".\main.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\sqlloadinventory.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -180,6 +184,10 @@
 			>
 			<File
 				RelativePath=".\dbconnection.h"
+				>
+			</File>
+			<File
+				RelativePath=".\sqlloadinventory.h"
 				>
 			</File>
 		</Filter>

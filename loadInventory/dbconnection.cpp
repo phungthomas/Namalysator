@@ -16,7 +16,7 @@ DbConnection::~DbConnection (){
 void DbConnection::openDB(){
 	// see if file exist before 
 	//
-	bool fileNotExist = true; 
+	bool fileNotExist = true; // not yet tested
 	int rc = sqlite3_open(dbfileName.c_str(), &db);
 	
 	if( rc )
@@ -37,7 +37,7 @@ void DbConnection::openDB(){
 		if ( fileNotExist ) {
 			createSchema();
 		} else {
-			throw DbConnectionException ( "Existing db without version" + sqlschemafileName );
+			throw DbConnectionException ( "Existing db without good version" + sqlschemafileName );
 		}
 		if (!readVersion()) throw DbConnectionException ( "Unable to get version: create sql file " + sqlschemafileName ); 
 	};
@@ -58,10 +58,8 @@ bool DbConnection::isConnected(){
 // init version field : if impossible means that must be plaid create file
 //
 bool DbConnection::readVersion(){
-	//std::vector<std::string> vect;
 	
 	sqlite3_stmt *pStmt;
-	
 	const char *zErrMsg= 0; 
 
 	std::string selectSql = "SELECT VALUE FROM METADATA WHERE ID='VERSION'";
@@ -77,8 +75,14 @@ bool DbConnection::readVersion(){
 				std :: cout << "read version: " << tmp << std::endl;
 				version = std::string ( (const char *) tmp );
 			}
-			//vect.push_back(safe_sqlite3_column_text(pStmt, 0));
 		}
+	}else{
+
+		// no need of log
+		// test of invariant
+
+		sqlite3_free((void *)zErrMsg);
+		return false;
 	}
 	sqlite3_finalize(pStmt);
 	return version.compare(VERSIONHARDCODED) == 0;

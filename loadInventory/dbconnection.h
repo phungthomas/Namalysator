@@ -9,19 +9,21 @@
 class DbConnection {
 public:
 	DbConnection (std::string _dbfileName, std::string _sqlschemafileName);
-	~DbConnection ();
+	virtual ~DbConnection ();
 
-	void openDB();
-	void closeDB();
+	virtual void openDB();
+	virtual void closeDB();
 
-	bool isConnected();
+	virtual bool isConnected();
 
+protected : 
+	sqlite3 *db;
 private:
 
 	bool readVersion();
 	void createSchema();
 
-	sqlite3 *db;
+	
 	bool connected;
 	std::string dbfileName;
 	std::string sqlschemafileName;

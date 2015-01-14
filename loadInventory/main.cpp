@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include "dbconnection.h"
+#include "sqlloadinventory.h"
 
 int loadInventory (const char * fileName,DbConnection& db ){
 
@@ -32,7 +32,7 @@ int loadInventory (const char * fileName,DbConnection& db ){
 int main () {
 	int ret;
 	std :: cout << "Inventory loader" << std::endl;
-	DbConnection db ( "test.db","createTable.txt" );
+	SQLLoadInventory db ( "test.db","createTable.txt" );
 	try {
 		db.openDB();
 		ret = loadInventory("file.csv", db);
