@@ -3,6 +3,9 @@
 
  #include <QHeaderView>
 
+//* in case of cutomisation of behaviour of header 
+//
+
 class bookColumn: public QHeaderView {
 public:
 	bookColumn(Qt::Orientation orientation,QWidget * parent = 0);
