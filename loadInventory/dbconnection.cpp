@@ -31,7 +31,7 @@ void DbConnection::openDB(){
 	// if version not define means that schema of creation has never been plaid 
 	// but must take care that for old database there is no metadata table and so version is not known
 	// in that case, having an idea if the file exist before could be use too avoid to create and recreate
-	// TODO : analyse the logic
+	// TODO : analyse the logic seems only necessary for namalysator and never else where
 	//
 	if (!readVersion()) {
 		if ( fileNotExist ) {
@@ -116,10 +116,8 @@ void DbConnection::createSchema(){
 		if (rc!=SQLITE_OK ){			
 				sqlite3_free(zErrMsg);		
 				throw DbConnectionException ( "SQL error :" + vect[i] );
-		}
-		
+		}	
 	}
-
 	
 }
 
