@@ -62,6 +62,10 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 	{
 		helpMth->start(& (ctx->database));
 	}
+	else if (strcmp(name,"inventory")== 0)	
+	{
+		helpMth->start(& (ctx->inventoryFile));
+	}
 	else if (strcmp(name,"batchName")== 0)			
 	{
 		helpMth->start(& (ctx->batchName));
