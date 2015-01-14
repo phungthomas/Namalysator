@@ -112,6 +112,8 @@ int start()
 	configparser config(parameter);
 	//Parse the config file
 	
+	std::cerr << "Config file :" << configPath.str().c_str() << std::endl;
+
 	if (config.parse(configPath.str().c_str()) !=0 )	
 	{	
 		errorHandler hLog;		
