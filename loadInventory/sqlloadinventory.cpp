@@ -11,6 +11,7 @@ SQLLoad::SQLLoad():zErrMsg(0),pStmt(0){
 }
 
 SQLLoad::~SQLLoad(){
+	if (pStmt)sqlite3_finalize(pStmt);
 }
 
 void SQLLoad::Start(){
