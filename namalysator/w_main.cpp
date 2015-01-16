@@ -13,6 +13,7 @@
 #include "exportdata.h"
 #include "w_inventaire.h"
 #include "w_bookbrowser.h"
+#include "w_thumb.h"
 #include <iostream>
 
 w_main::w_main(QWidget *parent) :
@@ -55,6 +56,8 @@ void w_main::createActions()
 
 void w_main::booksActions()
 {	
+
+	QAction* Act;
 	modeBookAct = new QAction(tr("Mode News Paper"), this);  
 	modeBookAct->setToolTip("Mode News Paper");	
 	connect(modeBookAct, SIGNAL(triggered()), this, SLOT(modeNewsPaper()));
@@ -88,6 +91,11 @@ void w_main::booksActions()
 	{
 		fileTools->addAction(openInventaire);
 	}
+	Act = new QAction(tr("Thumb"), this);  
+	Act->setToolTip("Thumb");	
+	connect(Act, SIGNAL(triggered()), this, SLOT(openThumb()));
+	fileTools->addAction(Act);
+
 	fileTools->addAction(modeBookAct);	
 	fileTools->addAction(openSelectBatch);	 
 	fileTools->setAllowedAreas(Qt::TopToolBarArea );
@@ -196,6 +204,16 @@ void w_main::openTitleCheckWindow()
 	titlecheck->setBatchDetail(batch);
 	this->resize(1050,910);
 	this->setCentralWidget(titlecheck); 
+}
+
+void w_main::openThumb()
+{
+	w_thumb *widget = new  w_thumb(this);
+	this->resize(1330,910);
+	widget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+	//widget->resize(this->centralWidget()->size());
+	this->setCentralWidget(widget); 
+	//widget->load();
 }
 
 void w_main::openSelectBatchWindow()

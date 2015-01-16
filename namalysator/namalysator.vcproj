@@ -382,6 +382,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\w_thumb.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\w_titlecheck.cpp"
 					>
 				</File>
@@ -873,6 +877,21 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\w_thumb.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing w_thumb.h..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFIER)\Headers&quot;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\w_titlecheck.h"
 					>
 					<FileConfiguration
@@ -1196,6 +1215,10 @@
 						Name="VCCLCompilerTool"
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\GeneratedFiles\Release\moc_w_thumb.cpp"
+				>
 			</File>
 			<File
 				RelativePath=".\GeneratedFiles\Debug\moc_w_titlecheck.cpp"
