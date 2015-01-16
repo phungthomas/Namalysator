@@ -208,12 +208,13 @@ void w_main::openTitleCheckWindow()
 
 void w_main::openThumb()
 {
-	w_thumb *widget = new  w_thumb(this);
-	this->resize(1330,910);
+	w_thumb *widget = new  w_thumb(690,this);
+	//this->resize(1330,910);
 	widget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
 	//widget->resize(this->centralWidget()->size());
 	this->setCentralWidget(widget); 
-	//widget->load();
+	
+	widget->load();
 }
 
 void w_main::openSelectBatchWindow()

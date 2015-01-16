@@ -346,6 +346,10 @@
 				Name="widgets"
 				>
 				<File
+					RelativePath=".\flowlayout.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\w_bookbrowser.cpp"
 					>
 				</File>
@@ -627,6 +631,10 @@
 			<Filter
 				Name="widgets"
 				>
+				<File
+					RelativePath=".\flowlayout.h"
+					>
+				</File>
 				<File
 					RelativePath=".\w_bookbrowser.h"
 					>
