@@ -40,24 +40,10 @@ w_structview::w_structview(QWidget *parent) :
     currentSelectedArticle =0;
     m_ui->btnStructure->setVisible(false);
 	viewCalendar();
-	_bookModel = new bookModel();
-	proxyModel = new QSortFilterProxyModel();
-	proxyModel->setSourceModel(_bookModel);
-	m_ui->bookView->setModel(proxyModel);
-	m_ui->bookView->verticalHeader()->hide();
-	m_ui->bookView->setAlternatingRowColors(true);
-	m_ui->bookView->setShowGrid(false);
-	m_ui->bookView->setHorizontalHeader(new bookColumn(Qt::Horizontal));
-	m_ui->bookView->setSortingEnabled(true);
-	//m_ui->bookView->setItemDelegateForRow(0,new bookColumn());
-	
 
-    // QSplitter *splitter = new QSplitter(Qt::Horizontal,this);
-    // QGridLayout *grid = new QGridLayout();
-    // splitter->addWidget(m_ui->groupBox);
-    // splitter->addWidget(m_ui->scrollArea);
-	// grid->addWidget(splitter);	
-	// m_ui->widget->setLayout(grid);
+	bookList = new w_booklist();
+	m_ui->bookW->setWidget(bookList);
+	m_ui->bookW->setWidgetResizable(true);
 };
 
 //! create event / slots
@@ -90,8 +76,6 @@ void w_structview::createConnections()
 w_structview::~w_structview()
 {
     delete m_ui;
-	delete _bookModel;
-	delete proxyModel;
 }
 
 //set detail of the batch
@@ -724,7 +708,7 @@ void w_structview::rbhelperSampling(bool b){
 	if ( b ) fillListSamplingStructure();
 }
 void w_structview::rbhelperList(bool b){
-	m_ui->bookView->setVisible(b);
+	m_ui->bookW->setVisible(b);
 }
 
 

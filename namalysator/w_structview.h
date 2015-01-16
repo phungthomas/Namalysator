@@ -8,6 +8,7 @@
 #include "dbrequest.h"
 #include "logstruct_colors.h"
 #include "bookModel.h"
+#include "w_booklist.h"
  #include <QSortFilterProxyModel>
 
 namespace Ui {
@@ -40,8 +41,7 @@ private:
     void showCurrentPage();    
     Item *treeContents;
     bool changeNewDate;
-	bookModel *_bookModel;
-	QSortFilterProxyModel * proxyModel;
+	w_booklist * bookList;
     
     QAction *zoomInAct;   
     QAction *zoomOutAct;
