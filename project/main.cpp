@@ -242,18 +242,6 @@ int start()
 			return 1;
 		};
 
-		/*
-		std::cerr << "Next One Parsing" << std::endl;
-
-		if (ParseDocument(parseString.c_str(),&metsP) !=0 )	
-		{						
-			hError.getError(cat_xml_error,"METS",currentMetsFile, "Could not parse Mets file %s\n" + currentMetsFile ,currentMetsFile,"");
-			parseError = true;			
-		};
-		*/
-
-		
-
 		//std::cerr << "Finish" << std::endl;
 
 		pt.LogTime("Parsing METS file");

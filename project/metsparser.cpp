@@ -111,6 +111,7 @@ public:
 
 	virtual void endElement (const char* const name){
 		CTX.dfMets->set(CTX.idItem,CTX.dmdSecStruct);
+		CTX.dmdSecStruct.mapAddStringData.clear();
 	};
 };
 
