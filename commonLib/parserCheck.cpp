@@ -48,6 +48,7 @@ int parserCheck::parse(const   char* const     systemId) {
 			std::cerr << "Couldn't open file: " << systemId << std::endl;
 			return 1;
 		} 
+		fclose(fp);
 
 		
 		try {
