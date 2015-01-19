@@ -25,9 +25,8 @@ m_ui(new Ui::w_main)
 
 }
 
-void w_main::setBatchDetail(const BatchDetail &d)
+void w_main::setBatchDetail()
 { 
-	batch = d;
 	parseBatch();
 	createActions();  
 }
@@ -87,7 +86,7 @@ void w_main::booksActions()
 	fileTools->addAction(openBookBrowserAction);
 	
 	
-	if( batch.databaseInv !="")
+	if( BatchDetail::getBatchDetail().databaseInv !="")
 	{
 		fileTools->addAction(openInventaire);
 	}
@@ -146,7 +145,7 @@ void w_main::newsPaperActions()
 	fileTools->addAction(openCalendarAction);
 	fileTools->addAction(openStructureAction);	
 	
-	if( batch.databaseInv !="")
+	if( BatchDetail::getBatchDetail().databaseInv !="")
 	{
 		fileTools->addAction(openInventaire);
 	}
@@ -161,7 +160,7 @@ void w_main::newsPaperActions()
 void w_main::openSummaryErrorsWindow()
 {
 	w_errors *w = new w_errors();	
-	w->setBatchDetail(batch);
+	w->setBatchDetail();
 	this->resize(1050,800);
 	this->setCentralWidget(w); 
 }
@@ -169,7 +168,6 @@ void w_main::openSummaryErrorsWindow()
 void w_main::openBookBrowser()
 {
 	w_bookbrowser *w = new w_bookbrowser();	
-	//w->setBatchDetail(batch);
 	this->resize(1050,800);
 	this->setCentralWidget(w); 
 }
@@ -177,7 +175,7 @@ void w_main::openBookBrowser()
 void w_main::openCalendarWindow()
 {	
 	w_calendar *cal = new w_calendar();
-	cal->setBatchDetail(batch); 
+	cal->setBatchDetail(); 
 	this->resize(1050,1020);
 	this->setCentralWidget(cal); 		
 }
@@ -185,7 +183,7 @@ void w_main::openCalendarWindow()
 void w_main::parseBatch()
 {	
 	w_disk *disk = new w_disk();
-	disk->setBatchDetail(batch);	
+	disk->setBatchDetail();	
 	this->resize(1050,1020);
 	this->setCentralWidget(disk); 
 }
@@ -193,7 +191,7 @@ void w_main::parseBatch()
 void w_main::openStructureWindow()
 {
 	w_structview *view = new w_structview();
-	view->setBatchDetail(batch);	
+	view->setBatchDetail();	
 	this->resize(1200,910);
 	this->setCentralWidget(view);  
 }
@@ -201,7 +199,7 @@ void w_main::openStructureWindow()
 void w_main::openTitleCheckWindow()
 {
 	w_titlecheck *titlecheck = new  w_titlecheck();
-	titlecheck->setBatchDetail(batch);
+	titlecheck->setBatchDetail();
 	this->resize(1050,910);
 	this->setCentralWidget(titlecheck); 
 }
@@ -228,7 +226,7 @@ void w_main::openSelectBatchWindow()
 void w_main::openInventaireWindow()
 {	
 	w_inventaire *invent = new w_inventaire();
-	invent->setBatchDetail(batch);	
+	invent->setBatchDetail();	
 	this->resize(1050,910);
 	this->setCentralWidget(invent); 
 }

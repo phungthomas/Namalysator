@@ -5,9 +5,8 @@
 #include <QFile>
 #include <QMessageBox>
 #include <fstream>
-tabErrors::tabErrors(int id, const BatchDetail &bd)
+tabErrors::tabErrors(int id, BatchDetail &bd):batch(bd)
 {
-	batch = bd;
 	id_cat = id;
 	db.setDataBaseName(batch.database);  
 	vSchemaE = db.getvErrorPerCategory(id_cat,batch.idTestSet);

@@ -4,9 +4,8 @@
 #include <sstream>
 #include <QDate>
 
-dateerrortab::dateerrortab(int id,const BatchDetail &bd)
+dateerrortab::dateerrortab(int id):batchDetail(BatchDetail::getBatchDetail())
 {
-	batchDetail = bd;
 	id_cat = id;
 	db.setDataBaseName(batchDetail.database);  
 

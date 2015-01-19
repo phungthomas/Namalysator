@@ -21,6 +21,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
 #include <QtGui/QScrollArea>
+#include <QtGui/QSpinBox>
 #include <QtGui/QTreeWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -32,11 +33,14 @@ class Ui_w_structview
 public:
     QVBoxLayout *verticalLayout_2;
     QLabel *label;
+    QScrollArea *bookW;
+    QWidget *scrollAreaWidgetContents_2;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_6;
     QRadioButton *rbSampling;
     QRadioButton *rbCalendar;
+    QRadioButton *rbList;
     QHBoxLayout *horizontalLayout_5;
     QPushButton *btnUndo;
     QPushButton *btnChecked;
@@ -47,9 +51,10 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_3;
     QPushButton *btnZoomIn;
+    QPushButton *zoomNormal;
     QPushButton *btnZoomOut;
     QPushButton *btnPrevious;
-    QLabel *lblPage;
+    QSpinBox *lblPage;
     QLabel *label_2;
     QLabel *lblPageEnd;
     QPushButton *btnNext;
@@ -73,7 +78,7 @@ public:
     {
         if (w_structview->objectName().isEmpty())
             w_structview->setObjectName(QString::fromUtf8("w_structview"));
-        w_structview->resize(1218, 877);
+        w_structview->resize(1217, 900);
         verticalLayout_2 = new QVBoxLayout(w_structview);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         label = new QLabel(w_structview);
@@ -85,6 +90,18 @@ public:
         label->setSizePolicy(sizePolicy);
 
         verticalLayout_2->addWidget(label);
+
+        bookW = new QScrollArea(w_structview);
+        bookW->setObjectName(QString::fromUtf8("bookW"));
+        bookW->setMinimumSize(QSize(0, 180));
+        bookW->setMaximumSize(QSize(16777215, 180));
+        bookW->setWidgetResizable(true);
+        scrollAreaWidgetContents_2 = new QWidget();
+        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 1197, 178));
+        bookW->setWidget(scrollAreaWidgetContents_2);
+
+        verticalLayout_2->addWidget(bookW);
 
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
@@ -102,10 +119,16 @@ public:
 
         rbCalendar = new QRadioButton(w_structview);
         rbCalendar->setObjectName(QString::fromUtf8("rbCalendar"));
-        rbCalendar->setMinimumSize(QSize(150, 0));
+        rbCalendar->setMinimumSize(QSize(0, 0));
         rbCalendar->setMaximumSize(QSize(150, 16777215));
 
         horizontalLayout_6->addWidget(rbCalendar);
+
+        rbList = new QRadioButton(w_structview);
+        rbList->setObjectName(QString::fromUtf8("rbList"));
+        rbList->setMaximumSize(QSize(150, 16777215));
+
+        horizontalLayout_6->addWidget(rbList);
 
 
         verticalLayout_3->addLayout(horizontalLayout_6);
@@ -191,6 +214,11 @@ public:
 
         horizontalLayout_3->addWidget(btnZoomIn);
 
+        zoomNormal = new QPushButton(w_structview);
+        zoomNormal->setObjectName(QString::fromUtf8("zoomNormal"));
+
+        horizontalLayout_3->addWidget(zoomNormal);
+
         btnZoomOut = new QPushButton(w_structview);
         btnZoomOut->setObjectName(QString::fromUtf8("btnZoomOut"));
 
@@ -202,10 +230,8 @@ public:
 
         horizontalLayout_3->addWidget(btnPrevious);
 
-        lblPage = new QLabel(w_structview);
+        lblPage = new QSpinBox(w_structview);
         lblPage->setObjectName(QString::fromUtf8("lblPage"));
-        lblPage->setMinimumSize(QSize(0, 16));
-        lblPage->setFrameShape(QFrame::Box);
 
         horizontalLayout_3->addWidget(lblPage);
 
@@ -337,12 +363,13 @@ public:
         label->setText(QApplication::translate("w_structview", "Please select calendar entry for Issue", 0, QApplication::UnicodeUTF8));
         rbSampling->setText(QApplication::translate("w_structview", "Sampling View", 0, QApplication::UnicodeUTF8));
         rbCalendar->setText(QApplication::translate("w_structview", "Calendar View", 0, QApplication::UnicodeUTF8));
+        rbList->setText(QApplication::translate("w_structview", "List View", 0, QApplication::UnicodeUTF8));
         btnUndo->setText(QApplication::translate("w_structview", "Undo", 0, QApplication::UnicodeUTF8));
         btnChecked->setText(QApplication::translate("w_structview", "Checked", 0, QApplication::UnicodeUTF8));
         btnZoomIn->setText(QApplication::translate("w_structview", "Zoom In", 0, QApplication::UnicodeUTF8));
+        zoomNormal->setText(QApplication::translate("w_structview", "100%", 0, QApplication::UnicodeUTF8));
         btnZoomOut->setText(QApplication::translate("w_structview", "Zoom Out", 0, QApplication::UnicodeUTF8));
         btnPrevious->setText(QApplication::translate("w_structview", "<", 0, QApplication::UnicodeUTF8));
-        lblPage->setText(QString());
         label_2->setText(QApplication::translate("w_structview", "  /", 0, QApplication::UnicodeUTF8));
         lblPageEnd->setText(QString());
         btnNext->setText(QApplication::translate("w_structview", ">", 0, QApplication::UnicodeUTF8));

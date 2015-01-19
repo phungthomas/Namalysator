@@ -22,7 +22,7 @@ public:
     explicit w_calendar(QWidget *parent = 0);
     virtual ~w_calendar();
     
-     void setBatchDetail(const BatchDetail &d);
+     void setBatchDetail();
      void fillcalendar();
      void setMapComment();
        
@@ -47,7 +47,7 @@ private:
     QListWidgetItem *lst;
     QDate dateComment;
     dbrequest db;
-    BatchDetail batchdetail;
+    //BatchDetail batchdetail;
     MetsFile mets;
 	void clearGroupBox();
 	int getLastDayOfMonth(int month,int year);

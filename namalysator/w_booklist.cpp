@@ -1,6 +1,6 @@
 #include "w_booklist.h"
 
-w_booklist::w_booklist(QWidget *parent){
+w_booklist::w_booklist(dbrequest & _db,QWidget *parent):db(_db),QWidget(parent){
 	init();
 }
 

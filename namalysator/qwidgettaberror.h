@@ -19,7 +19,7 @@ class tabErrors : public QWidget
 	Q_OBJECT
 
 	public :
-		tabErrors(int id_cat,const BatchDetail &batch);
+		tabErrors(int id_cat,BatchDetail &batch);
 		int getSizeVError();
 		int id_cat;
 		QPlainTextEdit *plainTextEdit;
@@ -28,7 +28,7 @@ class tabErrors : public QWidget
 		QTableWidgetItem *newItem;
 		QTableWidget *table;
 		std::vector<MetsError> vSchemaE;
-		BatchDetail batch;
+		BatchDetail& batch;
 		void fillCombo(int id_cat,const BatchDetail &batchDetail);
 		QComboBox *comboYear;
 		QComboBox *comboError;		

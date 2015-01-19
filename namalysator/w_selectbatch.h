@@ -35,7 +35,7 @@ private :
     std::vector<Inventaire> vInventaire ;   
     dbrequest db; 
     dbrequest dbInventaire; 
-    BatchDetail batch;
+    BatchDetail& batch;
     Inventaire inv;   
     
  protected slots:

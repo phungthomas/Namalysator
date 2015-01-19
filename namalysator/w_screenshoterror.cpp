@@ -71,12 +71,12 @@ void w_screenshoterror::fillComboBoxErrortype()
 }
 
 
-void w_screenshoterror::setBatchDetailImage(const BatchDetail &bd,QPixmap pix,MetsFile m,w_structview *w)
+void w_screenshoterror::setBatchDetailImage(QPixmap pix,MetsFile m,w_structview *w)
 {
 	structView = w;
-	batchDetail = bd;
+	//batchDetail = bd;
 	mets = m;	
-	db.setDataBaseName(bd.database);  
+	db.setDataBaseName(BatchDetail::getBatchDetail().database);  
 	m_ui->comboBoxErrorType->clear();
 	fillComboBoxErrortype();
 	originalPixmap = pix;

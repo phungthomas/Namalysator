@@ -22,7 +22,7 @@ public:
     explicit w_structview(QWidget *parent = 0);
     virtual ~w_structview();
 	
-	 void setBatchDetail(const BatchDetail &d);
+	 void setBatchDetail();
 	 void fillListErrors();
 	 void setCurrentMets(MetsFile mets);
 protected:
@@ -33,7 +33,7 @@ private:
 	logstruct_colors	m_colors;
     std::map<int,MetsFile> mapMets;
     QListWidgetItem *lst;	   
-    BatchDetail batch;
+    //BatchDetail batch;
     dbrequest db;
     int currentPage;
     int maxPage;

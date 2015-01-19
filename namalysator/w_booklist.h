@@ -4,18 +4,20 @@
 #include <QtGui>
 #include "bookModel.h"
 #include "bookColumn.h"
+#include "dbrequest.h"
 
 class w_booklist : public QWidget
 {
     Q_OBJECT
 
 public:
-	w_booklist(QWidget *parent = 0);
+	w_booklist(dbrequest&,QWidget *parent = 0);
 	~w_booklist();
 
 private:
 	void init();
 
+	dbrequest& db;
 	QVBoxLayout* _mainLayout;
 	QTableView *bookView;
 	bookModel *_bookModel;

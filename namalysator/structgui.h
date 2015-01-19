@@ -4,6 +4,7 @@
 #include <QDate>
 #include "../common_files/struct.h"
 
+
 /**
 * A test class. A more elaborate class description.
 */
@@ -92,6 +93,10 @@ struct MetsError
 //TODO comment
 class BatchDetail
 {
+private:
+	BatchDetail(){};
+	//dbrequest db;
+	static BatchDetail bd;
 public:
 	Inventaire inventaire;
 	std::string path; // Path of disk	
@@ -112,10 +117,13 @@ public:
 	std::vector<MetsFile> *getMetsByDate(QDate date);
 	bool getMetsByDate(QDate date, std::vector<MetsFile> &result);
 
-private:
-//	std::map<int, MetsFile> mapMets;  // map Mets on id of Mets
-//	std::map<QDate, std::vector<int> > mapMetsDate;   // map vector of Mets on a date to the ID in mapMets
-//	std::map<int ,std::pair<int, int> > mapYearCount;   // map a pair of total Mets per year - total supplement per year on a year
+	static BatchDetail& getBatchDetail(){return bd;};
+	/*
+	dbrequest& getDataBase(){
+		db.setDataBaseName(database);
+		return db;
+	};
+	*/
 };
 
 struct DateComment

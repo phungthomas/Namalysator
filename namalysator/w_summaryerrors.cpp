@@ -27,19 +27,18 @@ void w_summaryerrors::changeEvent(QEvent *e)
 }
 
 //set detail of the batch
-void w_summaryerrors::setBatchDetail(const BatchDetail &d)
+void w_summaryerrors::setBatchDetail()
 { 	
-	batch = d;  
-	db.setDataBaseName(batch.database);	
+	db.setDataBaseName(BatchDetail::getBatchDetail().database);	
 	loadTableSummary();
-	loadYear(m_ui->tableYear,batch);
+	loadYear(m_ui->tableYear,BatchDetail::getBatchDetail());
 	loadTextbox();
 }
 
 /// <summary>load table with summary of the errors </summary>
 void w_summaryerrors::loadTableSummary()
 {
-	std::vector<ErrorSummary> vEs = db.getvErrorSummary(batch.idTestSet);	
+	std::vector<ErrorSummary> vEs = db.getvErrorSummary(BatchDetail::getBatchDetail().idTestSet);	
 	m_ui->tableSummary->setColumnCount(6);
 	m_ui->tableSummary->setRowCount(vEs.size());
 	labels  << tr("Severity") << tr("Error Category") << tr("Count")<< tr("Nb. of issues affected")<< tr("Percentage") << tr("Details on sheet");// << tr("Number of issues");
@@ -62,7 +61,7 @@ void w_summaryerrors::loadTableSummary()
 	QTableWidgetItem *newItem;
 	for(size_t i=0;i < vEs.size();i++)
 	{
-		int countErrorMets = db.getcountMetsErrorForEachErrorType(batch.idTestSet,vEs[i].errorType.id);
+		int countErrorMets = db.getcountMetsErrorForEachErrorType(BatchDetail::getBatchDetail().idTestSet,vEs[i].errorType.id);
 		newItem = new QTableWidgetItem(vEs[i].errorType.severity.gravity.c_str(),0);		
 		newItem->setTextAlignment(Qt::AlignCenter);
 		m_ui->tableSummary->setItem(i, 0, newItem);
@@ -76,7 +75,7 @@ void w_summaryerrors::loadTableSummary()
 		newItem->setTextAlignment(Qt::AlignCenter);	
 		m_ui->tableSummary->setItem(i, 3, newItem);		
 
-		float percentage = float(countErrorMets) / float(batch.count) *100 ;
+		float percentage = float(countErrorMets) / float(BatchDetail::getBatchDetail().count) *100 ;
 		char tmp[20];
 		sprintf_s(tmp, "%.2f", percentage);			
 		newItem = new QTableWidgetItem(tmp,4);	
@@ -91,15 +90,15 @@ void w_summaryerrors::loadTableSummary()
 void w_summaryerrors::loadTextbox()
 {
 	QString ss;
-	m_ui->lbSummary->setText(batch.batchName.c_str());	
-	m_ui->lbDate->setText(batch.testDate.c_str());
-	m_ui->lbTotal->setText(ss.setNum(batch.count));
-	m_ui->lbTotal2->setText(ss.setNum(batch.count));
-	m_ui->lbTitles->setText(ss.setNum(db.getcountTitleCheck(batch.idTestSet)));	
-	int error = db.getcountMetsError(batch.idTestSet);
-	int correct = batch.count - error;
+	m_ui->lbSummary->setText(BatchDetail::getBatchDetail().batchName.c_str());	
+	m_ui->lbDate->setText(BatchDetail::getBatchDetail().testDate.c_str());
+	m_ui->lbTotal->setText(ss.setNum(BatchDetail::getBatchDetail().count));
+	m_ui->lbTotal2->setText(ss.setNum(BatchDetail::getBatchDetail().count));
+	m_ui->lbTitles->setText(ss.setNum(db.getcountTitleCheck(BatchDetail::getBatchDetail().idTestSet)));	
+	int error = db.getcountMetsError(BatchDetail::getBatchDetail().idTestSet);
+	int correct = BatchDetail::getBatchDetail().count - error;
 	m_ui->lbCorrectIssues->setText(ss.setNum(correct));	
-	float percent = float(correct) / float(batch.count) * 100;
+	float percent = float(correct) / float(BatchDetail::getBatchDetail().count) * 100;
 	char tmp[20];
 	sprintf_s(tmp, "%.2f", percent);
 	m_ui->lbPercent->setText(tmp);	

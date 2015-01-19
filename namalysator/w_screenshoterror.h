@@ -20,14 +20,14 @@ public:
     virtual ~w_screenshoterror();
     
     //! set batchdetail + current image to show errors. 
-	void setBatchDetailImage(const BatchDetail &bd,QPixmap pix,MetsFile mets,w_structview *w);	
+	void setBatchDetailImage(QPixmap pix,MetsFile mets,w_structview *w);	
 protected:
     virtual void changeEvent(QEvent *e);
 
 private:
     Ui::w_screenshoterror *m_ui;
     w_structview *structView;
-    BatchDetail batchDetail;
+    //BatchDetail batchDetail;
     MetsFile mets;
     dbrequest db;
     QPixmap pixmap,originalPixmap;

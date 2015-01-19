@@ -57,10 +57,10 @@ void w_titlecheck::changeEvent(QEvent *e)
 }
 
 //!set details of the batch
-void w_titlecheck::setBatchDetail(const BatchDetail &d)
+void w_titlecheck::setBatchDetail()
 { 	
-	batchdetail = d; 
-	db.setDataBaseName(batchdetail.database);  
+	//batchdetail = d; 
+	db.setDataBaseName(BatchDetail::getBatchDetail().database);  
 }
 
 void w_titlecheck::createArticle()
@@ -138,14 +138,14 @@ void w_titlecheck::checktitle()
 	std::string currentAlto="";
 	std::string currentTif="";
 
-	vTitle = db.getvTitle(batchdetail.idTestSet);
+	vTitle = db.getvTitle(BatchDetail::getBatchDetail().idTestSet);
 	m_ui->progressBar->setRange(0,100);
 	
 	 for (size_t ij = 0;ij < vTitle.size(); ij++)
     {	
 		Title t = vTitle[ij];	
 		MetsFile mets = vTitle[ij].mets;
-		std::string pathMets =  batchdetail.path + mets.path + "/" + mets.fileName;
+		std::string pathMets =  BatchDetail::getBatchDetail().path + mets.path + "/" + mets.fileName;
 		Item itemtree;
 		Item *treeContents;
 	    
@@ -164,7 +164,7 @@ void w_titlecheck::checktitle()
 		for(std::map<int,LinkedFiles>::iterator it = mapAltoPath.begin(); it != mapAltoPath.end(); it++)
 		{
 			int dpi = mapTiffPath[it->first].dpi;
-			std::string path = batchdetail.path +"/"+ t.mets.path + it->second.fileName;
+			std::string path = BatchDetail::getBatchDetail().path +"/"+ t.mets.path + it->second.fileName;
 			altoparser ap(path,it->second,&mapAlto,dpi);	
 			if (ParseDocument(path.c_str(),&ap)!=0)	
 			{						
@@ -197,7 +197,7 @@ void w_titlecheck::checktitle()
 							currentTif = mapTiffPath.find(it->first)->second.fileName;
 							currentAlto = it->second.fileId;
 					
-							path = batchdetail.path + mets.path + currentTif;							
+							path = BatchDetail::getBatchDetail().path + mets.path + currentTif;							
 							found =true;
 							originImage.load(path.c_str());	
 							break;
@@ -289,7 +289,7 @@ void w_titlecheck::save()
 
 void w_titlecheck::updateSummaryTitleError()
 {
-	std::pair<int,int> pair = db.getSumCharacter(batchdetail.idTestSet);
+	std::pair<int,int> pair = db.getSumCharacter(BatchDetail::getBatchDetail().idTestSet);
 	QString ss;
 	m_ui->lbTotal->setText(ss.setNum(pair.first));
 	m_ui->lbError->setText(ss.setNum(pair.second));
@@ -345,7 +345,7 @@ void w_titlecheck::exportData()
 	hc->open_document(message);
 	std::string currentAlto="";
 	std::string currentTif="";
-	std::vector<Title> vTitle = db.getvTitle(batchdetail.idTestSet);
+	std::vector<Title> vTitle = db.getvTitle(BatchDetail::getBatchDetail().idTestSet);
 
 	for (size_t ij = 0;ij < vTitle.size(); ij++)
     {	
@@ -354,7 +354,7 @@ void w_titlecheck::exportData()
 		vectItem.clear();
 		const Title &t = vTitle[ij];	
 		const MetsFile &mets = vTitle[ij].mets;
-		std::string pathMets =  batchdetail.path + mets.path + "/" + mets.fileName;
+		std::string pathMets =  BatchDetail::getBatchDetail().path + mets.path + "/" + mets.fileName;
 		Item itemtree;
 		Item *treeContents;
 
@@ -372,7 +372,7 @@ void w_titlecheck::exportData()
 		for(std::map<int,LinkedFiles>::iterator it = mapAltoPath.begin(); it != mapAltoPath.end(); it++)
 		{
 			int dpi = mapTiffPath[it->first].dpi;
-			std::string path = batchdetail.path +"/"+ t.mets.path + it->second.fileName;
+			std::string path = BatchDetail::getBatchDetail().path +"/"+ t.mets.path + it->second.fileName;
 			altoparser ap(path,it->second, &mapAlto, dpi);	
 			if (ParseDocument(path.c_str(),&ap)!=0)
 			{
@@ -397,7 +397,7 @@ void w_titlecheck::exportData()
 					{
 						currentTif = mapTiffPath.find(it->first)->second.fileName;
 						currentAlto = it->second.fileId;
-						path = batchdetail.path + mets.path + currentTif;
+						path = BatchDetail::getBatchDetail().path + mets.path + currentTif;
 						found = true;
 						break;
 					}

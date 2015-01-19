@@ -10,7 +10,7 @@
 #include "w_inventaire.h"
 #include "w_stat.h"
 
-w_selectBatch::w_selectBatch(QWidget *parent) :
+w_selectBatch::w_selectBatch(QWidget *parent) :batch(BatchDetail::getBatchDetail()),
     QWidget(parent),
     m_ui(new Ui::w_selectBatch)
 {
@@ -73,7 +73,7 @@ void w_selectBatch::fillItemInventaire()
 }
 void w_selectBatch::getMets(QListWidgetItem* item)
 {	
-	batch = db.getBatch(item->type());	
+	batch = db.getBatch(BatchDetail::getBatchDetail(),item->type());	
 	fillBatchDetail();
 }
 
@@ -116,7 +116,7 @@ void w_selectBatch::getListDate(QString name)
 	{	
 		QListWidgetItem *lst;
 		lst =new QListWidgetItem(v[i].second.c_str(),  m_ui->listDateTestset,v[i].first);
-		batch = db.getBatch(v[i].first);
+		batch = db.getBatch(BatchDetail::getBatchDetail(),v[i].first);
 		fillBatchDetail();
 		m_ui->listDateTestset->setItemSelected(lst,true);
 	}		
@@ -141,8 +141,8 @@ void w_selectBatch::valider()
 	if (inputDisk() == true)
 	{		
 		w_main *main = new w_main();
-		std::string s = batch.batchName + " on " + batch.testDate;		
-		main->setBatchDetail(batch);	
+		std::string s = BatchDetail::getBatchDetail().batchName + " on " + batch.testDate;		
+		main->setBatchDetail();	
 		main->setWindowTitle(s.c_str());
 		main->resize(1050,910);		
 		main->show();			

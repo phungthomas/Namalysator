@@ -23,14 +23,13 @@ class w_main : public QMainWindow {
 public:
     explicit w_main(QWidget *parent = 0);
     virtual ~w_main();    
-	void setBatchDetail(const BatchDetail &d);
+	void setBatchDetail();
 
 protected:
     virtual void changeEvent(QEvent *e);
 
 private:
     Ui::w_main *m_ui;
-    BatchDetail batch;   
     QAction *openAct;
 	QAction *modeBookAct;
 	QAction *openErrorAction;

@@ -14,7 +14,7 @@ class dateerrortab : public QWidget
 	Q_OBJECT
 
 	public :
-		dateerrortab(int id_cat, const BatchDetail &batchDetail);
+		dateerrortab(int id_cat);
 		int getSizeVError();
 		int id_cat;
 		
@@ -24,7 +24,7 @@ class dateerrortab : public QWidget
 		QTableWidget *table;
 		std::vector<MetsError> vSchemaE;
 		std::vector<DateError> vDateError;
-		BatchDetail batchDetail;
+		BatchDetail& batchDetail;
 		void fillCombo(int id_cat,const BatchDetail &batchDetail);
 		QComboBox *comboYear;
 		QComboBox *comboError;

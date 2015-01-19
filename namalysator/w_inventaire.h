@@ -19,12 +19,12 @@ class w_inventaire : public QWidget
 public:
     w_inventaire(QWidget *parent = 0);
     ~w_inventaire();
-	void setBatchDetail(const BatchDetail &d);
+	void setBatchDetail();
 private:
     Ui::w_inventaire *ui;  	
     dbrequest db;
     dbrequest dbInventaire;
-    BatchDetail batch;
+    //BatchDetail batch;
     MetsFile mets,currentMets;
     QStringList labels,labelInventaire,labelInventaireTotal;   
     QTableWidget *widgetInventaire;

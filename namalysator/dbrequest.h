@@ -53,7 +53,7 @@ class dbrequest
 		// get a vector of  all tests from selected Batch
 		std::vector<std::pair<int,std::string> > getvDateTestset(std::string batch);
 		//return the details from the selected Batch 
-		BatchDetail getBatch(int id_testset);
+		void getBatch(BatchDetail& bdetail,int id_testset);
 		// return the parameters of verified tests
 		Parameters getParameterVerifiers(int id_testset);
 	/// <summary>getTestset id's of selected batch</summary>

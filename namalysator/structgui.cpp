@@ -17,6 +17,8 @@ MetsFile *BatchDetail::getMetsByID(int id)
 	}
 }
 
+BatchDetail BatchDetail::bd ;
+
 bool BatchDetail::getMetsByID(int id, MetsFile &result)
 {
 	dbrequest db;

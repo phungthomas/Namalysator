@@ -41,7 +41,7 @@ w_structview::w_structview(QWidget *parent) :
     m_ui->btnStructure->setVisible(false);
 	viewCalendar();
 
-	bookList = new w_booklist();
+	bookList = new w_booklist(db);
 	m_ui->bookW->setWidget(bookList);
 	m_ui->bookW->setWidgetResizable(true);
 };
@@ -79,15 +79,15 @@ w_structview::~w_structview()
 }
 
 //set detail of the batch
-void w_structview::setBatchDetail(const BatchDetail &d)
+void w_structview::setBatchDetail()
 { 	
-	batch = d; 
-	db.setDataBaseName(batch.database);  
+	//batch = d; 
+	db.setDataBaseName(BatchDetail::getBatchDetail().database);  
 	m_ui->calendarWidget->setVisible(true);
 	m_ui->listMets->setVisible(true);
 	m_ui->rbCalendar->setChecked(true);	
 	
-	initCalendarWidget(m_ui->calendarWidget,batch);
+	initCalendarWidget(m_ui->calendarWidget,BatchDetail::getBatchDetail());
 	fillListSamplingStructure();	
 
 }
@@ -104,7 +104,7 @@ void w_structview::getDate(QDate search)
 {	
     clear();    
 	bool findfirst = false;
-	std::vector<MetsFile> *MetsOnDate = batch.getMetsByDate(search);
+	std::vector<MetsFile> *MetsOnDate = BatchDetail::getBatchDetail().getMetsByDate(search);
 	if (MetsOnDate)	{
 		for (std::vector<MetsFile>::iterator itMets = MetsOnDate->begin(); itMets != MetsOnDate->end(); itMets++)
 		{
@@ -132,7 +132,7 @@ void w_structview::getDate(QDate search)
 //! event when click on the listItem
  void w_structview::getIdMets(QListWidgetItem* item )
 {
-	if (batch.getMetsByID(item->type(), mets)) {
+	if (BatchDetail::getBatchDetail().getMetsByID(item->type(), mets)) {
 		mapTiffPath = db.getMapLinkedFiles(mets.idMets,"IMGGRP");
 		mapAltoPath = db.getMapLinkedFiles(mets.idMets,"ALTOGRP");
 		currentPage=1;
@@ -152,7 +152,7 @@ void w_structview::showCurrentPage()
 	
 	if (mapTiffPath.find(currentPage)!= mapTiffPath.end())
 	{		
-		std::string path = batch.path + mets.path + mapTiffPath.find(currentPage)->second.fileName;
+		std::string path = BatchDetail::getBatchDetail().path + mets.path + mapTiffPath.find(currentPage)->second.fileName;
 		originalImage.load(path.c_str());			
 		image = originalImage.scaled(originalImage.width()/divImage,originalImage.height()/divImage);
 		originalPixmap = QPixmap::fromImage(image);		
@@ -301,7 +301,7 @@ void w_structview::zoomIn()
  //! contents and get the block coordiantes for painting on the issue.
 void w_structview::metsAltoParser()
 {		
-	std::string pathMets =  batch.path + "/" + mets.path + "/" + mets.fileName;
+	std::string pathMets =  BatchDetail::getBatchDetail().path + "/" + mets.path + "/" + mets.fileName;
     Item itemtree;
 	metsParser p(pathMets,&itemtree);	
 	ParseDocument(pathMets.c_str(),&p);	
@@ -310,7 +310,7 @@ void w_structview::metsAltoParser()
 	for(std::map<int,LinkedFiles>::iterator it = mapAltoPath.begin(); it != mapAltoPath.end(); it++)
 	{
 		int dpi = mapTiffPath[it->first].dpi;
-		std::string path = batch.path +"/"+ mets.path + it->second.fileName;
+		std::string path = BatchDetail::getBatchDetail().path +"/"+ mets.path + it->second.fileName;
 		altoparser ap(path,it->second,&mapAlto,dpi);	
 		if (ParseDocument(path.c_str(),&ap)!=0)	
 		{						
@@ -633,7 +633,7 @@ void w_structview::openErrorScreen()
 {
 	QPixmap xmap = QPixmap::grabWidget(this,0,35,this->width(),this->height()-160);
 	w_screenshoterror *ws = new w_screenshoterror();
-	ws->setBatchDetailImage(batch,xmap,mets,this);
+	ws->setBatchDetailImage(xmap,mets,this);
 	ws->resize(1200,910);
 	ws->show();	
 }
@@ -668,7 +668,7 @@ void w_structview::clear()
 void w_structview::fillListSamplingStructure()
 {	
 	m_ui->listSampling->clear();
-	 vListSampling = db.getListSamplingStructure(batch.idTestSet);
+	 vListSampling = db.getListSamplingStructure(BatchDetail::getBatchDetail().idTestSet);
 	
 	for(size_t i=0;i <vListSampling.size(); i++)
 	{		
@@ -794,5 +794,5 @@ void w_structview::viewHtml()
 
 void w_structview::viewMetsFile()
 {
-	ShellExecuteA(NULL, "open", (batch.path + "/" + mets.path + "/" + mets.fileName).c_str(), NULL, NULL, SW_SHOWNORMAL);
+	ShellExecuteA(NULL, "open", (BatchDetail::getBatchDetail().path + "/" + mets.path + "/" + mets.fileName).c_str(), NULL, NULL, SW_SHOWNORMAL);
 }

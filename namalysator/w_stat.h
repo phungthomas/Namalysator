@@ -22,7 +22,7 @@ public:
 private:
     Ui::w_stat *ui;
     dbrequest db;
-    BatchDetail batchdetail;
+    //BatchDetail batchdetail;
     MetsFile mets;
     QStringList labels;
     void load();

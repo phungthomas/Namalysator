@@ -183,9 +183,8 @@ std::vector<std::pair<int,std::string> > dbrequest::getvDateTestset(std::string 
 	return vect;
 }
 
-BatchDetail dbrequest::getBatch(int id_testset)
+void  dbrequest::getBatch(BatchDetail& bdetail,int id_testset)
 {	
-	BatchDetail bdetail;
 	ConnectionDB conn = g_pool.getConnection(databaseName);
     sqlite3_stmt *pStmt;
 	int rc;		

@@ -30,12 +30,11 @@ w_disk::~w_disk()
 }
 /// <summary>set detail of the batch</summary>
 /// <param name="d">Batch</param>
-void w_disk::setBatchDetail(const BatchDetail &d)
+void w_disk::setBatchDetail()
 { 
-	batch = d; 	
-	db.setDataBaseName(batch.database);
-	loadYear(m_ui->tableYear, batch);
-	initCalendarWidget(m_ui->calendarWidget,batch);	
+	db.setDataBaseName(BatchDetail::getBatchDetail().database);
+	loadYear(m_ui->tableYear, BatchDetail::getBatchDetail());
+	initCalendarWidget(m_ui->calendarWidget,BatchDetail::getBatchDetail());	
 }
 
 void w_disk::changeEvent(QEvent *e)
@@ -64,7 +63,7 @@ void w_disk::clickDate(QDate search)
 #ifdef LOG_TIMING
 	pt.Start();
 #endif
-	if (batch.getMetsByDate(search, result)) {
+	if (BatchDetail::getBatchDetail().getMetsByDate(search, result)) {
 #ifdef LOG_TIMING
 		pt.LogTime("w_disk::clickDate - batch.getMetsByDate");
 #endif
@@ -73,7 +72,7 @@ void w_disk::clickDate(QDate search)
 			listOfMetsOnDay[it->idMets] = *it;
 
 			std::stringstream sPath;
-			sPath << batch.path << it->path;
+			sPath << BatchDetail::getBatchDetail().path << it->path;
 			lst = new QListWidgetItem(it->fileName.c_str(), m_ui->listMets, it->idMets);
 			if (findfirst == false)
 			{
@@ -129,7 +128,7 @@ void w_disk::openPath(QModelIndex index)
 bool w_disk::initHeader(const MetsFile &mets)
 {
 	std::map<int,LinkedFiles> tifPath = db.getMapLinkedFiles(mets.idMets,"IMGGRP");	
-	std::string path = batch.path  + mets.path + "" + tifPath[1].fileName;
+	std::string path = BatchDetail::getBatchDetail().path  + mets.path + "" + tifPath[1].fileName;
 	QImage image(path.c_str());	
 	if (image.isNull()) {
 		QMessageBox::information(this, tr("Header"),
@@ -176,11 +175,11 @@ void w_disk::getIdMets(QListWidgetItem* item)
 #ifdef LOG_TIMING
 	pt.Start();
 #endif
-	if (batch.getMetsByID(item->type(), mets)) {
+	if (BatchDetail::getBatchDetail().getMetsByID(item->type(), mets)) {
 #ifdef LOG_TIMING
 		pt.LogTime("w_disk::getIdMets - batch.getMetsByID");
 #endif
-		sPath << batch.path << "/" << mets.path;
+		sPath << BatchDetail::getBatchDetail().path << "/" << mets.path;
 		m_ui->treeViewMets->setModel(&model);
 #ifdef LOG_TIMING
 		pt.LogTime("w_disk::getIdMets - m_ui->treeViewMets->setModel");

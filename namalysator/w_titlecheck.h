@@ -16,7 +16,7 @@ class w_titlecheck : public QWidget {
 public:
     explicit w_titlecheck(QWidget *parent = 0);
     virtual ~w_titlecheck();
-      void setBatchDetail(const BatchDetail &d);
+      void setBatchDetail();
 
 protected:
     virtual void changeEvent(QEvent *e);
@@ -25,7 +25,7 @@ private:
     Ui::w_titlecheck *m_ui;       
 	
     dbrequest db;
-    BatchDetail batchdetail;
+    //BatchDetail batchdetail;
     std::set<std::string> to_extract;
     void createConnections();
     MetsFile mets;

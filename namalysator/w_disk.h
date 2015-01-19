@@ -22,7 +22,7 @@ class w_disk : public QWidget {
 public:
     explicit w_disk(QWidget *parent = 0);
     virtual ~w_disk();    
-    void setBatchDetail(const BatchDetail &d);
+    void setBatchDetail();
     bool initHeader(const MetsFile &mets);
     void initDetails(const MetsFile &mets);
     dbrequest db;
@@ -37,7 +37,7 @@ private:
 	QDirModel model;	
 	QListWidgetItem *lst;   
     QStringList labels;
-    BatchDetail batch;
+    //BatchDetail batch;
 	std::map<int, MetsFile> listOfMetsOnDay;
     
 private slots :

@@ -16,7 +16,7 @@ class w_summaryerrors : public QWidget {
 public:
     explicit w_summaryerrors(QWidget *parent = 0);
     virtual ~w_summaryerrors();
-	 void setBatchDetail(const BatchDetail &d);
+	 void setBatchDetail();
 protected:
     virtual void changeEvent(QEvent *e);
 
@@ -24,7 +24,7 @@ private:
     Ui::w_summaryerrors *m_ui;
     QStringList labels;
     QTableWidgetItem *newItem;
-    BatchDetail batch;    
+    //BatchDetail batch;    
     void loadTableSummary();
     void loadTextbox();
     dbrequest db;

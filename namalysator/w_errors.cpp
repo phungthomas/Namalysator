@@ -32,9 +32,8 @@ void w_errors::changeEvent(QEvent *e)
     }
 }
 //! set detail of the batch
-void w_errors::setBatchDetail(const BatchDetail &d)
+void w_errors::setBatchDetail()
 { 	
-	batchdetail = d; 
 	getTaberrors();
 }
 
@@ -42,19 +41,19 @@ void w_errors::getTaberrors()
 {
 	w_summaryerrors *w_s = new w_summaryerrors();
 	dbrequest db;
-	db.setDataBaseName(batchdetail.database);
-	w_s->setBatchDetail(batchdetail);
+	db.setDataBaseName(BatchDetail::getBatchDetail().database);
+	w_s->setBatchDetail();
 	m_ui->scrollAreaErrorTable->setWidget(w_s);	
 	std::vector<ErrorCategory> vCategory = db.getErrorCategory(); 	
 	for (size_t i=0; i< vCategory.size();i++)
 	{
-		tabErrors *e = new tabErrors(vCategory[i].id_category,batchdetail);	
+		tabErrors *e = new tabErrors(vCategory[i].id_category,BatchDetail::getBatchDetail());	
 		if (e->getSizeVError() !=0)
 		{			
 			m_ui->tabWidget->insertTab(i+1,e,vCategory[i].name.c_str());		
 		}
 	}
-	dateerrortab *d = new dateerrortab(6,batchdetail);		
+	dateerrortab *d = new dateerrortab(6);		
 	if( d->getSizeVError() !=0)
 		m_ui->tabWidget->addTab(d,"DATES");	
 }
@@ -65,6 +64,6 @@ void w_errors::exportExcel()
      if (!fileName.isEmpty()) 
      {			
 		 exportdata *data = new exportdata();
-		 data->exportErrors(batchdetail,fileName.toStdString());
+		 data->exportErrors(BatchDetail::getBatchDetail(),fileName.toStdString());
 	}  	
 }

@@ -40,7 +40,7 @@ w_calendar::~w_calendar()
 
 void w_calendar::fillcomboBoxYear()
 {	
-	std::map<int,std::pair<int,int>>mapYear  = db.getSumMetsYear(batchdetail.idTestSet);
+	std::map<int,std::pair<int,int>>mapYear  = db.getSumMetsYear(BatchDetail::getBatchDetail().idTestSet);
 	for(std::map<int,std::pair<int,int>>::iterator it = mapYear.begin(); it != mapYear.end(); it++)
 	{
 		QString s;		
@@ -50,13 +50,12 @@ void w_calendar::fillcomboBoxYear()
 
 void w_calendar::setMapComment()
 {
-	mapComment = db.getDateComment(batchdetail.idTestSet);
+	mapComment = db.getDateComment(BatchDetail::getBatchDetail().idTestSet);
 } 
 
-void w_calendar::setBatchDetail(const BatchDetail &d)
-{ 
-	batchdetail = d; 	
-	db.setDataBaseName(batchdetail.database);  	
+void w_calendar::setBatchDetail()
+{  	
+	db.setDataBaseName(BatchDetail::getBatchDetail().database);  	
 	fillcomboBoxYear();
 	setMapComment();
 	setRemarks();
@@ -76,7 +75,7 @@ void w_calendar::changeEvent(QEvent *e)
 
 void w_calendar::fillcalendar(int month,int year,QCalendarWidget *calendar)
 {	
-	std::vector<QDate> v = db.getMetsDateInMonth(batchdetail.idTestSet, year, month);
+	std::vector<QDate> v = db.getMetsDateInMonth(BatchDetail::getBatchDetail().idTestSet, year, month);
 	calendar->setEnabled(true);
 	for(size_t j=0;j< v.size();j++)
 	{
@@ -94,14 +93,14 @@ void w_calendar::fillcalendar(int month,int year,QCalendarWidget *calendar)
 void w_calendar::viewMets()
 {
 	std::string link;		
-	link = batchdetail.path + mets.path; // Open directory  + "/" + mets.fileName ;		
+	link = BatchDetail::getBatchDetail().path + mets.path; // Open directory  + "/" + mets.fileName ;		
 	ShellExecuteA(NULL, "open",link.c_str(), NULL, NULL, SW_SHOWNORMAL);
 }
 
 void w_calendar::showMissingIssue()
 {
 	return;
-	vDateError = db.getvDateError(batchdetail.idTestSet);
+	vDateError = db.getvDateError(BatchDetail::getBatchDetail().idTestSet);
 	
 	for(size_t i=0;i< vDateError.size();i++)
 	{	
@@ -171,7 +170,7 @@ void w_calendar::setCalendar(int year)
 	QDate minDate;
 	QDate maxDate;
 
-	minDate = minDate.fromString(batchdetail.minDate.c_str(), "yyyy-MM-dd");
+	minDate = minDate.fromString(BatchDetail::getBatchDetail().minDate.c_str(), "yyyy-MM-dd");
 	
 	for (int i=1;i< 13;i++)
 	{
@@ -222,7 +221,7 @@ return  m_ui->calendarJan;
 void w_calendar::displayHeader()
 {
 	std::map<int,LinkedFiles> tifPath = db.getMapLinkedFiles(mets.idMets,"IMGGRP");	
-	std::string path = batchdetail.path  + mets.path + "" + tifPath[1].fileName;
+	std::string path = BatchDetail::getBatchDetail().path  + mets.path + "" + tifPath[1].fileName;
 	
 	QImage image(path.c_str());
 
@@ -255,7 +254,7 @@ void w_calendar::clickDate(QDate search)
 	bool findfirst = false;
 
 	std::vector<MetsFile> result;
-	if (batchdetail.getMetsByDate(search, result)) {
+	if (BatchDetail::getBatchDetail().getMetsByDate(search, result)) {
 		for (std::vector<MetsFile>::const_iterator it = result.begin(); it != result.end(); it++) {
 			listOfMetsOnDay[it->idMets] = *it;
 			lst = new QListWidgetItem(it->fileName.c_str(), m_ui->listMets, it->idMets);	

@@ -36,7 +36,7 @@ void w_inventaire::viewIssue()
 {	
 	w_structview *view = new w_structview();	
     view->resize(1200,910);
-    view->setBatchDetail(batch);
+    view->setBatchDetail();
     view->setCurrentMets(currentMets);
     view->show();
 }
@@ -48,7 +48,7 @@ void w_inventaire::showInventaire()
 //! fill combobox of years
 void w_inventaire::fillComboYear()
 {
-	std::map<int,std::pair<int,int>> m = db.getSumMetsYear(batch.idTestSet);
+	std::map<int,std::pair<int,int>> m = db.getSumMetsYear(BatchDetail::getBatchDetail().idTestSet);
 	ui->comboYear->addItem("");
 	for (std::map<int,std::pair<int,int>>::iterator it = m.begin(); it!= m.end();it++)
 	{
@@ -302,14 +302,13 @@ void w_inventaire::fillMetsfromInventory(QTableWidget *tableInventaire)
 }
 
 	
-void w_inventaire::setBatchDetail(const BatchDetail &d)
+void w_inventaire::setBatchDetail()
 { 	
-	batch = d; 
-	db.setDataBaseName(batch.database);  		
+	db.setDataBaseName(BatchDetail::getBatchDetail().database);  		
 	fillComboYear();
-	dbInventaire.setDataBaseName(batch.databaseInv);
-	vInventaire = dbInventaire.getInventaire(batch.inventaire.id);
-	mapInventaire = dbInventaire.getMapInventaire(batch.inventaire.id);	
+	dbInventaire.setDataBaseName(BatchDetail::getBatchDetail().databaseInv);
+	vInventaire = dbInventaire.getInventaire(BatchDetail::getBatchDetail().inventaire.id);
+	mapInventaire = dbInventaire.getMapInventaire(BatchDetail::getBatchDetail().inventaire.id);	
     widgetInventaire = new  QTableWidget();
 	fillMetsfromInventory(widgetInventaire);
 	widgetInventaire->resize(1100,600);
