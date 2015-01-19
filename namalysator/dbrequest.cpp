@@ -209,7 +209,6 @@ void  dbrequest::getBatch(BatchDetail& bdetail,int id_testset)
 		}
 	}
 	sqlite3_finalize(pStmt);
-	return bdetail;
 }
 
 /// <summary>get details of a mets</summary>	

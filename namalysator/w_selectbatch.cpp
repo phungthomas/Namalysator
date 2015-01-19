@@ -73,7 +73,7 @@ void w_selectBatch::fillItemInventaire()
 }
 void w_selectBatch::getMets(QListWidgetItem* item)
 {	
-	batch = db.getBatch(BatchDetail::getBatchDetail(),item->type());	
+	db.getBatch(BatchDetail::getBatchDetail(),item->type());	
 	fillBatchDetail();
 }
 
@@ -116,7 +116,7 @@ void w_selectBatch::getListDate(QString name)
 	{	
 		QListWidgetItem *lst;
 		lst =new QListWidgetItem(v[i].second.c_str(),  m_ui->listDateTestset,v[i].first);
-		batch = db.getBatch(BatchDetail::getBatchDetail(),v[i].first);
+		db.getBatch(BatchDetail::getBatchDetail(),v[i].first);
 		fillBatchDetail();
 		m_ui->listDateTestset->setItemSelected(lst,true);
 	}		
