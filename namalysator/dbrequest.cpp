@@ -1838,6 +1838,36 @@ std::vector<Inventaire> dbrequest::getNameInventaire()
 
 }
 
+std::vector<std::vector<std::string> > dbrequest::getAllMets(int id_testset){
+	ConnectionDB conn = g_pool.getConnection(BatchDetail::getBatchDetail().database);	
+	sqlite3_stmt *pStmt;
+	const char *zErrMsg= 0; 
+	
+	std::stringstream clause;
+	clause << "ID_TESTSET='" << id_testset << "'" ;
+	std::string selectSql = "SELECT ID_METS, PATH, FILENAME FROM METS WHERE " + clause.str();
+	std::vector<std::vector<std::string> > v;
+
+	int rc = sqlite3_prepare_v2(conn.db,selectSql.c_str(),-1, &pStmt,&zErrMsg);	
+
+	if(rc == SQLITE_OK)
+	{	  
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{
+			std::vector<std::string> row;
+			 
+			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 0) ) );
+			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 1) ) );
+			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 2) ) );
+			
+			v.push_back(row);
+		}
+	}
+	sqlite3_finalize(pStmt);
+	return v;
+
+}
+
 std::vector<int> dbrequest::getMetsIdInPeriod(int id_testset, int year_from, int month_from, int year_to, int month_to)
 {
 	ConnectionDB conn = g_pool.getConnection(databaseName);	

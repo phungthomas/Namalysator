@@ -123,6 +123,7 @@ private:
 	 void paintAllStructure(std::string altoFile);   
 private slots :	
 	void getDate(QDate);  
+	void getIdMetsII(int);
 	void getIdMets(QListWidgetItem*);
 	void previous();
 	void next();

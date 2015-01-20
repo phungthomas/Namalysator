@@ -2,11 +2,12 @@
 #define _BOOKMODEL_H
 
 #include <QAbstractTableModel>
+#include "dbrequest.h"
 //** implement model of book to be able to developp : use by the tableview widget
 
 class bookModel : public QAbstractTableModel {
 public:
-	bookModel();
+	bookModel(dbrequest & _db,QObject *parent = 0);
 	virtual ~bookModel();
 
     virtual QModelIndex parent(const QModelIndex &child) const ;
@@ -15,8 +16,14 @@ public:
 	virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const ;
 	virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
 
-private:
 
+	virtual void init();
+
+	int idMets ( const QModelIndex &index );
+
+private:
+	dbrequest& db;
+	std::vector<std::vector<std::string> > allMets;
 };
 
 

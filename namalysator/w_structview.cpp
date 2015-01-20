@@ -23,6 +23,9 @@ w_structview::w_structview(QWidget *parent) :
 	m_colors()
 {
     m_ui->setupUi(this);
+
+	bookList = new w_booklist(db);
+	bookList ->init();
   
 	createActions();
 	createConnections();
@@ -41,7 +44,8 @@ w_structview::w_structview(QWidget *parent) :
     m_ui->btnStructure->setVisible(false);
 	viewCalendar();
 
-	bookList = new w_booklist(db);
+	
+
 	m_ui->bookW->setWidget(bookList);
 	m_ui->bookW->setWidgetResizable(true);
 };
@@ -71,6 +75,8 @@ void w_structview::createConnections()
 	connect(m_ui->btnChecked, SIGNAL(clicked()), this, SLOT(checked()));
 	connect(m_ui->btnUndo, SIGNAL(clicked()), this, SLOT(undo()));
 	connect(m_ui->btnViewMets, SIGNAL(clicked()), this, SLOT(viewMetsFile()));
+	connect(bookList, SIGNAL(metsIdSelected(int)), this, SLOT(getIdMetsII(int)));
+	
 }
 
 w_structview::~w_structview()
@@ -130,9 +136,8 @@ void w_structview::getDate(QDate search)
 }
 
 //! event when click on the listItem
- void w_structview::getIdMets(QListWidgetItem* item )
-{
-	if (BatchDetail::getBatchDetail().getMetsByID(item->type(), mets)) {
+void w_structview::getIdMetsII(int i ){
+	if (BatchDetail::getBatchDetail().getMetsByID(i, mets)) {
 		mapTiffPath = db.getMapLinkedFiles(mets.idMets,"IMGGRP");
 		mapAltoPath = db.getMapLinkedFiles(mets.idMets,"ALTOGRP");
 		currentPage=1;
@@ -145,6 +150,12 @@ void w_structview::getDate(QDate search)
 	} else {
 		// TODO ERROR HANDLING
 	}
+}
+
+
+ void w_structview::getIdMets(QListWidgetItem* item )
+{
+	getIdMetsII(item->type());
 }
 //! show the current page
 void w_structview::showCurrentPage()

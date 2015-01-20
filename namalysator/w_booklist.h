@@ -14,8 +14,17 @@ public:
 	w_booklist(dbrequest&,QWidget *parent = 0);
 	~w_booklist();
 
-private:
 	void init();
+
+public slots:
+	void onclick(const QModelIndex &);
+
+signals:
+	void metsIdSelected(int i);
+
+
+private:
+	
 
 	dbrequest& db;
 	QVBoxLayout* _mainLayout;
