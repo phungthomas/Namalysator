@@ -90,12 +90,8 @@ void w_main::booksActions()
 	{
 		fileTools->addAction(openInventaire);
 	}
-	Act = new QAction(tr("Thumb"), this);  
-	Act->setToolTip("Thumb");	
-	connect(Act, SIGNAL(triggered()), this, SLOT(openThumb()));
-	fileTools->addAction(Act);
-
-	fileTools->addAction(modeBookAct);	
+	
+	//fileTools->addAction(modeBookAct);	
 	fileTools->addAction(openSelectBatch);	 
 	fileTools->setAllowedAreas(Qt::TopToolBarArea );
 	addToolBar(Qt::TopToolBarArea, fileTools);
@@ -204,16 +200,6 @@ void w_main::openTitleCheckWindow()
 	this->setCentralWidget(titlecheck); 
 }
 
-void w_main::openThumb()
-{
-	w_thumb *widget = new  w_thumb(690,this);
-	//this->resize(1330,910);
-	widget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-	//widget->resize(this->centralWidget()->size());
-	this->setCentralWidget(widget); 
-	
-	widget->load();
-}
 
 void w_main::openSelectBatchWindow()
 { 

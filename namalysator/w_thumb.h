@@ -6,6 +6,25 @@
 #include <QScrollArea>
 #include <vector>
 #include "flowlayout.h"
+#include "structgui.h"
+
+class InternalQPushButton : public QPushButton{
+	 Q_OBJECT
+
+public:
+
+	InternalQPushButton(QWidget *parent = 0);
+	virtual ~InternalQPushButton();
+
+    int pageNb;
+public slots:
+	void onclick();
+	
+signals:
+	void clickedPageNb(int i);
+
+};
+
 
 class w_thumb : public QWidget
 {
@@ -13,16 +32,19 @@ class w_thumb : public QWidget
 
 public:
 	w_thumb(int,QWidget *parent = 0);
+	w_thumb(std::string _path, std::map<int,LinkedFiles> _listFile,QWidget *parent = 0);
 	~w_thumb();
 
 	void load();
 public slots:
 	void cancel();
 	void perform();
+	void onPage(int);
 
 signals:
 	void newText(QString);
 	void nextValue(int i);
+	void selectPage(int i);
 
 private:
 	void init();
@@ -41,7 +63,9 @@ private:
 	bool canceled; 
 	int stepi;
 	int nbPage;
-	std::vector<QPushButton*> allButton;
+	std::vector<InternalQPushButton*> allButton;
+	std::map<int,LinkedFiles> listFile;
+	std::string path; 
 };
 
 #endif

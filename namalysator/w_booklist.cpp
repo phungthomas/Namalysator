@@ -32,5 +32,11 @@ void w_booklist::init(){
 }
 
 void w_booklist::onclick(const QModelIndex & idx){
-	emit metsIdSelected( _bookModel->idMets(proxyModel->mapToSource(idx)) );
+	int metsId = _bookModel->idMets(proxyModel->mapToSource(idx));
+	if ( idx.column()  != 3 ) {
+		emit metsIdSelected( metsId );
+	} else {
+		emit metsThumb( metsId );
+		emit metsIdSelected( metsId );
+	}
 }

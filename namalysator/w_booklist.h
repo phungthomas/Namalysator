@@ -21,6 +21,7 @@ public slots:
 
 signals:
 	void metsIdSelected(int i);
+	void metsThumb(int i);
 
 
 private:

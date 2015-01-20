@@ -3,6 +3,16 @@
 #include <iomanip>
 
 
+InternalQPushButton::InternalQPushButton(QWidget *parent):QPushButton(parent){
+}
+
+InternalQPushButton::~InternalQPushButton(){
+}
+
+void InternalQPushButton::onclick(){
+	emit clickedPageNb(pageNb);
+}
+
 void w_thumb::cancel(){
 	canceled = true;
 }
@@ -28,21 +38,26 @@ void w_thumb::perform(){
 	emit nextValue(i);
 	std::stringstream ss;
 	
-    int jj=i%56;
+    // int jj=i%56;
+    
+		//ss<< "C:\\SmallTestBook\\243149\\tif\\" << std::setfill('0')<<std::setw(5)<< jj << ".tif";
 
-	ss<< "C:\\SmallTestBook\\243149\\tif\\" << std::setfill('0')<<std::setw(5)<< jj << ".tif";
-	//ss<< "E:\\tif\\" << std::setfill('0')<<std::setw(5)<< jj << ".tif";
+	ss<<path<<(listFile.find(stepi)->second).fileName;
+
 	emit newText(ss.str().c_str());
 	image.load(ss.str().c_str());
 	;
     ss<<" -> " << stepi;
 		
-	QPushButton* _but=allButton[stepi - 1];
+	InternalQPushButton* _but=allButton[stepi - 1];
+	_but ->pageNb = stepi;
 	_but ->setToolTip(ss.str().c_str());
 	_but ->setIcon(QPixmap::fromImage(image.scaled(200,200,Qt::KeepAspectRatio,
 		           Qt::SmoothTransformation /*Qt::FastTransformation*/),
 				   Qt::DiffuseAlphaDither|Qt::ColorOnly));
 	_but ->setIconSize(QSize(200,200));
+	connect(_but,SIGNAL(pressed()),_but,SLOT(onclick()));
+	connect(_but,SIGNAL(clickedPageNb(int)),this,SLOT(onPage(int)));
 
 	 QPixmapCache::clear();
 	
@@ -50,6 +65,10 @@ void w_thumb::perform(){
 		
 		
 	
+}
+
+void w_thumb::onPage(int i){
+	emit selectPage(i);
 }
 
 void w_thumb::load(){
@@ -113,9 +132,9 @@ void w_thumb::createButton(){
 	//curr = &_qvLayout;
 
 	
-	QPushButton* _but;
+	InternalQPushButton* _but;
 	for (int i = 0;i<nbPage;i++){
-		_but = new QPushButton();
+		_but = new InternalQPushButton();
 		_but ->setMinimumSize(200,200);
 		_but ->setMaximumSize(370,370);
 		_but ->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::MinimumExpanding);
@@ -138,6 +157,10 @@ void w_thumb::addInternal(QWidget * wid){
 }
 
 w_thumb::w_thumb(int nb,QWidget *parent):QWidget(parent),nbPage(nb){
+	init();
+}
+
+w_thumb::w_thumb(std::string _path,std::map<int,LinkedFiles> _listFile,QWidget *parent):listFile(_listFile),path(_path),QWidget(parent),nbPage(_listFile.size()){
 	init();
 }
 

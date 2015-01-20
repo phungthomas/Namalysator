@@ -9,7 +9,9 @@
 #include "logstruct_colors.h"
 #include "bookModel.h"
 #include "w_booklist.h"
- #include <QSortFilterProxyModel>
+#include "w_thumb.h"
+#include <QSortFilterProxyModel>
+
 
 namespace Ui {
     class w_structview;
@@ -45,6 +47,8 @@ private:
     
     QAction *zoomInAct;   
     QAction *zoomOutAct;
+
+	w_thumb *thumb ;
     
     /*********** functions  *********/
     
@@ -120,10 +124,12 @@ private:
 	
 	void construct_page2blocks();
 	void construct_page2blocks_recursive(const std::string &current_type, Item *item);
-	 void paintAllStructure(std::string altoFile);   
+	 void paintAllStructure(std::string altoFile);
+
 private slots :	
 	void getDate(QDate);  
 	void getIdMetsII(int);
+	void showThumb(int);
 	void getIdMets(QListWidgetItem*);
 	void previous();
 	void next();

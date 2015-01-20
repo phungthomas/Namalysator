@@ -56,7 +56,6 @@ private slots:
 		void openSelectBatchWindow();    
 		void openInventaireWindow();
 		void openBookBrowser();
-		void openThumb();
 };
 
 #endif // W_MAIN_H

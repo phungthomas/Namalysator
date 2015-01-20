@@ -26,6 +26,10 @@ w_structview::w_structview(QWidget *parent) :
 
 	bookList = new w_booklist(db);
 	bookList ->init();
+
+	thumb = 0;
+
+
   
 	createActions();
 	createConnections();
@@ -76,6 +80,7 @@ void w_structview::createConnections()
 	connect(m_ui->btnUndo, SIGNAL(clicked()), this, SLOT(undo()));
 	connect(m_ui->btnViewMets, SIGNAL(clicked()), this, SLOT(viewMetsFile()));
 	connect(bookList, SIGNAL(metsIdSelected(int)), this, SLOT(getIdMetsII(int)));
+	connect(bookList, SIGNAL(metsThumb(int)), this, SLOT(showThumb(int)));
 	
 }
 
@@ -150,6 +155,25 @@ void w_structview::getIdMetsII(int i ){
 	} else {
 		// TODO ERROR HANDLING
 	}
+}
+
+void w_structview::showThumb(int i ){
+	if ( thumb ) {
+		thumb->cancel();
+		thumb->close ();
+		delete thumb;
+	};
+	
+	std::map<int,LinkedFiles> localMap; 
+	if (BatchDetail::getBatchDetail().getMetsByID(i, mets)) {
+		localMap = db.getMapLinkedFiles(mets.idMets,"IMGGRP");
+	};
+
+
+	thumb = new w_thumb(BatchDetail::getBatchDetail().path +"/"+ mets.path,localMap);
+	thumb -> show();
+	thumb -> load();
+	connect ( thumb, SIGNAL(selectPage(int)),this,SLOT(showPage(int)));
 }
 
 

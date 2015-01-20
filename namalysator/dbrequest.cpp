@@ -1859,6 +1859,7 @@ std::vector<std::vector<std::string> > dbrequest::getAllMets(int id_testset){
 			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 0) ) );
 			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 1) ) );
 			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 2) ) );
+			row.push_back(std::string( "CLICKEDO" ) );
 			
 			v.push_back(row);
 		}
