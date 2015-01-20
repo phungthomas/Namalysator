@@ -31,7 +31,7 @@ protected:
 private:
     Ui::w_main *m_ui;
     QAction *openAct;
-	QAction *modeBookAct;
+	//QAction *modeBookAct;
 	QAction *openErrorAction;
 	QAction *openBookBrowserAction;
 	QAction *openDiskAnalyze;

@@ -56,11 +56,11 @@ void w_main::createActions()
 void w_main::booksActions()
 {	
 
-	QAction* Act;
-	modeBookAct = new QAction(tr("Mode News Paper"), this);  
-	modeBookAct->setToolTip("Mode News Paper");	
-	connect(modeBookAct, SIGNAL(triggered()), this, SLOT(modeNewsPaper()));
-	connect(modeBookAct, SIGNAL(triggered()), this, SLOT(parseBatch()));
+	//QAction* Act;
+	//modeBookAct = new QAction(tr("Mode News Paper"), this);  
+	//modeBookAct->setToolTip("Mode News Paper");	
+	//connect(modeBookAct, SIGNAL(triggered()), this, SLOT(modeNewsPaper()));
+	//connect(modeBookAct, SIGNAL(triggered()), this, SLOT(parseBatch()));
 	 
 	openErrorAction = new QAction(tr("Show Errors"),this); 
 	openErrorAction->setToolTip("Show Errors");
@@ -99,10 +99,9 @@ void w_main::booksActions()
 
 void w_main::newsPaperActions()
 {	
-	modeBookAct = new QAction(tr("Mode Book"), this);  
-	modeBookAct->setToolTip("Mode Book");	
-	connect(modeBookAct, SIGNAL(triggered()), this, SLOT(modeBook()));
-	connect(modeBookAct, SIGNAL(triggered()), this, SLOT(openSummaryErrorsWindow()));
+	
+	//connect(modeBookAct, SIGNAL(triggered()), this, SLOT(modeBook()));
+	//connect(modeBookAct, SIGNAL(triggered()), this, SLOT(openSummaryErrorsWindow()));
 
 	openDiskAnalyze = new QAction(tr("File Explorer"), this);  
 	openDiskAnalyze->setToolTip("File Explorer");	
@@ -146,7 +145,7 @@ void w_main::newsPaperActions()
 		fileTools->addAction(openInventaire);
 	}
 	fileTools->addAction(openTitleCheck);
-	fileTools->addAction(modeBookAct);
+	//fileTools->addAction(modeBookAct);
 	fileTools->addAction(openSelectBatch);	 
 	fileTools->setAllowedAreas(Qt::TopToolBarArea );
 	addToolBar(Qt::TopToolBarArea, fileTools);
