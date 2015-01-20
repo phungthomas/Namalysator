@@ -114,6 +114,7 @@ bool database::insertTestSet(const std::string &batchName,const std::string &dat
 		ss <<  "Can not insert data into table TESTSET: " << zErrMsg ;		
 		return false;
 	}
+	if ( zErrMsg ) { sqlite3_free(zErrMsg);};
 	//set the current id from the Testset
 	setIdTestSet();		
 	return true;
@@ -161,6 +162,9 @@ void database::insertMets(const std::string &batchName,const std::string &path ,
 		std::stringstream ss;
 		ss <<  "Can not insert new mets into table: " << zErrMsg ;	
 		insertLog(ss.str());
+	}
+	if ( zErrMsg ) {
+		sqlite3_free(zErrMsg);
 	}
 }
 //update details of Mets
@@ -388,7 +392,8 @@ void database::insertMetsError(int category,const std::string &relatedType,const
 		std::stringstream ss;
 		ss <<  "Can not insert data into table Schema Error: " << &zErrMsg ;	
 		insertLog(ss.str());
-	}	
+	}
+	if ( zErrMsg ) { sqlite3_free(zErrMsg);};
 }
 //! insert message into log
 void database::insertLog(std::string message)
@@ -423,17 +428,28 @@ void database::insertDateError(int category,std::string dateBegin,std::string da
 		ss <<  "Can not insert data into DATEERROR: " << &zErrMsg ;	
 		insertLog(ss.str());		
 	} 
+	if ( zErrMsg ) {
+		sqlite3_free(zErrMsg);
+	}
 }
 bool database::insertALLData(datafactory *df)
 {	
-	char *sErrMsg;
+	char *sErrMsg=0;
 	// Use a transaction to speed things up
 	sqlite3_exec(db, "BEGIN TRANSACTION", NULL, NULL, &sErrMsg);
+	if ( sErrMsg ) {
+		sqlite3_free(sErrMsg);
+		sErrMsg=0;
+	};
 	updateMets(df);
 	insertLinkedFiles(df);
 	datafactory_set<Article> dfarticle = df->get_set<Article>();
 	insertArticle(dfarticle);	
 	sqlite3_exec(db, "END TRANSACTION", NULL, NULL, &sErrMsg);
+	if ( sErrMsg ) {
+		sqlite3_free(sErrMsg);
+		sErrMsg=0;
+	};
 	return true;
 }
 //! get all years of the current Mets
@@ -535,7 +551,10 @@ void database::insertRandomTitle(int number)
 				std::stringstream ss;
 				ss <<  "Can not insert data TITLECHECK: " << zErrMsg ;	
 				insertLog(ss.str());	
-			} 		 
+			} 
+			if ( zErrMsg2 ) {
+				sqlite3_free(zErrMsg2);
+			};
 		}
 	}
 	sqlite3_finalize(pStmt);
@@ -576,6 +595,7 @@ void database::insertRandomMets(int number,int totalMets)
 				ss <<  "Can not insert data SAMPLING_STRUCTURE: " << zErrMsg ;	
 				insertLog(ss.str());				
 			}
+			if ( zErrMsg2 ) { sqlite3_free(zErrMsg2);};
 		}
 	}
 	sqlite3_finalize(pStmt);
@@ -643,6 +663,7 @@ void database::insertParameterVerifiers(Parameters *param)
 		ss <<  "Can not insert data VERIFIERS: " << zErrMsg ;	
 		insertLog(ss.str());		
 	}
+	if ( zErrMsg ) { sqlite3_free(zErrMsg);};
 }
 
 int database::getCountTitle()
@@ -698,6 +719,7 @@ void database::insertMetsErrorWithId(int category,const std::string &relatedType
 		ss <<  "Can not insert data into table Schema ErrorTest: " << zErrMsg ;	
 		insertLog(ss.str());		
 	}
+	if ( zErrMsg ) { sqlite3_free(zErrMsg);};
 }
 
 bool database::FillSupplements(int idMets, std::vector<string> &supplements)
