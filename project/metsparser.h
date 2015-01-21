@@ -19,7 +19,7 @@ public :
 
 	// need by structMap
 	Item *currentItem;
-	Item *rootItem;
+	Item rootItem;
 	typeBlock typeblock; // probably could go outside of the context
 
 	// need by filegroup	
