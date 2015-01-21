@@ -33,15 +33,22 @@ QVariant bookModel::data(const QModelIndex &index, int role ) const{
 
 
 	if ( role == Qt::CheckStateRole ) return QVariant();
+
+	if(role==Qt::DecorationRole){
+		QVariant ret = allMets[index.row()][index.column()];
+		return ret;
+	}
+
 	if ( role == Qt::DisplayRole ) {
 		QVariant ret = allMets[index.row()][index.column()];
 		return ret;
 	}
+
 	return QVariant();
 }
 
 QVariant bookModel::headerData ( int section, Qt::Orientation orientation, int role ) const{
-	static char* table[]={"ID","PATH","METS", "UNDEF-1","BIBREC_245a","BIBREC_245b","BIBREC_100a-1","BIBREC_100a-2","BIBREC_008-35-37","BIBREC_260b","BIBREC_260c","ITEMbarCode","BIBREC_SYS_NUM"};
+	static char* table[]={"ID","PATH","METS", " ","BIBREC_245a","BIBREC_245b","BIBREC_100a-1","BIBREC_100a-2","BIBREC_008-35-37","BIBREC_260b","BIBREC_260c","ITEMbarCode","BIBREC_SYS_NUM"};
 	QVariant ret=QVariant();
 	if ( role == Qt::DisplayRole && section < 13 && section >= 0 ) {
 		char * tmp = table [section];

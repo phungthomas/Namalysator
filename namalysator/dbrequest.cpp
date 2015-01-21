@@ -4,6 +4,7 @@
 #include "gui_utilities.h"
 #include <QDate>
 #include <QTime>
+#include <QIcon>
 
 #ifdef LOG_TIMING
 #define DEBUG_ME	{ fprintf(conn.fpLog, "SQL: %s\n\t%s\n", selectSql.c_str(), qPrintable(QTime::currentTime().toString("hh:mm:ss:zzz"))); fflush(conn.fpLog); }
@@ -1841,7 +1842,8 @@ std::vector<Inventaire> dbrequest::getNameInventaire()
 std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 	ConnectionDB conn = g_pool.getConnection(BatchDetail::getBatchDetail().database);	
 	sqlite3_stmt *pStmt;
-	const char *zErrMsg= 0; 
+	const char *zErrMsg= 0;
+	static QIcon icon("toto.bmp");
 	
 	
 	std::string selectSql = "SELECT ID_METS, PATH, FILENAME FROM METS WHERE ID_TESTSET=?";
@@ -1859,7 +1861,7 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 			row.push_back(QVariant( sqlite3_column_int(pStmt, 0) ) );
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, 1) ) );
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, 2) ) );
-			row.push_back(QString( "CLICKEDO" ) );
+			row.push_back( icon );
 			row.push_back(QString( "BIBREC_245a" ) );
 			row.push_back(QString( "BIBREC_245b" ) );
 			row.push_back(QString( "BIBREC_100a-1" ) );
