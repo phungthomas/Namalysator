@@ -304,8 +304,6 @@ void w_structview::zoomIn()
  
  void w_structview::resizeImage()
  {
- 	std::string file;
-	file = mets.fileName.substr(0, mets.fileName.length()-9);
 	image = originalImage.scaled(originalImage.width()/divImage,originalImage.height()/divImage);	
 	originalPixmap = QPixmap::fromImage(image);		
 	m_ui->label->setPixmap(originalPixmap);

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1217</width>
+    <width>1194</width>
     <height>900</height>
    </rect>
   </property>
@@ -49,7 +49,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1197</width>
+        <width>1174</width>
         <height>178</height>
        </rect>
       </property>
@@ -358,6 +358,7 @@
             <height>817</height>
            </rect>
           </property>
+          <zorder>label</zorder>
          </widget>
         </widget>
        </item>
