@@ -200,7 +200,6 @@ void w_structview::showCurrentPage()
 		m_ui->lblPage->setValue(currentPage);
 		m_ui->lblPage->setMaximum(mapTiffPath.size());
 		updateTableOfContents(currentAltoFile);	
-		// TODO : Add call to drawRect
 		enableButton(true);		
 	}
 }
@@ -221,7 +220,6 @@ void w_structview::previous()
 	if (currentPage > 1) {
 		currentPage--;
 		showCurrentPage();
-
 	}
 }
 void w_structview::next()
@@ -243,7 +241,7 @@ void w_structview::showPage(int i)
 			currentPage=mapTiffPath.size();
 		}
 	}
-		showCurrentPage();	
+	showCurrentPage();	
 }
 
 void w_structview::zoomIn()
