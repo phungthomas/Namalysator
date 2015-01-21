@@ -67,8 +67,7 @@ void w_structview::createConnections()
 	connect(m_ui->lblPage,SIGNAL(valueChanged(int)),this,SLOT(showPage(int)));
 	connect(m_ui->btnStructure,SIGNAL(clicked()),this,SLOT(structure()));
 	connect(m_ui->btnError,SIGNAL(clicked()),this,SLOT(openErrorScreen()));
-	connect(m_ui->btnClearPainter,SIGNAL(clicked()),this,SLOT(clearPainter()));
-//	connect(m_ui->btnShowSampling,SIGNAL(clicked()),this,SLOT(showListSampling()));		
+	connect(m_ui->btnClearPainter,SIGNAL(clicked()),this,SLOT(clearPainter()));		
 	connect(m_ui->btnViewHtml,SIGNAL(clicked()),this,SLOT(viewHtml()));
 	connect(m_ui->btnZoomIn, SIGNAL(clicked()), this, SLOT(zoomIn()));
     connect(m_ui->btnZoomOut, SIGNAL(clicked()), this, SLOT(zoomOut()));
