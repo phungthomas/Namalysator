@@ -222,10 +222,7 @@ void w_structview::previous()
 	if (currentPage > 1) {
 		currentPage--;
 		showCurrentPage();
-		// If the current article is still on the new current page, redraw its rectangles
-		if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
-			drawRect(currentSelectedArticle, 0);
-		}
+
 	}
 }
 void w_structview::next()
@@ -233,10 +230,6 @@ void w_structview::next()
 	if (currentPage < mapTiffPath.size()) {
 		currentPage++;
 		showCurrentPage();
-		// If the current article is still on the new current page, redraw its rectangles
-		if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
-			drawRect(currentSelectedArticle, 0);
-		}
 	}
 }
 
@@ -251,12 +244,7 @@ void w_structview::showPage(int i)
 			currentPage=mapTiffPath.size();
 		}
 	}
-		showCurrentPage();
-		// If the current article is still on the new current page, redraw its rectangles
-		if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
-			drawRect(currentSelectedArticle, 0);
-		}
-	
+		showCurrentPage();	
 }
 
 void w_structview::zoomIn()
@@ -265,11 +253,6 @@ void w_structview::zoomIn()
    divImage = divImage * 0.8;
    multiImage = multiImage / 0.8;
    resizeImage();
-   
-
-   if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
-		drawRect(currentSelectedArticle, 0);
-	}
 }
 
  void w_structview::zoomOut()
@@ -277,11 +260,6 @@ void w_structview::zoomIn()
 	divImage = divImage /0.8;
 	multiImage = multiImage * 0.8;
 	resizeImage();
-    
-
-	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
-		drawRect(currentSelectedArticle, 0);
-	}
  }
 
  void w_structview::zoomNon()
@@ -289,10 +267,6 @@ void w_structview::zoomIn()
 	divImage = 1;
 	multiImage = 1;
 	resizeImage();
-	
-	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
-		drawRect(currentSelectedArticle, 0);
-	}
  }
 
 
@@ -304,6 +278,11 @@ void w_structview::zoomIn()
 	originalPixmap = QPixmap::fromImage(image);		
 	m_ui->label->setPixmap(originalPixmap);
 	m_ui->label->adjustSize();
+
+	// If the current article is still on the new current page, redraw its rectangles
+	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
+		drawRect(currentSelectedArticle, 0);
+	};
  }
 
  void w_structview::clearPainter()
