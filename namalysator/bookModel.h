@@ -23,7 +23,7 @@ public:
 
 private:
 	dbrequest& db;
-	std::vector<std::vector<std::string> > allMets;
+	std::vector<std::vector<QVariant> > allMets;
 };
 
 

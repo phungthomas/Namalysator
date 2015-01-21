@@ -6,6 +6,7 @@
 #include "structgui.h"
 #include <map>
 #include <QDate>
+#include <QVariant>
 
 struct ConnectionDB
 {
@@ -194,7 +195,7 @@ class dbrequest
 		std::vector<Inventaire> getNameInventaire();
 		
 
-		std::vector<std::vector<std::string> > getAllMets(int id_testset);
+		std::vector<std::vector<QVariant> > getAllMets(int id_testset);
 		std::vector<int> getMetsIdInPeriod(int id_testset, int year_from, int month_from, int year_to, int month_to);
 		std::vector<QDate> getMetsDateInPeriod(int id_testset, int year_from, int month_from, int year_to, int month_to);
 		std::vector<QDate> getMetsDateInMonth(int id_testset, int year, int month);

@@ -1838,14 +1838,14 @@ std::vector<Inventaire> dbrequest::getNameInventaire()
 
 }
 
-std::vector<std::vector<std::string> > dbrequest::getAllMets(int id_testset){
+std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 	ConnectionDB conn = g_pool.getConnection(BatchDetail::getBatchDetail().database);	
 	sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0; 
 	
 	
 	std::string selectSql = "SELECT ID_METS, PATH, FILENAME FROM METS WHERE ID_TESTSET=?";
-	std::vector<std::vector<std::string> > v;
+	std::vector<std::vector<QVariant> > v;
 
 	int rc = sqlite3_prepare_v2(conn.db,selectSql.c_str(),-1, &pStmt,&zErrMsg);	
 
@@ -1854,21 +1854,21 @@ std::vector<std::vector<std::string> > dbrequest::getAllMets(int id_testset){
 		sqlite3_bind_int(pStmt, 1,id_testset);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			std::vector<std::string> row;
+			std::vector<QVariant> row;
 			 
-			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 0) ) );
-			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 1) ) );
-			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 2) ) );
-			row.push_back(std::string( "CLICKEDO" ) );
-			row.push_back(std::string( "BIBREC_245a" ) );
-			row.push_back(std::string( "BIBREC_245b" ) );
-			row.push_back(std::string( "BIBREC_100a-1" ) );
-			row.push_back(std::string( "BIBREC_100a-2" ) );
-			row.push_back(std::string( "BIBREC_008-35-37" ) );
-			row.push_back(std::string( "BIBREC_260b" ) );
-			row.push_back(std::string( "BIBREC_260c" ) );
-			row.push_back(std::string( "ITEMbarCode" ) );
-			row.push_back(std::string( "BIBREC_SYS_NUM" ) );
+			row.push_back(QVariant( sqlite3_column_int(pStmt, 0) ) );
+			row.push_back(QString( (char*)sqlite3_column_text(pStmt, 1) ) );
+			row.push_back(QString( (char*)sqlite3_column_text(pStmt, 2) ) );
+			row.push_back(QString( "CLICKEDO" ) );
+			row.push_back(QString( "BIBREC_245a" ) );
+			row.push_back(QString( "BIBREC_245b" ) );
+			row.push_back(QString( "BIBREC_100a-1" ) );
+			row.push_back(QString( "BIBREC_100a-2" ) );
+			row.push_back(QString( "BIBREC_008-35-37" ) );
+			row.push_back(QString( "BIBREC_260b" ) );
+			row.push_back(QString( "BIBREC_260c" ) );
+			row.push_back(QString( "ITEMbarCode" ) );
+			row.push_back(QString( "BIBREC_SYS_NUM" ) );
 
 
 			v.push_back(row);

@@ -25,8 +25,8 @@ int bookModel::columnCount(const QModelIndex &parent ) const{
 }
 
 int bookModel::idMets ( const QModelIndex &index ){
-	std::string tmp = allMets[index.row()][0];
-	return atoi(tmp.c_str()); 
+	QString tmp = allMets[index.row()][0].value<QString>();
+	return tmp.toInt(); 
 }
 
 QVariant bookModel::data(const QModelIndex &index, int role ) const{
@@ -34,9 +34,7 @@ QVariant bookModel::data(const QModelIndex &index, int role ) const{
 
 	if ( role == Qt::CheckStateRole ) return QVariant();
 	if ( role == Qt::DisplayRole ) {
-		QString qs ( allMets[index.row()][index.column()].c_str() );
-		QVariant ret = QVariant (qs);
-
+		QVariant ret = allMets[index.row()][index.column()];
 		return ret;
 	}
 	return QVariant();
