@@ -188,7 +188,7 @@ void w_main::openStructureWindow()
 	w_structview *view = new w_structview();
 	view->setBatchDetail();	
 	this->resize(1200,910);
-	this->setCentralWidget(view);  
+	this->setCentralWidget(view); 
 }
 
 void w_main::openTitleCheckWindow()

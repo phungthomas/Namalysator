@@ -1843,15 +1843,15 @@ std::vector<std::vector<std::string> > dbrequest::getAllMets(int id_testset){
 	sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0; 
 	
-	std::stringstream clause;
-	clause << "ID_TESTSET='" << id_testset << "'" ;
-	std::string selectSql = "SELECT ID_METS, PATH, FILENAME FROM METS WHERE " + clause.str();
+	
+	std::string selectSql = "SELECT ID_METS, PATH, FILENAME FROM METS WHERE ID_TESTSET=?";
 	std::vector<std::vector<std::string> > v;
 
 	int rc = sqlite3_prepare_v2(conn.db,selectSql.c_str(),-1, &pStmt,&zErrMsg);	
 
 	if(rc == SQLITE_OK)
 	{	  
+		sqlite3_bind_int(pStmt, 1,id_testset);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			std::vector<std::string> row;

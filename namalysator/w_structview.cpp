@@ -87,6 +87,12 @@ void w_structview::createConnections()
 w_structview::~w_structview()
 {
     delete m_ui;
+	if (thumb){
+		thumb->cancel();
+		thumb->close();
+		delete thumb;
+		thumb=0;
+	}
 }
 
 //set detail of the batch
@@ -666,9 +672,19 @@ void w_structview::create_page2toc_entry()
 
 void w_structview::openErrorScreen()
 {
-	QPixmap xmap = QPixmap::grabWidget(this,0,35,this->width(),this->height()-160);
+	//QPixmap xmap = QPixmap::grabWidget(this,0,35,this->width(),this->height()-160);
+	QPixmap xmap1 = QPixmap::grabWidget(m_ui->treeWidget,0,0);
+	QPixmap xmap2 = QPixmap::grabWidget(m_ui->scrollArea,0,0);
+	
+	QPixmap result ( m_ui->treeWidget->width() + m_ui->scrollArea->width(), m_ui->scrollArea->height());
+
+	QPainter painter(&result);
+	painter.drawPixmap(0,0, xmap1);
+	painter.drawPixmap(m_ui->treeWidget->width(),0, xmap2);
+
 	w_screenshoterror *ws = new w_screenshoterror();
-	ws->setBatchDetailImage(xmap,mets,this);
+	//ws->setBatchDetailImage(xmap,mets,this);
+	ws->setBatchDetailImage(result,mets,this);
 	ws->resize(1200,910);
 	ws->show();	
 }
