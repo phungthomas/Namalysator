@@ -60,14 +60,6 @@ private:
 		void create_page2toc_entry();
 		
 	/******* déclarations **********/   
-    
-     double scaleFactor;
-    
-    //declaration for zooming
-   
-    void scaleImage(double factor);
-    void adjustScrollBar(QScrollBar *scrollBar, double factor);
-    
     QImage image,originalImage;
     
     // Maps the page number (starting from 1) to the corresponding TIFFID and ALTOID

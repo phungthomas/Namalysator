@@ -194,12 +194,9 @@ void w_structview::showCurrentPage()
 	if (mapTiffPath.find(currentPage)!= mapTiffPath.end())
 	{		
 		std::string path = BatchDetail::getBatchDetail().path + mets.path + mapTiffPath.find(currentPage)->second.fileName;
-		originalImage.load(path.c_str());			
-		image = originalImage.scaled(originalImage.width()/divImage,originalImage.height()/divImage);
-		originalPixmap = QPixmap::fromImage(image);		
-		m_ui->label->setPixmap(originalPixmap);
-		scaleFactor = 1.0;
-		m_ui->label->adjustSize();	
+		originalImage.load(path.c_str());	
+		resizeImage();
+		
 		currentAltoFile = mapAltoPath.find(currentPage)->second.fileId;
 		m_ui->lblPage->setValue(currentPage);
 		m_ui->lblPage->setMaximum(mapTiffPath.size());
@@ -264,10 +261,11 @@ void w_structview::showPage(int i)
 
 void w_structview::zoomIn()
 {
-   scaleImage(1.25);
+   
    divImage = divImage * 0.8;
    multiImage = multiImage / 0.8;
    resizeImage();
+   
 
    if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
 		drawRect(currentSelectedArticle, 0);
@@ -279,7 +277,7 @@ void w_structview::zoomIn()
 	divImage = divImage /0.8;
 	multiImage = multiImage * 0.8;
 	resizeImage();
-    scaleImage(0.8);
+    
 
 	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
 		drawRect(currentSelectedArticle, 0);
@@ -290,10 +288,8 @@ void w_structview::zoomIn()
  {
 	divImage = 1;
 	multiImage = 1;
-	scaleFactor = 1;
 	resizeImage();
-    scaleImage(1);
-
+	
 	if (currentSelectedArticle && (m_toc_entry2page[currentSelectedArticle->type()].find(currentAltoFile) != m_toc_entry2page[currentSelectedArticle->type()].end())) {
 		drawRect(currentSelectedArticle, 0);
 	}
@@ -307,6 +303,7 @@ void w_structview::zoomIn()
 	image = originalImage.scaled(originalImage.width()/divImage,originalImage.height()/divImage);	
 	originalPixmap = QPixmap::fromImage(image);		
 	m_ui->label->setPixmap(originalPixmap);
+	m_ui->label->adjustSize();
  }
 
  void w_structview::clearPainter()
@@ -314,20 +311,6 @@ void w_structview::zoomIn()
 	originalPixmap = QPixmap::fromImage(image);
 	QPainter painter(&originalPixmap);		
 	m_ui->label->setPixmap(originalPixmap);	
- }
- 
- //scale the image
- void w_structview::scaleImage(double factor)
- { 
-     scaleFactor *= factor;
-     m_ui->label->resize(scaleFactor *m_ui->label->pixmap()->size());
-     adjustScrollBar(m_ui->scrollArea->horizontalScrollBar(), factor);
-     adjustScrollBar(m_ui->scrollArea->verticalScrollBar(), factor);
- }
-//adjust scrollbar from scaling
- void w_structview::adjustScrollBar(QScrollBar *scrollBar, double factor)
- {
-    scrollBar->setValue(int(factor * scrollBar->value() + ((factor - 1) * scrollBar->pageStep()/2)));
  }
 
  void w_structview::structure()
