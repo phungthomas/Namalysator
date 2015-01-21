@@ -1860,7 +1860,17 @@ std::vector<std::vector<std::string> > dbrequest::getAllMets(int id_testset){
 			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 1) ) );
 			row.push_back(std::string( (char*)sqlite3_column_text(pStmt, 2) ) );
 			row.push_back(std::string( "CLICKEDO" ) );
-			
+			row.push_back(std::string( "BIBREC_245a" ) );
+			row.push_back(std::string( "BIBREC_245b" ) );
+			row.push_back(std::string( "BIBREC_100a-1" ) );
+			row.push_back(std::string( "BIBREC_100a-2" ) );
+			row.push_back(std::string( "BIBREC_008-35-37" ) );
+			row.push_back(std::string( "BIBREC_260b" ) );
+			row.push_back(std::string( "BIBREC_260c" ) );
+			row.push_back(std::string( "ITEMbarCode" ) );
+			row.push_back(std::string( "BIBREC_SYS_NUM" ) );
+
+
 			v.push_back(row);
 		}
 	}
