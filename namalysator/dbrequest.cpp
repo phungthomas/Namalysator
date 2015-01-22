@@ -5,6 +5,7 @@
 #include <QDate>
 #include <QTime>
 #include <QIcon>
+#include <iostream>
 
 #ifdef LOG_TIMING
 #define DEBUG_ME	{ fprintf(conn.fpLog, "SQL: %s\n\t%s\n", selectSql.c_str(), qPrintable(QTime::currentTime().toString("hh:mm:ss:zzz"))); fflush(conn.fpLog); }
@@ -1402,7 +1403,7 @@ std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
 	sId_mets << id_Mets;
 	int rc;	
 	const char *zErrMsg= ""; 
-	std::string selectSql = "SELECT * FROM STRUCTUREERROR where ID_METS = '"+ sId_mets.str()  +"'"; 
+	std::string selectSql = "SELECT ID,ID_METS,IMAGEPATH,MESSAGE,ID_ERRORTYPE FROM STRUCTUREERROR where ID_METS = '"+ sId_mets.str()  +"'"; 
 	std::map<int,StructureError> v;
 	DEBUG_ME
 	rc = sqlite3_prepare_v2(conn.db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1533,18 +1534,33 @@ std::vector<ErrorType> dbrequest::getErrorTypeCatStructure()
 bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,std::string path)
 {
 	ConnectionDB conn = g_pool.getConnection(databaseName);
-	std::stringstream sId_mets,sIdError;	
-	sId_mets << id_mets;
-	sIdError << idErrorType;
-	 char *zErrMsg=0;
-	std::string sql = "INSERT INTO STRUCTUREERROR ('ID_METS','IMAGEPATH', 'MESSAGE','ID_ERRORTYPE') \
-					  VALUES  ('" + sId_mets.str() + "','" + path + "','" + message + "','" + sIdError.str() +"')"; 							
 
-	int rc = sqlite3_exec(conn.db, sql.c_str(), NULL, 0, &zErrMsg); 	
-	if( rc )
+	const char *zErrMsg=0;
+	sqlite3_stmt *pStmt;
+	std::string sql = "INSERT INTO STRUCTUREERROR ('ID_METS','IMAGEPATH', 'MESSAGE','ID_ERRORTYPE') \
+					  VALUES  (?,?,?,?)"; 							
+
+	
+	int rc = sqlite3_prepare_v2(conn.db,sql.c_str(),-1, &pStmt,&zErrMsg);
+	if( rc != SQLITE_OK )
 	{
-		fprintf(stderr, "Can't insert data TestSet: %s\n",zErrMsg);
-		return false;
+			std::string error ( sqlite3_errmsg(conn.db) );
+			std::cerr << error << std::endl;
+			std::cerr << sql << std::endl;
+			return false;
+	}
+    
+	sqlite3_bind_int(pStmt, 1,id_mets);
+	sqlite3_bind_text(pStmt,2,path.c_str(),path.length(),SQLITE_STATIC);
+	sqlite3_bind_text(pStmt,3,message.c_str(),message.length(),SQLITE_STATIC);
+	sqlite3_bind_int(pStmt, 4,idErrorType);
+
+	
+	if (sqlite3_step(pStmt) != SQLITE_DONE) {
+			std::string error ( sqlite3_errmsg(conn.db) );
+			std::cerr << error << std::endl;
+			std::cerr << sql << std::endl;
+			return false;
 	}
 	return true; 
 }
