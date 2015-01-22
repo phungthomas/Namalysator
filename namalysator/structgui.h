@@ -164,6 +164,7 @@ struct StructureError {
 	std::string pathImage;
 	std::string message;
 	ErrorType errorType;
+	int pageNb;
 
 
 };

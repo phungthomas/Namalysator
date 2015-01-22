@@ -1399,30 +1399,27 @@ std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
 {
 	ConnectionDB conn = g_pool.getConnection(databaseName);	
 	sqlite3_stmt *pStmt;
-	std::stringstream sId_mets;	
-	sId_mets << id_Mets;
+
 	int rc;	
 	const char *zErrMsg= ""; 
-	std::string selectSql = "SELECT ID,ID_METS,IMAGEPATH,MESSAGE,ID_ERRORTYPE FROM STRUCTUREERROR where ID_METS = '"+ sId_mets.str()  +"'"; 
+	std::string selectSql = "SELECT ID,ID_METS,IMAGEPATH,MESSAGE,ID_ERRORTYPE,PAGENB FROM STRUCTUREERROR where ID_METS = ?"; 
 	std::map<int,StructureError> v;
 	DEBUG_ME
 	rc = sqlite3_prepare_v2(conn.db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	StructureError se;  
 	if(rc == SQLITE_OK)
-	{	  
+	{	
+		sqlite3_bind_int(pStmt,1,id_Mets);
+
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{
-			
-			int count = sqlite3_data_count(pStmt);		
-			for (int i =0;i<  count ;i++)
-			{
-				const char *result = safe_sqlite3_column_text(pStmt, i);			
-				if (i==0) se.id = atoi(result);							
-				else if (i==1) se.id_mets = atoi(result);
-				else if (i==2) se.pathImage = result; 
-				else if (i==3) se.message = result;
-				else if (i==4) se.errorType = getErrorTypeWithId(atoi(result));					
-			}
+		{   int col=0;
+			se.id = sqlite3_column_int(pStmt,col++);
+			se.id_mets = sqlite3_column_int(pStmt,col++);
+			se.pathImage = safe_sqlite3_column_text(pStmt, col++);
+			se.message = safe_sqlite3_column_text(pStmt, col++);
+			se.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
+			se.pageNb = sqlite3_column_int(pStmt,col++);
+
 			v[se.id]= se; 			 
 		}		
    }
