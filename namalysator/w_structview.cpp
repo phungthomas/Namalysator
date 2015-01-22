@@ -15,6 +15,9 @@
 #include "boost/filesystem/operations.hpp"
 #include "boost/filesystem/path.hpp"
 #include "boost/progress.hpp"
+	
+#include <cstdio>
+#include <cstdlib>
 namespace fs = boost::filesystem;
 
 w_structview::w_structview(QWidget *parent) :
@@ -641,7 +644,7 @@ void w_structview::openErrorScreen()
 
 	w_screenshoterror *ws = new w_screenshoterror();
 	//ws->setBatchDetailImage(xmap,mets,this);
-	ws->setBatchDetailImage(result,mets,this);
+	ws->setBatchDetailImage(result,mets,this,currentPage);
 	ws->resize(1200,910);
 	ws->show();	
 }
@@ -746,9 +749,12 @@ void w_structview::fillListErrors()
 	std::map<int,StructureError> vListErrors = db.getStructureError(mets.idMets);
 	for ( std::map<int,StructureError>::iterator it = vListErrors.begin(); it != vListErrors.end(); it++)
 	{
-		std::string txt;
-		txt =it->second.errorType.severity.gravity  + ": " + it->second.errorType.error + " - " + it->second.message;
-		new QListWidgetItem(txt.c_str(),  m_ui->listErrors,mets.idMets);	
+		std::stringstream txt;
+
+		if (it->second.pageNb != 0)
+			txt << it->second.pageNb <<  " p.:" ;
+		txt << it->second.errorType.severity.gravity  << ": " << it->second.errorType.error << " - " << it->second.message;
+		new QListWidgetItem(txt.str().c_str(),  m_ui->listErrors,mets.idMets);	
 		m_ui->btnViewHtml->setEnabled(true);
 		
 		if (it->second.errorType.severity.gravity=="MINOR")	minor++;		

@@ -1528,14 +1528,14 @@ std::vector<ErrorType> dbrequest::getErrorTypeCatStructure()
 	return v;
 }
 
-bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,std::string path)
+bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,std::string path, int pageNB)
 {
 	ConnectionDB conn = g_pool.getConnection(databaseName);
 
 	const char *zErrMsg=0;
 	sqlite3_stmt *pStmt;
-	std::string sql = "INSERT INTO STRUCTUREERROR ('ID_METS','IMAGEPATH', 'MESSAGE','ID_ERRORTYPE') \
-					  VALUES  (?,?,?,?)"; 							
+	std::string sql = "INSERT INTO STRUCTUREERROR ('ID_METS','IMAGEPATH', 'MESSAGE','ID_ERRORTYPE','PAGENB') \
+					  VALUES  (?,?,?,?,?)"; 							
 
 	
 	int rc = sqlite3_prepare_v2(conn.db,sql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1551,6 +1551,7 @@ bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,
 	sqlite3_bind_text(pStmt,2,path.c_str(),path.length(),SQLITE_STATIC);
 	sqlite3_bind_text(pStmt,3,message.c_str(),message.length(),SQLITE_STATIC);
 	sqlite3_bind_int(pStmt, 4,idErrorType);
+	sqlite3_bind_int(pStmt, 5,pageNB);
 
 	
 	if (sqlite3_step(pStmt) != SQLITE_DONE) {
