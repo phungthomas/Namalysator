@@ -610,6 +610,10 @@
 				RelativePath=".\metsverifier.rc"
 				>
 			</File>
+			<File
+				RelativePath=".\updateDbVersion.txt"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\ClassDiagram1.cd"
