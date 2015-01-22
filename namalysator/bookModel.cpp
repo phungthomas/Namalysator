@@ -34,12 +34,12 @@ QVariant bookModel::data(const QModelIndex &index, int role ) const{
 
 	if ( role == Qt::CheckStateRole ) return QVariant();
 
-	if(role==Qt::DecorationRole){
+	if(role==Qt::DecorationRole && index.column()==3 ){
 		QVariant ret = allMets[index.row()][index.column()];
 		return ret;
 	}
 
-	if ( role == Qt::DisplayRole ) {
+	if ( role == Qt::DisplayRole && index.column()!=3 ) {
 		QVariant ret = allMets[index.row()][index.column()];
 		return ret;
 	}
