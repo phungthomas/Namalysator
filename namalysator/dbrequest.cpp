@@ -706,30 +706,30 @@ std::map<int,LinkedFiles> dbrequest::getMapLinkedFiles(int idMets,std::string fi
 	int rc;	
 	const char *zErrMsg= 0; 
 	int page=1;
-	std::string selectSql = "SELECT ID,ID_METS,TYPE,GROUPID,CHECKSUM,SIZE,FILENAME,FILEID,DPI FROM LINKEDFILES where ID_METS ='" + oid.str() + "' and TYPE = '"+ fileGroup +"'";
+	std::string selectSql = "SELECT ID,ID_METS,TYPE,GROUPID,CHECKSUM,SIZE,FILENAME,FILEID,DPI FROM LINKEDFILES where ID_METS = ? and TYPE = ?";
 	DEBUG_ME
 	rc = sqlite3_prepare_v2(conn.db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	LinkedFiles lf;  
 	if(rc == SQLITE_OK)
 	{	  
+		sqlite3_bind_int(pStmt,1,idMets);
+		sqlite3_bind_text(pStmt,2,fileGroup.c_str(),fileGroup.length(),SQLITE_STATIC);
+
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{			
-			int count = sqlite3_data_count(pStmt);		
-			for (int i =0;i<  count ;i++)
-			{
-				const char *result = safe_sqlite3_column_text(pStmt, i);			
-				if (i==0)lf.id = atoi(result);							
-				else if (i==1) lf.idMets = atoi(result);
-				else if (i==2) lf.type = (result);
-				else if (i==3) lf.grouId = result;
-				else if (i==4) lf.checksum = result;
-				else if (i==5) lf.size =  atof(result) ;
-				else if (i==6) lf.fileName = result;
-				else if (i==7) lf.fileId = result;		
-				else if (i==8) lf.dpi = atoi(result);	
-			}	
-			  altoPath[page]= lf;	
-			  page++;  	 
+			int col = 0;
+			lf.id = sqlite3_column_int(pStmt,col++);
+			lf.idMets = sqlite3_column_int(pStmt,col++);
+			lf.type = safe_sqlite3_column_text(pStmt, col++);
+			lf.grouId = safe_sqlite3_column_text(pStmt, col++);
+			lf.checksum = safe_sqlite3_column_text(pStmt, col++);
+			lf.size =  sqlite3_column_double(pStmt,col++);
+			lf.fileName = safe_sqlite3_column_text(pStmt, col++);
+			lf.fileId = safe_sqlite3_column_text(pStmt, col++);
+			lf.dpi = sqlite3_column_int(pStmt,col++);
+
+			altoPath[page]= lf;	
+			page++;  	 
 		}		
    }
    sqlite3_finalize(pStmt);
@@ -1857,10 +1857,12 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 	ConnectionDB conn = g_pool.getConnection(BatchDetail::getBatchDetail().database);	
 	sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0;
-	static QIcon icon("toto.bmp");
+	static QIcon icon("iconLoadThumb.bmp");
 	
 	
-	std::string selectSql = "SELECT ID_METS, PATH, FILENAME FROM METS WHERE ID_TESTSET=?";
+	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
+	std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME FROM METS a WHERE a.ID_TESTSET=?";
+	
 	std::vector<std::vector<QVariant> > v;
 
 	int rc = sqlite3_prepare_v2(conn.db,selectSql.c_str(),-1, &pStmt,&zErrMsg);	
@@ -1876,6 +1878,7 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, 1) ) );
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, 2) ) );
 			row.push_back( icon );
+			//row.push_back(QString( (char*)sqlite3_column_text(pStmt, 3) ) );
 			row.push_back(QString( "BIBREC_245a" ) );
 			row.push_back(QString( "BIBREC_245b" ) );
 			row.push_back(QString( "BIBREC_100a-1" ) );

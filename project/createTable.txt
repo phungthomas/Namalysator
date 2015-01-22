@@ -152,7 +152,7 @@ create table STRUCTUREERROR (
   IMAGEPATH varchar(50),
   MESSAGE varchar(255),  
   ID_ERRORTYPE INTEGER,
-  PAGENB INTEGER
+  FILEID varchar(10)
 );
 
 drop table if exists SAMPLING_STRUCTURE;
