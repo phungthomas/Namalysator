@@ -26,6 +26,7 @@ struct LinkedFiles
 	std::string fileName;
 	std::string fileId;
 	int dpi;
+	int countError;
 };
 
 struct MetsFile
@@ -164,8 +165,7 @@ struct StructureError {
 	std::string pathImage;
 	std::string message;
 	ErrorType errorType;
-	int pageNb;
-
+	std::string fileid;
 
 };
 

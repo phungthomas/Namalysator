@@ -20,7 +20,7 @@ public:
     virtual ~w_screenshoterror();
     
     //! set batchdetail + current image to show errors. 
-	void setBatchDetailImage(QPixmap pix,MetsFile mets,w_structview *w,int);	
+	void setBatchDetailImage(QPixmap pix,MetsFile mets,w_structview *w,std::string);	
 protected:
     virtual void changeEvent(QEvent *e);
 
@@ -43,7 +43,7 @@ private:
 	void createConnections();
 	void init();
 	void setBoxColor();	
-	int pageNB;
+	std::string fileID;
 	
 private slots: 
 	void saveError();

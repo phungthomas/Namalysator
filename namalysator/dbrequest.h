@@ -182,7 +182,7 @@ class dbrequest
 		std::vector<Sampling_Structure> getListSamplingStructure(int id_testset);	
 		void updateSamplingStructure(int id,int checked);
 		std::vector<ErrorType> getErrorTypeCatStructure();
-		bool saveStructError(int id_mets,std::string message,int idErrorType,std::string path,int);
+		bool saveStructError(int id_mets,std::string message,int idErrorType,std::string path,std::string);
 		std::vector<Title> getvTitle(int id_testset);
 		Article getArticle(int id);
 		std::pair<int,int> getSumCharacter(int id);

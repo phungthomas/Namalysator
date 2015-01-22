@@ -83,6 +83,7 @@ void w_structview::createConnections()
 	connect(m_ui->btnViewMets, SIGNAL(clicked()), this, SLOT(viewMetsFile()));
 	connect(bookList, SIGNAL(metsIdSelected(int)), this, SLOT(getIdMetsII(int)));
 	connect(bookList, SIGNAL(metsThumb(int)), this, SLOT(showThumb(int)));
+	//connect(bookList, SIGNAL(metsThumb(int)), this, SLOT(getIdMetsII(int)));
 	
 }
 
@@ -166,6 +167,9 @@ void w_structview::getIdMetsII(int i ){
 }
 
 void w_structview::showThumb(int i ){
+
+	getIdMetsII(i); // do both thumb plus content
+
 	if ( thumb ) {
 		thumb->cancel();
 		thumb->close ();
@@ -644,7 +648,7 @@ void w_structview::openErrorScreen()
 
 	w_screenshoterror *ws = new w_screenshoterror();
 	//ws->setBatchDetailImage(xmap,mets,this);
-	ws->setBatchDetailImage(result,mets,this,currentPage);
+	ws->setBatchDetailImage(result,mets,this,mapTiffPath.find(currentPage)->second.fileId);
 	ws->resize(1200,910);
 	ws->show();	
 }
@@ -751,8 +755,8 @@ void w_structview::fillListErrors()
 	{
 		std::stringstream txt;
 
-		if (it->second.pageNb != 0)
-			txt << it->second.pageNb <<  " p.:" ;
+		if (it->second.fileid.length() != 0)
+			txt << it->second.fileid <<  ":" ;
 		txt << it->second.errorType.severity.gravity  << ": " << it->second.errorType.error << " - " << it->second.message;
 		new QListWidgetItem(txt.str().c_str(),  m_ui->listErrors,mets.idMets);	
 		m_ui->btnViewHtml->setEnabled(true);

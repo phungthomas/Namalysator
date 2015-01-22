@@ -71,11 +71,11 @@ void w_screenshoterror::fillComboBoxErrortype()
 }
 
 
-void w_screenshoterror::setBatchDetailImage(QPixmap pix,MetsFile m,w_structview *w, int _pageNB)
+void w_screenshoterror::setBatchDetailImage(QPixmap pix,MetsFile m,w_structview *w, std::string _fileID)
 {
 	structView = w;
 	//batchDetail = bd;
-	pageNB=_pageNB;
+	fileID=_fileID;
 	mets = m;	
 	db.setDataBaseName(BatchDetail::getBatchDetail().database);  
 	m_ui->comboBoxErrorType->clear();
@@ -182,7 +182,7 @@ void w_screenshoterror::saveError()
 		sid << vStructureError.size();	
 		
 		pathImg =  mets.date.toString("dd-MM-yyyy").toStdString() +"_nr" + sid.str() + ".png"  ;	
-		db.saveStructError(mets.idMets,m_ui->txtCommentaire->toPlainText().toStdString(),vErrorType[m_ui->comboBoxErrorType->currentIndex()].id,pathImg,pageNB);
+		db.saveStructError(mets.idMets,m_ui->txtCommentaire->toPlainText().toStdString(),vErrorType[m_ui->comboBoxErrorType->currentIndex()].id,pathImg,fileID);
 		
 	//	QPixmap xmap = QPixmap::grabWidget(this,0,25,this->width(),this->height()-100);
 		

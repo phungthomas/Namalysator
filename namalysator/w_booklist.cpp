@@ -37,6 +37,6 @@ void w_booklist::onclick(const QModelIndex & idx){
 		emit metsIdSelected( metsId );
 	} else {
 		emit metsThumb( metsId );
-		emit metsIdSelected( metsId );
+		//emit metsIdSelected( metsId );
 	}
 }

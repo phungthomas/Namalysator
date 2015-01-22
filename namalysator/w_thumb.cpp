@@ -41,8 +41,9 @@ void w_thumb::perform(){
     // int jj=i%56;
     
 		//ss<< "C:\\SmallTestBook\\243149\\tif\\" << std::setfill('0')<<std::setw(5)<< jj << ".tif";
-
-	ss<<path<<(listFile.find(stepi)->second).fileName;
+	
+	LinkedFiles linkF = listFile.find(stepi)->second;
+	ss<<path<<linkF.fileName;
 
 	emit newText(ss.str().c_str());
 	image.load(ss.str().c_str());
@@ -51,11 +52,22 @@ void w_thumb::perform(){
 		
 	InternalQPushButton* _but=allButton[stepi - 1];
 	_but ->pageNb = stepi;
-	_but ->setToolTip(ss.str().c_str());
+	
 	_but ->setIcon(QPixmap::fromImage(image.scaled(200,200,Qt::KeepAspectRatio,
 		           Qt::SmoothTransformation /*Qt::FastTransformation*/),
 				   Qt::DiffuseAlphaDither|Qt::ColorOnly));
+	if ( linkF.countError != 0 ){
+		QPalette pal = _but->palette();
+		pal.setColor(QPalette::Button, QColor(Qt::blue));
+		_but->setAutoFillBackground(true);
+		_but->setPalette(pal);
+		
+		ss <<" error count " << linkF.countError;
+	}
 	_but ->setIconSize(QSize(200,200));
+	_but ->setToolTip(ss.str().c_str());
+	_but->update();
+	
 	connect(_but,SIGNAL(pressed()),_but,SLOT(onclick()));
 	connect(_but,SIGNAL(clickedPageNb(int)),this,SLOT(onPage(int)));
 

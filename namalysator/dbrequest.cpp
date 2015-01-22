@@ -706,19 +706,39 @@ std::map<int,LinkedFiles> dbrequest::getMapLinkedFiles(int idMets,std::string fi
 	int rc;	
 	const char *zErrMsg= 0; 
 	int page=1;
-	std::string selectSql = "SELECT ID,ID_METS,TYPE,GROUPID,CHECKSUM,SIZE,FILENAME,FILEID,DPI FROM LINKEDFILES where ID_METS = ? and TYPE = ?";
+	std::string selectSql = "SELECT a.ID,a.ID_METS,a.TYPE,a.GROUPID,a.CHECKSUM,a.SIZE,a.FILENAME,a.FILEID,a.DPI, b.FILEID "
+		                    "FROM LINKEDFILES a LEFT JOIN STRUCTUREERROR b on a.ID_METS = b.ID_METS and a.FILEID =b.FILEID "
+							"where a.ID_METS = ? and a.TYPE = ? "
+							"ORDER BY a.ID";
 	DEBUG_ME
 	rc = sqlite3_prepare_v2(conn.db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	LinkedFiles lf;  
 	if(rc == SQLITE_OK)
-	{	  
+	{	int count = -1 ;
+	    lf.id =-1;
+		int previous;
 		sqlite3_bind_int(pStmt,1,idMets);
 		sqlite3_bind_text(pStmt,2,fileGroup.c_str(),fileGroup.length(),SQLITE_STATIC);
 
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{			
+		{	
 			int col = 0;
-			lf.id = sqlite3_column_int(pStmt,col++);
+		    previous = sqlite3_column_int(pStmt,col++);
+			if ( previous == lf.id ){
+				count ++;
+				continue;
+			}else{
+				if ( lf.id != -1 ) {
+					lf.countError=count;
+					altoPath[page]= lf;	
+					page++;
+					count = -1;   
+				};
+				count ++;
+				lf.id = previous;
+				
+			}
+
 			lf.idMets = sqlite3_column_int(pStmt,col++);
 			lf.type = safe_sqlite3_column_text(pStmt, col++);
 			lf.grouId = safe_sqlite3_column_text(pStmt, col++);
@@ -728,9 +748,13 @@ std::map<int,LinkedFiles> dbrequest::getMapLinkedFiles(int idMets,std::string fi
 			lf.fileId = safe_sqlite3_column_text(pStmt, col++);
 			lf.dpi = sqlite3_column_int(pStmt,col++);
 
+			if ( sqlite3_column_text ( pStmt,col++ ) ){ 
+				count ++;
+			};
+		}	
+			lf.countError=count;
 			altoPath[page]= lf;	
-			page++;  	 
-		}		
+			page++;
    }
    sqlite3_finalize(pStmt);
    return altoPath;
@@ -1402,7 +1426,7 @@ std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
 
 	int rc;	
 	const char *zErrMsg= 0; 
-	std::string selectSql = "SELECT ID,ID_METS,IMAGEPATH,MESSAGE,ID_ERRORTYPE,PAGENB FROM STRUCTUREERROR where ID_METS = ?"; 
+	std::string selectSql = "SELECT ID,ID_METS,IMAGEPATH,MESSAGE,ID_ERRORTYPE,FILEID FROM STRUCTUREERROR where ID_METS = ?"; 
 	std::map<int,StructureError> v;
 	DEBUG_ME
 	rc = sqlite3_prepare_v2(conn.db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1418,7 +1442,7 @@ std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
 			se.pathImage = safe_sqlite3_column_text(pStmt, col++);
 			se.message = safe_sqlite3_column_text(pStmt, col++);
 			se.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
-			se.pageNb = sqlite3_column_int(pStmt,col++);
+			se.fileid = safe_sqlite3_column_text(pStmt, col++);
 
 			v[se.id]= se; 			 
 		}		
@@ -1528,13 +1552,13 @@ std::vector<ErrorType> dbrequest::getErrorTypeCatStructure()
 	return v;
 }
 
-bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,std::string path, int pageNB)
+bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,std::string path, std::string fileID)
 {
 	ConnectionDB conn = g_pool.getConnection(databaseName);
 
 	const char *zErrMsg=0;
 	sqlite3_stmt *pStmt;
-	std::string sql = "INSERT INTO STRUCTUREERROR ('ID_METS','IMAGEPATH', 'MESSAGE','ID_ERRORTYPE','PAGENB') \
+	std::string sql = "INSERT INTO STRUCTUREERROR ('ID_METS','IMAGEPATH', 'MESSAGE','ID_ERRORTYPE','FILEID') \
 					  VALUES  (?,?,?,?,?)"; 							
 
 	
@@ -1551,7 +1575,7 @@ bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,
 	sqlite3_bind_text(pStmt,2,path.c_str(),path.length(),SQLITE_STATIC);
 	sqlite3_bind_text(pStmt,3,message.c_str(),message.length(),SQLITE_STATIC);
 	sqlite3_bind_int(pStmt, 4,idErrorType);
-	sqlite3_bind_int(pStmt, 5,pageNB);
+	sqlite3_bind_text(pStmt, 5,fileID.c_str(),fileID.length(),SQLITE_STATIC);
 
 	
 	if (sqlite3_step(pStmt) != SQLITE_DONE) {
