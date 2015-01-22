@@ -1401,7 +1401,7 @@ std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
 	sqlite3_stmt *pStmt;
 
 	int rc;	
-	const char *zErrMsg= ""; 
+	const char *zErrMsg= 0; 
 	std::string selectSql = "SELECT ID,ID_METS,IMAGEPATH,MESSAGE,ID_ERRORTYPE,PAGENB FROM STRUCTUREERROR where ID_METS = ?"; 
 	std::map<int,StructureError> v;
 	DEBUG_ME
