@@ -95,7 +95,7 @@ struct Mets : public dataitem
 	std::string identifier;
 	std::string ausgabe;
 	int year;
-	std::string papertype; // The type of document as used in the logical structure (e.g. Newspaper or Serial)
+	std::string papertype; // The type of document as used in the logical structure (e.g. Newspaper, Serial or MonoGraph)
 
 };
 /* THIS SEEMS DANGEROUSLY WRONG

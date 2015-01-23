@@ -4,6 +4,9 @@
 #include <string>
 #include <xercesc/sax2/Attributes.hpp>
 
+#include <xercesc/util/TransService.hpp>
+
+
 
 using namespace std;
 using namespace xercesc;
@@ -20,9 +23,20 @@ StateParserCH::~StateParserCH(){
 }
 
 void 	StateParserCH::characters (const XMLCh *const chars, const XMLSize_t length){
-	char* _chars =XMLString::transcode (chars);
-	dataAcc += std::string (_chars,strlen ( _chars ));
-	XMLString::release(&_chars);
+	static XMLTransService::Codes failReason;
+	static XMLCh* UTF8_ENCODING = XMLString::transcode("UTF-8");;
+	static XMLTranscoder* utf8Transcoder = XMLPlatformUtils::fgTransService->makeNewTranscoderFor(UTF8_ENCODING, failReason,16*1024);
+    XMLSize_t      charsEaten;
+	char _chars[3000]; // for strange reason when declare like static metsverifier core dump ( however there is not multi threading !!! Strange
+
+	if ( length > 0 ) {
+		utf8Transcoder->transcodeTo(chars, length,(XMLByte*)_chars,3000,charsEaten,XMLTranscoder::UnRep_RepChar);
+	}else{
+		_chars[0]='\0';
+	}
+	//char* _chars =XMLString::transcode (chars);
+	dataAcc += std::string (_chars,strlen(_chars));
+	//XMLString::release(&_chars);
 }
 
 void    StateParserCH::startElement(const XMLCh *const uri, const XMLCh *const localname, const XMLCh *const qname, const xercesc::Attributes &attrs){
