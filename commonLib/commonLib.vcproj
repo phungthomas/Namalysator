@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\include"
+				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;$(METSVERIFIER)\Headers"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"

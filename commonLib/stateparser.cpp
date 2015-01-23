@@ -27,10 +27,11 @@ void 	StateParserCH::characters (const XMLCh *const chars, const XMLSize_t lengt
 	static XMLCh* UTF8_ENCODING = XMLString::transcode("UTF-8");;
 	static XMLTranscoder* utf8Transcoder = XMLPlatformUtils::fgTransService->makeNewTranscoderFor(UTF8_ENCODING, failReason,16*1024);
     XMLSize_t      charsEaten;
-	char _chars[3000]; // for strange reason when declare like static metsverifier core dump ( however there is not multi threading !!! Strange
+	static char _chars[3000]; // for strange reason when declare like static metsverifier core dump ( however there is not multi threading !!! Strange
 
 	if ( length > 0 ) {
-		utf8Transcoder->transcodeTo(chars, length,(XMLByte*)_chars,3000,charsEaten,XMLTranscoder::UnRep_RepChar);
+		int col=utf8Transcoder->transcodeTo(chars, length,(XMLByte*)_chars,3000,charsEaten,XMLTranscoder::UnRep_RepChar);
+		_chars[col]='\0';
 	}else{
 		_chars[0]='\0';
 	}
@@ -101,14 +102,36 @@ StateParserState* StateParserState::getNext(const char* const name){
 
 // helper for start element analysor of attributes
 char* StateParserState::getAttributeValue (const char* qname, const xercesc::Attributes &attrs){
+	static XMLTransService::Codes failReason;
+	static XMLCh* UTF8_ENCODING = XMLString::transcode("UTF-8");;
+	static XMLTranscoder* utf8Transcoder = XMLPlatformUtils::fgTransService->makeNewTranscoderFor(UTF8_ENCODING, failReason,16*1024);
+    XMLSize_t      charsEaten;
+	static char _chars[3000]; 
+
 	char* ret=NULL ;
+
+
+	//std::cerr << failReason << XMLTransService::Ok << qname<< std::endl;
+
 	if ( qname != NULL) {
 		XMLCh* _qname = XMLString::transcode(qname);
 		const XMLCh* value = attrs.getValue(_qname);
+		int len ;
+		
 
 		
 		if ( value != NULL ) {
-			ret = XMLString::transcode(value);
+			char * tmp = XMLString::transcode(value);
+			len = strlen(tmp);
+			XMLString::release(&tmp);
+
+			int col = utf8Transcoder->transcodeTo(value, len,(XMLByte*)_chars,3000,charsEaten,XMLTranscoder::UnRep_RepChar);
+			_chars[col]='\0';
+			
+			
+			ret = strdup(_chars); // don't forgot to free
+			//ret = XMLString::transcode(value); // possible memory leak : ret must be XMLString::release(ret)
+			//std::cerr << "VAL1:" << _chars << std::endl << "VAL2:" << ret <<std::endl << std::endl;
 		}
 		XMLString::release(&_qname);
 	}
