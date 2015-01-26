@@ -5,6 +5,7 @@
 #include <xercesc/sax2/Attributes.hpp>
 
 #include <xercesc/util/TransService.hpp>
+#include <queue>
 
 
 
@@ -27,14 +28,12 @@ void 	StateParserCH::characters (const XMLCh *const chars, const XMLSize_t lengt
 	static XMLCh* UTF8_ENCODING = XMLString::transcode("UTF-8");;
 	static XMLTranscoder* utf8Transcoder = XMLPlatformUtils::fgTransService->makeNewTranscoderFor(UTF8_ENCODING, failReason,16*1024);
     XMLSize_t      charsEaten;
-	static char _chars[3000]; // for strange reason when declare like static metsverifier core dump ( however there is not multi threading !!! Strange
+	static char _chars[3000]; 
 
-	if ( length > 0 ) {
-		int col=utf8Transcoder->transcodeTo(chars, length,(XMLByte*)_chars,3000,charsEaten,XMLTranscoder::UnRep_RepChar);
-		_chars[col]='\0';
-	}else{
-		_chars[0]='\0';
-	}
+	
+	int col=utf8Transcoder->transcodeTo(chars, length,(XMLByte*)_chars,3000,charsEaten,XMLTranscoder::UnRep_RepChar);
+	_chars[col]='\0';
+	
 	//char* _chars =XMLString::transcode (chars);
 	dataAcc += std::string (_chars,strlen(_chars));
 	//XMLString::release(&_chars);
@@ -106,33 +105,30 @@ char* StateParserState::getAttributeValue (const char* qname, const xercesc::Att
 	static XMLCh* UTF8_ENCODING = XMLString::transcode("UTF-8");;
 	static XMLTranscoder* utf8Transcoder = XMLPlatformUtils::fgTransService->makeNewTranscoderFor(UTF8_ENCODING, failReason,16*1024);
     XMLSize_t      charsEaten;
-	static char _chars[3000]; 
+	#define INTERNALSIZE 500
+	#define NBTOT 50
+	static char _charsTab[NBTOT][INTERNALSIZE]; // like the function give back a char*: here a static memory on which we roll on
+	char * _chars;
+	static int nbWhere=0;
 
 	char* ret=NULL ;
-
-
-	//std::cerr << failReason << XMLTransService::Ok << qname<< std::endl;
 
 	if ( qname != NULL) {
 		XMLCh* _qname = XMLString::transcode(qname);
 		const XMLCh* value = attrs.getValue(_qname);
-		int len ;
-		
-
-		
+			
 		if ( value != NULL ) {
-			char * tmp = XMLString::transcode(value);
-			len = strlen(tmp);
-			XMLString::release(&tmp);
 
-			int col = utf8Transcoder->transcodeTo(value, len,(XMLByte*)_chars,3000,charsEaten,XMLTranscoder::UnRep_RepChar);
+			_chars = _charsTab[nbWhere];
+			nbWhere = (++nbWhere)%NBTOT;
+
+			int col = utf8Transcoder->transcodeTo(value, XMLString::stringLen(value),
+				                                  (XMLByte*)_chars,INTERNALSIZE-2,
+												  charsEaten,XMLTranscoder::UnRep_RepChar);
 			_chars[col]='\0';
-			
-			
-			ret = strdup(_chars); // don't forgot to free
-			//ret = XMLString::transcode(value); // possible memory leak : ret must be XMLString::release(ret)
-			//std::cerr << "VAL1:" << _chars << std::endl << "VAL2:" << ret <<std::endl << std::endl;
+			ret = _chars; 
 		}
+
 		XMLString::release(&_qname);
 	}
 	return ret;
