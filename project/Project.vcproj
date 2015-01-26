@@ -416,10 +416,6 @@
 				Name="sql"
 				>
 				<File
-					RelativePath=".\insertinventaire.h"
-					>
-				</File>
-				<File
 					RelativePath=".\sql.h"
 					>
 				</File>
