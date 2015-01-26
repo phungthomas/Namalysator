@@ -35,11 +35,8 @@ public :
 // do the work only if actif : meaning if it is a monography
 
 class inventoryMappingActif:public inventoryMapping{
-
 	bool actif;
-
 public :
-
 	virtual void setCurrentInventory(std::string type); // call parent if actif, otherwise do nothing
 	virtual void setCurrentInventoryValue(std::string field, std::string value); // call parent if actif, otherwise do nothing
     void setActif(bool);
