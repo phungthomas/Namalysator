@@ -9,7 +9,7 @@ using namespace std;
 altoparser::altoparser(const std::string &alto_fname,const std::string &altoId,errorHandler *h, datafactory *df):StateParserCH(ctx,root){	
 	ctx.altoFile = alto_fname;
 	ctx.alto = altoId;
-	ctx.hError = h; // no more usefull like parsing will validate !
+//	ctx.hError = h; // no more usefull like parsing will validate !
 	ctx.dfalto = df;	
 }
 

@@ -14,7 +14,7 @@ public :
 	datafactory *dfalto;
 	std::string altoFile;
 	altoblock altoBlock;
-	errorHandler *hError;
+	//errorHandler *hError;
 	bool is_mm10;	
 	int  dpi;
 };
