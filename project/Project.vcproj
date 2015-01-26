@@ -195,6 +195,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\inventory.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\main.cpp"
 				>
 			</File>
@@ -386,6 +390,10 @@
 			</File>
 			<File
 				RelativePath=".\errorhandler.h"
+				>
+			</File>
+			<File
+				RelativePath=".\inventory.h"
 				>
 			</File>
 			<File
