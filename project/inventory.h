@@ -19,6 +19,7 @@ struct inventory{
 	std::string BIBREC_SYS_NUM;
 };
 
+// inventoryMapping : store different inventory like there is multiple section in xml 
 class inventoryMapping {
 private :
 	struct inventory inventoryMODSMD_PRINT;
