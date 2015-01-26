@@ -206,10 +206,6 @@
 				RelativePath=".\utilities.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\xmlsaverstruct.cpp"
-				>
-			</File>
 			<Filter
 				Name="datafactory"
 				>
@@ -402,10 +398,6 @@
 			</File>
 			<File
 				RelativePath=".\titletocheck.h"
-				>
-			</File>
-			<File
-				RelativePath=".\xmlsaverstruct.h"
 				>
 			</File>
 			<Filter
@@ -615,10 +607,6 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\ClassDiagram1.cd"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
