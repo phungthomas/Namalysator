@@ -101,7 +101,7 @@ void metsParser::XMLendElement(const char *name)
 	}	
 }
 
-void metsParser::XMLcharacterData(const char *s, int len)
+void metsParser::XMLcharacterData(const char *, int )
 {
 }
 

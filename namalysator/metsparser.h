@@ -24,7 +24,7 @@ private:
 	std::string batchName;
 	typeBlock typeblock;
 
-std::stack <std::string> pile;
+//std::stack <std::string> pile;
 	Item *currentItem;
 	Item *rootItem;
 public:
