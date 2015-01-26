@@ -5,9 +5,7 @@
 #include <vector>
 #include "struct.h"
 #include "sqlite3.h"
-const char *get_named_attr(const char *name, const char **atts);
 
-//std::string initializeXmlValidator();
 std::string replaceApostrophe(std::string message);
 std::vector<int> getIssueNumber(const std::string &s);
 std::string slash_path(std::string path);

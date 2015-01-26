@@ -6,26 +6,6 @@
 #include <sstream>
 #include "metsverifier.h"
 
-const char* get_named_attr(const char *name, const char **atts)
-{
-	const char *val = 0;
-	if (!atts) {
-		return 0;
-	}
-	while (*atts) {
-		if (strcmp(*atts, name) == 0) {
-			++atts;
-			if (*atts) {
-				val = *atts;
-			}
-			return val;
-		} else {
-			++atts;
-			++atts;
-		}
-	}
-	return val;
-}
 
 std::string replaceApostrophe(std::string message)
 {
