@@ -199,10 +199,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\schemavalidator.hnomoreuse"
-				>
-			</File>
-			<File
 				RelativePath=".\titletocheck.cpp"
 				>
 			</File>
