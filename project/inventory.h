@@ -15,6 +15,7 @@ public:
 	std::string BIBREC_100a_2;
 	std::string BIBREC_260b;
 	std::string BIBREC_260c;
+	std::string ITEM_barcode;
 	std::string BIBREC_SYS_NUM; //could be ITEM_barcode depending of the section
 	std::string languageTerm; //std::string BIBREC_008_35_37;
 	std::string toString(std::string name);
@@ -23,11 +24,13 @@ public:
 // inventoryMapping : store different inventory like there is multiple section in xml 
 class inventoryMapping {
 private :
+
+	inventory* currentInventory;
+public :
 	inventory inventoryMODSMD_PRINT;
 	inventory inventoryMODSMD_ELEC;
 	inventory inventoryMARCMD_ALEPHSYNC;
-	inventory* currentInventory;
-public :
+
 	inventory* getInventory(std::string type);
 	virtual void setCurrentInventory(std::string type);
 	virtual void setCurrentInventoryValue(std::string field, std::string value);

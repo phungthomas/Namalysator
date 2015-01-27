@@ -4,6 +4,7 @@
 #include "sqlite3.h"
 #include "datafactory.h"
 #include "../common_files/struct.h"
+#include "inventory.h"
 
 //! sql queries to the database
 class database
@@ -23,6 +24,7 @@ public:
 	//! open database
 	bool openDB();
 	void closeDB();
+	void dberror(std::string);
 	//! \ set id of the current Testset	
 	void setIdTestSet();		
 	//! insert all data of the datafactory in the database
@@ -67,5 +69,6 @@ public:
 	void insertLog(std::string message);
 
 	bool FillSupplements(int idMets, std::vector<string> &supplements);
+	bool getInventory(std::string _sysnum, inventory&);
 };
 #endif // SQL_H_

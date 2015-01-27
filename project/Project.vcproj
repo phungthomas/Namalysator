@@ -229,6 +229,10 @@
 			<Filter
 				Name="verifiers"
 				>
+				<File
+					RelativePath=".\verifyBook.cpp"
+					>
+				</File>
 				<Filter
 					Name="semanticchecks"
 					>
@@ -431,6 +435,10 @@
 			<Filter
 				Name="verifiers"
 				>
+				<File
+					RelativePath=".\verifybook.h"
+					>
+				</File>
 				<File
 					RelativePath=".\verifyIdentifierInMix.h"
 					>

@@ -25,5 +25,6 @@ struct Parameters
 	std::string sampling;
 	std::string issueNumber;
 	std::string measurementSTD;
+	std::string inventoryBook;
 };
 #endif

@@ -260,7 +260,10 @@ typedef enum errorTypeEnum {
 	cat_incorrectBlock=  34,
 	cat_partnumber =  35,
 	cat_cutoutoriginal =  36,
-	cat_measurement =  37
+	cat_measurement =  37,
+	cat_bookinventory = 38,
+	cat_bookinventoryTitle = 50,
+	cat_bookinventoryData = 51
 } errorType;
 
 

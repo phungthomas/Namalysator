@@ -22,6 +22,7 @@ public:
 	virtual ~errorHandler(){};
 
 	void setDatabase(database *db);
+	inline database * getDatabase (){ return db;}; // not nice shortcut
 	void writeToLog(errorType category,const std::string &fileName,const std::string &message);
 	void getMetsError(errorType category,const std::string &relatedType,const std::string &file_part,Error error,const std::string &fname );
 	void begin(const std::string &info);

@@ -40,6 +40,7 @@
 #include "verifychecksum.h"
 #include "verifycutouts.h"
 #include "verifymeasurement.h"
+#include "verifybook.h"
 #include "titletocheck.h"
 #include "datehelper.h"
 #include <configparser.h>
@@ -107,9 +108,9 @@ int start()
 	std::stringstream configPath,sqlCreateTablePath;	
 	configPath << CurrentPath << "/config.xml"; 	
 
-	Parameters *parameter = new Parameters;
+	Parameters parameter;
 
-	configparser config(parameter);
+	configparser config(&parameter);
 	//Parse the config file
 	
 	std::cerr << "Config file :" << configPath.str().c_str() << std::endl;
@@ -123,9 +124,9 @@ int start()
 		return 1;				
 	}	
 
-	std::string batchName = parameter->batchName;
-	std::string datab = parameter->database + ".db";
-	std::string input= parameter->input;		
+	std::string batchName = parameter.batchName;
+	std::string datab = parameter.database + ".db";
+	std::string input= parameter.input;		
 
 	sqlCreateTablePath << CurrentPath << "/createtable.txt";
 	
@@ -159,7 +160,7 @@ int start()
 	hError.setlogFilePath(logFilePath.str());
 	hError.begin(getDate());
 	//verify input path of disk
-	if (validInputPath(parameter->input,&hError)== false)
+	if (validInputPath(parameter.input,&hError)== false)
 	{	
 		hError.begin("return 2");			
 		return 2;	
@@ -188,7 +189,7 @@ int start()
 		return 4;
 	}		
 	//insert the parameters of verifiers into the database
-	db.insertParameterVerifiers(parameter);	
+	db.insertParameterVerifiers(&parameter);	
 
 	pt.LogTime("Inserting DB parameters");
 	
@@ -243,14 +244,13 @@ int start()
 			return 1;
 		};
 
-		cerr << metsP.getContext().inventory.toString();
-		
-		//std::cerr << "Finish" << std::endl;
+		//cerr << metsP.getContext().inventory.toString();
 
 		pt.LogTime("Parsing METS file");
+
+
 		//Parse all the Altos from Mets		
-		File_Group *fg = 0;
-		fg = df.get<File_Group>("ALTOGRP");
+		File_Group *fg = df.get<File_Group>("ALTOGRP");
 		if ( fg != NULL ){
 			for(size_t j=0;j < fg->vect.size();j++)
 			{	
@@ -267,14 +267,20 @@ int start()
 	
 			}
 		
-		pt.LogTime("Parsing ALTO files");
-		if (parameter->oddsPages =="1")
-		{
-			verifyoddspages(&hError,currentMetsFile,fg->vect.size());
+			pt.LogTime("Parsing ALTO files");
+			if (parameter.oddsPages =="1")
+			{
+				verifyoddspages(&hError,currentMetsFile,fg->vect.size());
+			}
+			pt.LogTime("Verify Odds pages");
 		}
-		}
-		pt.LogTime("Verify Odds pages");
-		if (parameter->checkFile =="1")
+		
+
+		static verifyBook vBook;
+		vBook.check(parameter.inventoryBook,metsP.getContext());
+		
+
+		if (parameter.checkFile =="1")
 		{
 			verifypdf(&df,&hError,currentMetsPath);
 			pt.LogTime("Verify PDF");
@@ -288,7 +294,7 @@ int start()
 		dataaggregator da(&df,currentMetsFile);	
 		pt.LogTime("Creating dataagregator");
 		
-		if (parameter->dateFolderIssue =="1")
+		if (parameter.dateFolderIssue =="1")
 		{			
 			verifydatefolder(&hError,currentMetsFile,currentMetsPath);		
 			verifydatemismatch(	&hError,df.get<Mets>("METS"));				
@@ -296,60 +302,60 @@ int start()
 		//Begin for the verifiers		
 		if (parseError == false)
 		{				
-			if (parameter->checkSum =="1")
+			if (parameter.checkSum =="1")
 			{
 				verifychecksum(&df,&hError,currentMetsFile,currentMetsPath);				
 			}
 			
-			if (parameter->divs =="1")
+			if (parameter.divs =="1")
 			{
 				verifydivs vd(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter->unlinkedIdentifier =="1")
+			if (parameter.unlinkedIdentifier =="1")
 			{
 				verifyunlinkedidentifier(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter->identifierMix =="1")
+			if (parameter.identifierMix =="1")
 			{
 				verifyidentifierinmix(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter->altoblockPerPage =="1")
+			if (parameter.altoblockPerPage =="1")
 			{
 				verifyaltoblockperpage(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter->blockStructure =="1")
+			if (parameter.blockStructure =="1")
 			{
 				verifyblockstructure(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter->coveragePercentAlto =="1")
+			if (parameter.coveragePercentAlto =="1")
 			{
 				verifycoveragepercentagealtoblocks(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter->multipleBlockUse =="1")
+			if (parameter.multipleBlockUse =="1")
 			{
 				verifyblocks(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter->noIssueDefined =="1")
+			if (parameter.noIssueDefined =="1")
 			{
 				verifynoissuedefined(&df,&hError,currentMetsFile);		
 			}
 
-			if (parameter->invalidSupplement =="1")
+			if (parameter.invalidSupplement =="1")
 			{
 				verifyinvalidsupplement(&df,&hError,currentMetsFile);				
 			}								
-			if (parameter->issueNumber =="1")
+			if (parameter.issueNumber =="1")
 			{
 				verifyinvalidissuenumber(&df,&hError,currentMetsFile);
 			}	
-			if (parameter->measurementSTD == "1"){
+			if (parameter.measurementSTD == "1"){
 				std::cerr << "ADDING measurement test" << std::endl;
 				verifyMeasurement(&df,&hError,currentMetsFile);
 			}
@@ -377,8 +383,8 @@ int start()
 	verifymissingissue(&hError,&db);
 	
 	//TODO quand c'est 0 et empty string
-	db.insertRandomTitle(atoi(parameter->checkTitle.c_str()));
-	db.insertRandomMets(atoi(parameter->sampling.c_str()),vectorMets.size());	
+	db.insertRandomTitle(atoi(parameter.checkTitle.c_str()));
+	db.insertRandomMets(atoi(parameter.sampling.c_str()),vectorMets.size());	
 
 	hError.begin(getDate());
 	hError.begin("The End");
@@ -400,6 +406,7 @@ void initXSDMets(parserCheck* p){
 	p->addXSD("mods-3-2.xsd");
 	p->addXSD("mods-3-3.xsd");
 	p->addXSD("xlink.xsd");
+	p->addXSD("MARC21slim_bnl.xsd");
 	p->lockaddXSD();
 }
 void initXSDAlto(parserCheck* p){

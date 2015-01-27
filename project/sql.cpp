@@ -167,6 +167,56 @@ void database::insertMets(const std::string &batchName,const std::string &path ,
 		sqlite3_free(zErrMsg);
 	}
 }
+
+void database::dberror(std::string sql){
+	std::string error ( sqlite3_errmsg(db) );
+	std::cerr << "ERROR DB :" << error << std::endl << sql << std::endl;
+}
+
+bool database::getInventory(std::string _sysnum, inventory& _inventory){
+	bool ret = false;
+	static std::string sql = "SELECT BIBREC_SYS_NUM,ITEM_barcode,BIBREC_CALL_NUM,"
+		              "  languageTerm,BIBREC_100a_1,BIBREC_100a_2,BIBREC_245a,"
+					  "  BIBREC_245b,BIBREC_260b,BIBREC_260c,BIBREC_300a,"
+					  "  BIBREC_300a_ref,BIBREC_300c from BOOKSINVENTORY where BIBREC_SYS_NUM=?";
+
+	const char *szErrMsg =0;
+	sqlite3_stmt *pStmt =0;
+
+	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt, &szErrMsg);
+
+	if( rc == SQLITE_OK){
+		sqlite3_bind_text(pStmt, 1, _sysnum.c_str(), _sysnum.length(), SQLITE_STATIC);
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{
+			int col=0;
+			
+			_inventory.BIBREC_SYS_NUM = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.ITEM_barcode = safe_sqlite3_column_text(pStmt, col++);
+			std::string dummy = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.languageTerm = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.BIBREC_100a_1 = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.BIBREC_100a_2 = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.BIBREC_245a = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.BIBREC_245b = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.BIBREC_260c = safe_sqlite3_column_text(pStmt, col++);
+			dummy = safe_sqlite3_column_text(pStmt, col++);
+			dummy = safe_sqlite3_column_text(pStmt, col++);
+			dummy = safe_sqlite3_column_text(pStmt, col++);
+
+			ret = true;
+		}
+		
+		
+	}else{ // problem
+		dberror(sql);
+	}
+	sqlite3_finalize(pStmt);
+
+	return ret;
+}
+
 //update details of Mets
 void database::updateMets(datafactory *df)
 {	
