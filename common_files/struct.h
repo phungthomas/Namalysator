@@ -9,7 +9,7 @@
 
 using namespace std;
 
-//extern const std::string article_identifier;
+//extern const std::string article_identifier,
 
 //! structure of an dmdsec : a map with  : tag name as key, vector of all the item .
 struct dmdsec : public dataitem
@@ -228,39 +228,40 @@ struct ErrorTypeMets {
 };
 
 #include <common.h>
-
-const static int cat_xml_error=  1;	
-const static int cat_schema_err=  2;
-const static int cat_wrongFolderName=  3;
-const static int cat_missingFile=  4;
-const static int cat_sequenceIncorrect=  5;
-const static int cat_multipleDmdId=  6;
-const static int cat_wrongChecksum= 7 ;
-const static int cat_multipleDiv=  8;
-const static int cat_unlinkedIdentifier=9;
-const static int cat_missingGroupId=  10;	
-const static int cat_amdsecID=  11;
-const static int cat_multipleBlock=  12;
-const static int cat_noIssueDefined=  13;
-const static int cat_invalidSupplement=  14;
-const static int cat_wrongTitle=  15;					
-const static int cat_altoPerPage=  16;	
-const static int cat_wrongCoordinates= 17 ;
-const static int cat_BlockOutsidePrintspace=  18;
-const static int cat_dateMisMatch =  19;
-const static int cat_missingIssue=  20;
-const static int cat_invalidIssueNumber=  21;
-const static int cat_duplicateIssue=  22;	
-const static int cat_missingIssueNumber=  23;	
-const static int cat_metsFile = 24;
-const static int cat_strangePrintspaceNumber = 30;
-const static int cat_emptyBlock = 31;
-const static int cat_odds = 32;
-const static int cat_actualcoverage = 33;
-const static int cat_incorrectBlock=  34;
-const static int cat_partnumber =  35;
-const static int cat_cutoutoriginal =  36;
-const static int cat_measurement =  37;
+typedef enum errorTypeEnum {
+	cat_xml_error=  1,	
+	cat_schema_err=  2,
+	cat_wrongFolderName=  3,
+	cat_missingFile=  4,
+	cat_sequenceIncorrect=  5,
+	cat_multipleDmdId=  6,
+	cat_wrongChecksum= 7 ,
+	cat_multipleDiv=  8,
+	cat_unlinkedIdentifier=9,
+	cat_missingGroupId=  10,	
+	cat_amdsecID=  11,
+	cat_multipleBlock=  12,
+	cat_noIssueDefined=  13,
+	cat_invalidSupplement=  14,
+	cat_wrongTitle=  15,					
+	cat_altoPerPage=  16,	
+	cat_wrongCoordinates= 17 ,
+	cat_BlockOutsidePrintspace=  18,
+	cat_dateMisMatch =  19,
+	cat_missingIssue=  20,
+	cat_invalidIssueNumber=  21,
+	cat_duplicateIssue=  22,	
+	cat_missingIssueNumber=  23,	
+	cat_metsFile = 24,
+	cat_strangePrintspaceNumber = 30,
+	cat_emptyBlock = 31,
+	cat_odds = 32,
+	cat_actualcoverage = 33,
+	cat_incorrectBlock=  34,
+	cat_partnumber =  35,
+	cat_cutoutoriginal =  36,
+	cat_measurement =  37
+} errorType;
 
 
 #endif //STRUCT_H_  

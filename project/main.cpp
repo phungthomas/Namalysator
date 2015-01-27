@@ -212,6 +212,7 @@ int start()
 
 	//Begin to parse Mets File
 	for(size_t i=0;i < vectorMets.size();i++)
+		//for ( int j=0;j <10 ;j++)
 	{	
 		pt.Start();
 		bool parseError = false;		
@@ -242,6 +243,8 @@ int start()
 			return 1;
 		};
 
+		cerr << metsP.getContext().inventory.toString();
+		
 		//std::cerr << "Finish" << std::endl;
 
 		pt.LogTime("Parsing METS file");

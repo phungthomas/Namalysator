@@ -20,7 +20,9 @@ public:
 		StringItem papertype;
 		papertype.value = (s ? s : "");
 		CTX.dfMets->set<StringItem>("METS_PAPERTYPE", papertype);
-		//cerr << "StateParserMetsState :: startElement" << name << "papertype:" << papertype.value << endl;
+	
+		if ( papertype.value.compare("Monograph")==0 ) CTX.inventory.setActif(true);
+		else CTX.inventory.setActif(false);
 	};
 };
 
@@ -105,25 +107,31 @@ public:
 		const char *val = getAttributeValue("ID", atts);
 		if (val != 0) 
 		{		
-			CTX.idItem = val;						
+			CTX.idItem = val;
+			CTX.inventory.setCurrentInventory(val);
 		}
 	};
 
 	virtual void endElement (const char* const name){
 		CTX.dfMets->set(CTX.idItem,CTX.dmdSecStruct);
 		CTX.dmdSecStruct.mapAddStringData.clear();
+		CTX.inventory.setCurrentInventory("DUMMY");
 	};
 };
 
 class StateParsermodState : public StateParserMetsRootState{
+private :
 public:
+
 	virtual void characters (const char* const s, const int len){
 		CTX.addStringData += xml2str(s,len);
 	}
 	virtual void endElement (const char* const name){
-		std::string idkeymap = "MODS:" + std::string(name);
+		std::string _name (name);
+		std::string idkeymap = "MODS:" + _name;
 		// trim whitespace, tabs, newlines from character Data
 		boost::algorithm::trim(CTX.addStringData);
+		
 
 		if( CTX.dmdSecStruct.mapAddStringData.find(idkeymap) == CTX.dmdSecStruct.mapAddStringData.end())
 		{
@@ -138,9 +146,87 @@ public:
 		}	
 	};
 
-	virtual StateParserState* getNext(const char* const name){
-		return this;
+	virtual StateParserState* getNext(const char* const name);
+
+};
+
+class StateParsermodStateInventory:public StateParsermodState{
+private:
+	std::string value;
+	StateParserState* next;
+public:
+	StateParsermodStateInventory(std::string _value,StateParserState* _next):value(_value),next(_next){};
+
+	virtual void endElement (const char* const name){
+		CTX.inventory.setCurrentInventoryValue(value,CTX.addStringData);
+		StateParsermodState::endElement(name);
 	};
+/*
+	virtual StateParserState* getNext(const char* const name){
+		return next->getNext(name);
+	}
+*/
+};
+class StateParsermodStateInventoryType:public StateParsermodState{
+private:
+	std::string localType;
+	StateParserState* next;
+public:
+	StateParsermodStateInventoryType(StateParserState* _next):next(_next){}
+	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
+		
+		const char *val = getAttributeValue("type", atts);
+		if (val != 0) 
+		{		
+			localType=std::string(val);
+		}
+	};
+
+	virtual void endElement (const char* const name){
+		if ( localType.compare("given")==0 ){
+			CTX.inventory.setCurrentInventoryValue("BIBREC_100a-1",CTX.addStringData);
+		}else if ( localType.compare("family")==0 ){
+			CTX.inventory.setCurrentInventoryValue("BIBREC_100a-2",CTX.addStringData);
+		}
+		StateParsermodState::endElement(name);
+	};
+
+	/*
+	virtual StateParserState* getNext(const char* const name){
+		return next->getNext(name);
+	}
+	*/
+
+};
+
+StateParserState* StateParsermodState::getNext(const char* const name){
+	static std::map<string,StateParsermodState*> map;
+	static StateParserState* root=this;
+
+	StateParserState* ret=root;
+	
+	static struct _onlyOnes {
+		_onlyOnes(std::map<string,StateParsermodState*>& map,StateParserState* pt){
+			static int i = 0;
+			std::cerr << "Only Ones :"<< ++i << std::endl;
+			map["title"]=		new StateParsermodStateInventory("BIBREC_245a",pt);
+			map["subTitle"]=	new StateParsermodStateInventory("BIBREC_245b",pt); // sub state machine
+			map["identifier"]=	new StateParsermodStateInventory("BIBREC_SYS_NUM",pt);
+			map["languageTerm"]=new StateParsermodStateInventory("languageTerm",pt);
+			map["publisher"]=	new StateParsermodStateInventory("BIBREC_260b",pt);
+			map["dateIssued"]=	new StateParsermodStateInventory("BIBREC_260c",pt);
+			map["namePart"]=	new StateParsermodStateInventoryType(pt); // case of type
+		}
+	} onlyOnes (map,root);
+
+	if (CTX.inventory.isActif()){
+		std::map<string,StateParsermodState*>::iterator it = map.find(name);
+		if ( it != map.end()) ret = (*it).second;
+	};
+
+	return ret;
+
+
 };
 
 class StateParserRootfileSec : public StateParserMetsRootState{

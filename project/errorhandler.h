@@ -22,12 +22,12 @@ public:
 	virtual ~errorHandler(){};
 
 	void setDatabase(database *db);
-	void writeToLog(int category,const std::string &fileName,const std::string &message);
-	void getMetsError(int category,const std::string &relatedType,const std::string &file_part,Error error,const std::string &fname );
+	void writeToLog(errorType category,const std::string &fileName,const std::string &message);
+	void getMetsError(errorType category,const std::string &relatedType,const std::string &file_part,Error error,const std::string &fname );
 	void begin(const std::string &info);
-	void getDateError(int category,std::string dateBegin,std::string dateEnd,std::string issues,std::string comment);
+	void getDateError(errorType category,std::string dateBegin,std::string dateEnd,std::string issues,std::string comment);
 	void setlogFilePath(const std::string &pathLog);
-	void getError(int category,const std::string &relatedType,const std::string &file_part, const std::string &message,const std::string &fName, std::string id);
+	void getError(errorType category,const std::string &relatedType,const std::string &file_part, const std::string &message,const std::string &fName, std::string id);
 
     virtual void warning (const xercesc::SAXParseException&);
     virtual void error (const xercesc::SAXParseException&);

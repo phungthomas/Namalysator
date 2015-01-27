@@ -8,6 +8,7 @@
 #include "datafactory.h"
 #include "errorhandler.h"
 #include "stateparser.h"
+#include "inventory.h"
 
 
 class metsparserContext : public StateParserContext{
@@ -35,6 +36,7 @@ public :
 	// amdsec
 	AmdSec amdsec;
 
+	inventoryMappingActif inventory;
 };
 
 class StateParserMetsRootState:public StateParserState{
@@ -52,7 +54,8 @@ private:
 	StateParserMetsRootState _root;
 	metsparserContext ctx;
 public:
-	metsParser(std::string &mets_fname,errorHandler *h,datafactory *df);		
+	metsParser(std::string &mets_fname,errorHandler *h,datafactory *df);
+	inline metsparserContext& getContext(){return ctx;};
 };
 
 #endif // METSPARSER_H_
