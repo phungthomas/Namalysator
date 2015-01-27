@@ -11,7 +11,7 @@ CREATE TABLE BOOKSINVENTORY (
 	BIBREC_SYS_NUM varchar(20) UNIQUE,
 	ITEM_barcode varchar(20),
 	BIBREC_CALL_NUM varchar(20),
-    languageTerm varchar(3),
+    languageTerm varchar(3) NOT NULL,
 	BIBREC_100a_1 varchar(40),
 	BIBREC_100a_2 varchar(40),
 	BIBREC_245a varchar(400),
@@ -20,7 +20,8 @@ CREATE TABLE BOOKSINVENTORY (
 	BIBREC_260c varchar(40),
 	BIBREC_300a varchar(20),
 	BIBREC_300a_ref varchar(20),
-	BIBREC_300c varchar(20)
+	BIBREC_300c varchar(20),
+	CHECKED INTEGER
 );
 
 drop table if exists TESTSET ;
