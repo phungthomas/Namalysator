@@ -153,26 +153,32 @@ public:
 class StateParsermodStateInventory:public StateParsermodState{
 private:
 	std::string value;
-	StateParserState* next;
 public:
-	StateParsermodStateInventory(std::string _value,StateParserState* _next):value(_value),next(_next){};
+	StateParsermodStateInventory(std::string _value):value(_value){};
 
 	virtual void endElement (const char* const name){
 		CTX.inventory.setCurrentInventoryValue(value,CTX.addStringData);
 		StateParsermodState::endElement(name);
 	};
-/*
-	virtual StateParserState* getNext(const char* const name){
-		return next->getNext(name);
-	}
-*/
 };
+
+class StateParsermodStateInventoryMarc:public StateParsermodState{
+private:
+	std::string value;
+public:
+	StateParsermodStateInventoryMarc(std::string _value):value(_value){};
+
+	virtual void endElement (const char* const name){
+		CTX.inventory.setCurrentInventoryValue(value,CTX.addStringData);
+		CTX.addStringData.clear();
+	};
+};
+
 class StateParsermodStateInventoryType:public StateParsermodState{
 private:
 	std::string localType;
-	StateParserState* next;
 public:
-	StateParsermodStateInventoryType(StateParserState* _next):next(_next){}
+	StateParsermodStateInventoryType(){}
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
 		
 		const char *val = getAttributeValue("type", atts);
@@ -191,11 +197,6 @@ public:
 		StateParsermodState::endElement(name);
 	};
 
-	/*
-	virtual StateParserState* getNext(const char* const name){
-		return next->getNext(name);
-	}
-	*/
 
 };
 
@@ -206,18 +207,18 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 	StateParserState* ret=root;
 	
 	static struct _onlyOnes {
-		_onlyOnes(std::map<string,StateParsermodState*>& map,StateParserState* pt){
+		_onlyOnes(std::map<string,StateParsermodState*>& map){
 			static int i = 0;
 			std::cerr << "Only Ones :"<< ++i << std::endl;
-			map["title"]=		new StateParsermodStateInventory("BIBREC_245a",pt);
-			map["subTitle"]=	new StateParsermodStateInventory("BIBREC_245b",pt); // sub state machine
-			map["identifier"]=	new StateParsermodStateInventory("BIBREC_SYS_NUM",pt);
-			map["languageTerm"]=new StateParsermodStateInventory("languageTerm",pt);
-			map["publisher"]=	new StateParsermodStateInventory("BIBREC_260b",pt);
-			map["dateIssued"]=	new StateParsermodStateInventory("BIBREC_260c",pt);
-			map["namePart"]=	new StateParsermodStateInventoryType(pt); // case of type
+			map["title"]=		new StateParsermodStateInventory("BIBREC_245a");
+			map["subTitle"]=	new StateParsermodStateInventory("BIBREC_245b"); // sub state machine
+			map["identifier"]=	new StateParsermodStateInventory("BIBREC_SYS_NUM");
+			map["languageTerm"]=new StateParsermodStateInventory("languageTerm");
+			map["publisher"]=	new StateParsermodStateInventory("BIBREC_260b");
+			map["dateIssued"]=	new StateParsermodStateInventory("BIBREC_260c");
+			map["namePart"]=	new StateParsermodStateInventoryType(); // case of type
 		}
-	} onlyOnes (map,root);
+	} onlyOnes (map);
 
 	if (CTX.inventory.isActif()){
 		std::map<string,StateParsermodState*>::iterator it = map.find(name);
@@ -480,7 +481,8 @@ StateParserState* StateParserMetsRootState::getNext(const char* const name){
 			map["fileSec"]=	new StateParserfileSec();
 			// dmdSec
 			map["dmdSec"]=	new StateParserdmdSecState();
-			map["mods"]=	new StateParsermodState();
+			map["mods"]=	new StateParsermodState(); // could be better if children of dmdsec
+			map["controlfield"]=	new StateParsermodStateInventoryMarc("BIBREC_SYS_NUM"); // could be better if children of dmdsec
             // amd -> has his sub state
 			map["amdSec"]=	new StateParseramdSecState();
 
