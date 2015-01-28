@@ -46,6 +46,13 @@ create table METS (
   PAPERTYPE varchar(50)
 );
 
+drop table if exists METSBOOK;
+create table METSBOOK (
+  ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  ID_METS INTEGER NOT NULL,
+  BIBREC_SYS_NUM varchar(20)
+);
+
 drop table if exists SUPPLEMENTS;
 create table SUPPLEMENTS (
   ID_SUPPLEMENT INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,

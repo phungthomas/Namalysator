@@ -7,6 +7,7 @@
 #include "datehelper.h"
 #include "metsverifier.h"
 #include "errorhandler.h"
+#include "metsparser.h"
 
 typedef std::map<std::string,std::vector<std::string>> my_map_type;
 
@@ -221,6 +222,34 @@ bool database::getInventory(std::string _sysnum, inventory& _inventory){
 	return ret;
 }
 
+bool database::insertMetsBook(int id_mets, std::string _sysnum){
+	bool ret = false;
+	static std::string sql= "INSERT INTO METSBOOK (ID_METS,BIBREC_SYS_NUM)"
+							" VALUES(?,?)";
+
+	std::cerr << "INSERT METSBOOK:" << id_mets << " SYSNUM:" << _sysnum << std::endl;
+	const char *szErrMsg =0;
+	sqlite3_stmt *pStmt =0;
+
+	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt, &szErrMsg);
+
+	if( rc == SQLITE_OK){
+		sqlite3_bind_int(pStmt,1,id_mets);
+		sqlite3_bind_text(pStmt,2,_sysnum.c_str(), _sysnum.length(), SQLITE_STATIC);
+
+		if ( sqlite3_step(pStmt) == SQLITE_DONE ) {
+			ret = true;
+		}else{
+			dberror(std::string("INSERT NOT DONE:")+sql);
+		}	
+	}else{ 
+		dberror(std::string("PREPARE PROBLEM:")+sql);	
+	}
+	sqlite3_finalize(pStmt);
+
+	return ret;
+}
+
 bool database::InventoryChecked(std::string _sysnum){
 	bool ret = false;
 	static std::string sql = "UPDATE BOOKSINVENTORY SET CHECKED=1"
@@ -248,14 +277,14 @@ bool database::InventoryChecked(std::string _sysnum){
 }
 
 //update details of Mets
-void database::updateMets(datafactory *df)
+void database::updateMets(int id_mets, datafactory *df)
 {	
 	const char *szErrMsg =0;
 	sqlite3_stmt *pStmt =0;
 
 	std::string issue_number;
 	std::string title,date, ausgabe,titleSupplement, papertype;		
-	int id_mets = select_idMets();	
+		
 
 	Mets *mets = 0;
 	mets = df->get<Mets>("METS");		
@@ -362,11 +391,10 @@ int database::select_idMets()
 
 
 //! insert Linked files of mets (pdf,alto,img)
-void database::insertLinkedFiles(datafactory *df)
+void database::insertLinkedFiles(int id_mets,datafactory *df)
 {
 	const char *zErrMsg = 0;
 	sqlite3_stmt *pStmt = 0;
-	int id_mets = select_idMets();
 
 	datafactory_set<File_Group> dftypefile = df->get_set<File_Group>();
 	datafactory_set<AmdSec> dfamdsec = df->get_set<AmdSec>();
@@ -413,11 +441,10 @@ void database::insertLinkedFiles(datafactory *df)
 	}
 }
 //! insert Articles into database
-void database::insertArticle(datafactory_set<Article> dfarticle)
+void database::insertArticle(int id_mets, datafactory_set<Article> dfarticle)
 {
 	const char *zErrMsg = 0;
 	sqlite3_stmt *pStmt = 0;
-	int id_mets = select_idMets();
 
 	const char *sql = "INSERT INTO ARTICLE ('ID_METS','ID_ARTICLE','DIV','MUSTCHECK','COUNTCARACTER','TITLE', 'NUMBER_BLOCKS') VALUES (?,?,?,?,?,?,?)";
 	if (sqlite3_prepare_v2(db, sql, -1, &pStmt, &zErrMsg) == SQLITE_OK) {
@@ -512,15 +539,19 @@ void database::insertDateError(int category,std::string dateBegin,std::string da
 		sqlite3_free(zErrMsg);
 	}
 }
-bool database::insertALLData(datafactory *df)
+bool database::insertALLData(datafactory *df,metsparserContext& ctx)
 {	
 	char *sErrMsg=0;
 	// Use a transaction to speed things up
 	startTransaction();
-		updateMets(df);
-		insertLinkedFiles(df);
+		int id_mets = select_idMets();
+		updateMets(id_mets,df);
+		if ( ctx.inventory.isActif() ){ 
+			insertMetsBook(id_mets,ctx.inventory.inventoryMODSMD_ELEC.BIBREC_SYS_NUM); 
+		};
+		insertLinkedFiles(id_mets,df);
 		datafactory_set<Article> dfarticle = df->get_set<Article>();
-		insertArticle(dfarticle);	
+		insertArticle(id_mets,dfarticle);	
 	endTransaction();
 	return true;
 }

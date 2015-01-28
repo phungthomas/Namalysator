@@ -5,7 +5,9 @@
 #include "datafactory.h"
 #include "../common_files/struct.h"
 #include "inventory.h"
+//#include "metsparser.h"
 
+class metsparserContext;
 //! sql queries to the database
 class database
 {
@@ -32,7 +34,7 @@ public:
 	void setIdTestSet();		
 	//! insert all data of the datafactory in the database
 	//! \param df as a datafactory
-	bool insertALLData(datafactory *df );
+	bool insertALLData(datafactory *df,metsparserContext& );
 	
 	//! create tables of the database
 	//! \param createTableFile path of the database path
@@ -40,12 +42,12 @@ public:
 	bool createTable(const std::string &filePath);
 	//! insert LinkedFiles into the database
 	//! \param datafactory with File_Group as type
-	void insertLinkedFiles(datafactory *df);
+	void insertLinkedFiles(int,datafactory *df);
 	
 	//! update Mets details	
-	void updateMets(datafactory *df);
+	void updateMets(int,datafactory *df);
 	//!insert Article into Database
-	void insertArticle(datafactory_set<Article> dfarticle);
+	void insertArticle(int,datafactory_set<Article> dfarticle);
 	//! insert Mets error get from parser
 	void insertMetsError(int category,const std::string &relatedType,const std::string &filePart,const Error &e);
 	
@@ -74,5 +76,6 @@ public:
 	bool FillSupplements(int idMets, std::vector<string> &supplements);
 	bool getInventory(std::string _sysnum, inventory&);
 	bool InventoryChecked(std::string _sysnum);
+	bool insertMetsBook(int id_mets, std::string _sysnum); 
 };
 #endif // SQL_H_

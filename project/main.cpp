@@ -371,7 +371,7 @@ int start()
 #endif // DEBUG
 		}
 		pt.LogTime("All other verifiers");
-		db.insertALLData(&df);
+		db.insertALLData(&df,metsP.getContext());
 		pt.LogTime("Writing to DB");
 #ifdef DEBUGPARAMETERS
 		std::cout << "		Insert data finito " <<std::endl;
