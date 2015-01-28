@@ -9,7 +9,10 @@ void Parameters::setValue(std::string Key,std::string Val){
 
 std::string Parameters::getValue(std::string Key){
 	std::map<std::string,std::string>::iterator it=mapConfig.find(Key);
-	if ( it == mapConfig.end() ) { return "";}
+	if ( it == mapConfig.end() ) { 
+		std::cerr << "KEY NOT FOUND:"<<Key<<std::endl; 
+		return "";
+	}
 	else return it->second;
 }
 

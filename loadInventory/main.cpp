@@ -132,7 +132,7 @@ int start(){
 	SQLLoadInventory db ( parameter.getValue("database") + ".db" ,"createTable.txt" );
 	try {
 		db.openDB();
-		ret = loadInventory(parameter.inventoryFile.c_str(), db);
+		ret = loadInventory(parameter.getValue("inventoryFile").c_str(), db);
 		db.closeDB();
 		return ret;
 	}catch(DbConnectionException& e){

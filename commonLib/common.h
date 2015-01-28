@@ -10,7 +10,7 @@ public:
 	//std::string input;
 	//std::string batchName;
 	//std::string database;
-	std::string inventoryFile; //+ Name of the inventory .csv File
+	//std::string inventoryFile; //+ Name of the inventory .csv File
 	// std::string schemaValidation; No more validation like must be done by the parser itself
 	std::string dateFolderIssue;
 	//std::string dates;

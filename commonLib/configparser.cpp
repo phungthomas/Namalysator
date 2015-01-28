@@ -73,31 +73,10 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 
 	currPoss.push(position);
 
-	if (strcmp(name,"database")== 0)	
-	{
-		//helpMth->start(& (ctx->database));
-	}
-	else if (strcmp(name,"inventory")== 0)	
-	{
-		helpMth->start(& (ctx->inventoryFile));
-	}else if (strcmp(name,"inventoryBook")== 0)	
+    if (strcmp(name,"inventoryBook")== 0)	
 	{
 		helpMth->start(& (ctx->inventoryBook));
 	}
-	else if (strcmp(name,"batchName")== 0)			
-	{
-		//helpMth->start(& (ctx->batchName));
-	}	
-	else if (strcmp(name,"input") == 0)		
-	{
-		//helpMth->start(& (ctx->input));
-	}
-	/* // No More Validation
-	else if (strcmp(name,"schemaValidation") == 0)		
-	{
-		helpMth->start(& (ctx->schemaValidation));
-	}
-	*/
 	else if (strcmp(name,"checkFile") == 0)		
 	{
 		helpMth->start(& (ctx->checkFile));
@@ -153,14 +132,6 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 	else if (strcmp(name,"checkTitle") == 0)		
 	{
 		helpMth->start(& (ctx->checkTitle));
-	}
-	else if (strcmp(name,"sampling") == 0)		
-	{
-		//helpMth->start(& (ctx->sampling));
-	}	
-	else if (strcmp(name,"dates") == 0)		
-	{
-		//helpMth->start(& (ctx->dates));
 	}	
 	else if (strcmp(name,"issueNumber") == 0)		
 	{
