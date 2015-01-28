@@ -108,9 +108,9 @@ int start(){
 	std::stringstream configPath,sqlCreateTablePath;	
 	configPath << CurrentPath << "/config.xml"; 	
 
-	Parameters *parameter = new Parameters;
+	Parameters parameter;
 
-	configparser config(parameter);
+	configparser config(&parameter);
 	//Parse the config file
 	
 	std::cerr << "Config file :" << configPath.str().c_str() << std::endl;
@@ -123,10 +123,10 @@ int start(){
 
 	int ret;
 	std :: cout << "Inventory loader" << std::endl;
-	SQLLoadInventory db ( parameter->database + ".db" ,"createTable.txt" );
+	SQLLoadInventory db ( parameter.database + ".db" ,"createTable.txt" );
 	try {
 		db.openDB();
-		ret = loadInventory(parameter->inventoryFile.c_str(), db);
+		ret = loadInventory(parameter.inventoryFile.c_str(), db);
 		db.closeDB();
 		return ret;
 	}catch(DbConnectionException& e){
