@@ -4,6 +4,8 @@
 #include "parserCheck.h"
 #include "common.h"
 #include <xercesc/sax2/DefaultHandler.hpp>
+#include <string>
+#include <stack>
 
 //! reader of config file to feed xml
 //
@@ -23,6 +25,10 @@ class configparser: public parserCheck, public DefaultHandler {
 	private:
 		Parameters* ctx;
 		HelperMethod* helpMth; // Help Methode
+		std::string position;
+		std::stack<std::string> currPoss;
+		std::string value;
+		bool save;
 };
 
 #endif

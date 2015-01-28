@@ -45,22 +45,37 @@ private :
 
 
 void    configparser::endElement (const XMLCh* const uri,const XMLCh* const localname,const XMLCh* const qname){
-
 	char* name =XMLString::transcode (qname);
 	//cout << "END qname : "<< name << endl ;
 	helpMth->end();
 	XMLString::release(&name);
-
+	if ( save && position.length() > 1 ){
+		ctx->setValue(position.substr(1),value);
+		save=false;
+	}
+	value ="";
+	currPoss.pop();
+	position=currPoss.top();
 }
 
 void configparser::startElement(const XMLCh *const uri, const XMLCh *const localname, const XMLCh *const qname, const xercesc_3_1::Attributes &attrs){
 
 	char* name =XMLString::transcode (qname);
-	
-	//cout << "STX qname : "<< name << endl ;
+	std::string tmpName = std::string(name);
+	save = true;
+	value ="";
+	if ( tmpName.compare("config") ) {
+		position+="."+tmpName;
+	}else{
+		position="";
+		currPoss.push(position);
+	}
+
+	currPoss.push(position);
+
 	if (strcmp(name,"database")== 0)	
 	{
-		helpMth->start(& (ctx->database));
+		//helpMth->start(& (ctx->database));
 	}
 	else if (strcmp(name,"inventory")== 0)	
 	{
@@ -71,11 +86,11 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 	}
 	else if (strcmp(name,"batchName")== 0)			
 	{
-		helpMth->start(& (ctx->batchName));
+		//helpMth->start(& (ctx->batchName));
 	}	
 	else if (strcmp(name,"input") == 0)		
 	{
-		helpMth->start(& (ctx->input));
+		//helpMth->start(& (ctx->input));
 	}
 	/* // No More Validation
 	else if (strcmp(name,"schemaValidation") == 0)		
@@ -145,7 +160,7 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 	}	
 	else if (strcmp(name,"dates") == 0)		
 	{
-		helpMth->start(& (ctx->dates));
+		//helpMth->start(& (ctx->dates));
 	}	
 	else if (strcmp(name,"issueNumber") == 0)		
 	{
@@ -163,6 +178,8 @@ void 	configparser::characters (const XMLCh *const chars, const XMLSize_t length
 	
 	char* _chars =XMLString::transcode (chars);
 	helpMth->charachter( _chars, strlen(_chars));
+
+	value+=_chars;
 	XMLString::release(&_chars);
 
 };

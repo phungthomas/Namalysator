@@ -782,7 +782,7 @@ void database::insertParameterVerifiers(Parameters *param)
 					  '" + param->blockStructure + "',  \
 					  '" + param->coveragePercentAlto + "',  \
 					  '" + param->multipleBlockUse + "',  \
-					  '" + param->dates + "',  \
+					  '" + "1" /*param->dates*/ + "',  \
 					  '" + "1" + /*param->schemaValidation*/ + "')"; // always true 				
 
 	int rc = sqlite3_exec(db, sql.c_str(), NULL, 0, &zErrMsg);

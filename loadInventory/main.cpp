@@ -120,10 +120,16 @@ int start(){
 		std::cerr << "Unable to parse :" << configPath << std::endl;
 		return 1;				
 	}
-
+	std::cerr << parameter.getValue("database")+ ".db" << std::endl;
+	std::cerr << parameter.getValue("input")+ ".db" << std::endl;
+	std::cerr << parameter.getValueCheck("dataintegrity.checkSum") << std::endl;
+	std::cerr << parameter.getValueCheck("dataintegrity.checkSum") << std::endl;
+	std::cerr << parameter.getValueCheck("dataintegrity.checkSumTOTO") << std::endl;
+	std::cerr << parameter.getValueCheck("inventoryBook") << std::endl;
+    //if (1) return 1;
 	int ret;
 	std :: cout << "Inventory loader" << std::endl;
-	SQLLoadInventory db ( parameter.database + ".db" ,"createTable.txt" );
+	SQLLoadInventory db ( parameter.getValue("database") + ".db" ,"createTable.txt" );
 	try {
 		db.openDB();
 		ret = loadInventory(parameter.inventoryFile.c_str(), db);

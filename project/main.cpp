@@ -124,9 +124,9 @@ int start()
 		return 1;				
 	}	
 
-	std::string batchName = parameter.batchName;
-	std::string datab = parameter.database + ".db";
-	std::string input= parameter.input;		
+	std::string batchName = parameter.getValue("batchName");
+	std::string datab = parameter.getValue("database") + ".db";
+	std::string input= parameter.getValue("input");	
 
 	sqlCreateTablePath << CurrentPath << "/createtable.txt";
 	
@@ -160,7 +160,7 @@ int start()
 	hError.setlogFilePath(logFilePath.str());
 	hError.begin(getDate());
 	//verify input path of disk
-	if (validInputPath(parameter.input,&hError)== false)
+	if (validInputPath(input,&hError)== false)
 	{	
 		hError.begin("return 2");			
 		return 2;	

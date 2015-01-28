@@ -49,7 +49,7 @@ int start (int argc, char** argv){
 	};
 
 	
-	std::cout << "Database:" <<param.database<< std::endl;
+	std::cout << "Database:" <<param.getValue("database")<< std::endl;
 	std::cout << "altoblockPerPage" <<param.altoblockPerPage<< std::endl;
 	return 0;
 }

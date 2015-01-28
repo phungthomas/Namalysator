@@ -299,7 +299,7 @@ Parameters dbrequest::getParameterVerifiers(int id_testset)
 			else if (i==8) param.blockStructure = result;	
 			else if (i==9) param.coveragePercentAlto = result;		
 			else if (i==10) param.multipleBlockUse = result;
-			else if (i==11) param.dates = result;
+			//else if (i==11) param.dates = result;
 			//else if (i==12) param.schemaValidation = result;					
 		 }			
 	  }
