@@ -1,3 +1,33 @@
 REM adaptation script of version of db;
 
 ALTER TABLE STRUCTUREERROR ADD COLUMN FILEID varchar(10);
+
+
+REM outer join are done in namalysator: so the table must be there same if empty
+
+CREATE TABLE BOOKSINVENTORY (
+	ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	BOX_ID varchar(20),
+	BIBREC_SYS_NUM varchar(20) UNIQUE,
+	ITEM_barcode varchar(20),
+	BIBREC_CALL_NUM varchar(20),
+    languageTerm varchar(3) NOT NULL,
+	BIBREC_100a_1 varchar(40),
+	BIBREC_100a_2 varchar(40),
+	BIBREC_245a varchar(400),
+	BIBREC_245b varchar(400),
+	BIBREC_260b varchar(40),
+	BIBREC_260c varchar(40),
+	BIBREC_300a varchar(20),
+	BIBREC_300a_ref varchar(20),
+	BIBREC_300c varchar(20),
+	CHECKED INTEGER
+);
+
+REM outer join are done in namalysator: so the table must be there same if empty
+
+create table METSBOOK (
+  ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  ID_METS INTEGER NOT NULL,
+  BIBREC_SYS_NUM varchar(20)
+);
