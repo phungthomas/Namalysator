@@ -516,22 +516,40 @@ bool database::insertALLData(datafactory *df)
 {	
 	char *sErrMsg=0;
 	// Use a transaction to speed things up
-	sqlite3_exec(db, "BEGIN TRANSACTION", NULL, NULL, &sErrMsg);
-	if ( sErrMsg ) {
-		sqlite3_free(sErrMsg);
-		sErrMsg=0;
-	};
-	updateMets(df);
-	insertLinkedFiles(df);
-	datafactory_set<Article> dfarticle = df->get_set<Article>();
-	insertArticle(dfarticle);	
-	sqlite3_exec(db, "END TRANSACTION", NULL, NULL, &sErrMsg);
-	if ( sErrMsg ) {
-		sqlite3_free(sErrMsg);
-		sErrMsg=0;
-	};
+	startTransaction();
+		updateMets(df);
+		insertLinkedFiles(df);
+		datafactory_set<Article> dfarticle = df->get_set<Article>();
+		insertArticle(dfarticle);	
+	endTransaction();
 	return true;
 }
+
+void database::startTransaction(){
+	char *sErrMsg=0;
+	
+	int rc=sqlite3_exec(db, "BEGIN TRANSACTION", NULL, NULL, &sErrMsg);
+	
+	if ( rc != SQLITE_OK ){
+		std::string error (sErrMsg);
+		std::cerr << "ERROR BEGIN TRANSATCTION" << error << std::endl;
+		sqlite3_free(sErrMsg);
+	}
+}
+
+void database::endTransaction(){
+	char *sErrMsg=0;
+	
+	int rc=sqlite3_exec(db, "END TRANSACTION", NULL, NULL, &sErrMsg);
+
+	if ( rc != SQLITE_OK ){
+		std::string error (sErrMsg);
+		std::cerr << "ERROR END TRANSATCTION" << error << std::endl;
+		sqlite3_free(sErrMsg);
+	}
+
+}
+
 //! get all years of the current Mets
 std::vector<int> database::getAllYears()
 {	

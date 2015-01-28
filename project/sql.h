@@ -24,6 +24,9 @@ public:
 	//! open database
 	bool openDB();
 	void closeDB();
+	void startTransaction();
+	void endTransaction();
+
 	void dberror(std::string);
 	//! \ set id of the current Testset	
 	void setIdTestSet();		
