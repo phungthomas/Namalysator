@@ -156,7 +156,7 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 	}
 	else if (strcmp(name,"sampling") == 0)		
 	{
-		helpMth->start(& (ctx->sampling));
+		//helpMth->start(& (ctx->sampling));
 	}	
 	else if (strcmp(name,"dates") == 0)		
 	{

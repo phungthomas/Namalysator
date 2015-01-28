@@ -384,7 +384,7 @@ int start()
 	
 	//TODO quand c'est 0 et empty string
 	db.insertRandomTitle(atoi(parameter.checkTitle.c_str()));
-	db.insertRandomMets(atoi(parameter.sampling.c_str()),vectorMets.size());	
+	db.insertRandomMets(atoi(parameter.getValue("sampling").c_str()),vectorMets.size());	
 
 	hError.begin(getDate());
 	hError.begin("The End");

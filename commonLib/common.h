@@ -27,7 +27,7 @@ public:
 	std::string noIssueDefined;	
 	std::string checkTitle;
 	std::string oddsPages;
-	std::string sampling;
+	//std::string sampling;
 	std::string issueNumber;
 	std::string measurementSTD;
 	std::string inventoryBook;
