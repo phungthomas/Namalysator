@@ -15,24 +15,19 @@ struct ConnectionDB
 	FILE *fpLog;
 #endif
 	ConnectionDB();
-	ConnectionDB(const ConnectionDB &src);
-	ConnectionDB &operator=(const ConnectionDB &src);
 	bool openConnection(const std::string &dbname);
 	~ConnectionDB();
 private:
-	int *reference_count;
-
 	void close();
-	void add_reference();
-	void del_reference();
 };
 
 class ConnectionPool
 {
 public:
-	ConnectionDB getConnection(const std::string &dbname);
+	ConnectionDB* getConnection(const std::string &dbname);
+	~ConnectionPool();
 private:
-	std::map<std::string, ConnectionDB> Databases;
+	std::map<std::string, ConnectionDB*> Databases;
 };
 
 extern ConnectionPool g_pool;
