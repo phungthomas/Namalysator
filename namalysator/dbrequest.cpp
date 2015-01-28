@@ -1885,7 +1885,11 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 	
 	
 	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
-	std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME FROM METS a WHERE a.ID_TESTSET=?";
+	std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a, c.BIBREC_245b," 
+		                    " c.BIBREC_100a_1, c.BIBREC_100a_2, c.BIBREC_260b,c.BIBREC_260c,c.ITEM_barcode, c.BIBREC_SYS_NUM FROM METS a"
+		                    " LEFT JOIN METSBOOK b ON a.ID_METS = b.ID_METS"
+							" LEFT JOIN BOOKSINVENTORY c ON b.BIBREC_SYS_NUM = c.BIBREC_SYS_NUM"
+							" WHERE a.ID_TESTSET=?";
 	
 	std::vector<std::vector<QVariant> > v;
 
@@ -1897,21 +1901,20 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			std::vector<QVariant> row;
-			 
-			row.push_back(QVariant( sqlite3_column_int(pStmt, 0) ) );
-			row.push_back(QString( (char*)sqlite3_column_text(pStmt, 1) ) );
-			row.push_back(QString( (char*)sqlite3_column_text(pStmt, 2) ) );
+			int col=0;
+			row.push_back(QVariant( sqlite3_column_int(pStmt, col++) ) );
+			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ) );
+			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ) );
 			row.push_back( icon );
 			//row.push_back(QString( (char*)sqlite3_column_text(pStmt, 3) ) );
-			row.push_back(QString( "BIBREC_245a" ) );
-			row.push_back(QString( "BIBREC_245b" ) );
-			row.push_back(QString( "BIBREC_100a-1" ) );
-			row.push_back(QString( "BIBREC_100a-2" ) );
-			row.push_back(QString( "BIBREC_008-35-37" ) );
-			row.push_back(QString( "BIBREC_260b" ) );
-			row.push_back(QString( "BIBREC_260c" ) );
-			row.push_back(QString( "ITEMbarCode" ) );
-			row.push_back(QString( "BIBREC_SYS_NUM" ) );
+			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
+			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
+			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
+			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
+			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
+			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
+			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ));
+			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ));
 
 
 			v.push_back(row);
