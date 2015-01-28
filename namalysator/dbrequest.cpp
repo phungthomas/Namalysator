@@ -1907,12 +1907,12 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ) );
 			row.push_back( icon );
 			//row.push_back(QString( (char*)sqlite3_column_text(pStmt, 3) ) );
-			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
-			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
-			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
-			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
-			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
-			row.push_back(QString( QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) ));
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ));
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ));
 
