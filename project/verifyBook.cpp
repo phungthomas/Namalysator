@@ -20,7 +20,7 @@ void verifyBook::check(std::string check,metsparserContext& context){
 		return; // skip all
 	};
 
-
+	db->InventoryChecked(BIBREC_SYSNUM); // update checked flag in bookinventory to be able to show the rate of full campaign
 
 	if ( invent.BIBREC_245a.compare(context.inventory.inventoryMODSMD_ELEC.BIBREC_245a)) {
 		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MOD_SMD_ELEC", "wrong title:" + context.inventory.inventoryMODSMD_ELEC.BIBREC_245a ,context.metsfile,"");

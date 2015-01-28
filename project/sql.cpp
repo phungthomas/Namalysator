@@ -170,14 +170,17 @@ void database::insertMets(const std::string &batchName,const std::string &path ,
 
 void database::dberror(std::string sql){
 	std::string error ( sqlite3_errmsg(db) );
-	std::cerr << "ERROR DB :" << error << std::endl << sql << std::endl;
+	std::stringstream ss;
+	ss << "ERROR DB :" << error << std::endl << sql ;
+	std::cerr << ss.str() << std::endl;
+	insertLog(ss.str());
 }
 
 bool database::getInventory(std::string _sysnum, inventory& _inventory){
 	bool ret = false;
 	static std::string sql = "SELECT BIBREC_SYS_NUM,ITEM_barcode,BIBREC_CALL_NUM,"
 		              "  languageTerm,BIBREC_100a_1,BIBREC_100a_2,BIBREC_245a,"
-					  "  BIBREC_245b,BIBREC_260b,BIBREC_260c,BIBREC_300a,"
+					  "  BIBREC_245b,BIBREC_260b,BIBREC_260c,CHECKED,BIBREC_300a,"
 					  "  BIBREC_300a_ref,BIBREC_300c from BOOKSINVENTORY where BIBREC_SYS_NUM=?";
 
 	const char *szErrMsg =0;
@@ -201,6 +204,7 @@ bool database::getInventory(std::string _sysnum, inventory& _inventory){
 			_inventory.BIBREC_245a = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.BIBREC_245b = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.BIBREC_260c = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.checked = sqlite3_column_int(pStmt, col++);
 			dummy = safe_sqlite3_column_text(pStmt, col++);
 			dummy = safe_sqlite3_column_text(pStmt, col++);
 			dummy = safe_sqlite3_column_text(pStmt, col++);
@@ -211,6 +215,32 @@ bool database::getInventory(std::string _sysnum, inventory& _inventory){
 		
 	}else{ // problem
 		dberror(sql);
+	}
+	sqlite3_finalize(pStmt);
+
+	return ret;
+}
+
+bool database::InventoryChecked(std::string _sysnum){
+	bool ret = false;
+	static std::string sql = "UPDATE BOOKSINVENTORY SET CHECKED=1"
+		              " where BIBREC_SYS_NUM=?";
+
+	const char *szErrMsg =0;
+	sqlite3_stmt *pStmt =0;
+
+	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt, &szErrMsg);
+
+	if( rc == SQLITE_OK){
+		sqlite3_bind_text(pStmt, 1, _sysnum.c_str(), _sysnum.length(), SQLITE_STATIC);
+
+		if ( sqlite3_step(pStmt) == SQLITE_DONE ) {
+			ret = true;
+		}else{
+			dberror(std::string("UPDATE NOT DONE:")+sql);
+		}	
+	}else{ 
+		dberror(std::string("PREPARE PROBLEM:")+sql);	
 	}
 	sqlite3_finalize(pStmt);
 

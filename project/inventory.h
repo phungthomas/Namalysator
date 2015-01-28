@@ -19,6 +19,7 @@ public:
 	std::string BIBREC_SYS_NUM; //could be ITEM_barcode depending of the section
 	std::string languageTerm; //std::string BIBREC_008_35_37;
 	std::string toString(std::string name);
+	int checked;
 };
 
 // inventoryMapping : store different inventory like there is multiple section in xml 

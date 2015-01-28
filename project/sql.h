@@ -70,5 +70,6 @@ public:
 
 	bool FillSupplements(int idMets, std::vector<string> &supplements);
 	bool getInventory(std::string _sysnum, inventory&);
+	bool InventoryChecked(std::string _sysnum);
 };
 #endif // SQL_H_
