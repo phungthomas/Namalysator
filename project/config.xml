@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<database>C:/Data/DB/smallTestBOOK</database>
-	<inventory>file.csv</inventory>
+	<database>C:/Data/DB/smallTestTTTBOOK</database>
+	<inventoryFile>file.csv</inventoryFile>
 	<batchName>bookobermosel-1945-july</batchName>
 	<input>C:/SmallTestBook</input>
-	<verifiers>
-		<xml>
-			<schemaValidation>1</schemaValidation>		
-		</xml>
-		<dataintegrity >
+	<verifiers><!-- metsverifier will save a atoi of data for each key under node verifiers-->
+		<dataintegrity>
 			<checkFile>1</checkFile>
 			<checkSum>1</checkSum>
-			<divs>1</divs>
+			<!--divs>1</divs-->
 			<oddsPages>1</oddsPages>
 			<unlinkedIdentifier>1</unlinkedIdentifier>	
 		</dataintegrity>
