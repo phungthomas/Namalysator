@@ -2,9 +2,9 @@
 #include <iostream>
 
 void Parameters::setValue(std::string Key,std::string Val){
-	//mapConfig.insert( std::pair<std::string,std::string>(Key,Val));
+	
 	mapConfig[Key]+=Val;
-	std::cerr << "KEY:"<<Key <<" VALUE:"<< Val<< " LENGTH:" <<mapConfig[Key].length()<<std::endl;
+	//std::cerr << "KEY:"<<Key <<" VALUE:"<< Val<< " LENGTH:" <<mapConfig[Key].length()<<std::endl;
 }
 
 std::string Parameters::getValue(std::string Key){
