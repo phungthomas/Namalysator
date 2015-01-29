@@ -761,38 +761,75 @@ ErrorTypeMets database::getErrorTypeWithId(int id)
 	return et;
 }
 
+
+void database::deletePARAMTESTSET(){
+
+	static std::string sql = "DELETE FROM PARAMTESTSET WHERE ID_TESTSET = ? ";
+	const char *zErrMsg=0;
+	sqlite3_stmt *pStmt;
+
+	int rc = sqlite3_prepare_v2(db,sql.c_str(),-1, &pStmt,&zErrMsg);
+
+	if( rc != SQLITE_OK  )
+	{		
+		
+		dberror(sql);
+		return;	
+	};
+
+	int col = 1;
+	sqlite3_bind_int(pStmt,col++,idTestset);
+
+	if (sqlite3_step(pStmt) != SQLITE_DONE) {
+			dberror(sql);
+	};
+
+	sqlite3_finalize(pStmt);
+
+}
+
 //! insert parameters values into database
 void database::insertParameterVerifiers(Parameters *param)
 {
-	char *zErrMsg=0;
-	std::string sql = "INSERT INTO VERIFIERS ('ID_TESTSET','FILECHECK','CHECKSUM','DIVS','UNLINKEDIDENTIFIER', \
-					  'IDENTIFIERMIX','DATEFOLDERISSUE','ODDSPAGES','INVALIDSUPPLEMENT','NOISSUEDEFINED','ALTOBLOCKPERPAGE', \
-					  'BLOCKSTRUCTURE','COVERAGEPERCENTALTO','MULTIBLOCKUSE','DATES','SCHEMACHECK') \
-					  VALUES   ( '" + stringIdTestSet  + "',  \
-					  '" + param->getValue("verifiers.dataintegrity.checkFile")  + "',  \
-					  '" + param->getValue("verifiers.dataintegrity.checkSum") + "',  \
-					  '" + param->getValue("verifiers.semanticchecks.divs") + "',  \
-					  '" + param->getValue("verifiers.dataintegrity.unlinkedIdentifier") + "',  \
-					  '" + param->getValue("verifiers.semanticchecks.identifierMix") + "',  \
-					  '" + param->getValue("verifiers.semanticchecks.dateFolderIssue") + "',  \
-					  '" + param->getValue("verifiers.dataintegrity.oddsPages") + "',  \
-					  '" + param->getValue("verifiers.semanticchecks.invalidSupplement")+ "',  \
-					  '" + param->getValue("verifiers.semanticchecks.noIssueDefined") + "',  \
-					  '" + param->getValue("verifiers.blocks.altoblockPerPage") + "',  \
-					  '" + param->getValue("verifiers.blocks.blockStructure") + "',  \
-					  '" + param->getValue("verifiers.blocks.coveragePercentAlto") + "',  \
-					  '" + param->getValue("verifiers.blocks.multipleBlockUse") + "',  \
-					  '" + "1" /*param->dates*/ + "',  \
-					  '" + "1" + /*param->schemaValidation*/ + "')"; // always true 				
+	
+	deletePARAMTESTSET();
+	
+	const char *zErrMsg=0;
+	sqlite3_stmt *pStmt;
 
-	int rc = sqlite3_exec(db, sql.c_str(), NULL, 0, &zErrMsg);
-	if( rc )
+
+	static std::string sql = "INSERT INTO PARAMTESTSET (ID_TESTSET,KEY,VALUE) VALUES (?,?,?)";
+
+	int rc = sqlite3_prepare_v2(db,sql.c_str(),-1, &pStmt,&zErrMsg);
+
+	if( rc != SQLITE_OK  )
 	{		
-		std::stringstream ss;
-		ss <<  "Can not insert data VERIFIERS: " << zErrMsg ;	
-		insertLog(ss.str());		
+		
+		dberror(sql);
+		sqlite3_finalize(pStmt);
+		return;	
+	};
+
+	std::map<std::string,std::string> map = param->mapFilter();
+
+	for ( std::map<std::string,std::string>::iterator it = map.begin();it != map.end() ; it ++){
+		sqlite3_clear_bindings(pStmt);
+		sqlite3_reset(pStmt);
+		
+		int col = 1;
+		sqlite3_bind_int(pStmt,col++,idTestset);
+		sqlite3_bind_text(pStmt,col++,it->first.c_str(),it->first.length(),SQLITE_STATIC);
+		sqlite3_bind_int(pStmt,col++,atoi(it->second.c_str()));
+
+		if (sqlite3_step(pStmt) != SQLITE_DONE) {
+			dberror(sql);
+		};
+
 	}
-	if ( zErrMsg ) { sqlite3_free(zErrMsg);};
+
+
+	sqlite3_finalize(pStmt);
+	
 }
 
 int database::getCountTitle()

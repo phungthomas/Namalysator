@@ -350,7 +350,10 @@ int start()
 			if (parameter.getValueCheck("semanticchecks.invalidSupplement") == 1 )
 			{
 				verifyinvalidsupplement(&df,&hError,currentMetsFile);				
-			}								
+			}	
+
+			//parameter.getValueCheck("semanticchecks.invalidSupplement.toto");// to show automatic parameter reporting
+
 			if (parameter.getValue("issueNumber") == "1")
 			{
 				verifyinvalidissuenumber(&df,&hError,currentMetsFile);
@@ -385,6 +388,8 @@ int start()
 	//TODO quand c'est 0 et empty string
 	db.insertRandomTitle(atoi(parameter.getValue("checkTitle").c_str()));
 	db.insertRandomMets(atoi(parameter.getValue("sampling").c_str()),vectorMets.size());	
+
+	db.insertParameterVerifiers(&parameter); // for automatic reporting of test	
 
 	hError.begin(getDate());
 	hError.begin("The End");

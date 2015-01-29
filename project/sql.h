@@ -18,7 +18,9 @@ private:
 	int idTestset;
 	std::string stringIdTestSet;
 	std::string databaseName;	
-	std::string logFilePath;		
+	std::string logFilePath;
+
+	void deletePARAMTESTSET();
 	
 public:
 	//! constructor with batchName and dataBaseName as parameter
@@ -66,6 +68,7 @@ public:
 	//! function for samples of structures
 	void insertRandomMets(int number,int totalMets);
 	void insertParameterVerifiers(Parameters *param);
+	
 	int getCountTitle();	
 	ErrorTypeMets getErrorTypeWithId(int id);
 	void insertMetsErrorWithId(int category,const std::string &relatedType,const std::string &filePart,const Error &e,std::string id);
