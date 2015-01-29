@@ -324,17 +324,17 @@ Parameters dbrequest::getParameterVerifiers(int id_testset)
 		 {
 			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
-			if (i==0) param.setValue("verifiers.dataintegrity.checkFile",result);								
-			else if (i==1) param.setValue("verifiers.dataintegrity.checkSum",result);	
-			else if (i==2) param.setValue("verifiers.semanticchecks.divs",result);
-			else if (i==3) param.setValue("verifiers.dataintegrity.unlinkedIdentifier",result);
-			else if (i==4) param.setValue("verifiers.semanticchecks.identifierMix",result);		
-			else if (i==5) param.setValue("verifiers.semanticchecks.invalidSupplement",result);	
-			else if (i==6) param.setValue("verifiers.semanticchecks.noIssueDefined",result);		
-			else if (i==7) param.setValue("verifiers.blocks.altoblockPerPage",result);
-			else if (i==8) param.setValue("verifiers.blocks.blockStructure",result);	
-			else if (i==9) param.setValue("verifiers.blocks.coveragePercentAlto",result);		
-			else if (i==10) param.setValue("verifiers.blocks.multipleBlockUse",result);
+			if (i==0) param.addParam("verifiers.dataintegrity.checkFile",result);								
+			else if (i==1) param.addParam("verifiers.dataintegrity.checkSum",result);	
+			else if (i==2) param.addParam("verifiers.semanticchecks.divs",result);
+			else if (i==3) param.addParam("verifiers.dataintegrity.unlinkedIdentifier",result);
+			else if (i==4) param.addParam("verifiers.semanticchecks.identifierMix",result);		
+			else if (i==5) param.addParam("verifiers.semanticchecks.invalidSupplement",result);	
+			else if (i==6) param.addParam("verifiers.semanticchecks.noIssueDefined",result);		
+			else if (i==7) param.addParam("verifiers.blocks.altoblockPerPage",result);
+			else if (i==8) param.addParam("verifiers.blocks.blockStructure",result);	
+			else if (i==9) param.addParam("verifiers.blocks.coveragePercentAlto",result);		
+			else if (i==10) param.addParam("verifiers.blocks.multipleBlockUse",result);
 			//else if (i==11) param.dates = result;
 			//else if (i==12) param.schemaValidation = result;					
 		 }			

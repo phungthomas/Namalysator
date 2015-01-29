@@ -19,7 +19,7 @@ void    configparser::endElement (const XMLCh* const uri,const XMLCh* const loca
 	
 	XMLString::release(&name);
 	if ( save && position.length() > 1 ){
-		ctx->setValue(position.substr(1),value);
+		ctx->addParam(position.substr(1),value);
 		save=false;
 	}
 	value ="";
