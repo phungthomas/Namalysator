@@ -198,6 +198,11 @@ void w_selectBatch::fillBatchDetail()
 	QString count; 
 	count.setNum(batch.count);
 	m_ui->groupButton->setEnabled(true);
+	QPalette pal = m_ui->btnAnalyze->palette();
+    pal.setColor(QPalette::Button, QColor(Qt::blue));
+    m_ui->btnAnalyze->setAutoFillBackground(true);
+    m_ui->btnAnalyze->setPalette(pal);
+    m_ui->btnAnalyze->update();
 	date = batch.minDate + " / " + batch.maxDate ;
 	m_ui->lbBatchName->setText(batch.batchName.c_str());	
 	m_ui->lbYear->setText(date.c_str());	
