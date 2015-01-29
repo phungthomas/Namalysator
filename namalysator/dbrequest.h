@@ -46,6 +46,8 @@ class dbrequest
 		// bool openDB();
 		//return a vector of all testsets from batch
 		std::vector<std::string> getvTestSet();
+		std::map<std::string,std::string> key2Label(std::map<std::string,std::string>);
+		std::string getLabel(std::string);
 		// get a vector of  all tests from selected Batch
 		std::vector<std::pair<int,std::string> > getvDateTestset(std::string batch);
 		//return the details from the selected Batch 

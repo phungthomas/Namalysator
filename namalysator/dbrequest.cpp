@@ -115,6 +115,42 @@ std::vector<std::string> dbrequest::getvTestSet()
 	return vect;
 }
 
+std::map<std::string,std::string> dbrequest::key2Label(std::map<std::string,std::string> map){
+	std::map<std::string,std::string> ret;
+	for ( std::map<std::string,std::string>::iterator it=map.begin(); it !=map.end(); it++){
+		ret [ getLabel ( it->first ) ] = it->second;
+	};
+	return ret;
+}
+
+std::string dbrequest::getLabel(std::string key){
+	static std::map<std::string,std::string> internal;
+	std::string ret="";
+	if ( internal.size() == 0) {
+		// LOAD normally in a table
+		internal["dataintegrity.checkSum"]="CheckSum";
+		internal["semanticchecks.dateFolderIssue"]="Date Structure of Issue";
+		internal["semanticchecks.divs"]="Div Structure";
+		internal["dataintegrity.unlinkedIdentifier"]="not link identifier";
+		internal["semanticchecks.identifierMix"]="Mix";
+		internal["blocks.altoblockPerPage"]="One alto per page";
+		internal["blocks.blockStructure"]="Block Structure";
+		internal["blocks.coveragePercentAlto"]="Cover Percentage";
+		internal["blocks.multipleBlockUse"]="Use Multi";
+		internal["semanticchecks.noIssueDefined"]="Issue not define";
+		internal["semanticchecks.invalidSupplement"]="Invalid Supplement";
+		internal["blocks.measurementSTD"]="Measurement standard";
+		internal["dataintegrity.checkFile"]="Check File";
+	};
+	std::map<std::string,std::string>::iterator it = internal.find(key);
+	if ( it == internal.end() ){
+		internal[key]=key;
+		ret = key;
+	}else{
+		ret = it->second;
+	}
+	return ret;
+}
 
 
 // get all tests from Batch

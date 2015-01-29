@@ -209,11 +209,13 @@ void w_selectBatch::fillBatchDetail()
  {
 	Parameters param = db.getParameterVerifiers(id);
 	//m_ui->lbschema->setText("Yes"); // always yes no more choice 
-	std::map<std::string,std::string>map=param.mapFilter();
+	std::map<std::string,std::string>map=db.key2Label(param.mapFilter());
+
 	paramModel* modelParam = new paramModel();
 	modelParam->init(map);
 	m_ui->paramView->setModel(modelParam);
 	m_ui->paramView->verticalHeader()->hide();
+	//m_ui->paramView->horizontalHeader()->hide();
 	m_ui->paramView->setAlternatingRowColors(true);
 
 }

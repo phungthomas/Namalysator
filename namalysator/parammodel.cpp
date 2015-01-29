@@ -42,13 +42,21 @@ QVariant paramModel::headerData ( int section, Qt::Orientation orientation, int 
 
 void paramModel::init(std::map<std::string,std::string> map){
 	std::vector<QVariant> vect;
+	static QString ok("Yes");
+	static QString nok("No");
+
 
 	table.clear();
 	
 	for ( std::map<std::string,std::string>::iterator it=map.begin(); it != map.end(); it++ ){
 		vect.clear();
 		vect.push_back(QString(it->first.c_str()));
-		vect.push_back(QString(it->second.c_str()));
+		int rr = atoi (it->second.c_str());
+		switch(rr){
+			case 1: vect.push_back(ok); break;
+			case 0: vect.push_back(nok); break;
+			default: vect.push_back(QString(it->second.c_str())); break;
+		}
 		table.push_back(vect);
 	};
 	
