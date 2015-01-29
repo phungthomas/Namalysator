@@ -209,7 +209,7 @@ void w_selectBatch::fillBatchDetail()
 	Parameters param = db.getParameterVerifiers(id);
 	m_ui->lbschema->setText("Yes"); // always yes no more choice 
 
-	if ( param.checkFile =="1")
+	if ( param.getValueCheck("dataintegrity.checkFile") == 1)
 	{			
 		m_ui->lbFileCheck->setText("Yes");						
 	}
@@ -218,7 +218,7 @@ void w_selectBatch::fillBatchDetail()
 		m_ui->lbFileCheck->setText("No");	
 	}
 	
-	if ( param.checkSum =="1")
+	if ( param.getValueCheck("dataintegrity.checkSum") == 1 )
 	{
 		m_ui->lbChecksum->setText("Yes");						
 	}
@@ -227,7 +227,7 @@ void w_selectBatch::fillBatchDetail()
 		m_ui->lbChecksum->setText("No");	
 	}
 	
-	if ( param.divs =="1")
+	if ( param.getValueCheck("semanticchecks.divs") == 1)
 	{
 		m_ui->lbDivs->setText("Yes");						
 	}
@@ -236,7 +236,7 @@ void w_selectBatch::fillBatchDetail()
 		m_ui->lbDivs->setText("No");	
 	}
 
-	if ( param.unlinkedIdentifier =="1")
+	if ( param.getValueCheck("dataintegrity.unlinkedIdentifier") == 1)
 	{
 		m_ui->lbUnlinkedIdentifier->setText("Yes");						
 	}
@@ -245,7 +245,7 @@ void w_selectBatch::fillBatchDetail()
 		m_ui->lbUnlinkedIdentifier->setText("No");	
 	}
 	
-	if ( param.identifierMix =="1")
+	if ( param.getValueCheck("semanticchecks.identifierMix") == 1)
 	{
 		m_ui->lbIdentifierMix->setText("Yes");						
 	}
@@ -254,7 +254,7 @@ void w_selectBatch::fillBatchDetail()
 		m_ui->lbIdentifierMix->setText("No");	
 	}
 	
-	if ( param.altoblockPerPage =="1")
+	if ( param.getValueCheck("blocks.altoblockPerPage") == 1)
 	{
 		m_ui->lbAltoBlockPerpage->setText("Yes");						
 	}
@@ -263,7 +263,7 @@ void w_selectBatch::fillBatchDetail()
 		m_ui->lbAltoBlockPerpage->setText("No");	
 	}
 	
-	if ( param.blockStructure =="1")
+	if ( param.getValueCheck("blocks.blockStructure") == 1)
 	{
 		m_ui->lbBlockStructure->setText("Yes");						
 	}
@@ -272,7 +272,7 @@ void w_selectBatch::fillBatchDetail()
 		m_ui->lbBlockStructure->setText("No");	
 	}
 	
-	if ( param.coveragePercentAlto =="1")
+	if ( param.getValueCheck("blocks.coveragePercentAlto") == 1)
 	{
 		m_ui->lbCoverageAlto->setText("Yes");						
 	}
@@ -281,7 +281,7 @@ void w_selectBatch::fillBatchDetail()
 		m_ui->lbCoverageAlto->setText("No");	
 	}
 	
-	if ( param.multipleBlockUse =="1")
+	if ( param.getValueCheck("blocks.multipleBlockUse") == 1)
 	{
 		m_ui->lbMultipleBlockUse->setText("Yes");						
 	}
@@ -289,7 +289,7 @@ void w_selectBatch::fillBatchDetail()
 	{
 		m_ui->lbMultipleBlockUse->setText("No");	
 	}			
-	if ( param.invalidSupplement =="1")
+	if ( param.getValueCheck("semanticchecks.invalidSupplement") == 1 )
 	{
 		m_ui->lbInvalidSupplement->setText("Yes");						
 	}
@@ -297,7 +297,7 @@ void w_selectBatch::fillBatchDetail()
 	{
 		m_ui->lbInvalidSupplement->setText("No");	
 	}
-	if ( param.oddsPages =="1")
+	if ( param.getValueCheck("dataintegrity.oddsPages") == 1)
 	{
 		m_ui->lbPages->setText("Yes");						
 	}
@@ -305,7 +305,7 @@ void w_selectBatch::fillBatchDetail()
 	{
 		m_ui->lbPages->setText("No");	
 	}	
-	if ( param.dateFolderIssue =="1")
+	if ( param.getValueCheck("semanticchecks.dateFolderIssue") == 1)
 	{
 		m_ui->lbDateFolderIssue->setText("Yes");						
 	}
@@ -313,7 +313,7 @@ void w_selectBatch::fillBatchDetail()
 	{
 		m_ui->lbDateFolderIssue->setText("No");	
 	}	
-	if ( param.noIssueDefined =="1")
+	if ( param.getValueCheck("semanticchecks.noIssueDefined") == 1)
 	{
 		m_ui->lbNoIssueDef->setText("Yes");						
 	}

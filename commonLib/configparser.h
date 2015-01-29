@@ -10,8 +10,6 @@
 //! reader of config file to feed xml
 //
 
-class HelperMethod; 
-
 class configparser: public parserCheck, public DefaultHandler {
 	public:	
 		virtual void 	characters (const XMLCh *const chars, const XMLSize_t length);
@@ -24,7 +22,6 @@ class configparser: public parserCheck, public DefaultHandler {
 		virtual void init();
 	private:
 		Parameters* ctx;
-		HelperMethod* helpMth; // Help Methode
 		std::string position;
 		std::stack<std::string> currPoss;
 		std::string value;
