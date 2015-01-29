@@ -298,9 +298,42 @@ LinkedFiles dbrequest::getLinkedFiles(int id,std::string file_part)
    return lf;
 }
 
+Parameters dbrequest::getParameterVerifiers(int id_testset){
 
+		ConnectionDB* conn = g_pool.getConnection(databaseName);
+	Parameters param;
+	static std::string sql = "SELECT KEY,VALUE FROM PARAMTESTSET WHERE ID_TESTSET=?";
+	sqlite3_stmt *pStmt;
+	const char *zErrMsg= 0; 
+
+	int rc = sqlite3_prepare_v2(conn->db,sql.c_str(),-1, &pStmt,&zErrMsg);
+
+	if(rc != SQLITE_OK) 
+	{   // try with old implementation
+		sqlite3_finalize(pStmt);
+		return _getParameterVerifiers(id_testset); 
+	};
+
+	sqlite3_bind_int(pStmt,1,id_testset);
+
+	while(sqlite3_step(pStmt) == SQLITE_ROW)
+    {
+		int col=0;
+		const char *key = safe_sqlite3_column_text(pStmt, col++);
+		const char *value = safe_sqlite3_column_text(pStmt, col++);
+
+		param.addParam(Parameters::prefix+key,value);
+	};
+
+	sqlite3_finalize(pStmt);
+
+
+	return param; 
+}
+
+// old implementation @deprecated
 // return the parameters of verified tests
-Parameters dbrequest::getParameterVerifiers(int id_testset)
+Parameters dbrequest::_getParameterVerifiers(int id_testset)
 {
 	std::stringstream oId;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);

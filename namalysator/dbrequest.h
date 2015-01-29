@@ -39,6 +39,7 @@ class dbrequest
 		std::string databaseName;
 		//FILE *fpLog;
 		//void closeDB();
+		Parameters _getParameterVerifiers(int id_testset);
 	public:	
 
 		//set database
