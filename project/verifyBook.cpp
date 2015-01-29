@@ -5,7 +5,7 @@
 
 
 verifyBook::verifyBook(){
-	std::cerr << "VERIFY BOOK" << std::endl;
+	//std::cerr << "VERIFY BOOK" << std::endl;
 }
 
 void verifyBook::check(std::string check,metsparserContext& context){

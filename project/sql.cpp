@@ -227,7 +227,7 @@ bool database::insertMetsBook(int id_mets, std::string _sysnum){
 	static std::string sql= "INSERT INTO METSBOOK (ID_METS,BIBREC_SYS_NUM)"
 							" VALUES(?,?)";
 
-	std::cerr << "INSERT METSBOOK:" << id_mets << " SYSNUM:" << _sysnum << std::endl;
+	//std::cerr << "INSERT METSBOOK:" << id_mets << " SYSNUM:" << _sysnum << std::endl;
 	const char *szErrMsg =0;
 	sqlite3_stmt *pStmt =0;
 

@@ -59,7 +59,7 @@ void inventoryMappingActif::setCurrentInventoryValue(std::string field, std::str
 }
 
 void inventoryMappingActif::setActif(bool _actif){
-	std::cerr << "INVENTORY SET to : " << _actif << std::endl;
+	//std::cerr << "INVENTORY SET to : " << _actif << std::endl;
 	actif = _actif;
 }
 

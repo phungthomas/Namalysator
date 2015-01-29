@@ -208,8 +208,8 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 	
 	static struct _onlyOnes {
 		_onlyOnes(std::map<string,StateParsermodState*>& map){
-			static int i = 0;
-			std::cerr << "Only Ones :"<< ++i << std::endl;
+			//static int i = 0;
+			//std::cerr << "Only Ones :"<< ++i << std::endl;
 			map["title"]=		new StateParsermodStateInventory("BIBREC_245a");
 			map["subTitle"]=	new StateParsermodStateInventory("BIBREC_245b"); // sub state machine
 			map["identifier"]=	new StateParsermodStateInventory("BIBREC_SYS_NUM");
