@@ -302,376 +302,56 @@
     <rect>
      <x>310</x>
      <y>30</y>
-     <width>231</width>
+     <width>361</width>
      <height>321</height>
     </rect>
    </property>
    <property name="title">
     <string>Parameters</string>
    </property>
-   <widget class="QLabel" name="label_2">
+   <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>20</y>
-      <width>91</width>
-      <height>16</height>
+      <width>341</width>
+      <height>291</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Schemavalidation</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>40</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>File check</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>60</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Checksum</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_11">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>80</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Divs</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_13">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>120</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Identifiermix</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_14">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>140</y>
-      <width>101</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Altoblockperpage</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_15">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>100</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Unlinked identifier</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_12">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>160</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Block structure</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_16">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>180</y>
-      <width>151</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Coveragepercentageperalto</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_17">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>200</y>
-      <width>151</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Multiple block use</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_18">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>220</y>
-      <width>141</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Invalid Supplement</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbschema">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>20</y>
-      <width>46</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbFileCheck">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>40</y>
-      <width>51</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbChecksum">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>60</y>
-      <width>46</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbDivs">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>80</y>
-      <width>46</width>
-      <height>14</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbUnlinkedIdentifier">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>94</y>
-      <width>46</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbIdentifierMix">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>120</y>
-      <width>46</width>
-      <height>14</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbAltoBlockPerpage">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>140</y>
-      <width>46</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbBlockStructure">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>160</y>
-      <width>46</width>
-      <height>14</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbCoverageAlto">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>180</y>
-      <width>46</width>
-      <height>14</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbInvalidSupplement">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>220</y>
-      <width>46</width>
-      <height>14</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbMultipleBlockUse">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>200</y>
-      <width>46</width>
-      <height>14</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_20">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>240</y>
-      <width>81</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Odds pages</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbPages">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>240</y>
-      <width>41</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_21">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>260</y>
-      <width>101</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Date Folder - Issue</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbDateFolderIssue">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>260</y>
-      <width>41</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_22">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>280</y>
-      <width>91</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>No issue defined</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lbNoIssueDef">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>280</y>
-      <width>46</width>
-      <height>14</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QScrollArea" name="scrollArea">
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>337</width>
+          <height>287</height>
+         </rect>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget_2">
+         <property name="geometry">
+          <rect>
+           <x>9</x>
+           <y>9</y>
+           <width>321</width>
+           <height>271</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QTableView" name="paramView"/>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QTableWidget" name="tableSummary">
@@ -679,7 +359,7 @@
     <rect>
      <x>310</x>
      <y>360</y>
-     <width>231</width>
+     <width>361</width>
      <height>191</height>
     </rect>
    </property>

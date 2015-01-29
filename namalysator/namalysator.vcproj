@@ -76,10 +76,10 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; &quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
-				AdditionalDependencies="libexpatMT.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtWebKitd4.lib sqlite.lib shell32.lib Tiff.lib cximage.lib png.lib jbig.lib jasper.lib Jpeg.lib mng.lib libdcr.lib"
+				AdditionalDependencies="libexpatMT.lib commonLib.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtWebKitd4.lib sqlite.lib shell32.lib Tiff.lib cximage.lib png.lib jbig.lib jasper.lib Jpeg.lib mng.lib libdcr.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="&quot;$(METSVERIFIER)\Libraries\Debug&quot;;&quot;$(METSVERIFIER)\Libraries\boost-libs&quot;;&quot;$(QTDIR)\lib&quot;;$(CODESYNTHESIS)\lib\VC-9-0"
+				AdditionalLibraryDirectories="c:\Development\metsverifier\Libraries\Debug;&quot;$(METSVERIFIER)\metsverifier\Debug&quot;;&quot;$(METSVERIFIER)\Libraries\Debug&quot;;&quot;$(METSVERIFIER)\Libraries\boost-libs&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(CODESYNTHESIS)\lib\VC-9-0&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=""
 				SubSystem="2"
@@ -260,6 +260,10 @@
 			</File>
 			<File
 				RelativePath=".\metsparser.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\parammodel.cpp"
 				>
 			</File>
 			<File
@@ -476,6 +480,10 @@
 			</File>
 			<File
 				RelativePath=".\metsparser.h"
+				>
+			</File>
+			<File
+				RelativePath=".\parammodel.h"
 				>
 			</File>
 			<File

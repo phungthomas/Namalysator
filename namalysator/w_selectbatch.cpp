@@ -9,6 +9,7 @@
 #include "gui_utilities.h"
 #include "w_inventaire.h"
 #include "w_stat.h"
+#include "parammodel.h"
 
 w_selectBatch::w_selectBatch(QWidget *parent) :batch(BatchDetail::getBatchDetail()),
     QWidget(parent),
@@ -207,121 +208,14 @@ void w_selectBatch::fillBatchDetail()
  void w_selectBatch::loadParameters(int id)
  {
 	Parameters param = db.getParameterVerifiers(id);
-	m_ui->lbschema->setText("Yes"); // always yes no more choice 
+	//m_ui->lbschema->setText("Yes"); // always yes no more choice 
+	std::map<std::string,std::string>map=param.mapFilter();
+	paramModel* modelParam = new paramModel();
+	modelParam->init(map);
+	m_ui->paramView->setModel(modelParam);
+	m_ui->paramView->verticalHeader()->hide();
+	m_ui->paramView->setAlternatingRowColors(true);
 
-	if ( param.getValueCheck("dataintegrity.checkFile") == 1)
-	{			
-		m_ui->lbFileCheck->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbFileCheck->setText("No");	
-	}
-	
-	if ( param.getValueCheck("dataintegrity.checkSum") == 1 )
-	{
-		m_ui->lbChecksum->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbChecksum->setText("No");	
-	}
-	
-	if ( param.getValueCheck("semanticchecks.divs") == 1)
-	{
-		m_ui->lbDivs->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbDivs->setText("No");	
-	}
-
-	if ( param.getValueCheck("dataintegrity.unlinkedIdentifier") == 1)
-	{
-		m_ui->lbUnlinkedIdentifier->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbUnlinkedIdentifier->setText("No");	
-	}
-	
-	if ( param.getValueCheck("semanticchecks.identifierMix") == 1)
-	{
-		m_ui->lbIdentifierMix->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbIdentifierMix->setText("No");	
-	}
-	
-	if ( param.getValueCheck("blocks.altoblockPerPage") == 1)
-	{
-		m_ui->lbAltoBlockPerpage->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbAltoBlockPerpage->setText("No");	
-	}
-	
-	if ( param.getValueCheck("blocks.blockStructure") == 1)
-	{
-		m_ui->lbBlockStructure->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbBlockStructure->setText("No");	
-	}
-	
-	if ( param.getValueCheck("blocks.coveragePercentAlto") == 1)
-	{
-		m_ui->lbCoverageAlto->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbCoverageAlto->setText("No");	
-	}
-	
-	if ( param.getValueCheck("blocks.multipleBlockUse") == 1)
-	{
-		m_ui->lbMultipleBlockUse->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbMultipleBlockUse->setText("No");	
-	}			
-	if ( param.getValueCheck("semanticchecks.invalidSupplement") == 1 )
-	{
-		m_ui->lbInvalidSupplement->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbInvalidSupplement->setText("No");	
-	}
-	if ( param.getValueCheck("dataintegrity.oddsPages") == 1)
-	{
-		m_ui->lbPages->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbPages->setText("No");	
-	}	
-	if ( param.getValueCheck("semanticchecks.dateFolderIssue") == 1)
-	{
-		m_ui->lbDateFolderIssue->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbDateFolderIssue->setText("No");	
-	}	
-	if ( param.getValueCheck("semanticchecks.noIssueDefined") == 1)
-	{
-		m_ui->lbNoIssueDef->setText("Yes");						
-	}
-	else
-	{
-		m_ui->lbNoIssueDef->setText("No");	
-	}	
-		
 }
 
  void w_selectBatch::loadParametersCompareBatch()

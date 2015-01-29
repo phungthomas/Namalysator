@@ -36,3 +36,16 @@ int Parameters::getValueCheck(std::string _Key){
 
 	return ret;
 }
+
+std::map<std::string,std::string> Parameters::mapFilter(){
+	static std::string check("verifiers.");
+	std::map<std::string,std::string> ret;
+	for ( std::map<std::string,std::string>::iterator it = mapConfig.begin();it != mapConfig.end() ;it++){
+		std::string key = it->first;
+		if ( check.compare(0,check.length(),key,0,check.length()) == 0){
+			ret[key.substr(check.length())]=it->second;
+		}
+
+	}
+	return ret;
+}
