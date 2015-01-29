@@ -28,10 +28,10 @@ QVariant paramModel::data(const QModelIndex &index, int role) const {
 }
 
 QVariant paramModel::headerData ( int section, Qt::Orientation orientation, int role  ) const{
-	static char* tableTitle[]={"key","value","U", "U"};
+	static char* tableTitle[]={"key","value","key","value","U","U"};
 	QVariant ret=QVariant();
 
-	if ( role == Qt::DisplayRole && section < 3 && section >= 0 ) {
+	if ( role == Qt::DisplayRole && section < 5 && section >= 0 ) {
 		char * tmp = tableTitle [section];
 		QString qs ( tmp );
 		ret = QVariant (qs);
@@ -47,9 +47,11 @@ void paramModel::init(std::map<std::string,std::string> map){
 
 
 	table.clear();
+	vect.clear();
+	bool flag = false;
 	
 	for ( std::map<std::string,std::string>::iterator it=map.begin(); it != map.end(); it++ ){
-		vect.clear();
+		
 		vect.push_back(QString(it->first.c_str()));
 		int rr = atoi (it->second.c_str());
 		switch(rr){
@@ -57,7 +59,22 @@ void paramModel::init(std::map<std::string,std::string> map){
 			case 0: vect.push_back(nok); break;
 			default: vect.push_back(QString(it->second.c_str())); break;
 		}
-		table.push_back(vect);
+		if ( flag ){
+			table.push_back(vect);
+			vect.clear();
+			flag = false;
+		}else{
+			flag = true;
+		};
 	};
+
+	
+	if ( flag ){
+		vect.push_back(QString(""));
+		vect.push_back(QString(""));
+		table.push_back(vect);
+		vect.clear();
+	};
+
 	
 }
