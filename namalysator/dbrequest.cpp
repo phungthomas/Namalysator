@@ -288,17 +288,17 @@ Parameters dbrequest::getParameterVerifiers(int id_testset)
 		 {
 			const char *result = safe_sqlite3_column_text(pStmt, i);
 			
-			if (i==0) param.checkFile = result;								
-			else if (i==1) 	param.checkSum = result;	
-			else if (i==2) param.divs = result;
-			else if (i==3) param.unlinkedIdentifier = result;
-			else if (i==4) param.identifierMix = result;		
-			else if (i==5) param.invalidSupplement = result;	
-			else if (i==6) param.noIssueDefined = result;		
-			else if (i==7) param.altoblockPerPage = result;
-			else if (i==8) param.blockStructure = result;	
-			else if (i==9) param.coveragePercentAlto = result;		
-			else if (i==10) param.multipleBlockUse = result;
+			if (i==0) param.setValue("verifiers.dataintegrity.checkFile",result);								
+			else if (i==1) param.setValue("verifiers.dataintegrity.checkSum",result);	
+			else if (i==2) param.setValue("verifiers.semanticchecks.divs",result);
+			else if (i==3) param.setValue("verifiers.dataintegrity.unlinkedIdentifier",result);
+			else if (i==4) param.setValue("verifiers.semanticchecks.identifierMix",result);		
+			else if (i==5) param.setValue("verifiers.semanticchecks.invalidSupplement",result);	
+			else if (i==6) param.setValue("verifiers.semanticchecks.noIssueDefined",result);		
+			else if (i==7) param.setValue("verifiers.blocks.altoblockPerPage",result);
+			else if (i==8) param.setValue("verifiers.blocks.blockStructure",result);	
+			else if (i==9) param.setValue("verifiers.blocks.coveragePercentAlto",result);		
+			else if (i==10) param.setValue("verifiers.blocks.multipleBlockUse",result);
 			//else if (i==11) param.dates = result;
 			//else if (i==12) param.schemaValidation = result;					
 		 }			

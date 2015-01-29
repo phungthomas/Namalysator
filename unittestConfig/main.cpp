@@ -50,7 +50,7 @@ int start (int argc, char** argv){
 
 	
 	std::cout << "Database:" <<param.getValue("database")<< std::endl;
-	std::cout << "altoblockPerPage" <<param.altoblockPerPage<< std::endl;
+	std::cout << "altoblockPerPage" <<param.getValue("verifiers.blocks.altoblockPerPage")<< std::endl;
 	return 0;
 }
 

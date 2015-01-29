@@ -769,19 +769,19 @@ void database::insertParameterVerifiers(Parameters *param)
 					  'IDENTIFIERMIX','DATEFOLDERISSUE','ODDSPAGES','INVALIDSUPPLEMENT','NOISSUEDEFINED','ALTOBLOCKPERPAGE', \
 					  'BLOCKSTRUCTURE','COVERAGEPERCENTALTO','MULTIBLOCKUSE','DATES','SCHEMACHECK') \
 					  VALUES   ( '" + stringIdTestSet  + "',  \
-					  '" + param->checkFile  + "',  \
-					  '" + param->checkSum + "',  \
-					  '" + param->divs + "',  \
-					  '" + param->unlinkedIdentifier + "',  \
-					  '" + param->identifierMix + "',  \
-					  '" + param->dateFolderIssue + "',  \
-					  '" + param->oddsPages + "',  \
-					  '" + param->invalidSupplement+ "',  \
-					  '" + param->noIssueDefined + "',  \
-					  '" + param->altoblockPerPage + "',  \
-					  '" + param->blockStructure + "',  \
-					  '" + param->coveragePercentAlto + "',  \
-					  '" + param->multipleBlockUse + "',  \
+					  '" + param->getValue("verifiers.dataintegrity.checkFile")  + "',  \
+					  '" + param->getValue("verifiers.dataintegrity.checkSum") + "',  \
+					  '" + param->getValue("verifiers.semanticchecks.divs") + "',  \
+					  '" + param->getValue("verifiers.dataintegrity.unlinkedIdentifier") + "',  \
+					  '" + param->getValue("verifiers.semanticchecks.identifierMix") + "',  \
+					  '" + param->getValue("verifiers.semanticchecks.dateFolderIssue") + "',  \
+					  '" + param->getValue("verifiers.dataintegrity.oddsPages") + "',  \
+					  '" + param->getValue("verifiers.semanticchecks.invalidSupplement")+ "',  \
+					  '" + param->getValue("verifiers.semanticchecks.noIssueDefined") + "',  \
+					  '" + param->getValue("verifiers.blocks.altoblockPerPage") + "',  \
+					  '" + param->getValue("verifiers.blocks.blockStructure") + "',  \
+					  '" + param->getValue("verifiers.blocks.coveragePercentAlto") + "',  \
+					  '" + param->getValue("verifiers.blocks.multipleBlockUse") + "',  \
 					  '" + "1" /*param->dates*/ + "',  \
 					  '" + "1" + /*param->schemaValidation*/ + "')"; // always true 				
 

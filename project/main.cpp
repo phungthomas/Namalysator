@@ -268,7 +268,7 @@ int start()
 			}
 		
 			pt.LogTime("Parsing ALTO files");
-			if (parameter.oddsPages =="1")
+			if (parameter.getValueCheck("dataintegrity.oddsPages") == 1)
 			{
 				verifyoddspages(&hError,currentMetsFile,fg->vect.size());
 			}
@@ -277,10 +277,10 @@ int start()
 		
 
 		static verifyBook vBook;
-		vBook.check(parameter.inventoryBook,metsP.getContext());
+		vBook.check(parameter.getValue("verifiers.inventoryBook"),metsP.getContext());
 		
 
-		if (parameter.checkFile =="1")
+		if (parameter.getValueCheck("dataintegrity.checkFile") == 1)
 		{
 			verifypdf(&df,&hError,currentMetsPath);
 			pt.LogTime("Verify PDF");
@@ -294,7 +294,7 @@ int start()
 		dataaggregator da(&df,currentMetsFile);	
 		pt.LogTime("Creating dataagregator");
 		
-		if (parameter.dateFolderIssue =="1")
+		if (parameter.getValueCheck("semanticchecks.dateFolderIssue") == 1)
 		{			
 			verifydatefolder(&hError,currentMetsFile,currentMetsPath);		
 			verifydatemismatch(	&hError,df.get<Mets>("METS"));				
@@ -302,60 +302,60 @@ int start()
 		//Begin for the verifiers		
 		if (parseError == false)
 		{				
-			if (parameter.checkSum =="1")
+			if (parameter.getValueCheck("dataintegrity.checkSum") == 1)
 			{
 				verifychecksum(&df,&hError,currentMetsFile,currentMetsPath);				
 			}
 			
-			if (parameter.divs =="1")
+			if (parameter.getValueCheck("semanticchecks.divs") == 1)
 			{
 				verifydivs vd(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter.unlinkedIdentifier =="1")
+			if (parameter.getValueCheck("dataintegrity.unlinkedIdentifier") == 1)
 			{
 				verifyunlinkedidentifier(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter.identifierMix =="1")
+			if (parameter.getValueCheck("semanticchecks.identifierMix") == 1)
 			{
 				verifyidentifierinmix(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter.altoblockPerPage =="1")
+			if (parameter.getValueCheck("blocks.altoblockPerPage") == 1)
 			{
 				verifyaltoblockperpage(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter.blockStructure =="1")
+			if (parameter.getValueCheck("blocks.blockStructure") == 1)
 			{
 				verifyblockstructure(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter.coveragePercentAlto =="1")
+			if (parameter.getValueCheck("blocks.coveragePercentAlto") == 1)
 			{
 				verifycoveragepercentagealtoblocks(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter.multipleBlockUse =="1")
+			if (parameter.getValueCheck("blocks.multipleBlockUse") == 1)
 			{
 				verifyblocks(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter.noIssueDefined =="1")
+			if (parameter.getValueCheck("semanticchecks.noIssueDefined") == 1)
 			{
 				verifynoissuedefined(&df,&hError,currentMetsFile);		
 			}
 
-			if (parameter.invalidSupplement =="1")
+			if (parameter.getValueCheck("semanticchecks.invalidSupplement") == 1 )
 			{
 				verifyinvalidsupplement(&df,&hError,currentMetsFile);				
 			}								
-			if (parameter.issueNumber =="1")
+			if (parameter.getValue("issueNumber") == "1")
 			{
 				verifyinvalidissuenumber(&df,&hError,currentMetsFile);
 			}	
-			if (parameter.measurementSTD == "1"){
+			if (parameter.getValueCheck("blocks.measurementSTD") == 1){
 				std::cerr << "ADDING measurement test" << std::endl;
 				verifyMeasurement(&df,&hError,currentMetsFile);
 			}
@@ -383,7 +383,7 @@ int start()
 	verifymissingissue(&hError,&db);
 	
 	//TODO quand c'est 0 et empty string
-	db.insertRandomTitle(atoi(parameter.checkTitle.c_str()));
+	db.insertRandomTitle(atoi(parameter.getValue("checkTitle").c_str()));
 	db.insertRandomMets(atoi(parameter.getValue("sampling").c_str()),vectorMets.size());	
 
 	hError.begin(getDate());

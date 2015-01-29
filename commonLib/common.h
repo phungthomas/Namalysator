@@ -7,6 +7,7 @@
 class Parameters
 {
 public:
+	/*
 	//std::string input;
 	//std::string batchName;
 	//std::string database;
@@ -23,14 +24,15 @@ public:
 	std::string blockStructure;
 	std::string coveragePercentAlto;	
 	std::string multipleBlockUse;
-	std::string invalidSupplement;
+	//std::string invalidSupplement;
 	std::string noIssueDefined;	
 	std::string checkTitle;
 	std::string oddsPages;
 	//std::string sampling;
 	std::string issueNumber;
 	std::string measurementSTD;
-	std::string inventoryBook;
+	std::string inventoryBook;*/
+
 	void setValue(std::string Key,std::string Val);
 	std::string getValue(std::string Key);
 	int getValueCheck(std::string Key);

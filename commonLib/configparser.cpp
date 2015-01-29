@@ -72,7 +72,7 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 	}
 
 	currPoss.push(position);
-
+    /*
     if (strcmp(name,"inventoryBook")== 0)	
 	{
 		helpMth->start(& (ctx->inventoryBook));
@@ -107,7 +107,7 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 	}
 	else if(strcmp(name,"invalidSupplement") == 0)		
 	{
-		helpMth->start(& (ctx->invalidSupplement));
+		//helpMth->start(& (ctx->invalidSupplement));
 	}
 	else if(strcmp(name,"divs") == 0)		
 	{
@@ -141,6 +141,8 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 	{
 		helpMth->start(& (ctx->measurementSTD));
 	}
+	*/
+
 
 	XMLString::release(&name);
 }
