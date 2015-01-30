@@ -870,29 +870,32 @@ std::map<int,std::pair<int,int>> dbrequest::getSumMetsYear(int id_testset)
 int dbrequest::getSumSupplYear(int id_testset,int year)
 {
 	int numberSuppl =0;
-	std::stringstream oid,oyear;
-	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	oid << id_testset;	
+	std::stringstream oyear;
 	oyear << year;
-	sqlite3_stmt *pStmt;
-	int rc;	
+
+	ConnectionDB* conn = g_pool.getConnection(databaseName);	
+
+
+	sqlite3_stmt *pStmt;	
 	const char *zErrMsg= 0;    
-	std::string selectSql = "select count(title_supplement) from Mets  where id_testset ='" + oid.str() + "'and year = '" + oyear.str() + "' and title_supplement !='' group by year";  
-	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-	std::map<int,int> mapYearCount;
-	if(rc == SQLITE_OK)
-	{	  
-      while(sqlite3_step(pStmt) == SQLITE_ROW)
-      {				
-		const char *result = safe_sqlite3_column_text(pStmt, 0);			
-		numberSuppl = atoi(result);			 
-	  }
+	static std::string selectSql = "select count(a.title_supplement) from SUPPLEMENTS a, METS b"
+		                    " where a.ID_METS = b.ID_METS and b.id_testset =?"
+							" and b.year = ? and a.title_supplement !='' group by b.year";  
+
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
+	if(rc == SQLITE_OK){	  
+		sqlite3_bind_int(pStmt,1,id_testset);
+		sqlite3_bind_text(pStmt,2,oyear.str().c_str(),oyear.str().length(),SQLITE_STATIC);
+
+		while( sqlite3_step(pStmt) == SQLITE_ROW ){							
+			numberSuppl = sqlite3_column_int(pStmt,0);			 
+		}
    }else{
 		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
-   return numberSuppl;
+	return numberSuppl;
 }
 
 /// <summary>get comments of specific date</summary>
