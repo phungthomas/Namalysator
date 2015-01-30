@@ -40,6 +40,7 @@ class dbrequest
 		//FILE *fpLog;
 		//void closeDB();
 		Parameters _getParameterVerifiers(int id_testset);
+		void raiseError(ConnectionDB*, std::string);
 	public:	
 
 		//set database

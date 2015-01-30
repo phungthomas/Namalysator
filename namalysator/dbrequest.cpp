@@ -5,6 +5,8 @@
 #include <QDate>
 #include <QTime>
 #include <QIcon>
+#include <QErrorMessage>
+
 #include <iostream>
 
 #ifdef LOG_TIMING
@@ -85,6 +87,13 @@ ConnectionPool::~ConnectionPool(){
 /////////////////////////////////////////////////////////////
 // class dbrequest
 
+void dbrequest::raiseError(ConnectionDB* Conn, std::string message){
+	std::string error ( sqlite3_errmsg(Conn->db) );
+	std::stringstream ss;
+	ss << "ERROR DB :" << error << std::endl << message ;
+	QErrorMessage* Qerror= new QErrorMessage();
+	Qerror->showMessage(ss.str().c_str());
+}
 
 void dbrequest::setDataBaseName(std::string dbName)
 {
@@ -264,7 +273,9 @@ MetsFile dbrequest::getMets(int id_mets)
 			mets.year = sqlite3_column_int(pStmt, 8);
 			mets.docType = safe_sqlite3_column_text(pStmt, 9);
 		}	  
-    }
+	}else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	// Get names of supplements
 	static const std::string selectSql2 = "SELECT TITLE_SUPPLEMENT FROM SUPPLEMENTS WHERE ID_METS = ?";
@@ -429,6 +440,8 @@ std::vector<ErrorSummary> dbrequest::getvErrorSummary(int id_testset){
 					
 			ret.push_back(es);		 
 		}
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return ret;
