@@ -398,63 +398,39 @@ Parameters dbrequest::_getParameterVerifiers(int id_testset)
 	return param;  	
 }
 
-/// <summary>getTestset id's of selected batch</summary>
-/// <param name="id">batchName</param>
-/// <returns>vector of testset id's</returns>
-std::vector<int> dbrequest::getIdTestset(std::string batchName)
-{
-	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::vector<int> v;
-    sqlite3_stmt *pStmt;
-	int rc;	
-	const char *zErrMsg= 0; 		
-	std::string selectSql = "select ID_TESTSET from Testset where BATCHNAME = '" + batchName + "'";
-	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-	if(rc == SQLITE_OK)
-	{	  
-		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{
-			const char *result = safe_sqlite3_column_text(pStmt, 0);			
-			v.push_back(atoi(result));
-		}		 
-	} 
-	sqlite3_finalize(pStmt);
-	return v;
-}
+
 
 /// <summary>get all errors of the current testset (without dates) </summary>
 /// <param name="id">id_testset</param>
 /// <returns>vector of ErrorSummary</returns>
-std::vector<ErrorSummary> dbrequest::getvErrorSummary(int id_testset)
-{
-	std::vector<ErrorSummary> v ;
+std::vector<ErrorSummary> dbrequest::getvErrorSummary(int id_testset){
+	std::vector<ErrorSummary> ret;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	ErrorSummary es;
+	
 	sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0;
-	std::stringstream sId_testset;	
-	sId_testset << id_testset; 	
-
-    std::string selectSql ="SELECT ID_ERRORTYPE,COUNT (ID_ERRORTYPE) FROM MetsError where ID_TESTSET = '" + sId_testset.str() + "' GROUP BY ID_ERRORTYPE";
-	DEBUG_ME
+	
+    static const std::string selectSql ="SELECT ID_ERRORTYPE,COUNT (ID_ERRORTYPE) FROM MetsError where ID_TESTSET = ? GROUP BY ID_ERRORTYPE";
+	
     int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+
+	
     if(rc == SQLITE_OK)
     {	 
+		ErrorSummary es;
+		sqlite3_bind_int(pStmt,1,id_testset);
+
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			int count = sqlite3_data_count(pStmt);		
-			for (int i =0;i<  count ;i++)
-			{
-				const char *result = safe_sqlite3_column_text(pStmt, i);			
-				if (i==0) es.errorType = getErrorTypeWithId(atoi(result));						
-				else if (i==1) es.count = atoi(result);					
-			}		
-			 v.push_back(es);		 
+			int col = 0;
+			es.errorType = getErrorTypeWithId( sqlite3_column_int(pStmt,col++));
+			es.count = sqlite3_column_int(pStmt,col++);
+					
+			ret.push_back(es);		 
 		}
 	}
 	sqlite3_finalize(pStmt);
-	return v;
+	return ret;
 }
 
 /// <summary>get the summary of the date errors of the current testset</summary>

@@ -54,12 +54,7 @@ class dbrequest
 		//return the details from the selected Batch 
 		void getBatch(BatchDetail& bdetail,int id_testset);
 		// return the parameters of verified tests
-		Parameters getParameterVerifiers(int id_testset);
-	/// <summary>getTestset id's of selected batch</summary>
-	/// <param name="id">batchName</param>
-	/// <returns>vector of testset id's</returns>
-//--> pas besoin pour le moment
-		std::vector<int> getIdTestset(std::string batchName);		
+		Parameters getParameterVerifiers(int id_testset);	
 	/// <summary>get the summary of the errors of the current testset (without dates) </summary>
 	/// <param name="id">id_testset</param>
 	/// <returns>vector of ErrorSummary</returns>
