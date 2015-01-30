@@ -1505,43 +1505,33 @@ std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
 std::vector<Sampling_Structure> dbrequest::getListSamplingStructure(int id_testset)
 {	
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::stringstream oIdTestset,oYear;
-	oIdTestset << id_testset;	
-	//oYear << year;
     sqlite3_stmt *pStmt;
-	int rc;	
+		
 	const char *zErrMsg= ""; 
-	Sampling_Structure ss;
-	std::vector<Sampling_Structure>  v;
-	std::string selectSql = "select * from SAMPLING_STRUCTURE ss, METS m where ss.ID_METS = m.ID_METS and m.ID_TESTSET  ='" + oIdTestset.str() + "'";
-	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
-	if(rc == SQLITE_OK)
-	{	  
-      while(sqlite3_step(pStmt) == SQLITE_ROW)
-      {
-		int count = sqlite3_data_count(pStmt);		
-		 for (int i =0;i<  count ;i++)
-		 {
-			const char *result = safe_sqlite3_column_text(pStmt, i);
-			
-			if (i==0)
-			{ 
-				ss.id = atoi(result);			
-			}
-							
-			else if (i==1) ss.id_Mets = atoi(result);
-			else if (i==2) ss.checked = atoi(result);				
-		 }	
+	static std::string selectSql = "select ss.ID,ss.ID_METS,ss.CHECKED from SAMPLING_STRUCTURE ss, METS m where ss.ID_METS = m.ID_METS and m.ID_TESTSET  =?";
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+
+	
+	std::vector<Sampling_Structure>  ret;
+
+	if(rc == SQLITE_OK){
+		Sampling_Structure ss;
+		sqlite3_bind_int(pStmt,1,id_testset);
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW){
+			int col=0;
+			ss.id = sqlite3_column_int (pStmt,col++);
+			ss.id_Mets = sqlite3_column_int (pStmt,col++);
+			ss.checked = sqlite3_column_int (pStmt,col++);
 		 
-		 ss.Mets = getMets(ss.id_Mets);	
-		 v.push_back(ss);
-		 
-	  }
-   }
+			ss.Mets = getMets(ss.id_Mets);	
+			ret.push_back(ss);
+		}
+	};
 	sqlite3_finalize(pStmt);
-   return v;   
+	return ret;   
 }
 
 void dbrequest::updateSamplingStructure(int id,int checked)
