@@ -207,7 +207,7 @@ void  dbrequest::getBatch(BatchDetail& bdetail,int id_testset)
     sqlite3_stmt *pStmt;	
 	const char *zErrMsg=0; 	
 	bdetail.idTestSet = id_testset;
-	std::string selectSql = "select min(m.Date),max(m. Date),count(id_mets),batchname,t.date from Mets m,Testset t where t.id_testset = m.id_testset and m.id_testset =?";
+	static const std::string selectSql = "select min(m.Date),max(m. Date),count(id_mets),batchname,t.date from Mets m,Testset t where t.id_testset = m.id_testset and m.id_testset =?";
 
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
