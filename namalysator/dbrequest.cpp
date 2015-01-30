@@ -1982,7 +1982,7 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 	
 	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
 	static std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a, c.BIBREC_245b," 
-		                    " c.BIBREC_100a_1, c.BIBREC_100a_2, c.BIBREC_260b,c.BIBREC_260c,c.ITEM_barcode, c.BIBREC_SYS_NUM FROM METS a"
+		                    " c.BIBREC_100a_1, c.BIBREC_100a_2, c.BIBREC_260b,c.BIBREC_260c,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a"
 		                    " LEFT JOIN METSBOOK b ON a.ID_METS = b.ID_METS"
 							" LEFT JOIN BOOKSINVENTORY c ON b.BIBREC_SYS_NUM = c.BIBREC_SYS_NUM"
 							" WHERE a.ID_TESTSET=?";
@@ -2011,6 +2011,7 @@ retry:
 			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ));
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ));
+			//row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ));
 
 
 			v.push_back(row);
