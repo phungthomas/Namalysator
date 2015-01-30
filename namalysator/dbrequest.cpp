@@ -126,7 +126,7 @@ std::map<std::string,std::string> dbrequest::key2Label(std::map<std::string,std:
 std::string dbrequest::getLabel(std::string key){
 	static std::map<std::string,std::string> internal; // must be define in db_connection like could be dependant of the database name ( cherry on the cake )
 	std::string ret="";
-	if ( internal.size() == 0) { // first loading
+	if ( internal.size() == 0) { // LOAD normally in a table
 
 		ConnectionDB* conn = g_pool.getConnection(databaseName);
 		sqlite3_stmt *pStmt;
@@ -143,7 +143,7 @@ std::string dbrequest::getLabel(std::string key){
 			{
 				internal[safe_sqlite3_column_text(pStmt, 0)]=safe_sqlite3_column_text(pStmt, 1);
 			}
-		}else{ // table not existant so load a default
+		}else{ // BUT IF NO Table 
 			internal["dataintegrity.checkSum"]="CheckSum";
 			internal["semanticchecks.dateFolderIssue"]="Date Structure of Issue";
 			internal["semanticchecks.divs"]="Div Structure";
@@ -159,7 +159,7 @@ std::string dbrequest::getLabel(std::string key){
 			internal["dataintegrity.checkFile"]="Check File";
 		}
 		sqlite3_finalize(pStmt);
-			// LOAD normally in a table
+			
 
 	};
 
