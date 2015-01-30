@@ -14,11 +14,13 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QComboBox>
-#include <QtGui/QGroupBox>
+#include <QtGui/QGridLayout>
+#include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
 #include <QtGui/QTextEdit>
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -26,56 +28,104 @@ QT_BEGIN_NAMESPACE
 class Ui_w_screenshoterror
 {
 public:
+    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout;
     QLabel *label;
-    QGroupBox *groupBoxSaveError;
-    QComboBox *comboBoxErrorType;
-    QTextEdit *txtCommentaire;
+    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout;
     QPushButton *btnSave;
-    QPushButton *btnClearPainter;
-    QPushButton *btnClose;
     QPushButton *btnColor;
     QTextEdit *boxColor;
+    QPushButton *btnClearPainter;
+    QPushButton *btnClose;
+    QTextEdit *txtCommentaire;
+    QComboBox *comboBoxErrorType;
     QLabel *lbComment;
 
     void setupUi(QWidget *w_screenshoterror)
     {
         if (w_screenshoterror->objectName().isEmpty())
             w_screenshoterror->setObjectName(QString::fromUtf8("w_screenshoterror"));
-        w_screenshoterror->resize(1144, 875);
+        w_screenshoterror->resize(954, 860);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(w_screenshoterror->sizePolicy().hasHeightForWidth());
+        w_screenshoterror->setSizePolicy(sizePolicy);
+        w_screenshoterror->setMinimumSize(QSize(300, 300));
+        verticalLayout_2 = new QVBoxLayout(w_screenshoterror);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         label = new QLabel(w_screenshoterror);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(0, 0, 291, 121));
-        groupBoxSaveError = new QGroupBox(w_screenshoterror);
-        groupBoxSaveError->setObjectName(QString::fromUtf8("groupBoxSaveError"));
-        groupBoxSaveError->setEnabled(true);
-        groupBoxSaveError->setGeometry(QRect(180, 790, 951, 61));
-        comboBoxErrorType = new QComboBox(groupBoxSaveError);
-        comboBoxErrorType->setObjectName(QString::fromUtf8("comboBoxErrorType"));
-        comboBoxErrorType->setGeometry(QRect(20, 10, 241, 22));
-        txtCommentaire = new QTextEdit(groupBoxSaveError);
-        txtCommentaire->setObjectName(QString::fromUtf8("txtCommentaire"));
-        txtCommentaire->setGeometry(QRect(270, 10, 491, 41));
-        btnSave = new QPushButton(groupBoxSaveError);
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
+        label->setMinimumSize(QSize(600, 600));
+
+        verticalLayout->addWidget(label);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        gridLayout = new QGridLayout();
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        btnSave = new QPushButton(w_screenshoterror);
         btnSave->setObjectName(QString::fromUtf8("btnSave"));
-        btnSave->setGeometry(QRect(790, 10, 101, 24));
-        btnClearPainter = new QPushButton(w_screenshoterror);
-        btnClearPainter->setObjectName(QString::fromUtf8("btnClearPainter"));
-        btnClearPainter->setGeometry(QRect(90, 790, 75, 24));
-        btnClose = new QPushButton(w_screenshoterror);
-        btnClose->setObjectName(QString::fromUtf8("btnClose"));
-        btnClose->setGeometry(QRect(90, 830, 75, 24));
+
+        gridLayout->addWidget(btnSave, 0, 3, 1, 1);
+
         btnColor = new QPushButton(w_screenshoterror);
         btnColor->setObjectName(QString::fromUtf8("btnColor"));
-        btnColor->setGeometry(QRect(10, 790, 75, 24));
+
+        gridLayout->addWidget(btnColor, 0, 0, 1, 1);
+
         boxColor = new QTextEdit(w_screenshoterror);
         boxColor->setObjectName(QString::fromUtf8("boxColor"));
         boxColor->setEnabled(false);
-        boxColor->setGeometry(QRect(20, 830, 41, 21));
+        boxColor->setMinimumSize(QSize(10, 10));
+        boxColor->setMaximumSize(QSize(60, 20));
         boxColor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         boxColor->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+        gridLayout->addWidget(boxColor, 1, 0, 1, 1);
+
+        btnClearPainter = new QPushButton(w_screenshoterror);
+        btnClearPainter->setObjectName(QString::fromUtf8("btnClearPainter"));
+
+        gridLayout->addWidget(btnClearPainter, 0, 1, 1, 1);
+
+        btnClose = new QPushButton(w_screenshoterror);
+        btnClose->setObjectName(QString::fromUtf8("btnClose"));
+
+        gridLayout->addWidget(btnClose, 1, 3, 1, 1);
+
+        txtCommentaire = new QTextEdit(w_screenshoterror);
+        txtCommentaire->setObjectName(QString::fromUtf8("txtCommentaire"));
+        txtCommentaire->setMinimumSize(QSize(10, 0));
+        txtCommentaire->setMaximumSize(QSize(16777215, 120));
+
+        gridLayout->addWidget(txtCommentaire, 1, 2, 1, 1);
+
+        comboBoxErrorType = new QComboBox(w_screenshoterror);
+        comboBoxErrorType->setObjectName(QString::fromUtf8("comboBoxErrorType"));
+
+        gridLayout->addWidget(comboBoxErrorType, 0, 2, 1, 1);
+
         lbComment = new QLabel(w_screenshoterror);
         lbComment->setObjectName(QString::fromUtf8("lbComment"));
-        lbComment->setGeometry(QRect(190, 850, 661, 21));
+
+        gridLayout->addWidget(lbComment, 2, 2, 1, 1);
+
+
+        horizontalLayout->addLayout(gridLayout);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+
+        verticalLayout_2->addLayout(verticalLayout);
+
 
         retranslateUi(w_screenshoterror);
 
@@ -86,11 +136,10 @@ public:
     {
         w_screenshoterror->setWindowTitle(QApplication::translate("w_screenshoterror", "Form", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("w_screenshoterror", "TextLabel", 0, QApplication::UnicodeUTF8));
-        groupBoxSaveError->setTitle(QString());
         btnSave->setText(QApplication::translate("w_screenshoterror", "Save Image", 0, QApplication::UnicodeUTF8));
+        btnColor->setText(QApplication::translate("w_screenshoterror", "Color", 0, QApplication::UnicodeUTF8));
         btnClearPainter->setText(QApplication::translate("w_screenshoterror", "Clear painter", 0, QApplication::UnicodeUTF8));
         btnClose->setText(QApplication::translate("w_screenshoterror", "Close", 0, QApplication::UnicodeUTF8));
-        btnColor->setText(QApplication::translate("w_screenshoterror", "Color", 0, QApplication::UnicodeUTF8));
         lbComment->setText(QString());
     } // retranslateUi
 

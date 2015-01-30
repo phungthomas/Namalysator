@@ -78,7 +78,7 @@ public:
     {
         if (w_structview->objectName().isEmpty())
             w_structview->setObjectName(QString::fromUtf8("w_structview"));
-        w_structview->resize(1217, 900);
+        w_structview->resize(1194, 900);
         verticalLayout_2 = new QVBoxLayout(w_structview);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         label = new QLabel(w_structview);
@@ -98,7 +98,7 @@ public:
         bookW->setWidgetResizable(true);
         scrollAreaWidgetContents_2 = new QWidget();
         scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 1197, 178));
+        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 1174, 178));
         bookW->setWidget(scrollAreaWidgetContents_2);
 
         verticalLayout_2->addWidget(bookW);
@@ -280,6 +280,7 @@ public:
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 937, 817));
         scrollArea->setWidget(scrollAreaWidgetContents);
+        label->raise();
 
         verticalLayout->addWidget(scrollArea);
 

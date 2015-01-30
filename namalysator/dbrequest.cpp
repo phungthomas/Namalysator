@@ -904,44 +904,43 @@ int dbrequest::getSumSupplYear(int id_testset,int year)
 std::map<QDate,DateComment> dbrequest::getDateComment(int id_testset)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::stringstream id;
-	id << id_testset;		
+		
 	std::map<QDate,DateComment>  mapComment;
     sqlite3_stmt *pStmt;
 	int rc;	
 	const char *zErrMsg= 0; 
     DateComment dateComment;  
 
-   std::string selectSql = "select * from Datecomment dc, dateerror de where dc.ID_DATEERROR = de.Id and id_TESTSET='" + id.str() + "'"; 
-   DEBUG_ME
-   rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	static std::string selectSql = "select dc.ID,dc.ID_DATEERROR,dc.DATE,dc.COMMENT  from DATECOMMENT dc, dateerror de"
+		                           " where dc.ID_DATEERROR = de.Id and id_TESTSET=?"; 
+   
+	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
-   if(rc == SQLITE_OK)
-   {	  
+	if(rc == SQLITE_OK)
+	{	 
+		sqlite3_bind_int(pStmt,1,id_testset);
+
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			int count = sqlite3_data_count(pStmt);		
-			for (int i =0;i<  count ;i++)
-			{			
-				const char *result = safe_sqlite3_column_text(pStmt, i);								
-				if (i==0) dateComment.id = atoi(result);
-				else if (i==1) dateComment.id_DateError = atoi(result);
-				else if (i==2) dateComment.date = dateComment.date.fromString(result,"yyyy-MM-dd");
-				else if (i==3)dateComment.comment = result;		
-			}		
+			int col=0;
+			dateComment.id=sqlite3_column_int(pStmt,col++);	
+			dateComment.id_DateError=sqlite3_column_int(pStmt,col++);
+			dateComment.date= dateComment.date.fromString(safe_sqlite3_column_text(pStmt, col++),"yyyy-MM-dd");
+			dateComment.comment= safe_sqlite3_column_text(pStmt, col++);
+		
 			mapComment[dateComment.date] = dateComment;	 
-	  }
-   }else{
+		}
+	}else{
 		raiseError(conn,selectSql);
 	}
-   sqlite3_finalize(pStmt);
-   return mapComment;
+	sqlite3_finalize(pStmt);
+	return mapComment;
 }
 
 /// <summary>get vector of date error found by mets verifier</summary>
 /// <param name="id_testset">id_testset</param>
 /// <returns>vector with pair id,DateError </returns>
-std::vector<std::pair<int,DateError>> dbrequest::getvDateError(int id_testset)
+std::vector<std::pair<int,DateError> > dbrequest::getvDateError(int id_testset)
 {	
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	std::stringstream oIdTestset,oYear;

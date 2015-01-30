@@ -22,7 +22,7 @@ static const uint qt_meta_data_w_main[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,22 +32,29 @@ static const uint qt_meta_data_w_main[] = {
  // slots: signature, parameters, type, tag, flags
        8,    7,    7,    7, 0x08,
       24,    7,    7,    7, 0x08,
-      50,    7,    7,    7, 0x08,
-      71,    7,    7,    7, 0x08,
+      43,    7,    7,    7, 0x08,
+      58,    7,    7,    7, 0x08,
       84,    7,    7,    7, 0x08,
-     106,    7,    7,    7, 0x08,
+     105,    7,    7,    7, 0x08,
+     118,    7,    7,    7, 0x08,
      129,    7,    7,    7, 0x08,
-     153,    7,    7,    7, 0x08,
+     145,    7,    7,    7, 0x08,
+     167,    7,    7,    7, 0x08,
+     190,    7,    7,    7, 0x08,
+     214,    7,    7,    7, 0x08,
+     237,    7,    7,    7, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_w_main[] = {
-    "w_main\0\0createActions()\0"
-    "openSummaryErrorsWindow()\0"
+    "w_main\0\0createActions()\0newsPaperActions()\0"
+    "booksActions()\0openSummaryErrorsWindow()\0"
     "openCalendarWindow()\0parseBatch()\0"
+    "modeBook()\0modeNewsPaper()\0"
     "openStructureWindow()\0openTitleCheckWindow()\0"
     "openSelectBatchWindow()\0openInventaireWindow()\0"
+    "openBookBrowser()\0"
 };
 
 void w_main::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -57,13 +64,18 @@ void w_main::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         w_main *_t = static_cast<w_main *>(_o);
         switch (_id) {
         case 0: _t->createActions(); break;
-        case 1: _t->openSummaryErrorsWindow(); break;
-        case 2: _t->openCalendarWindow(); break;
-        case 3: _t->parseBatch(); break;
-        case 4: _t->openStructureWindow(); break;
-        case 5: _t->openTitleCheckWindow(); break;
-        case 6: _t->openSelectBatchWindow(); break;
-        case 7: _t->openInventaireWindow(); break;
+        case 1: _t->newsPaperActions(); break;
+        case 2: _t->booksActions(); break;
+        case 3: _t->openSummaryErrorsWindow(); break;
+        case 4: _t->openCalendarWindow(); break;
+        case 5: _t->parseBatch(); break;
+        case 6: _t->modeBook(); break;
+        case 7: _t->modeNewsPaper(); break;
+        case 8: _t->openStructureWindow(); break;
+        case 9: _t->openTitleCheckWindow(); break;
+        case 10: _t->openSelectBatchWindow(); break;
+        case 11: _t->openInventaireWindow(); break;
+        case 12: _t->openBookBrowser(); break;
         default: ;
         }
     }
@@ -102,9 +114,9 @@ int w_main::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 13;
     }
     return _id;
 }
