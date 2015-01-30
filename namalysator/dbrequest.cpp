@@ -100,8 +100,8 @@ std::vector<std::string> dbrequest::getvTestSet()
 	int rc;	
 	const char *zErrMsg= 0; 
 
-	std::string selectSql = "SELECT distinct (BATCHNAME) FROM TESTSET";
-	DEBUG_ME
+	static const std::string selectSql = "SELECT distinct (BATCHNAME) FROM TESTSET";
+	
 	rc = sqlite3_prepare_v2(conn->db, selectSql.c_str(), -1, &pStmt,&zErrMsg);
 
 	if(rc == SQLITE_OK)
@@ -124,24 +124,45 @@ std::map<std::string,std::string> dbrequest::key2Label(std::map<std::string,std:
 }
 
 std::string dbrequest::getLabel(std::string key){
-	static std::map<std::string,std::string> internal;
+	static std::map<std::string,std::string> internal; // must be define in db_connection like could be dependant of the database name ( cherry on the cake )
 	std::string ret="";
-	if ( internal.size() == 0) {
-		// LOAD normally in a table
-		internal["dataintegrity.checkSum"]="CheckSum";
-		internal["semanticchecks.dateFolderIssue"]="Date Structure of Issue";
-		internal["semanticchecks.divs"]="Div Structure";
-		internal["dataintegrity.unlinkedIdentifier"]="not link identifier";
-		internal["semanticchecks.identifierMix"]="Mix";
-		internal["blocks.altoblockPerPage"]="One alto per page";
-		internal["blocks.blockStructure"]="Block Structure";
-		internal["blocks.coveragePercentAlto"]="Cover Percentage";
-		internal["blocks.multipleBlockUse"]="Use Multi";
-		internal["semanticchecks.noIssueDefined"]="Issue not define";
-		internal["semanticchecks.invalidSupplement"]="Invalid Supplement";
-		internal["blocks.measurementSTD"]="Measurement standard";
-		internal["dataintegrity.checkFile"]="Check File";
+	if ( internal.size() == 0) { // first loading
+
+		ConnectionDB* conn = g_pool.getConnection(databaseName);
+		sqlite3_stmt *pStmt;
+		int rc;	
+		const char *zErrMsg= 0; 
+
+		static const std::string selectSql = "SELECT KEY,LABEL FROM KEY2LABEL";
+		
+		rc = sqlite3_prepare_v2(conn->db, selectSql.c_str(), -1, &pStmt,&zErrMsg);
+
+		if(rc == SQLITE_OK)
+		{		
+			while(sqlite3_step(pStmt) == SQLITE_ROW)
+			{
+				internal[safe_sqlite3_column_text(pStmt, 0)]=safe_sqlite3_column_text(pStmt, 1);
+			}
+		}else{ // table not existant so load a default
+			internal["dataintegrity.checkSum"]="CheckSum";
+			internal["semanticchecks.dateFolderIssue"]="Date Structure of Issue";
+			internal["semanticchecks.divs"]="Div Structure";
+			internal["dataintegrity.unlinkedIdentifier"]="not link identifier";
+			internal["semanticchecks.identifierMix"]="Mix";
+			internal["blocks.altoblockPerPage"]="One alto per page";
+			internal["blocks.blockStructure"]="Block Structure";
+			internal["blocks.coveragePercentAlto"]="Cover Percentage";
+			internal["blocks.multipleBlockUse"]="Use Multi";
+			internal["semanticchecks.noIssueDefined"]="Issue not define";
+			internal["semanticchecks.invalidSupplement"]="Invalid Supplement";
+			internal["blocks.measurementSTD"]="Measurement standard";
+			internal["dataintegrity.checkFile"]="Check File";
+		}
+		sqlite3_finalize(pStmt);
+			// LOAD normally in a table
+
 	};
+
 	std::map<std::string,std::string>::iterator it = internal.find(key);
 	if ( it == internal.end() ){
 		internal[key]=key;

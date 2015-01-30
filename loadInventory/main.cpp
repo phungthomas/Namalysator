@@ -122,11 +122,7 @@ int start(){
 	}
 	std::cerr << parameter.getValue("database")+ ".db" << std::endl;
 	std::cerr << parameter.getValue("input")+ ".db" << std::endl;
-	std::cerr << parameter.getValueCheck("dataintegrity.checkSum") << std::endl;
-	std::cerr << parameter.getValueCheck("dataintegrity.checkSum") << std::endl;
-	std::cerr << parameter.getValueCheck("dataintegrity.checkSumTOTO") << std::endl;
-	std::cerr << parameter.getValueCheck("inventoryBook") << std::endl;
-    //if (1) return 1;
+	//std::cerr << parameter.getValueCheck("dataintegrity.checkSum") << std::endl;
 	int ret;
 	std :: cout << "Inventory loader" << std::endl;
 	SQLLoadInventory db ( parameter.getValue("database") + ".db" ,"createTable.txt" );
