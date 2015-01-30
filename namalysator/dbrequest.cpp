@@ -235,18 +235,20 @@ void  dbrequest::getBatch(BatchDetail& bdetail,int id_testset)
 MetsFile dbrequest::getMets(int id_mets)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::stringstream oid_mets;
-	oid_mets << id_mets;	
+	
 	sqlite3_stmt *pStmt;
-	int rc;	
+	
 	const char *zErrMsg= 0; 
 	MetsFile mets;  
-	std::string selectSql = "SELECT ID_METS,ID_TESTSET,PATH,FILENAME,ISSUE_NUMBER,TITLE,PAGES,DATE,YEAR,PAPERTYPE FROM METS where ID_METS =" + oid_mets.str();
-	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	static const std::string selectSql = "SELECT ID_METS,ID_TESTSET,PATH,"
+		                                         "FILENAME,ISSUE_NUMBER,TITLE,"
+												 "PAGES,DATE,YEAR,PAPERTYPE FROM METS where ID_METS = ?";
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
 	if(rc == SQLITE_OK)
 	{	  
+		sqlite3_bind_int(pStmt,1,id_mets);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			mets.idMets = sqlite3_column_int(pStmt, 0);
@@ -267,11 +269,12 @@ MetsFile dbrequest::getMets(int id_mets)
     }
 	sqlite3_finalize(pStmt);
 	// Get names of supplements
-	selectSql = "SELECT TITLE_SUPPLEMENT FROM SUPPLEMENTS WHERE ID_METS = " + oid_mets.str();
-	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	static const std::string selectSql2 = "SELECT TITLE_SUPPLEMENT FROM SUPPLEMENTS WHERE ID_METS = ?";
+	
+	rc = sqlite3_prepare_v2(conn->db,selectSql2.c_str(),-1, &pStmt,&zErrMsg);
 	if(rc == SQLITE_OK)
-	{	  
+	{
+		sqlite3_bind_int(pStmt,1,id_mets);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			mets.supplements.push_back(safe_sqlite3_column_text(pStmt, 0));
