@@ -477,7 +477,9 @@ std::vector<ErrorSummary> dbrequest::getvErrorDate(int id_testset)
 		 }		
 		 v.push_back(es);		 
 	  }
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return v;
 }
@@ -515,7 +517,9 @@ ErrorType dbrequest::getErrorTypeWithId(int id)
 				else if (i==5) et.category = getErrorCategoryWithId(atoi(result));				
 			}					 
 		}		
-    }
+    }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return et;
 }
@@ -549,7 +553,9 @@ ErrorSeverity dbrequest::getErrorSeverityWithId(int id)
 				else if (i==2) es.gravity = result;							
 			}					 
 		}		
-    }
+    }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return es;
 }
@@ -582,6 +588,8 @@ ErrorCategory dbrequest::getErrorCategoryWithId(int id)
 				else if (i==2) ec.name = result;							
 			}					 
 		}		
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return ec;
@@ -624,7 +632,9 @@ std::vector<ErrorType> dbrequest::getErrorType()
 			}
 			v.push_back(et);				 
 		}		
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return v;
 }
@@ -657,7 +667,9 @@ int dbrequest::getErrorTypeCountWithTestset(int idError,int id_testset)
 			const char *result = safe_sqlite3_column_text(pStmt, 0);			
 			count = atoi(result);	
 		}		
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return count;
 }
@@ -688,6 +700,8 @@ int dbrequest::getErrorTypeCountWithTestsetDates(int idError,int id_testset)
 			const char *result = safe_sqlite3_column_text(pStmt, 0);			
 			count = atoi(result);	
 		}		
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return count;
@@ -726,6 +740,8 @@ std::map<QDate,std::vector<int> > dbrequest::getmMetsDate(int id_testset)
 				mapMetsDate[date].push_back(result_id_mets);
 			}	  
 		}		
+	}else{
+		raiseError(conn,selectSql);
 	}
    sqlite3_finalize(pStmt);
    return mapMetsDate;
@@ -745,7 +761,7 @@ std::map<int,LinkedFiles> dbrequest::getMapLinkedFiles(int idMets,std::string fi
 	int rc;	
 	const char *zErrMsg= 0; 
 	int page=1;
-	std::string selectSql = "SELECT a.ID,a.ID_METS,a.TYPE,a.GROUPID,a.CHECKSUM,a.SIZE,a.FILENAME,a.FILEID,a.DPI, b.FILEID "
+	static const std::string selectSql = "SELECT a.ID,a.ID_METS,a.TYPE,a.GROUPID,a.CHECKSUM,a.SIZE,a.FILENAME,a.FILEID,a.DPI, b.FILEID "
 		                    "FROM LINKEDFILES a LEFT JOIN STRUCTUREERROR b on a.ID_METS = b.ID_METS and a.FILEID =b.FILEID "
 							"where a.ID_METS = ? and a.TYPE = ? "
 							"ORDER BY a.ID";
@@ -794,7 +810,9 @@ std::map<int,LinkedFiles> dbrequest::getMapLinkedFiles(int idMets,std::string fi
 			lf.countError=count;
 			altoPath[page]= lf;	
 			page++;
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
    sqlite3_finalize(pStmt);
    return altoPath;
 }
@@ -838,7 +856,9 @@ std::map<int,std::pair<int,int>> dbrequest::getSumMetsYear(int id_testset)
 				mapYearCount[year]  = pair;
 			}			
 		}
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
    sqlite3_finalize(pStmt);
    return mapYearCount;
 }
@@ -868,7 +888,9 @@ int dbrequest::getSumSupplYear(int id_testset,int year)
 		const char *result = safe_sqlite3_column_text(pStmt, 0);			
 		numberSuppl = atoi(result);			 
 	  }
-   } 
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
    return numberSuppl;
 }
@@ -906,7 +928,9 @@ std::map<QDate,DateComment> dbrequest::getDateComment(int id_testset)
 			}		
 			mapComment[dateComment.date] = dateComment;	 
 	  }
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
    sqlite3_finalize(pStmt);
    return mapComment;
 }
@@ -964,7 +988,9 @@ std::vector<std::pair<int,DateError>> dbrequest::getvDateError(int id_testset)
 		 vDateError.push_back(p);
 		 
 	  }
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
    return vDateError;
 }
@@ -1043,7 +1069,9 @@ int dbrequest::getcountMetsErrorForEachErrorType(int idTestset,int errortype)
 				}
 			}
 		}
-	} 
+	} else{
+		raiseError(conn,selectSql);
+	}
     sqlite3_finalize(pStmt);
 	std::string selectSqlLinked = "select distinct (ID_METS) from MetsError S,LINKEDFILES l where s.ID_TESTSET ='"+ sId_testset.str() + "' and RELATED_TYPE = 'LINKEDFILES' and s.id_related = l.id and id_errortype = '" +siderror.str() + "'";
 	
@@ -1063,6 +1091,8 @@ int dbrequest::getcountMetsErrorForEachErrorType(int idTestset,int errortype)
 				}
 			}
 		}
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return pileMets.size();
@@ -1102,6 +1132,8 @@ int dbrequest::getcountMetsError(int idTestset)
 				}
 			}
 		}
+	}else{
+		raiseError(conn,selectSql);
 	}
    sqlite3_finalize(pStmt);
   
@@ -1152,7 +1184,9 @@ int dbrequest::getcountTitleCheck(int id_testset)
 			const char *result = safe_sqlite3_column_text(pStmt, 0);			
 			count = atoi(result);	
 		}		
-    }
+    }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return count;
 }
@@ -1211,6 +1245,8 @@ std::vector<MetsError> dbrequest::getvErrorPerCategory(int id_cat, int idTestset
 		 }
 		 v.push_back(es);		 
 	  }
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return v;
@@ -1240,7 +1276,9 @@ std::vector<ErrorType> dbrequest::getDistinctErrorType(int id_cat,int id_testset
 			const char *result = safe_sqlite3_column_text(pStmt, 0);			
 			v.push_back(getErrorTypeWithId(atoi(result)));		 
 		}
-   } 
+   } else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
    return v;
 }
@@ -1272,7 +1310,9 @@ std::vector<ErrorCategory> dbrequest::getErrorCategory()
 			}	
 			v.push_back(ec);		 
 		}
-   } 
+   } else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
    return v;
 }
@@ -1335,7 +1375,9 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 		 }
 		 v.push_back(es);		 
 	  }
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return v;
 }
@@ -1382,6 +1424,8 @@ std::vector<DateError> dbrequest::getDateError(int id_testset)
 		 }		
 		 v.push_back(de);
 	  }
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return v;
@@ -1411,7 +1455,9 @@ std::vector<std::string> dbrequest::getDistinctErrorTypeDateError(int id_cat,int
 		const char *result = safe_sqlite3_column_text(pStmt, 0);			
 		v.push_back(result);		 
 	  }
-   } 
+   } else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
    return v;
 }
@@ -1451,6 +1497,8 @@ std::vector<DateComment> dbrequest::getDateCommentid(int idError)
 		 }		
 		v.push_back(dc);	 
 	  }
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return v;
@@ -1485,7 +1533,9 @@ std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
 
 			v[se.id]= se; 			 
 		}		
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return v;
 }
@@ -1519,6 +1569,8 @@ std::vector<Sampling_Structure> dbrequest::getListSamplingStructure(int id_tests
 			ss.Mets = getMets(ss.id_Mets);	
 			ret.push_back(ss);
 		}
+	}else{
+		raiseError(conn,selectSql);
 	};
 	sqlite3_finalize(pStmt);
 	return ret;   
@@ -1576,7 +1628,9 @@ std::vector<ErrorType> dbrequest::getErrorTypeCatStructure()
 			}
 			v.push_back(et);				 
 		}		
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return v;
 }
@@ -1594,9 +1648,7 @@ bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,
 	int rc = sqlite3_prepare_v2(conn->db,sql.c_str(),-1, &pStmt,&zErrMsg);
 	if( rc != SQLITE_OK )
 	{
-			std::string error ( sqlite3_errmsg(conn->db) );
-			std::cerr << error << std::endl;
-			std::cerr << sql << std::endl;
+		raiseError(conn,sql);
 			return false;
 	}
     
@@ -1660,7 +1712,9 @@ std::vector<Title> dbrequest::getvTitle(int id_testset)
 		vTitle.push_back(title);
 		 
 	  }
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
    return vTitle;
 }
@@ -1708,7 +1762,9 @@ Article a;
 		 }		
 		 
 	  }
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return article;
 }
@@ -1746,7 +1802,9 @@ std::pair<int,int> dbrequest::getSumCharacter(int id)
 		 }		
 		 
 	  }
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return pair;
 }
@@ -1808,7 +1866,9 @@ std::vector<Excel> dbrequest::getInventaire(int id)
 		 }	
 		 v.push_back(excel);		
 	  }
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return v;
 }
@@ -1868,7 +1928,9 @@ std::map<QDate,std::vector<Excel> > dbrequest::getMapInventaire(int id)
 		}		
 			
 	  }
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return mapInv;
 }
@@ -1900,7 +1962,9 @@ std::vector<Inventaire> dbrequest::getNameInventaire()
 		 }	
 		 v.push_back(inv);		
 	  }
-   }
+   }else{
+		raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return v;
 
@@ -1958,6 +2022,8 @@ retry:
 				sqlite3_finalize(pStmt);
 				goto retry; // yes I know :-)
 
+			}else{
+				raiseError(conn,selectSql);
 			}
 		}
 	sqlite3_finalize(pStmt);
@@ -1986,6 +2052,8 @@ std::vector<int> dbrequest::getMetsIdInPeriod(int id_testset, int year_from, int
 			int result = sqlite3_column_int(pStmt, 0);
 			v.push_back(result);
 		}
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return v;
@@ -2013,6 +2081,8 @@ std::vector<QDate> dbrequest::getMetsDateInPeriod(int id_testset, int year_from,
 			const char * result = safe_sqlite3_column_text(pStmt, 0);
 			v.push_back(temp.fromString(result, "yyyy-MM-dd"));
 		}
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return v;
@@ -2049,6 +2119,8 @@ std::vector<QDate> dbrequest::getMetsDateInMonth(int id_testset, int year, int m
 			const char * result = safe_sqlite3_column_text(pStmt, 0);
 			v.push_back(temp.fromString(result, "yyyy-MM-dd"));
 		}
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return v;
@@ -2074,6 +2146,8 @@ std::vector<QDate> dbrequest::getMetsDates(int id_testset)
 			const char * result = safe_sqlite3_column_text(pStmt, 0);
 			v.push_back(temp.fromString(result, "yyyy-MM-dd"));
 		}
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return v;
@@ -2103,6 +2177,8 @@ std::map<int ,std::pair<int, int> > dbrequest::GetYearSummary(int id_testset)
 			int resCountMets = sqlite3_column_int(pStmt, 1);
 			v[resYear].first = resCountMets;
 		}
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	
@@ -2122,6 +2198,8 @@ std::map<int ,std::pair<int, int> > dbrequest::GetYearSummary(int id_testset)
 			int resCountSuppl = sqlite3_column_int(pStmt, 1);
 			v[resYear].second = resCountSuppl;
 		}
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 
@@ -2152,7 +2230,7 @@ std::vector<MetsFile> *dbrequest::getMetsByDate(int id_testset, QDate date)
 		}
 		sqlite3_finalize(pStmt);
 		return result;
-	} else {
+	} else { // TODO analyse error
 		sqlite3_finalize(pStmt);
 		return 0;
 	}
@@ -2182,6 +2260,8 @@ std::string dbrequest::getFirstMetsFilename(int id_testset)
 			res = path + std::string("/") + filename;
 		}
 		
+	}else{
+		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
 	return res;
