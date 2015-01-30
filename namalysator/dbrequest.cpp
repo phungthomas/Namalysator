@@ -91,7 +91,7 @@ void dbrequest::raiseError(ConnectionDB* Conn, std::string message){
 	std::string error ( sqlite3_errmsg(Conn->db) );
 	std::stringstream ss;
 	ss << "ERROR DB :" << error << std::endl << message ;
-	QErrorMessage* Qerror= new QErrorMessage();
+	static QErrorMessage* Qerror= new QErrorMessage();
 	Qerror->showMessage(ss.str().c_str());
 }
 
