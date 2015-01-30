@@ -204,18 +204,16 @@ std::vector<std::pair<int,std::string> > dbrequest::getvDateTestset(std::string 
 void  dbrequest::getBatch(BatchDetail& bdetail,int id_testset)
 {	
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-    sqlite3_stmt *pStmt;
-	int rc;		
-	const char *zErrMsg=0; 
-	std::stringstream oIdTestset;
-	oIdTestset << id_testset;	
+    sqlite3_stmt *pStmt;	
+	const char *zErrMsg=0; 	
 	bdetail.idTestSet = id_testset;
-	std::string selectSql = "select min(m.Date),max(m. Date),count(id_mets),batchname,t.date from Mets m,Testset t where t.id_testset = m.id_testset and m.id_testset ='" + oIdTestset.str() + "'";
-	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	std::string selectSql = "select min(m.Date),max(m. Date),count(id_mets),batchname,t.date from Mets m,Testset t where t.id_testset = m.id_testset and m.id_testset =?";
+
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
 	if(rc == SQLITE_OK)
 	{	  
+		sqlite3_bind_int(pStmt,1,id_testset);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			std::pair<std::string,std::string> p;
