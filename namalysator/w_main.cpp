@@ -13,6 +13,7 @@
 #include "exportdata.h"
 #include "w_inventaire.h"
 #include "w_thumb.h"
+#include "w_report.h"
 #include <iostream>
 
 std::string w_main::title;
@@ -66,7 +67,7 @@ void w_main::newsPaperActions()
 	QAction * act = menu->addAction(tr("Exit"));
 	connect(act, SIGNAL(triggered()), this, SLOT(exit()));
 
-	menu = menuBar->addMenu("Tool"); 
+	menu = menuBar->addMenu("View"); 
 
 	openDiskAnalyze = menu->addAction(QIcon("dos-application-icon.png"),tr("File Explorer"));  
 	openDiskAnalyze->setToolTip("File Explorer");	
@@ -105,36 +106,12 @@ void w_main::newsPaperActions()
 
 void w_main::openReport()
 {
-	QWidget *w = new QWidget();	
+	w_report *w = new w_report();	
 	//w->setBatchDetail();
-	QVBoxLayout* layv=new QVBoxLayout();
-	QHBoxLayout* lay=new QHBoxLayout();
-	layv->addLayout(lay);
-	
-	QLabel* lab=new QLabel("rate of completude:");
-	lay->addWidget(lab);
-	lab=new QLabel("0.3%");
-	lay->addWidget(lab);
-	lay->addStretch();
 
-	lay=new QHBoxLayout();
-	layv->addLayout(lay);
-	lab=new QLabel("checked:");
-	lay->addWidget(lab);
-	lab=new QLabel("200");
-	lay->addWidget(lab);
-	lay->addStretch();
+	w->init();
+	w->setValue(1,100);
 
-	lay=new QHBoxLayout();
-	layv->addLayout(lay);
-	lab=new QLabel("total:");
-	lay->addWidget(lab);
-	lab=new QLabel("2000");
-	lay->addWidget(lab);
-	lay->addStretch();
-
-	layv->addStretch();
-	w->setLayout(layv);
 	titleChange("Completeness");
 	this->resize(900,200);
 	this->setCentralWidget(w); 
