@@ -138,16 +138,10 @@ void w_selectBatch::valider()
 	{
 		batch.inventaire = vInventaire[m_ui->cbInventaire->currentIndex()];
 	}
-	//TODO changer nom
+	
 	if (inputDisk() == true)
 	{		
-		w_main *main = new w_main();
-		std::string s = BatchDetail::getBatchDetail().batchName + " on " + batch.testDate;		
-		main->setBatchDetail();	
-		main->setWindowTitle(s.c_str());
-		main->resize(1050,910);		
-		main->show();			
-		this->close();	
+		emit validated(batch.testDate);	
 	}
 }
 //! verify if path of the disk corresponds to the data in the database
@@ -179,7 +173,7 @@ void w_selectBatch::browsePath()
 
 void w_selectBatch::exit()
 {
-	this->close();
+	emit exited();
 }
 
 void w_selectBatch::clearBatchDetail()

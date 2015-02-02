@@ -16,13 +16,13 @@
 #include "w_thumb.h"
 #include <iostream>
 
+std::string w_main::title;
+
 w_main::w_main(QWidget *parent) :
 QMainWindow(parent),
 m_ui(new Ui::w_main)
 {
 	m_ui->setupUi(this);    
-	   
-
 }
 
 void w_main::setBatchDetail()
@@ -53,102 +53,92 @@ void w_main::createActions()
 	newsPaperActions();
 }
 
-void w_main::booksActions()
-{	
-
-	//QAction* Act;
-	//modeBookAct = new QAction(tr("Mode News Paper"), this);  
-	//modeBookAct->setToolTip("Mode News Paper");	
-	//connect(modeBookAct, SIGNAL(triggered()), this, SLOT(modeNewsPaper()));
-	//connect(modeBookAct, SIGNAL(triggered()), this, SLOT(parseBatch()));
-	 
-	openErrorAction = new QAction(tr("Show Errors"),this); 
-	openErrorAction->setToolTip("Show Errors");
-	connect(openErrorAction, SIGNAL(triggered()), this, SLOT(openSummaryErrorsWindow()));
-
-	openBookBrowserAction = new QAction(tr("Book Browser"),this); 
-	openBookBrowserAction->setToolTip("Book Browser");
-	connect(openBookBrowserAction, SIGNAL(triggered()), this, SLOT(openBookBrowser()));
-
-	openSelectBatch = new QAction(tr("Return"),this); 
-	openSelectBatch->setToolTip("Return");
-	connect(openSelectBatch, SIGNAL(triggered()), this, SLOT(openSelectBatchWindow()));
-
-	openInventaire = new QAction(tr("Inventaire"),this); 
-	openInventaire->setToolTip("Inventaire");
-	connect(openInventaire, SIGNAL(triggered()), this, SLOT(openInventaireWindow()));
-
-
-	fileTools = new QToolBar( "file toolbar",this);
-
-	
-	fileTools->addAction(openErrorAction);
-	fileTools->addAction(openBookBrowserAction);
-	
-	
-	if( BatchDetail::getBatchDetail().databaseInv !="")
-	{
-		fileTools->addAction(openInventaire);
-	}
-	
-	//fileTools->addAction(modeBookAct);	
-	fileTools->addAction(openSelectBatch);	 
-	fileTools->setAllowedAreas(Qt::TopToolBarArea );
-	addToolBar(Qt::TopToolBarArea, fileTools);
-}
 
 void w_main::newsPaperActions()
 {	
-	
-	//connect(modeBookAct, SIGNAL(triggered()), this, SLOT(modeBook()));
-	//connect(modeBookAct, SIGNAL(triggered()), this, SLOT(openSummaryErrorsWindow()));
+	QMenuBar* menuBar = this->menuBar();
+	//menuBar->hide();
+	QMenu* menu = menuBar->addMenu("File"); 
 
-	openDiskAnalyze = new QAction(tr("File Explorer"), this);  
+	openSelectBatch = menu->addAction(tr("Select batch")); 
+	openSelectBatch->setToolTip("Select batch");
+	connect(openSelectBatch, SIGNAL(triggered()), this, SLOT(openSelectBatchWindow()));
+
+	QAction * act = menu->addAction(tr("Exit"));
+	connect(act, SIGNAL(triggered()), this, SLOT(exit()));
+
+	menu = menuBar->addMenu("Tool"); 
+
+	openDiskAnalyze = menu->addAction(tr("File Explorer"));  
 	openDiskAnalyze->setToolTip("File Explorer");	
-	connect(openDiskAnalyze, SIGNAL(triggered()), this, SLOT(parseBatch()));	 
+	connect(openDiskAnalyze, SIGNAL(triggered()), this, SLOT(parseBatch()));
 
-	openErrorAction = new QAction(tr("Show Errors"),this); 
+	openErrorAction =  menu->addAction(tr("Show Errors"));
 	openErrorAction->setToolTip("Show Errors");
 	connect(openErrorAction, SIGNAL(triggered()), this, SLOT(openSummaryErrorsWindow()));	 
 
-	openCalendarAction = new QAction(tr("Calendar"),this); 
+	openCalendarAction = menu->addAction(tr("Calendar"));
 	openCalendarAction->setToolTip("Calendar");
 	connect(openCalendarAction, SIGNAL(triggered()), this, SLOT(openCalendarWindow()));	
 
-	openStructureAction = new QAction(tr("Issue viewer"),this); 
+	openStructureAction = menu->addAction(tr("Issue viewer")); 
 	openStructureAction->setToolTip("Issue viewer");
 	connect(openStructureAction, SIGNAL(triggered()), this, SLOT(openStructureWindow()));
 
-	openTitleCheck = new QAction(tr("Title check"),this); 
+	openTitleCheck = menu->addAction(tr("Title check")); 
 	openTitleCheck->setToolTip("Title check");
 	connect(openTitleCheck, SIGNAL(triggered()), this, SLOT(openTitleCheckWindow()));
-
-	openSelectBatch = new QAction(tr("Return"),this); 
-	openSelectBatch->setToolTip("Return");
-	connect(openSelectBatch, SIGNAL(triggered()), this, SLOT(openSelectBatchWindow()));
-
-	openInventaire = new QAction(tr("Inventaire"),this); 
-	openInventaire->setToolTip("Inventaire");
-	connect(openInventaire, SIGNAL(triggered()), this, SLOT(openInventaireWindow()));
-
-
-	fileTools = new QToolBar( "file toolbar",this);
-
-	
-	fileTools->addAction(openDiskAnalyze);
-	fileTools->addAction(openErrorAction);
-	fileTools->addAction(openCalendarAction);
-	fileTools->addAction(openStructureAction);	
 	
 	if( BatchDetail::getBatchDetail().databaseInv !="")
 	{
-		fileTools->addAction(openInventaire);
+		openInventaire = menu->addAction(tr("Inventaire"));
+		openInventaire->setToolTip("Inventaire");
+		connect(openInventaire, SIGNAL(triggered()), this, SLOT(openInventaireWindow()));
 	}
-	fileTools->addAction(openTitleCheck);
-	//fileTools->addAction(modeBookAct);
-	fileTools->addAction(openSelectBatch);	 
-	fileTools->setAllowedAreas(Qt::TopToolBarArea );
-	addToolBar(Qt::TopToolBarArea, fileTools);
+
+	menu = menuBar->addMenu("Report");
+
+	act = menu->addAction(tr("Completeness of campaign"));
+	connect(act, SIGNAL(triggered()), this, SLOT(openReport()));
+
+}
+
+
+void w_main::openReport()
+{
+	QWidget *w = new QWidget();	
+	//w->setBatchDetail();
+	QVBoxLayout* layv=new QVBoxLayout();
+	QHBoxLayout* lay=new QHBoxLayout();
+	layv->addLayout(lay);
+	
+	QLabel* lab=new QLabel("rate of completude:");
+	lay->addWidget(lab);
+	lab=new QLabel("0.3%");
+	lay->addWidget(lab);
+	lay->addStretch();
+
+	lay=new QHBoxLayout();
+	layv->addLayout(lay);
+	lab=new QLabel("checked:");
+	lay->addWidget(lab);
+	lab=new QLabel("200");
+	lay->addWidget(lab);
+	lay->addStretch();
+
+	lay=new QHBoxLayout();
+	layv->addLayout(lay);
+	lab=new QLabel("total:");
+	lay->addWidget(lab);
+	lab=new QLabel("2000");
+	lay->addWidget(lab);
+	lay->addStretch();
+
+	layv->addStretch();
+	w->setLayout(layv);
+	titleChange("Completeness");
+	this->resize(900,200);
+	this->setCentralWidget(w); 
 }
 
 
@@ -156,13 +146,7 @@ void w_main::openSummaryErrorsWindow()
 {
 	w_errors *w = new w_errors();	
 	w->setBatchDetail();
-	this->resize(1050,800);
-	this->setCentralWidget(w); 
-}
-
-void w_main::openBookBrowser()
-{
-	w_bookbrowser *w = new w_bookbrowser();	
+	titleChange("Error Summary");
 	this->resize(1050,800);
 	this->setCentralWidget(w); 
 }
@@ -171,6 +155,7 @@ void w_main::openCalendarWindow()
 {	
 	w_calendar *cal = new w_calendar();
 	cal->setBatchDetail(); 
+	titleChange("Calendar");
 	this->resize(1050,1020);
 	this->setCentralWidget(cal); 		
 }
@@ -178,7 +163,8 @@ void w_main::openCalendarWindow()
 void w_main::parseBatch()
 {	
 	w_disk *disk = new w_disk();
-	disk->setBatchDetail();	
+	disk->setBatchDetail();
+	titleChange("File Explorer");
 	this->resize(1050,1020);
 	this->setCentralWidget(disk); 
 }
@@ -187,6 +173,7 @@ void w_main::openStructureWindow()
 {
 	w_structview *view = new w_structview();
 	view->setBatchDetail();	
+	titleChange("Issue Viewer");
 	this->resize(1200,910);
 	this->setCentralWidget(view); 
 }
@@ -195,6 +182,7 @@ void w_main::openTitleCheckWindow()
 {
 	w_titlecheck *titlecheck = new  w_titlecheck();
 	titlecheck->setBatchDetail();
+	titleChange("Title Check");
 	this->resize(1050,910);
 	this->setCentralWidget(titlecheck); 
 }
@@ -203,27 +191,43 @@ void w_main::openTitleCheckWindow()
 void w_main::openSelectBatchWindow()
 { 
 	w_selectBatch *gui = new w_selectBatch();
-	gui->show();
-	this->close();
+	this->menuBar()->hide();
+	titleChange("","Namalysator");
+	this->resize(800,600);
+	this->setCentralWidget(gui);
+
+	connect(gui, SIGNAL(validated(std::string)), this, SLOT(openStart(std::string)));
+	connect(gui, SIGNAL(exited()), this, SLOT(exit()));
 }
 
+void w_main::exit(){
+	close();
+}
 
+void w_main::openStart(std::string date){
+	menuBar()->show();
+	titleChange("",BatchDetail::getBatchDetail().batchName +" on "+date);
+	parseBatch();
+}
 void w_main::openInventaireWindow()
 {	
 	w_inventaire *invent = new w_inventaire();
 	invent->setBatchDetail();	
-	this->resize(1050,910);
-	this->setCentralWidget(invent); 
+	titleChange("Inventaire");
+	resize(1050,910);
+	setCentralWidget(invent); 
 }
 
-void w_main::modeBook()
-{
-	removeToolBar(fileTools);
-	booksActions();
-}
 
 void w_main::modeNewsPaper()
 {
 	removeToolBar(fileTools);
 	newsPaperActions();
+}
+
+void w_main::titleChange(std::string sub,std::string _title){
+	title = _title;
+	subTitle = sub; 
+	std::string tmp=title + "     " + subTitle;
+	this->setWindowTitle(tmp.c_str());
 }

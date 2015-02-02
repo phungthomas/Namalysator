@@ -37,8 +37,12 @@ private :
     dbrequest dbInventaire; 
     BatchDetail& batch;
     Inventaire inv;   
+
+signals:
+	void validated(std::string);
+	void exited();
     
- protected slots:
+protected slots:
 	void getListDate(QString date); 
 	void getMets(QListWidgetItem*);
 	void valider();

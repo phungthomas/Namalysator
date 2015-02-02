@@ -20,15 +20,22 @@ namespace Ui {
 class w_main : public QMainWindow {
     Q_OBJECT
     Q_DISABLE_COPY(w_main)
+private:
+	static std::string title;
 public:
     explicit w_main(QWidget *parent = 0);
     virtual ~w_main();    
 	void setBatchDetail();
 
+
+	void titleChange(std::string sub,std::string _title = title);
+
 protected:
     virtual void changeEvent(QEvent *e);
 
 private:
+	
+	std::string subTitle;
     Ui::w_main *m_ui;
     QAction *openAct;
 	//QAction *modeBookAct;
@@ -42,20 +49,20 @@ private:
 	QAction *openInventaire;
 	QToolBar *fileTools;	
 
-private slots:
+public slots:
 		void createActions();
 		void newsPaperActions();
-		void booksActions();
 		void openSummaryErrorsWindow();
 		void openCalendarWindow();
 		void parseBatch();
-		void modeBook();
 		void modeNewsPaper();
 		void openStructureWindow();
 		void openTitleCheckWindow();		
 		void openSelectBatchWindow();    
 		void openInventaireWindow();
-		void openBookBrowser();
+		void openReport();
+		void openStart(std::string);
+		void exit();
 };
 
 #endif // W_MAIN_H

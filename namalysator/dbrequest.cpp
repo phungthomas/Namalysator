@@ -405,7 +405,9 @@ Parameters dbrequest::_getParameterVerifiers(int id_testset)
 			//else if (i==12) param.schemaValidation = result;					
 		 }			
 	  }
-    }
+    }else{
+		raiseError(conn,sql);
+	}
 	sqlite3_finalize(pStmt);
 	return param;  	
 }
