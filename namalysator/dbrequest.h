@@ -196,6 +196,7 @@ class dbrequest
 		std::vector<QDate> getMetsDates(int id_testset);
 		std::map<int ,std::pair<int, int> > GetYearSummary(int id_testset);
 		std::vector<MetsFile> *getMetsByDate(int id_testset, QDate date);
+		std::vector<int> getReport();
 		std::string getFirstMetsFilename(int id_testset);
 };
 #endif // DBREQUEST_H_

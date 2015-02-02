@@ -1,4 +1,5 @@
 #include "w_report.h"
+#include "structgui.h"
 #include <sstream>
 w_report::w_report(QWidget *parent):QWidget(parent){
 }
@@ -36,6 +37,17 @@ void w_report::init(){
 
 	layv->addStretch();
 	setLayout(layv);
+}
+
+void w_report::setBatchDetail(){
+	db.setDataBaseName(BatchDetail::getBatchDetail().database);
+	std::vector<int> vect = db.getReport();
+	if ( vect.size()==2 ){
+		setValue ( vect [0], vect[0]+vect[1] );
+	}else{
+		setValue (0,0);
+	}
+
 }
 
 void w_report::setValue(int i, int tot){

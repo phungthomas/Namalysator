@@ -2,6 +2,7 @@
 #define _REPORT_W_H
 
 #include <QtGui>
+#include "dbrequest.h"
 
 
 class w_report : public QWidget
@@ -15,12 +16,14 @@ public:
 	void init();
 
 	void setValue(int i, int tot);
+	void setBatchDetail();
 
 
 private:
 	QLabel* labCheckCount;
 	QLabel* labTot;
 	QLabel* report;
+	dbrequest db;
 	
 };
 

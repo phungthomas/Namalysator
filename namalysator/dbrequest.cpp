@@ -2241,6 +2241,35 @@ std::vector<MetsFile> *dbrequest::getMetsByDate(int id_testset, QDate date)
 	}
 }
 
+std::vector<int> dbrequest::getReport(){
+	ConnectionDB* conn = g_pool.getConnection(databaseName);
+    sqlite3_stmt *pStmt;
+		
+	const char *zErrMsg= ""; 
+
+	static std::string selectSql = "select checked , count() from booksinventory group by checked order by checked desc";
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+
+	
+	std::vector<int>  ret;
+
+	if(rc == SQLITE_OK){
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW){
+			int col=0;
+			col++; //sqlite3_column_int (pStmt,col++);
+			int count = sqlite3_column_int (pStmt,col++);
+				
+			ret.push_back(count);
+		}
+	}else{
+		raiseError(conn,selectSql);
+	};
+	sqlite3_finalize(pStmt);
+	return ret;
+}
+
 std::string dbrequest::getFirstMetsFilename(int id_testset)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);	

@@ -107,10 +107,9 @@ void w_main::newsPaperActions()
 void w_main::openReport()
 {
 	w_report *w = new w_report();	
-	//w->setBatchDetail();
 
 	w->init();
-	w->setValue(1,100);
+	w->setBatchDetail();
 
 	titleChange("Completeness");
 	this->resize(900,200);
@@ -185,6 +184,7 @@ void w_main::openStart(std::string date){
 	titleChange("",BatchDetail::getBatchDetail().batchName +" on "+date);
 	parseBatch();
 }
+
 void w_main::openInventaireWindow()
 {	
 	w_inventaire *invent = new w_inventaire();
