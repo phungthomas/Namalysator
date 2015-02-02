@@ -59,7 +59,7 @@ void w_main::newsPaperActions()
 	//menuBar->hide();
 	QMenu* menu = menuBar->addMenu("File"); 
 
-	openSelectBatch = menu->addAction(tr("Select batch")); 
+	openSelectBatch = menu->addAction(QIcon("open-file-icon.png"),tr("Select batch")); 
 	openSelectBatch->setToolTip("Select batch");
 	connect(openSelectBatch, SIGNAL(triggered()), this, SLOT(openSelectBatchWindow()));
 
@@ -68,11 +68,11 @@ void w_main::newsPaperActions()
 
 	menu = menuBar->addMenu("Tool"); 
 
-	openDiskAnalyze = menu->addAction(tr("File Explorer"));  
+	openDiskAnalyze = menu->addAction(QIcon("dos-application-icon.png"),tr("File Explorer"));  
 	openDiskAnalyze->setToolTip("File Explorer");	
 	connect(openDiskAnalyze, SIGNAL(triggered()), this, SLOT(parseBatch()));
 
-	openErrorAction =  menu->addAction(tr("Show Errors"));
+	openErrorAction =  menu->addAction(QIcon("Emoticon-Shocked-Screaming-Scream-icon.png"),tr("Show Errors"));
 	openErrorAction->setToolTip("Show Errors");
 	connect(openErrorAction, SIGNAL(triggered()), this, SLOT(openSummaryErrorsWindow()));	 
 
@@ -80,7 +80,7 @@ void w_main::newsPaperActions()
 	openCalendarAction->setToolTip("Calendar");
 	connect(openCalendarAction, SIGNAL(triggered()), this, SLOT(openCalendarWindow()));	
 
-	openStructureAction = menu->addAction(tr("Issue viewer")); 
+	openStructureAction = menu->addAction(QIcon("Emoticon-Hiding-Scared-icon.png"),tr("Issue viewer")); 
 	openStructureAction->setToolTip("Issue viewer");
 	connect(openStructureAction, SIGNAL(triggered()), this, SLOT(openStructureWindow()));
 
@@ -97,7 +97,7 @@ void w_main::newsPaperActions()
 
 	menu = menuBar->addMenu("Report");
 
-	act = menu->addAction(tr("Completeness of campaign"));
+	act = menu->addAction(QIcon("Sales-report-icon.png"),tr("Completeness of campaign"));
 	connect(act, SIGNAL(triggered()), this, SLOT(openReport()));
 
 }

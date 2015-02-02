@@ -611,11 +611,27 @@
 				>
 			</File>
 			<File
+				RelativePath=".\dos-application-icon.png"
+				>
+			</File>
+			<File
+				RelativePath=".\Emoticon-Hiding-Scared-icon.png"
+				>
+			</File>
+			<File
+				RelativePath=".\Emoticon-Shocked-Screaming-Scream-icon.png"
+				>
+			</File>
+			<File
 				RelativePath=".\metsverifier.rc"
 				>
 			</File>
 			<File
 				RelativePath=".\open-file-icon.png"
+				>
+			</File>
+			<File
+				RelativePath=".\Sales-report-icon.png"
 				>
 			</File>
 			<File
