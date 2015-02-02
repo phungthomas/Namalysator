@@ -15,7 +15,7 @@ void w_report::init(){
 	
 	QLabel* lab=new QLabel("rate of completude:");
 	lay->addWidget(lab);
-	report=new QLabel("0.3%");
+	report=new QLabel("Unknown");
 	lay->addWidget(report);
 	lay->addStretch();
 
@@ -23,7 +23,7 @@ void w_report::init(){
 	layv->addLayout(lay);
 	lab=new QLabel("checked:");
 	lay->addWidget(lab);
-	labCheckCount=new QLabel("200");
+	labCheckCount=new QLabel("Unknown");
 	lay->addWidget(labCheckCount);
 	lay->addStretch();
 
@@ -31,7 +31,7 @@ void w_report::init(){
 	layv->addLayout(lay);
 	lab=new QLabel("total:");
 	lay->addWidget(lab);
-	labTot=new QLabel("2000");
+	labTot=new QLabel("Unknown");
 	lay->addWidget(labTot);
 	lay->addStretch();
 

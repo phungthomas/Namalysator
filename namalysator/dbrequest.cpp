@@ -1664,9 +1664,7 @@ bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,
 
 	
 	if (sqlite3_step(pStmt) != SQLITE_DONE) {
-			std::string error ( sqlite3_errmsg(conn->db) );
-			std::cerr << error << std::endl;
-			std::cerr << sql << std::endl;
+			raiseError(conn,sql);
 			return false;
 	}
 	return true; 
@@ -2236,6 +2234,7 @@ std::vector<MetsFile> *dbrequest::getMetsByDate(int id_testset, QDate date)
 		sqlite3_finalize(pStmt);
 		return result;
 	} else { // TODO analyse error
+		raiseError(conn,selectSql);
 		sqlite3_finalize(pStmt);
 		return 0;
 	}
