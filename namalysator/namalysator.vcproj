@@ -354,10 +354,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\w_bookbrowser.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\w_booklist.cpp"
 					>
 				</File>
@@ -646,21 +642,6 @@
 				<File
 					RelativePath=".\flowlayout.h"
 					>
-				</File>
-				<File
-					RelativePath=".\w_bookbrowser.h"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing w_bookbrowser.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFIER)\Headers&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\w_booklist.h"
@@ -1032,10 +1013,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_bookbrowser.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\GeneratedFiles\Release\moc_w_booklist.cpp"
 				>
 			</File>
@@ -1260,18 +1237,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_titlecheck.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\GeneratedFiles\Debug\moc_w_titlecheck.cpp"
 				>
 				<FileConfiguration
@@ -1284,8 +1249,16 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\ui_w_bookbrowser.h"
+				RelativePath=".\GeneratedFiles\Release\moc_w_titlecheck.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\ui_w_calendar.h"
@@ -1378,21 +1351,6 @@
 			UniqueIdentifier="{99349809-55BA-4b9d-BF79-8FDBB0286EB3}"
 			ParseFiles="false"
 			>
-			<File
-				RelativePath=".\w_bookbrowser.ui"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Uic&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
-						Outputs="&quot;.\ui_$(InputName).h&quot;"
-					/>
-				</FileConfiguration>
-			</File>
 			<File
 				RelativePath=".\w_calendar.ui"
 				>

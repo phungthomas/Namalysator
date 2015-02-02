@@ -12,7 +12,6 @@
 #include "w_errors.h"
 #include "exportdata.h"
 #include "w_inventaire.h"
-#include "w_bookbrowser.h"
 #include "w_thumb.h"
 #include <iostream>
 
