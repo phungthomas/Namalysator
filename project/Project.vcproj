@@ -615,6 +615,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\open-file-icon.png"
+				>
+			</File>
+			<File
 				RelativePath=".\updateDbVersion.txt"
 				>
 			</File>
