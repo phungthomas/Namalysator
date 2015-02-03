@@ -140,7 +140,7 @@ void w_main::parseBatch()
 	w_disk *disk = new w_disk();
 	disk->setBatchDetail();
 	titleChange("File Explorer");
-	this->resize(1050,1020);
+	this->resize(1050,910);
 	this->setCentralWidget(disk); 
 }
 
