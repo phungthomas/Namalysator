@@ -13,70 +13,60 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTabWidget" name="tabWidget">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>10</y>
-     <width>941</width>
-     <height>651</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <kerning>false</kerning>
-    </font>
-   </property>
-   <property name="currentIndex">
-    <number>0</number>
-   </property>
-   <widget class="QWidget" name="tab">
-    <attribute name="title">
-     <string>Summary of Errors</string>
-    </attribute>
-    <widget class="QScrollArea" name="scrollAreaErrorTable">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>881</width>
-       <height>581</height>
-      </rect>
-     </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
      <property name="font">
       <font>
-       <kerning>true</kerning>
+       <kerning>false</kerning>
       </font>
      </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>877</width>
-        <height>577</height>
-       </rect>
-      </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Summary of Errors</string>
+      </attribute>
+      <widget class="QScrollArea" name="scrollAreaErrorTable">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>881</width>
+         <height>581</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>879</width>
+          <height>579</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </widget>
-   </widget>
-  </widget>
-  <widget class="QPushButton" name="btnExport">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>680</y>
-     <width>75</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Export Data</string>
-   </property>
-  </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnExport">
+     <property name="text">
+      <string>Export Data</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
