@@ -108,7 +108,7 @@ void w_thumb::init(){
 	_mainLayout = new QVBoxLayout();
 	this->setLayout(_mainLayout);
 	_sbar = new QScrollArea();
-	_sbar->setMinimumSize(QSize(420,420));
+	_sbar->setMinimumSize(QSize(240,240));
 	_sbar->setMaximumSize(QSize(19000,19000));
 	_sbar->resize(this->frameSize());	
 	_sbar->setSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding);

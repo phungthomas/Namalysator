@@ -59,8 +59,8 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>150</width>
-          <height>150</height>
+          <width>180</width>
+          <height>180</height>
          </size>
         </property>
         <property name="maximumSize">
