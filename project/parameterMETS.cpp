@@ -23,7 +23,7 @@ void ParameterMETS::addParam(std::string Key,std::string Val){
 		return ;
 	}
 
-	std::cerr << "DEBUG:" << Key << " Val" <<Val << std::endl; 
+	//std::cerr << "DEBUG:" << Key << " Val" <<Val << std::endl; 
 
 	if (Key.compare(XSDprefix+"addXSD") == 0 ){
 		addXSD (Val);
@@ -34,8 +34,6 @@ void ParameterMETS::addParam(std::string Key,std::string Val){
 		typeDefine (Val);
 		return;
 	};
-
-
 
 	if (Key.compare(XSDprefix+"lock") == 0 ){
 		lockXSD (Val);
