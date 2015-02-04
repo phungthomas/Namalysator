@@ -39,7 +39,7 @@
 	<XSDManager>
 		<type>BNL</type>
 		<addXSD>bnl-monograph_v1.0.xsd</addXSD>
-		<lock></lock>
+		<lock/>
 	</XSDManager>
 	<XSDManager>
 		<type>METS</type>
@@ -48,14 +48,14 @@
 		<addXSD>mods-3-3.xsd</addXSD>
 		<addXSD>xlink.xsd</addXSD>
 		<addXSD>MARC21slim_bnl.xsd</addXSD>
-		<lock></lock>
+		<lock/>
 	</XSDManager>
 	<XSDManager>
 		<type>ALTO</type>
 		<addXSD>alto-1-2.xsd</addXSD>
 		<addXSD>alto-1-4.xsd</addXSD>
 		<addXSD>nonexistingFile.xsd</addXSD>
-		<lock></lock>
+		<lock/>
 	</XSDManager>
 	
 </config>
