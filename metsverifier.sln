@@ -14,6 +14,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "unittestConfig", "unittestC
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadInventory", "loadInventory\loadInventory.vcproj", "{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testXalan", "testXalan\testXalan.vcproj", "{47B54579-5D4E-42DE-8080-AB510752ED9A}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -142,6 +144,19 @@ Global
 		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Release|Win32.ActiveCfg = Release|Win32
 		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Release|Win32.Build.0 = Release|Win32
 		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Release|x64.ActiveCfg = Release|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.Debug|x64.ActiveCfg = Debug|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.ICU Debug|Win32.ActiveCfg = Debug|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.ICU Debug|x64.ActiveCfg = Debug|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.ICU Release|Win32.ActiveCfg = Release|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.ICU Release|x64.ActiveCfg = Release|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.Release|Win32.ActiveCfg = Release|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.Release|Win32.Build.0 = Release|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.Release|x64.ActiveCfg = Release|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.Static Debug|Win32.ActiveCfg = Debug|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.Static Debug|x64.ActiveCfg = Debug|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.Static Release|Win32.ActiveCfg = Release|Win32
+		{47B54579-5D4E-42DE-8080-AB510752ED9A}.Static Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
