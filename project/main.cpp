@@ -19,6 +19,7 @@
 
 
 #include <parserCheck.h>
+#include "parameterMETS.h"
 
 #include "dataaggregator.h"
 #include "verifytitles.h"
@@ -98,8 +99,6 @@ bool existDatabase(database *db,errorHandler *hError,std::string databasePath,st
 	return true;
 }
 
-void initXSDMets(parserCheck*);
-void initXSDAlto(parserCheck*);
 
 int start()
 {		
@@ -110,7 +109,7 @@ int start()
 	std::stringstream configPath,sqlCreateTablePath;	
 	configPath << CurrentPath << "/config.xml"; 	
 
-	Parameters parameter;
+	ParameterMETS parameter;
 
 	configparser config(&parameter);
 	//Parse the config file
@@ -196,20 +195,12 @@ int start()
 	pt.LogTime("Inserting DB parameters");
 	
 
-	parserCheck parserCheckBNL;
-	if (parameter.getValueCheck("monograph.structure") == 1){
-		parserCheckBNL.addXSD("bnl-monograph_v1.0.xsd");
-		parserCheckBNL.lockaddXSD();
-	}
+	parserCheck* parserCheckBNL=parameter.getParser("BNL");
+	parserCheck* metsParserCall=parameter.getParser("METS");
+	parserCheck* altoParserCall=parameter.getParser("ALTO");
 
-	parserCheck metsParserCall;
-	parserCheck altoParserCall;
-
-	initXSDMets(&metsParserCall);
-    initXSDAlto(&altoParserCall);
-
-	metsParserCall.setErrorHandler(&hError);
-	altoParserCall.setErrorHandler(&hError);
+	metsParserCall->setErrorHandler(&hError);
+	altoParserCall->setErrorHandler(&hError);
 
 	//Get all METS files from input
 	DiskParser dp(&hError);
@@ -239,12 +230,12 @@ int start()
 		pt.LogTime("Insrting METS into DB");
 		std::string parseString = currentMetsPath + "/" + currentMetsFile;
 		
-		metsParserCall.setContentHandler(&metsP);
+		metsParserCall->setContentHandler(&metsP);
 		//std::cerr << "START Parsing" << std::endl;
 		hError.setFilePart(currentMetsFile);
 		hError.setRelatedType("METS");
 
-		if ( metsParserCall.parse( parseString.c_str())!= 0){
+		if ( metsParserCall->parse( parseString.c_str())!= 0){
             hError.getError(cat_xml_error,"METS",currentMetsFile, "Could not parse Mets file %s\n" + currentMetsFile ,currentMetsFile,"");
 			// go to the next file : structure are not provide like the parser has stop
 			cerr << "STOP immediately --> see trace in DB" << endl;
@@ -259,17 +250,17 @@ int start()
 			std::string generatedFile = outputDir + "/GENERATED" + currentMetsFile;
 			transformParser transformCH;
 			transformCH.getContext().openFile(generatedFile);
-			metsParserCall.setContentHandler(&transformCH);
+			metsParserCall->setContentHandler(&transformCH);
 
-			if ( metsParserCall.parse( parseString.c_str())!= 0){
+			if ( metsParserCall->parse( parseString.c_str())!= 0){
 					return 2;
 			};
 
 			transformCH.getContext().closeFile();
 
-			parserCheckBNL.setErrorHandler(&hError);
+			parserCheckBNL->setErrorHandler(&hError);
 
-			if ( parserCheckBNL.parse( generatedFile.c_str())!= 0){
+			if ( parserCheckBNL->parse( generatedFile.c_str())!= 0){
 				cerr << "STOP immediately --> File"<< generatedFile.c_str() << endl;
 				return 3;
 			};
@@ -286,14 +277,12 @@ int start()
 				Type_File tf = fg->vect[j];				
 				const std::string &path = currentMetsPath + tf.ref;	
 				altoparser altoP(path,tf.id,&hError,&df);
-				altoParserCall.setContentHandler(&altoP);
+				altoParserCall->setContentHandler(&altoP);
 
-				if ( altoParserCall.parse(path.c_str()) != 0){
+				if ( altoParserCall->parse(path.c_str()) != 0){
 					hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
 					parseError = true;
 				};
-
-	
 			}
 		
 			pt.LogTime("Parsing ALTO files");
@@ -432,19 +421,4 @@ int main(int argc, char** argv){
 	start ();
 
 	XMLPlatformUtils::Terminate ();
-}
-
-void initXSDMets(parserCheck* p){
-	p->addXSD("mets.xsd");
-	p->addXSD("mods-3-2.xsd");
-	p->addXSD("mods-3-3.xsd");
-	p->addXSD("xlink.xsd");
-	p->addXSD("MARC21slim_bnl.xsd");
-	p->lockaddXSD();
-}
-void initXSDAlto(parserCheck* p){
-    p->addXSD("alto-1-2.xsd");
-	p->addXSD("alto-1-4.xsd");
-	p->addXSD("nonexistingFile.xsd"); // Test Purpose 
-	p->lockaddXSD();
 }

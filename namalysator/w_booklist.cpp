@@ -27,6 +27,8 @@ void w_booklist::init(){
 	bookView->setShowGrid(false);
   	bookView->setHorizontalHeader(new bookColumn(Qt::Horizontal));
 	bookView->setSortingEnabled(true);
+	bookView->resizeColumnsToContents();
+	bookView->resizeRowsToContents();
 
 	connect ( bookView, SIGNAL(clicked(QModelIndex)), this, SLOT(onclick(QModelIndex)));
 }

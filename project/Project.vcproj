@@ -203,6 +203,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\parameterMETS.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\titletocheck.cpp"
 				>
 			</File>
@@ -406,6 +410,10 @@
 			</File>
 			<File
 				RelativePath=".\metsverifier.h"
+				>
+			</File>
+			<File
+				RelativePath=".\parameterMETS.h"
 				>
 			</File>
 			<File
