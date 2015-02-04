@@ -207,6 +207,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\transform.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\utilities.cpp"
 				>
 			</File>
@@ -410,6 +414,10 @@
 			</File>
 			<File
 				RelativePath=".\titletocheck.h"
+				>
+			</File>
+			<File
+				RelativePath=".\transform.h"
 				>
 			</File>
 			<Filter

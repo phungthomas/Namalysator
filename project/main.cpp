@@ -15,6 +15,8 @@
 #include "altoparser.h"
 #include "sql.h"
 #include "errorhandler.h"
+#include "transform.h"
+
 
 #include <parserCheck.h>
 
@@ -194,6 +196,12 @@ int start()
 	pt.LogTime("Inserting DB parameters");
 	
 
+	parserCheck parserCheckBNL;
+	if (parameter.getValueCheck("monograph.structure") == 1){
+		parserCheckBNL.addXSD("bnl-monograph_v1.0.xsd");
+		parserCheckBNL.lockaddXSD();
+	}
+
 	parserCheck metsParserCall;
 	parserCheck altoParserCall;
 
@@ -245,6 +253,27 @@ int start()
 		};
 
 		//cerr << metsP.getContext().inventory.toString();
+
+		if (parameter.getValueCheck("monograph.structure") == 1){
+			std::string outputDir = parameter.getValue("outputDir");
+			std::string generatedFile = outputDir + "/GENERATED" + currentMetsFile;
+			transformParser transformCH;
+			transformCH.getContext().openFile(generatedFile);
+			metsParserCall.setContentHandler(&transformCH);
+
+			if ( metsParserCall.parse( parseString.c_str())!= 0){
+					return 2;
+			};
+
+			transformCH.getContext().closeFile();
+
+			parserCheckBNL.setErrorHandler(&hError);
+
+			if ( parserCheckBNL.parse( generatedFile.c_str())!= 0){
+				cerr << "STOP immediately --> File"<< generatedFile.c_str() << endl;
+				return 3;
+			};
+		}
 
 		pt.LogTime("Parsing METS file");
 

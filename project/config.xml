@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<database>C:/Data/DB/smallTestTTTBOOK</database>
+	<database>C:/Data/DB/smallTestBook</database>
 	<inventoryFile>file.csv</inventoryFile>
-	<batchName>bookobermosel-1945-july</batchName>
+	<batchName>obermosel-1945-july</batchName>
 	<input>C:/SmallTestBook</input>
+	<outputDir>C:/Data/output</outputDir> <!-- where intermediate generate file are put before analysis, mainly a temp directory -->
 	<verifiers><!-- metsverifier will save a atoi of data for each key under node verifiers-->
 		<dataintegrity>
 			<checkFile>1</checkFile>
@@ -26,6 +27,9 @@
 			<multipleBlockUse>1</multipleBlockUse>
 			<measurementSTD>1</measurementSTD>
 		</blocks>
+		<monograph>
+			<structure>1</structure>
+		</monograph>
 		<inventoryBook>1</inventoryBook>
 	</verifiers>
 	<checkTitle>5</checkTitle> <!-- per 1000 -->
