@@ -20,6 +20,33 @@
 #include <cstdlib>
 namespace fs = boost::filesystem;
 
+
+void w_structview::setQMainWindow(QMainWindow* _qmain){
+	qmain=_qmain;
+
+	
+	contentsWindow->setAllowedAreas(Qt::TopDockWidgetArea
+                                  | Qt::BottomDockWidgetArea);
+	    
+	contentsWindow->setWidget(bookList);
+	contentsWindow->setMinimumHeight(50);
+	//contentsWindow->setMaximumHeight(180);
+	QWidget *titleBarWidget = new QWidget(0);
+	contentsWindow->setTitleBarWidget(titleBarWidget);
+	contentsWindow->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    qmain->addDockWidget(Qt::TopDockWidgetArea, contentsWindow);
+
+    menu = qmain->menuBar()->addMenu("Issue Viewer option"); 
+	QAction *act = menu->addAction(tr("Sampling View"));
+	connect(act,SIGNAL(triggered()),this,SLOT(showListSampling()));
+
+	act = menu->addAction(tr("Calendar View"));;
+	connect(act, SIGNAL(triggered()), this, SLOT(viewCalendar()));
+
+	act = menu->addAction(tr("List View"));
+	connect(act, SIGNAL(triggered()), this, SLOT(viewList()));
+}
+
 w_structview::w_structview(QWidget *parent) :
     QWidget(parent),
     m_ui(new Ui::w_structview),
@@ -29,8 +56,10 @@ w_structview::w_structview(QWidget *parent) :
 
 	bookList = new w_booklist(db);
 	bookList ->init();
+	contentsWindow = new QDockWidget();
 
 	thumb = 0;
+	menu = 0;
 
 
   
@@ -50,11 +79,6 @@ w_structview::w_structview(QWidget *parent) :
     currentSelectedArticle =0;
     m_ui->btnStructure->setVisible(false);
 	viewCalendar();
-
-	
-
-	m_ui->bookW->setWidget(bookList);
-	m_ui->bookW->setWidgetResizable(true);
 };
 
 //! create event / slots
@@ -75,9 +99,9 @@ void w_structview::createConnections()
 	connect(m_ui->btnZoomIn, SIGNAL(clicked()), this, SLOT(zoomIn()));
     connect(m_ui->btnZoomOut, SIGNAL(clicked()), this, SLOT(zoomOut()));
 	connect(m_ui->zoomNormal, SIGNAL(clicked()), this, SLOT(zoomNon()));
-	connect(m_ui->rbCalendar, SIGNAL(clicked()), this, SLOT(viewCalendar()));
-	connect(m_ui->rbList, SIGNAL(clicked()), this, SLOT(viewList()));
-	connect(m_ui->rbSampling,SIGNAL(clicked()),this,SLOT(showListSampling()));
+	//connect(m_ui->rbCalendar, SIGNAL(clicked()), this, SLOT(viewCalendar()));
+	//connect(m_ui->rbList, SIGNAL(clicked()), this, SLOT(viewList()));
+	//connect(m_ui->rbSampling,SIGNAL(clicked()),this,SLOT(showListSampling()));
 	connect(m_ui->btnChecked, SIGNAL(clicked()), this, SLOT(checked()));
 	connect(m_ui->btnUndo, SIGNAL(clicked()), this, SLOT(undo()));
 	connect(m_ui->btnViewMets, SIGNAL(clicked()), this, SLOT(viewMetsFile()));
@@ -96,16 +120,27 @@ w_structview::~w_structview()
 		delete thumb;
 		thumb=0;
 	}
+	if (contentsWindow){
+		contentsWindow->close();
+		delete contentsWindow;
+		contentsWindow=0;
+	};
+	if ( menu ){
+		menu->close();
+		delete menu;
+		menu = 0;
+	}
 }
 
 //set detail of the batch
 void w_structview::setBatchDetail()
 { 	
 	//batch = d; 
+	
 	db.setDataBaseName(BatchDetail::getBatchDetail().database);  
 	m_ui->calendarWidget->setVisible(true);
 	m_ui->listMets->setVisible(true);
-	m_ui->rbCalendar->setChecked(true);	
+	//m_ui->rbCalendar->setChecked(true);	
 	
 	initCalendarWidget(m_ui->calendarWidget,BatchDetail::getBatchDetail());
 	fillListSamplingStructure();	
@@ -723,21 +758,28 @@ void w_structview::rbhelperSampling(bool b){
 	if ( b ) fillListSamplingStructure();
 }
 void w_structview::rbhelperList(bool b){
-	m_ui->bookW->setVisible(b);
+	contentsWindow->setVisible(b);
+
 }
 
 
 // checked if the issues was validated
 void::w_structview::checked()
 {
-	db.updateSamplingStructure(vListSampling[m_ui->listSampling->currentRow()].id,1);
+	int i = m_ui->listSampling->currentRow();
+	if ( i < 0 ) return;
+
+	db.updateSamplingStructure(vListSampling[i].id,1);
 	m_ui->listSampling->currentItem()->setTextColor("red");
 }
 
 
 void::w_structview::undo()
 {
-	db.updateSamplingStructure(vListSampling[m_ui->listSampling->currentRow()].id,0);
+	int i = m_ui->listSampling->currentRow();
+	if ( i < 0 ) return;
+
+	db.updateSamplingStructure(vListSampling[i].id,0);
 	m_ui->listSampling->currentItem()->setTextColor("black");
 }
 

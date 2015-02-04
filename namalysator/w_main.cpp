@@ -148,8 +148,10 @@ void w_main::openStructureWindow()
 {
 	w_structview *view = new w_structview();
 	view->setBatchDetail();	
+	view->setQMainWindow(this);
 	titleChange("Issue Viewer");
 	this->resize(1200,910);
+	view->setMinimumHeight(700);
 	this->setCentralWidget(view); 
 }
 

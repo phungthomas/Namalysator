@@ -27,10 +27,14 @@ public:
 	 void setBatchDetail();
 	 void fillListErrors();
 	 void setCurrentMets(MetsFile mets);
+	void setQMainWindow(QMainWindow*);
 protected:
     virtual void changeEvent(QEvent *e);
 
 private:
+	QMenu* menu;
+	QDockWidget*    contentsWindow;
+	QMainWindow* qmain;
     Ui::w_structview *m_ui;
 	logstruct_colors	m_colors;
     std::map<int,MetsFile> mapMets;
