@@ -15,9 +15,8 @@ public :
 	ParameterMETS();
 	virtual ~ParameterMETS();
 
-	virtual void addParam(std::string Key,std::string Val); 
-
-	parserCheck* getParser(std::string Key);
+	virtual void addParam(std::string Key,std::string Val); //+ overloaded call parent function if not defining a xsd manager
+	parserCheck* getParser(std::string Type); //+ give the parser for the type
 
 private :
 
