@@ -61,7 +61,7 @@ void ParameterMETS::addXSD (std::string filename){
 	if ( currentParserCheck ) {
 		currentParserCheck->addXSD(filename);
 	}else {
-		std::cerr << "Parser Type not define" << std::endl;
+		std::cerr << "ADDXSD: Parser Type not define" << std::endl;
 		exit(2);
 	}
 }
@@ -71,7 +71,7 @@ void ParameterMETS::lockXSD (std::string filename){
 		currentParserCheck->lockaddXSD();
 		currentParserCheck = 0;
 	}else {
-		std::cerr << "LOCK Parser Type not define" << std::endl;
+		std::cerr << "LOCK: Parser Type not define" << std::endl;
 		exit(3);
 	}
 }
