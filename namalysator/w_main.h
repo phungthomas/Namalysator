@@ -43,9 +43,11 @@ private:
 	QAction *openDiskAnalyze;
 	QAction *openCalendarAction;	
 	QAction *openStructureAction;
-	QAction *openTitleCheck;	
+	//QAction *openTitleCheck;	
 	QAction *openSelectBatch;
 	QToolBar *fileTools;	
+
+
 
 public slots:
 		void createActions();
@@ -55,11 +57,12 @@ public slots:
 		void parseBatch();
 		void modeNewsPaper();
 		void openStructureWindow();
-		void openTitleCheckWindow();		
+		//void openTitleCheckWindow();		
 		void openSelectBatchWindow();    
 		void openReport();
 		void openStart(std::string);
 		void exit();
+		void exportData();
 };
 
 #endif // W_MAIN_H

@@ -4,7 +4,7 @@
 #include "w_disk.h"
 #include "w_calendar.h"
 #include "w_structview.h"
-#include "w_titlecheck.h"
+//#include "w_titlecheck.h"
 #include "w_errors.h"
 #include "w_exportdata.h"
 #include "qwidgettaberror.h"
@@ -13,6 +13,7 @@
 #include "exportdata.h"
 #include "w_thumb.h"
 #include "w_report.h"
+#include "exportDataHelper.h"
 #include <iostream>
 
 std::string w_main::title;
@@ -63,7 +64,11 @@ void w_main::newsPaperActions()
 	openSelectBatch->setToolTip("Select batch");
 	connect(openSelectBatch, SIGNAL(triggered()), this, SLOT(openSelectBatchWindow()));
 
-	QAction * act = menu->addAction(tr("Exit"));
+	QAction * act = menu->addAction(tr("Export Title Data"));
+	connect(act, SIGNAL(triggered()), this, SLOT(exportData()));
+
+		
+	act = menu->addAction(tr("Exit"));
 	connect(act, SIGNAL(triggered()), this, SLOT(exit()));
 
 	menu = menuBar->addMenu("View"); 
@@ -84,9 +89,9 @@ void w_main::newsPaperActions()
 	openStructureAction->setToolTip("Issue viewer");
 	connect(openStructureAction, SIGNAL(triggered()), this, SLOT(openStructureWindow()));
 
-	openTitleCheck = menu->addAction(tr("Title check")); 
-	openTitleCheck->setToolTip("Title check");
-	connect(openTitleCheck, SIGNAL(triggered()), this, SLOT(openTitleCheckWindow()));
+	//openTitleCheck = menu->addAction(tr("Title check")); 
+	//openTitleCheck->setToolTip("Title check");
+	//connect(openTitleCheck, SIGNAL(triggered()), this, SLOT(openTitleCheckWindow()));
 
 	menu = menuBar->addMenu("Report");
 
@@ -147,6 +152,7 @@ void w_main::openStructureWindow()
 	this->setCentralWidget(view); 
 }
 
+/*
 void w_main::openTitleCheckWindow()
 {
 	w_titlecheck *titlecheck = new  w_titlecheck();
@@ -155,6 +161,8 @@ void w_main::openTitleCheckWindow()
 	this->resize(1050,910);
 	this->setCentralWidget(titlecheck); 
 }
+*/
+
 
 
 void w_main::openSelectBatchWindow()
@@ -191,3 +199,28 @@ void w_main::titleChange(std::string sub,std::string _title){
 	std::string tmp=title + "     " + subTitle;
 	this->setWindowTitle(tmp.c_str());
 }
+
+
+
+
+void w_main::exportData(){
+
+	QString fileName = QFileDialog::getSaveFileName(this,tr("Open File"),"",tr("file (*.ods)"));
+    std::string message;
+
+	if (!fileName.isEmpty()) 
+    {		
+		message = fileName.toStdString();
+    };
+
+	exportDataHelper helper;
+	helper.exportData(message);
+
+
+	QMessageBox::information(this, tr("Namalysator"),
+                                   tr("Export finished"));
+}
+
+
+
+
