@@ -31,11 +31,8 @@ protected:
     bool inputDisk();
 private : 
 	Ui::w_selectBatch *m_ui;
-    //std::vector<Inventaire> vInventaire ;   
     dbrequest db; 
-    //dbrequest dbInventaire; 
     BatchDetail& batch;
-    //Inventaire inv;   
 
 signals:
 	void validated(std::string);

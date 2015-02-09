@@ -7,7 +7,6 @@
 #include <QMessageBox>
 #include <fstream>
 #include "gui_utilities.h"
-//#include "w_inventaire.h"
 #include "w_stat.h"
 #include "parammodel.h"
 
