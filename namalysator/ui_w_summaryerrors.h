@@ -13,8 +13,12 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QFormLayout>
+#include <QtGui/QGroupBox>
+#include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
+#include <QtGui/QSpacerItem>
 #include <QtGui/QTableWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -24,38 +28,117 @@ QT_BEGIN_NAMESPACE
 class Ui_w_summaryerrors
 {
 public:
-    QTableWidget *tableSummary;
-    QLabel *label_4;
-    QLabel *label_5;
-    QWidget *layoutWidget;
+    QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout;
+    QGroupBox *groupBox;
+    QFormLayout *formLayout_2;
     QLabel *label;
     QLabel *label_2;
-    QLabel *label_3;
     QLabel *label_9;
-    QWidget *layoutWidget1;
-    QVBoxLayout *verticalLayout_2;
-    QLabel *lbSummary;
-    QLabel *lbDate;
+    QLabel *label_3;
     QLabel *lbTotal;
     QLabel *lbTitles;
-    QWidget *layoutWidget2;
-    QVBoxLayout *verticalLayout_3;
+    QLabel *lbSummary;
+    QLabel *lbDate;
+    QTableWidget *tableYear;
+    QSpacerItem *horizontalSpacer_3;
+    QTableWidget *tableSummary;
+    QHBoxLayout *horizontalLayout_2;
+    QSpacerItem *horizontalSpacer;
+    QGroupBox *groupBox_2;
+    QFormLayout *formLayout;
     QLabel *label_6;
     QLabel *label_7;
     QLabel *label_8;
-    QWidget *layoutWidget3;
-    QVBoxLayout *verticalLayout_4;
-    QLabel *lbTotal2;
     QLabel *lbCorrectIssues;
+    QLabel *lbTotal2;
     QLabel *lbPercent;
-    QTableWidget *tableYear;
+    QSpacerItem *horizontalSpacer_2;
 
     void setupUi(QWidget *w_summaryerrors)
     {
         if (w_summaryerrors->objectName().isEmpty())
             w_summaryerrors->setObjectName(QString::fromUtf8("w_summaryerrors"));
-        w_summaryerrors->resize(913, 629);
+        w_summaryerrors->resize(957, 632);
+        verticalLayout_5 = new QVBoxLayout(w_summaryerrors);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        groupBox = new QGroupBox(w_summaryerrors);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        formLayout_2 = new QFormLayout(groupBox);
+        formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
+        label = new QLabel(groupBox);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        formLayout_2->setWidget(0, QFormLayout::LabelRole, label);
+
+        label_2 = new QLabel(groupBox);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        formLayout_2->setWidget(1, QFormLayout::LabelRole, label_2);
+
+        label_9 = new QLabel(groupBox);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        formLayout_2->setWidget(3, QFormLayout::LabelRole, label_9);
+
+        label_3 = new QLabel(groupBox);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        formLayout_2->setWidget(4, QFormLayout::LabelRole, label_3);
+
+        lbTotal = new QLabel(groupBox);
+        lbTotal->setObjectName(QString::fromUtf8("lbTotal"));
+
+        formLayout_2->setWidget(4, QFormLayout::FieldRole, lbTotal);
+
+        lbTitles = new QLabel(groupBox);
+        lbTitles->setObjectName(QString::fromUtf8("lbTitles"));
+
+        formLayout_2->setWidget(3, QFormLayout::FieldRole, lbTitles);
+
+        lbSummary = new QLabel(groupBox);
+        lbSummary->setObjectName(QString::fromUtf8("lbSummary"));
+
+        formLayout_2->setWidget(0, QFormLayout::FieldRole, lbSummary);
+
+        lbDate = new QLabel(groupBox);
+        lbDate->setObjectName(QString::fromUtf8("lbDate"));
+
+        formLayout_2->setWidget(1, QFormLayout::FieldRole, lbDate);
+
+        label->raise();
+        label->raise();
+        label_2->raise();
+        label_9->raise();
+        label_3->raise();
+        lbTotal->raise();
+        lbTitles->raise();
+        lbSummary->raise();
+        lbDate->raise();
+
+        verticalLayout->addWidget(groupBox);
+
+
+        horizontalLayout->addLayout(verticalLayout);
+
+        tableYear = new QTableWidget(w_summaryerrors);
+        tableYear->setObjectName(QString::fromUtf8("tableYear"));
+        tableYear->setMinimumSize(QSize(500, 0));
+
+        horizontalLayout->addWidget(tableYear);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_3);
+
+
+        verticalLayout_5->addLayout(horizontalLayout);
+
         tableSummary = new QTableWidget(w_summaryerrors);
         if (tableSummary->columnCount() < 6)
             tableSummary->setColumnCount(6);
@@ -73,111 +156,61 @@ public:
         tableSummary->setHorizontalHeaderItem(5, __qtablewidgetitem5);
         tableSummary->setObjectName(QString::fromUtf8("tableSummary"));
         tableSummary->setEnabled(true);
-        tableSummary->setGeometry(QRect(60, 200, 761, 231));
         tableSummary->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        label_4 = new QLabel(w_summaryerrors);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setGeometry(QRect(70, 170, 91, 16));
-        label_5 = new QLabel(w_summaryerrors);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setGeometry(QRect(190, 170, 46, 14));
-        layoutWidget = new QWidget(w_summaryerrors);
-        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(60, 10, 107, 91));
-        verticalLayout = new QVBoxLayout(layoutWidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(layoutWidget);
-        label->setObjectName(QString::fromUtf8("label"));
 
-        verticalLayout->addWidget(label);
+        verticalLayout_5->addWidget(tableSummary);
 
-        label_2 = new QLabel(layoutWidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        verticalLayout->addWidget(label_2);
+        horizontalLayout_2->addItem(horizontalSpacer);
 
-        label_3 = new QLabel(layoutWidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        verticalLayout->addWidget(label_3);
-
-        label_9 = new QLabel(layoutWidget);
-        label_9->setObjectName(QString::fromUtf8("label_9"));
-
-        verticalLayout->addWidget(label_9);
-
-        layoutWidget1 = new QWidget(w_summaryerrors);
-        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(170, 10, 121, 91));
-        verticalLayout_2 = new QVBoxLayout(layoutWidget1);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        lbSummary = new QLabel(layoutWidget1);
-        lbSummary->setObjectName(QString::fromUtf8("lbSummary"));
-
-        verticalLayout_2->addWidget(lbSummary);
-
-        lbDate = new QLabel(layoutWidget1);
-        lbDate->setObjectName(QString::fromUtf8("lbDate"));
-
-        verticalLayout_2->addWidget(lbDate);
-
-        lbTotal = new QLabel(layoutWidget1);
-        lbTotal->setObjectName(QString::fromUtf8("lbTotal"));
-
-        verticalLayout_2->addWidget(lbTotal);
-
-        lbTitles = new QLabel(layoutWidget1);
-        lbTitles->setObjectName(QString::fromUtf8("lbTitles"));
-
-        verticalLayout_2->addWidget(lbTitles);
-
-        layoutWidget2 = new QWidget(w_summaryerrors);
-        layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(80, 440, 146, 56));
-        verticalLayout_3 = new QVBoxLayout(layoutWidget2);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        label_6 = new QLabel(layoutWidget2);
+        groupBox_2 = new QGroupBox(w_summaryerrors);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        formLayout = new QFormLayout(groupBox_2);
+        formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
+        label_6 = new QLabel(groupBox_2);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
-        verticalLayout_3->addWidget(label_6);
+        formLayout->setWidget(1, QFormLayout::LabelRole, label_6);
 
-        label_7 = new QLabel(layoutWidget2);
+        label_7 = new QLabel(groupBox_2);
         label_7->setObjectName(QString::fromUtf8("label_7"));
 
-        verticalLayout_3->addWidget(label_7);
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_7);
 
-        label_8 = new QLabel(layoutWidget2);
+        label_8 = new QLabel(groupBox_2);
         label_8->setObjectName(QString::fromUtf8("label_8"));
 
-        verticalLayout_3->addWidget(label_8);
+        formLayout->setWidget(5, QFormLayout::LabelRole, label_8);
 
-        layoutWidget3 = new QWidget(w_summaryerrors);
-        layoutWidget3->setObjectName(QString::fromUtf8("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(240, 440, 48, 56));
-        verticalLayout_4 = new QVBoxLayout(layoutWidget3);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
-        lbTotal2 = new QLabel(layoutWidget3);
-        lbTotal2->setObjectName(QString::fromUtf8("lbTotal2"));
-
-        verticalLayout_4->addWidget(lbTotal2);
-
-        lbCorrectIssues = new QLabel(layoutWidget3);
+        lbCorrectIssues = new QLabel(groupBox_2);
         lbCorrectIssues->setObjectName(QString::fromUtf8("lbCorrectIssues"));
 
-        verticalLayout_4->addWidget(lbCorrectIssues);
+        formLayout->setWidget(2, QFormLayout::FieldRole, lbCorrectIssues);
 
-        lbPercent = new QLabel(layoutWidget3);
+        lbTotal2 = new QLabel(groupBox_2);
+        lbTotal2->setObjectName(QString::fromUtf8("lbTotal2"));
+
+        formLayout->setWidget(1, QFormLayout::FieldRole, lbTotal2);
+
+        lbPercent = new QLabel(groupBox_2);
         lbPercent->setObjectName(QString::fromUtf8("lbPercent"));
 
-        verticalLayout_4->addWidget(lbPercent);
+        formLayout->setWidget(5, QFormLayout::FieldRole, lbPercent);
 
-        tableYear = new QTableWidget(w_summaryerrors);
-        tableYear->setObjectName(QString::fromUtf8("tableYear"));
-        tableYear->setGeometry(QRect(310, 10, 251, 151));
+
+        horizontalLayout_2->addWidget(groupBox_2);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_2);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_2);
+
 
         retranslateUi(w_summaryerrors);
 
@@ -187,6 +220,15 @@ public:
     void retranslateUi(QWidget *w_summaryerrors)
     {
         w_summaryerrors->setWindowTitle(QApplication::translate("w_summaryerrors", "Form", 0, QApplication::UnicodeUTF8));
+        groupBox->setTitle(QString());
+        label->setText(QApplication::translate("w_summaryerrors", "Summary of disk :", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("w_summaryerrors", "Date of test :", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("w_summaryerrors", "Titles to correct :", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("w_summaryerrors", "Number of Mets files :", 0, QApplication::UnicodeUTF8));
+        lbTotal->setText(QApplication::translate("w_summaryerrors", "Total", 0, QApplication::UnicodeUTF8));
+        lbTitles->setText(QApplication::translate("w_summaryerrors", "lbTitles", 0, QApplication::UnicodeUTF8));
+        lbSummary->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
+        lbDate->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem = tableSummary->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("w_summaryerrors", "Severity", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem1 = tableSummary->horizontalHeaderItem(1);
@@ -199,21 +241,12 @@ public:
         ___qtablewidgetitem4->setText(QApplication::translate("w_summaryerrors", "Percentage", 0, QApplication::UnicodeUTF8));
         QTableWidgetItem *___qtablewidgetitem5 = tableSummary->horizontalHeaderItem(5);
         ___qtablewidgetitem5->setText(QApplication::translate("w_summaryerrors", "Details on sheet", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("w_summaryerrors", "Title to correct", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("w_summaryerrors", "Summary of disk :", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("w_summaryerrors", "Date of test :", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("w_summaryerrors", "Number of Mets files :", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("w_summaryerrors", "Titles to correct :", 0, QApplication::UnicodeUTF8));
-        lbSummary->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
-        lbDate->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
-        lbTotal->setText(QApplication::translate("w_summaryerrors", "Total", 0, QApplication::UnicodeUTF8));
-        lbTitles->setText(QApplication::translate("w_summaryerrors", "lbTitles", 0, QApplication::UnicodeUTF8));
+        groupBox_2->setTitle(QString());
         label_6->setText(QApplication::translate("w_summaryerrors", "Total number of issues :", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("w_summaryerrors", "Correct issues :", 0, QApplication::UnicodeUTF8));
         label_8->setText(QApplication::translate("w_summaryerrors", "Percentage of correct issues :", 0, QApplication::UnicodeUTF8));
-        lbTotal2->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
         lbCorrectIssues->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
+        lbTotal2->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
         lbPercent->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

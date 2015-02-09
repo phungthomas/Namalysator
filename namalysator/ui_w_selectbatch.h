@@ -23,6 +23,7 @@
 #include <QtGui/QListWidget>
 #include <QtGui/QPushButton>
 #include <QtGui/QScrollArea>
+#include <QtGui/QSpacerItem>
 #include <QtGui/QTableView>
 #include <QtGui/QTableWidget>
 #include <QtGui/QVBoxLayout>
@@ -36,18 +37,13 @@ public:
     QGridLayout *gridLayout;
     QGroupBox *groupBox;
     QVBoxLayout *verticalLayout_4;
-    QGroupBox *groupBox_3;
-    QVBoxLayout *verticalLayout_3;
-    QPushButton *btnBrowseDbInventaire;
-    QLabel *label_19;
-    QLineEdit *lineEditInventaire;
-    QComboBox *cbInventaire;
     QLabel *label_3;
     QLabel *lbBatchName;
     QLabel *label_4;
     QLabel *lbYear;
     QLabel *label_7;
     QLabel *lbNumberMets;
+    QSpacerItem *verticalSpacer;
     QGroupBox *groupButton;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnAnalyze;
@@ -87,45 +83,6 @@ public:
         groupBox->setMaximumSize(QSize(200, 16777215));
         verticalLayout_4 = new QVBoxLayout(groupBox);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        groupBox_3 = new QGroupBox(groupBox);
-        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(groupBox_3->sizePolicy().hasHeightForWidth());
-        groupBox_3->setSizePolicy(sizePolicy);
-        groupBox_3->setMinimumSize(QSize(150, 0));
-        groupBox_3->setMaximumSize(QSize(200, 16777215));
-        verticalLayout_3 = new QVBoxLayout(groupBox_3);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        btnBrowseDbInventaire = new QPushButton(groupBox_3);
-        btnBrowseDbInventaire->setObjectName(QString::fromUtf8("btnBrowseDbInventaire"));
-
-        verticalLayout_3->addWidget(btnBrowseDbInventaire);
-
-        label_19 = new QLabel(groupBox_3);
-        label_19->setObjectName(QString::fromUtf8("label_19"));
-
-        verticalLayout_3->addWidget(label_19);
-
-        lineEditInventaire = new QLineEdit(groupBox_3);
-        lineEditInventaire->setObjectName(QString::fromUtf8("lineEditInventaire"));
-
-        verticalLayout_3->addWidget(lineEditInventaire);
-
-        cbInventaire = new QComboBox(groupBox_3);
-        cbInventaire->setObjectName(QString::fromUtf8("cbInventaire"));
-        cbInventaire->setEnabled(true);
-
-        verticalLayout_3->addWidget(cbInventaire);
-
-        label_19->raise();
-        lineEditInventaire->raise();
-        btnBrowseDbInventaire->raise();
-        cbInventaire->raise();
-
-        verticalLayout_4->addWidget(groupBox_3);
-
         label_3 = new QLabel(groupBox);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
@@ -162,13 +119,10 @@ public:
 
         verticalLayout_4->addWidget(lbNumberMets);
 
-        label_3->raise();
-        lbBatchName->raise();
-        label_4->raise();
-        lbYear->raise();
-        label_7->raise();
-        lbNumberMets->raise();
-        groupBox_3->raise();
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_4->addItem(verticalSpacer);
+
 
         gridLayout->addWidget(groupBox, 1, 0, 1, 1);
 
@@ -257,10 +211,12 @@ public:
 
         groupBox_4 = new QGroupBox(w_selectBatch);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
+        groupBox_4->setMinimumSize(QSize(0, 250));
         verticalLayout_5 = new QVBoxLayout(groupBox_4);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         scrollArea = new QScrollArea(groupBox_4);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
+        scrollArea->setMinimumSize(QSize(0, 0));
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
@@ -269,11 +225,11 @@ public:
         verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         tableSummary = new QTableWidget(scrollAreaWidgetContents);
         tableSummary->setObjectName(QString::fromUtf8("tableSummary"));
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(tableSummary->sizePolicy().hasHeightForWidth());
-        tableSummary->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(tableSummary->sizePolicy().hasHeightForWidth());
+        tableSummary->setSizePolicy(sizePolicy);
         tableSummary->setMinimumSize(QSize(100, 0));
 
         verticalLayout_6->addWidget(tableSummary);
@@ -300,11 +256,11 @@ public:
 
         gbBatch = new QGroupBox(w_selectBatch);
         gbBatch->setObjectName(QString::fromUtf8("gbBatch"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::MinimumExpanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(gbBatch->sizePolicy().hasHeightForWidth());
-        gbBatch->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::MinimumExpanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(gbBatch->sizePolicy().hasHeightForWidth());
+        gbBatch->setSizePolicy(sizePolicy1);
         gbBatch->setMinimumSize(QSize(150, 0));
         gbBatch->setMaximumSize(QSize(200, 437));
         verticalLayout_2 = new QVBoxLayout(gbBatch);
@@ -322,8 +278,11 @@ public:
         lineEditSql = new QLineEdit(gbBatch);
         lineEditSql->setObjectName(QString::fromUtf8("lineEditSql"));
         lineEditSql->setEnabled(true);
-        sizePolicy.setHeightForWidth(lineEditSql->sizePolicy().hasHeightForWidth());
-        lineEditSql->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(lineEditSql->sizePolicy().hasHeightForWidth());
+        lineEditSql->setSizePolicy(sizePolicy2);
         lineEditSql->setMinimumSize(QSize(100, 0));
 
         verticalLayout_2->addWidget(lineEditSql);
@@ -377,10 +336,6 @@ public:
     {
         w_selectBatch->setWindowTitle(QApplication::translate("w_selectBatch", "Form", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("w_selectBatch", "Details", 0, QApplication::UnicodeUTF8));
-        groupBox_3->setTitle(QApplication::translate("w_selectBatch", "Inventaire", 0, QApplication::UnicodeUTF8));
-        btnBrowseDbInventaire->setText(QApplication::translate("w_selectBatch", "Browse", 0, QApplication::UnicodeUTF8));
-        label_19->setText(QApplication::translate("w_selectBatch", "Select database :", 0, QApplication::UnicodeUTF8));
-        lineEditInventaire->setText(QString());
         label_3->setText(QApplication::translate("w_selectBatch", "Batchname :", 0, QApplication::UnicodeUTF8));
         lbBatchName->setText(QString());
         label_4->setText(QApplication::translate("w_selectBatch", "Year on disk :", 0, QApplication::UnicodeUTF8));

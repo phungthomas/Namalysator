@@ -22,30 +22,33 @@ static const uint qt_meta_data_w_selectBatch[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       2,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      15,   14,   14,   14, 0x05,
+      38,   14,   14,   14, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      20,   15,   14,   14, 0x09,
-      41,   14,   14,   14, 0x09,
-      67,   14,   14,   14, 0x09,
-      77,   14,   14,   14, 0x09,
-      90,   14,   14,   14, 0x09,
-     101,   14,   14,   14, 0x09,
-     108,   14,   14,   14, 0x09,
+      52,   47,   14,   14, 0x09,
+      73,   14,   14,   14, 0x09,
+      99,   14,   14,   14, 0x09,
+     109,   14,   14,   14, 0x09,
+     122,   14,   14,   14, 0x09,
+     133,   14,   14,   14, 0x09,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_w_selectBatch[] = {
-    "w_selectBatch\0\0date\0getListDate(QString)\0"
+    "w_selectBatch\0\0validated(std::string)\0"
+    "exited()\0date\0getListDate(QString)\0"
     "getMets(QListWidgetItem*)\0valider()\0"
     "browsePath()\0browseDb()\0exit()\0"
-    "browsePathInventaire()\0"
 };
 
 void w_selectBatch::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -54,13 +57,14 @@ void w_selectBatch::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         Q_ASSERT(staticMetaObject.cast(_o));
         w_selectBatch *_t = static_cast<w_selectBatch *>(_o);
         switch (_id) {
-        case 0: _t->getListDate((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 1: _t->getMets((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 2: _t->valider(); break;
-        case 3: _t->browsePath(); break;
-        case 4: _t->browseDb(); break;
-        case 5: _t->exit(); break;
-        case 6: _t->browsePathInventaire(); break;
+        case 0: _t->validated((*reinterpret_cast< std::string(*)>(_a[1]))); break;
+        case 1: _t->exited(); break;
+        case 2: _t->getListDate((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 3: _t->getMets((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 4: _t->valider(); break;
+        case 5: _t->browsePath(); break;
+        case 6: _t->browseDb(); break;
+        case 7: _t->exit(); break;
         default: ;
         }
     }
@@ -98,10 +102,23 @@ int w_selectBatch::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
+}
+
+// SIGNAL 0
+void w_selectBatch::validated(std::string _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+
+// SIGNAL 1
+void w_selectBatch::exited()
+{
+    QMetaObject::activate(this, &staticMetaObject, 1, 0);
 }
 QT_END_MOC_NAMESPACE

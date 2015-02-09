@@ -13,10 +13,12 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QGridLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QPushButton>
 #include <QtGui/QScrollArea>
 #include <QtGui/QTabWidget>
+#include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,8 +26,10 @@ QT_BEGIN_NAMESPACE
 class Ui_w_errors
 {
 public:
+    QVBoxLayout *verticalLayout;
     QTabWidget *tabWidget;
     QWidget *tab;
+    QGridLayout *gridLayout;
     QScrollArea *scrollAreaErrorTable;
     QWidget *scrollAreaWidgetContents;
     QPushButton *btnExport;
@@ -35,29 +39,39 @@ public:
         if (w_errors->objectName().isEmpty())
             w_errors->setObjectName(QString::fromUtf8("w_errors"));
         w_errors->resize(1035, 817);
+        verticalLayout = new QVBoxLayout(w_errors);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         tabWidget = new QTabWidget(w_errors);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        tabWidget->setGeometry(QRect(0, 10, 941, 651));
         QFont font;
         font.setKerning(false);
         tabWidget->setFont(font);
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
+        gridLayout = new QGridLayout(tab);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         scrollAreaErrorTable = new QScrollArea(tab);
         scrollAreaErrorTable->setObjectName(QString::fromUtf8("scrollAreaErrorTable"));
-        scrollAreaErrorTable->setGeometry(QRect(10, 20, 881, 581));
         QFont font1;
         font1.setKerning(true);
         scrollAreaErrorTable->setFont(font1);
         scrollAreaErrorTable->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 877, 577));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 991, 724));
         scrollAreaErrorTable->setWidget(scrollAreaWidgetContents);
+
+        gridLayout->addWidget(scrollAreaErrorTable, 0, 0, 1, 1);
+
         tabWidget->addTab(tab, QString());
+
+        verticalLayout->addWidget(tabWidget);
+
         btnExport = new QPushButton(w_errors);
         btnExport->setObjectName(QString::fromUtf8("btnExport"));
-        btnExport->setGeometry(QRect(20, 680, 75, 24));
+
+        verticalLayout->addWidget(btnExport);
+
 
         retranslateUi(w_errors);
 

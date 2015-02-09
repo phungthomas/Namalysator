@@ -38,7 +38,6 @@ private:
 	std::string subTitle;
     Ui::w_main *m_ui;
     QAction *openAct;
-	//QAction *modeBookAct;
 	QAction *openErrorAction;
 	QAction *openBookBrowserAction;
 	QAction *openDiskAnalyze;
@@ -46,7 +45,6 @@ private:
 	QAction *openStructureAction;
 	QAction *openTitleCheck;	
 	QAction *openSelectBatch;
-	QAction *openInventaire;
 	QToolBar *fileTools;	
 
 public slots:
@@ -59,7 +57,6 @@ public slots:
 		void openStructureWindow();
 		void openTitleCheckWindow();		
 		void openSelectBatchWindow();    
-		void openInventaireWindow();
 		void openReport();
 		void openStart(std::string);
 		void exit();

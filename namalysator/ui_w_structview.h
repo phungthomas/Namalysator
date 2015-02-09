@@ -19,7 +19,6 @@
 #include <QtGui/QLabel>
 #include <QtGui/QListWidget>
 #include <QtGui/QPushButton>
-#include <QtGui/QRadioButton>
 #include <QtGui/QScrollArea>
 #include <QtGui/QSpinBox>
 #include <QtGui/QTreeWidget>
@@ -33,19 +32,14 @@ class Ui_w_structview
 public:
     QVBoxLayout *verticalLayout_2;
     QLabel *label;
-    QScrollArea *bookW;
-    QWidget *scrollAreaWidgetContents_2;
     QHBoxLayout *horizontalLayout;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_6;
-    QRadioButton *rbSampling;
-    QRadioButton *rbCalendar;
-    QRadioButton *rbList;
+    QCalendarWidget *calendarWidget;
+    QListWidget *listSampling;
     QHBoxLayout *horizontalLayout_5;
     QPushButton *btnUndo;
     QPushButton *btnChecked;
-    QCalendarWidget *calendarWidget;
-    QListWidget *listSampling;
     QListWidget *listMets;
     QTreeWidget *treeWidget;
     QVBoxLayout *verticalLayout;
@@ -91,18 +85,6 @@ public:
 
         verticalLayout_2->addWidget(label);
 
-        bookW = new QScrollArea(w_structview);
-        bookW->setObjectName(QString::fromUtf8("bookW"));
-        bookW->setMinimumSize(QSize(0, 180));
-        bookW->setMaximumSize(QSize(16777215, 180));
-        bookW->setWidgetResizable(true);
-        scrollAreaWidgetContents_2 = new QWidget();
-        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 1174, 178));
-        bookW->setWidget(scrollAreaWidgetContents_2);
-
-        verticalLayout_2->addWidget(bookW);
-
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setSizeConstraint(QLayout::SetMinimumSize);
@@ -111,44 +93,8 @@ public:
         verticalLayout_3->setSizeConstraint(QLayout::SetMaximumSize);
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        rbSampling = new QRadioButton(w_structview);
-        rbSampling->setObjectName(QString::fromUtf8("rbSampling"));
-        rbSampling->setMaximumSize(QSize(150, 16777215));
-
-        horizontalLayout_6->addWidget(rbSampling);
-
-        rbCalendar = new QRadioButton(w_structview);
-        rbCalendar->setObjectName(QString::fromUtf8("rbCalendar"));
-        rbCalendar->setMinimumSize(QSize(0, 0));
-        rbCalendar->setMaximumSize(QSize(150, 16777215));
-
-        horizontalLayout_6->addWidget(rbCalendar);
-
-        rbList = new QRadioButton(w_structview);
-        rbList->setObjectName(QString::fromUtf8("rbList"));
-        rbList->setMaximumSize(QSize(150, 16777215));
-
-        horizontalLayout_6->addWidget(rbList);
-
 
         verticalLayout_3->addLayout(horizontalLayout_6);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        btnUndo = new QPushButton(w_structview);
-        btnUndo->setObjectName(QString::fromUtf8("btnUndo"));
-        btnUndo->setMaximumSize(QSize(150, 16777215));
-
-        horizontalLayout_5->addWidget(btnUndo);
-
-        btnChecked = new QPushButton(w_structview);
-        btnChecked->setObjectName(QString::fromUtf8("btnChecked"));
-        btnChecked->setMaximumSize(QSize(150, 16777215));
-
-        horizontalLayout_5->addWidget(btnChecked);
-
-
-        verticalLayout_3->addLayout(horizontalLayout_5);
 
         calendarWidget = new QCalendarWidget(w_structview);
         calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
@@ -173,6 +119,23 @@ public:
         listSampling->setMaximumSize(QSize(300, 180));
 
         verticalLayout_3->addWidget(listSampling);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        btnUndo = new QPushButton(w_structview);
+        btnUndo->setObjectName(QString::fromUtf8("btnUndo"));
+        btnUndo->setMaximumSize(QSize(150, 16777215));
+
+        horizontalLayout_5->addWidget(btnUndo);
+
+        btnChecked = new QPushButton(w_structview);
+        btnChecked->setObjectName(QString::fromUtf8("btnChecked"));
+        btnChecked->setMaximumSize(QSize(150, 16777215));
+
+        horizontalLayout_5->addWidget(btnChecked);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_5);
 
         listMets = new QListWidget(w_structview);
         listMets->setObjectName(QString::fromUtf8("listMets"));
@@ -280,7 +243,6 @@ public:
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 937, 817));
         scrollArea->setWidget(scrollAreaWidgetContents);
-        label->raise();
 
         verticalLayout->addWidget(scrollArea);
 
@@ -362,9 +324,6 @@ public:
     {
         w_structview->setWindowTitle(QApplication::translate("w_structview", "Form", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("w_structview", "Please select calendar entry for Issue", 0, QApplication::UnicodeUTF8));
-        rbSampling->setText(QApplication::translate("w_structview", "Sampling View", 0, QApplication::UnicodeUTF8));
-        rbCalendar->setText(QApplication::translate("w_structview", "Calendar View", 0, QApplication::UnicodeUTF8));
-        rbList->setText(QApplication::translate("w_structview", "List View", 0, QApplication::UnicodeUTF8));
         btnUndo->setText(QApplication::translate("w_structview", "Undo", 0, QApplication::UnicodeUTF8));
         btnChecked->setText(QApplication::translate("w_structview", "Checked", 0, QApplication::UnicodeUTF8));
         btnZoomIn->setText(QApplication::translate("w_structview", "Zoom In", 0, QApplication::UnicodeUTF8));

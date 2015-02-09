@@ -7,7 +7,7 @@
 #include <QMessageBox>
 #include <fstream>
 #include "gui_utilities.h"
-#include "w_inventaire.h"
+//#include "w_inventaire.h"
 #include "w_stat.h"
 #include "parammodel.h"
 
@@ -44,8 +44,7 @@ void w_selectBatch::createConnections()
 	connect(m_ui->btnAnalyze,SIGNAL(clicked()),this,SLOT(valider()));
 	connect(m_ui->btnCancel,SIGNAL(clicked()),this,SLOT(exit()));
 	connect(m_ui->btnBrowseDb,SIGNAL(clicked()),this,SLOT(browseDb()));
-	connect(m_ui->btnPath, SIGNAL(clicked()),this, SLOT(browsePath()));	
-	connect(m_ui->btnBrowseDbInventaire, SIGNAL(clicked()),this, SLOT(browsePathInventaire()));	
+	connect(m_ui->btnPath, SIGNAL(clicked()),this, SLOT(browsePath()));		
 }
 
 //! fill Batch combobox
@@ -62,6 +61,7 @@ void w_selectBatch::fillItemBatchName()
 }
 
 //! fill Inventaire combobox
+/*
 void w_selectBatch::fillItemInventaire()
 {	
 	m_ui->cbInventaire->clear();
@@ -72,6 +72,7 @@ void w_selectBatch::fillItemInventaire()
 		m_ui->cbInventaire->addItem(vInventaire[i].name.c_str());	
 	}	
 }
+*/
 void w_selectBatch::getMets(QListWidgetItem* item)
 {	
 	db.getBatch(BatchDetail::getBatchDetail(),item->type());	
@@ -93,6 +94,7 @@ void w_selectBatch::browseDb()
      }     	
 }
 
+/*
 void w_selectBatch::browsePathInventaire()
 {
 
@@ -106,6 +108,7 @@ void w_selectBatch::browsePathInventaire()
         fillItemInventaire();
      }     	
 }
+*/
 
 
 void w_selectBatch::getListDate(QString name)
@@ -133,12 +136,13 @@ void w_selectBatch::valider()
 //	batch.mapMets = db.getmMets(batch.idTestSet);
 //	batch.mapMetsDate = db.getmMetsDate(batch.idTestSet);
 //	batch.mapYearCount  = db.getSumMetsYear(batch.idTestSet);
-	batch.databaseInv = m_ui->lineEditInventaire->text().toStdString ();
+	//batch.databaseInv = m_ui->lineEditInventaire->text().toStdString ();
+	/*
 	if (vInventaire.size() >0)
 	{
 		batch.inventaire = vInventaire[m_ui->cbInventaire->currentIndex()];
 	}
-	
+	*/
 	if (inputDisk() == true)
 	{		
 		emit validated(batch.testDate);	

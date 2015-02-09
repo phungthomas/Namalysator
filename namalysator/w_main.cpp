@@ -11,7 +11,6 @@
 #include "w_selectbatch.h"
 #include "w_errors.h"
 #include "exportdata.h"
-#include "w_inventaire.h"
 #include "w_thumb.h"
 #include "w_report.h"
 #include <iostream>
@@ -88,13 +87,6 @@ void w_main::newsPaperActions()
 	openTitleCheck = menu->addAction(tr("Title check")); 
 	openTitleCheck->setToolTip("Title check");
 	connect(openTitleCheck, SIGNAL(triggered()), this, SLOT(openTitleCheckWindow()));
-	
-	if( BatchDetail::getBatchDetail().databaseInv !="")
-	{
-		openInventaire = menu->addAction(tr("Inventaire"));
-		openInventaire->setToolTip("Inventaire");
-		connect(openInventaire, SIGNAL(triggered()), this, SLOT(openInventaireWindow()));
-	}
 
 	menu = menuBar->addMenu("Report");
 
@@ -186,16 +178,6 @@ void w_main::openStart(std::string date){
 	titleChange("",BatchDetail::getBatchDetail().batchName +" on "+date);
 	parseBatch();
 }
-
-void w_main::openInventaireWindow()
-{	
-	w_inventaire *invent = new w_inventaire();
-	invent->setBatchDetail();	
-	titleChange("Inventaire");
-	resize(1050,910);
-	setCentralWidget(invent); 
-}
-
 
 void w_main::modeNewsPaper()
 {

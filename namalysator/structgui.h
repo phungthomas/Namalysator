@@ -102,7 +102,7 @@ public:
 	Inventaire inventaire;
 	std::string path; // Path of disk	
 	std::string database;
-	std::string databaseInv; 
+	//std::string databaseInv; 
 	std::string batchName;
 	std::string minDate;
 	std::string maxDate;

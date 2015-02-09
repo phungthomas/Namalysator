@@ -24,7 +24,7 @@ protected:
     virtual void changeEvent(QEvent *e);  
 	void createConnections();	
     void fillItemBatchName();
-    void fillItemInventaire();
+    //void fillItemInventaire();
     void fillBatchDetail();
     void clearBatchDetail();
     void loadParameters(int id);
@@ -49,7 +49,7 @@ protected slots:
 	void browsePath();
 	void browseDb();
 	void exit();     
-    void browsePathInventaire();
+    //void browsePathInventaire();
 };
 
 #endif // W_SELECTBATCH_H
