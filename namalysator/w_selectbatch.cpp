@@ -60,19 +60,6 @@ void w_selectBatch::fillItemBatchName()
 	}	
 }
 
-//! fill Inventaire combobox
-/*
-void w_selectBatch::fillItemInventaire()
-{	
-	m_ui->cbInventaire->clear();
-	dbInventaire.setDataBaseName(m_ui->lineEditInventaire->text().toStdString());	
-	vInventaire  =   dbInventaire.getNameInventaire(); 
-	for (size_t i =0; i< vInventaire.size();i++)
-	{
-		m_ui->cbInventaire->addItem(vInventaire[i].name.c_str());	
-	}	
-}
-*/
 void w_selectBatch::getMets(QListWidgetItem* item)
 {	
 	db.getBatch(BatchDetail::getBatchDetail(),item->type());	
@@ -93,22 +80,6 @@ void w_selectBatch::browseDb()
 		loadParametersCompareBatch();       
      }     	
 }
-
-/*
-void w_selectBatch::browsePathInventaire()
-{
-
- QString fileName = QFileDialog::getOpenFileName(this,
-                                     tr("Open File"),"",tr("Database Files (*.db)"));
-     if (!fileName.isEmpty()) 
-     {	 	
-	    std::string message = fileName.toStdString();		
-        m_ui->lineEditInventaire->setText(slash_path(message).c_str());        
-       // dbInventaire.setDataBaseName(message);
-        fillItemInventaire();
-     }     	
-}
-*/
 
 
 void w_selectBatch::getListDate(QString name)
@@ -136,13 +107,7 @@ void w_selectBatch::valider()
 //	batch.mapMets = db.getmMets(batch.idTestSet);
 //	batch.mapMetsDate = db.getmMetsDate(batch.idTestSet);
 //	batch.mapYearCount  = db.getSumMetsYear(batch.idTestSet);
-	//batch.databaseInv = m_ui->lineEditInventaire->text().toStdString ();
-	/*
-	if (vInventaire.size() >0)
-	{
-		batch.inventaire = vInventaire[m_ui->cbInventaire->currentIndex()];
-	}
-	*/
+	
 	if (inputDisk() == true)
 	{		
 		emit validated(batch.testDate);	

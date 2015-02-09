@@ -24,7 +24,6 @@ protected:
     virtual void changeEvent(QEvent *e);  
 	void createConnections();	
     void fillItemBatchName();
-    //void fillItemInventaire();
     void fillBatchDetail();
     void clearBatchDetail();
     void loadParameters(int id);
@@ -32,11 +31,11 @@ protected:
     bool inputDisk();
 private : 
 	Ui::w_selectBatch *m_ui;
-    std::vector<Inventaire> vInventaire ;   
+    //std::vector<Inventaire> vInventaire ;   
     dbrequest db; 
-    dbrequest dbInventaire; 
+    //dbrequest dbInventaire; 
     BatchDetail& batch;
-    Inventaire inv;   
+    //Inventaire inv;   
 
 signals:
 	void validated(std::string);
@@ -49,7 +48,6 @@ protected slots:
 	void browsePath();
 	void browseDb();
 	void exit();     
-    //void browsePathInventaire();
 };
 
 #endif // W_SELECTBATCH_H
