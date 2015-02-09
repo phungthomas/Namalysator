@@ -152,19 +152,6 @@ void w_main::openStructureWindow()
 	this->setCentralWidget(view); 
 }
 
-/*
-void w_main::openTitleCheckWindow()
-{
-	w_titlecheck *titlecheck = new  w_titlecheck();
-	titlecheck->setBatchDetail();
-	titleChange("Title Check");
-	this->resize(1050,910);
-	this->setCentralWidget(titlecheck); 
-}
-*/
-
-
-
 void w_main::openSelectBatchWindow()
 { 
 	w_selectBatch *gui = new w_selectBatch();

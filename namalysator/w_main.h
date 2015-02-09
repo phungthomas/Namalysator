@@ -42,8 +42,7 @@ private:
 	QAction *openBookBrowserAction;
 	QAction *openDiskAnalyze;
 	QAction *openCalendarAction;	
-	QAction *openStructureAction;
-	//QAction *openTitleCheck;	
+	QAction *openStructureAction;	
 	QAction *openSelectBatch;
 	QToolBar *fileTools;	
 
@@ -56,8 +55,7 @@ public slots:
 		void openCalendarWindow();
 		void parseBatch();
 		void modeNewsPaper();
-		void openStructureWindow();
-		//void openTitleCheckWindow();		
+		void openStructureWindow();	
 		void openSelectBatchWindow();    
 		void openReport();
 		void openStart(std::string);
