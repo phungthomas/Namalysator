@@ -48,7 +48,7 @@ void paramModel::init(std::map<std::string,std::string> map){
 
 	table.clear();
 	vect.clear();
-	bool flag = false;
+	//bool flag = false;
 	
 	for ( std::map<std::string,std::string>::iterator it=map.begin(); it != map.end(); it++ ){
 		
@@ -59,22 +59,22 @@ void paramModel::init(std::map<std::string,std::string> map){
 			case 0: vect.push_back(nok); break;
 			default: vect.push_back(QString(it->second.c_str())); break;
 		}
-		if ( flag ){
+		//if ( flag ){
 			table.push_back(vect);
 			vect.clear();
-			flag = false;
-		}else{
-			flag = true;
-		};
+		//	flag = false;
+		//}else{
+		//	flag = true;
+		//};
 	};
 
-	
+	/*
 	if ( flag ){
 		vect.push_back(QString(""));
 		vect.push_back(QString(""));
 		table.push_back(vect);
 		vect.clear();
 	};
-
+    */
 	
 }
