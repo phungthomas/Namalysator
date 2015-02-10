@@ -1983,8 +1983,8 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
 	static std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a, c.BIBREC_245b," 
 		                    " c.BIBREC_100a_1, c.BIBREC_100a_2, c.BIBREC_260b,c.BIBREC_260c,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a"
-		                    " LEFT JOIN METSBOOK b ON a.ID_METS = b.ID_METS"
-							" LEFT JOIN BOOKSINVENTORY c ON b.BIBREC_SYS_NUM = c.BIBREC_SYS_NUM"
+							" LEFT JOIN (SELECT * FROM BOOKSINVENTORY h, METSBOOK b WHERE b.BIBREC_SYS_NUM = h.BIBREC_SYS_NUM) c "
+							" ON a.ID_METS = c.ID_METS"
 							" WHERE a.ID_TESTSET=?";
 	
 	std::vector<std::vector<QVariant> > v;
@@ -2029,6 +2029,55 @@ retry:
 				raiseError(conn,selectSql);
 			}
 		}
+	sqlite3_finalize(pStmt);
+	return v;
+
+}
+
+std::vector<std::vector<QVariant> > dbrequest::getAllBooks(int id_testset){
+	ConnectionDB* conn = g_pool.getConnection(BatchDetail::getBatchDetail().database);	
+	sqlite3_stmt *pStmt;
+	const char *zErrMsg= 0;
+	
+	
+	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
+	static std::string selectSql = "SELECT  c.CHECKED, a.ID_TESTSET, c.BIBREC_SYS_NUM,c.ITEM_barcode, c.BIBREC_245a, c.BIBREC_245b," 
+		                    " c.BIBREC_100a_1, c.BIBREC_100a_2, c.BIBREC_260b,c.BIBREC_260c FROM "
+							" BOOKSINVENTORY c"
+							" LEFT JOIN ( SELECT ID_TESTSET, BIBREC_SYS_NUM  FROM METS a, METSBOOK b WHERE a.ID_METS = b.ID_METS AND a.ID_TESTSET=? ) a"
+							" ON a.BIBREC_SYS_NUM = c.BIBREC_SYS_NUM";
+	
+	std::vector<std::vector<QVariant> > v;
+
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);	
+
+	if(rc == SQLITE_OK)
+	{	  
+		sqlite3_bind_int(pStmt, 1,id_testset);
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{
+			std::vector<QVariant> row;
+			int col=0;
+			row.push_back(QString( sqlite3_column_int(pStmt, col++)==1  ?"Checked":"" ));
+			row.push_back(QString( id_testset == sqlite3_column_int(pStmt, col++) ? "Current Batch" : "Not" ) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
+			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ));
+			//row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ));
+
+
+			v.push_back(row);
+		}
+	}else {
+			
+			raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return v;
 

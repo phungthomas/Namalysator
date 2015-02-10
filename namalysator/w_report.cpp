@@ -1,5 +1,6 @@
 #include "w_report.h"
 #include "structgui.h"
+#include "bookModel.h"
 #include <sstream>
 w_report::w_report(QWidget *parent):QWidget(parent){
 }
@@ -35,7 +36,29 @@ void w_report::init(){
 	lay->addWidget(labTot);
 	lay->addStretch();
 
-	layv->addStretch();
+	QTableView* qttable = new QTableView();
+	bookModelInventory* book = new bookModelInventory(db);
+	book->init();
+
+	QSortFilterProxyModel*	proxyModel = new QSortFilterProxyModel();
+	proxyModel->setSourceModel(book);
+
+	qttable->setModel(proxyModel);
+	qttable->verticalHeader()->hide();
+	qttable->setEditTriggers(QAbstractItemView::NoEditTriggers);  
+    qttable->setSelectionMode(QAbstractItemView::SingleSelection);  
+    qttable->setSelectionBehavior(QAbstractItemView::SelectRows);  
+	qttable->setAlternatingRowColors(true);
+	qttable->setShowGrid(false);
+	qttable->setSortingEnabled(true);
+	qttable->resizeColumnsToContents();
+	qttable->resizeRowsToContents();
+
+	
+	layv->addWidget(qttable);
+
+
+	//layv->addStretch();
 	setLayout(layv);
 }
 

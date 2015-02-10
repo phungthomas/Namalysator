@@ -38,10 +38,10 @@ static const uint qt_meta_data_w_main[] = {
      103,    7,    7,    7, 0x0a,
      119,    7,    7,    7, 0x0a,
      141,    7,    7,    7, 0x0a,
-     164,    7,    7,    7, 0x0a,
-     188,    7,    7,    7, 0x0a,
+     165,    7,    7,    7, 0x0a,
+     178,    7,    7,    7, 0x0a,
      201,    7,    7,    7, 0x0a,
-     224,    7,    7,    7, 0x0a,
+     208,    7,    7,    7, 0x0a,
 
        0        // eod
 };
@@ -51,9 +51,9 @@ static const char qt_meta_stringdata_w_main[] = {
     "openSummaryErrorsWindow()\0"
     "openCalendarWindow()\0parseBatch()\0"
     "modeNewsPaper()\0openStructureWindow()\0"
-    "openTitleCheckWindow()\0openSelectBatchWindow()\0"
-    "openReport()\0openStart(std::string)\0"
-    "exit()\0"
+    "openSelectBatchWindow()\0openReport()\0"
+    "openStart(std::string)\0exit()\0"
+    "exportData()\0"
 };
 
 void w_main::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -69,11 +69,11 @@ void w_main::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 4: _t->parseBatch(); break;
         case 5: _t->modeNewsPaper(); break;
         case 6: _t->openStructureWindow(); break;
-        case 7: _t->openTitleCheckWindow(); break;
-        case 8: _t->openSelectBatchWindow(); break;
-        case 9: _t->openReport(); break;
-        case 10: _t->openStart((*reinterpret_cast< std::string(*)>(_a[1]))); break;
-        case 11: _t->exit(); break;
+        case 7: _t->openSelectBatchWindow(); break;
+        case 8: _t->openReport(); break;
+        case 9: _t->openStart((*reinterpret_cast< std::string(*)>(_a[1]))); break;
+        case 10: _t->exit(); break;
+        case 11: _t->exportData(); break;
         default: ;
         }
     }

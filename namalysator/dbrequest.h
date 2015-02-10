@@ -190,6 +190,7 @@ class dbrequest
 		
 
 		std::vector<std::vector<QVariant> > getAllMets(int id_testset);
+		std::vector<std::vector<QVariant> > getAllBooks(int id_testset);
 		std::vector<int> getMetsIdInPeriod(int id_testset, int year_from, int month_from, int year_to, int month_to);
 		std::vector<QDate> getMetsDateInPeriod(int id_testset, int year_from, int month_from, int year_to, int month_to);
 		std::vector<QDate> getMetsDateInMonth(int id_testset, int year, int month);

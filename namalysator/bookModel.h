@@ -21,9 +21,20 @@ public:
 
 	int idMets ( const QModelIndex &index );
 
-private:
+protected:
 	dbrequest& db;
 	std::vector<std::vector<QVariant> > allMets;
+};
+
+class bookModelInventory : public bookModel {
+public:
+	bookModelInventory(dbrequest & _db,QObject *parent = 0):bookModel(_db,parent){};
+	virtual ~bookModelInventory(){};
+
+	virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const ;
+	virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
+
+	virtual void init();
 };
 
 
