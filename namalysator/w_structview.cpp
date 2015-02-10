@@ -692,6 +692,8 @@ void w_structview::openErrorScreen()
 void w_structview::enableButton(bool enable)
 {
 	m_ui->btnError->setEnabled(enable);
+	m_ui->btnViewDir->setEnabled(enable);
+	m_ui->btnViewMets->setEnabled(enable);
 	m_ui->btnNext->setEnabled(enable);
 	m_ui->btnZoomIn->setEnabled(enable);
 	m_ui->btnZoomOut->setEnabled(enable);
