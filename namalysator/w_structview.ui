@@ -369,6 +369,13 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="btnViewDir">
+         <property name="text">
+          <string>View Mets Dir</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>

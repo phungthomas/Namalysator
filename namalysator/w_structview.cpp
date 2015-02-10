@@ -105,6 +105,7 @@ void w_structview::createConnections()
 	connect(m_ui->btnChecked, SIGNAL(clicked()), this, SLOT(checked()));
 	connect(m_ui->btnUndo, SIGNAL(clicked()), this, SLOT(undo()));
 	connect(m_ui->btnViewMets, SIGNAL(clicked()), this, SLOT(viewMetsFile()));
+	connect(m_ui->btnViewDir, SIGNAL(clicked()), this, SLOT(viewMetsDir()));
 	connect(bookList, SIGNAL(metsIdSelected(int)), this, SLOT(getIdMetsII(int)));
 	connect(bookList, SIGNAL(metsThumb(int)), this, SLOT(showThumb(int)));
 	//connect(bookList, SIGNAL(metsThumb(int)), this, SLOT(getIdMetsII(int)));
@@ -855,4 +856,9 @@ void w_structview::viewHtml()
 void w_structview::viewMetsFile()
 {
 	ShellExecuteA(NULL, "open", (BatchDetail::getBatchDetail().path + "/" + mets.path + "/" + mets.fileName).c_str(), NULL, NULL, SW_SHOWNORMAL);
+}
+
+void w_structview::viewMetsDir()
+{
+	ShellExecuteA(NULL, "open", (BatchDetail::getBatchDetail().path + "/" + mets.path ).c_str(), NULL, NULL, SW_SHOWNORMAL);
 }

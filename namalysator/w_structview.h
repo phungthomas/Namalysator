@@ -144,6 +144,7 @@ private slots :
 	void undo();
 	void viewHtml();
 	void viewMetsFile();
+	void viewMetsDir();
 
 	void rbhelperCalendar(bool);
 	void rbhelperSampling(bool);

@@ -67,7 +67,8 @@ void w_main::newsPaperActions()
 	QAction * act = menu->addAction(tr("Export Title Data"));
 	connect(act, SIGNAL(triggered()), this, SLOT(exportData()));
 
-		
+	menu->addSeparator();
+
 	act = menu->addAction(tr("Exit"));
 	connect(act, SIGNAL(triggered()), this, SLOT(exit()));
 
