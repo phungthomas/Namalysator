@@ -2031,7 +2031,6 @@ retry:
 		}
 	sqlite3_finalize(pStmt);
 	return v;
-
 }
 
 std::vector<std::vector<QVariant> > dbrequest::getAllBooks(int id_testset){
