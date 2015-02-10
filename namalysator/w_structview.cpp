@@ -810,10 +810,6 @@ void w_structview::fillListErrors()
 		else if (it->second.errorType.severity.gravity=="MAJOR") major++;
 		else if (it->second.errorType.severity.gravity=="BLOCKING") blocking++;		
 	}
-	QString ss;
-//	m_ui->lbMinor->setText(ss.setNum(minor));
-//	m_ui->lbMajor->setText(ss.setNum(major));
-//	m_ui->lbBlocking->setText(ss.setNum(blocking));
 }
 
 //! view the error in html
