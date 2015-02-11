@@ -117,6 +117,7 @@ public:
 	// Get a METS file by Date
 	std::vector<MetsFile> *getMetsByDate(QDate date);
 	bool getMetsByDate(QDate date, std::vector<MetsFile> &result);
+	std::string getErrorPath();
 
 	static BatchDetail& getBatchDetail(){return bd;};
 	/*

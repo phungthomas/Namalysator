@@ -816,13 +816,8 @@ void w_structview::fillListErrors()
 void w_structview::viewHtml()
 {
 	FILE *fp;	
-	
-	//get current path of the folder
-	fs::path CurrentPath( fs::initial_path<fs::path>());
-	
-	std::stringstream errorImgPath;		
-	errorImgPath << CurrentPath << "/ErrorImg/" ; 	
-	std::string path = errorImgPath.str() + "error.html";	
+		
+	std::string path = BatchDetail::getBatchDetail().getErrorPath()  + "/error.html";	
 	path = slash_path(path);	
 	DeleteFileA(path.c_str());
 	fopen_s(&fp,path.c_str(), "a");

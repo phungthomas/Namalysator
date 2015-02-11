@@ -2,10 +2,8 @@
 #include "ui_w_screenshoterror.h"
 #include <sstream>
 #include "gui_utilities.h"
-#include "boost/filesystem/operations.hpp"
-#include "boost/filesystem/path.hpp"
-#include "boost/progress.hpp"
-namespace fs = boost::filesystem;
+
+
 
 w_screenshoterror::w_screenshoterror(QWidget *parent) :
     QWidget(parent),
@@ -180,21 +178,18 @@ void w_screenshoterror::saveError()
 		std::map<int,StructureError> vStructureError = db.getStructureError(mets.idMets);
 		std::string pathImg;
 		std::stringstream sid;
-		sid << vStructureError.size();	
+		sid << mets.idMets<<"_"<< vStructureError.size();	// add a diversification per id_Mets : normally uniq 
+		                                                    // multibatch ok
+		                                                    // take care to not run multiple disk for different campaign from the same location 
+		                                                    // perhaps adding name of campaign could be better too
 		
 		pathImg =  mets.date.toString("dd-MM-yyyy").toStdString() +"_nr" + sid.str() + ".png"  ;	
 		db.saveStructError(mets.idMets,m_ui->txtCommentaire->toPlainText().toStdString(),vErrorType[m_ui->comboBoxErrorType->currentIndex()].id,pathImg,fileID);
 		
 	//	QPixmap xmap = QPixmap::grabWidget(this,0,25,this->width(),this->height()-100);
 		
-		//get current path of the folder
-		fs::path CurrentPath( fs::initial_path<fs::path>());
-		
-		std::stringstream errorImgPath;		
-		errorImgPath << CurrentPath << "/ErrorImg" ; 	
-		//createdir(errorImgPath.str());
-		_mkdir(errorImgPath.str().c_str());
-		pathImg = errorImgPath.str() + "/" +  pathImg;
+
+		pathImg = BatchDetail::getBatchDetail().getErrorPath() + "/" +  pathImg;
 		pixmap.save(pathImg.c_str());
 		
 	//	getStructureErrorPerMets();
