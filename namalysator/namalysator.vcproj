@@ -1184,18 +1184,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_titlecheck.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\ui_w_calendar.h"
 				>
 			</File>
