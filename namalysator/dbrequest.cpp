@@ -1597,7 +1597,10 @@ void dbrequest::updateSamplingStructure(int id,int checked)
 	}
 }
 
-std::vector<ErrorType> dbrequest::getErrorTypeCatStructure()
+
+///@Deprecated : only for old base
+//
+std::vector<ErrorType> dbrequest::_getErrorTypeCatStructure(std::string docType)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);	
 	sqlite3_stmt *pStmt;
@@ -1634,6 +1637,44 @@ std::vector<ErrorType> dbrequest::getErrorTypeCatStructure()
 		}		
    }else{
 		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+	return v;
+}
+
+std::vector<ErrorType> dbrequest::getErrorTypeCatStructure(std::string docType)
+{
+	ConnectionDB* conn = g_pool.getConnection(databaseName);	
+	sqlite3_stmt *pStmt;
+	int rc;	
+	const char *zErrMsg= 0; 
+	
+	std::string selectSql = "SELECT a.ID,a.ID_TYPE,a.ERROR,a.DETAILS,a.ID_SEVERITY,a.ID_CATEGORY"
+		                    " FROM ERRORTYPE a ,ERRORSCREENSHOT b"
+							" where a.ID_TYPE = b.ID_TYPE and a.ID_CATEGORY = 6 and b.DOCTYPE=?"; 
+	std::vector<ErrorType> v;
+	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	ErrorType et;  
+	if(rc == SQLITE_OK)
+	{	 
+		sqlite3_bind_text(pStmt,1,docType.c_str(),docType.length(),SQLITE_STATIC);
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{
+			int col = 0;
+			
+			et.id =  sqlite3_column_int(pStmt, col++);	
+			et.id_type = sqlite3_column_int(pStmt, col++);				
+			et.error = std::string((const char*)sqlite3_column_text(pStmt, col++));
+			et.details = std::string((const char*)sqlite3_column_text(pStmt, col++));
+			et.id_severity = sqlite3_column_int(pStmt, col++);
+			et.severity = getErrorSeverityWithId(et.id_severity);
+			et.category = getErrorCategoryWithId(sqlite3_column_int(pStmt, col++));
+						
+			v.push_back(et);				 
+		}		
+   }else{
+	   raiseError(conn,selectSql); // only for debug
+	   return _getErrorTypeCatStructure(docType);
 	}
 	sqlite3_finalize(pStmt);
 	return v;

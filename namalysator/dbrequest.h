@@ -39,7 +39,8 @@ class dbrequest
 		std::string databaseName;
 		//FILE *fpLog;
 		//void closeDB();
-		Parameters _getParameterVerifiers(int id_testset);
+		Parameters _getParameterVerifiers(int id_testset); //@deprecated
+		std::vector<ErrorType> _getErrorTypeCatStructure(std::string);//@deprecated
 		void raiseError(ConnectionDB*, std::string);
 	public:	
 
@@ -175,7 +176,7 @@ class dbrequest
 		std::map<int,StructureError> getStructureError(int id_Mets);	
 		std::vector<Sampling_Structure> getListSamplingStructure(int id_testset);	
 		void updateSamplingStructure(int id,int checked);
-		std::vector<ErrorType> getErrorTypeCatStructure();
+		std::vector<ErrorType> getErrorTypeCatStructure(std::string);
 		bool saveStructError(int id_mets,std::string message,int idErrorType,std::string path,std::string);
 		std::vector<Title> getvTitle(int id_testset);
 		Article getArticle(int id);

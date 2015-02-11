@@ -62,8 +62,9 @@ void w_screenshoterror::close()
 
 void w_screenshoterror::fillComboBoxErrortype()
 {
-	vErrorType = db.getErrorTypeCatStructure();
-	m_ui->comboBoxErrorType->addItem("");
+	vErrorType = db.getErrorTypeCatStructure(mets.docType);
+	//m_ui->comboBoxErrorType->addItem(""); // false because db.saveStructError acess to vErrorTypee by the index of the comboBoxErrorType 
+	                                        // otherwise correction must be made
 	for (size_t i =0;i<vErrorType.size();i++)
 	{	
 		m_ui->comboBoxErrorType->addItem(vErrorType[i].error.c_str(),i);	
