@@ -186,7 +186,7 @@ void w_screenshoterror::saveError()
 		pathImg =  mets.date.toString("dd-MM-yyyy").toStdString() +"_nr" + sid.str() + ".png"  ;	
 		db.saveStructError(mets.idMets,m_ui->txtCommentaire->toPlainText().toStdString(),
 			vErrorType[m_ui->comboBoxErrorType->itemData(m_ui->comboBoxErrorType->currentIndex()).toInt()].id_type,
-			pathImg,fileID,"TESTINGCUSTOM");
+			pathImg,fileID,m_ui->customEdit->text().toStdString());
 		
 	//	QPixmap xmap = QPixmap::grabWidget(this,0,25,this->width(),this->height()-100);
 		
@@ -205,6 +205,7 @@ void w_screenshoterror::saveError()
 	
 		m_ui->lbComment->setText(ss.str().c_str());	
 		m_ui->txtCommentaire->clear();
+		m_ui->customEdit->clear();
 		m_ui->comboBoxErrorType->setCurrentIndex(0);		
 	}
 }

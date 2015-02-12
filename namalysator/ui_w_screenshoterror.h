@@ -18,6 +18,7 @@
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
+#include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
 #include <QtGui/QTextEdit>
 #include <QtGui/QVBoxLayout>
@@ -41,6 +42,8 @@ public:
     QTextEdit *txtCommentaire;
     QComboBox *comboBoxErrorType;
     QLabel *lbComment;
+    QLabel *label_2;
+    QLineEdit *customEdit;
 
     void setupUi(QWidget *w_screenshoterror)
     {
@@ -88,7 +91,7 @@ public:
         boxColor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         boxColor->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-        gridLayout->addWidget(boxColor, 1, 0, 1, 1);
+        gridLayout->addWidget(boxColor, 2, 0, 1, 1);
 
         btnClearPainter = new QPushButton(w_screenshoterror);
         btnClearPainter->setObjectName(QString::fromUtf8("btnClearPainter"));
@@ -98,14 +101,14 @@ public:
         btnClose = new QPushButton(w_screenshoterror);
         btnClose->setObjectName(QString::fromUtf8("btnClose"));
 
-        gridLayout->addWidget(btnClose, 1, 3, 1, 1);
+        gridLayout->addWidget(btnClose, 2, 3, 1, 1);
 
         txtCommentaire = new QTextEdit(w_screenshoterror);
         txtCommentaire->setObjectName(QString::fromUtf8("txtCommentaire"));
         txtCommentaire->setMinimumSize(QSize(10, 0));
         txtCommentaire->setMaximumSize(QSize(16777215, 120));
 
-        gridLayout->addWidget(txtCommentaire, 1, 2, 1, 1);
+        gridLayout->addWidget(txtCommentaire, 2, 2, 1, 1);
 
         comboBoxErrorType = new QComboBox(w_screenshoterror);
         comboBoxErrorType->setObjectName(QString::fromUtf8("comboBoxErrorType"));
@@ -115,7 +118,17 @@ public:
         lbComment = new QLabel(w_screenshoterror);
         lbComment->setObjectName(QString::fromUtf8("lbComment"));
 
-        gridLayout->addWidget(lbComment, 2, 2, 1, 1);
+        gridLayout->addWidget(lbComment, 3, 2, 1, 1);
+
+        label_2 = new QLabel(w_screenshoterror);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        gridLayout->addWidget(label_2, 1, 1, 1, 1);
+
+        customEdit = new QLineEdit(w_screenshoterror);
+        customEdit->setObjectName(QString::fromUtf8("customEdit"));
+
+        gridLayout->addWidget(customEdit, 1, 2, 1, 1);
 
 
         horizontalLayout->addLayout(gridLayout);
@@ -141,6 +154,7 @@ public:
         btnClearPainter->setText(QApplication::translate("w_screenshoterror", "Clear painter", 0, QApplication::UnicodeUTF8));
         btnClose->setText(QApplication::translate("w_screenshoterror", "Close", 0, QApplication::UnicodeUTF8));
         lbComment->setText(QString());
+        label_2->setText(QApplication::translate("w_screenshoterror", "Only for CUSTOM", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

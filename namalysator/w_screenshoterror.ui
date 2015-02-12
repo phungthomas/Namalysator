@@ -68,7 +68,7 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="2" column="0">
           <widget class="QTextEdit" name="boxColor">
            <property name="enabled">
             <bool>false</bool>
@@ -100,14 +100,14 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="3">
+         <item row="2" column="3">
           <widget class="QPushButton" name="btnClose">
            <property name="text">
             <string>Close</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
+         <item row="2" column="2">
           <widget class="QTextEdit" name="txtCommentaire">
            <property name="minimumSize">
             <size>
@@ -126,12 +126,22 @@
          <item row="0" column="2">
           <widget class="QComboBox" name="comboBoxErrorType"/>
          </item>
-         <item row="2" column="2">
+         <item row="3" column="2">
           <widget class="QLabel" name="lbComment">
            <property name="text">
             <string/>
            </property>
           </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Only for CUSTOM</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLineEdit" name="customEdit"/>
          </item>
         </layout>
        </item>
