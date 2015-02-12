@@ -183,7 +183,8 @@ create table STRUCTUREERROR (
   IMAGEPATH varchar(50),
   MESSAGE varchar(255),  
   ID_ERRORTYPE INTEGER,
-  FILEID varchar(10)
+  FILEID varchar(10),
+  CUSTOM varchar(255),
 );
 
 drop table if exists SAMPLING_STRUCTURE;

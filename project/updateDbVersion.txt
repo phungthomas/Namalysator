@@ -1,6 +1,7 @@
 REM adaptation script of version of db;
 
 ALTER TABLE STRUCTUREERROR ADD COLUMN FILEID varchar(10);
+ALTER TABLE STRUCTUREERROR ADD COLUMN CUSTOM varchar(255);
 
 
 REM outer join are done in namalysator: so the table must be there same if empty
