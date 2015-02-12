@@ -31,6 +31,25 @@ void w_screenshoterror::createConnections()
     connect(m_ui->btnClearPainter,SIGNAL(clicked()),this,SLOT(clearPainter()));  
     connect(m_ui->btnColor,SIGNAL(clicked()),this,SLOT(setPenColor()));  
     connect(m_ui->btnClose,SIGNAL(clicked()),this,SLOT(close())); 
+	connect(m_ui->comboBoxErrorType,SIGNAL(currentIndexChanged ( int )),this,SLOT(enableCustom(int)));
+}
+
+void w_screenshoterror::enableCustom(int i){
+
+	bool flag = false;
+
+	if ( m_ui->comboBoxErrorType->itemData(m_ui->comboBoxErrorType->currentIndex()).toInt() > -1 ){
+		int id = vErrorType[m_ui->comboBoxErrorType->itemData(m_ui->comboBoxErrorType->currentIndex()).toInt()].id_type;
+		if ( id == 100 ) flag = true;
+		else
+			m_ui->customEdit->clear();
+
+	}
+
+
+	m_ui->customEdit->setEnabled(flag);
+	m_ui->label_2->setEnabled(flag);
+
 }
 
 
@@ -78,6 +97,9 @@ void w_screenshoterror::setBatchDetailImage(QPixmap pix,MetsFile m,w_structview 
 	mets = m;	
 	db.setDataBaseName(BatchDetail::getBatchDetail().database);  
 	m_ui->comboBoxErrorType->clear();
+	m_ui->customEdit->clear();
+	m_ui->customEdit->setEnabled(false);
+	m_ui->label_2->setEnabled(false);
 	fillComboBoxErrortype();
 	originalPixmap = pix;
 	loadImage();

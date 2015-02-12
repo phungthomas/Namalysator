@@ -50,6 +50,7 @@ private slots:
 	void clearPainter();
 	void setPenColor();
 	void close();
+	void enableCustom(int);
 	
 };
 
