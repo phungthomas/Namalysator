@@ -168,7 +168,9 @@ public:
 	std::string message;
 	ErrorType errorType;
 	std::string fileid;
-	virtual std::string getError(){ 
+	std::string custom;
+	virtual std::string getError(){
+		if ( errorType.id_type == 100 ) return custom;
 		return errorType.error; 
 	};
 
