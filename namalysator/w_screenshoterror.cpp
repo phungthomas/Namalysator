@@ -184,7 +184,9 @@ void w_screenshoterror::saveError()
 		                                                    // perhaps adding name of campaign could be better too
 		
 		pathImg =  mets.date.toString("dd-MM-yyyy").toStdString() +"_nr" + sid.str() + ".png"  ;	
-		db.saveStructError(mets.idMets,m_ui->txtCommentaire->toPlainText().toStdString(),vErrorType[m_ui->comboBoxErrorType->itemData(m_ui->comboBoxErrorType->currentIndex()).toInt()].id_type,pathImg,fileID);
+		db.saveStructError(mets.idMets,m_ui->txtCommentaire->toPlainText().toStdString(),
+			vErrorType[m_ui->comboBoxErrorType->itemData(m_ui->comboBoxErrorType->currentIndex()).toInt()].id_type,
+			pathImg,fileID,"TESTINGCUSTOM");
 		
 	//	QPixmap xmap = QPixmap::grabWidget(this,0,25,this->width(),this->height()-100);
 		

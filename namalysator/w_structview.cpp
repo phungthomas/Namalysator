@@ -832,10 +832,14 @@ void w_structview::viewHtml()
 	
 	for ( std::map<std::string,std::vector<StructureError> >::iterator it = vStructureError.begin(); it != vStructureError.end(); it++)
 	{	
-		fprintf(fp, "<h2>");
-		fprintf(fp,it->first.c_str());
-		fprintf(fp, "</h2>\n");
 		std::vector<StructureError> & ref = it->second;
+
+		if ( ref.size() > 0 ) { // skip empty file
+			fprintf(fp, "<h2>");
+			fprintf(fp,it->first.c_str());
+			fprintf(fp, "</h2>\n");
+		}
+		
 		for ( std::vector<StructureError>::iterator itt = ref.begin(); itt != ref.end(); itt++)
 		{
 			fprintf(fp, "<h3>");	
