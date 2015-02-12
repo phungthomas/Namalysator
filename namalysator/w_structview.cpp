@@ -795,7 +795,7 @@ void w_structview::fillListErrors()
 	
 	m_ui->btnViewHtml->setEnabled(false);
 	m_ui->listErrors->clear(); 
-	std::vector<StructureError> vListErrors = db.getStructureError(BatchDetail::getBatchDetail().idTestSet);
+	std::vector<StructureError> vListErrors = db.getStructureError(mets.idMets);
 
 	for ( std::vector<StructureError>::iterator it = vListErrors.begin(); it != vListErrors.end(); it++)
 	{
@@ -827,7 +827,7 @@ void w_structview::viewHtml()
 	{			
 		fclose(fp);		
 	}	
-	std::map<std::string,std::vector<StructureError> > vStructureError = db.getBatchStructureError(mets.idMets);	 
+	std::map<std::string,std::vector<StructureError> > vStructureError = db.getBatchStructureError(BatchDetail::getBatchDetail().idTestSet);	 
 	
 	
 	for ( std::map<std::string,std::vector<StructureError> >::iterator it = vStructureError.begin(); it != vStructureError.end(); it++)
@@ -841,13 +841,14 @@ void w_structview::viewHtml()
 			fprintf(fp, "<h3>");	
 			fprintf(fp,itt->errorType.error.c_str());
 			fprintf(fp, "</h3>\n");	
-			fprintf(fp, "<p>");	
-			fprintf(fp, itt->message.c_str());
-			fprintf(fp, "</p>\n");	
+	
 			//fprintf(fp, "<img =\"500px\" height=\"500px\"    src=\"");		
 			fprintf(fp, "<img  width=\"600\"  src=\"");
 			fprintf(fp, itt->pathImage.c_str());
 			fprintf(fp, "\"/>\n");
+			fprintf(fp, "<p>");	
+			fprintf(fp, itt->message.c_str());
+			fprintf(fp, "</p>\n");
 			fprintf(fp, "<br>\n");
 		}
 	}

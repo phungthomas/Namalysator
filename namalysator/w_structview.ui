@@ -317,7 +317,7 @@
      <item>
       <widget class="QPushButton" name="btnViewHtml">
        <property name="text">
-        <string>View Errors</string>
+        <string>View All Batch Errors</string>
        </property>
       </widget>
      </item>
