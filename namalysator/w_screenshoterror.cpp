@@ -40,10 +40,12 @@ void w_screenshoterror::enableCustom(int i){
 
 	if ( m_ui->comboBoxErrorType->itemData(m_ui->comboBoxErrorType->currentIndex()).toInt() > -1 ){
 		int id = vErrorType[m_ui->comboBoxErrorType->itemData(m_ui->comboBoxErrorType->currentIndex()).toInt()].id_type;
-		if ( id == 100 ) 
+		if ( id == 100 ) {
 			flag = true;
-		else
+		}
+		else{
 			m_ui->customEdit->clear();
+		}
 
 	}
 
