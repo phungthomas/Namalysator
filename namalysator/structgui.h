@@ -58,7 +58,8 @@ struct ErrorSeverity {
 	int id_sevrity;
 	std::string gravity;
 };
-struct ErrorType {
+class ErrorType {
+public:
 	int id;
 	int id_type;
 	std::string error;
@@ -159,14 +160,17 @@ struct Sampling_Structure
 	MetsFile Mets;
 };
 
-struct StructureError {
-
+class StructureError {
+public:
 	int id;
 	int id_mets;
 	std::string pathImage;
 	std::string message;
 	ErrorType errorType;
 	std::string fileid;
+	virtual std::string getError(){ 
+		return errorType.error; 
+	};
 
 };
 

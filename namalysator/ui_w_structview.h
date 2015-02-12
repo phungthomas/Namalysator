@@ -340,7 +340,7 @@ public:
         lblPageEnd->setText(QString());
         btnNext->setText(QApplication::translate("w_structview", ">", 0, QApplication::UnicodeUTF8));
         btnClearPainter->setText(QApplication::translate("w_structview", "Clear highlighting", 0, QApplication::UnicodeUTF8));
-        btnViewHtml->setText(QApplication::translate("w_structview", "View Errors", 0, QApplication::UnicodeUTF8));
+        btnViewHtml->setText(QApplication::translate("w_structview", "View All Batch Errors", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("w_structview", "Blocking :", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("w_structview", "Major :", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("w_structview", "Minor :", 0, QApplication::UnicodeUTF8));

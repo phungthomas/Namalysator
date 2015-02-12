@@ -803,7 +803,7 @@ void w_structview::fillListErrors()
 
 		if (it->fileid.length() != 0)
 			txt << it->fileid <<  ":" ;
-		txt << it->errorType.severity.gravity  << ": " << it->errorType.error << " - " << it->message;
+		txt << it->errorType.severity.gravity  << ": " << it->getError() << " - " << it->message;
 		new QListWidgetItem(txt.str().c_str(),  m_ui->listErrors,mets.idMets);	
 		m_ui->btnViewHtml->setEnabled(true);
 		
@@ -839,7 +839,7 @@ void w_structview::viewHtml()
 		for ( std::vector<StructureError>::iterator itt = ref.begin(); itt != ref.end(); itt++)
 		{
 			fprintf(fp, "<h3>");	
-			fprintf(fp,itt->errorType.error.c_str());
+			fprintf(fp,itt->getError().c_str());
 			fprintf(fp, "</h3>\n");	
 	
 			//fprintf(fp, "<img =\"500px\" height=\"500px\"    src=\"");		
