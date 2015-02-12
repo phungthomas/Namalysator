@@ -835,9 +835,9 @@ void w_structview::viewHtml()
 		fprintf(fp, "</h1>");	
 		fprintf(fp, "<h3>");	
 		fprintf(fp, it->second.message.c_str());
-		fprintf(fp, "<h3>");	
+		fprintf(fp, "</h3>");	
 		//fprintf(fp, "<img =\"500px\" height=\"500px\"    src=\"");		
-		fprintf(fp, "<img    src=\"");
+		fprintf(fp, "<img  width=\"600\"  src=\"");
 		fprintf(fp, it->second.pathImage.c_str());
 		fprintf(fp, "\"/>");
 		fprintf(fp, "<br>");			
