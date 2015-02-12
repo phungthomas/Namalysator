@@ -67,6 +67,7 @@ public:
     QPushButton *btnError;
     QPushButton *btnStructure;
     QPushButton *btnViewMets;
+    QPushButton *btnViewDir;
 
     void setupUi(QWidget *w_structview)
     {
@@ -308,6 +309,11 @@ public:
 
         verticalLayout_5->addWidget(btnViewMets);
 
+        btnViewDir = new QPushButton(w_structview);
+        btnViewDir->setObjectName(QString::fromUtf8("btnViewDir"));
+
+        verticalLayout_5->addWidget(btnViewDir);
+
 
         horizontalLayout_4->addLayout(verticalLayout_5);
 
@@ -341,6 +347,7 @@ public:
         btnError->setText(QApplication::translate("w_structview", " Error", 0, QApplication::UnicodeUTF8));
         btnStructure->setText(QApplication::translate("w_structview", "Structure", 0, QApplication::UnicodeUTF8));
         btnViewMets->setText(QApplication::translate("w_structview", "View Mets File", 0, QApplication::UnicodeUTF8));
+        btnViewDir->setText(QApplication::translate("w_structview", "View Mets Dir", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

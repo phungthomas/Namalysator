@@ -175,7 +175,7 @@ void w_screenshoterror::saveError()
 	}
 	else
 	{
-		std::map<int,StructureError> vStructureError = db.getStructureError(mets.idMets);
+		std::vector<StructureError> vStructureError = db.getStructureError(mets.idMets);
 		std::string pathImg;
 		std::stringstream sid;
 		sid << mets.idMets<<"_"<< vStructureError.size();	// add a diversification per id_Mets : normally uniq 

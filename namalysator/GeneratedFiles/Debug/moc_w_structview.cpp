@@ -22,7 +22,7 @@ static const uint qt_meta_data_w_structview[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      24,   14, // methods
+      25,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -52,8 +52,9 @@ static const uint qt_meta_data_w_structview[] = {
      312,   13,   13,   13, 0x08,
      323,   13,   13,   13, 0x08,
      338,   13,   13,   13, 0x08,
-     361,   13,   13,   13, 0x08,
-     384,   13,   13,   13, 0x08,
+     352,   13,   13,   13, 0x08,
+     375,   13,   13,   13, 0x08,
+     398,   13,   13,   13, 0x08,
 
        0        // eod
 };
@@ -68,8 +69,8 @@ static const char qt_meta_stringdata_w_structview[] = {
     "openErrorScreen()\0showListSampling()\0"
     "viewCalendar()\0viewList()\0checked()\0"
     "undo()\0viewHtml()\0viewMetsFile()\0"
-    "rbhelperCalendar(bool)\0rbhelperSampling(bool)\0"
-    "rbhelperList(bool)\0"
+    "viewMetsDir()\0rbhelperCalendar(bool)\0"
+    "rbhelperSampling(bool)\0rbhelperList(bool)\0"
 };
 
 void w_structview::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -99,9 +100,10 @@ void w_structview::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 18: _t->undo(); break;
         case 19: _t->viewHtml(); break;
         case 20: _t->viewMetsFile(); break;
-        case 21: _t->rbhelperCalendar((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 22: _t->rbhelperSampling((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 23: _t->rbhelperList((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 21: _t->viewMetsDir(); break;
+        case 22: _t->rbhelperCalendar((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 23: _t->rbhelperSampling((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 24: _t->rbhelperList((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -139,9 +141,9 @@ int w_structview::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 24)
+        if (_id < 25)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 24;
+        _id -= 25;
     }
     return _id;
 }

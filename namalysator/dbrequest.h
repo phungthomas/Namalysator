@@ -173,7 +173,8 @@ class dbrequest
 	/// <returns>vector of DateComment of the current DateError</returns>
 		std::vector<DateComment> getDateCommentid(int idError);		
 		
-		std::map<int,StructureError> getStructureError(int id_Mets);	
+		std::vector<StructureError> getStructureError(int id_Mets);	
+		std::map<std::string,std::vector<StructureError> > dbrequest::getBatchStructureError(int id_testset);
 		std::vector<Sampling_Structure> getListSamplingStructure(int id_testset);	
 		void updateSamplingStructure(int id,int checked);
 		std::vector<ErrorType> getErrorTypeCatStructure(std::string);

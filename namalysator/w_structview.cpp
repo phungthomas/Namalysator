@@ -794,21 +794,22 @@ void w_structview::fillListErrors()
 	int blocking=0;
 	
 	m_ui->btnViewHtml->setEnabled(false);
-	m_ui->listErrors->clear();
-	std::map<int,StructureError> vListErrors = db.getStructureError(mets.idMets);
-	for ( std::map<int,StructureError>::iterator it = vListErrors.begin(); it != vListErrors.end(); it++)
+	m_ui->listErrors->clear(); 
+	std::vector<StructureError> vListErrors = db.getStructureError(BatchDetail::getBatchDetail().idTestSet);
+
+	for ( std::vector<StructureError>::iterator it = vListErrors.begin(); it != vListErrors.end(); it++)
 	{
 		std::stringstream txt;
 
-		if (it->second.fileid.length() != 0)
-			txt << it->second.fileid <<  ":" ;
-		txt << it->second.errorType.severity.gravity  << ": " << it->second.errorType.error << " - " << it->second.message;
+		if (it->fileid.length() != 0)
+			txt << it->fileid <<  ":" ;
+		txt << it->errorType.severity.gravity  << ": " << it->errorType.error << " - " << it->message;
 		new QListWidgetItem(txt.str().c_str(),  m_ui->listErrors,mets.idMets);	
 		m_ui->btnViewHtml->setEnabled(true);
 		
-		if (it->second.errorType.severity.gravity=="MINOR")	minor++;		
-		else if (it->second.errorType.severity.gravity=="MAJOR") major++;
-		else if (it->second.errorType.severity.gravity=="BLOCKING") blocking++;		
+		if (it->errorType.severity.gravity=="MINOR")	minor++;		
+		else if (it->errorType.severity.gravity=="MAJOR") major++;
+		else if (it->errorType.severity.gravity=="BLOCKING") blocking++;		
 	}
 }
 
@@ -826,22 +827,32 @@ void w_structview::viewHtml()
 	{			
 		fclose(fp);		
 	}	
-	vStructureError = db.getStructureError(mets.idMets);	 
+	std::map<std::string,std::vector<StructureError> > vStructureError = db.getBatchStructureError(mets.idMets);	 
 	
-	for ( std::map<int,StructureError>::iterator it = vStructureError.begin(); it != vStructureError.end(); it++)
+	
+	for ( std::map<std::string,std::vector<StructureError> >::iterator it = vStructureError.begin(); it != vStructureError.end(); it++)
 	{	
-		fprintf(fp, "<h1>");	
-		fprintf(fp,it->second.errorType.error.c_str());
-		fprintf(fp, "</h1>");	
-		fprintf(fp, "<h3>");	
-		fprintf(fp, it->second.message.c_str());
-		fprintf(fp, "</h3>");	
-		//fprintf(fp, "<img =\"500px\" height=\"500px\"    src=\"");		
-		fprintf(fp, "<img  width=\"600\"  src=\"");
-		fprintf(fp, it->second.pathImage.c_str());
-		fprintf(fp, "\"/>");
-		fprintf(fp, "<br>");			
-	}	
+		fprintf(fp, "<h2>");
+		fprintf(fp,it->first.c_str());
+		fprintf(fp, "</h2>\n");
+		std::vector<StructureError> & ref = it->second;
+		for ( std::vector<StructureError>::iterator itt = ref.begin(); itt != ref.end(); itt++)
+		{
+			fprintf(fp, "<h3>");	
+			fprintf(fp,itt->errorType.error.c_str());
+			fprintf(fp, "</h3>\n");	
+			fprintf(fp, "<p>");	
+			fprintf(fp, itt->message.c_str());
+			fprintf(fp, "</p>\n");	
+			//fprintf(fp, "<img =\"500px\" height=\"500px\"    src=\"");		
+			fprintf(fp, "<img  width=\"600\"  src=\"");
+			fprintf(fp, itt->pathImage.c_str());
+			fprintf(fp, "\"/>\n");
+			fprintf(fp, "<br>\n");
+		}
+	}
+	
+
 	fclose(fp);	
 	ShellExecuteA(NULL, "open",path.c_str(), NULL, NULL, SW_SHOWNORMAL);
 }

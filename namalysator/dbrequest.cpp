@@ -1510,7 +1510,7 @@ std::vector<DateComment> dbrequest::getDateCommentid(int idError)
 
 
 
-std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
+std::vector<StructureError> dbrequest::getStructureError(int id_Mets)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);	
 	sqlite3_stmt *pStmt;
@@ -1518,7 +1518,7 @@ std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
 	int rc;	
 	const char *zErrMsg= 0; 
 	std::string selectSql = "SELECT ID,ID_METS,IMAGEPATH,MESSAGE,ID_ERRORTYPE,FILEID FROM STRUCTUREERROR where ID_METS = ?"; 
-	std::map<int,StructureError> v;
+	std::vector<StructureError> v;
 	DEBUG_ME
 	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	StructureError se;  
@@ -1535,7 +1535,37 @@ std::map<int,StructureError> dbrequest::getStructureError(int id_Mets)
 			se.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
 			se.fileid = safe_sqlite3_column_text(pStmt, col++);
 
-			v[se.id]= se; 			 
+			v.push_back(se); 			 
+		}		
+   }else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+	return v;
+}
+
+std::map<std::string,std::vector<StructureError> > dbrequest::getBatchStructureError(int id_testset)
+{
+	ConnectionDB* conn = g_pool.getConnection(databaseName);	
+	sqlite3_stmt *pStmt;
+
+	int rc;	
+	const char *zErrMsg= 0; 
+	std::string selectSql = "SELECT ID_METS,FILENAME FROM METS where ID_TESTSET = ?"; 
+	std::map<std::string,std::vector<StructureError> > v;
+	
+	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	StructureError se;  
+	if(rc == SQLITE_OK)
+	{	
+		sqlite3_bind_int(pStmt,1,id_testset);
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{   int col=0;
+		    int idmets = sqlite3_column_int(pStmt,col++);
+			std::vector<StructureError> vect = getStructureError(idmets);
+			std::string ptr =  std::string ( (char*)safe_sqlite3_column_text(pStmt, col++));
+			v[ ptr ]= vect; 			 
 		}		
    }else{
 		raiseError(conn,selectSql);
@@ -1686,6 +1716,7 @@ bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,
 
 	const char *zErrMsg=0;
 	sqlite3_stmt *pStmt;
+	
 	std::string sql = "INSERT INTO STRUCTUREERROR ('ID_METS','IMAGEPATH', 'MESSAGE','ID_ERRORTYPE','FILEID') \
 					  VALUES  (?,?,?,?,?)"; 							
 

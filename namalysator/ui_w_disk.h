@@ -87,7 +87,7 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(calendarWidget->sizePolicy().hasHeightForWidth());
         calendarWidget->setSizePolicy(sizePolicy1);
-        calendarWidget->setMinimumSize(QSize(180, 180));
+        calendarWidget->setMinimumSize(QSize(220, 220));
         calendarWidget->setMaximumSize(QSize(200, 198));
         calendarWidget->setFont(font);
         calendarWidget->setMouseTracking(false);
