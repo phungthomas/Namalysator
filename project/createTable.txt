@@ -184,7 +184,8 @@ create table STRUCTUREERROR (
   MESSAGE varchar(255),  
   ID_ERRORTYPE INTEGER,
   FILEID varchar(10),
-  CUSTOM varchar(255)
+  CUSTOM varchar(255),
+  PAGENB INTEGER
 );
 
 drop table if exists SAMPLING_STRUCTURE;

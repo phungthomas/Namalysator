@@ -169,6 +169,7 @@ public:
 	ErrorType errorType;
 	std::string fileid;
 	std::string custom;
+	int pagenb;
 	virtual std::string getError(){
 		if ( errorType.id_type == 100 ) return custom;
 		return errorType.error; 

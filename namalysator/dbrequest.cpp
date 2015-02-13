@@ -1517,7 +1517,7 @@ std::vector<StructureError> dbrequest::getStructureError(int id_Mets)
 
 	int rc;	
 	const char *zErrMsg= 0; 
-	std::string selectSql = "SELECT ID,ID_METS,IMAGEPATH,MESSAGE,ID_ERRORTYPE,FILEID,CUSTOM FROM STRUCTUREERROR where ID_METS = ?"; 
+	std::string selectSql = "SELECT ID,ID_METS,IMAGEPATH,MESSAGE,ID_ERRORTYPE,FILEID,CUSTOM,PAGENB FROM STRUCTUREERROR where ID_METS = ?"; 
 	std::vector<StructureError> v;
 	DEBUG_ME
 	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1535,6 +1535,7 @@ std::vector<StructureError> dbrequest::getStructureError(int id_Mets)
 			se.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
 			se.fileid = safe_sqlite3_column_text(pStmt, col++);
 			se.custom = safe_sqlite3_column_text(pStmt, col++);
+			se.pagenb = sqlite3_column_int(pStmt, col++);
 
 			v.push_back(se); 			 
 		}		
@@ -1711,15 +1712,15 @@ std::vector<ErrorType> dbrequest::getErrorTypeCatStructure(std::string docType)
 	return v;
 }
 
-bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,std::string path, std::string fileID, std::string custom)
+bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,std::string path, std::string fileID, std::string custom,int pagenb)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 
 	const char *zErrMsg=0;
 	sqlite3_stmt *pStmt;
 	
-	std::string sql = "INSERT INTO STRUCTUREERROR ('ID_METS','IMAGEPATH', 'MESSAGE','ID_ERRORTYPE','FILEID','CUSTOM') \
-					  VALUES  (?,?,?,?,?,?)"; 							
+	std::string sql = "INSERT INTO STRUCTUREERROR ('ID_METS','IMAGEPATH', 'MESSAGE','ID_ERRORTYPE','FILEID','CUSTOM','PAGENB') \
+					  VALUES  (?,?,?,?,?,?,?)"; 							
 
 	
 	int rc = sqlite3_prepare_v2(conn->db,sql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1735,6 +1736,7 @@ bool dbrequest::saveStructError(int id_mets,std::string message,int idErrorType,
 	sqlite3_bind_int(pStmt, 4,idErrorType);
 	sqlite3_bind_text(pStmt, 5,fileID.c_str(),fileID.length(),SQLITE_STATIC);
 	sqlite3_bind_text(pStmt, 6,custom.c_str(),custom.length(),SQLITE_STATIC);
+	sqlite3_bind_int(pStmt, 7,pagenb);
 
 	
 	if (sqlite3_step(pStmt) != SQLITE_DONE) {

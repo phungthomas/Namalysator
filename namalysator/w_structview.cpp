@@ -684,7 +684,7 @@ void w_structview::openErrorScreen()
 
 	w_screenshoterror *ws = new w_screenshoterror();
 	//ws->setBatchDetailImage(xmap,mets,this);
-	ws->setBatchDetailImage(result,mets,this,mapTiffPath.find(currentPage)->second.fileId);
+	ws->setBatchDetailImage(result,mets,this,mapTiffPath.find(currentPage)->second.fileId,currentPage);
 	ws->resize(1200,910);
 	ws->show();	
 }
@@ -835,25 +835,15 @@ void w_structview::viewHtml()
 		std::vector<StructureError> & ref = it->second;
 
 		if ( ref.size() > 0 ) { // skip empty file
-			fprintf(fp, "<h2>");
-			fprintf(fp,it->first.c_str());
-			fprintf(fp, "</h2>\n");
-		}
+			fprintf(fp, "<h2>%s</h2>\n",it->first.c_str());
 		
-		for ( std::vector<StructureError>::iterator itt = ref.begin(); itt != ref.end(); itt++)
-		{
-			fprintf(fp, "<h3>");	
-			fprintf(fp,itt->getError().c_str());
-			fprintf(fp, "</h3>\n");	
-	
-			//fprintf(fp, "<img =\"500px\" height=\"500px\"    src=\"");		
-			fprintf(fp, "<img  width=\"600\"  src=\"");
-			fprintf(fp, itt->pathImage.c_str());
-			fprintf(fp, "\"/>\n");
-			fprintf(fp, "<p>");	
-			fprintf(fp, itt->message.c_str());
-			fprintf(fp, "</p>\n");
-			fprintf(fp, "<br>\n");
+			for ( std::vector<StructureError>::iterator itt = ref.begin(); itt != ref.end(); itt++)
+			{	
+				fprintf(fp,"<h3>%s  (p.%d)</h3>\n",itt->getError().c_str(),itt->pagenb);
+				fprintf(fp, "<img  width=\"600\"  src=\"%s\"/>\n",itt->pathImage.c_str());
+				fprintf(fp, "<p>%s</p>\n",itt->message.c_str());	
+				fprintf(fp, "<br>\n");
+			}
 		}
 	}
 	

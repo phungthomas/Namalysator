@@ -34,7 +34,7 @@ void w_screenshoterror::createConnections()
 	connect(m_ui->comboBoxErrorType,SIGNAL(currentIndexChanged ( int )),this,SLOT(enableCustom(int)));
 }
 
-void w_screenshoterror::enableCustom(int i){
+void w_screenshoterror::enableCustom(int){
 
 	bool flag = false;
 
@@ -92,11 +92,12 @@ void w_screenshoterror::fillComboBoxErrortype()
 }
 
 
-void w_screenshoterror::setBatchDetailImage(QPixmap pix,MetsFile m,w_structview *w, std::string _fileID)
+void w_screenshoterror::setBatchDetailImage(QPixmap pix,MetsFile m,w_structview *w, std::string _fileID,int _pageNB)
 {
 	structView = w;
 	//batchDetail = bd;
 	fileID=_fileID;
+	pageNB = _pageNB;
 	mets = m;	
 	db.setDataBaseName(BatchDetail::getBatchDetail().database);  
 	m_ui->comboBoxErrorType->clear();
@@ -211,7 +212,7 @@ void w_screenshoterror::saveError()
 		pathImg =  mets.date.toString("dd-MM-yyyy").toStdString() +"_nr" + sid.str() + ".png"  ;	
 		db.saveStructError(mets.idMets,m_ui->txtCommentaire->toPlainText().toStdString(),
 			vErrorType[m_ui->comboBoxErrorType->itemData(m_ui->comboBoxErrorType->currentIndex()).toInt()].id_type,
-			pathImg,fileID,m_ui->customEdit->text().toStdString());
+			pathImg,fileID,m_ui->customEdit->text().toStdString(),pageNB);
 		
 	//	QPixmap xmap = QPixmap::grabWidget(this,0,25,this->width(),this->height()-100);
 		
