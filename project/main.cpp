@@ -126,6 +126,7 @@ int start()
 	}	
 
 	std::string batchName = parameter.getValue("batchName");
+	std::string subbatchName = parameter.getValue("subbatchName");
 	std::string datab = parameter.getValue("database") + ".db";
 	std::string input= parameter.getValue("input");	
 
@@ -183,7 +184,7 @@ int start()
 	pt.LogTime("Creating DB");
 	db.openDB();
 	
-	if(db.insertTestSet(batchName,getDate()) ==false)
+	if(db.insertTestSet(batchName,subbatchName,getDate()) ==false)
 	{	
 		hError.begin("Database Error : Can not insert new Testset");
 		hError.begin("return 4");					

@@ -3,6 +3,7 @@
 	<database>C:/Data/DB/smallTestBook</database>
 	<inventoryFile>file.csv</inventoryFile>
 	<batchName>obermosel-1945-july</batchName>
+  <subbatchName>subBatch</subbatchName>
 	<input>C:/SmallTestBook</input>
 	<outputDir>C:/Data/output</outputDir> <!-- where intermediate generate file are put before analysis, mainly a temp directory -->
 	<verifiers><!-- metsverifier will save a atoi of data for each key under node verifiers-->

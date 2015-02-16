@@ -102,11 +102,11 @@ bool database::createTable(const std::string &filePath)
 //! \param batchName name of the Batch
 //! \param datetime current time of Test
 //! \return true if there's no errors, otherwise FALSE  the program will exit
-bool database::insertTestSet(const std::string &batchName,const std::string &datetime)
+bool database::insertTestSet(const std::string &batchName,const std::string &subbatchName,const std::string &datetime)
 {	
 	char *zErrMsg=0;
-	std::string sql = "INSERT INTO TESTSET ('BATCHNAME', 'DATE') \
-					  VALUES  ('" + batchName + "','" + datetime + "')"; 							
+	std::string sql = "INSERT INTO TESTSET ('BATCHNAME','SUBBATCHNAME', 'DATE') \
+					  VALUES  ('" + batchName + "','"+ subbatchName+ "','"+ datetime + "')"; 							
 
 	int rc = sqlite3_exec(db, sql.c_str(), NULL, 0, &zErrMsg); //null because no calll back needed	
 	if( rc )

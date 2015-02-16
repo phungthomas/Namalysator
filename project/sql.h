@@ -53,7 +53,7 @@ public:
 	//! insert Mets error get from parser
 	void insertMetsError(int category,const std::string &relatedType,const std::string &filePart,const Error &e);
 	
-	bool insertTestSet(const std::string &batchName,const std::string &date);
+	bool insertTestSet(const std::string &batchName,const std::string & subBatch,const std::string &date);
 	void insertMets(const std::string &batchName,const std::string &path,const std::string &fileName);	
 	int select_idMets();	
 	std::vector<int> getAllYears();

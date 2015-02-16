@@ -1,12 +1,16 @@
-REM adaptation script of version of db;
+-- REM adaptation script of version of db;
 
 ALTER TABLE STRUCTUREERROR ADD COLUMN FILEID varchar(10);
 ALTER TABLE STRUCTUREERROR ADD COLUMN CUSTOM varchar(255);
 ALTER TABLE STRUCTUREERROR ADD COLUMN PAGENB INTEGER;
 
 
-REM outer join are done in namalysator: so the table must be there same if empty
-REM not to do introduce compatibility mode in namalysator
+
+ALTER TABLE TESTSET ADD COLUMN SUBBATCHNAME VARCHAR(50) NOT NULL;
+
+
+--REM outer join are done in namalysator: so the table must be there same if empty
+--REM not to do introduce compatibility mode in namalysator
 CREATE TABLE BOOKSINVENTORY (
 	ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	BOX_ID varchar(20),
@@ -25,8 +29,8 @@ CREATE TABLE BOOKSINVENTORY (
 	BIBREC_300c varchar(20),
 	CHECKED INTEGER
 );
-REM not to do introduce compatibility mode in namalysator
-REM outer join are done in namalysator: so the table must be there same if empty
+--REM not to do introduce compatibility mode in namalysator
+--REM outer join are done in namalysator: so the table must be there same if empty
 
 create table METSBOOK (
   ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
