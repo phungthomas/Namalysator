@@ -127,7 +127,9 @@ std::map<std::string,std::map<std::string,std::vector<std::pair<int,std::string>
 			p.second = date;
 			((ret[batchName])[subbatchName]).push_back(p);
 		}
-	}
+	}else{
+		raiseError(conn,selectSql);
+	};
 	sqlite3_finalize(pStmt);
 	return ret;
 }
@@ -191,38 +193,6 @@ std::string dbrequest::getLabel(std::string key){
 }
 
 
-// get all tests from Batch
-/*
-std::vector<std::pair<int,std::string> > dbrequest::getvDateTestset(std::string batch,std::string subbatch )
-{
-	std::vector<std::pair<int,std::string>> vect;
-	ConnectionDB* conn = g_pool.getConnection(databaseName);
-    sqlite3_stmt *pStmt;	
-	const char *zErrMsg= 0; 
-
-	std::string selectSql = "SELECT ID_TESTSET,DATE FROM TESTSET where BATCHNAME =? AND SUBBATCHNAME =?";
-	DEBUG_ME
-	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-
-	if(rc == SQLITE_OK)
-	{
-		sqlite3_bind_text(pStmt, 1, batch.c_str(), batch.length(), SQLITE_STATIC);
-		sqlite3_bind_text(pStmt, 2, subbatch.c_str(), subbatch.length(), SQLITE_STATIC);
-		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{
-			std::pair<int,std::string> p;
-			p.first = sqlite3_column_int(pStmt, 0);
-			p.second = safe_sqlite3_column_text(pStmt, 1);
-			vect.push_back(p);	
-		}
-	}
-	sqlite3_finalize(pStmt);
-	return vect;
-}
-*/
-
-
-
 void  dbrequest::getBatch(BatchDetail& bdetail,int id_testset)
 {	
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
@@ -245,7 +215,9 @@ void  dbrequest::getBatch(BatchDetail& bdetail,int id_testset)
 			bdetail.batchName = safe_sqlite3_column_text(pStmt, 3);
 			bdetail.testDate = safe_sqlite3_column_text(pStmt, 4);
 		}
-	}
+	}else{
+		raiseError(conn,selectSql);
+	};
 	sqlite3_finalize(pStmt);
 }
 
