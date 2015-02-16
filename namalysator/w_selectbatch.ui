@@ -699,6 +699,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Sub Batch Name</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbSubBatchName"/>
+      </item>
+      <item>
        <widget class="QLabel" name="label_9">
         <property name="text">
          <string>Batch Test on date :</string>

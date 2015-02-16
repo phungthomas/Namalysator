@@ -48,11 +48,11 @@ class dbrequest
 		void setDataBaseName(std::string dbName);
 		// bool openDB();
 		//return a vector of all testsets from batch
-		std::vector<std::string> getvTestSet();
+		std::map<std::string, std::map< std::string, std::vector<std::pair<int,std::string> > > > getvTestSet();
 		std::map<std::string,std::string> key2Label(std::map<std::string,std::string>);
 		std::string getLabel(std::string);
 		// get a vector of  all tests from selected Batch
-		std::vector<std::pair<int,std::string> > getvDateTestset(std::string batch);
+		//std::vector<std::pair<int,std::string> > getvDateTestset(std::string batch,std::string batch);
 		//return the details from the selected Batch 
 		void getBatch(BatchDetail& bdetail,int id_testset);
 		// return the parameters of verified tests

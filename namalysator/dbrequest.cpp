@@ -101,15 +101,15 @@ void dbrequest::setDataBaseName(std::string dbName)
 }
 
 // get all testsets from database
-std::vector<std::string> dbrequest::getvTestSet()
+std::map<std::string,std::map<std::string,std::vector<std::pair<int,std::string> > > > dbrequest::getvTestSet()
 {
-	std::vector<std::string> vect;
+	std::map<std::string,std::map<std::string,std::vector<std::pair<int,std::string> > > > ret;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	sqlite3_stmt *pStmt;
 	int rc;	
 	const char *zErrMsg= 0; 
 
-	static const std::string selectSql = "SELECT distinct (BATCHNAME) FROM TESTSET";
+	static const std::string selectSql = "SELECT BATCHNAME,SUBBATCHNAME,ID_TESTSET, DATE FROM TESTSET";
 	
 	rc = sqlite3_prepare_v2(conn->db, selectSql.c_str(), -1, &pStmt,&zErrMsg);
 
@@ -117,11 +117,19 @@ std::vector<std::string> dbrequest::getvTestSet()
 	{		
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			vect.push_back(safe_sqlite3_column_text(pStmt, 0));
+			int col=0;
+			std::pair<int,std::string> p;
+			std::string batchName = (char*)safe_sqlite3_column_text(pStmt, col++);
+			std::string subbatchName = (char*)safe_sqlite3_column_text(pStmt, col++);
+			int idtestset = sqlite3_column_int(pStmt, col++);
+			std::string date = (char*)safe_sqlite3_column_text(pStmt, col++);
+			p.first = idtestset;
+			p.second = date;
+			((ret[batchName])[subbatchName]).push_back(p);
 		}
 	}
 	sqlite3_finalize(pStmt);
-	return vect;
+	return ret;
 }
 
 std::map<std::string,std::string> dbrequest::key2Label(std::map<std::string,std::string> map){
@@ -184,20 +192,22 @@ std::string dbrequest::getLabel(std::string key){
 
 
 // get all tests from Batch
-std::vector<std::pair<int,std::string> > dbrequest::getvDateTestset(std::string batch)
+/*
+std::vector<std::pair<int,std::string> > dbrequest::getvDateTestset(std::string batch,std::string subbatch )
 {
 	std::vector<std::pair<int,std::string>> vect;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
     sqlite3_stmt *pStmt;	
 	const char *zErrMsg= 0; 
 
-	std::string selectSql = "SELECT ID_TESTSET,DATE FROM TESTSET where BATCHNAME =?";
+	std::string selectSql = "SELECT ID_TESTSET,DATE FROM TESTSET where BATCHNAME =? AND SUBBATCHNAME =?";
 	DEBUG_ME
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
 	if(rc == SQLITE_OK)
 	{
 		sqlite3_bind_text(pStmt, 1, batch.c_str(), batch.length(), SQLITE_STATIC);
+		sqlite3_bind_text(pStmt, 2, subbatch.c_str(), subbatch.length(), SQLITE_STATIC);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			std::pair<int,std::string> p;
@@ -209,6 +219,9 @@ std::vector<std::pair<int,std::string> > dbrequest::getvDateTestset(std::string 
 	sqlite3_finalize(pStmt);
 	return vect;
 }
+*/
+
+
 
 void  dbrequest::getBatch(BatchDetail& bdetail,int id_testset)
 {	

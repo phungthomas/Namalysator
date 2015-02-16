@@ -7,6 +7,8 @@
 #include "dbrequest.h"
 #include "structgui.h"
 #include <map>
+#include <string>
+#include <vector>
 
 namespace Ui {
     class w_selectBatch;
@@ -33,13 +35,15 @@ private :
 	Ui::w_selectBatch *m_ui;
     dbrequest db; 
     BatchDetail& batch;
+	std::map<std::string,std::map<std::string,std::vector<std::pair<int,std::string> > > > vTestSet;
 
 signals:
 	void validated(std::string);
 	void exited();
     
 protected slots:
-	void getListDate(QString date); 
+	void getListDate(QString date);
+	void getListSubName(QString);
 	void getMets(QListWidgetItem*);
 	void valider();
 	void browsePath();

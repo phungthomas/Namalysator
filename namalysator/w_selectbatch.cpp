@@ -38,7 +38,9 @@ void w_selectBatch::changeEvent(QEvent *e)
  //! create slots / signals
 void w_selectBatch::createConnections()
 {
-	connect(m_ui->cbBatchName, SIGNAL(currentIndexChanged(QString)),this, SLOT(getListDate(QString)));
+	connect(m_ui->cbBatchName, SIGNAL(currentIndexChanged(QString)),this, SLOT(getListSubName(QString)));
+	connect(m_ui->cbSubBatchName, SIGNAL(currentIndexChanged(QString)),this, SLOT(getListDate(QString)));
+
 	connect(m_ui->listDateTestset,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(getMets(QListWidgetItem*)));
 	connect(m_ui->btnAnalyze,SIGNAL(clicked()),this,SLOT(valider()));
 	connect(m_ui->btnCancel,SIGNAL(clicked()),this,SLOT(exit()));
@@ -52,10 +54,11 @@ void w_selectBatch::fillItemBatchName()
 	m_ui->cbBatchName->clear();
 	db.setDataBaseName(m_ui->lineEditSql->text().toStdString());
 	//get all Testsets from batch
-	std::vector<std::string> vTestSet  =   db.getvTestSet(); 
-	for (size_t i =0; i< vTestSet.size();i++)
+	vTestSet  =   db.getvTestSet(); 
+	for (std::map<std::string,std::map<std::string,std::vector<std::pair<int,std::string> > > >::iterator it = vTestSet.begin(); it != vTestSet.end();it++)
 	{
-		m_ui->cbBatchName->addItem(vTestSet[i].c_str());	
+		m_ui->cbBatchName->addItem(QString(it->first.c_str()) );
+
 	}	
 }
 
@@ -81,10 +84,30 @@ void w_selectBatch::browseDb()
 }
 
 
+void w_selectBatch::getListSubName(QString name){
+
+	if ( vTestSet.find(m_ui->cbBatchName->currentText().toStdString())!=vTestSet.end()){
+		std::map<std::string,std::vector<std::pair<int,std::string> > > mmap = vTestSet[m_ui->cbBatchName->currentText().toStdString()];
+	
+		m_ui->cbSubBatchName->clear();
+
+		for ( std::map<std::string,std::vector<std::pair<int,std::string> > > ::iterator it = mmap.begin(); it != mmap.end() ; it ++ ) {
+			m_ui->cbSubBatchName->addItem(QString(it->first.c_str()));
+		}
+	}else{
+		m_ui->cbSubBatchName->clear();
+	}
+
+}
+
 void w_selectBatch::getListDate(QString name)
 {		
 	clearBatchDetail();
-	std::vector<std::pair<int,std::string>> v =  db.getvDateTestset(name.toStdString()); 	
+
+	if ( vTestSet[m_ui->cbBatchName->currentText().toStdString()].find(m_ui->cbSubBatchName->currentText().toStdString()) 
+		  == vTestSet[m_ui->cbBatchName->currentText().toStdString()].end() ) return;
+
+	std::vector<std::pair<int,std::string> > v = vTestSet[m_ui->cbBatchName->currentText().toStdString()][m_ui->cbSubBatchName->currentText().toStdString()]; 
 	
 	for (size_t i =0; i< v.size();i++)
 	{	
@@ -189,7 +212,7 @@ void w_selectBatch::fillBatchDetail()
 
  void w_selectBatch::loadParametersCompareBatch()
  {
-	std::vector<std::pair<int,std::string>> vDate =  db.getvDateTestset(batch.batchName); 	
+	std::vector<std::pair<int,std::string> > vDate = vTestSet[m_ui->cbBatchName->currentText().toStdString()][m_ui->cbSubBatchName->currentText().toStdString()];
 	QString ss;	
 	QTableWidgetItem *newItem;
 	QStringList labels;
