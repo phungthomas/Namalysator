@@ -181,13 +181,6 @@ class dbrequest
 		Article getArticle(int id);
 		std::pair<int,int> getSumCharacter(int id);
 		void updateTitleError(int id,int caract);		
-		std::vector<Excel> getInventaire(int id);
-		std::map<QDate,std::vector<Excel> >getMapInventaire(int id);
-		
-		/// <summary>get all inventory from the selected database</summary>		
-		/// <returns>vector of inventory</returns>
-		std::vector<Inventaire> getNameInventaire();
-		
 
 		std::vector<std::vector<QVariant> > getAllMets(int id_testset);
 		std::vector<std::vector<QVariant> > getAllBooks(int id_testset);
