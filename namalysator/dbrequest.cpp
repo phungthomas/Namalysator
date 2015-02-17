@@ -1872,24 +1872,6 @@ std::pair<int,int> dbrequest::getSumCharacter(int id)
 	return pair;
 }
 
-
-void dbrequest::updateTitleError(int id,int caract)
-{
-	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	char *zErrMsg =0;
-	std::stringstream o,oCaract;
-	o << id;
-	oCaract << caract;	
-	std::string sql =	"UPDATE TITLECHECK SET ERRORCOUNT  ='" + oCaract.str() + "' where ID = '"+ o.str() +"'";					
-		
-	int rc = sqlite3_exec(conn->db, sql.c_str(), NULL, 0, &zErrMsg); //null because no calll back needed
-	
-	if( rc )
-	{
-		fprintf(stderr, "Can't update data ERRORCOUNT: %s\n",  zErrMsg);
-	}
-}
-
 std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 	ConnectionDB* conn = g_pool.getConnection(BatchDetail::getBatchDetail().database);	
 	sqlite3_stmt *pStmt;

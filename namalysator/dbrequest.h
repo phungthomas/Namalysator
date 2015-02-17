@@ -180,7 +180,6 @@ class dbrequest
 		std::vector<Title> getvTitle(int id_testset);
 		Article getArticle(int id);
 		std::pair<int,int> getSumCharacter(int id);
-		void updateTitleError(int id,int caract);		
 
 		std::vector<std::vector<QVariant> > getAllMets(int id_testset);
 		std::vector<std::vector<QVariant> > getAllBooks(int id_testset);
