@@ -64,6 +64,8 @@ public:
     QLineEdit *lineEditSql;
     QLabel *label_8;
     QComboBox *cbBatchName;
+    QLabel *label_2;
+    QComboBox *cbSubBatchName;
     QLabel *label_9;
     QListWidget *listDateTestset;
     QLabel *label_10;
@@ -298,6 +300,16 @@ public:
 
         verticalLayout_2->addWidget(cbBatchName);
 
+        label_2 = new QLabel(gbBatch);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        verticalLayout_2->addWidget(label_2);
+
+        cbSubBatchName = new QComboBox(gbBatch);
+        cbSubBatchName->setObjectName(QString::fromUtf8("cbSubBatchName"));
+
+        verticalLayout_2->addWidget(cbSubBatchName);
+
         label_9 = new QLabel(gbBatch);
         label_9->setObjectName(QString::fromUtf8("label_9"));
 
@@ -352,6 +364,7 @@ public:
         label->setText(QApplication::translate("w_selectBatch", "Select database :", 0, QApplication::UnicodeUTF8));
         lineEditSql->setText(QString());
         label_8->setText(QApplication::translate("w_selectBatch", "Batch Name", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("w_selectBatch", "Sub Batch Name", 0, QApplication::UnicodeUTF8));
         label_9->setText(QApplication::translate("w_selectBatch", "Batch Test on date :", 0, QApplication::UnicodeUTF8));
         label_10->setText(QApplication::translate("w_selectBatch", "Path of the disk :", 0, QApplication::UnicodeUTF8));
         btnPath->setText(QApplication::translate("w_selectBatch", "Browse", 0, QApplication::UnicodeUTF8));

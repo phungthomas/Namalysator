@@ -406,7 +406,7 @@ int start()
 	verifymissingissue(&hError,&db);
 	
 	//TODO quand c'est 0 et empty string
-	db.insertRandomTitle();
+	//db.insertRandomTitle();
 	db.insertRandomMets(atoi(parameter.getValue("sampling").c_str()),vectorMets.size());	
 
 	db.insertParameterVerifiers(&parameter); // for automatic reporting of test	

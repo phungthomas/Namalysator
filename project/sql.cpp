@@ -656,6 +656,7 @@ std::vector<std::pair<int,Mets>> database::vMetsYear(int year)
 	return vMets;
 }
 
+/*
 //! insert random title to check
 void database::insertRandomTitle()
 {	 
@@ -693,6 +694,8 @@ void database::insertRandomTitle()
 	}
 	sqlite3_finalize(pStmt);
 }
+*/
+
 //ü insert mets for the sample test of the structure
 void database::insertRandomMets(int number,int totalMets)
 {
