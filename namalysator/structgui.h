@@ -179,7 +179,7 @@ public:
 
 struct Title 
 {
-	int id;
+	//int id;
 	int id_article;
 	int id_mets;
 	int countString;

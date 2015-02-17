@@ -1742,37 +1742,34 @@ std::vector<Title> dbrequest::getvTitle(int id_testset)
 	const char *zErrMsg= 0; 
 	Title title;
 	std::vector<Title>  vTitle;
-	std::string selectSql ="select t.id,t.id_article, m.id_mets,a.countcaracter,t.errorcount,a.title from TITLECHECK t, \
-	ARTICLE a,METS m where  t.id_article = a.id and m.id_mets = a.id_mets and m.id_testset = '"+ oIdTestset.str() +"' order by t.id ";
+	std::string selectSql ="select a.id, m.id_mets,a.countcaracter,0,a.title from ARTICLE a,METS m "
+		                   "where  m.id_mets = a.id_mets and m.id_testset = ? order by a.id ";
 	DEBUG_ME
 	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
 	if(rc == SQLITE_OK)
 	{	  
-      while(sqlite3_step(pStmt) == SQLITE_ROW)
-      {
-		int count = sqlite3_data_count(pStmt);
-		std::pair<int,DateError> p;
-		for (int i =0;i<  count ;i++)
+
+		sqlite3_bind_int(pStmt,1,id_testset);
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			const char *result = safe_sqlite3_column_text(pStmt, i);
-			
-			if (i==0)title.id = atoi(result);							
-			else if (i==1)
-			{ 
-				title.id_article = atoi(result);
-				title.article = getArticle(atoi(result));
-			}
-			else if (i==2)
-			{ 
-				title.id_mets = atoi(result);
-				title.mets = getMets(atoi(result));
-			}
-			else if (i==3) title.countString = atoi(result);
-			else if (i==4)title.countError = atoi(result);					
-			else if (i==5) title.title = result;			
-		}	
-		vTitle.push_back(title);
+		
+			std::pair<int,DateError> p;
+		
+			int col = 0;
+
+			title.id_article = sqlite3_column_int(pStmt, col++);
+			title.article = getArticle(title.id_article);
+
+			title.id_mets = sqlite3_column_int(pStmt, col++);
+			title.mets = getMets(title.id_mets);
+
+			title.countString = sqlite3_column_int(pStmt, col++);
+			title.countError = sqlite3_column_int(pStmt, col++);
+			title.title = safe_sqlite3_column_text(pStmt, col++);
+
+			vTitle.push_back(title);
 		 
 	  }
    }else{
