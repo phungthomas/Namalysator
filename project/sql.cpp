@@ -453,7 +453,7 @@ void database::insertArticle(int id_mets, datafactory_set<Article> dfarticle,int
 		{	
 			if (it->check == 1){
 				int rr = rand();
-				double al = ( 1000.0 * rr ) / RAND_MAX;
+				double al = ( 1000.0 * rr ) / ( RAND_MAX + 1 );
 				if ( al > number ) continue ; // skip the insert
 
 				sqlite3_bind_int(pStmt, 1, id_mets);
