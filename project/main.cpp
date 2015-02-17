@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <cstdio>
+#include <cstdlib>
 
 
 #include "../common_files/xmltostr.h"
@@ -101,7 +102,8 @@ bool existDatabase(database *db,errorHandler *hError,std::string databasePath,st
 
 
 int start()
-{		
+{	
+	srand(time(NULL));
 	
 	//get current path of the folder
 	fs::path CurrentPath( fs::initial_path<fs::path>());
@@ -392,7 +394,7 @@ int start()
 #endif // DEBUG
 		}
 		pt.LogTime("All other verifiers");
-		db.insertALLData(&df,metsP.getContext());
+		db.insertALLData(&df,metsP.getContext(),atoi(parameter.getValue("checkTitle").c_str()));
 		pt.LogTime("Writing to DB");
 #ifdef DEBUGPARAMETERS
 		std::cout << "		Insert data finito " <<std::endl;
@@ -404,7 +406,7 @@ int start()
 	verifymissingissue(&hError,&db);
 	
 	//TODO quand c'est 0 et empty string
-	db.insertRandomTitle(atoi(parameter.getValue("checkTitle").c_str()));
+	db.insertRandomTitle();
 	db.insertRandomMets(atoi(parameter.getValue("sampling").c_str()),vectorMets.size());	
 
 	db.insertParameterVerifiers(&parameter); // for automatic reporting of test	

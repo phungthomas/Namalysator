@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
 #include <iomanip>
 #include "../common_files/utilities.h"
 #include "datehelper.h"
@@ -441,7 +442,7 @@ void database::insertLinkedFiles(int id_mets,datafactory *df)
 	}
 }
 //! insert Articles into database
-void database::insertArticle(int id_mets, datafactory_set<Article> dfarticle)
+void database::insertArticle(int id_mets, datafactory_set<Article> dfarticle,int number)
 {
 	const char *zErrMsg = 0;
 	sqlite3_stmt *pStmt = 0;
@@ -451,6 +452,10 @@ void database::insertArticle(int id_mets, datafactory_set<Article> dfarticle)
 		for (datafactory_set<Article>::iterator it = dfarticle.begin(); it != dfarticle.end(); ++it)
 		{	
 			if (it->check == 1){
+				int rr = rand();
+				double al = ( 1000.0 * rr ) / RAND_MAX;
+				if ( al > number ) continue ; // skip the insert
+
 				sqlite3_bind_int(pStmt, 1, id_mets);
 				sqlite3_bind_text(pStmt, 2, it->id.c_str(), it->id.length(), SQLITE_STATIC);
 				sqlite3_bind_text(pStmt, 3, it->div.c_str(), it->div.length(), SQLITE_STATIC);
@@ -539,7 +544,7 @@ void database::insertDateError(int category,std::string dateBegin,std::string da
 		sqlite3_free(zErrMsg);
 	}
 }
-bool database::insertALLData(datafactory *df,metsparserContext& ctx)
+bool database::insertALLData(datafactory *df,metsparserContext& ctx,int number)
 {	
 	char *sErrMsg=0;
 	// Use a transaction to speed things up
@@ -551,7 +556,7 @@ bool database::insertALLData(datafactory *df,metsparserContext& ctx)
 		};
 		insertLinkedFiles(id_mets,df);
 		datafactory_set<Article> dfarticle = df->get_set<Article>();
-		insertArticle(id_mets,dfarticle);	
+		insertArticle(id_mets,dfarticle,number);	
 	endTransaction();
 	return true;
 }
@@ -650,16 +655,14 @@ std::vector<std::pair<int,Mets>> database::vMetsYear(int year)
 }
 
 //! insert random title to check
-void database::insertRandomTitle(int number)
+void database::insertRandomTitle()
 {	 
-	int totalTitleToCheck = getCountTitle();	
-	float percentage = float(totalTitleToCheck) /float (1000) * number;	 
+ 
 	sqlite3_stmt *pStmt =0;	
 	const char *zErrMsg= 0; 	
-	std::stringstream ss;
-	ss << (int(percentage));
+
 	string selectSql = "SELECT ID FROM ARTICLE a,METS m WHERE m.ID_METS = a.ID_METS and \
-					   m.ID_TESTSET ='"+ stringIdTestSet + "' and  MUSTCHECK = 1 ORDER BY RANDOM () LIMIT " + ss.str() ;
+					   m.ID_TESTSET ='"+ stringIdTestSet + "' and  MUSTCHECK = 1 "  ;
 
 	int rc = sqlite3_prepare_v2(db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	if(rc == SQLITE_OK)
@@ -832,26 +835,6 @@ void database::insertParameterVerifiers(Parameters *param)
 	
 }
 
-int database::getCountTitle()
-{
-	int numberTitle =0;
-	sqlite3_stmt *pStmt;
-	int rc;	
-	const char *zErrMsg= 0;
-	std::string selectSql = "select count(a.ID) from ARTICLE a, METS m  where a.id_mets = m.id_mets and m.id_testset ='" + stringIdTestSet + "'";  
-	rc = sqlite3_prepare_v2(db,selectSql.c_str(),-1, &pStmt,&zErrMsg);	
-	if(rc == SQLITE_OK)
-	{	  
-		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{
-			int count = sqlite3_data_count(pStmt);			
-			const char *result = (const char *)sqlite3_column_text(pStmt, 0);			
-			numberTitle = atoi(result);			 
-		}
-	}
-	sqlite3_finalize(pStmt);
-	return numberTitle;
-}
 
 void database::insertMetsErrorWithId(int category,const std::string &relatedType,const std::string &filePart,const Error &e,std::string id)
 {	

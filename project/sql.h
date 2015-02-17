@@ -36,7 +36,7 @@ public:
 	void setIdTestSet();		
 	//! insert all data of the datafactory in the database
 	//! \param df as a datafactory
-	bool insertALLData(datafactory *df,metsparserContext& );
+	bool insertALLData(datafactory *df,metsparserContext&,int );
 	
 	//! create tables of the database
 	//! \param createTableFile path of the database path
@@ -49,7 +49,7 @@ public:
 	//! update Mets details	
 	void updateMets(int,datafactory *df);
 	//!insert Article into Database
-	void insertArticle(int,datafactory_set<Article> dfarticle);
+	void insertArticle(int,datafactory_set<Article> dfarticle,int);
 	//! insert Mets error get from parser
 	void insertMetsError(int category,const std::string &relatedType,const std::string &filePart,const Error &e);
 	
@@ -64,12 +64,11 @@ public:
 	
 	std::vector<std::string> guiVectSelectDateTestset(std::string batch);
 	void insertDateError(int category,std::string dateBegin,std::string dateEnd,std::string issues,std::string comment);
-	void insertRandomTitle(int number);
+	void insertRandomTitle();
 	//! function for samples of structures
 	void insertRandomMets(int number,int totalMets);
 	void insertParameterVerifiers(Parameters *param);
 	
-	int getCountTitle();	
 	ErrorTypeMets getErrorTypeWithId(int id);
 	void insertMetsErrorWithId(int category,const std::string &relatedType,const std::string &filePart,const Error &e,std::string id);
 	
