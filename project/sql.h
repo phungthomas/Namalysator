@@ -64,7 +64,7 @@ public:
 	
 	std::vector<std::string> guiVectSelectDateTestset(std::string batch);
 	void insertDateError(int category,std::string dateBegin,std::string dateEnd,std::string issues,std::string comment);
-	//void insertRandomTitle();
+	
 	//! function for samples of structures
 	void insertRandomMets(int number,int totalMets);
 	void insertParameterVerifiers(Parameters *param);

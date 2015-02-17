@@ -656,46 +656,6 @@ std::vector<std::pair<int,Mets>> database::vMetsYear(int year)
 	return vMets;
 }
 
-/*
-//! insert random title to check
-void database::insertRandomTitle()
-{	 
- 
-	sqlite3_stmt *pStmt =0;	
-	const char *zErrMsg= 0; 	
-
-	string selectSql = "SELECT ID FROM ARTICLE a,METS m WHERE m.ID_METS = a.ID_METS and \
-					   m.ID_TESTSET ='"+ stringIdTestSet + "' and  MUSTCHECK = 1 "  ;
-
-	int rc = sqlite3_prepare_v2(db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-	if(rc == SQLITE_OK)
-	{   
-		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{		
-			const char *result = (const char *)sqlite3_column_text(pStmt, 0);			
-			int id  = atoi(result);				
-			std::stringstream oId;
-			oId << id;
-			char *zErrMsg2=0;
-			std::string sql2 = "INSERT INTO TITLECHECK ('ID_ARTICLE', 'ERRORCOUNT') \
-							   VALUES  ('" + oId.str()  + "','0')"; 							
-
-			int rc = sqlite3_exec(db, sql2.c_str(), NULL, 0, &zErrMsg2); //null because no calll back needed	
-			if( rc )
-			{		
-				std::stringstream ss;
-				ss <<  "Can not insert data TITLECHECK: " << zErrMsg ;	
-				insertLog(ss.str());	
-			} 
-			if ( zErrMsg2 ) {
-				sqlite3_free(zErrMsg2);
-			};
-		}
-	}
-	sqlite3_finalize(pStmt);
-}
-*/
-
 //ü insert mets for the sample test of the structure
 void database::insertRandomMets(int number,int totalMets)
 {
