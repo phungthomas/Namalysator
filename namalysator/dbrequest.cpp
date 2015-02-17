@@ -1156,22 +1156,21 @@ int dbrequest::getcountTitleCheck(int id_testset)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);	
 	sqlite3_stmt *pStmt;
-	std::stringstream sIdTestset;	
-	sIdTestset << id_testset;
+
 	int rc;	
 	int count =0;
 	const char *zErrMsg= 0; 
-	std::string selectSql = "select count(a.id) from article a, mets m where mustcheck = 1 and a.id_mets = m.id_mets and m.id_testset = '"+ sIdTestset.str()+"'"; 
-	DEBUG_ME
+	std::string selectSql = "select count(a.id) from article a, mets m where mustcheck = 1 and a.id_mets = m.id_mets and m.id_testset = ? "; 
+	
 	std::vector<ErrorType> v;
 	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	ErrorType et;  
 	if(rc == SQLITE_OK)
-	{	  
+	{	
+		sqlite3_bind_int(pStmt,1,id_testset);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{			
-			const char *result = safe_sqlite3_column_text(pStmt, 0);			
-			count = atoi(result);	
+		{						
+			count = sqlite3_column_int(	pStmt, 0);
 		}		
     }else{
 		raiseError(conn,selectSql);
