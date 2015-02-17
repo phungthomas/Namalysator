@@ -183,7 +183,7 @@ struct Title
 	int id_article;
 	int id_mets;
 	int countString;
-	int countError;
+	//int countError;
 	std::string title;
 	MetsFile mets;
 	Article article;

@@ -1742,7 +1742,7 @@ std::vector<Title> dbrequest::getvTitle(int id_testset)
 	const char *zErrMsg= 0; 
 	Title title;
 	std::vector<Title>  vTitle;
-	std::string selectSql ="select a.id, m.id_mets,a.countcaracter,0,a.title from ARTICLE a,METS m "
+	std::string selectSql ="select a.id, m.id_mets,a.countcaracter,a.title from ARTICLE a,METS m "
 		                   "where  m.id_mets = a.id_mets and m.id_testset = ? order by a.id ";
 	DEBUG_ME
 	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1766,7 +1766,7 @@ std::vector<Title> dbrequest::getvTitle(int id_testset)
 			title.mets = getMets(title.id_mets);
 
 			title.countString = sqlite3_column_int(pStmt, col++);
-			title.countError = sqlite3_column_int(pStmt, col++);
+			//title.countError = sqlite3_column_int(pStmt, col++);
 			title.title = safe_sqlite3_column_text(pStmt, col++);
 
 			vTitle.push_back(title);
