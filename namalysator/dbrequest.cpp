@@ -1829,46 +1829,6 @@ Article a;
 	return article;
 }
 
-
-std::pair<int,int> dbrequest::getSumCharacter(int id)
-{
-	Article a;
-	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::stringstream oId;
-	std::pair<int,int> pair;
-	pair.first =0;
-	pair.second =0;
-	oId << id;	
-	
-    sqlite3_stmt *pStmt;
-	int rc;	
-	const char *zErrMsg= 0; 		
-	std::string selectSql = "select sum (countcaracter),sum(errorcount) from article a, titlecheck t, mets m where t.id_article = a.id and  \
-	a.id_mets = m.id_mets and m.id_testset ='" + oId.str() + "'";
-	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-
-	if(rc == SQLITE_OK)
-	{	  
-      while(sqlite3_step(pStmt) == SQLITE_ROW)
-      {
-		int count = sqlite3_data_count(pStmt);
-		std::pair<int,DateError> p;
-		 for (int i =0;i<  count ;i++)
-		 {
-			const char *result = safe_sqlite3_column_text(pStmt, i);			
-			if (i==0){ pair.first = atoi(result);}							
-			else if (i==1) pair.second = atoi(result);	
-		 }		
-		 
-	  }
-   }else{
-		raiseError(conn,selectSql);
-	}
-	sqlite3_finalize(pStmt);
-	return pair;
-}
-
 std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 	ConnectionDB* conn = g_pool.getConnection(BatchDetail::getBatchDetail().database);	
 	sqlite3_stmt *pStmt;

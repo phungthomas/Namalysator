@@ -179,7 +179,6 @@ class dbrequest
 		bool saveStructError(int id_mets,std::string message,int idErrorType,std::string path,std::string,std::string,int );
 		std::vector<Title> getvTitle(int id_testset);
 		Article getArticle(int id);
-		std::pair<int,int> getSumCharacter(int id);
 
 		std::vector<std::vector<QVariant> > getAllMets(int id_testset);
 		std::vector<std::vector<QVariant> > getAllBooks(int id_testset);
