@@ -453,16 +453,18 @@ void database::insertArticle(int id_mets, datafactory_set<Article> dfarticle,int
 		{	
 			if (it->check == 1){
 				int rr = rand();
-				double al = ( 1000.0 * rr ) / ( RAND_MAX + 1 );
+				double al = ( 1000.0 * rr ) / ( 1.0 + RAND_MAX );
 				if ( al > number ) continue ; // skip the insert
 
-				sqlite3_bind_int(pStmt, 1, id_mets);
-				sqlite3_bind_text(pStmt, 2, it->id.c_str(), it->id.length(), SQLITE_STATIC);
-				sqlite3_bind_text(pStmt, 3, it->div.c_str(), it->div.length(), SQLITE_STATIC);
-				sqlite3_bind_int(pStmt, 4, it->check);
-				sqlite3_bind_int(pStmt, 5, it->title.length());
-				sqlite3_bind_text(pStmt, 6, it->title.c_str(), it->title.length(), SQLITE_STATIC);
-				sqlite3_bind_int(pStmt, 7, it->vectArticle.size());
+				int col = 1;
+
+				sqlite3_bind_int(pStmt, col++, id_mets);
+				sqlite3_bind_text(pStmt, col++, it->id.c_str(), it->id.length(), SQLITE_STATIC);
+				sqlite3_bind_text(pStmt, col++, it->div.c_str(), it->div.length(), SQLITE_STATIC);
+				sqlite3_bind_int(pStmt, col++, it->check);
+				sqlite3_bind_int(pStmt, col++, it->title.length());
+				sqlite3_bind_text(pStmt, col++, it->title.c_str(), it->title.length(), SQLITE_STATIC);
+				sqlite3_bind_int(pStmt, col++, it->vectArticle.size());
 				if (sqlite3_step(pStmt) != SQLITE_DONE) {
 					insertLog("ERROR: Can not insert data into table Article");
 				}
