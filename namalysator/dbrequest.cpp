@@ -2180,16 +2180,15 @@ std::string dbrequest::getFirstMetsFilename(int id_testset)
 
 	const char *zErrMsg= 0; 
 	
-	// First get the number of METS files per year
-	std::stringstream clause;
-	clause << "ID_TESTSET='" << id_testset << "' LIMIT 1";
-	std::string selectSql = "SELECT PATH, FILENAME FROM METS WHERE " + clause.str();
-	DEBUG_ME
+	std::string selectSql = "SELECT PATH, FILENAME FROM METS WHERE ID_TESTSET=? LIMIT 1";
+	
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	std::string res;
 	
 	if(rc == SQLITE_OK)
-	{	  
+	{	 
+		sqlite3_bind_int(pStmt,1,id_testset);
+
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			const char *path = safe_sqlite3_column_text(pStmt, 0);
