@@ -2128,7 +2128,7 @@ std::vector<int> dbrequest::getReport(){
 
 		while(sqlite3_step(pStmt) == SQLITE_ROW){
 			int col=0;
-			col++; //sqlite3_column_int (pStmt,col++);
+			col++; 
 			int count = sqlite3_column_int (pStmt,col++);
 				
 			ret.push_back(count);
