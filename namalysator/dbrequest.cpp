@@ -444,24 +444,21 @@ std::vector<ErrorSummary> dbrequest::getvErrorDate(int id_testset)
 	ErrorSummary es;
 	sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0;
-	std::stringstream sId_testset;	
-	sId_testset << id_testset; 
-	std::string selectSql ="SELECT ID_ERRORTYPE,COUNT (ID_ERRORTYPE) FROM DATEERROR where ID_TESTSET = '" + sId_testset.str() + "' GROUP BY ID_ERRORTYPE";
-	DEBUG_ME
+
+	const std::string selectSql ="SELECT ID_ERRORTYPE,COUNT (ID_ERRORTYPE) FROM DATEERROR where ID_TESTSET = ? GROUP BY ID_ERRORTYPE";
+	
     int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
     if(rc == SQLITE_OK)
     {	 
+		sqlite3_bind_int(pStmt,1,id_testset);
+
       while(sqlite3_step(pStmt) == SQLITE_ROW)
       {
-		int count = sqlite3_data_count(pStmt);
-		
-		 for (int i =0;i<  count ;i++)
-		 {
-			const char *result = safe_sqlite3_column_text(pStmt, i);			
-			if (i==0) es.errorType = getErrorTypeWithId(atoi(result));							
-			else if (i==1) es.count = atoi(result);					
-		 }		
+		  int col = 0;
+		  es.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
+		  es.count = sqlite3_column_int(pStmt,col++);					
+		 		
 		 v.push_back(es);		 
 	  }
    }else{
@@ -490,18 +487,13 @@ ErrorType dbrequest::getErrorTypeWithId(int id)
 		sqlite3_bind_int(pStmt,1,id);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			
-			int count = sqlite3_data_count(pStmt);		
-			for (int i =0;i<  count ;i++)
-			{
-				const char *result = safe_sqlite3_column_text(pStmt, i);			
-				if (i==0) et.id = atoi(result);		
-				else if (i==1) et.id_type = atoi(result);					
-				else if (i==2) et.error = result;
-				else if (i==3) et.details = result;
-				else if (i==4) et.severity = getErrorSeverityWithId(atoi(result));	
-				else if (i==5) et.category = getErrorCategoryWithId(atoi(result));				
-			}					 
+			int col = 0; 
+			et.id = sqlite3_column_int(pStmt, col++);
+			et.id_type = sqlite3_column_int(pStmt, col++);
+			et.error = safe_sqlite3_column_text(pStmt, col++);
+			et.details = safe_sqlite3_column_text(pStmt, col++);
+			et.severity = getErrorSeverityWithId(sqlite3_column_int(pStmt, col++));	
+			et.category = getErrorCategoryWithId(sqlite3_column_int(pStmt, col++));				 
 		}		
     }else{
 		raiseError(conn,selectSql);
@@ -517,27 +509,21 @@ ErrorSeverity dbrequest::getErrorSeverityWithId(int id)
 {
 	sqlite3_stmt *pStmt;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::stringstream ss;
-	ss<<id;
-	int rc;	
+	
 	const char *zErrMsg= 0; 
-	std::string selectSql = "SELECT * FROM ErrorSeverity where ID_SEVERITY ='" + ss.str()+ "'"; 	
+	static const std::string selectSql = "SELECT * FROM ErrorSeverity where ID_SEVERITY =?"; 	
 	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	ErrorSeverity es;  
 	if(rc == SQLITE_OK)
-	{	  
+	{	
+		sqlite3_bind_int(pStmt,1,id);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
-			
-			int count = sqlite3_data_count(pStmt);		
-			for (int i =0;i<  count ;i++)
-			{
-				const char *result = safe_sqlite3_column_text(pStmt, i);			
-				if (i==0) es.id = atoi(result);							
-				else if (i==1) es.id_sevrity =atoi(result);
-				else if (i==2) es.gravity = result;							
-			}					 
+			int col = 0; 
+			es.id = sqlite3_column_int(pStmt, col++);
+			es.id_sevrity = sqlite3_column_int(pStmt, col++);
+			es.gravity = safe_sqlite3_column_text(pStmt, col++);					 
 		}		
     }else{
 		raiseError(conn,selectSql);
@@ -553,26 +539,22 @@ ErrorCategory dbrequest::getErrorCategoryWithId(int id)
 {	
 	sqlite3_stmt *pStmt;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::stringstream ss;
-	ss<<id;
-	int rc;	
+
 	const char *zErrMsg= 0; 
-	std::string selectSql = "SELECT * FROM ErrorCategory where ID_CATEGORY ='" + ss.str()+ "'"; 	
-	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	std::string selectSql = "SELECT * FROM ErrorCategory where ID_CATEGORY =?"; 	
+
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	ErrorCategory ec;  
 	if(rc == SQLITE_OK)
-	{	  
+	{	
+		sqlite3_bind_int(pStmt,1,id);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{			
-			int count = sqlite3_data_count(pStmt);		
-			for (int i =0;i<  count ;i++)
-			{
-				const char *result = safe_sqlite3_column_text(pStmt, i);			
-				if (i==0) ec.id = atoi(result);							
-				else if (i==1) ec.id_category =atoi(result);
-				else if (i==2) ec.name = result;							
-			}					 
+			int col = 0; 
+			ec.id = sqlite3_column_int(pStmt, col++);
+			ec.id_category = sqlite3_column_int(pStmt, col++);
+			ec.name = safe_sqlite3_column_text(pStmt, col++);
+				 
 		}		
 	}else{
 		raiseError(conn,selectSql);
@@ -587,35 +569,28 @@ std::vector<ErrorType> dbrequest::getErrorType()
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);	
 	sqlite3_stmt *pStmt;
-	int rc;	
+		
 	const char *zErrMsg=0; 
-	std::string selectSql = "SELECT * FROM ERRORTYPE"; 
-	DEBUG_ME
+	const std::string selectSql = "SELECT * FROM ERRORTYPE"; 
+	
 	//std::string selectSql = "SELECT * FROM ERRORTYPE where ID_CATEGORY = 6"; 
 	std::vector<ErrorType> v;
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-	ErrorType et;  
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	  
 	if(rc == SQLITE_OK)
-	{	  
+	{
+		ErrorType et;
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
+			int col = 0; 
+			et.id = sqlite3_column_int(pStmt, col++);
+			et.id_type = sqlite3_column_int(pStmt, col++);
+			et.error = safe_sqlite3_column_text(pStmt, col++);
+			et.details = safe_sqlite3_column_text(pStmt, col++);
+			et.id_severity = sqlite3_column_int(pStmt, col++);
+			et.severity = getErrorSeverityWithId(et.id_severity);	
+			et.category = getErrorCategoryWithId(sqlite3_column_int(pStmt, col++));
 			
-			int count = sqlite3_data_count(pStmt);		
-			for (int i =0;i<  count ;i++)
-			{
-				const char *result = safe_sqlite3_column_text(pStmt, i);			
-				if (i==0) et.id = atoi(result);	
-				else if (i==1) et.id_type = atoi(result);						
-				else if (i==2) et.error = result;
-				else if (i==3) et.details = result;
-				else if (i==4) 
-				{
-					et.severity = getErrorSeverityWithId(atoi(result));
-					et.id_severity = atoi(result);		
-				}	
-				else if (i==5) et.category = getErrorCategoryWithId(atoi(result));
-						
-			}
 			v.push_back(et);				 
 		}		
    }else{
@@ -635,23 +610,20 @@ int dbrequest::getErrorTypeCountWithTestset(int idError,int id_testset)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);	
 	sqlite3_stmt *pStmt;
-	std::stringstream sidError,sIdTestset;
-	sidError << idError;
-	sIdTestset << id_testset;
-	int rc;	
+	
+	
 	int count =0;
 	const char *zErrMsg= 0; 
-	std::string selectSql = "SELECT count(ID) FROM MetsError where id_errortype ='" + sidError.str()+ "' and id_testset = '"+ sIdTestset.str()+"'"; 
-	DEBUG_ME
-	std::vector<ErrorType> v;
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-	ErrorType et;  
+	static const std::string selectSql = "SELECT count(ID) FROM MetsError where id_errortype = ? and id_testset = ?"; 
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
 	if(rc == SQLITE_OK)
-	{	  
-		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{			
-			const char *result = safe_sqlite3_column_text(pStmt, 0);			
-			count = atoi(result);	
+	{
+		sqlite3_bind_int(pStmt,1,idError);
+		sqlite3_bind_int(pStmt,2,id_testset);
+		while(sqlite3_step(pStmt) == SQLITE_ROW){				
+			count = sqlite3_column_int(pStmt, 0);
 		}		
    }else{
 		raiseError(conn,selectSql);
@@ -668,23 +640,21 @@ int dbrequest::getErrorTypeCountWithTestsetDates(int idError,int id_testset)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);	
 	sqlite3_stmt *pStmt;
-	std::stringstream sidError,sIdTestset;
-	sidError << idError;
-	sIdTestset << id_testset;
-	int rc;	
+	
 	int count =0;
 	const char *zErrMsg= 0; 
-	std::string selectSql = "SELECT count(ID) FROM DATEERROR where id_errortype ='" + sidError.str()+ "' and id_testset = '"+ sIdTestset.str()+"'"; 
-	DEBUG_ME
-	std::vector<ErrorType> v;
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-	ErrorType et;  
+	const std::string selectSql = "SELECT count(ID) FROM DATEERROR where id_errortype =? and id_testset = ?"; 
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
 	if(rc == SQLITE_OK)
-	{	  
+	{	
+		sqlite3_bind_int(pStmt,1,idError);
+		sqlite3_bind_int(pStmt,2,id_testset);
+
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{			
-			const char *result = safe_sqlite3_column_text(pStmt, 0);			
-			count = atoi(result);	
+		{						
+			count = sqlite3_column_int(pStmt, 0);	
 		}		
 	}else{
 		raiseError(conn,selectSql);
@@ -699,17 +669,17 @@ int dbrequest::getErrorTypeCountWithTestsetDates(int idError,int id_testset)
 std::map<QDate,std::vector<int> > dbrequest::getmMetsDate(int id_testset)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::stringstream oIdTestset;
-	oIdTestset << id_testset;
+
     sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0;
 	std::map<QDate,std::vector<int> >  mapMetsDate;
 	std::vector<int> vMets;
-	std::string selectSql = "SELECT ID_METS, DATE FROM METS where ID_TESTSET ='" + oIdTestset.str() + "'";
-	DEBUG_ME
+	const std::string selectSql = "SELECT ID_METS, DATE FROM METS where ID_TESTSET =?";
+
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
    if(rc == SQLITE_OK)
-   {	  
+   {	
+	   sqlite3_bind_int(pStmt,1,id_testset);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			int result_id_mets = sqlite3_column_int(pStmt, 0);
@@ -741,18 +711,17 @@ std::map<int,LinkedFiles> dbrequest::getMapLinkedFiles(int idMets,std::string fi
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	std::map<int,LinkedFiles> altoPath;
-	std::stringstream oid;
-	oid << idMets;	
+
     sqlite3_stmt *pStmt;
-	int rc;	
+	
 	const char *zErrMsg= 0; 
 	int page=1;
 	static const std::string selectSql = "SELECT a.ID,a.ID_METS,a.TYPE,a.GROUPID,a.CHECKSUM,a.SIZE,a.FILENAME,a.FILEID,a.DPI, b.FILEID "
 		                    "FROM LINKEDFILES a LEFT JOIN STRUCTUREERROR b on a.ID_METS = b.ID_METS and a.FILEID =b.FILEID "
 							"where a.ID_METS = ? and a.TYPE = ? "
 							"ORDER BY a.ID";
-	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	LinkedFiles lf;  
 	if(rc == SQLITE_OK)
 	{	int count = -1 ;
@@ -810,18 +779,18 @@ std::map<int,LinkedFiles> dbrequest::getMapLinkedFiles(int idMets,std::string fi
 std::map<int,std::pair<int,int>> dbrequest::getSumMetsYear(int id_testset)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::stringstream oid;
-	oid << id_testset;	
+
     sqlite3_stmt *pStmt;
-	int rc;	
+		
 	const char *zErrMsg= 0; 
    MetsFile mets;  
-   std::string selectSql = "select year,count(year) from Mets where id_testset ='" + oid.str() + "' group by year";  
-   DEBUG_ME
-   rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+   const std::string selectSql = "select year,count(year) from Mets where id_testset =? group by year";  
+   
+   int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
    std::map<int,std::pair<int,int>>  mapYearCount;
    if(rc == SQLITE_OK)
-   {	  
+   {
+	   sqlite3_bind_int(pStmt,1,id_testset);	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{	
 			int count = sqlite3_data_count(pStmt);	
@@ -929,20 +898,19 @@ std::map<QDate,DateComment> dbrequest::getDateComment(int id_testset)
 std::vector<std::pair<int,DateError> > dbrequest::getvDateError(int id_testset)
 {	
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::stringstream oIdTestset,oYear;
-	oIdTestset << id_testset;	
-	//oYear << year;
+
     sqlite3_stmt *pStmt;
-	int rc;	
+	
 	const char *zErrMsg= 0; 
 	DateError derror;
 	std::vector<std::pair<int,DateError>>  vDateError;
-	std::string selectSql = "SELECT ID,ID_TESTSET,DATE_BEGIN,DATE_END,ISSUES,COMMENT,ID_ERRORTYPE FROM DATEERROR where ID_TESTSET ='" + oIdTestset.str() + "'";
-	DEBUG_ME
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	const std::string selectSql = "SELECT ID,ID_TESTSET,DATE_BEGIN,DATE_END,ISSUES,COMMENT,ID_ERRORTYPE FROM DATEERROR where ID_TESTSET =?";
+
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
 	if(rc == SQLITE_OK)
-	{	  
+	{
+		sqlite3_bind_int(pStmt,1,id_testset);
       while(sqlite3_step(pStmt) == SQLITE_ROW)
       {
 		int count = sqlite3_data_count(pStmt);
