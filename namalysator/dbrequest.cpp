@@ -478,17 +478,16 @@ ErrorType dbrequest::getErrorTypeWithId(int id)
 {
 	sqlite3_stmt *pStmt;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::stringstream ss;
-	ss << id;
-	int rc;	
-	const char *zErrMsg= ""; 
-	std::string selectSql = "SELECT * FROM ERRORTYPE where id_type ='" + ss.str()+ "'"; 
-	DEBUG_ME
+
+	const char *zErrMsg= 0; 
+	const std::string selectSql = "SELECT * FROM ERRORTYPE where id_type = ?"; 
+
 	std::vector<ErrorType> v;
-	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	ErrorType et;  
 	if(rc == SQLITE_OK)
 	{	  
+		sqlite3_bind_int(pStmt,1,id);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			
