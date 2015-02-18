@@ -4,17 +4,6 @@
 #include <QDate>
 #include "../common_files/struct.h"
 
-
-/**
-* A test class. A more elaborate class description.
-*/
-struct TestSet
-{
-	int id;
-	std::string batchName;
-	QDate date;
-};
-
 struct LinkedFiles
 {
 	int id;
@@ -33,7 +22,7 @@ struct MetsFile
 {
 	int idMets;
 	int idTestSet;
-	std::string docType; // The type of document (e.g. "Newspaper" or "Serial")
+	std::string docType; // The type of document (e.g. "Newspaper" or "Serial", "Monograph")
 	std::string path;
 	std::string fileName;
 	std::string issueNumber;
@@ -58,6 +47,7 @@ struct ErrorSeverity {
 	int id_sevrity;
 	std::string gravity;
 };
+
 class ErrorType {
 public:
 	int id;
@@ -97,13 +87,10 @@ class BatchDetail
 {
 private:
 	BatchDetail(){};
-	//dbrequest db;
 	static BatchDetail bd;
 public:
-	Inventaire inventaire;
 	std::string path; // Path of disk	
 	std::string database;
-	//std::string databaseInv; 
 	std::string batchName;
 	std::string minDate;
 	std::string maxDate;
@@ -121,12 +108,6 @@ public:
 	std::string getErrorPath();
 
 	static BatchDetail& getBatchDetail(){return bd;};
-	/*
-	dbrequest& getDataBase(){
-		db.setDataBaseName(database);
-		return db;
-	};
-	*/
 };
 
 struct DateComment
@@ -179,11 +160,9 @@ public:
 
 struct Title 
 {
-	//int id;
 	int id_article;
 	int id_mets;
 	int countString;
-	//int countError;
 	std::string title;
 	MetsFile mets;
 	Article article;

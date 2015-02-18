@@ -19,19 +19,6 @@ struct dmdsec : public dataitem
 	
 };
 
-
-struct Inventaire
-{
-	int id;
-	std::string name;
-	std::string code;
-	std::string input;
-	std::string database;
-};
-
-
-
-
 //! structure of an error
 struct Error
 {
