@@ -249,41 +249,37 @@ int start()
 			return 1;
 		};
 
-		//cerr << metsP.getContext().inventory.toString();
+		std::string outputDir = parameter.getValue("outputDir");
+		std::string generatedFile = outputDir + "/GENERATED" + currentMetsFile;
+		transformParser transformCH;
+		transformCH.getContext().openFile(generatedFile);
+		metsParserCall->setContentHandler(&transformCH);
 
-		//if (parameter.getValueCheck("monograph.structure") == 1){
-			std::string outputDir = parameter.getValue("outputDir");
-			std::string generatedFile = outputDir + "/GENERATED" + currentMetsFile;
-			transformParser transformCH;
-			transformCH.getContext().openFile(generatedFile);
-			metsParserCall->setContentHandler(&transformCH);
+		if ( metsParserCall->parse( parseString.c_str())!= 0){
+				return 2;
+		};
 
-			if ( metsParserCall->parse( parseString.c_str())!= 0){
-					return 2;
-			};
-
-			transformCH.getContext().closeFile();
+		transformCH.getContext().closeFile();
 
 
-			if ( transformCH.getContext().typeIssue.compare ("Monograph")==0 ){
-				parserCheckBNL = parserCheckBNLMono;
-			}else if ( transformCH.getContext().typeIssue.compare ("Newspaper")==0 ){
-				parserCheckBNL = parserCheckBNLNews;
-			}else if ( transformCH.getContext().typeIssue.compare ("Serial")==0 ){
-				parserCheckBNL = parserCheckBNLSerial;
-			}else {
-				cerr << "STOP immediately --> Unknown issue "<< transformCH.getContext().typeIssue << endl;
-				return 4;
-			}
+		if ( transformCH.getContext().typeIssue.compare ("Monograph")==0 ){
+			parserCheckBNL = parserCheckBNLMono;
+		}else if ( transformCH.getContext().typeIssue.compare ("Newspaper")==0 ){
+			parserCheckBNL = parserCheckBNLNews;
+		}else if ( transformCH.getContext().typeIssue.compare ("Serial")==0 ){
+			parserCheckBNL = parserCheckBNLSerial;
+		}else {
+			cerr << "STOP immediately --> Unknown issue "<< transformCH.getContext().typeIssue << endl;
+			return 4;
+		}
 
-			parserCheckBNL->setErrorHandler(&hError);
+		parserCheckBNL->setErrorHandler(&hError);
 
-			if ( parserCheckBNL->parse( generatedFile.c_str())!= 0){
-				cerr << "STOP immediately --> File"<< generatedFile.c_str() << endl; // TODO
-				// skip this mets and go next one
-				return 3;
-			};
-		//}
+		if ( parserCheckBNL->parse( generatedFile.c_str())!= 0){
+			cerr << "STOP immediately --> File"<< generatedFile.c_str() << endl; // TODO
+			// skip this mets and go next one
+			return 3;
+		};
 
 		pt.LogTime("Parsing METS file");
 

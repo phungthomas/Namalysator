@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<database>C:/Data/DB/smallTestBook</database>
-	<inventoryFile>file.csv</inventoryFile>
-	<batchName>obermosel-1945-july</batchName>
-  <subbatchName>subBatch</subbatchName>
-	<input>C:/SmallTestBook</input>
+	<database>C:/Data/DB/BIGTEST</database>
+	<inventoryFile></inventoryFile>
+	<batchName>batch1</batchName>
+	<subbatchName>deletz</subbatchName>
+	<input>C:/BIGTEST/batch1/deletz_20140316</input>
 	<outputDir>C:/Data/output</outputDir> <!-- where intermediate generate file are put before analysis, mainly a temp directory -->
 	<verifiers><!-- metsverifier will save a atoi of data for each key under node verifiers-->
 		<dataintegrity>
@@ -28,18 +28,25 @@
 			<multipleBlockUse>1</multipleBlockUse>
 			<measurementSTD>1</measurementSTD>
 		</blocks>
-		<monograph>
-			<structure>1</structure>
-		</monograph>
-		<inventoryBook>1</inventoryBook>
+		<inventoryBook>0</inventoryBook>
 	</verifiers>
-	<checkTitle>5</checkTitle> <!-- per 1000 -->
-	<sampling>1000</sampling> <!-- per 1000 -->
+	<checkTitle>50</checkTitle> <!-- per 1000 -->
+	<sampling>50</sampling> <!-- per 1000 -->
 	<dates>1</dates>
 	<issueNumber>1</issueNumber>
 	<XSDManager>
-		<type>BNL</type>
+		<type>BNLMonograph</type>
 		<addXSD>bnl-monograph_v1.0.xsd</addXSD>
+		<lock/>
+	</XSDManager>
+	<XSDManager>
+		<type>BNLSerial</type>
+		<addXSD>bnl-serial_v1.0.xsd</addXSD>
+		<lock/>
+	</XSDManager>
+	<XSDManager>
+		<type>BNLNewspaper</type>
+		<addXSD>bnl-newspaper_v1.3.xsd</addXSD>
 		<lock/>
 	</XSDManager>
 	<XSDManager>
@@ -55,7 +62,6 @@
 		<type>ALTO</type>
 		<addXSD>alto-1-2.xsd</addXSD>
 		<addXSD>alto-1-4.xsd</addXSD>
-		<addXSD>nonexistingFile.xsd</addXSD>
 		<lock/>
 	</XSDManager>
 	
