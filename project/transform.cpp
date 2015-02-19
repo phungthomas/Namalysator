@@ -9,11 +9,6 @@
 
 class FptrElem : public StateTransformRootState{
 
-private :
-
-	char* type;
-
-
 public :
 
 	virtual void endElement (const char* const name);
