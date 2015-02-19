@@ -8,6 +8,7 @@
 class transformContext : public StateParserContext{
 public :
 	transformContext():firstTag(true){};
+	std::string typeIssue;
 	std::string filename;
 	std::ofstream fileStream;
 

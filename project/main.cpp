@@ -197,8 +197,11 @@ int start()
 
 	pt.LogTime("Inserting DB parameters");
 	
+	parserCheck* parserCheckBNLMono=parameter.getParser("BNLMonograph");
+	parserCheck* parserCheckBNLSerial=parameter.getParser("BNLSerial");
+	parserCheck* parserCheckBNLNews=parameter.getParser("BNLNewspaper");
 
-	parserCheck* parserCheckBNL=parameter.getParser("BNL");
+	parserCheck* parserCheckBNL=0;
 	parserCheck* metsParserCall=parameter.getParser("METS");
 	parserCheck* altoParserCall=parameter.getParser("ALTO");
 
@@ -248,7 +251,7 @@ int start()
 
 		//cerr << metsP.getContext().inventory.toString();
 
-		if (parameter.getValueCheck("monograph.structure") == 1){
+		//if (parameter.getValueCheck("monograph.structure") == 1){
 			std::string outputDir = parameter.getValue("outputDir");
 			std::string generatedFile = outputDir + "/GENERATED" + currentMetsFile;
 			transformParser transformCH;
@@ -261,13 +264,26 @@ int start()
 
 			transformCH.getContext().closeFile();
 
+
+			if ( transformCH.getContext().typeIssue.compare ("Monograph")==0 ){
+				parserCheckBNL = parserCheckBNLMono;
+			}else if ( transformCH.getContext().typeIssue.compare ("Newspaper")==0 ){
+				parserCheckBNL = parserCheckBNLNews;
+			}else if ( transformCH.getContext().typeIssue.compare ("Serial")==0 ){
+				parserCheckBNL = parserCheckBNLSerial;
+			}else {
+				cerr << "STOP immediately --> Unknown issue "<< transformCH.getContext().typeIssue << endl;
+				return 4;
+			}
+
 			parserCheckBNL->setErrorHandler(&hError);
 
 			if ( parserCheckBNL->parse( generatedFile.c_str())!= 0){
-				cerr << "STOP immediately --> File"<< generatedFile.c_str() << endl;
+				cerr << "STOP immediately --> File"<< generatedFile.c_str() << endl; // TODO
+				// skip this mets and go next one
 				return 3;
 			};
-		}
+		//}
 
 		pt.LogTime("Parsing METS file");
 

@@ -33,13 +33,12 @@ class DivElem : public StateTransformRootState{
 private :
 
 	StateParserState* clean1;
-	StateParserState* clean2;
 
 	std::string type;
 
 public :
 
-	DivElem():clean1(0),clean2(0){};
+	DivElem():clean1(0){};
 
 		//virtual void characters (const char* const chars, const int len);
     virtual void startElement (const char* const name, const xercesc::Attributes &attrs );
@@ -61,7 +60,20 @@ void DivElem::startElement (const char* const name, const xercesc::Attributes &a
 
 	if ( CTX->firstTag ) {
 		CTX->fileStream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
-		CTX->fileStream << "<" << type << " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://BNL.Namespace/\" xsi:schemaLocation=\"http://BNL.Namespace/ bnl-monograph_v1.0.xsd\" >" << std::endl;
+		std::string append;
+		CTX->typeIssue = type;
+
+		if ( type.compare("Monograph")==0 ){
+			append = " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://downloads.bnl.lu/schemas/bnl-monograph_v1.0.xsd\" xsi:schemaLocation=\"http://downloads.bnl.lu/schemas/bnl-monograph_v1.0.xsd bnl-monograph_v1.0.xsd\" ";
+		}else if ( type.compare("Newspaper")==0 ){
+			append = " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://downloads.bnl.lu/schemas/bnl-newspaper_v1.3.xsd\" xsi:schemaLocation=\"http://downloads.bnl.lu/schemas/bnl-newspaper_v1.3.xsd bnl-newspaper_v1.3.xsd\" ";
+		}else if ( type.compare("Serial")==0 ){
+			append = " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://downloads.bnl.lu/schemas/bnl-serial_v1.0.xsd\" xsi:schemaLocation=\"http://downloads.bnl.lu/schemas/bnl-serial_v1.0.xsd bnl-serial_v1.0.xsd\" ";
+		}else{
+			append = " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://BNL.Namespace/\" xsi:schemaLocation=\"http://BNL.Namespace/ bnl-monograph_v1.0.xsd\" ";
+		}
+
+		CTX->fileStream << "<" << type << append << ">" << std::endl;
 		CTX->firstTag = false;
 	}else{
 		CTX->fileStream << "<" << type << ">" << std::endl;
@@ -74,20 +86,20 @@ void DivElem::endElement (const char* const name){
 	CTX->fileStream << "</" << type << ">"<< std::endl ;
 	
 	if ( clean1 ) {delete clean1; clean1  = 0;} 
-	if ( clean2 ) {delete clean2; clean2  = 0;} 
 }
 
 StateParserState* DivElem::getNext(const char* const name){
-	std::map<std::string,StateParserState*> map;
+
 	static StateParserState* root=new StateTransformRootState();
 
 	StateParserState* ret=root;
 
-	map["div"]=	clean1 = new DivElem();
-	map["fptr"]= clean2 = new FptrElem();
-
-	std::map<std::string,StateParserState*>::iterator it = map.find(name);
-	if ( it != map.end()) ret = (*it).second;
+	if ( strcmp ( name,"div" ) == 0) {
+	  ret = clean1 = new DivElem();
+	};
+	if ( strcmp ( name,"fptr" ) == 0) {
+	  ret = clean1 = new FptrElem();
+	};
 
 	return ret;
 }
