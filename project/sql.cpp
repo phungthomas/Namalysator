@@ -481,33 +481,35 @@ void database::insertArticle(int id_mets, datafactory_set<Article> dfarticle,int
 void database::insertMetsError(int category,const std::string &relatedType,const std::string &filePart,const Error &e)
 {
 	int id_mets = select_idMets();	
-	char *zErrMsg =0;	
-	std::stringstream oErrorline,oErrorColumn,oIdMets,oCategory;	
-	oCategory << category;
-	oErrorline << e.errorline;
-	oErrorColumn << e.errorcolumn;	
-	oIdMets << id_mets;
-	// TODO: Replace this with statement with placeholders
-	std::string message = replaceApostrophe(e.message);	
-	std::string sql = "INSERT INTO METSERROR ('ID_RELATED','RELATED_TYPE','ID_TESTSET', 'FILE_PART',\
-					  'ERRORLINE', 'ERRORCOLUMN','ID_ERRORTYPE', 'MESSAGE','ID_SEARCH') \
-					  VALUES   ('" + oIdMets.str()  + "',  \
-					  '" + relatedType + "',  \
-					  '" + stringIdTestSet + "',  \
-					  '" + filePart + "',  \
-					  '" + oErrorline.str() + "',  \
-					  '" + oErrorColumn.str() + "',  \
-					  '" + oCategory.str() + "',  \
-					  '" + message + "',  \
-					  '" + message + "')";	
-	int rc = sqlite3_exec(db, sql.c_str(), NULL, 0, &zErrMsg);	
-	if( rc )
-	{					
-		std::stringstream ss;
-		ss <<  "Can not insert data into table Schema Error: " << &zErrMsg ;	
-		insertLog(ss.str());
+	const char *zErrMsg =0;
+	sqlite3_stmt *pStmt;
+
+	std::string sql = "INSERT INTO METSERROR ('ID_RELATED','RELATED_TYPE','ID_TESTSET', 'FILE_PART',"
+					  "'ERRORLINE', 'ERRORCOLUMN','ID_ERRORTYPE', 'MESSAGE','ID_SEARCH') "
+					  "VALUES   (?,  ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?)";	
+	
+	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt,&zErrMsg);
+	if( rc == SQLITE_OK ){
+		sqlite3_bind_int(pStmt,1,id_mets);
+		sqlite3_bind_text(pStmt,2,relatedType.c_str(),relatedType.length(),SQLITE_STATIC);
+		sqlite3_bind_int(pStmt,3,idTestset);
+		sqlite3_bind_text(pStmt,4,filePart.c_str(),filePart.length(),SQLITE_STATIC);
+		sqlite3_bind_int(pStmt,5,e.errorline);
+		sqlite3_bind_int(pStmt,6,e.errorcolumn);
+		sqlite3_bind_int(pStmt,7,category);
+		sqlite3_bind_text(pStmt,8,e.message.c_str(),e.message.length(),SQLITE_STATIC);
+		sqlite3_bind_text(pStmt,9,e.message.c_str(),e.message.length(),SQLITE_STATIC);
+		
+		if ( sqlite3_step(pStmt) != SQLITE_DONE )  {
+			dberror(std::string("INSERT NOT DONE:")+sql);
+		};
+		
+	}else{
+		dberror(std::string("PREPARE PROBLEM:")+sql);		
 	}
-	if ( zErrMsg ) { sqlite3_free(zErrMsg);};
+
+	sqlite3_finalize(pStmt);
+	
 }
 //! insert message into log
 void database::insertLog(std::string message)
@@ -804,36 +806,35 @@ void database::insertParameterVerifiers(Parameters *param)
 void database::insertMetsErrorWithId(int category,const std::string &relatedType,const std::string &filePart,const Error &e,std::string id)
 {	
 	int id_mets = select_idMets();	
-	char *zErrMsg =0;	
-	std::stringstream oErrorline,oErrorColumn,oIdMets,oCategory;	
-	oCategory << category;
-	oErrorline << e.errorline;
-	oErrorColumn << e.errorcolumn;	
-	oIdMets << id_mets;			
-	std::string message (e.message);
-	// TODO: Replace this with statement with placeholders
-	message = replaceApostrophe(e.message);
+	const char *zErrMsg =0;
+	sqlite3_stmt *pStmt;
 
 	std::string sql = "INSERT INTO MetsError ('ID_RELATED','RELATED_TYPE','ID_TESTSET', 'FILE_PART',\
 					  'ERRORLINE', 'ERRORCOLUMN','ID_ERRORTYPE', 'MESSAGE','ID_SEARCH') \
-					  VALUES   ('" + oIdMets.str()  + "',  \
-					  '" + relatedType + "',  \
-					  '" + stringIdTestSet + "',  \
-					  '" + filePart + "',  \
-					  '" + oErrorline.str() + "',  \
-					  '" + oErrorColumn.str() + "',  \
-					  '" + oCategory.str() + "',  \
-					  '" + message + "',  \
-					  '" + id + "')";		
+					  VALUES   (?,  ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?)";		
 					  
-	int rc = sqlite3_exec(db, sql.c_str(), NULL, 0, &zErrMsg);
-	if( rc )
-	{
-		std::stringstream ss;
-		ss <<  "Can not insert data into table Schema ErrorTest: " << zErrMsg ;	
-		insertLog(ss.str());		
+	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt,&zErrMsg);
+	if( rc == SQLITE_OK ){
+		sqlite3_bind_int(pStmt,1,id_mets);
+		sqlite3_bind_text(pStmt,2,relatedType.c_str(),relatedType.length(),SQLITE_STATIC);
+		sqlite3_bind_int(pStmt,3,idTestset);
+		sqlite3_bind_text(pStmt,4,filePart.c_str(),filePart.length(),SQLITE_STATIC);
+		sqlite3_bind_int(pStmt,5,e.errorline);
+		sqlite3_bind_int(pStmt,6,e.errorcolumn);
+		sqlite3_bind_int(pStmt,7,category);
+		sqlite3_bind_text(pStmt,8,e.message.c_str(),e.message.length(),SQLITE_STATIC);
+		sqlite3_bind_text(pStmt,9,id.c_str(),id.length(),SQLITE_STATIC);
+
+		if ( sqlite3_step(pStmt) != SQLITE_DONE ) {
+			dberror(std::string("INSERT NOT DONE:")+sql);
+		};
+		
+	}else{
+		dberror(std::string("PREPARE PROBLEM:")+sql);		
 	}
-	if ( zErrMsg ) { sqlite3_free(zErrMsg);};
+
+	sqlite3_finalize(pStmt);
+	
 }
 
 bool database::FillSupplements(int idMets, std::vector<string> &supplements)
