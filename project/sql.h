@@ -21,7 +21,7 @@ private:
 	std::string logFilePath;
 
 	void deletePARAMTESTSET();
-	int select_idMets();
+	Mets select_idMets();
 	
 public:
 	//! constructor with batchName and dataBaseName as parameter
