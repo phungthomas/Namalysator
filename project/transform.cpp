@@ -11,17 +11,12 @@ class FptrElem : public StateTransformRootState{
 
 public :
 
-	virtual void endElement (const char* const name);
+	virtual void endElement (const char* const name){
+		CTX->fileStream  << "<fptr><area/></fptr>" << std::endl;
+	};
 	
 
 };
-
-void FptrElem::endElement (const char* const name){
-
-	CTX->fileStream  << "<fptr><area/></fptr>" << std::endl;
-
-}
-
 
 class DivElem : public StateTransformRootState{
 
@@ -39,8 +34,6 @@ public :
     virtual void startElement (const char* const name, const xercesc::Attributes &attrs );
 	virtual void endElement (const char* const name);
 	virtual StateParserState* getNext(const char* const name);
-	
-
 };
 
 void DivElem::startElement (const char* const name, const xercesc::Attributes &attrs ){
