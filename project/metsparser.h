@@ -20,7 +20,9 @@ public :
 
 	// need by structMap
 	Item *currentItem;
-	Item rootItem;
+	Item rootItemLOGICAL;
+	Item rootItemPHYSICAL; // non use today but fill by 
+	Item* rootItem;
 	typeBlock typeblock; // probably could go outside of the context
 
 	// need by filegroup	
