@@ -18,8 +18,6 @@ verifycoveragepercentagealtoblocks::verifycoveragepercentagealtoblocks(datafacto
 		}
 	}
 	
-	datafactory_set<Article> dfarticle = dfverifiers->get_set<Article>();
-	
 	datafactory_set<altoblock> dfaltoblock= dfverifiers->get_set<altoblock>();
 	for (datafactory_set<altoblock>::iterator it = dfaltoblock.begin(); it != dfaltoblock.end(); ++it)
 	{	
