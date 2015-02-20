@@ -1,7 +1,6 @@
 #include "verifyinvalidsupplement.h"
 #include "errorhandler.h"
 
-const char* string_issue = "MODSMD_ISSUE";
 const char* string_find = "MODSMD_SUPPLEMENT";
 
 verifyinvalidsupplement::verifyinvalidsupplement(datafactory *dfVerifiers,errorHandler *hError,std::string &fileName)
