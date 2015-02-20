@@ -163,7 +163,8 @@ create table METSERROR(
   ERRORCOLUMN INTEGER,  
   MESSAGE varchar(255),
   ID_ERRORTYPE INTEGER,
-  ID_SEARCH varchar(50)
+  ID_SEARCH varchar(50),
+  HASHKEY varchar(50)
 );
 
 drop table if exists DATEERROR;

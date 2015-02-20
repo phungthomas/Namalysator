@@ -9,8 +9,10 @@
 #include "metsverifier.h"
 #include "errorhandler.h"
 #include "metsparser.h"
+#include "md5wrapper.h"
 
 typedef std::map<std::string,std::vector<std::string>> my_map_type;
+md5wrapper g_md5;
 
 database::database(const std::string &batch,const std::string &dataBase,const std::string &logFile)
 {
@@ -478,6 +480,7 @@ void database::insertArticle(int id_mets, datafactory_set<Article> dfarticle,int
 }
 
 //insert error from Mets file into database
+/*
 void database::insertMetsError(int category,const std::string &relatedType,const std::string &filePart,const Error &e)
 {
 	int id_mets = select_idMets();	
@@ -499,6 +502,10 @@ void database::insertMetsError(int category,const std::string &relatedType,const
 		sqlite3_bind_int(pStmt,7,category);
 		sqlite3_bind_text(pStmt,8,e.message.c_str(),e.message.length(),SQLITE_STATIC);
 		sqlite3_bind_text(pStmt,9,e.message.c_str(),e.message.length(),SQLITE_STATIC);
+
+		std::stringstream ss;
+		ss << relatedType << filePart << category << e.errorline << e.errorcolumn;
+		cerr << "MD5" << g_md5.getHashFromString(ss.str());
 		
 		if ( sqlite3_step(pStmt) != SQLITE_DONE )  {
 			dberror(std::string("INSERT NOT DONE:")+sql);
@@ -511,6 +518,8 @@ void database::insertMetsError(int category,const std::string &relatedType,const
 	sqlite3_finalize(pStmt);
 	
 }
+*/
+
 //! insert message into log
 void database::insertLog(std::string message)
 {
@@ -810,8 +819,8 @@ void database::insertMetsErrorWithId(int category,const std::string &relatedType
 	sqlite3_stmt *pStmt;
 
 	std::string sql = "INSERT INTO MetsError ('ID_RELATED','RELATED_TYPE','ID_TESTSET', 'FILE_PART',\
-					  'ERRORLINE', 'ERRORCOLUMN','ID_ERRORTYPE', 'MESSAGE','ID_SEARCH') \
-					  VALUES   (?,  ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?)";		
+					  'ERRORLINE', 'ERRORCOLUMN','ID_ERRORTYPE', 'MESSAGE','ID_SEARCH','HASHKEY') \
+					  VALUES   (?,  ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?, ?)";		
 					  
 	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt,&zErrMsg);
 	if( rc == SQLITE_OK ){
@@ -825,6 +834,12 @@ void database::insertMetsErrorWithId(int category,const std::string &relatedType
 		sqlite3_bind_text(pStmt,8,e.message.c_str(),e.message.length(),SQLITE_STATIC);
 		sqlite3_bind_text(pStmt,9,id.c_str(),id.length(),SQLITE_STATIC);
 
+		std::stringstream ss;
+		ss << relatedType << filePart << category << e.errorline << e.message << id;
+		std::string md5 = g_md5.getHashFromString(ss.str());
+
+		sqlite3_bind_text(pStmt,10,md5.c_str(),md5.length(),SQLITE_STATIC);
+		
 		if ( sqlite3_step(pStmt) != SQLITE_DONE ) {
 			dberror(std::string("INSERT NOT DONE:")+sql);
 		};

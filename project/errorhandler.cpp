@@ -51,12 +51,14 @@ void errorHandler::writeToLog(errorType category,const std::string &fileName, co
 		std::cout << "could not write to log --> Programm will continue " << std::endl; 	
 	}
 }
+/*
 //! get error from Mets during parsing files
 void errorHandler::getMetsError(errorType category,const std::string &relatedType,const std::string &file_part,Error e,const std::string &fName)
 {		
 	writeToLog(category,fName,convertStringErrorMessage(e));	
 	db->insertMetsError(category,relatedType,file_part,e);
 }
+*/
 
 //! write to log where the parser currently is
 void errorHandler::begin(const std::string &info)
@@ -138,7 +140,7 @@ void errorHandler::handle (const xercesc::SAXParseException& e, severity s){
   ee.message = ss.str();
   //string relatedType ="XML"; // todo define correcltly 
 
-  db->insertMetsError(category,_relatedType,_file_part,ee);
+  db->insertMetsErrorWithId(category,_relatedType,_file_part,ee,ee.message);
  
 
   XMLString::release (&id);

@@ -21,6 +21,7 @@ private:
 	std::string logFilePath;
 
 	void deletePARAMTESTSET();
+	int select_idMets();
 	
 public:
 	//! constructor with batchName and dataBaseName as parameter
@@ -51,11 +52,11 @@ public:
 	//!insert Article into Database
 	void insertArticle(int,datafactory_set<Article> dfarticle,int);
 	//! insert Mets error get from parser
-	void insertMetsError(int category,const std::string &relatedType,const std::string &filePart,const Error &e);
+	//void insertMetsError(int category,const std::string &relatedType,const std::string &filePart,const Error &e);
 	
 	bool insertTestSet(const std::string &batchName,const std::string & subBatch,const std::string &date);
 	void insertMets(const std::string &batchName,const std::string &path,const std::string &fileName);	
-	int select_idMets();	
+		
 	std::vector<int> getAllYears();
 	std::vector<std::pair<int,Mets>> vMetsYear(int year);
 	
