@@ -211,12 +211,13 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 			//static int i = 0;
 			//std::cerr << "Only Ones :"<< ++i << std::endl;
 			map["title"]=		new StateParsermodStateInventory("BIBREC_245a");
-			map["subTitle"]=	new StateParsermodStateInventory("BIBREC_245b"); // sub state machine
+			//map["subTitle"]=	new StateParsermodStateInventory("BIBREC_245b"); // sub state machine
 			map["identifier"]=	new StateParsermodStateInventory("BIBREC_SYS_NUM");
 			map["languageTerm"]=new StateParsermodStateInventory("languageTerm");
 			map["publisher"]=	new StateParsermodStateInventory("BIBREC_260b");
-			map["dateIssued"]=	new StateParsermodStateInventory("BIBREC_260c");
-			map["namePart"]=	new StateParsermodStateInventoryType(); // case of type
+			//map["dateIssued"]=	new StateParsermodStateInventory("BIBREC_260c");
+			map["namePart"]=	new StateParsermodStateInventory("BIBREC_100a"); // case of type
+			map["notyetdefined"]=	new StateParsermodStateInventory("BIBREC_008_7_10");
 		}
 	} onlyOnes (map);
 

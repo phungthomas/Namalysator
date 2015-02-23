@@ -183,9 +183,9 @@ void database::dberror(std::string sql){
 bool database::getInventory(std::string _sysnum, inventory& _inventory){
 	bool ret = false;
 	static std::string sql = "SELECT BIBREC_SYS_NUM,ITEM_barcode,BIBREC_CALL_NUM,"
-		              "  languageTerm,BIBREC_100a_1,BIBREC_100a_2,BIBREC_245a,"
-					  "  BIBREC_245b,BIBREC_260b,BIBREC_260c,CHECKED,BIBREC_300a,"
-					  "  BIBREC_300a_ref,BIBREC_300c from BOOKSINVENTORY where BIBREC_SYS_NUM=?";
+		              "  languageTerm,BIBREC_008_7_10,BIBREC_100a,BIBREC_245a,"
+					  "  BIBREC_260b,BIBREC_260c,CHECKED"
+					  "  from BOOKSINVENTORY where BIBREC_SYS_NUM=?";
 
 	const char *szErrMsg =0;
 	sqlite3_stmt *pStmt =0;
@@ -203,16 +203,11 @@ bool database::getInventory(std::string _sysnum, inventory& _inventory){
 			_inventory.ITEM_barcode = safe_sqlite3_column_text(pStmt, col++);
 			std::string dummy = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.languageTerm = safe_sqlite3_column_text(pStmt, col++);
-			_inventory.BIBREC_100a_1 = safe_sqlite3_column_text(pStmt, col++);
-			_inventory.BIBREC_100a_2 = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.BIBREC_008_7_10 = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.BIBREC_100a = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.BIBREC_245a = safe_sqlite3_column_text(pStmt, col++);
-			_inventory.BIBREC_245b = safe_sqlite3_column_text(pStmt, col++);
-			_inventory.BIBREC_260c = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.BIBREC_260b = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.checked = sqlite3_column_int(pStmt, col++);
-			dummy = safe_sqlite3_column_text(pStmt, col++);
-			dummy = safe_sqlite3_column_text(pStmt, col++);
-			dummy = safe_sqlite3_column_text(pStmt, col++);
-
 			ret = true;
 		}
 		

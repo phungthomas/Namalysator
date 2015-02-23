@@ -10,11 +10,9 @@
 class inventory{
 public:
 	std::string BIBREC_245a;
-	std::string BIBREC_245b;
-	std::string BIBREC_100a_1;
-	std::string BIBREC_100a_2;
+	std::string BIBREC_100a;
 	std::string BIBREC_260b;
-	std::string BIBREC_260c;
+	std::string BIBREC_008_7_10;
 	std::string ITEM_barcode;
 	std::string BIBREC_SYS_NUM; //could be ITEM_barcode depending of the section
 	std::string languageTerm; //std::string BIBREC_008_35_37;
