@@ -4,10 +4,9 @@
 SQLLoad::SQLLoad():zErrMsg(0),pStmt(0){
 	sql = "INSERT INTO BOOKSINVENTORY "
 		              "( BOX_ID,BIBREC_SYS_NUM,ITEM_barcode,BIBREC_CALL_NUM,"
-		              "  languageTerm,BIBREC_100a_1,BIBREC_100a_2,BIBREC_245a,"
-					  "  BIBREC_245b,BIBREC_260b,BIBREC_260c,BIBREC_300a,"
-					  "  BIBREC_300a_ref,BIBREC_300c) "
-		              "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		              "  languageTerm,BIBREC_008_7_10,BIBREC_100a,BIBREC_245a,"
+					  "  BIBREC_260b) "
+		              "VALUES (?,?,?,?,?,?,?,?,?);";
 }
 
 SQLLoad::~SQLLoad(){
@@ -29,7 +28,7 @@ void SQLLoad::Start(){
 
 void SQLLoad::Store(std::vector<std::string> allValue){
 	//std::cerr << allValue.size() << std::endl;
-	if ( allValue.size() != 15 ){
+	if ( allValue.size() != 10 ){
 		std::cerr << "Not enough field in file : " << allValue.size() << std::endl;
 		return ;
 	};
@@ -39,7 +38,7 @@ void SQLLoad::Store(std::vector<std::string> allValue){
 	int pt = 0;
 	int vt = 0;
 	for ( int i = 0; i < allValue.size(); i++){
-		if ( i == 2 ) { // skip third column
+		if ( i == 1 ) { // skip second column
 			vt ++;
 			continue;
 		};

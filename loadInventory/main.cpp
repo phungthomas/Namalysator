@@ -13,7 +13,7 @@ namespace fs = boost::filesystem;
 // analyse csv file separate by ;
 // xxxx;xxxx;"xxxxx";"yyyy;xxxx";"zzzz"" ;""kjhkhkjhkj";xxxxx
 
-void analyse ( const char* line, std::vector<std::string> & vect  ){
+void analyse_csv ( const char* line, std::vector<std::string> & vect  ){
     static char WORD [ 2000 ]; // not nice -> 500 chinese char on 4 byte in UTF-8
 	const char * ptr ;
 	char * ptrW ;
@@ -67,6 +67,35 @@ void analyse ( const char* line, std::vector<std::string> & vect  ){
 	vect.push_back( std::string(WORD) );
 }
 
+void analyse_tab ( const char* line, std::vector<std::string> & vect  ){
+    static char WORD [ 2000 ]; // not nice -> 500 chinese char on 4 byte in UTF-8
+	const char * ptr ;
+	char * ptrW ;
+	
+
+	ptr = line;
+	ptrW = WORD; *ptrW = '\0' ;
+	
+
+	for ( ptr = line ; *ptr ; ptr++ ) {
+	
+		switch ( *ptr ) {
+		case	'\t' : 
+					// new WORD START
+					// means previous is finish
+					*ptrW = '\0' ; 
+					vect.push_back(std::string(WORD));
+					ptrW = WORD; *ptrW = '\0' ;
+				  break;
+		default :
+		          *ptrW = *ptr; ptrW++;  
+				  break;
+		}
+	}
+	// always add last one;
+	vect.push_back( std::string(WORD) );
+}
+
 int loadInventory (const char * fileName,SQLLoadInventory& db ){
 
 	int skipfirst = 0;
@@ -90,7 +119,7 @@ int loadInventory (const char * fileName,SQLLoadInventory& db ){
 		skipfirst ++ ;
 		if ( skipfirst == 1 ) continue;
 
-		analyse (line.c_str(),all_words);
+		analyse_tab (line.c_str(),all_words);
 
 		//std::cerr << "Line :" << skipfirst << " -> " << std::endl;
 		sql.Store(all_words);

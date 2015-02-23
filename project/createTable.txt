@@ -11,16 +11,11 @@ CREATE TABLE BOOKSINVENTORY (
 	BIBREC_SYS_NUM varchar(20) UNIQUE,
 	ITEM_barcode varchar(20),
 	BIBREC_CALL_NUM varchar(20),
-    languageTerm varchar(3) NOT NULL,
-	BIBREC_100a_1 varchar(40),
-	BIBREC_100a_2 varchar(40),
+    languageTerm varchar(30) NOT NULL,
+    BIBREC_008_7_10 varchar(100),
+	BIBREC_100a varchar(100),
 	BIBREC_245a varchar(400),
-	BIBREC_245b varchar(400),
 	BIBREC_260b varchar(40),
-	BIBREC_260c varchar(40),
-	BIBREC_300a varchar(20),
-	BIBREC_300a_ref varchar(20),
-	BIBREC_300c varchar(20),
 	CHECKED INTEGER
 );
 
