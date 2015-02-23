@@ -11,7 +11,11 @@ std::string inventory::toString(std::string name){
 	ss<<"BIBREC_260b:"<<BIBREC_260b<<std::endl;
 	//ss<<"ITEM_barcode:"<<ITEM_barcode<<std::endl;
 	ss<<"BIBREC_SYS_NUM:"<<BIBREC_SYS_NUM<<std::endl;
-	ss<<"languageTerm:"<<languageTerm<<std::endl;
+	for ( std::map<std::string,std::string>::iterator it = languageTerm.begin() ; it != languageTerm.end(); it ++) {
+
+		ss<<"languageTerm:"<<it->first<<std::endl;
+	
+	}
 	ss<<"BIBREC_008_7_10:"<<BIBREC_008_7_10<<std::endl;
 	ss<<"END INVENTORY:"<<name<<std::endl;
 	return ss.str();
@@ -45,8 +49,11 @@ void inventoryMapping::setCurrentInventoryValue(std::string field, std::string v
 	//if ( field.compare("BIBREC_260c")==0) currentInventory->BIBREC_260c=value;
 	//if ( field.compare("ITEM_barcode")==0) currentInventory->ITEM_barcode=value;
 	if ( field.compare("BIBREC_SYS_NUM")==0) currentInventory->BIBREC_SYS_NUM=value;
-	if ( field.compare("languageTerm")==0) currentInventory->languageTerm=value;//
-	if ( field.compare("BIBREC_008_7_10")==0) currentInventory->BIBREC_008_7_10=value;
+	if ( field.compare("languageTerm")==0) { 
+		currentInventory->languageTerm[value]=value;//
+	}
+	if ( field.compare("BIBREC_008_7_10")==0) currentInventory->BIBREC_008_7_10 =value;
+	;
 }
 
 

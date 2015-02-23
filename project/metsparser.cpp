@@ -220,7 +220,7 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 			map["publisher"]=	new StateParsermodStateInventory("BIBREC_260b");
 			//map["dateIssued"]=	new StateParsermodStateInventory("BIBREC_260c");
 			map["namePart"]=	new StateParsermodStateInventory("BIBREC_100a"); // case of type
-			map["notyetdefined"]=	new StateParsermodStateInventory("BIBREC_008_7_10");
+			map["dateIssued"]=	new StateParsermodStateInventory("BIBREC_008_7_10");
 		}
 	} onlyOnes (map);
 

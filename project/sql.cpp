@@ -202,7 +202,12 @@ bool database::getInventory(std::string _sysnum, inventory& _inventory){
 			_inventory.BIBREC_SYS_NUM = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.ITEM_barcode = safe_sqlite3_column_text(pStmt, col++);
 			std::string dummy = safe_sqlite3_column_text(pStmt, col++);
-			_inventory.languageTerm = safe_sqlite3_column_text(pStmt, col++);
+			std::string lang = safe_sqlite3_column_text(pStmt, col++);
+			std::stringstream ss(lang);
+			std::string item;
+			while (std::getline(ss, item, ',')) {
+				_inventory.languageTerm[item]=item;
+			}
 			_inventory.BIBREC_008_7_10 = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.BIBREC_100a = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.BIBREC_245a = safe_sqlite3_column_text(pStmt, col++);

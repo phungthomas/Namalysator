@@ -2,6 +2,7 @@
 #define _INVENTORY_H_
 
 #include <string>
+#include <map>
 
 
 //+ struct inventaire : define field for an inventaire
@@ -15,7 +16,7 @@ public:
 	std::string BIBREC_008_7_10;
 	std::string ITEM_barcode;
 	std::string BIBREC_SYS_NUM; //could be ITEM_barcode depending of the section
-	std::string languageTerm; //std::string BIBREC_008_35_37;
+	std::map<std::string,std::string> languageTerm; //std::string BIBREC_008_35_37;
 	std::string toString(std::string name);
 	int checked;
 };

@@ -48,13 +48,25 @@ void verifyBook::check(std::string check,metsparserContext& context){
 	}
 	
 	// TODO compare must be base on any kind order of list
-	if ( invent.languageTerm.compare(context.inventory.inventoryMODSMD_ELEC.languageTerm)) {
-		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_ELEC", "wrong languageTerm:" + context.inventory.inventoryMODSMD_ELEC.languageTerm ,context.metsfile,"");
-	}
+	
+	for ( std::map<std::string,std::string>::iterator it = context.inventory.inventoryMODSMD_ELEC.languageTerm.begin() ; it != context.inventory.inventoryMODSMD_ELEC.languageTerm.end() ;it++){
 
-	if ( invent.languageTerm.compare(context.inventory.inventoryMODSMD_PRINT.languageTerm)) {
-		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong languageTerm:" + context.inventory.inventoryMODSMD_PRINT.languageTerm ,context.metsfile,"");
-	}
+		if ( invent.languageTerm.find(it->first) == invent.languageTerm.end() ) {
+			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_ELEC", "wrong languageTerm:" + it->first ,context.metsfile,"");
+			
+		}
+	
+	};
+
+	for ( std::map<std::string,std::string>::iterator it = context.inventory.inventoryMODSMD_PRINT.languageTerm.begin() ; it != context.inventory.inventoryMODSMD_PRINT.languageTerm.end() ;it++){
+
+		if ( invent.languageTerm.find(it->first) == invent.languageTerm.end() ) {
+			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong languageTerm:" + it->first ,context.metsfile,"");
+			
+		}
+	
+	};
+
 
 	if ( invent.ITEM_barcode.compare(context.inventory.inventoryMODSMD_PRINT.BIBREC_SYS_NUM /* put there in the xml */ )) {
 		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong languageTerm:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_SYS_NUM ,context.metsfile,"");
