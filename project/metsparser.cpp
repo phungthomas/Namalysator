@@ -174,6 +174,7 @@ public:
 	};
 };
 
+/*
 class StateParsermodStateInventoryType:public StateParsermodState{
 private:
 	std::string localType;
@@ -199,6 +200,8 @@ public:
 
 
 };
+*/
+
 
 StateParserState* StateParsermodState::getNext(const char* const name){
 	static std::map<string,StateParsermodState*> map;
