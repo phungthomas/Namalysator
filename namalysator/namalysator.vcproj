@@ -358,6 +358,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\w_accepted.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\w_booklist.cpp"
 					>
 				</File>
@@ -648,6 +652,21 @@
 					>
 				</File>
 				<File
+					RelativePath=".\w_accepted.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFIER)\Headers&quot;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\w_booklist.h"
 					>
 					<FileConfiguration
@@ -908,18 +927,6 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_codeeditor.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\GeneratedFiles\Release\moc_codeeditor.cpp"
 				>
 				<FileConfiguration
@@ -932,7 +939,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_dateerrortab.cpp"
+				RelativePath=".\GeneratedFiles\Debug\moc_codeeditor.cpp"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -956,10 +963,10 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_qwidgettaberror.cpp"
+				RelativePath=".\GeneratedFiles\Debug\moc_dateerrortab.cpp"
 				>
 				<FileConfiguration
-					Name="Debug|Win32"
+					Name="Release|Win32"
 					ExcludedFromBuild="true"
 					>
 					<Tool
@@ -980,14 +987,10 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_booklist.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_calendar.cpp"
+				RelativePath=".\GeneratedFiles\Release\moc_qwidgettaberror.cpp"
 				>
 				<FileConfiguration
-					Name="Release|Win32"
+					Name="Debug|Win32"
 					ExcludedFromBuild="true"
 					>
 					<Tool
@@ -996,10 +999,30 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\GeneratedFiles\Release\moc_w_accepted.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\GeneratedFiles\Release\moc_w_booklist.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GeneratedFiles\Release\moc_w_calendar.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\GeneratedFiles\Debug\moc_w_calendar.cpp"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
 					ExcludedFromBuild="true"
 					>
 					<Tool
@@ -1032,18 +1055,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_errors.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\GeneratedFiles\Release\moc_w_errors.cpp"
 				>
 				<FileConfiguration
@@ -1056,7 +1067,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_main.cpp"
+				RelativePath=".\GeneratedFiles\Debug\moc_w_errors.cpp"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -1080,11 +1091,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_report.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_screenshoterror.cpp"
+				RelativePath=".\GeneratedFiles\Debug\moc_w_main.cpp"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -1096,10 +1103,26 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\GeneratedFiles\Release\moc_w_report.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GeneratedFiles\Release\moc_w_screenshoterror.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\GeneratedFiles\Debug\moc_w_screenshoterror.cpp"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
 					ExcludedFromBuild="true"
 					>
 					<Tool
@@ -1156,10 +1179,10 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_summaryerrors.cpp"
+				RelativePath=".\GeneratedFiles\Debug\moc_w_summaryerrors.cpp"
 				>
 				<FileConfiguration
-					Name="Debug|Win32"
+					Name="Release|Win32"
 					ExcludedFromBuild="true"
 					>
 					<Tool
@@ -1168,10 +1191,10 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_summaryerrors.cpp"
+				RelativePath=".\GeneratedFiles\Release\moc_w_summaryerrors.cpp"
 				>
 				<FileConfiguration
-					Name="Release|Win32"
+					Name="Debug|Win32"
 					ExcludedFromBuild="true"
 					>
 					<Tool

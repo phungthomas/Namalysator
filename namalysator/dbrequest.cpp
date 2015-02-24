@@ -2168,3 +2168,50 @@ std::string dbrequest::getFirstMetsFilename(int id_testset)
 	sqlite3_finalize(pStmt);
 	return res;
 }
+
+void dbrequest::insertAccepted (std::string hashkey){
+	ConnectionDB* conn = g_pool.getConnection(databaseName);	
+	sqlite3_stmt *pStmt;
+
+	const char *zErrMsg= 0; 
+	static std::string selectSql = "INSERT INTO ACCEPTEDERROR ( HASHKEY, VALUE ) VALUES (?,?) ";
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
+	
+	if(rc == SQLITE_OK)
+	{	 
+		sqlite3_bind_text(pStmt,1,hashkey.c_str(),hashkey.length(),SQLITE_STATIC);
+		sqlite3_bind_int(pStmt,2,1);
+
+		if ( sqlite3_step(pStmt)!=SQLITE_DONE ) raiseError(conn,selectSql);
+		
+	}else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+	return;
+}
+
+void dbrequest::deleteAccepted (std::string hashkey){
+		ConnectionDB* conn = g_pool.getConnection(databaseName);	
+	sqlite3_stmt *pStmt;
+
+	const char *zErrMsg= 0; 
+	static std::string selectSql = "DELETE FROM ACCEPTEDERROR WHERE HASHKEY = ?";
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
+	
+	if(rc == SQLITE_OK)
+	{	 
+		sqlite3_bind_text(pStmt,1,hashkey.c_str(),hashkey.length(),SQLITE_STATIC);
+
+		if ( sqlite3_step(pStmt)!= SQLITE_DONE ) raiseError(conn,selectSql);
+		
+	}else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+	return;
+}

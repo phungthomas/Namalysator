@@ -190,5 +190,8 @@ class dbrequest
 		std::vector<MetsFile> *getMetsByDate(int id_testset, QDate date);
 		std::vector<int> getReport();
 		std::string getFirstMetsFilename(int id_testset);
+		void insertAccepted (std::string hashkey);
+		void deleteAccepted (std::string hashkey);
+
 };
 #endif // DBREQUEST_H_

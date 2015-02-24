@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QMessageBox>
 #include <fstream>
+#include "w_accepted.h"
 tabErrors::tabErrors(int id, BatchDetail &bd):batch(bd)
 {
 	id_cat = id;
@@ -173,7 +174,7 @@ void tabErrors::fillTableError(std::vector<MetsError> vError)
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1, 5, newItem);
 		
-		QCheckBox* checkBox = new QCheckBox();
+		acceptedW* checkBox = new acceptedW(vError[i].accepted,vError[i].hashkey);
 		table->setCellWidget(i+1, 6,checkBox);
 	}
 	table->resizeColumnsToContents();
