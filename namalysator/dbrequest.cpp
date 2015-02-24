@@ -1282,23 +1282,28 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	MetsError es;
 	sqlite3_stmt *pStmt;	
-	std::stringstream sId_testset,sYear,sId_cat;
-	sId_testset << id_testset;	
-	sId_cat << id_cat;
+		
 	const char *zErrMsg= 0; 
-	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search from MetsError s,ERRORTYPE e where s.ID_ERRORTYPE = e.ID_type  and s.ID_TESTSET = '"+ sId_testset.str() + "'";
+	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search from MetsError s,ERRORTYPE e where s.ID_ERRORTYPE = e.ID_type  and s.ID_TESTSET = ?";
 	if (error !="")
 	{
-		selectSql = selectSql +	" and e.ERROR = '"+ error + "'";
+		selectSql = selectSql +	" and e.ERROR = ?";
 	}
 	else
 	{
-		selectSql = selectSql +" and e.id_category = '" + sId_cat.str() + "'";
+		selectSql = selectSql +" and e.id_category = ?";
 	}
-	DEBUG_ME
+	
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	if(rc == SQLITE_OK)
 	{	  
+		sqlite3_bind_int(pStmt,1,id_testset);
+		if (error !="")
+			sqlite3_bind_text(pStmt,2,error.c_str(),error.length(),SQLITE_STATIC);
+		else
+			sqlite3_bind_int(pStmt,2,id_cat);
+
+
       while(sqlite3_step(pStmt) == SQLITE_ROW)
       {
 		int count = sqlite3_data_count(pStmt);		

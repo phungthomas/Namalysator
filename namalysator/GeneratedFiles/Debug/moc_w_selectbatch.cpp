@@ -22,7 +22,7 @@ static const uint qt_meta_data_w_selectBatch[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,10 +36,11 @@ static const uint qt_meta_data_w_selectBatch[] = {
  // slots: signature, parameters, type, tag, flags
       52,   47,   14,   14, 0x09,
       73,   14,   14,   14, 0x09,
-      99,   14,   14,   14, 0x09,
-     109,   14,   14,   14, 0x09,
-     122,   14,   14,   14, 0x09,
+      97,   14,   14,   14, 0x09,
+     123,   14,   14,   14, 0x09,
      133,   14,   14,   14, 0x09,
+     146,   14,   14,   14, 0x09,
+     157,   14,   14,   14, 0x09,
 
        0        // eod
 };
@@ -47,6 +48,7 @@ static const uint qt_meta_data_w_selectBatch[] = {
 static const char qt_meta_stringdata_w_selectBatch[] = {
     "w_selectBatch\0\0validated(std::string)\0"
     "exited()\0date\0getListDate(QString)\0"
+    "getListSubName(QString)\0"
     "getMets(QListWidgetItem*)\0valider()\0"
     "browsePath()\0browseDb()\0exit()\0"
 };
@@ -60,11 +62,12 @@ void w_selectBatch::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 0: _t->validated((*reinterpret_cast< std::string(*)>(_a[1]))); break;
         case 1: _t->exited(); break;
         case 2: _t->getListDate((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: _t->getMets((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 4: _t->valider(); break;
-        case 5: _t->browsePath(); break;
-        case 6: _t->browseDb(); break;
-        case 7: _t->exit(); break;
+        case 3: _t->getListSubName((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 4: _t->getMets((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 5: _t->valider(); break;
+        case 6: _t->browsePath(); break;
+        case 7: _t->browseDb(); break;
+        case 8: _t->exit(); break;
         default: ;
         }
     }
@@ -102,9 +105,9 @@ int w_selectBatch::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

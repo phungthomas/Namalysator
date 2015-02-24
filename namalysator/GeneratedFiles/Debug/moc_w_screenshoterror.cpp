@@ -22,7 +22,7 @@ static const uint qt_meta_data_w_screenshoterror[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -34,6 +34,7 @@ static const uint qt_meta_data_w_screenshoterror[] = {
       31,   18,   18,   18, 0x08,
       46,   18,   18,   18, 0x08,
       60,   18,   18,   18, 0x08,
+      68,   18,   18,   18, 0x08,
 
        0        // eod
 };
@@ -41,6 +42,7 @@ static const uint qt_meta_data_w_screenshoterror[] = {
 static const char qt_meta_stringdata_w_screenshoterror[] = {
     "w_screenshoterror\0\0saveError()\0"
     "clearPainter()\0setPenColor()\0close()\0"
+    "enableCustom(int)\0"
 };
 
 void w_screenshoterror::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -53,10 +55,10 @@ void w_screenshoterror::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         case 1: _t->clearPainter(); break;
         case 2: _t->setPenColor(); break;
         case 3: _t->close(); break;
+        case 4: _t->enableCustom((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData w_screenshoterror::staticMetaObjectExtraData = {
@@ -91,9 +93,9 @@ int w_screenshoterror::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
