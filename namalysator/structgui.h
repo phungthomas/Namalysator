@@ -78,6 +78,8 @@ struct MetsError
 	ErrorType errorType;
 	std::string message;
 	std::string id_search;
+	std::string hashkey;
+	int accepted;
 };
 
 

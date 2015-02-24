@@ -162,6 +162,15 @@ create table METSERROR(
   HASHKEY varchar(50)
 );
 
+drop table if exists ACCEPTEDERROR;
+create table ACCEPTEDERROR(
+  ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  HASHKEY varchar(50),
+  VALUE INTEGER
+);
+
+
+
 drop table if exists DATEERROR;
 create table DATEERROR(
   ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,  

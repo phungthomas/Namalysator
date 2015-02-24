@@ -1159,34 +1159,33 @@ std::vector<MetsError> dbrequest::getvErrorPerCategory(int id_cat, int idTestset
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	MetsError es;
 	sqlite3_stmt *pStmt;	
-	std::stringstream sId_testset,sidCat,sYear;	
-	sId_testset << idTestset; 	
-	sidCat << id_cat;	
+	
 	const char *zErrMsg= 0; 	
-	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search from MetsError s,ERRORTYPE e where s.ID_ERRORTYPE = e.ID_TYPE and e.ID_CATEGORY = '"+ sidCat.str() + "' and s.ID_TESTSET = '"+ sId_testset.str() + "'";
+	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY from MetsError s,ERRORTYPE e where s.ID_ERRORTYPE = e.ID_TYPE and e.ID_CATEGORY = ? and s.ID_TESTSET = ?";
 	DEBUG_ME
 
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
     if(rc == SQLITE_OK)
-    {	  
+    {	
+		sqlite3_bind_int(pStmt,1,id_cat);
+		sqlite3_bind_int(pStmt,2,idTestset);
+
       while(sqlite3_step(pStmt) == SQLITE_ROW)
       {
-		int count = sqlite3_data_count(pStmt);
-		
-		 for (int i =0;i<  count ;i++)
-		 {
-			const char *result = safe_sqlite3_column_text(pStmt, i);
-			if (i==0) es.id= atoi(result); 							
-			else if (i==1) es.idRelatedFile = atoi(result);
-			else if (i==2) es.relatedType = result;	
-			else if (i==3) es.filePart = result;
-			else if (i==4) es.errorLine = atoi(result);
-			else if (i==5) es.errorColumn = atoi(result);
-			else if (i==6) es.message = result;
-			else if (i==7) es.errorType = getErrorTypeWithId(atoi(result));
-			else if (i==8) es.id_search = result;
-		 }
+		  int col = 0;
+		  es.id = sqlite3_column_int(pStmt,col++);
+ 							
+			es.idRelatedFile = sqlite3_column_int(pStmt,col++);
+			es.relatedType = safe_sqlite3_column_text(pStmt,col++);
+			es.filePart =safe_sqlite3_column_text(pStmt,col++);
+			es.errorLine = sqlite3_column_int(pStmt,col++);
+			es.errorColumn = sqlite3_column_int(pStmt,col++);
+			es.message = safe_sqlite3_column_text(pStmt,col++);
+			es.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
+			es.id_search = safe_sqlite3_column_text(pStmt,col++);
+			es.hashkey = safe_sqlite3_column_text(pStmt,col++);
+		 
 
 		 if (strcmp(es.relatedType.c_str(),"METS") == 0)
 		 {
