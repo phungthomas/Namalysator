@@ -1059,7 +1059,6 @@ int dbrequest::getcountMetsErrorForEachErrorType(int idTestset,int errortype)
 /// <returns>int</returns>
 int dbrequest::getcountMetsError(int idTestset)
 {
-	std::vector<MetsError> v ;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	MetsError es;
 	sqlite3_stmt *pStmt;	
