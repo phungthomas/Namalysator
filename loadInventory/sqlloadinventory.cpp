@@ -44,9 +44,9 @@ void SQLLoad::Store(std::vector<std::string> allValue){
 		};
 		pt++;
 		//std::cerr << "VAL" << pt <<" :" << allValue[vt] << std::endl;//DEBUG
-		if ( vt!= 5 || allValue[vt].length() != 0 ) { // skip error on inventory
+		//if ( vt!= 5 || allValue[vt].length() != 0 ) { // skip error on inventory
 			sqlite3_bind_text(pStmt, pt, allValue[vt].c_str(),allValue[vt].length(),SQLITE_STATIC);
-		}
+		//}
 		vt++;
 	}
 
@@ -57,7 +57,7 @@ void SQLLoad::Store(std::vector<std::string> allValue){
 		std::cerr << sql << std::endl;
 		
 		for ( int i = 0; i < allValue.size(); i++){
-			if ( i==2) continue;
+			if ( i==1) continue;
 			std::cerr << "'" << allValue[i] << "'," ;
 		}
 		std::cerr << std::endl;

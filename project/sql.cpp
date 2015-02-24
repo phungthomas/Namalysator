@@ -213,6 +213,8 @@ bool database::getInventory(std::string _sysnum, inventory& _inventory){
 			_inventory.BIBREC_245a = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.BIBREC_260b = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.checked = sqlite3_column_int(pStmt, col++);
+
+			//std::cerr << _inventory.toString("DATABASE") << std::endl;
 			ret = true;
 		}
 		

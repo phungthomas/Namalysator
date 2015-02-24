@@ -93,6 +93,7 @@ void analyse_tab ( const char* line, std::vector<std::string> & vect  ){
 		}
 	}
 	// always add last one;
+	*ptrW = '\0' ; 
 	vect.push_back( std::string(WORD) );
 }
 
