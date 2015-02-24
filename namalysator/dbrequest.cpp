@@ -1220,7 +1220,7 @@ std::vector<ErrorType> dbrequest::getDistinctErrorType(int id_cat,int id_testset
 	oidcat << id_cat;
 	sqlite3_stmt *pStmt;	
 	const char *zErrMsg= 0;    
-	std::string selectSql = "select distinct(ID_TYPE) from ERRORTYPE e,MetsError s where s.ID_ERRORTYPE = e.id and id_testset ='" + oid.str() + "'and e.ID_CATEGORY = '" + oidcat.str() + "'";  
+	std::string selectSql = "select distinct(ID_TYPE) from ERRORTYPE e,MetsError s where s.ID_ERRORTYPE = e.id_type and id_testset ='" + oid.str() + "'and e.ID_CATEGORY = '" + oidcat.str() + "'";  
 	DEBUG_ME
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	std::map<int,int> mapYearCount;
@@ -1286,7 +1286,7 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 	sId_testset << id_testset;	
 	sId_cat << id_cat;
 	const char *zErrMsg= 0; 
-	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search from MetsError s,ERRORTYPE e where s.ID_ERRORTYPE = e.ID  and s.ID_TESTSET = '"+ sId_testset.str() + "'";
+	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search from MetsError s,ERRORTYPE e where s.ID_ERRORTYPE = e.ID_type  and s.ID_TESTSET = '"+ sId_testset.str() + "'";
 	if (error !="")
 	{
 		selectSql = selectSql +	" and e.ERROR = '"+ error + "'";
