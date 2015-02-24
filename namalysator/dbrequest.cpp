@@ -1424,32 +1424,24 @@ std::vector<DateComment> dbrequest::getDateCommentid(int idError)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	DateComment dc;
-	std::stringstream oId;
-	oId << idError;	
 	std::vector<DateComment> v;
     sqlite3_stmt *pStmt;	
 	const char *zErrMsg= 0; 
 	Article article;	
-	std::string selectSql = "SELECT dc.id, dc.id_dateerror, dc.date, dc.comment FROM DATECOMMENT dc where id_dateerror ='" + oId.str() + "'" ;
-	DEBUG_ME
+	std::string selectSql = "SELECT dc.id, dc.id_dateerror, dc.date, dc.comment FROM DATECOMMENT dc where id_dateerror =?" ;
+
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	if(rc == SQLITE_OK)
 	{	  
+	  sqlite3_bind_int(pStmt,1,idError);
       while(sqlite3_step(pStmt) == SQLITE_ROW)
       {
-		int count = sqlite3_data_count(pStmt);
-		std::pair<int,DateError> p;
-		 for (int i =0;i<  count ;i++)
-		 {
-			const char *result = safe_sqlite3_column_text(pStmt, i);			
-			if (i==0)
-			{ 
-				dc.id = atoi(result);				
-			}							
-			else if (i==1) dc.id_DateError = atoi(result);			
-			else if (i==2) dc.date = dc.date.fromString(result,"yyyy-MM-dd");		
-			else if (i==3) dc.comment = result;			
-		 }		
+		  int col = 0;
+		  dc.id = sqlite3_column_int(pStmt, col++);	
+		  dc.id_DateError = sqlite3_column_int(pStmt, col++);
+		  dc.date = dc.date.fromString(safe_sqlite3_column_text(pStmt, col++),"yyyy-MM-dd");
+		  dc.comment = safe_sqlite3_column_text(pStmt, col++);	
+	
 		v.push_back(dc);	 
 	  }
 	}else{
