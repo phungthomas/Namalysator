@@ -1844,8 +1844,8 @@ retry:
 	}else {
 			if ( flagones ){ // probably table non existing so retry without compatibility mode with previous database
 				flagones = false;
-				selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, 'BIBREC_245a', 'BIBREC_245b'," 
-		                    " 'BIBREC_100a_1', 'BIBREC_100a_2', 'BIBREC_260b','BIBREC_260c','ITEM_barcode', 'BIBREC_SYS_NUM' FROM METS a"
+				selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, 'BIBREC_245a'," 
+		                    " 'BIBREC_100a', 'BIBREC_260b','ITEM_barcode', 'BIBREC_SYS_NUM' FROM METS a"
 							" WHERE a.ID_TESTSET=?";
 				sqlite3_finalize(pStmt);
 				goto retry; // yes I know :-)
@@ -1865,7 +1865,7 @@ std::vector<std::vector<QVariant> > dbrequest::getAllBooks(int id_testset){
 	
 	
 	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
-	static std::string selectSql = "SELECT  c.CHECKED, a.ID_TESTSET, c.BIBREC_SYS_NUM,c.ITEM_barcode, c.BIBREC_245a," 
+	static std::string selectSql = "SELECT  c.CHECKED, a.ID_TESTSET, c.languageTerm, c.BIBREC_SYS_NUM,c.ITEM_barcode, c.BIBREC_245a," 
 		                    " c.BIBREC_100a, c.BIBREC_260b,c.BIBREC_008_7_10 FROM "
 							" BOOKSINVENTORY c"
 							" LEFT JOIN ( SELECT ID_TESTSET, BIBREC_SYS_NUM  FROM METS a, METSBOOK b WHERE a.ID_METS = b.ID_METS AND a.ID_TESTSET=? ) a"
