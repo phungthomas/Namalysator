@@ -184,7 +184,7 @@ bool database::getInventory(std::string _sysnum, inventory& _inventory){
 	bool ret = false;
 	static std::string sql = "SELECT BIBREC_SYS_NUM,ITEM_barcode,BIBREC_CALL_NUM,"
 		              "  languageTerm,BIBREC_008_7_10,BIBREC_100a,BIBREC_245a,"
-					  "  BIBREC_260b,BIBREC_260c,CHECKED"
+					  "  BIBREC_260b,CHECKED"
 					  "  from BOOKSINVENTORY where BIBREC_SYS_NUM=?";
 
 	const char *szErrMsg =0;
