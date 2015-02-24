@@ -1156,7 +1156,9 @@ std::vector<MetsError> dbrequest::getvErrorPerCategory(int id_cat, int idTestset
 	sqlite3_stmt *pStmt;	
 	
 	const char *zErrMsg= 0; 	
-	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY from MetsError s,ERRORTYPE e where s.ID_ERRORTYPE = e.ID_TYPE and e.ID_CATEGORY = ? and s.ID_TESTSET = ?";
+	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE from MetsError s,ERRORTYPE e"
+		" LEFT JOIN ACCEPTEDERROR b ON b.HASHKEY = s.HASHKEY"
+		" where s.ID_ERRORTYPE = e.ID_TYPE and e.ID_CATEGORY = ? and s.ID_TESTSET = ?";
 	DEBUG_ME
 
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1180,6 +1182,7 @@ std::vector<MetsError> dbrequest::getvErrorPerCategory(int id_cat, int idTestset
 			es.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
 			es.id_search = safe_sqlite3_column_text(pStmt,col++);
 			es.hashkey = safe_sqlite3_column_text(pStmt,col++);
+			es.accepted = sqlite3_column_int(pStmt,col++);
 		 
 
 		 if (strcmp(es.relatedType.c_str(),"METS") == 0)
@@ -1280,7 +1283,10 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 	sqlite3_stmt *pStmt;	
 		
 	const char *zErrMsg= 0; 
-	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY from MetsError s,ERRORTYPE e where s.ID_ERRORTYPE = e.ID_type  and s.ID_TESTSET = ?";
+	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE "
+		"from MetsError s,ERRORTYPE e "
+		" LEFT JOIN ACCEPTEDERROR b ON b.HASHKEY = s.HASHKEY"
+		"where s.ID_ERRORTYPE = e.ID_type  and s.ID_TESTSET = ?";
 	if (error !="")
 	{
 		selectSql = selectSql +	" and e.ERROR = ?";
@@ -1315,6 +1321,7 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 			es.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt, col++));
 			es.id_search = safe_sqlite3_column_text(pStmt, col++);
 			es.hashkey = safe_sqlite3_column_text(pStmt, col++);
+			es.accepted= sqlite3_column_int(pStmt, col++);
 		 
 
 		 if (strcmp(es.relatedType.c_str(),"METS") == 0)
