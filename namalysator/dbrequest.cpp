@@ -1286,7 +1286,7 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE "
 		"from MetsError s,ERRORTYPE e "
 		" LEFT JOIN ACCEPTEDERROR b ON b.HASHKEY = s.HASHKEY"
-		"where s.ID_ERRORTYPE = e.ID_type  and s.ID_TESTSET = ?";
+		" where s.ID_ERRORTYPE = e.ID_type  and s.ID_TESTSET = ?";
 	if (error !="")
 	{
 		selectSql = selectSql +	" and e.ERROR = ?";
