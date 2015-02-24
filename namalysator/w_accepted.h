@@ -11,10 +11,13 @@ public :
 	acceptedW( int _value,std::string _hash,QWidget * parent = 0);
 public slots:
 	void change(bool);
+
+signals:
+	void changeHash(bool,std::string);
+
 private :
 	int value;
 	std::string hashkey;
-	dbrequest db;
 };
 
 #endif

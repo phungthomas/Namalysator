@@ -41,6 +41,7 @@ class tabErrors : public QWidget
 		std::string search_item;
 		
 	private slots :
+		void accepted(bool,std::string);
 		void getcbCategory(QString category);
 		void getcbYear(QString year);
 		void lineChanged(int col,int row);

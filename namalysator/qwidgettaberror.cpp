@@ -176,6 +176,7 @@ void tabErrors::fillTableError(std::vector<MetsError> vError)
 		
 		acceptedW* checkBox = new acceptedW(vError[i].accepted,vError[i].hashkey);
 		table->setCellWidget(i+1, 6,checkBox);
+		connect ( checkBox, SIGNAL(changeHash(bool,std::string)), this, SLOT(accepted(bool,std::string)));
 	}
 	table->resizeColumnsToContents();
 	for (int i=0;i<table->columnCount();i++)
@@ -258,4 +259,12 @@ void tabErrors::findLine(const BatchDetail &batch,MetsError s)
 void tabErrors::findNext()
 {
 	editor->find(search_item.c_str());
+}
+
+void tabErrors::accepted(bool val,std::string hashkey){
+	if ( val) {
+		db.insertAccepted(hashkey);	
+	}else{
+		db.deleteAccepted(hashkey);
+	}
 }
