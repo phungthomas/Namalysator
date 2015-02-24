@@ -93,6 +93,7 @@ void exportdata::writeCatError(odswriter *ow, BatchDetail *bdetail,dbrequest *db
 			ow->add_text("File");
 			ow->add_text("Search for");
 			ow->add_text("Year");
+			ow->add_text("Ack");
 			ow->close_row();
 			
 			for(size_t i =0;i < vSchemaE.size();i++)
@@ -109,6 +110,7 @@ void exportdata::writeCatError(odswriter *ow, BatchDetail *bdetail,dbrequest *db
 				}
 				ow->add_text(vSchemaE[i].id_search);
 				ow->add_number(vSchemaE[i].mets.year);
+				ow->add_text(vSchemaE[i].accepted==0?std::string("Not accepted"):std::string("Accepted"));
 				ow->close_row();
 			}
 			ow->close_sheet();
