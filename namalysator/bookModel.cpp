@@ -84,7 +84,7 @@ QVariant bookModel::headerData ( int section, Qt::Orientation orientation, int r
 
 QVariant bookModelInventory::headerData ( int section, Qt::Orientation orientation, int role  ) const{
 	static char* table[]={"CHECKED","BATCH","BIBREC_SYS_NUM","ITEMbarCode","BIBREC_245a",
-		                  "BIBREC_100a","BIBREC_260b","R","N","D"};
+		                  "BIBREC_100a","BIBREC_260b","BIBREC_008_7_10","N","D"};
 
 	QVariant ret=QVariant();
 	if ( role == Qt::DisplayRole && section < 8 && section >= 0 ) {

@@ -10,7 +10,7 @@ tabErrors::tabErrors(int id, BatchDetail &bd):batch(bd)
 	id_cat = id;
 	db.setDataBaseName(batch.database);  
 	vSchemaE = db.getvErrorPerCategory(id_cat,batch.idTestSet);
-	labels  << tr("Severity") << tr("Error Category") << tr("Location")<<tr("Message") << tr("File") << tr("Year");// << tr("Number of issues");
+	labels  << tr("Severity") << tr("Error Category") << tr("Location")<<tr("Message") << tr("File") << tr("Year")<<tr("Accepted");// << tr("Number of issues");
 	editor = new CodeEditor();
 	plainTextEdit = new QPlainTextEdit();	
 	btnNext = new QPushButton("Next");
@@ -171,7 +171,10 @@ void tabErrors::fillTableError(std::vector<MetsError> vError)
 
 		newItem = new QTableWidgetItem(ss.setNum(vError[i].mets.year),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
-		table->setItem(i+1, 5, newItem);			
+		table->setItem(i+1, 5, newItem);
+		
+		QCheckBox* checkBox = new QCheckBox();
+		table->setCellWidget(i+1, 6,checkBox);
 	}
 	table->resizeColumnsToContents();
 	for (int i=0;i<table->columnCount();i++)
