@@ -11,7 +11,7 @@ tabErrors::tabErrors(int id, BatchDetail &bd):batch(bd)
 	id_cat = id;
 	db.setDataBaseName(batch.database);  
 	vSchemaE = db.getvErrorPerCategory(id_cat,batch.idTestSet);
-	labels  << tr("Severity") << tr("Error Category") << tr("Location")<<tr("Message") << tr("File") << tr("Year")<<tr("Accepted");// << tr("Number of issues");
+	labels  <<tr("Accepted")<< tr("Severity") << tr("Error Category") << tr("Location")<<tr("Message") << tr("File") << tr("Year");// << tr("Number of issues");
 	editor = new CodeEditor();
 	//plainTextEdit = new QPlainTextEdit();	
 	btnNext = new QPushButton("Next");
@@ -91,7 +91,7 @@ void tabErrors::lineChanged(int row,int col)
 	editor->clear();
 
 	btnNext->setEnabled(false);
-	if ((col !=06) && (row!= 0))
+	if ((col !=0) && (row!= 0))
 	{
 		std::string link;
 		MetsError s = vSchemaE[row-1];
@@ -138,23 +138,29 @@ void tabErrors::fillTableError(std::vector<MetsError> vError)
 
 	for( size_t i=0;i < vError.size(); i++)
 	{
-		QString ss ;	
+		QString ss;	
+		int col = 0;
+
+		acceptedW* checkBox = new acceptedW(vError[i].accepted,vError[i].hashkey);
+		table->setCellWidget(i+1, col++,checkBox);
+		connect ( checkBox, SIGNAL(changeHash(bool,std::string)), this, SLOT(accepted(bool,std::string)));
+
 		newItem = new QTableWidgetItem(vError[i].errorType.severity.gravity.c_str(),i);		
 		newItem->setTextAlignment(Qt::AlignCenter);
-		table->setItem(i+1, 0, newItem);
+		table->setItem(i+1, col++, newItem);
 
 		newItem = new QTableWidgetItem(vError[i].errorType.error.c_str(),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
-		table->setItem(i+1, 1, newItem);
+		table->setItem(i+1, col++, newItem);
 
 		newItem = new QTableWidgetItem(vError[i].filePart.c_str(),i);
 		//		newItem = new QTableWidgetItem(ss.setNum(vError[i].errorLine),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
-		table->setItem(i+1, 2, newItem);
+		table->setItem(i+1, col++, newItem);
 
 		newItem = new QTableWidgetItem(QString::fromUtf8(vError[i].message.c_str()),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
-		table->setItem(i+1, 3, newItem);		
+		table->setItem(i+1, col++, newItem);		
 
 
 
@@ -168,15 +174,13 @@ void tabErrors::fillTableError(std::vector<MetsError> vError)
 		}
 
 		newItem->setTextAlignment(Qt::AlignCenter);
-		table->setItem(i+1, 4, newItem);
+		table->setItem(i+1,col++, newItem);
 
 		newItem = new QTableWidgetItem(ss.setNum(vError[i].mets.year),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
-		table->setItem(i+1, 5, newItem);
+		table->setItem(i+1,col++, newItem);
 		
-		acceptedW* checkBox = new acceptedW(vError[i].accepted,vError[i].hashkey);
-		table->setCellWidget(i+1, 6,checkBox);
-		connect ( checkBox, SIGNAL(changeHash(bool,std::string)), this, SLOT(accepted(bool,std::string)));
+
 	}
 	table->resizeColumnsToContents();
 	for (int i=0;i<table->columnCount();i++)
@@ -197,15 +201,15 @@ void tabErrors::fillCombo(int id_cat,const BatchDetail &batch)
 		comboError->addItem(v[i].error.c_str());	
 	}	
 
-	std::map<int,std::pair<int,int>> m = db.getSumMetsYear(batch.idTestSet);
+	std::map<int,std::pair<int,int> > m = db.getSumMetsYear(batch.idTestSet);
 	comboYear->addItem("");
-	for (std::map<int,std::pair<int,int>>::iterator it = m.begin(); it!= m.end();it++)
+	for (std::map<int,std::pair<int,int> >::iterator it = m.begin(); it!= m.end();it++)
 	{
 		QString ss;
 		comboYear->addItem(ss.setNum(it->first));
 	}
-	table->setCellWidget(0,1,comboError);
-	table->setCellWidget(0,5,comboYear);
+	table->setCellWidget(0,2,comboError);
+	table->setCellWidget(0,6,comboYear);
 }
 
 int tabErrors::getSizeVError()
@@ -217,7 +221,7 @@ void tabErrors::findLine(const BatchDetail &batch,MetsError s)
 {	
 	std::string link = batch.path + s.mets.path + "/" + s.mets.fileName ;	
 	editor->setCenterOnScroll(true);	
-	if (s.errorType.id == cat_schema_err)
+	if (s.errorType.id == cat_schema_err || s.errorLine != 0 )
 	{
 		ifstream myfile;		
 		myfile.open (link.c_str());		
