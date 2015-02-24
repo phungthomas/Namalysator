@@ -997,55 +997,50 @@ bool dbrequest::insertComment(int id_mets,std::string date, std::string comment)
 /// <returns>int</returns>
 int dbrequest::getcountMetsErrorForEachErrorType(int idTestset,int errortype)
 {
-	//std::vector<MetsError> v ;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	MetsError es;
 	sqlite3_stmt *pStmt;	
-	std::stringstream sId_testset,siderror;	
-	sId_testset << idTestset; 	
-	siderror << errortype;		
+	
 	const char *zErrMsg= 0; 	
 	set<int> pileMets;
-	std::string selectSql = "select distinct (id_related) from MetsError where ID_TESTSET = '"+ sId_testset.str() + "' and id_errortype = '" +siderror.str() + "'";
+	std::string selectSql = "select distinct (id_related) from MetsError where ID_TESTSET = ? and id_errortype = ?";
 	DEBUG_ME
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
    if(rc == SQLITE_OK)
    {	   
+	   sqlite3_bind_int(pStmt,1,idTestset);
+		sqlite3_bind_int(pStmt,2,errortype);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		  {
-			int count = sqlite3_data_count(pStmt);	
-			    
-			for (int i =0;i<  count ;i++)
-			{	
-				const char *result = safe_sqlite3_column_text(pStmt, i);						
-				if (pileMets.find(atoi(result)) == pileMets.end())
+			  int res = sqlite3_column_int(pStmt, 0);
+				if (pileMets.find(res) == pileMets.end())
 				{
-					pileMets.insert(atoi(result));
+					pileMets.insert(res);
 				}
-			}
+			
 		}
 	} else{
 		raiseError(conn,selectSql);
 	}
     sqlite3_finalize(pStmt);
-	std::string selectSqlLinked = "select distinct (ID_METS) from MetsError S,LINKEDFILES l where s.ID_TESTSET ='"+ sId_testset.str() + "' and RELATED_TYPE = 'LINKEDFILES' and s.id_related = l.id and id_errortype = '" +siderror.str() + "'";
+	std::string selectSqlLinked = "select distinct (ID_METS) from MetsError S,LINKEDFILES l where s.ID_TESTSET =? and RELATED_TYPE = 'LINKEDFILES' and s.id_related = l.id and id_errortype = ?";
 	
 	 rc = sqlite3_prepare_v2(conn->db, selectSqlLinked.c_str(),-1, &pStmt,&zErrMsg);
 
 	if(rc == SQLITE_OK)
-	{	       
+	{	
+	    sqlite3_bind_int(pStmt,1,idTestset);
+		sqlite3_bind_int(pStmt,2,errortype);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		 {
-			int count = sqlite3_data_count(pStmt);		    
-			for (int i =0;i<  count ;i++)
-			{
-				const char *result = safe_sqlite3_column_text(pStmt, i);		
-				if (pileMets.find(atoi(result)) == pileMets.end())
+			 int res = sqlite3_column_int(pStmt, 0);
+	
+				if (pileMets.find(res) == pileMets.end())
 				{
-					pileMets.insert(atoi(result));
+					pileMets.insert(res);
 				}
-			}
+			
 		}
 	}else{
 		raiseError(conn,selectSql);
@@ -1285,7 +1280,7 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 	sqlite3_stmt *pStmt;	
 		
 	const char *zErrMsg= 0; 
-	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search from MetsError s,ERRORTYPE e where s.ID_ERRORTYPE = e.ID_type  and s.ID_TESTSET = ?";
+	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY from MetsError s,ERRORTYPE e where s.ID_ERRORTYPE = e.ID_type  and s.ID_TESTSET = ?";
 	if (error !="")
 	{
 		selectSql = selectSql +	" and e.ERROR = ?";
@@ -1308,20 +1303,19 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 
       while(sqlite3_step(pStmt) == SQLITE_ROW)
       {
-		int count = sqlite3_data_count(pStmt);		
-		 for (int i =0;i<  count ;i++)
-		 {
-			const char *result = safe_sqlite3_column_text(pStmt, i);
-			if (i==0) es.id= atoi(result); 							
-			else if (i==1) es.idRelatedFile = atoi(result);
-			else if (i==2) es.relatedType = result;	
-			else if (i==3) es.filePart = result;
-			else if (i==4) es.errorLine = atoi(result);
-			else if (i==5) es.errorColumn = atoi(result);
-			else if (i==6) es.message = result;
-			else if (i==7) es.errorType = getErrorTypeWithId(atoi(result));
-			else if (i==8) es.id_search = result;
-		 }
+		  int col = 0;
+
+			es.id= sqlite3_column_int(pStmt, col++);						
+			es.idRelatedFile = sqlite3_column_int(pStmt, col++);
+			es.relatedType = safe_sqlite3_column_text(pStmt, col++);	
+			es.filePart = safe_sqlite3_column_text(pStmt, col++);
+			es.errorLine = sqlite3_column_int(pStmt, col++);
+			es.errorColumn =sqlite3_column_int(pStmt, col++);
+			es.message = safe_sqlite3_column_text(pStmt, col++);
+			es.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt, col++));
+			es.id_search = safe_sqlite3_column_text(pStmt, col++);
+			es.hashkey = safe_sqlite3_column_text(pStmt, col++);
+		 
 
 		 if (strcmp(es.relatedType.c_str(),"METS") == 0)
 		 {
