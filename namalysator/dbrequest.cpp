@@ -1427,7 +1427,7 @@ std::vector<DateComment> dbrequest::getDateCommentid(int idError)
 	std::vector<DateComment> v;
     sqlite3_stmt *pStmt;	
 	const char *zErrMsg= 0; 
-	Article article;	
+	
 	std::string selectSql = "SELECT dc.id, dc.id_dateerror, dc.date, dc.comment FROM DATECOMMENT dc where id_dateerror =?" ;
 
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1442,7 +1442,7 @@ std::vector<DateComment> dbrequest::getDateCommentid(int idError)
 		  dc.date = dc.date.fromString(safe_sqlite3_column_text(pStmt, col++),"yyyy-MM-dd");
 		  dc.comment = safe_sqlite3_column_text(pStmt, col++);	
 	
-		v.push_back(dc);	 
+		  v.push_back(dc);	 
 	  }
 	}else{
 		raiseError(conn,selectSql);
