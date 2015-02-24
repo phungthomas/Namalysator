@@ -13,7 +13,7 @@ tabErrors::tabErrors(int id, BatchDetail &bd):batch(bd)
 	vSchemaE = db.getvErrorPerCategory(id_cat,batch.idTestSet);
 	labels  << tr("Severity") << tr("Error Category") << tr("Location")<<tr("Message") << tr("File") << tr("Year")<<tr("Accepted");// << tr("Number of issues");
 	editor = new CodeEditor();
-	plainTextEdit = new QPlainTextEdit();	
+	//plainTextEdit = new QPlainTextEdit();	
 	btnNext = new QPushButton("Next");
 	table = new QTableWidget();
 	fillTableError(vSchemaE);
@@ -108,7 +108,7 @@ void tabErrors::lineChanged(int row,int col)
 
 		QFile file(link.c_str());
 		if (file.open(QIODevice::ReadOnly))
-			editor->setPlainText(file.readAll());
+			editor->setPlainText(QString::fromUtf8(file.readAll()));
 
 		findLine(batch, s);
 		//	ShellExecuteA(NULL, "open",link.c_str(), NULL, NULL, SW_SHOWNORMAL);

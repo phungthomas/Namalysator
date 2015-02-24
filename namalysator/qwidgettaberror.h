@@ -22,7 +22,7 @@ class tabErrors : public QWidget
 		tabErrors(int id_cat,BatchDetail &batch);
 		int getSizeVError();
 		int id_cat;
-		QPlainTextEdit *plainTextEdit;
+		//QPlainTextEdit *plainTextEdit;
 	private : 
 		QStringList labels;
 		QTableWidgetItem *newItem;
