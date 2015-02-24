@@ -152,7 +152,7 @@ void tabErrors::fillTableError(std::vector<MetsError> vError)
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1, 2, newItem);
 
-		newItem = new QTableWidgetItem(vError[i].message.c_str(),i);
+		newItem = new QTableWidgetItem(QString::fromUtf8(vError[i].message.c_str()),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1, 3, newItem);		
 
