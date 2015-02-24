@@ -997,7 +997,7 @@ bool dbrequest::insertComment(int id_mets,std::string date, std::string comment)
 /// <returns>int</returns>
 int dbrequest::getcountMetsErrorForEachErrorType(int idTestset,int errortype)
 {
-	std::vector<MetsError> v ;
+	//std::vector<MetsError> v ;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	MetsError es;
 	sqlite3_stmt *pStmt;	
