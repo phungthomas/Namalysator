@@ -1068,13 +1068,13 @@ int dbrequest::getcountMetsError(int idTestset)
 	
 	const char *zErrMsg= ""; 	
 	set<int> pileMets;
-	std::string selectSql = "select distinct (id_related) from MetsError where ID_TESTSET = '"+ sId_testset.str() + "'";
-	DEBUG_ME
+	std::string selectSql = "select distinct (id_related) from MetsError where ID_TESTSET = ?";
 	
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
    if(rc == SQLITE_OK)
-   {	   
+   {
+	   sqlite3_bind_int(pStmt,1,idTestset);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		  {
 			int count = sqlite3_data_count(pStmt);	
@@ -1093,12 +1093,13 @@ int dbrequest::getcountMetsError(int idTestset)
 	}
    sqlite3_finalize(pStmt);
   
-	std::string selectSqlLinked = "select distinct (ID_METS) from MetsError S,LINKEDFILES l where s.ID_TESTSET ='"+ sId_testset.str() + "' and RELATED_TYPE = 'LINKEDFILES' and s.id_related = l.id ";
+	std::string selectSqlLinked = "select distinct (ID_METS) from MetsError S,LINKEDFILES l where s.ID_TESTSET =? and RELATED_TYPE = 'LINKEDFILES' and s.id_related = l.id ";
 	
 	rc = sqlite3_prepare_v2(conn->db,selectSqlLinked.c_str(),-1, &pStmt,&zErrMsg);
 
 	if(rc == SQLITE_OK)
-	{	       
+	{	  
+		sqlite3_bind_int(pStmt,1,idTestset);
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		 {
 			int count = sqlite3_data_count(pStmt);		    
@@ -1111,6 +1112,8 @@ int dbrequest::getcountMetsError(int idTestset)
 				}
 			}
 		}
+	}else{
+		raiseError(conn,selectSqlLinked);
 	}
 	sqlite3_finalize(pStmt);
 	return pileMets.size();
@@ -1298,6 +1301,7 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 	if(rc == SQLITE_OK)
 	{	  
 		sqlite3_bind_int(pStmt,1,id_testset);
+
 		if (error !="")
 			sqlite3_bind_text(pStmt,2,error.c_str(),error.length(),SQLITE_STATIC);
 		else
