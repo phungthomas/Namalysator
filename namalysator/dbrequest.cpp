@@ -1420,6 +1420,7 @@ std::vector<std::string> dbrequest::getDistinctErrorTypeDateError(int id_cat,int
 /// <summary>get comment of a date of the selected date</summary>
 /// <param name="idError">idError</param>
 /// <returns>vector of DateComment of the current DateError</returns>
+
 std::vector<DateComment> dbrequest::getDateCommentid(int idError)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
@@ -1450,6 +1451,7 @@ std::vector<DateComment> dbrequest::getDateCommentid(int idError)
 	sqlite3_finalize(pStmt);
 	return v;
 }
+
 
 
 
