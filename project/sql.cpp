@@ -837,7 +837,7 @@ void database::insertMetsErrorWithId(int category,const std::string &relatedType
 		sqlite3_bind_int(pStmt,6,e.errorcolumn);
 		sqlite3_bind_int(pStmt,7,category);
 		sqlite3_bind_text(pStmt,8,e.message.c_str(),e.message.length(),SQLITE_STATIC);
-		sqlite3_bind_text(pStmt,9,id.c_str(),id.length(),SQLITE_STATIC);
+		sqlite3_bind_text(pStmt,9,id.c_str(),id.length()>49?49:id.length(),SQLITE_STATIC);
 
 		std::stringstream ss;
 		ss << relatedType << mets.fileName << filePart << category << e.errorline << e.message << id;

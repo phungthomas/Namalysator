@@ -251,18 +251,17 @@ void tabErrors::findLine(const BatchDetail &batch,MetsError s)
 	{
 		search_item = (s.id_search);	
 	}   
-	editor->find(search_item.c_str());
-
-	if (s.errorType.id == cat_multipleBlock)
-	{
+	if (editor->find(QString::fromUtf8(search_item.c_str()))){
 		btnNext->setEnabled(true);
-	} 	 
+	};	 
 }
 
 
 void tabErrors::findNext()
 {
-	editor->find(search_item.c_str());
+	if (!editor->find(QString::fromUtf8(search_item.c_str()))){
+		btnNext->setEnabled(false);
+	};
 }
 
 void tabErrors::accepted(bool val,std::string hashkey){
