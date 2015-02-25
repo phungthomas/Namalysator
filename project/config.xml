@@ -16,6 +16,7 @@
 		</dataintegrity>
 		<semanticchecks>	
 				<identifierMix>1</identifierMix>
+        <emptyMix>1</emptyMix>
 				<dateFolderIssue>1</dateFolderIssue>
 				<noIssueDefined>1</noIssueDefined>
 				<invalidSupplement>1</invalidSupplement>
