@@ -241,6 +241,10 @@
 					RelativePath=".\verifyBook.cpp"
 					>
 				</File>
+				<File
+					RelativePath=".\verifyEmptyMix.cpp"
+					>
+				</File>
 				<Filter
 					Name="semanticchecks"
 					>
@@ -453,6 +457,10 @@
 				>
 				<File
 					RelativePath=".\verifybook.h"
+					>
+				</File>
+				<File
+					RelativePath=".\verifyEmptyMix.h"
 					>
 				</File>
 				<File

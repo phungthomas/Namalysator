@@ -65,6 +65,16 @@ public:
 	};
 };
 
+class StateEmptyCheck : public StateParserScanResolution{
+public:
+	virtual void endElement (const char* const name){
+		boost::algorithm::trim(cData);
+		if ( cData.length() == 0 ) {
+			CTX.MixContainer[std::string(name)]=cData;
+		}
+	};
+};
+
 
 void StateParseramdSecState::startElement (const char* const name, const xercesc::Attributes &atts ){
 	const char *val = getAttributeValue("ID", atts);
@@ -86,11 +96,18 @@ StateParserState* StateParserRootamdSecState::getNext(const char* const name){
 	StateParserState* ret=root;
 	
 	static struct _onlyOnes {
-		_onlyOnes(std::map<string,StateParserState*>& map){
+		_onlyOnes(std::map<string,StateParserState*>& map,bool flagMix){
 			map["SourceData"]=	new StateParserSourceDataResolution();
 			map["XphysScanResolution"]=	new StateParserScanResolution();
+			if ( flagMix ) {
+				map["ScannerManufacturer"]=new StateEmptyCheck();
+				map["ScannerModelName"]=new StateEmptyCheck();
+				map["ScannerModelSerialNo"]=new StateEmptyCheck();
+				map["ScanningSoftware"]=new StateEmptyCheck();
+				map["ScanningSoftwareVersionNo"]=new StateEmptyCheck();
+			};
 		}
-	} onlyOnes (map);
+	} onlyOnes (map,CTX.flagMix ); // take care CTX.flagMix: a side effect base on the fact that config.xml is read only ones ( no change on the fly like the map is static ) 
 
 	std::map<string,StateParserState*>::iterator it = map.find(name);
 	if ( it != map.end()) ret = (*it).second;

@@ -8,13 +8,13 @@
 #include "errorhandler.h"
 
 class verifyBook {
-private :
+protected :
 	database *db;
 	inventory invent;
 	errorHandler *hError;
 
 
-	void init(metsparserContext&);
+	virtual void init(metsparserContext&);
 public :
 	verifyBook();
 	virtual void check(std::string,metsparserContext&);

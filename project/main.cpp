@@ -45,12 +45,14 @@
 #include "verifycutouts.h"
 #include "verifymeasurement.h"
 #include "verifybook.h"
+#include "verifyEmptyMix.h"
 #include "titletocheck.h"
 #include "datehelper.h"
 #include <configparser.h>
 #include "metsverifier.h"
 #include "boost/filesystem/operations.hpp"
 #include "boost/filesystem/path.hpp"
+#include "boost/progress.hpp"
 #include "boost/progress.hpp"
 
 #include "../common_files/precisiontimer.h"
@@ -231,6 +233,9 @@ int start()
 		std::cout << tempMessage.str() << std::endl;
 		pt.LogTime("\tHousekeeping before mets parser");
 		metsParser metsP(currentMetsFile,&hError, &df);
+		if (parameter.getValueCheck("semanticchecks.emptyMix") == 1){
+			metsP.getContext().flagMix = true; // start parsing of mix part				
+		}
 		pt.LogTime("METS Parser creation");
 		db.insertMets(batchName,currentMetsPath,currentMetsFile);
 		pt.LogTime("Insrting METS into DB");
@@ -311,7 +316,9 @@ int start()
 
 		static verifyBook vBook;
 		vBook.check(parameter.getValue("verifiers.inventoryBook"),metsP.getContext());
-		
+
+		static verifyEmptyMix vMix;
+		vMix.check(parameter.getValue("verifiers.semanticchecks.emptyMix"),metsP.getContext());
 
 		if (parameter.getValueCheck("dataintegrity.checkFile") == 1)
 		{

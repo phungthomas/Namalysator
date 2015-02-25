@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 #include "datafactory.h"
 #include "errorhandler.h"
 #include "stateparser.h"
@@ -14,6 +15,7 @@
 class metsparserContext : public StateParserContext{
 
 public :
+	metsparserContext():flagMix(false){};
 	datafactory *dfMets;	
 	std::string metsfile;	
 	errorHandler *hError;
@@ -39,6 +41,10 @@ public :
 	AmdSec amdsec;
 
 	inventoryMappingActif inventory;
+
+	//testmix;
+	bool flagMix ; // if true test mix:mix ( ScannerManufacturer )
+	std::map<std::string,std::string> MixContainer;
 };
 
 class StateParserMetsRootState:public StateParserState{
