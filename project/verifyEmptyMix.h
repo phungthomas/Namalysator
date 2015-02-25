@@ -7,7 +7,7 @@ class verifyEmptyMix : public verifyBook {
 
 	public :
 	verifyEmptyMix();
-	virtual void check(std::string,metsparserContext&);
+	virtual void check(int,metsparserContext&);
 
 };
 

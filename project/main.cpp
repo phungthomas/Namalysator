@@ -315,10 +315,10 @@ int start()
 		
 
 		static verifyBook vBook;
-		vBook.check(parameter.getValue("verifiers.inventoryBook"),metsP.getContext());
+		vBook.check(parameter.getValueCheck("inventoryBook"),metsP.getContext());
 
 		static verifyEmptyMix vMix;
-		vMix.check(parameter.getValue("verifiers.semanticchecks.emptyMix"),metsP.getContext());
+		vMix.check(parameter.getValueCheck("semanticchecks.emptyMix"),metsP.getContext());
 
 		if (parameter.getValueCheck("dataintegrity.checkFile") == 1)
 		{

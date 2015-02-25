@@ -8,9 +8,9 @@ verifyBook::verifyBook(){
 	//std::cerr << "VERIFY BOOK" << std::endl;
 }
 
-void verifyBook::check(std::string check,metsparserContext& context){
+void verifyBook::check(int check,metsparserContext& context){
 
-	if ( check.compare("1")!=0 ) return; 
+	if ( check != 1 ) return; 
 	init (context);
 
 	// check if BIBREC_SYSNUM in database
