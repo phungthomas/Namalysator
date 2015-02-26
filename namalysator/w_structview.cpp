@@ -624,11 +624,12 @@ void w_structview::openErrorScreen()
 	QPixmap xmap1 = QPixmap::grabWidget(m_ui->treeWidget,0,0);
 	QPixmap xmap2 = QPixmap::grabWidget(m_ui->scrollArea,0,0);
 	
-	QPixmap result ( m_ui->treeWidget->width() + m_ui->scrollArea->width(), m_ui->scrollArea->height());
+	//QPixmap result ( m_ui->treeWidget->width() + m_ui->scrollArea->width(), m_ui->scrollArea->height());
+	QPixmap result ( xmap1.width() + xmap2.width(), xmap2.height());
 
 	QPainter painter(&result);
 	painter.drawPixmap(0,0, xmap1);
-	painter.drawPixmap(m_ui->treeWidget->width(),0, xmap2);
+	painter.drawPixmap(xmap1.width(),0, xmap2);
 
 	w_screenshoterror *ws = new w_screenshoterror();
 	//ws->setBatchDetailImage(xmap,mets,this);
