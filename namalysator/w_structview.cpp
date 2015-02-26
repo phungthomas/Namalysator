@@ -621,8 +621,9 @@ void w_structview::create_page2toc_entry()
 void w_structview::openErrorScreen()
 {
 	//QPixmap xmap = QPixmap::grabWidget(this,0,35,this->width(),this->height()-160);
-	QPixmap xmap1 = QPixmap::grabWidget(m_ui->treeWidget,0,0);
-	QPixmap xmap2 = QPixmap::grabWidget(m_ui->scrollArea,0,0);
+	
+	QPixmap xmap1 = QPixmap::grabWidget(m_ui->treeWidget);
+	QPixmap xmap2 = QPixmap::grabWidget(m_ui->scrollArea);
 	
 	//QPixmap result ( m_ui->treeWidget->width() + m_ui->scrollArea->width(), m_ui->scrollArea->height());
 	QPixmap result ( xmap1.width() + xmap2.width(), xmap2.height());
