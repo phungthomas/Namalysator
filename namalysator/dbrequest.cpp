@@ -1522,7 +1522,7 @@ std::map<std::string,std::vector<StructureError> > dbrequest::getBatchStructureE
 		    int idmets = sqlite3_column_int(pStmt,col++);
 			std::vector<StructureError> vect = getStructureError(idmets);
 			std::string ptr =  std::string ( (char*)safe_sqlite3_column_text(pStmt, col++));
-			v[ ptr ]= vect; 			 
+			v[ ptr ]= vect; // SIDE effect if all file has same name ( no possible to export error )			 
 		}		
    }else{
 		raiseError(conn,selectSql);
