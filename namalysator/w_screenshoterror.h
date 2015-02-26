@@ -32,7 +32,6 @@ private:
     dbrequest db;
     QPixmap pixmap,originalPixmap;
     void fillComboBoxErrortype();
-    void loadImage();
     std::vector<ErrorType> vErrorType;      
     void mousePressEvent(QMouseEvent *event);      
     void mouseReleaseEvent(QMouseEvent *event);   

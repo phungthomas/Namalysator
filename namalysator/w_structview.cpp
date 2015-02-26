@@ -635,7 +635,7 @@ void w_structview::openErrorScreen()
 	w_screenshoterror *ws = new w_screenshoterror();
 	//ws->setBatchDetailImage(xmap,mets,this);
 	ws->setBatchDetailImage(result,mets,this,mapTiffPath.find(currentPage)->second.fileId,currentPage);
-	ws->resize(1200,910);
+	ws->resize(1200,1000);
 	ws->show();	
 }
 
