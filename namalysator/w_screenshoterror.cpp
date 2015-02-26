@@ -166,7 +166,14 @@ void w_screenshoterror::mouseReleaseEvent(QMouseEvent *event)
 		point2X = event->x();
 		point2Y = event->y();
 										
-		QPainter painter(&pixmap);		
+		//
+		QPixmap xmap1 = QPixmap::grabWidget(m_ui->label,0,0);
+		QPainter painter(&xmap1);
+		
+		QRect r = m_ui->label->geometry();
+		//float coeffy= 1.0 * pixmap.height()/r.height();
+		//float coeffx= 1.0 * pixmap.width()/r.width();
+		
 		painter.setBrush(Qt::NoBrush);
 		painter.setOpacity(5);
 		painter.setPen(currentColor);		
@@ -174,9 +181,11 @@ void w_screenshoterror::mouseReleaseEvent(QMouseEvent *event)
 		y = point1Y;
 		width = point2X- point1X;
 		height = point2Y-point1Y;		
-		painter.drawRect( x,y, width,height);			
+		//painter.drawRect( (x-r.x())*coeffx,(y-r.y())*coeffy, width*coeffx,height*coeffy);	
+		painter.drawRect( x-r.x(),y-r.y(), width,height);			
 		clickCount=0;		
-		m_ui->label->setPixmap(pixmap);
+		m_ui->label->setPixmap(xmap1);
+		pixmap=xmap1;
 	}
 }
 

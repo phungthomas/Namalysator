@@ -48,11 +48,11 @@ public:
     QLabel *lbIssueNumber;
     QLabel *lbFileName;
     QListWidget *listSupplement;
+    QTableWidget *tableYear;
     QWidget *widget_2;
     QVBoxLayout *verticalLayout_3;
     QScrollArea *scrollAreaHeader;
     QWidget *scrollAreaWidgetContents;
-    QTableWidget *tableYear;
     QTreeView *treeViewMets;
     QLabel *lblHeader;
 
@@ -60,7 +60,7 @@ public:
     {
         if (w_disk->objectName().isEmpty())
             w_disk->setObjectName(QString::fromUtf8("w_disk"));
-        w_disk->resize(871, 523);
+        w_disk->resize(871, 720);
         QFont font;
         font.setKerning(true);
         w_disk->setFont(font);
@@ -82,13 +82,10 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         calendarWidget = new QCalendarWidget(widget);
         calendarWidget->setObjectName(QString::fromUtf8("calendarWidget"));
-        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(calendarWidget->sizePolicy().hasHeightForWidth());
-        calendarWidget->setSizePolicy(sizePolicy1);
-        calendarWidget->setMinimumSize(QSize(220, 220));
-        calendarWidget->setMaximumSize(QSize(200, 198));
+        sizePolicy.setHeightForWidth(calendarWidget->sizePolicy().hasHeightForWidth());
+        calendarWidget->setSizePolicy(sizePolicy);
+        calendarWidget->setMinimumSize(QSize(200, 200));
+        calendarWidget->setMaximumSize(QSize(16000, 16000));
         calendarWidget->setFont(font);
         calendarWidget->setMouseTracking(false);
         calendarWidget->setFocusPolicy(Qt::WheelFocus);
@@ -98,11 +95,11 @@ public:
 
         listMets = new QListWidget(widget);
         listMets->setObjectName(QString::fromUtf8("listMets"));
-        QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(listMets->sizePolicy().hasHeightForWidth());
-        listMets->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(listMets->sizePolicy().hasHeightForWidth());
+        listMets->setSizePolicy(sizePolicy1);
         listMets->setMinimumSize(QSize(50, 100));
         listMets->setMaximumSize(QSize(16000, 16000));
 
@@ -174,38 +171,47 @@ public:
 
         verticalLayout_2->addWidget(groupBox_4);
 
+        tableYear = new QTableWidget(widget);
+        tableYear->setObjectName(QString::fromUtf8("tableYear"));
+        tableYear->setMinimumSize(QSize(0, 0));
+
+        verticalLayout_2->addWidget(tableYear);
+
 
         horizontalLayout->addWidget(widget);
 
         widget_2 = new QWidget(w_disk);
         widget_2->setObjectName(QString::fromUtf8("widget_2"));
-        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(widget_2->sizePolicy().hasHeightForWidth());
-        widget_2->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(widget_2->sizePolicy().hasHeightForWidth());
+        widget_2->setSizePolicy(sizePolicy2);
         widget_2->setMinimumSize(QSize(0, 0));
         verticalLayout_3 = new QVBoxLayout(widget_2);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         scrollAreaHeader = new QScrollArea(widget_2);
         scrollAreaHeader->setObjectName(QString::fromUtf8("scrollAreaHeader"));
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Maximum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(scrollAreaHeader->sizePolicy().hasHeightForWidth());
+        scrollAreaHeader->setSizePolicy(sizePolicy3);
+        scrollAreaHeader->setMinimumSize(QSize(0, 200));
+        scrollAreaHeader->setMaximumSize(QSize(16000, 16000));
         scrollAreaHeader->setBaseSize(QSize(1000, 200));
         scrollAreaHeader->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 516, 89));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 516, 198));
         scrollAreaHeader->setWidget(scrollAreaWidgetContents);
 
         verticalLayout_3->addWidget(scrollAreaHeader);
 
-        tableYear = new QTableWidget(widget_2);
-        tableYear->setObjectName(QString::fromUtf8("tableYear"));
-        tableYear->setMinimumSize(QSize(0, 0));
-
-        verticalLayout_3->addWidget(tableYear);
-
         treeViewMets = new QTreeView(widget_2);
         treeViewMets->setObjectName(QString::fromUtf8("treeViewMets"));
+        sizePolicy2.setHeightForWidth(treeViewMets->sizePolicy().hasHeightForWidth());
+        treeViewMets->setSizePolicy(sizePolicy2);
 
         verticalLayout_3->addWidget(treeViewMets);
 
