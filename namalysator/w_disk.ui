@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>898</width>
-    <height>690</height>
+    <width>871</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="font">
@@ -248,6 +248,24 @@
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
        <widget class="QScrollArea" name="scrollAreaHeader">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16000</width>
+          <height>16000</height>
+         </size>
+        </property>
         <property name="baseSize">
          <size>
           <width>1000</width>
@@ -262,15 +280,22 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>543</width>
-           <height>322</height>
+           <width>516</width>
+           <height>198</height>
           </rect>
          </property>
         </widget>
        </widget>
       </item>
       <item>
-       <widget class="QTreeView" name="treeViewMets"/>
+       <widget class="QTreeView" name="treeViewMets">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
