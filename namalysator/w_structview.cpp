@@ -237,11 +237,13 @@ void w_structview::showCurrentPage()
 	{		
 		std::string path = BatchDetail::getBatchDetail().path + mets.path + mapTiffPath.find(currentPage)->second.fileName;
 		originalImage.load(path.c_str());	
-		resizeImage();
+		
 		
 		currentAltoFile = mapAltoPath.find(currentPage)->second.fileId;
-		m_ui->lblPage->setValue(currentPage);
-		m_ui->lblPage->setMaximum(mapTiffPath.size());
+		resizeImage();
+
+		this->currentPageChange();
+
 		updateTableOfContents(currentAltoFile);	
 		enableButton(true);		
 	}
@@ -262,19 +264,27 @@ void w_structview::previous()
 {
 	if (currentPage > 1) {
 		currentPage--;
-		showCurrentPage();
+		showCurrentPage();	
+	
 	}
 }
 void w_structview::next()
 {
 	if (currentPage < mapTiffPath.size()) {
 		currentPage++;
-		showCurrentPage();
+		showCurrentPage();	
 	}
+}
+
+void w_structview::currentPageChange(){
+		m_ui->lblPage->setValue(currentPage);
+		m_ui->lblPage->setMaximum(mapTiffPath.size());
 }
 
 void w_structview::showPage(int i)
 {
+	int oldcurrent = currentPage;
+	//if ( currentPage == i ) return ; // do nothing if no real change
 	if ( i <= mapTiffPath.size() && i >=1 ) {
 		currentPage=i;
 	}else{
@@ -284,6 +294,7 @@ void w_structview::showPage(int i)
 			currentPage=mapTiffPath.size();
 		}
 	}
+	if ( oldcurrent != currentPage)
 	showCurrentPage();	
 }
 
@@ -335,7 +346,7 @@ void w_structview::zoomIn()
  void w_structview::structure()
  { 
 	m_ui->label->adjustSize();
-    paintAllStructure(currentAltoFile);  
+    //paintAllStructure(currentAltoFile);  
  }
  
  //! this method parse the mets and alto files to get the logical for creating the table of
@@ -368,70 +379,6 @@ void w_structview::metsAltoParser()
 	create_page2toc_entry();
 }
 
-
-void w_structview::paintAllStructure(std::string altoFile)
-// This function should paint the current page with the different lowest-level colors, including headings and captions in yellow
-// It remains to be implemented
-{
-	int x,y,width,height;
-
-	originalPixmap = QPixmap::fromImage(image);
-	QPainter painter(&originalPixmap);
-	
-/*	for (std::set<std::pair<std::string,std::string>>::iterator it = blockAltoDmd.begin(); it != blockAltoDmd.end(); it++)
-	{	
-		if (it->second !="Newspaper")
-		if (it->second.find("MODSMD_ISSUE") != std::string::npos)
-		if (it->second != "MODSMD_PRINT MODSMD_ELEC")
-		if( it->first == altoFile)
-		{
-			for (std::map<int,Article>::iterator itArticle = mapArticle.begin(); itArticle != mapArticle.end(); itArticle++)
-			{
-				if (itArticle->second.id == it->second)
-				{
-					for (size_t i=0;i< itArticle->second.vectArticle.size();i++)
-					{
-						altoblock t = mapAlto[altoFile];
-						typeBlock ab = itArticle->second.vectArticle[i];
-						
-						Block block = t.mapalto[ab.block];						
-						x = block.vpos*multiImage ;
-						y = block.hpos*multiImage;
-						width = block.width*multiImage;
-						height =  block.height*multiImage;	
-						
-						if (ab.type=="HEADING")
-						{
-							QBrush b1( Qt::yellow );						
-							painter.setBrush( b1 );
-							painter.setOpacity(0.25);
-							painter.drawRect( x,y, width,height);	
-							
-						}
-						else if (ab.type=="PARAGRAPH")
-						{
-							QBrush b1( Qt::green);							
-							painter.setBrush( b1 );
-							painter.setBrush(Qt::NoBrush);
-							painter.setOpacity(1);						
-							painter.setPen(Qt::green);			
-						}
-						else
-						{
-							QBrush b1( Qt::blue );
-							painter.setBrush( b1 );
-							painter.setOpacity(0.25);													
-						}
-						painter.drawLine( x, y, x, y+height ) ;	
-						painter.drawLine( x+ width, y, x+ width, y+height ) ;			
-					}					
-				}			
-			}		
-		}
-		m_ui->label->setPixmap(originalPixmap);
-		m_ui->scrollArea->setWidget(m_ui->label);			
-	}*/
-}
 
 
 void w_structview::createActions()
@@ -572,8 +519,9 @@ void w_structview::drawRect(QTreeWidgetItem *itemW, QTreeWidgetItem *itemW2)
 			// load page			
 			for (std::map<int,LinkedFiles>::iterator it = mapAltoPath.begin(); it != mapAltoPath.end(); it++)
 			{
-				if(it->second.fileId == currentAltoFile)
-					currentPage = it->first;				
+				if(it->second.fileId == currentAltoFile){
+					currentPage = it->first;
+				}
 			}
 			showCurrentPage();
 			updateTableOfContents(currentAltoFile);
@@ -697,7 +645,7 @@ void w_structview::enableButton(bool enable)
 	m_ui->btnNext->setEnabled(enable);
 	m_ui->btnZoomIn->setEnabled(enable);
 	m_ui->btnZoomOut->setEnabled(enable);
-	m_ui->btnNext->setEnabled(enable);
+	m_ui->lblPage->setEnabled(enable);
 	m_ui->btnPrevious->setEnabled(enable);
 	m_ui->btnClearPainter->setEnabled(enable);	
 }

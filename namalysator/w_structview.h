@@ -120,7 +120,7 @@ private:
 	
 	void construct_page2blocks();
 	void construct_page2blocks_recursive(const std::string &current_type, Item *item);
-	 void paintAllStructure(std::string altoFile);
+	void currentPageChange();
 
 private slots :	
 	void getDate(QDate);  
