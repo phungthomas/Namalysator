@@ -273,6 +273,8 @@ MetsFile dbrequest::getMets(int id_mets)
 		{
 			mets.supplements.push_back(safe_sqlite3_column_text(pStmt, 0));
 		}
+	}else{
+		raiseError(conn,selectSql2);
 	}
 	sqlite3_finalize(pStmt);
 	return mets;
