@@ -69,7 +69,7 @@ w_structview::w_structview(QWidget *parent) :
 	currentPage=1;
 	m_ui->label->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 	m_ui->label->setScaledContents(true);
-	m_ui->btnViewHtml->setEnabled(false);
+	
 	m_ui->scrollArea->setWidget(m_ui->label);
 	enableButton(false);	
     currentLevel=1;
@@ -645,6 +645,7 @@ void w_structview::enableButton(bool enable)
 	m_ui->btnViewDir->setEnabled(enable);
 	m_ui->btnViewMets->setEnabled(enable);
 	m_ui->btnNext->setEnabled(enable);
+	m_ui->btnViewHtml->setEnabled(enable);
 	m_ui->btnZoomIn->setEnabled(enable);
 	m_ui->btnZoomOut->setEnabled(enable);
 	m_ui->lblPage->setEnabled(enable);
@@ -664,7 +665,6 @@ void w_structview::clear()
     m_ui->listMets->clear();
     m_ui->treeWidget->clear();	
     m_ui->listErrors->clear();
-    m_ui->btnViewHtml->setEnabled(false);
 	currentSelectedArticle=0;	
 }
 
@@ -743,7 +743,7 @@ void w_structview::fillListErrors()
 	int major=0;
 	int blocking=0;
 	
-	m_ui->btnViewHtml->setEnabled(false);
+	//m_ui->btnViewHtml->setEnabled(false);
 	m_ui->listErrors->clear(); 
 	std::vector<StructureError> vListErrors = db.getStructureError(mets.idMets);
 
@@ -755,7 +755,7 @@ void w_structview::fillListErrors()
 			txt << it->fileid <<  ":" ;
 		txt << it->errorType.severity.gravity  << ": " << it->getError() << " - " << it->message;
 		new QListWidgetItem(txt.str().c_str(),  m_ui->listErrors,mets.idMets);	
-		m_ui->btnViewHtml->setEnabled(true);
+		//m_ui->btnViewHtml->setEnabled(true);
 		
 		if (it->errorType.severity.gravity=="MINOR")	minor++;		
 		else if (it->errorType.severity.gravity=="MAJOR") major++;
@@ -767,6 +767,7 @@ void w_structview::fillListErrors()
 void w_structview::viewHtml()
 {
 	FILE *fp;	
+	int count=0;
 		
 	std::string path = BatchDetail::getBatchDetail().getErrorPath()  + "/error.html";	
 	path = slash_path(path);	
@@ -784,6 +785,8 @@ void w_structview::viewHtml()
 	{	
 		std::vector<StructureError> & ref = it->second;
 
+		count += 0;
+
 		if ( ref.size() > 0 ) { // skip empty file
 			fprintf(fp, "<h2>%s</h2>\n",it->first.c_str());
 		
@@ -799,7 +802,16 @@ void w_structview::viewHtml()
 	
 
 	fclose(fp);	
-	ShellExecuteA(NULL, "open",path.c_str(), NULL, NULL, SW_SHOWNORMAL);
+
+	if ( count != 0) {
+		ShellExecuteA(NULL, "open",path.c_str(), NULL, NULL, SW_SHOWNORMAL);
+	}else{
+		// No export but the file is empty and create
+		std::stringstream ss;
+		ss << "No structure error to export" <<  std::endl ;
+		static QErrorMessage* Qerror= new QErrorMessage();
+		Qerror->showMessage(ss.str().c_str());
+	}
 }
 
 void w_structview::viewMetsFile()
