@@ -65,7 +65,7 @@ public:
         label->setObjectName(QString::fromUtf8("label"));
         sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
         label->setSizePolicy(sizePolicy);
-        label->setMinimumSize(QSize(600, 600));
+        label->setMinimumSize(QSize(0, 550));
 
         verticalLayout->addWidget(label);
 

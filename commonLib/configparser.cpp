@@ -27,7 +27,7 @@ void    configparser::endElement (const XMLCh* const uri,const XMLCh* const loca
 	position=currPoss.top();
 }
 
-void configparser::startElement(const XMLCh *const uri, const XMLCh *const localname, const XMLCh *const qname, const xercesc_3_1::Attributes &attrs){
+void configparser::startElement(const XMLCh *const uri, const XMLCh *const localname, const XMLCh *const qname, const xercesc::Attributes &attrs){
 
 	char* name =XMLString::transcode (qname);
 	std::string tmpName = std::string(name);
