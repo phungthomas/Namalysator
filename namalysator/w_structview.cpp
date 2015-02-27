@@ -776,8 +776,15 @@ void w_structview::viewHtml()
 	
 	if(!fp)
 	{			
-		fclose(fp);		
-	}	
+		fclose(fp);
+	}
+	// Write header
+	fprintf(fp, "<html>");
+	fprintf(fp, "<head>");
+	fprintf(fp, "<link rel=\"stylesheet\" href=\"../css/error_style.css\" type=\"text/css\">");
+	fprintf(fp, "</head>");
+	fprintf(fp, "<body>");
+	
 	std::map<std::string,std::vector<StructureError> > vStructureError = db.getBatchStructureError(BatchDetail::getBatchDetail().idTestSet);	 
 	
 	
@@ -799,7 +806,9 @@ void w_structview::viewHtml()
 			}
 		}
 	}
-	
+	// Write footer
+	fprintf(fp, "</body>");
+	fprintf(fp, "</html>");
 
 	fclose(fp);	
 
