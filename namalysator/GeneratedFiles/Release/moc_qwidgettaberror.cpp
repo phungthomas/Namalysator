@@ -22,7 +22,7 @@ static const uint qt_meta_data_tabErrors[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -30,17 +30,19 @@ static const uint qt_meta_data_tabErrors[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      20,   11,   10,   10, 0x08,
-      48,   43,   10,   10, 0x08,
-      75,   67,   10,   10, 0x08,
-      96,   10,   10,   10, 0x08,
+      13,   11,   10,   10, 0x08,
+      49,   40,   10,   10, 0x08,
+      77,   72,   10,   10, 0x08,
+     104,   96,   10,   10, 0x08,
+     125,   10,   10,   10, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_tabErrors[] = {
-    "tabErrors\0\0category\0getcbCategory(QString)\0"
-    "year\0getcbYear(QString)\0col,row\0"
+    "tabErrors\0\0,\0accepted(bool,std::string)\0"
+    "category\0getcbCategory(QString)\0year\0"
+    "getcbYear(QString)\0col,row\0"
     "lineChanged(int,int)\0findNext()\0"
 };
 
@@ -50,10 +52,11 @@ void tabErrors::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         Q_ASSERT(staticMetaObject.cast(_o));
         tabErrors *_t = static_cast<tabErrors *>(_o);
         switch (_id) {
-        case 0: _t->getcbCategory((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 1: _t->getcbYear((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 2: _t->lineChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 3: _t->findNext(); break;
+        case 0: _t->accepted((*reinterpret_cast< bool(*)>(_a[1])),(*reinterpret_cast< std::string(*)>(_a[2]))); break;
+        case 1: _t->getcbCategory((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 2: _t->getcbYear((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 3: _t->lineChanged((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 4: _t->findNext(); break;
         default: ;
         }
     }
@@ -91,9 +94,9 @@ int tabErrors::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
