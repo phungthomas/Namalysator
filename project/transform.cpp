@@ -111,7 +111,7 @@ public :
 
 };
 
-void StructMapElem::startElement(const char *const name, const xercesc_3_1::Attributes &attrs){
+void StructMapElem::startElement(const char *const name, const xercesc::Attributes &attrs){
 	char* type = getAttributeValue ("TYPE" , attrs);
 
 	if ( type && strcmp ( type , "LOGICAL" )==0 ) {
