@@ -795,11 +795,11 @@ void w_structview::viewHtml()
 		count += 0;
 
 		if ( ref.size() > 0 ) { // skip empty file
-			fprintf(fp, "<h2>%s</h2>\n",it->first.c_str());
+			fprintf(fp, "<h3>%s</h3>\n",it->first.c_str());
 		
 			for ( std::vector<StructureError>::iterator itt = ref.begin(); itt != ref.end(); itt++)
 			{	
-				fprintf(fp, "<h3>%s  (p.%d)</h3>\n", itt->getError().c_str(),itt->pagenb);
+				fprintf(fp, "<h4>%s  (p.%d)</h4>\n", itt->getError().c_str(),itt->pagenb);
 				fprintf(fp, "<img  width=\"600\"  src=\"%s\"/>\n", itt->pathImage.c_str());
 				fprintf(fp, "<p>%s</p>\n", itt->message.c_str());	
 				fprintf(fp, "<br>\n");
