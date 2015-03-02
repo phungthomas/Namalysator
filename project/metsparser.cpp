@@ -381,6 +381,8 @@ public:
 };
 
 class SateParserstructMapDiv : public SateParserstructMapRoot{
+private : 
+	std::stack<std::string> typeMemo;
 public:
 
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
@@ -389,6 +391,15 @@ public:
 		const char *val2 = getAttributeValue("TYPE", atts);
 		const char *val3 = getAttributeValue("LABEL", atts);
 		const char *val4 = getAttributeValue("DMDID", atts);
+
+		if ( typeMemo.size() == 0 ){
+			typeMemo.push(std::string(val2 ? val2 : ""));
+		}else{
+			std::string tmp = typeMemo.top()+"."+std::string(val2 ? val2 : "");
+			typeMemo.push(tmp);
+		}
+		CTX.divID[std::string(val1 ? val1 : "")]=typeMemo.top();
+		CTX.divSuite.push_back(typeMemo.top());
 	
 		if (CTX.currentItem ==0)
 		{		
@@ -413,7 +424,10 @@ public:
 	};	
 	
 	virtual void endElement (const char* const name){
-		CTX.currentItem = CTX.currentItem->parent;	
+		CTX.currentItem = CTX.currentItem->parent;
+		if ( typeMemo.size() != 0 ){
+			typeMemo.pop();
+		}
 	};
 };
 

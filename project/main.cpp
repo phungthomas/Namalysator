@@ -254,6 +254,12 @@ int start()
 			return 1;
 		};
 
+		// test of new div structure
+		for ( std::vector<std::string>::iterator it = metsP.getContext().divSuite.begin(); it != metsP.getContext().divSuite.end(); it ++ ){
+			cerr << "DIV:" << *it << std::endl;
+		}
+		//
+
 		std::string outputDir = parameter.getValue("outputDir");
 		std::string generatedFile = outputDir + "/GENERATED" + currentMetsFile;
 		transformParser transformCH;

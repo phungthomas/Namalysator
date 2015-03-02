@@ -45,6 +45,10 @@ public :
 	//testmix;
 	bool flagMix ; // if true test mix:mix ( ScannerManufacturer )
 	std::map<std::string,std::string> MixContainer;
+
+	//DIV structure;
+	std::map<std::string,std::string> divID;
+	std::vector<std::string> divSuite;
 };
 
 class StateParserMetsRootState:public StateParserState{

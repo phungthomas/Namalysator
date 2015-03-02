@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(METSVERIFIER)\Headers"
+				AdditionalIncludeDirectories="&quot;$(XERCES_DIR)&quot;;&quot;$(METSVERIFIER)\commonLib&quot;;&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -58,8 +58,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sqlite.lib "
-				AdditionalLibraryDirectories="C:\Development\Libraries\Debug"
+				AdditionalDependencies="sqlite.lib xerces-c_3D.lib"
+				AdditionalLibraryDirectories="&quot;$(METSVERIFIER)\Libraries\Debug&quot;;&quot;$(METSVERIFY_EXTERNAL)\Libraries\Debug&quot;;&quot;$(BOOST_LIB)&quot;;&quot;$(XERCES_LIB)&quot;"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
 			/>
@@ -112,7 +112,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;&quot;$(METSVERIFIER)\metsverifier\commonLib&quot;;&quot;$(METSVERIFIER)\Headers&quot;"
+				AdditionalIncludeDirectories="&quot;$(XERCES_DIR)&quot;;&quot;$(METSVERIFIER)\commonLib&quot;;&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
@@ -130,7 +130,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="sqlite.lib xerces-c_3.lib commonLib.lib"
-				AdditionalLibraryDirectories="C:\Development\Libraries\Release;C:\Development\metsverifier\Libraries\Release;&quot;C:\Development\Libraries\boost-libs&quot;;&quot;C:\xerces_binary\xerces-c-3.1.1-x86-windows-vc-8.0\lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(METSVERIFIER)\Libraries\Release&quot;;&quot;$(METSVERIFY_EXTERNAL)\Libraries\Release&quot;;&quot;$(BOOST_LIB)&quot;;&quot;$(XERCES_LIB)&quot;"
 				GenerateDebugInformation="true"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"

@@ -1,4 +1,4 @@
-#include <parammodel.h>
+#include "parammodel.h"
 #include <QString>
 
 

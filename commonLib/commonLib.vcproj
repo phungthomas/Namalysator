@@ -44,7 +44,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;$(METSVERIFIER)\Headers"
+				AdditionalIncludeDirectories="&quot;$(XERCES_DIR)&quot;;&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -106,7 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;C:\xerces\xerces-c-3.1.1\src&quot;;$(METSVERIFIER)\Headers"
+				AdditionalIncludeDirectories="&quot;$(XERCES_DIR)&quot;;&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"

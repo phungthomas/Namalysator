@@ -47,7 +47,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="-Zm200 -w34100 -w34189 -Zm200 -w34100 -w34189 -w34100 -w34189"
 				Optimization="4"
-				AdditionalIncludeDirectories="&quot;$(METSVERIFIER)\commonLib&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtWebKit&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;.\debug;.;&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(ConfigurationName)&quot;;&quot;$(METSVERIFIER)\Headers&quot;"
+				AdditionalIncludeDirectories="&quot;$(METSVERIFIER)\Headers&quot;;&quot;$(METSVERIFIER)\commonLib&quot;;&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtWebKit&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(ConfigurationName)&quot;"
 				PreprocessorDefinitions="_WINDOWS;UNICODE;WIN32;QT_DLL;QT_WEBKIT_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;XML_STATIC"
 				GeneratePreprocessedFile="0"
 				ExceptionHandling="1"
@@ -79,7 +79,7 @@
 				AdditionalDependencies="libexpatMT.lib commonLib.lib qtmaind.lib QtCored4.lib QtGuid4.lib QtWebKitd4.lib sqlite.lib shell32.lib Tiff.lib cximage.lib png.lib jbig.lib jasper.lib Jpeg.lib mng.lib libdcr.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="c:\Development\metsverifier\Libraries\Debug;&quot;$(METSVERIFIER)\metsverifier\Debug&quot;;&quot;$(METSVERIFIER)\Libraries\Debug&quot;;&quot;$(METSVERIFIER)\Libraries\boost-libs&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(CODESYNTHESIS)\lib\VC-9-0&quot;"
+				AdditionalLibraryDirectories="&quot;$(METSVERIFIER)\Libraries\Debug&quot;;&quot;$(METSVERIFY_EXTERNAL)\Libraries\Debug&quot;;&quot;$(BOOST_LIB)&quot;;&quot;$(QTDIR)\lib&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=""
 				SubSystem="2"
@@ -138,7 +138,7 @@
 				AdditionalOptions="-Zm200 -w34100 -w34189 -Zm200 -w34100 -w34189 -w34100 -w34189"
 				Optimization="2"
 				WholeProgramOptimization="true"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtWebKit&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;.\release;.;&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(ConfigurationName)&quot;;&quot;$(METSVERIFIER)\Headers&quot;;&quot;$(METSVERIFIER)\commonLib&quot;"
+				AdditionalIncludeDirectories="&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtWebKit&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;.\release;.;&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(ConfigurationName)&quot;;&quot;$(METSVERIFIER)\Headers&quot;;&quot;$(METSVERIFIER)\commonLib&quot;"
 				PreprocessorDefinitions="QT_NO_DEBUG;NDEBUG;_WINDOWS;UNICODE;WIN32;QT_DLL;QT_WEBKIT_LIB;QT_GUI_LIB;QT_THREAD_SUPPORT;QT_CORE_LIB;XML_STATIC"
 				GeneratePreprocessedFile="0"
 				ExceptionHandling="1"
@@ -171,7 +171,7 @@
 				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="&quot;$(METSVERIFIER)\Libraries\Release&quot;;&quot;$(QTDIR)\lib&quot;;&quot;$(METSVERIFIER)\Libraries\boost-libs&quot;;&quot;$(METSVERIFIER)\metsverifier\Libraries\Release&quot;;&quot;$(CODESYNTHESIS)\lib\VC-9-0&quot;"
+				AdditionalLibraryDirectories="&quot;$(METSVERIFIER)\Libraries\Release&quot;;&quot;$(METSVERIFY_EXTERNAL)\Libraries\Release&quot;;&quot;$(BOOST_LIB)&quot;;&quot;$(QTDIR)\lib&quot;"
 				IgnoreAllDefaultLibraries="false"
 				IgnoreDefaultLibraryNames=""
 				GenerateDebugInformation="true"
@@ -927,286 +927,6 @@
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
 			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_codeeditor.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_codeeditor.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_dateerrortab.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_dateerrortab.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_qwidgettaberror.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_qwidgettaberror.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_accepted.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_booklist.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_calendar.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_calendar.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_disk.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_disk.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_errors.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_errors.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_main.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_main.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_report.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_screenshoterror.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_screenshoterror.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_selectbatch.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_selectbatch.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_structview.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_structview.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_summaryerrors.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Debug\moc_w_summaryerrors.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\GeneratedFiles\Release\moc_w_thumb.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\ui_w_calendar.h"
 				>
 			</File>
@@ -1260,6 +980,42 @@
 				SourceControlFiles="false"
 				>
 				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_codeeditor.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_dateerrortab.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_qwidgettaberror.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_w_calendar.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_w_disk.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_w_errors.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_w_main.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_w_screenshoterror.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_w_selectbatch.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_w_stat.cpp"
 					>
 					<FileConfiguration
@@ -1271,12 +1027,68 @@
 						/>
 					</FileConfiguration>
 				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_w_structview.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_w_summaryerrors.cpp"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Release"
 				Filter="cpp;moc"
 				SourceControlFiles="false"
 				>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_codeeditor.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_dateerrortab.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_qwidgettaberror.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_accepted.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_booklist.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_calendar.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_disk.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_errors.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_main.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_report.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_screenshoterror.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_selectbatch.cpp"
+					>
+				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_w_stat.cpp"
 					>
@@ -1288,6 +1100,18 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_structview.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_summaryerrors.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_w_thumb.cpp"
+					>
 				</File>
 			</Filter>
 		</Filter>
