@@ -48,7 +48,7 @@
 				AdditionalOptions="-Zm200 -w34100 -w34189 -Zm200 -w34100 -w34189 -w34100 -w34189"
 				Optimization="4"
 				AdditionalIncludeDirectories="&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;;&quot;$(METSVERIFIER)\commonLib&quot;;&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtWebKit&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(ConfigurationName)&quot;"
-				PreprocessorDefinitions="_WINDOWS;UNICODE;WIN32;QT_DLL;QT_WEBKIT_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;XML_STATIC"
+				PreprocessorDefinitions="_WINDOWS;UNICODE;WIN32;QT_DLL;QT_WEBKIT_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;XML_STATIC;_CRT_SECURE_NO_WARNINGS"
 				GeneratePreprocessedFile="0"
 				ExceptionHandling="1"
 				RuntimeLibrary="3"
@@ -441,9 +441,9 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -452,9 +452,9 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 					/>
 				</FileConfiguration>
 			</File>
@@ -550,9 +550,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -561,9 +561,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -576,9 +576,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-IC:\Development\metsverifier\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-IC:\Development\metsverifier\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -587,9 +587,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -602,9 +602,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -613,9 +613,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -660,9 +660,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -671,9 +671,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -686,9 +686,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -697,9 +697,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -712,9 +712,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -723,9 +723,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -738,9 +738,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -749,9 +749,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -764,9 +764,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -775,9 +775,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -790,9 +790,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -801,9 +801,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -816,9 +816,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -831,9 +831,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -842,9 +842,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -857,9 +857,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -868,9 +868,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -883,9 +883,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing w_stat.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -894,9 +894,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing w_stat.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -909,9 +909,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DXML_STATIC -D_UNICODE  &quot;-I$(METSVERIFIER)\commonLib&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -920,9 +920,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -935,9 +935,9 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing w_thumb.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
 				</File>
@@ -997,130 +997,71 @@
 				>
 			</File>
 			<Filter
-				Name="Debug"
-				Filter="cpp;moc"
+				Name="Mocking"
 				SourceControlFiles="false"
 				>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_codeeditor.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_codeeditor.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_dateerrortab.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_dateerrortab.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_qwidgettaberror.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_qwidgettaberror.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_accepted.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_accepted.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_booklist.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_booklist.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_calendar.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_calendar.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_disk.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_disk.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_errors.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_errors.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_main.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_main.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_screenshoterror.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_report.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_selectbatch.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_screenshoterror.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_stat.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_selectbatch.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_structview.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_stat.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_w_summaryerrors.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Release"
-				Filter="cpp;moc"
-				SourceControlFiles="false"
-				>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_codeeditor.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_structview.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Release\moc_dateerrortab.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_summaryerrors.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Release\moc_qwidgettaberror.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_accepted.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_calendar.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_disk.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_errors.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_main.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_report.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_screenshoterror.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_selectbatch.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_stat.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_structview.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_summaryerrors.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_w_thumb.cpp"
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_thumb.cpp"
 					>
 				</File>
 			</Filter>
