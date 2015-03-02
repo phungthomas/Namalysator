@@ -101,6 +101,8 @@ _tiffSizeProc(thandle_t fd)
 static int
 _tiffDummyMapProc(thandle_t fd, tdata_t* pbase, toff_t* psize)
 {
+	// Get rid of unused parameter warning
+	fd = 0; pbase = 0; psize = 0;
 	return (0);
 }
 
@@ -140,11 +142,15 @@ _tiffMapProc(thandle_t fd, tdata_t* pbase, toff_t* psize)
 static void
 _tiffDummyUnmapProc(thandle_t fd, tdata_t base, toff_t size)
 {
+	// Get rid of unused parameter warning
+	fd = 0; base = 0; size = 0;
 }
 
 static void
 _tiffUnmapProc(thandle_t fd, tdata_t base, toff_t size)
 {
+	// Get rid of unused parameter warning
+	fd = 0; size = 0;
 	UnmapViewOfFile(base);
 }
 

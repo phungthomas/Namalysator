@@ -36,6 +36,8 @@
 #ifdef WIN32
 uLong filetime(const char *f, tm_zip *tmzip, uLong *dt)
 {
+	// Get rid of unused parameter warning
+	tmzip = 0;
   int ret = 0;
   {
       FILETIME ftLocal;

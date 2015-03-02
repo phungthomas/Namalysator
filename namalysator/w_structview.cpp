@@ -270,7 +270,7 @@ void w_structview::previous()
 }
 void w_structview::next()
 {
-	if (currentPage < mapTiffPath.size()) {
+	if (currentPage < (int) mapTiffPath.size()) {
 		currentPage++;
 		showCurrentPage();	
 	}
@@ -285,7 +285,7 @@ void w_structview::showPage(int i)
 {
 	int oldcurrent = currentPage;
 	//if ( currentPage == i ) return ; // do nothing if no real change
-	if ( i <= mapTiffPath.size() && i >=1 ) {
+	if ( i <= (int) mapTiffPath.size() && i >=1 ) {
 		currentPage=i;
 	}else{
 		if ( i <= 1 ) {
@@ -501,6 +501,8 @@ void w_structview::updateTableOfContents(std::string currentAlto)
 
 void w_structview::drawRect(QTreeWidgetItem *itemW, QTreeWidgetItem *itemW2)
 {
+	// itemW2 is not used, so get rid of compiler warning
+	itemW2 = 0;
 	if (!itemW) {
 		// Means the tree is emptied, so no item is selected
 		return;

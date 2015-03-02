@@ -270,7 +270,7 @@ int block_cutter::open_tiff(const char *in_name)
     if (!m_tif) {
 		return -1;
 	}
-	uint16 n_samples = 0, compression = 0;
+	uint16 compression = 0; //  n_samples = 0
 	uint32 tifheight, tifwidth;
 
 	TIFFGetField(m_tif, TIFFTAG_IMAGELENGTH, &tifheight);
@@ -703,7 +703,7 @@ int ThumbCreator::open_tiff(const char *in_name)
     if (!m_tif) {
 		return -1;
 	}
-	uint16 n_samples = 0, compression = 0;
+	// uint16 n_samples = 0, compression = 0;
 	uint32 tifheight, tifwidth;
 
 	TIFFGetField(m_tif, TIFFTAG_IMAGELENGTH, &tifheight);
