@@ -58,7 +58,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sqlite.lib xerces-c_3D.lib"
+				AdditionalDependencies="sqlite.lib xerces-c_3D.lib commonLib.lib"
 				AdditionalLibraryDirectories="&quot;$(METSVERIFIER)\Libraries\Debug&quot;;&quot;$(METSVERIFY_EXTERNAL)\Libraries\Debug&quot;;&quot;$(BOOST_LIB)&quot;;&quot;$(XERCES_LIB)&quot;"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
