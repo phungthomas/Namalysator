@@ -1508,7 +1508,8 @@ std::map<std::string,std::vector<StructureError> > dbrequest::getBatchStructureE
 
 	int rc;	
 	const char *zErrMsg= 0; 
-	std::string selectSql = "SELECT ID_METS,FILENAME FROM METS where ID_TESTSET = ?"; 
+	std::string selectSql = "SELECT a.ID,a.ID_METS,a.IMAGEPATH,a.MESSAGE,a.ID_ERRORTYPE,a.FILEID,a.CUSTOM,"
+		                           "a.PAGENB,b.FILENAME FROM STRUCTUREERROR a, METS b where ID_TESTSET = ?"; 
 	std::map<std::string,std::vector<StructureError> > v;
 	
 	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1518,9 +1519,19 @@ std::map<std::string,std::vector<StructureError> > dbrequest::getBatchStructureE
 		sqlite3_bind_int(pStmt,1,id_testset);
 
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{   int col=0;
-		    int idmets = sqlite3_column_int(pStmt,col++);
-			std::vector<StructureError> vect = getStructureError(idmets);
+		{   
+			std::vector<StructureError> vect;
+		    int col=0;
+			se.id = sqlite3_column_int(pStmt,col++);
+			se.id_mets = sqlite3_column_int(pStmt,col++);
+			se.pathImage = safe_sqlite3_column_text(pStmt, col++);
+			se.message = safe_sqlite3_column_text(pStmt, col++);
+			se.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
+			se.fileid = safe_sqlite3_column_text(pStmt, col++);
+			se.custom = safe_sqlite3_column_text(pStmt, col++);
+			se.pagenb = sqlite3_column_int(pStmt, col++);
+
+			vect.push_back(se); 	
 			std::string ptr =  std::string ( (char*)safe_sqlite3_column_text(pStmt, col++));
 			v[ ptr ]= vect; // SIDE effect if all file has same name ( no possible to export error )			 
 		}		
