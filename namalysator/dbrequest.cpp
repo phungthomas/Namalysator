@@ -1509,7 +1509,7 @@ std::map<std::string,std::vector<StructureError> > dbrequest::getBatchStructureE
 	int rc;	
 	const char *zErrMsg= 0; 
 	std::string selectSql = "SELECT a.ID,a.ID_METS,a.IMAGEPATH,a.MESSAGE,a.ID_ERRORTYPE,a.FILEID,a.CUSTOM,"
-		                           "a.PAGENB,b.FILENAME FROM STRUCTUREERROR a, METS b where ID_TESTSET = ?"; 
+		                           "a.PAGENB,b.FILENAME FROM STRUCTUREERROR a, METS b where ID_TESTSET = ? AND a.ID_METS = b.ID_METS"; 
 	std::map<std::string,std::vector<StructureError> > v;
 	
 	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
