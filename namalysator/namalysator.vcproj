@@ -139,7 +139,7 @@
 				Optimization="2"
 				WholeProgramOptimization="true"
 				AdditionalIncludeDirectories="&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtWebKit&quot;;&quot;$(QTDIR)\include&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;.\release;.;&quot;$(QTDIR)\mkspecs\win32-msvc2008&quot;;&quot;$(ConfigurationName)&quot;;&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;;&quot;$(METSVERIFIER)\commonLib&quot;"
-				PreprocessorDefinitions="QT_NO_DEBUG;NDEBUG;_WINDOWS;UNICODE;WIN32;QT_DLL;QT_WEBKIT_LIB;QT_GUI_LIB;QT_THREAD_SUPPORT;QT_CORE_LIB;XML_STATIC"
+				PreprocessorDefinitions="QT_NO_DEBUG;NDEBUG;_WINDOWS;UNICODE;WIN32;_CRT_SECURE_NO_WARNINGS;QT_DLL;QT_WEBKIT_LIB;QT_GUI_LIB;QT_THREAD_SUPPORT;QT_CORE_LIB;XML_STATIC"
 				GeneratePreprocessedFile="0"
 				ExceptionHandling="1"
 				RuntimeLibrary="2"
