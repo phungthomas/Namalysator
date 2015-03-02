@@ -119,7 +119,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;$(METSVERIFIER)\Headers&quot;;&quot;$(METSVERIFIER)\commonLib&quot;;&quot;$(METSVERIFY_EXTERNAL)\Headers&quot;;&quot;$(XERCES_DIR)&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;XML_STATIC"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;XML_STATIC;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
