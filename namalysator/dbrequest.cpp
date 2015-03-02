@@ -1518,9 +1518,10 @@ std::map<std::string,std::vector<StructureError> > dbrequest::getBatchStructureE
 	{	
 		sqlite3_bind_int(pStmt,1,id_testset);
 
+		
+
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{   
-			std::vector<StructureError> vect;
 		    int col=0;
 			se.id = sqlite3_column_int(pStmt,col++);
 			se.id_mets = sqlite3_column_int(pStmt,col++);
@@ -1529,11 +1530,9 @@ std::map<std::string,std::vector<StructureError> > dbrequest::getBatchStructureE
 			se.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
 			se.fileid = safe_sqlite3_column_text(pStmt, col++);
 			se.custom = safe_sqlite3_column_text(pStmt, col++);
-			se.pagenb = sqlite3_column_int(pStmt, col++);
-
-			vect.push_back(se); 	
+			se.pagenb = sqlite3_column_int(pStmt, col++); 	
 			std::string ptr =  std::string ( (char*)safe_sqlite3_column_text(pStmt, col++));
-			v[ ptr ]= vect; // SIDE effect if all file has same name ( no possible to export error )			 
+			v[ ptr ].push_back(se);// SIDE effect if all file has same name ( no possible to export error )			 
 		}		
    }else{
 		raiseError(conn,selectSql);

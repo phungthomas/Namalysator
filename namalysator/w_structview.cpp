@@ -792,7 +792,7 @@ void w_structview::viewHtml()
 	{	
 		std::vector<StructureError> & ref = it->second;
 
-		count += 0;
+		
 
 		if ( ref.size() > 0 ) { // skip empty file
 			fprintf(fp, "<h3>%s</h3>\n",it->first.c_str());
@@ -804,6 +804,7 @@ void w_structview::viewHtml()
 				fprintf(fp, "<p>%s</p>\n", itt->message.c_str());	
 				fprintf(fp, "<br>\n");
 			}
+			count += 1;
 		}
 	}
 	// Write footer
