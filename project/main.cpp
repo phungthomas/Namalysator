@@ -251,7 +251,7 @@ int start()
 			// go to the next file : structure are not provide like the parser has stop
 			cerr << "STOP immediately --> see trace in DB" << endl;
 			parseError = true;
-			return 1;
+			continue;
 		};
 
 		// test of new div structure
@@ -267,7 +267,9 @@ int start()
 		metsParserCall->setContentHandler(&transformCH);
 
 		if ( metsParserCall->parse( parseString.c_str())!= 0){
-				return 2;
+			    // normally never go hear
+				hError.getError(cat_xml_error,"METS",currentMetsFile, "Could not parse Mets file %s\n" + currentMetsFile ,currentMetsFile,"");
+				continue;
 		};
 
 		transformCH.getContext().closeFile();
@@ -280,8 +282,8 @@ int start()
 		}else if ( transformCH.getContext().typeIssue.compare ("Serial")==0 ){
 			parserCheckBNL = parserCheckBNLSerial;
 		}else {
-			cerr << "STOP immediately --> Unknown issue "<< transformCH.getContext().typeIssue << endl;
-			return 4;
+			hError.getError(cat_xml_error,"METS",currentMetsFile, "typeIssue not known [\"Monograph\",\"Newspaper\",\"Serial\"] " + transformCH.getContext().typeIssue ,currentMetsFile,"");
+			continue; 
 		}
 
 		parserCheckBNL->setErrorHandler(&hError);
@@ -289,7 +291,7 @@ int start()
 		if ( parserCheckBNL->parse( generatedFile.c_str())!= 0){
 			cerr << "STOP immediately --> File"<< generatedFile.c_str() << endl; // TODO
 			// skip this mets and go next one
-			return 3;
+			continue;
 		};
 
 		pt.LogTime("Parsing METS file");

@@ -422,7 +422,9 @@ void database::insertLinkedFiles(int id_mets,datafactory *df)
 						dpi = s->dpi;	
 					}else{
 						dpi=0;
-						std::cerr << "Error with Non admid:" << tf.admid << std::endl;
+						std::stringstream ss;
+						ss <<  "database::insertLinkedFiles -> Error with Non admid:" << tf.admid ;               
+						insertLog(ss.str());   
 					}
 				}
 				else
