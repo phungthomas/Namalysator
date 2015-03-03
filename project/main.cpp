@@ -172,10 +172,12 @@ int start()
 		hError.begin("return 2");			
 		return 2;	
 	}
-	std::string fpFile = "C:\\Data\\metsverifier-log.txt";
-	FILE *fpTimingLog = fopen(fpFile.c_str(),"w");
+	std::stringstream fpFile ;
+	fpFile.clear();
+	fpFile<<CurrentPath<<"/metsverifier_TIME.log";
+	FILE *fpTimingLog = fopen(fpFile.str().c_str(),"w");
 	if ( fpTimingLog == NULL ){
-		std::cerr << "Could not open :"<< fpFile.c_str() <<std::endl;
+		std::cerr << "Could not open :"<< fpFile.str() <<std::endl;
 		std::cerr << "Emergency stop" << std::endl;
 		return 3;
 	}
@@ -335,8 +337,8 @@ int start()
 		static verifyEmptyMix vMix;
 		vMix.check(parameter.getValueCheck("semanticchecks.emptyMix"),metsP.getContext());
 
-		static verifyFolder vFold;
-		vFold.check(parameter.getValueCheck("semanticchecks.Folder"),metsP.getContext());
+		//static verifyFolder vFold;
+		//vFold.check(parameter.getValueCheck("semanticchecks.Folder"),metsP.getContext());
 
 		if (parameter.getValueCheck("dataintegrity.checkFile") == 1)
 		{
