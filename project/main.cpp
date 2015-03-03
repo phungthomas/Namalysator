@@ -46,6 +46,7 @@
 #include "verifymeasurement.h"
 #include "verifybook.h"
 #include "verifyEmptyMix.h"
+#include "verifyFolder.h"
 #include "titletocheck.h"
 #include "datehelper.h"
 #include <configparser.h>
@@ -171,7 +172,13 @@ int start()
 		hError.begin("return 2");			
 		return 2;	
 	}
-	FILE *fpTimingLog = fopen("C:\\Data\\metsverifier-log.txt","w");
+	std::string fpFile = "C:\\Data\\metsverifier-log.txt";
+	FILE *fpTimingLog = fopen(fpFile.c_str(),"w");
+	if ( fpTimingLog == NULL ){
+		std::cerr << "Could not open :"<< fpFile.c_str() <<std::endl;
+		std::cerr << "Emergency stop" << std::endl;
+		return 3;
+	}
 	precisiontimer pt(fpTimingLog);
 	pt.Start();
 
@@ -327,6 +334,9 @@ int start()
 
 		static verifyEmptyMix vMix;
 		vMix.check(parameter.getValueCheck("semanticchecks.emptyMix"),metsP.getContext());
+
+		static verifyFolder vFold;
+		vFold.check(parameter.getValueCheck("semanticchecks.Folder"),metsP.getContext());
 
 		if (parameter.getValueCheck("dataintegrity.checkFile") == 1)
 		{

@@ -16,28 +16,28 @@ void verifyBook::check(int check,metsparserContext& context){
 	// check if BIBREC_SYSNUM in database
 	std::string BIBREC_SYSNUM = context.inventory.inventoryMODSMD_ELEC.BIBREC_SYS_NUM;
 	if (!db->getInventory(BIBREC_SYSNUM,invent)){
-		hError -> getError(cat_bookinventory,"METS","DMDSEC MOD_SMD_ELEC", "BIBREC_SYSNUM not found:" + BIBREC_SYSNUM ,context.metsfile,BIBREC_SYSNUM);
+		hError -> getError(cat_bookinventory,"METS","DMDSEC MOD_SMD_ELEC", "BIBREC_SYSNUM not found:" + BIBREC_SYSNUM ,context.currentMetsFile,BIBREC_SYSNUM);
 		return; // skip all
 	};
 
 	db->InventoryChecked(BIBREC_SYSNUM); // update checked flag in bookinventory to be able to show the rate of full campaign
 
 	if ( invent.BIBREC_245a.compare(context.inventory.inventoryMODSMD_ELEC.BIBREC_245a)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MOD_SMD_ELEC", "wrong title:" + context.inventory.inventoryMODSMD_ELEC.BIBREC_245a +" against :"+ invent.BIBREC_245a ,context.metsfile,context.inventory.inventoryMODSMD_ELEC.BIBREC_245a);
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MOD_SMD_ELEC", "wrong title:" + context.inventory.inventoryMODSMD_ELEC.BIBREC_245a +" against :"+ invent.BIBREC_245a ,context.currentMetsFile,context.inventory.inventoryMODSMD_ELEC.BIBREC_245a);
 	}
 
 
 	if ( invent.BIBREC_245a.compare(context.inventory.inventoryMODSMD_PRINT.BIBREC_245a)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MOD_SMD_PRINT", "wrong title:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_245a +" against :"+ invent.BIBREC_245a,context.metsfile,context.inventory.inventoryMODSMD_PRINT.BIBREC_245a);
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MOD_SMD_PRINT", "wrong title:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_245a +" against :"+ invent.BIBREC_245a,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.BIBREC_245a);
 	}
 
 
 	if ( invent.BIBREC_100a.compare(context.inventory.inventoryMODSMD_ELEC.BIBREC_100a)) {
-		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_ELEC", "wrong BIBREC_100a:" + context.inventory.inventoryMODSMD_ELEC.BIBREC_100a +" against :"+ invent.BIBREC_100a,context.metsfile,context.inventory.inventoryMODSMD_ELEC.BIBREC_100a);
+		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_ELEC", "wrong BIBREC_100a:" + context.inventory.inventoryMODSMD_ELEC.BIBREC_100a +" against :"+ invent.BIBREC_100a,context.currentMetsFile,context.inventory.inventoryMODSMD_ELEC.BIBREC_100a);
 	}
 
 	if ( invent.BIBREC_100a.compare(context.inventory.inventoryMODSMD_PRINT.BIBREC_100a)) {
-		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong BIBREC_100a:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_100a +" against :"+ invent.BIBREC_100a ,context.metsfile,context.inventory.inventoryMODSMD_PRINT.BIBREC_100a);
+		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong BIBREC_100a:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_100a +" against :"+ invent.BIBREC_100a ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.BIBREC_100a);
 	}
 	
 	// TODO compare must be base on any kind order of list
@@ -45,7 +45,7 @@ void verifyBook::check(int check,metsparserContext& context){
 	for ( std::map<std::string,std::string>::iterator it = context.inventory.inventoryMODSMD_ELEC.languageTerm.begin() ; it != context.inventory.inventoryMODSMD_ELEC.languageTerm.end() ;it++){
 
 		if ( invent.languageTerm.find(it->first) == invent.languageTerm.end() ) {
-			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_ELEC", "wrong languageTerm:" + it->first ,context.metsfile,it->first);
+			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_ELEC", "wrong languageTerm:" + it->first ,context.currentMetsFile,it->first);
 			
 		}
 	
@@ -54,7 +54,7 @@ void verifyBook::check(int check,metsparserContext& context){
 	for ( std::map<std::string,std::string>::iterator it = context.inventory.inventoryMODSMD_PRINT.languageTerm.begin() ; it != context.inventory.inventoryMODSMD_PRINT.languageTerm.end() ;it++){
 
 		if ( invent.languageTerm.find(it->first) == invent.languageTerm.end() ) {
-			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong languageTerm:" + it->first ,context.metsfile,it->first);
+			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong languageTerm:" + it->first ,context.currentMetsFile,it->first);
 			
 		}
 	
@@ -62,15 +62,15 @@ void verifyBook::check(int check,metsparserContext& context){
 
 
 	if ( invent.ITEM_barcode.compare(context.inventory.inventoryMODSMD_PRINT.BIBREC_SYS_NUM /* put there in the xml */ )) {
-		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong BARCODE:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_SYS_NUM +" against :"+ invent.ITEM_barcode,context.metsfile,context.inventory.inventoryMODSMD_PRINT.BIBREC_SYS_NUM);
+		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong BARCODE:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_SYS_NUM +" against :"+ invent.ITEM_barcode,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.BIBREC_SYS_NUM);
 	}
 
 	if ( invent.BIBREC_260b.compare(context.inventory.inventoryMODSMD_PRINT.BIBREC_260b  )) {
-		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong BIBREC_260b:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_260b +" against :"+ invent.BIBREC_260b ,context.metsfile,context.inventory.inventoryMODSMD_PRINT.BIBREC_260b);
+		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong BIBREC_260b:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_260b +" against :"+ invent.BIBREC_260b ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.BIBREC_260b);
 	}
 
 	if ( invent.BIBREC_SYS_NUM.compare(context.inventory.inventoryMARCMD_ALEPHSYNC.BIBREC_SYS_NUM )) {
-		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_ALEPHSYNC", "wrong BIBREC_SYS_NUM:" + context.inventory.inventoryMARCMD_ALEPHSYNC.BIBREC_SYS_NUM +" against :"+ invent.BIBREC_SYS_NUM,context.metsfile,context.inventory.inventoryMARCMD_ALEPHSYNC.BIBREC_SYS_NUM);
+		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_ALEPHSYNC", "wrong BIBREC_SYS_NUM:" + context.inventory.inventoryMARCMD_ALEPHSYNC.BIBREC_SYS_NUM +" against :"+ invent.BIBREC_SYS_NUM,context.currentMetsFile,context.inventory.inventoryMARCMD_ALEPHSYNC.BIBREC_SYS_NUM);
 	}
 
 }

@@ -5,7 +5,7 @@
 
 metsParser::metsParser(std::string &mets_fname,std::string &mets_path,errorHandler *h,datafactory *df):StateParserCH(ctx,_root){
 	ctx.hError = h;	
-	ctx.metsfile = mets_fname;	
+	ctx.currentMetsFile = mets_fname;	
 	ctx.currentMetsPath = mets_path;
 	ctx.dfMets = df;
 }
@@ -291,7 +291,7 @@ public :
 		}
 		else
 		{
-			CTX.hError->getError(cat_missingGroupId,"METS","FILESEC","GROUPID missing",CTX.metsfile,getAttributeValue("CHECKSUM", atts));
+			CTX.hError->getError(cat_missingGroupId,"METS","FILESEC","GROUPID missing",CTX.currentMetsFile,getAttributeValue("CHECKSUM", atts));
 		}
 		const char *val3 = getAttributeValue("CHECKSUM", atts);			
 		CTX.f.checksum ="";

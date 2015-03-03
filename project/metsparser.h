@@ -17,7 +17,7 @@ class metsparserContext : public StateParserContext{
 public :
 	metsparserContext():flagMix(false){};
 	datafactory *dfMets;	
-	std::string metsfile;
+	std::string currentMetsFile;
 	std::string currentMetsPath;
 	errorHandler *hError;
 

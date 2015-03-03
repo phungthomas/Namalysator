@@ -245,6 +245,10 @@
 					RelativePath=".\verifyEmptyMix.cpp"
 					>
 				</File>
+				<File
+					RelativePath=".\verifyFolder.cpp"
+					>
+				</File>
 				<Filter
 					Name="semanticchecks"
 					>
@@ -461,6 +465,10 @@
 				</File>
 				<File
 					RelativePath=".\verifyEmptyMix.h"
+					>
+				</File>
+				<File
+					RelativePath=".\verifyFolder.h"
 					>
 				</File>
 				<File

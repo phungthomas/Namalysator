@@ -13,7 +13,7 @@ void verifyEmptyMix::check(int check ,metsparserContext& context){
 
 	for ( std::map<std::string,std::string>::iterator it = context.MixContainer.begin(); it != context.MixContainer.end(); it++ ){
 
-		hError -> getError(cat_emptymix,"METS","mix:mix empty",it->first + " empty Tag",context.metsfile,it->first);
+		hError -> getError(cat_emptymix,"METS","mix:mix empty",it->first + " empty Tag",context.currentMetsFile,it->first);
 		
 	} 
 
