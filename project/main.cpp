@@ -337,8 +337,8 @@ int start()
 		static verifyEmptyMix vMix;
 		vMix.check(parameter.getValueCheck("semanticchecks.emptyMix"),metsP.getContext());
 
-		//static verifyFolder vFold;
-		//vFold.check(parameter.getValueCheck("semanticchecks.Folder"),metsP.getContext());
+		static verifyFolder vFold;
+		vFold.check(parameter.getValueCheck("semanticchecks.Folder"),metsP.getContext());
 
 		if (parameter.getValueCheck("dataintegrity.checkFile") == 1)
 		{
