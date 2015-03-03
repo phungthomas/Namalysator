@@ -17,7 +17,8 @@ class metsparserContext : public StateParserContext{
 public :
 	metsparserContext():flagMix(false){};
 	datafactory *dfMets;	
-	std::string metsfile;	
+	std::string metsfile;
+	std::string currentMetsPath;
 	errorHandler *hError;
 
 	// need by structMap
@@ -66,7 +67,7 @@ private:
 	StateParserMetsRootState _root;
 	metsparserContext ctx;
 public:
-	metsParser(std::string &mets_fname,errorHandler *h,datafactory *df);
+	metsParser(std::string &mets_fname,std::string &mets_path,errorHandler *h,datafactory *df);
 	inline metsparserContext& getContext(){return ctx;};
 };
 

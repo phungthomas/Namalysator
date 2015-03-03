@@ -3,9 +3,10 @@
 #include "../common_files/xmltostr.h"
 
 
-metsParser::metsParser(std::string &mets_fname,errorHandler *h,datafactory *df):StateParserCH(ctx,_root){
+metsParser::metsParser(std::string &mets_fname,std::string &mets_path,errorHandler *h,datafactory *df):StateParserCH(ctx,_root){
 	ctx.hError = h;	
 	ctx.metsfile = mets_fname;	
+	ctx.currentMetsPath = mets_path;
 	ctx.dfMets = df;
 }
 

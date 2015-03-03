@@ -232,7 +232,7 @@ int start()
 		hError.begin(tempMessage.str());		
 		std::cout << tempMessage.str() << std::endl;
 		pt.LogTime("\tHousekeeping before mets parser");
-		metsParser metsP(currentMetsFile,&hError, &df);
+		metsParser metsP(currentMetsFile,currentMetsPath,&hError, &df);
 		if (parameter.getValueCheck("semanticchecks.emptyMix") == 1){
 			metsP.getContext().flagMix = true; // start parsing of mix part				
 		}
