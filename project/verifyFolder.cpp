@@ -21,6 +21,6 @@ void verifyFolder::check(int check ,metsparserContext& context){
 		if ( sub.compare( bibrec ) == 0 ) return ; // hoping that inventory is correcltly provided
 	};
 
-	hError->getError(cat_wrongFolderName,"METS","FOLDER", path + " is not BIBREC_SYS_NUM : "+ bibrec ,context.currentMetsFile,"");
+	hError->getError(cat_wrongFolderName,"METS","FOLDER", path + " is not BIBREC_SYS_NUM : "+ bibrec ,context.currentMetsFile,bibrec);
 
 }
