@@ -129,19 +129,19 @@ int database::getIdTestSet(const std::string &batchName)
 	const char *zErrMsg =0;
 	int id =0;
 	sqlite3_stmt *pStmt;     
-	std::string selectSql = "SELECT max(ID_TESTSET) FROM TESTSET WHERE BATCHNAME ='" + batchName + "'";
+	std::string selectSql = "SELECT max(ID_TESTSET) FROM TESTSET WHERE BATCHNAME =?";
 	int  rc = sqlite3_prepare_v2(db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
 	if(rc == SQLITE_OK)
-	{		
-		sqlite3_step(pStmt);
-		const char *result = (const char *)sqlite3_column_text(pStmt, 0);		
-		id = atoi(result);	 
+	{	
+		sqlite3_bind_text(pStmt, 1, batchName.c_str(), batchName.length(), SQLITE_STATIC);
+		sqlite3_step(pStmt);	
+		id = sqlite3_column_int(pStmt, 0);	 
 	}  
 	else
 	{
 		std::stringstream ss;
-		ss <<  "Can not select id from Testset: " << zErrMsg ;		
+		ss <<  "Can not select id from Testset: " << selectSql ;		
 		insertLog(ss.str());		
 	}
 	sqlite3_finalize(pStmt);
@@ -486,46 +486,6 @@ void database::insertArticle(int id_mets, datafactory_set<Article> dfarticle,int
 	}
 }
 
-//insert error from Mets file into database
-/*
-void database::insertMetsError(int category,const std::string &relatedType,const std::string &filePart,const Error &e)
-{
-	int id_mets = select_idMets();	
-	const char *zErrMsg =0;
-	sqlite3_stmt *pStmt;
-
-	std::string sql = "INSERT INTO METSERROR ('ID_RELATED','RELATED_TYPE','ID_TESTSET', 'FILE_PART',"
-					  "'ERRORLINE', 'ERRORCOLUMN','ID_ERRORTYPE', 'MESSAGE','ID_SEARCH') "
-					  "VALUES   (?,  ?,  ?,  ?,  ?,  ?,  ?,  ?,  ?)";	
-	
-	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt,&zErrMsg);
-	if( rc == SQLITE_OK ){
-		sqlite3_bind_int(pStmt,1,id_mets);
-		sqlite3_bind_text(pStmt,2,relatedType.c_str(),relatedType.length(),SQLITE_STATIC);
-		sqlite3_bind_int(pStmt,3,idTestset);
-		sqlite3_bind_text(pStmt,4,filePart.c_str(),filePart.length(),SQLITE_STATIC);
-		sqlite3_bind_int(pStmt,5,e.errorline);
-		sqlite3_bind_int(pStmt,6,e.errorcolumn);
-		sqlite3_bind_int(pStmt,7,category);
-		sqlite3_bind_text(pStmt,8,e.message.c_str(),e.message.length(),SQLITE_STATIC);
-		sqlite3_bind_text(pStmt,9,e.message.c_str(),e.message.length(),SQLITE_STATIC);
-
-		std::stringstream ss;
-		ss << relatedType << filePart << category << e.errorline << e.errorcolumn;
-		cerr << "MD5" << g_md5.getHashFromString(ss.str());
-		
-		if ( sqlite3_step(pStmt) != SQLITE_DONE )  {
-			dberror(std::string("INSERT NOT DONE:")+sql);
-		};
-		
-	}else{
-		dberror(std::string("PREPARE PROBLEM:")+sql);		
-	}
-
-	sqlite3_finalize(pStmt);
-	
-}
-*/
 
 //! insert message into log
 void database::insertLog(std::string message)
