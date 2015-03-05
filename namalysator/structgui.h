@@ -132,6 +132,8 @@ struct DateError
 	ErrorType errortype;
 	std::vector<DateComment> dateComment;
 	int errorType;
+	std::string hashkey;
+	int accepted;
 };
 
 

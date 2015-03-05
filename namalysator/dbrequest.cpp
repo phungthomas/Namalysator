@@ -1360,7 +1360,10 @@ std::vector<DateError> dbrequest::getDateError(int id_testset)
     sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0; 
 	
-	std::string selectSql = "SELECT de.id,de.id_testset,de.date_begin,de.date_end, de.issues,de.comment,de.id_errortype FROM DATEERROR de where de.ID_testset =?";
+	std::string selectSql = "SELECT de.id,de.id_testset,de.date_begin,de.date_end, de.issues,de.comment,de.id_errortype,de.hashkey,b.value "
+		                    "FROM DATEERROR de "
+							"LEFT JOIN ACCEPTEDERROR b ON b.HASHKEY = de.HASHKEY "
+	                        "where de.ID_testset =?";
 
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
@@ -1368,7 +1371,7 @@ std::vector<DateError> dbrequest::getDateError(int id_testset)
 
 		sqlite3_bind_int(pStmt,1,id_testset);
 		
-		  while(sqlite3_step(pStmt) == SQLITE_ROW){
+		while(sqlite3_step(pStmt) == SQLITE_ROW){
 
 			  int col=0;
 			  de.id = sqlite3_column_int(pStmt,col++);
@@ -1379,12 +1382,14 @@ std::vector<DateError> dbrequest::getDateError(int id_testset)
 			  de.issues = safe_sqlite3_column_text(pStmt, col++);
 			  de.comment = safe_sqlite3_column_text(pStmt, col++);
 			  de.errortype = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
+			  de.hashkey = safe_sqlite3_column_text(pStmt, col++);
+			  de.accepted = sqlite3_column_int(pStmt,col++);
 	
 			  v.push_back(de);
-		  }
-		}else{
-			raiseError(conn,selectSql);
 		}
+	}else{
+			raiseError(conn,selectSql);
+	}
 	sqlite3_finalize(pStmt);
 	return v;
 }

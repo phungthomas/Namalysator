@@ -10,7 +10,9 @@ dateerrortab::dateerrortab(int id):batchDetail(BatchDetail::getBatchDetail())
 	db.setDataBaseName(batchDetail.database);  
 
  	vSchemaE = db.getvErrorPerCategory(id_cat,batchDetail.idTestSet);
-	labels  << tr("Severity") << tr("Error Category") <<tr("Message") <<tr ("Year"); //<< tr("Date Begin") << tr("Date End"); //<< tr("Year");
+
+
+	labels  << tr("Accepted") << tr("Severity") << tr("Error Category") <<tr("Message") <<tr ("Year"); //<< tr("Date Begin") << tr("Date End"); //<< tr("Year");
 	
 	vDateError = db.getDateError(batchDetail.idTestSet);	
 	table = new QTableWidget();
