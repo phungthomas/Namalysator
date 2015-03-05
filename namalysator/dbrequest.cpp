@@ -1356,42 +1356,36 @@ std::vector<DateError> dbrequest::getDateError(int id_testset)
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	
 	DateError de;
-	std::stringstream oId;
-	oId << id_testset;	
 	std::vector<DateError> v;
     sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0; 
-	Article article;	
-	std::string selectSql = "SELECT de.id,de.id_testset,de.date_begin,de.date_end, de.issues,de.comment,de.id_errortype FROM DATEERROR de where de.ID_testset ='" + oId.str() + "'";
-	DEBUG_ME
+	//Article article;	
+	std::string selectSql = "SELECT de.id,de.id_testset,de.date_begin,de.date_end, de.issues,de.comment,de.id_errortype FROM DATEERROR de where de.ID_testset =?";
+
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-	if(rc == SQLITE_OK)
-	{	  
-      while(sqlite3_step(pStmt) == SQLITE_ROW)
-      {
-		int count = sqlite3_data_count(pStmt);
-		std::pair<int,DateError> p;
-		 for (int i =0;i<  count ;i++)
-		 {
-			const char *result = safe_sqlite3_column_text(pStmt, i);
-			
-			if (i==0)
-			{ 
-				de.id = atoi(result);
-				de.dateComment = getDateCommentid(atoi(result));				
-			}							
-			else if (i==1) de.id_testset = atoi(result);
-			else if (i==2) de.dateBegin = result;
-			else if (i==3) de.dateEnd = result;
-			else if (i==4) de.issues = result;		
-			else if (i==5) de.comment = result;			
-			else if (i==6) de.errortype = getErrorTypeWithId(atoi(result));					
-		 }		
-		 v.push_back(de);
-	  }
-	}else{
-		raiseError(conn,selectSql);
-	}
+
+	if(rc == SQLITE_OK){
+
+		sqlite3_bind_int(pStmt,1,id_testset);
+		
+		  while(sqlite3_step(pStmt) == SQLITE_ROW){
+
+			  //std::pair<int,DateError> p;
+			  int col=0;
+			  de.id = sqlite3_column_int(pStmt,col++);
+			  de.dateComment = getDateCommentid(de.id);
+			  de.id_testset = sqlite3_column_int(pStmt,col++); // silly it was the condition
+			  de.dateBegin = safe_sqlite3_column_text(pStmt, col++);
+			  de.dateEnd = safe_sqlite3_column_text(pStmt, col++);
+			  de.issues = safe_sqlite3_column_text(pStmt, col++);
+			  de.comment = safe_sqlite3_column_text(pStmt, col++);
+			  de.errortype = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
+	
+			  v.push_back(de);
+		  }
+		}else{
+			raiseError(conn,selectSql);
+		}
 	sqlite3_finalize(pStmt);
 	return v;
 }
