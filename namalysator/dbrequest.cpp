@@ -1150,18 +1150,28 @@ int dbrequest::getcountTitleCheck(int id_testset)
 /// <param name="id_testset">id testset</param>
 /// <param name="year">year</param>
 /// <returns>vector of mets error</returns>
-std::vector<MetsError> dbrequest::getvErrorPerCategory(int id_cat, int idTestset)
-{
+std::vector<MetsError> dbrequest::getvErrorPerCategory(int id_cat, int idTestset){
 	std::vector<MetsError> v;
+	getvErrorPerCategory_METS(v,id_cat,idTestset);
+	getvErrorPerCategory_LINKED(v,id_cat,idTestset);
+	return v;
+}
+void dbrequest::getvErrorPerCategory_LINKED(std::vector<MetsError>& v, int id_cat, int idTestset){
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 	MetsError es;
 	sqlite3_stmt *pStmt;	
 	
 	const char *zErrMsg= 0; 	
-	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE from MetsError s,ERRORTYPE e"
+	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,"
+		"s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE,l.FILENAME,mm.PATH,mm.year "
+		"from MetsError s,ERRORTYPE e, LINKEDFILES l, METS  mm"
 		" LEFT JOIN ACCEPTEDERROR b ON b.HASHKEY = s.HASHKEY"
-		" where s.ID_ERRORTYPE = e.ID_TYPE and e.ID_CATEGORY = ? and s.ID_TESTSET = ?";
-	DEBUG_ME
+		" where s.ID_ERRORTYPE = e.ID_TYPE and e.ID_CATEGORY = ? and s.ID_TESTSET = ? "
+		" AND s.RELATED_TYPE != 'METS' "
+		" AND s.ID_RELATED = l.ID_METS "
+		" AND s.FILE_PART = l.FILEID"
+		" AND s.ID_RELATED = mm.ID_METS";
+	
 
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
@@ -1185,27 +1195,67 @@ std::vector<MetsError> dbrequest::getvErrorPerCategory(int id_cat, int idTestset
 			es.id_search = safe_sqlite3_column_text(pStmt,col++);
 			es.hashkey = safe_sqlite3_column_text(pStmt,col++);
 			es.accepted = sqlite3_column_int(pStmt,col++);
-		 
+			es.filenameShort = safe_sqlite3_column_text(pStmt,col++);
+			es.filenameFullPath = std::string(safe_sqlite3_column_text(pStmt,col++)) + es.filenameShort;
+			es.mets.year = sqlite3_column_int(pStmt,col++);
 
-		 if (strcmp(es.relatedType.c_str(),"METS") == 0)
-		 {
-			MetsFile mets = getMets(es.idRelatedFile);
-			es.mets = mets;			
-		 }
-		 else
-		 { 
-			 LinkedFiles lf = getLinkedFiles(es.idRelatedFile,es.filePart);
-			 MetsFile mets = getMets(lf.idMets);
-			 es.mets = mets;
-			 es.linkedFiles = lf;		 
-		 }
 		 v.push_back(es);		 
 	  }
 	}else{
 		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
-	return v;
+
+}
+void dbrequest::getvErrorPerCategory_METS(std::vector<MetsError>& v, int id_cat, int idTestset)
+{
+	
+	ConnectionDB* conn = g_pool.getConnection(databaseName);
+	MetsError es;
+	sqlite3_stmt *pStmt;	
+	
+	const char *zErrMsg= 0; 	
+	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,"
+		"s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE,a.filename,a.path,a.year "
+		"from MetsError s,ERRORTYPE e, METS a"
+		" LEFT JOIN ACCEPTEDERROR b ON b.HASHKEY = s.HASHKEY"
+		" where s.ID_ERRORTYPE = e.ID_TYPE and e.ID_CATEGORY = ? and s.ID_TESTSET = ?"
+		" AND s.RELATED_TYPE = 'METS' "
+		" AND a.ID_METS = s.ID_RELATED ";
+	
+
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+
+    if(rc == SQLITE_OK)
+    {	
+		sqlite3_bind_int(pStmt,1,id_cat);
+		sqlite3_bind_int(pStmt,2,idTestset);
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW){
+			int col = 0;
+			es.id = sqlite3_column_int(pStmt,col++);
+
+			es.idRelatedFile = sqlite3_column_int(pStmt,col++);
+			es.relatedType = safe_sqlite3_column_text(pStmt,col++);
+			es.filePart =safe_sqlite3_column_text(pStmt,col++);
+			es.errorLine = sqlite3_column_int(pStmt,col++);
+			es.errorColumn = sqlite3_column_int(pStmt,col++);
+			es.message = safe_sqlite3_column_text(pStmt,col++);
+			es.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
+			es.id_search = safe_sqlite3_column_text(pStmt,col++);
+			es.hashkey = safe_sqlite3_column_text(pStmt,col++);
+			es.accepted = sqlite3_column_int(pStmt,col++);
+			es.filenameShort = safe_sqlite3_column_text(pStmt,col++);
+			es.filenameFullPath = std::string(safe_sqlite3_column_text(pStmt,col++)) + '/' + es.filenameShort;
+			es.mets.year = sqlite3_column_int(pStmt,col++);
+
+			v.push_back(es);		 
+		}
+	}else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+
 }
 
 /// <summary>get a vector of all the errortype found for a specific category of the testset </summary>

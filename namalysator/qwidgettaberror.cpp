@@ -96,14 +96,7 @@ void tabErrors::lineChanged(int row,int col)
 		std::string link;
 		MetsError s = vSchemaE[row-1];
 
-		if (s.relatedType == "METS")
-		{				
-			link = batch.path + s.mets.path + "/" + s.mets.fileName ;	
-		}
-		else
-		{		
-			link = batch.path +  s.mets.path +s.linkedFiles.fileName ;
-		}		
+		link = batch.path + s.filenameFullPath;	
 
 
 		QFile file(link.c_str());
@@ -162,16 +155,7 @@ void tabErrors::fillTableError(std::vector<MetsError> vError)
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1, col++, newItem);		
 
-
-
-		if (vSchemaE[i].relatedType == "METS")
-		{
-			newItem = new QTableWidgetItem(vError[i].mets.fileName.c_str(),i);			
-		}
-		else
-		{
-			newItem = new QTableWidgetItem(vError[i].linkedFiles.fileName.c_str(),i);
-		}
+		newItem = new QTableWidgetItem(vError[i].filenameShort.c_str(),i);
 
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1,col++, newItem);

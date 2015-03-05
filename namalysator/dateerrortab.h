@@ -22,7 +22,7 @@ class dateerrortab : public QWidget
 		QStringList labels;
 		QTableWidgetItem *newItem;
 		QTableWidget *table;
-		std::vector<MetsError> vSchemaE;
+		//std::vector<MetsError> vSchemaE;
 		std::vector<DateError> vDateError;
 		BatchDetail& batchDetail;
 		void fillCombo(int id_cat,const BatchDetail &batchDetail);
@@ -36,7 +36,7 @@ class dateerrortab : public QWidget
 		void accepted(bool,std::string);
 		void getcbCategory(QString category);
 		void getcbYear(QString year);
-		void getLine(int col,int row);
+		//void getLine(int col,int row);
 };
 
 

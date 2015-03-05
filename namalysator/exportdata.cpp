@@ -103,11 +103,7 @@ void exportdata::writeCatError(odswriter *ow, BatchDetail *bdetail,dbrequest *db
 				ow->add_text(vSchemaE[i].errorType.error);
 				ow->add_text(vSchemaE[i].filePart);
 				ow->add_text(vSchemaE[i].message);
-				if (vSchemaE[i].linkedFiles.fileName.empty()) {
-					ow->add_text_with_link(vSchemaE[i].mets.fileName, "file://" + bdetail->path + vSchemaE[i].mets.path + vSchemaE[i].mets.fileName);
-				} else {
-					ow->add_text_with_link(vSchemaE[i].linkedFiles.fileName, "file://" + bdetail->path + vSchemaE[i].mets.path + vSchemaE[i].linkedFiles.fileName);
-				}
+				ow->add_text_with_link(vSchemaE[i].mets.fileName, "file://" + bdetail->path + vSchemaE[i].filenameFullPath);
 				ow->add_text(vSchemaE[i].id_search);
 				ow->add_number(vSchemaE[i].mets.year);
 				ow->add_text(vSchemaE[i].accepted==0?std::string("Not accepted"):std::string("Accepted"));

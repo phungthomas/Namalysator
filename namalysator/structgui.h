@@ -80,6 +80,8 @@ struct MetsError
 	std::string id_search;
 	std::string hashkey;
 	int accepted;
+	std::string filenameFullPath;
+	std::string filenameShort;
 };
 
 

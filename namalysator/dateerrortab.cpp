@@ -10,7 +10,7 @@ dateerrortab::dateerrortab(int id):batchDetail(BatchDetail::getBatchDetail())
 	id_cat = id;
 	db.setDataBaseName(batchDetail.database);  
 
- 	vSchemaE = db.getvErrorPerCategory(id_cat,batchDetail.idTestSet);
+// 	vSchemaE = db.getvErrorPerCategory(id_cat,batchDetail.idTestSet);
 
 
 	labels  << tr("Accepted") << tr("Severity") << tr("Error Category") <<tr("Message") <<tr ("Year"); //<< tr("Date Begin") << tr("Date End"); //<< tr("Year");
@@ -66,7 +66,7 @@ void dateerrortab::getcbYear(QString year)
 	}		
 }
 
-
+/*
 void dateerrortab::getLine(int row,int col)
 {	
 	if ((col !=06) && (row!= 0))
@@ -77,6 +77,8 @@ void dateerrortab::getLine(int row,int col)
 		ShellExecuteA(NULL, "open",link.c_str(), NULL, NULL, SW_SHOWNORMAL);
 	}		
 }
+*/
+
 
 
 

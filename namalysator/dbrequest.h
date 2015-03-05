@@ -135,7 +135,11 @@ class dbrequest
 	/// <param name="id_cat">id category</param>
 	/// <param name="id_testset">id testset</param>
 	/// <returns>int count</returns>
-		std::vector<MetsError>getvErrorPerCategory(int id_cat, int idTestset);	
+		std::vector<MetsError>getvErrorPerCategory(int id_cat, int idTestset);
+private:
+		void getvErrorPerCategory_METS(std::vector<MetsError>& , int id_cat, int idTestset);
+		void getvErrorPerCategory_LINKED(std::vector<MetsError>& , int id_cat, int idTestset);
+public:
 	/// <summary>get a vector of Mets errors filter by category </summary>
 	/// <param name="error">string error</param>
 	/// <param name="id_testset">id testset</param>
