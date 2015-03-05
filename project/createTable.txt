@@ -179,7 +179,8 @@ create table DATEERROR(
   DATE_END datetime,
   ISSUES varchar(50),
   COMMENT varchar(50),
-  ID_ERRORTYPE INTEGER
+  ID_ERRORTYPE INTEGER,
+  HASHKEY varchar(50)
 );
 
 drop table if exists STRUCTUREERROR;

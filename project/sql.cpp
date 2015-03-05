@@ -505,11 +505,12 @@ void database::insertDateError(int category,std::string dateBegin,std::string da
 	sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0; 
 
-	std::string sql = "INSERT INTO DATEERROR ('ID_TESTSET','DATE_BEGIN', 'DATE_END', 'ISSUES', 'COMMENT','ID_ERRORTYPE') "
-					  "VALUES   (?,  ?,  ?,  ?,  ?,  ?)";	
+	std::string sql = "INSERT INTO DATEERROR ('ID_TESTSET','DATE_BEGIN', 'DATE_END', 'ISSUES', 'COMMENT','ID_ERRORTYPE','HASHKEY') "
+					  "VALUES   (?,  ?,  ?,  ?,  ?,  ?,  ?)";	
 
 	int rc = sqlite3_prepare_v2(db,sql.c_str(),-1, &pStmt,&zErrMsg);
 	if(rc == SQLITE_OK){
+
 		int pos = 1;
 
 		sqlite3_bind_int(pStmt,pos++,idTestset);
@@ -518,6 +519,12 @@ void database::insertDateError(int category,std::string dateBegin,std::string da
 		sqlite3_bind_text(pStmt,pos++,issues.c_str(),issues.length(),SQLITE_STATIC);
 		sqlite3_bind_text(pStmt,pos++,comment.c_str(),comment.length(),SQLITE_STATIC);
 		sqlite3_bind_int(pStmt,pos++,category);
+		
+		std::stringstream ss;
+		ss << dateBegin << dateEnd << issues << category << comment ;
+		std::string md5 = g_md5.getHashFromString(ss.str());
+
+		sqlite3_bind_text(pStmt,pos++,md5.c_str(),md5.length(),SQLITE_STATIC);
 
 		if (sqlite3_step(pStmt) != SQLITE_DONE) {
 			dberror(sql);
