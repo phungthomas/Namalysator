@@ -500,29 +500,35 @@ void database::insertLog(std::string message)
 
 }
 //! insert Dateerror 
-void database::insertDateError(int category,std::string dateBegin,std::string dateEnd,std::string issues,std::string comment)
-{
-	char *zErrMsg =0;	
-	std::stringstream oIdMets,oIdCategory;	
-	oIdCategory << category;
-	std::string sql = "INSERT INTO DATEERROR ('ID_TESTSET','DATE_BEGIN', 'DATE_END', 'ISSUES', 'COMMENT','ID_ERRORTYPE') \
-					  VALUES   ('" + stringIdTestSet + "',  \
-					  '" + dateBegin + "',  \
-					  '" + dateEnd + "',  \
-					  '" + issues + "',  \
-					  '" + comment + "',  \
-					  '" + oIdCategory.str() + "')";	
+void database::insertDateError(int category,std::string dateBegin,std::string dateEnd,std::string issues,std::string comment){	
 
-	int rc = sqlite3_exec(db, sql.c_str(), NULL, 0, &zErrMsg); 
-	if( rc )
-	{
+	sqlite3_stmt *pStmt;
+	const char *zErrMsg= 0; 
+
+	std::string sql = "INSERT INTO DATEERROR ('ID_TESTSET','DATE_BEGIN', 'DATE_END', 'ISSUES', 'COMMENT','ID_ERRORTYPE') "
+					  "VALUES   (?,  ?,  ?,  ?,  ?,  ?)";	
+
+	int rc = sqlite3_prepare_v2(db,sql.c_str(),-1, &pStmt,&zErrMsg);
+	if(rc == SQLITE_OK){
+		int pos = 1;
+
+		sqlite3_bind_int(pStmt,pos++,idTestset);
+		sqlite3_bind_text(pStmt,pos++,dateBegin.c_str(),dateBegin.length(),SQLITE_STATIC);
+		sqlite3_bind_text(pStmt,pos++,dateEnd.c_str(),dateEnd.length(),SQLITE_STATIC);
+		sqlite3_bind_text(pStmt,pos++,issues.c_str(),issues.length(),SQLITE_STATIC);
+		sqlite3_bind_text(pStmt,pos++,comment.c_str(),comment.length(),SQLITE_STATIC);
+		sqlite3_bind_int(pStmt,pos++,category);
+
+		if (sqlite3_step(pStmt) != SQLITE_DONE) {
+			dberror(sql);
+		};
+	
+	}else{
 		std::stringstream ss;
 		ss <<  "Can not insert data into DATEERROR: " << &zErrMsg ;	
 		insertLog(ss.str());		
 	} 
-	if ( zErrMsg ) {
-		sqlite3_free(zErrMsg);
-	}
+
 }
 bool database::insertALLData(datafactory *df,metsparserContext& ctx,int number)
 {	
