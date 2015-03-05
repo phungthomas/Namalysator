@@ -203,7 +203,7 @@ int tabErrors::getSizeVError()
 
 void tabErrors::findLine(const BatchDetail &batch,MetsError s)
 {	
-	std::string link = batch.path + s.mets.path + "/" + s.mets.fileName ;	
+	std::string link = batch.path + s.filenameFullPath ;	
 	editor->setCenterOnScroll(true);	
 	if (s.errorType.id == cat_schema_err || s.errorLine != 0 )
 	{
