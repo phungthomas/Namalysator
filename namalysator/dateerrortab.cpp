@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <sstream>
 #include <QDate>
+#include "w_accepted.h"
 
 dateerrortab::dateerrortab(int id):batchDetail(BatchDetail::getBatchDetail())
 {
@@ -151,18 +152,26 @@ void dateerrortab::fillTableError(std::vector<DateError> vError)
 		}
 		
 		
-	//	QString ss ;	
+	//	QString ss ;
+
+		int col = 0;
+
+		acceptedW* checkBox = new acceptedW(dateError.accepted,dateError.hashkey);
+		table->setCellWidget(i+1, col++,checkBox);
+		connect ( checkBox, SIGNAL(changeHash(bool,std::string)), this, SLOT(accepted(bool,std::string)));
+
+
 		newItem = new QTableWidgetItem(dateError.errortype.severity.gravity.c_str(),i);		
 		newItem->setTextAlignment(Qt::AlignCenter);
-		table->setItem(i+1, 0, newItem);
+		table->setItem(i+1, col++, newItem);
 	
 		newItem = new QTableWidgetItem(dateError.errortype.error.c_str(),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
-		table->setItem(i+1, 1, newItem);
+		table->setItem(i+1, col++, newItem);
 		
 		newItem = new QTableWidgetItem(ss.str().c_str(),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
-		table->setItem(i+1, 2, newItem);		
+		table->setItem(i+1, col++, newItem);		
 	}	
 	table->resizeColumnsToContents();
 	for (int i=0;i<table->columnCount();i++)
@@ -195,12 +204,20 @@ void dateerrortab::fillCombo(int id_cat,const BatchDetail &batchDetail)
 		comboYear->addItem(ss.setNum(it->first));
 	}	
 
-	table->setCellWidget(0,1,comboError);
-	table->setCellWidget(0,3,comboYear);
+	table->setCellWidget(0,2,comboError);
+	table->setCellWidget(0,4,comboYear);
 
 }
 int dateerrortab::getSizeVError()
 {
 	return vDateError.size();
+}
+
+void dateerrortab::accepted(bool val,std::string hashkey){
+	if ( val) {
+		db.insertAccepted(hashkey);	
+	}else{
+		db.deleteAccepted(hashkey);
+	}
 }
 

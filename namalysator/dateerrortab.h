@@ -33,6 +33,7 @@ class dateerrortab : public QWidget
 		std::string errorGroup;
 		void fillTableError(std::vector<DateError> vdateError);
 	private slots :
+		void accepted(bool,std::string);
 		void getcbCategory(QString category);
 		void getcbYear(QString year);
 		void getLine(int col,int row);
