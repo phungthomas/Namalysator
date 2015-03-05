@@ -479,7 +479,7 @@ ErrorType dbrequest::getErrorTypeWithId(int id)
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 
 	const char *zErrMsg= 0; 
-	const std::string selectSql = "SELECT * FROM ERRORTYPE where id_type = ?"; 
+	const std::string selectSql = "SELECT ID,ID_TYPE,ERROR,DETAILS,ID_SEVERITY,ID_CATEGORY FROM ERRORTYPE where id_type = ?"; 
 
 	std::vector<ErrorType> v;
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1379,14 +1379,21 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 		 if (strcmp(es.relatedType.c_str(),"METS") == 0)
 		 {
 			MetsFile mets = getMets(es.idRelatedFile);
-			es.mets = mets;			
+			es.mets = mets;	
+
+			es.filenameShort = mets.fileName ;
+			es.filenameFullPath = mets.path + '/' + es.filenameShort;
 		 }
 		 else
 		 { 
 			 LinkedFiles lf = getLinkedFiles(es.idRelatedFile,es.filePart);
 			 MetsFile mets = getMets(lf.idMets);
 			 es.mets = mets;
-			 es.linkedFiles = lf;		 
+			 es.linkedFiles = lf;	
+
+			 es.filenameShort = lf.fileName;
+			 es.filenameFullPath = mets.path + es.filenameShort;
+
 		 }
 		 v.push_back(es);		 
 	  }
