@@ -478,6 +478,13 @@ ErrorType dbrequest::getErrorTypeWithId(int id)
 	sqlite3_stmt *pStmt;
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
 
+	static std::map<int,ErrorType> cache;
+	std::map<int,ErrorType>::iterator it ;
+
+	it = cache .find(id);
+
+	if ( it != cache.end() ) return it->second;
+
 	const char *zErrMsg= 0; 
 	const std::string selectSql = "SELECT ID,ID_TYPE,ERROR,DETAILS,ID_SEVERITY,ID_CATEGORY FROM ERRORTYPE where id_type = ?"; 
 
@@ -501,6 +508,7 @@ ErrorType dbrequest::getErrorTypeWithId(int id)
 		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
+	cache[id]=et;
 	return et;
 }
 
