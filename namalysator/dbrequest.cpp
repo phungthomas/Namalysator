@@ -1359,7 +1359,7 @@ std::vector<DateError> dbrequest::getDateError(int id_testset)
 	std::vector<DateError> v;
     sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0; 
-	//Article article;	
+	
 	std::string selectSql = "SELECT de.id,de.id_testset,de.date_begin,de.date_end, de.issues,de.comment,de.id_errortype FROM DATEERROR de where de.ID_testset =?";
 
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
@@ -1370,7 +1370,6 @@ std::vector<DateError> dbrequest::getDateError(int id_testset)
 		
 		  while(sqlite3_step(pStmt) == SQLITE_ROW){
 
-			  //std::pair<int,DateError> p;
 			  int col=0;
 			  de.id = sqlite3_column_int(pStmt,col++);
 			  de.dateComment = getDateCommentid(de.id);
