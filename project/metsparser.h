@@ -19,6 +19,7 @@ public :
 	datafactory *dfMets;	
 	std::string currentMetsFile;
 	std::string currentMetsPath;
+	std::string papertype;
 	errorHandler *hError;
 
 	// need by structMap
