@@ -2290,3 +2290,52 @@ void dbrequest::deleteAccepted (std::string hashkey){
 	sqlite3_finalize(pStmt);
 	return;
 }
+
+std::map < string , QColor >& dbrequest::loadColor(std::string schma){
+
+	static std::map < string , QColor > empty;
+	static std::map < string , std::map < string , QColor > > cache;
+
+	if ( cache.size() == 0 ) _loadColor ( cache );
+
+	std::map < string , std::map < string , QColor > > ::iterator it =  cache.find(schma);
+
+	if ( it == cache.end() ) { return empty; }
+	return it->second;
+}
+
+void  dbrequest::_loadColor(std::map < string , std::map < string , QColor > >& toFill){
+
+
+	ConnectionDB* conn = g_pool.getConnection(databaseName);	
+	sqlite3_stmt *pStmt;
+
+	const char *zErrMsg= 0; 
+	
+	std::string selectSql = "SELECT RCOLOR,GCOLOR,BCOLOR,ENTITYNAME, DOCTYPE FROM ENTITYCONFIGURATION WHERE USEDNAMALYS=1";
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
+	
+	if(rc == SQLITE_OK)
+	{	 
+		
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{
+			int col = 0;
+			int r =  sqlite3_column_int(pStmt, col++);
+			int g =  sqlite3_column_int(pStmt, col++);
+			int b =  sqlite3_column_int(pStmt, col++);
+
+			std::string entity = safe_sqlite3_column_text(pStmt, col++);
+			std::string doctype = safe_sqlite3_column_text(pStmt, col++);
+
+			toFill [doctype] [entity] = QColor(r,g,b);
+		}
+		
+	}else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+}

@@ -20,12 +20,13 @@ public:
 	// returns true if this type of element exists in the internal map
 	bool is_color_set(const std::string &divtype) const;
 	logstruct_colors();
-	logstruct_colors(const std::string &schema);
-	void set_schema(const std::string &schema);
+	//logstruct_colors(const std::string &schema);
+	//void set_schema(const std::string &schema);
+	void set_colorTable(const std::map<std::string, QColor> & colorTable);
 	void dump_html(const std::string &fname);
 
 private:
-	void set_defaults(const std::string &schema);
+	//void set_defaults(const std::string &schema);
 };
 
 #endif // LOGSTRUCT_COLORS_H_

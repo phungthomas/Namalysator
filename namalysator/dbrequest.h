@@ -196,6 +196,9 @@ public:
 		std::string getFirstMetsFilename(int id_testset);
 		void insertAccepted (std::string hashkey);
 		void deleteAccepted (std::string hashkey);
+		std::map < string , QColor >& loadColor(std::string schma);
+		private:
+		void  _loadColor(std::map < string , std::map < string , QColor > > & toFill);
 
 };
 #endif // DBREQUEST_H_

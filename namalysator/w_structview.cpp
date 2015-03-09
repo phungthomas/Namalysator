@@ -180,7 +180,7 @@ void w_structview::getDate(QDate search)
 		showCurrentPage();	
 		metsAltoParser();		
 		fillListErrors();
-		m_colors.set_schema(mets.docType);
+		m_colors.set_colorTable(db.loadColor(mets.docType));
 		delete MetsOnDate;
 	}	
 }
@@ -373,7 +373,7 @@ void w_structview::metsAltoParser()
 			mapAlto[it->second.fileId]=ap.getAltoBlock();
 		}		
 	}
-	m_colors.set_schema(mets.docType);
+	m_colors.set_colorTable(db.loadColor(mets.docType));
     createTree();
     createArticle();
 	create_page2toc_entry();
