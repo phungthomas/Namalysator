@@ -155,6 +155,7 @@ int database::getIdTestSet(const std::string &batchName)
 void database::insertMets(const std::string &batchName,const std::string &path ,const std::string &fileName)
 {	
 	char *zErrMsg =0;
+	current_id_mets = -1;
 	std::string pathDb = path.substr(3,path.length());
 	std::string sql = "INSERT INTO METS ('ID_TESTSET','PATH','FILENAME') \
 					  VALUES   ('" + stringIdTestSet  + "',  \
@@ -166,10 +167,14 @@ void database::insertMets(const std::string &batchName,const std::string &path ,
 		std::stringstream ss;
 		ss <<  "Can not insert new mets into table: " << zErrMsg ;	
 		insertLog(ss.str());
+	}else{
+		current_id_mets = sqlite3_last_insert_rowid(db);
 	}
 	if ( zErrMsg ) {
 		sqlite3_free(zErrMsg);
 	}
+
+	
 }
 
 void database::dberror(std::string sql){
@@ -369,34 +374,6 @@ void database::updateMets(int id_mets, datafactory *df)
 	}
 }
 
-//! select current id of Mets
-Mets database::select_idMets()
-{
-	//int id =0;
-	Mets mets;
-	sqlite3_stmt *pStmt =0;
-	const char *zErrMsg= 0;
-
-	std::string selectSql = "SELECT ID_METS,FILENAME FROM METS WHERE ID_METS = ( SELECT max(ID_METS) FROM METS )";
-	int  rc = sqlite3_prepare_v2(db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-
-	if(rc == SQLITE_OK)
-	{		
-		sqlite3_step(pStmt);
-		int col = 0;
-		mets.idMets = sqlite3_column_int(pStmt, col++);
-		mets.fileName = std::string (safe_sqlite3_column_text(pStmt,col++));
-	}
-	else
-	{
-		std::stringstream ss;
-		ss <<  "Can not select max id_mets select data: %s\n: " << zErrMsg ;	
-		insertLog(ss.str());				
-	}
-	sqlite3_finalize(pStmt);
-	return mets;
-}
-
 
 //! insert Linked files of mets (pdf,alto,img)
 void database::insertLinkedFiles(int id_mets,datafactory *df)
@@ -542,14 +519,13 @@ bool database::insertALLData(datafactory *df,metsparserContext& ctx,int number)
 	char *sErrMsg=0;
 	// Use a transaction to speed things up
 	startTransaction();
-		Mets mets = select_idMets();
-		updateMets(mets.idMets,df);
+		updateMets(current_id_mets,df);
 		if ( ctx.inventory.isActif() ){ 
-			insertMetsBook(mets.idMets,ctx.inventory.inventoryMODSMD_ELEC.BIBREC_SYS_NUM); 
+			insertMetsBook(current_id_mets,ctx.inventory.inventoryMODSMD_ELEC.BIBREC_SYS_NUM); 
 		};
-		insertLinkedFiles(mets.idMets,df);
+		insertLinkedFiles(current_id_mets,df);
 		datafactory_set<Article> dfarticle = df->get_set<Article>();
-		insertArticle(mets.idMets,dfarticle,number);	
+		insertArticle(current_id_mets,dfarticle,number);	
 	endTransaction();
 	return true;
 }
@@ -794,7 +770,7 @@ void database::insertParameterVerifiers(Parameters *param)
 
 void database::insertMetsErrorWithId(int category,const std::string &relatedType,const std::string &filePart,const Error &e,std::string id)
 {	
-	Mets mets = select_idMets();	
+	
 	const char *zErrMsg =0;
 	sqlite3_stmt *pStmt;
 
@@ -804,7 +780,7 @@ void database::insertMetsErrorWithId(int category,const std::string &relatedType
 					  
 	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt,&zErrMsg);
 	if( rc == SQLITE_OK ){
-		sqlite3_bind_int(pStmt,1,mets.idMets);
+		sqlite3_bind_int(pStmt,1,current_id_mets);
 		sqlite3_bind_text(pStmt,2,relatedType.c_str(),relatedType.length(),SQLITE_STATIC);
 		sqlite3_bind_int(pStmt,3,idTestset);
 		sqlite3_bind_text(pStmt,4,filePart.c_str(),filePart.length(),SQLITE_STATIC);
@@ -815,7 +791,7 @@ void database::insertMetsErrorWithId(int category,const std::string &relatedType
 		sqlite3_bind_text(pStmt,9,id.c_str(),id.length()>49?49:id.length(),SQLITE_STATIC);
 
 		std::stringstream ss;
-		ss << relatedType << mets.fileName << filePart << category << e.errorline << e.message << id;
+		ss << relatedType << getMetsFilename(current_id_mets) << filePart << category << e.errorline << e.message << id;
 		std::string md5 = g_md5.getHashFromString(ss.str());
 
 		sqlite3_bind_text(pStmt,10,md5.c_str(),md5.length(),SQLITE_STATIC);
@@ -901,5 +877,72 @@ void  database::_loadEntity(std::map < string , std::map < string ,int > > & toF
 		dberror(std::string("PREPARE PROBLEM:")+selectSql);		
 	}
 	sqlite3_finalize(pStmt);
+}
+
+std::string database::getMetsFilename(int id_mets ){
+
+	sqlite3_stmt *pStmt;
+
+	std::string ret;
+
+	const char *zErrMsg= 0; 
+	
+	std::string selectSql = "SELECT FILENAME FROM METS WHERE id_mets=?";
+	
+	int rc = sqlite3_prepare_v2(db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
+	
+	if(rc == SQLITE_OK)
+	{	 
+		sqlite3_bind_int(pStmt,1,id_mets);
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{
+			int col = 0;
+
+			ret = safe_sqlite3_column_text(pStmt, col++);
+		}
+		
+	}else{
+		dberror(std::string("PREPARE PROBLEM:")+selectSql);		
+	}
+	sqlite3_finalize(pStmt);
+
+	return ret;
+
+}
+
+
+void database::insertDivCount(std::map<std::string,int> & tabl ){
+
+	const char *zErrMsg =0;
+	sqlite3_stmt *pStmt;
+	startTransaction();
+
+	std::string sql = "INSERT INTO METSDIVCOUNT (ID_METS,ENTITY,COUNT)" 
+		              " VALUES   (?,  ?,  ?)";		
+					  
+	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt,&zErrMsg);
+	if( rc == SQLITE_OK ){
+		for ( std::map<std::string,int>::iterator it = tabl.begin(); it != tabl.end() ; it++ ){
+			sqlite3_bind_int(pStmt,1,current_id_mets);
+			sqlite3_bind_text(pStmt,2,it->first.c_str(),it->first.length(),SQLITE_STATIC);
+			sqlite3_bind_int(pStmt,3,it->second);
+
+			if ( sqlite3_step(pStmt) != SQLITE_DONE ) {
+				dberror(std::string("INSERT NOT DONE:")+sql);
+				break;
+			};
+
+			sqlite3_reset(pStmt);
+		};
+	}else{
+		dberror(std::string("PREPARE PROBLEM:")+sql);		
+	};
+
+	sqlite3_finalize(pStmt);
+
+	endTransaction();
+
 }
 

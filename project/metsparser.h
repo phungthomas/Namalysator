@@ -49,8 +49,8 @@ public :
 	std::map<std::string,std::string> MixContainer;
 
 	//DIV structure;
-	//std::map<std::string,std::string> divID;
-	//std::vector<std::string> divSuite;
+	bool flagDivCount;
+	std::map<std::string,int> divIDCount;
 };
 
 class StateParserMetsRootState:public StateParserState{

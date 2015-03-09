@@ -21,9 +21,10 @@ private:
 	std::string logFilePath;
 
 	void deletePARAMTESTSET();
-	Mets select_idMets();
+	//Mets select_idMets();
 	
 public:
+	int current_id_mets;
 	//! constructor with batchName and dataBaseName as parameter
 	database(const std::string &batchName,const std::string &dataBaseName,const std::string &logFile);
 	//! open database
@@ -55,7 +56,11 @@ public:
 	//void insertMetsError(int category,const std::string &relatedType,const std::string &filePart,const Error &e);
 	
 	bool insertTestSet(const std::string &batchName,const std::string & subBatch,const std::string &date);
-	void insertMets(const std::string &batchName,const std::string &path,const std::string &fileName);	
+	void insertMets(const std::string &batchName,const std::string &path,const std::string &fileName);
+
+	std::string getMetsFilename(int id_mets );
+
+	void insertDivCount(std::map<std::string,int> & tabl );
 		
 	std::vector<int> getAllYears();
 	std::vector<std::pair<int,Mets>> vMetsYear(int year);

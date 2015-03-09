@@ -245,6 +245,15 @@ int start()
 		if (parameter.getValueCheck("semanticchecks.emptyMix") == 1){
 			metsP.getContext().flagMix = true; // start parsing of mix part				
 		}
+
+
+		// for testing purpose
+		if (parameter.getValueCheck("divCount") == 1){
+			metsP.getContext().flagDivCount = true;
+		}
+
+
+
 		pt.LogTime("METS Parser creation");
 		db.insertMets(batchName,currentMetsPath,currentMetsFile);
 		pt.LogTime("Insrting METS into DB");
@@ -262,12 +271,6 @@ int start()
 			parseError = true;
 			continue;
 		};
-
-		// test of new div structure
-		//for ( std::vector<std::string>::iterator it = metsP.getContext().divSuite.begin(); it != metsP.getContext().divSuite.end(); it ++ ){
-		//	cerr << "DIV:" << *it << std::endl;
-		//}
-		//
 
 		std::string outputDir = parameter.getValue("outputDir");
 		std::string generatedFile = outputDir + "/GENERATED" + currentMetsFile;
@@ -339,6 +342,11 @@ int start()
 
 		static verifyFolder vFold;
 		vFold.check(parameter.getValueCheck("semanticchecks.Folder"),metsP.getContext());
+
+		if (parameter.getValueCheck("divCount") == 1){
+			db.insertDivCount( metsP.getContext().divIDCount );
+		};
+
 
 		if (parameter.getValueCheck("dataintegrity.checkFile") == 1)
 		{
