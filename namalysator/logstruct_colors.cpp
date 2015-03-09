@@ -81,11 +81,23 @@ void logstruct_colors::set_defaults(const std::string &schema)
 		m_colors.insert(std::make_pair("STATEMENT", QColor(150,150,150)));
 		m_colors.insert(std::make_pair("PAGE_NUMBER", QColor(255,122,122)));
 	} else if (m_schema == "Monograph") {
-		m_colors.insert(std::make_pair("FRONT", QColor(255,0,0)));
-		m_colors.insert(std::make_pair("MAIN", QColor(0,0,255)));
-		m_colors.insert(std::make_pair("BACK", QColor(127,127,127)));
+		m_colors.insert(std::make_pair("FRONT", QColor(255,0,0))); // to be check
+		m_colors.insert(std::make_pair("MAIN", QColor(0,0,255))); // to be check
+		m_colors.insert(std::make_pair("BACK", QColor(127,127,127))); // to be check
 		m_colors.insert(std::make_pair("CHAPTER", QColor(0,255,0)));
 		m_colors.insert(std::make_pair("ILLUSTRATION", QColor(255, 100, 200)));
+		m_colors.insert(std::make_pair("INDEX", QColor(0,170,170)));
+		m_colors.insert(std::make_pair("TABLE_OF_CONTENTS", QColor(170,170,100)));
+		m_colors.insert(std::make_pair("TABLE", QColor(150,0,0)));
+		m_colors.insert(std::make_pair("ADVERTISEMENT", QColor(255,255,100)));
+		m_colors.insert(std::make_pair("MAP", QColor(255,255,100)));
+		m_colors.insert(std::make_pair("BIBLIOGRAPHY", QColor(0,255,100)));
+		m_colors.insert(std::make_pair("PREFACE", QColor(255,0,100)));
+        m_colors.insert(std::make_pair("APPENDIX", QColor(0,50,100)));
+		m_colors.insert(std::make_pair("CORRECTIONS", QColor(50,0,100)));
+		m_colors.insert(std::make_pair("FRONTISPIECE", QColor(50,50,100)));
+		m_colors.insert(std::make_pair("BOOKPLATE", QColor(255,255,200)));
+
 	}
 }
 
