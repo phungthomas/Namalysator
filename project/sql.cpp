@@ -858,3 +858,48 @@ bool database::FillSupplements(int idMets, std::vector<string> &supplements)
 	}
 }
 
+bool database::isEntityToCount(std::string type,std::string entity){
+
+	static std::map < string , std::map < string , int > > cache;
+
+	if ( cache.size() == 0 ) _loadEntity ( cache );
+
+
+	std::map < string , int >::iterator it = cache[type].find(entity);
+
+	if ( it != cache[type].end() ) return true;
+
+	return false;
+}
+
+void  database::_loadEntity(std::map < string , std::map < string ,int > > & toFill){
+	
+	sqlite3_stmt *pStmt;
+
+	const char *zErrMsg= 0; 
+	
+	std::string selectSql = "SELECT ENTITYNAME, DOCTYPE FROM ENTITYCONFIGURATION WHERE USEDMETSVER=1";
+	
+	int rc = sqlite3_prepare_v2(db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
+	
+	if(rc == SQLITE_OK)
+	{	 
+		
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{
+			int col = 0;
+
+			std::string entity = safe_sqlite3_column_text(pStmt, col++);
+			std::string doctype = safe_sqlite3_column_text(pStmt, col++);
+
+			toFill [doctype] [entity] = 1;
+		}
+		
+	}else{
+		dberror(std::string("PREPARE PROBLEM:")+selectSql);		
+	}
+	sqlite3_finalize(pStmt);
+}
+

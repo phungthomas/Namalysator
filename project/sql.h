@@ -79,6 +79,9 @@ public:
 	bool FillSupplements(int idMets, std::vector<string> &supplements);
 	bool getInventory(std::string _sysnum, inventory&);
 	bool InventoryChecked(std::string _sysnum);
-	bool insertMetsBook(int id_mets, std::string _sysnum); 
+	bool insertMetsBook(int id_mets, std::string _sysnum);
+	bool isEntityToCount(std::string type,std::string entity);
+	private:
+	void  _loadEntity(std::map < string , std::map < string , int > > & toFill);
 };
 #endif // SQL_H_
