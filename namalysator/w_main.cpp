@@ -13,6 +13,7 @@
 #include "exportdata.h"
 #include "w_thumb.h"
 #include "w_report.h"
+#include "w_entitycount.h"
 #include "exportDataHelper.h"
 #include <iostream>
 
@@ -98,9 +99,23 @@ void w_main::newsPaperActions()
 
 	act = menu->addAction(QIcon("Sales-report-icon.png"),tr("Completeness of campaign"));
 	connect(act, SIGNAL(triggered()), this, SLOT(openReport()));
+	act = menu->addAction(tr("Total of entity"));
+	connect(act, SIGNAL(triggered()), this, SLOT(openEntityCount()));
 
 }
 
+void w_main::openEntityCount (){
+
+	w_entitycount *w = new w_entitycount();	
+
+	w->init();
+	w->setBatchDetail();
+
+	titleChange("Entity Count");
+	this->resize(900,200);
+	this->setCentralWidget(w); 
+
+}
 
 void w_main::openReport()
 {

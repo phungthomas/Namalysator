@@ -58,6 +58,7 @@ public slots:
 		void openStructureWindow();	
 		void openSelectBatchWindow();    
 		void openReport();
+		void openEntityCount();
 		void openStart(std::string);
 		void exit();
 		void exportData();

@@ -374,6 +374,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\w_entitycount.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\w_errors.cpp"
 					>
 				</File>
@@ -756,6 +760,21 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\w_entitycount.h"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;  -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_WEBKIT_LIB -DQT_GUI_LIB -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DXML_STATIC  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtWebKit&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\release&quot; &quot;-I.&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2008&quot; &quot;-I$(ConfigurationName)\.&quot; &quot;-I$(METSVERIFY_EXTERNAL)\Headers&quot; &quot;-I$(METSVERIFIER)\commonLib&quot;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\GeneratedFiles\MOCKING\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\w_errors.h"
 					>
 					<FileConfiguration
@@ -1048,6 +1067,10 @@
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\MOCKING\moc_w_disk.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\MOCKING\moc_w_entitycount.cpp"
 					>
 				</File>
 				<File
