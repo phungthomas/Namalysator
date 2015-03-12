@@ -68,11 +68,12 @@ void DiskParser::parseDirectory( fs::path full_path)
 				}			
 			}		
 		}
-		catch (const std::exception e)
+		catch (const std::exception& e)
 		{
 			std::stringstream message;
 			message << "Not a METS file " << e.what();
-			hError->getError(cat_metsFile,"METS","METS", message.str() ,dir_itr->path().filename(),"");			
+			std::cerr << message.str() << std::endl;
+			hError->writeToLog(cat_nonAccess,"UNKNOWN",message.str());
 		}	
 	}
 }

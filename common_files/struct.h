@@ -251,7 +251,8 @@ typedef enum errorTypeEnum {
 	cat_bookinventory = 38,
 	cat_bookinventoryTitle = 50,
 	cat_bookinventoryData = 51,
-	cat_emptymix = 52
+	cat_emptymix = 52,
+	cat_nonAccess = 10090
 } errorType;
 
 
