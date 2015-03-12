@@ -1,6 +1,7 @@
 #include "diskparser.h"
 
 #include <iostream>
+#include <sstream>
 
 DiskParser::DiskParser(errorHandler *h)
 {
@@ -67,9 +68,11 @@ void DiskParser::parseDirectory( fs::path full_path)
 				}			
 			}		
 		}
-		catch (const std::exception)
-		{	
-			hError->getError(cat_metsFile,"METS","METS", "Not a METS file" ,dir_itr->path().filename(),"");			
+		catch (const std::exception e)
+		{
+			std::stringstream message;
+			message << "Not a METS file " << e.what();
+			hError->getError(cat_metsFile,"METS","METS", message.str() ,dir_itr->path().filename(),"");			
 		}	
 	}
 }
