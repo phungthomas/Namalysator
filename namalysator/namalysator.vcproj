@@ -239,6 +239,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\entitycountModel.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\exportdata.cpp"
 				>
 			</File>
@@ -464,6 +468,10 @@
 			</File>
 			<File
 				RelativePath=".\dbrequest.h"
+				>
+			</File>
+			<File
+				RelativePath=".\entitycountModel.h"
 				>
 			</File>
 			<File
