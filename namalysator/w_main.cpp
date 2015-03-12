@@ -108,8 +108,9 @@ void w_main::openEntityCount (){
 
 	w_entitycount *w = new w_entitycount();	
 
-	w->init();
+	
 	w->setBatchDetail();
+	w->init();
 
 	titleChange("Entity Count");
 	this->resize(900,200);

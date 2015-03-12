@@ -919,7 +919,7 @@ void database::insertDivCount(std::map<std::string,int> & tabl ){
 	sqlite3_stmt *pStmt;
 	startTransaction();
 
-	std::string sql = "INSERT INTO METSDIVCOUNT (ID_METS,ENTITY,COUNT)" 
+	std::string sql = "INSERT INTO METSDIVCOUNT (ID_METS,ENTITY,TOT)" 
 		              " VALUES   (?,  ?,  ?)";		
 					  
 	int rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &pStmt,&zErrMsg);

@@ -2348,8 +2348,7 @@ void  dbrequest::loadEntityCount(std::map<int, std::map < string , int > >& toFi
 
 	const char *zErrMsg= 0; 
 	
-	std::string selectSql = "SELECT a.ID_METS, a.ENTITY, a.COUNT "
-		                    " FROM METSDIVCOUNT a, METS b WHERE a.ID_METS = b.ID_METS and b.ID_TESTSET = ?";
+	std::string selectSql = "SELECT a.ID_METS,a.ENTITY,a.TOT FROM METS b, METSDIVCOUNT a  WHERE a.ID_METS = b.ID_METS and b.ID_TESTSET = ?";
 	
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	
