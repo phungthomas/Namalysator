@@ -199,6 +199,8 @@ public:
 		std::map < string , QColor >& loadColor(std::string schma);
 		private:
 		void  _loadColor(std::map < string , std::map < string , QColor > > & toFill);
+		public:
+		void  loadEntityCount(std::map<int,std::map < string , int > >& toFill, std::map< string,int>& headerData);
 
 };
 #endif // DBREQUEST_H_

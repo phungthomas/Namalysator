@@ -2339,3 +2339,41 @@ void  dbrequest::_loadColor(std::map < string , std::map < string , QColor > >& 
 	}
 	sqlite3_finalize(pStmt);
 }
+
+void  dbrequest::loadEntityCount(std::map<int, std::map < string , int > >& toFill, std::map< string,int>& headerData){
+
+
+	ConnectionDB* conn = g_pool.getConnection(databaseName);	
+	sqlite3_stmt *pStmt;
+
+	const char *zErrMsg= 0; 
+	
+	std::string selectSql = "SELECT a.ID_METS, a.ENTITY, a.COUNT "
+		                    " FROM METSDIVCOUNT a, METS b WHERE a.ID_METS = b.ID_METS and b.ID_TESTSET = ?";
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
+	
+	if(rc == SQLITE_OK)
+	{	 
+		
+		sqlite3_bind_int(pStmt, 1, BatchDetail::getBatchDetail().idTestSet);
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{
+			int col = 0;
+			int id_mets =  sqlite3_column_int(pStmt, col++);
+
+			std::string entity = safe_sqlite3_column_text(pStmt, col++);
+			int count =  sqlite3_column_int(pStmt, col++);
+			
+
+			toFill [id_mets] [entity] = count;
+			headerData[entity] ++;
+		}
+		
+	}else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+}

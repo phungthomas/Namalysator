@@ -2,9 +2,6 @@
 
 void w_entitycount::setBatchDetail(){
 	db.setDataBaseName(BatchDetail::getBatchDetail().database);
-
-
-
 }
 
 w_entitycount::w_entitycount(QWidget *parent):QWidget(parent){
