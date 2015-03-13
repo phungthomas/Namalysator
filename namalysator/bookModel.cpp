@@ -2,7 +2,6 @@
 #include <iostream>
 
 bookModel::bookModel(dbrequest & _db,QObject *parent):db(_db),QAbstractTableModel(parent){
-	std::cout << "DEBUG : BOOK Model" << std::endl; // 
 }
 bookModel::~bookModel(){
 }
@@ -61,8 +60,6 @@ QVariant bookModelInventory::data(const QModelIndex &index, int role ) const{
 	}
 
 	return QVariant();
-
-
 }
 
 QVariant bookModel::headerData ( int section, Qt::Orientation orientation, int role ) const{
@@ -77,8 +74,6 @@ QVariant bookModel::headerData ( int section, Qt::Orientation orientation, int r
 		ret = QVariant (qs);
 	}
 	return ret;
-
-
 }
 
 
@@ -93,5 +88,4 @@ QVariant bookModelInventory::headerData ( int section, Qt::Orientation orientati
 		ret = QVariant (qs);
 	}
 	return ret;
-
 }
