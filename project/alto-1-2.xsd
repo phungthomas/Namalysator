@@ -10,7 +10,7 @@ with the assistance of Gregor Retti (Unisversity of Innsbruck), Alexander Egger 
 <!-- June 22, 2004: Version finalized for docWORKS/METAe -->
 <!-- November 19, 2004: Modifications requested by Justin Littman -->
 <!-- Modifications of November 19, 2004: 
-	1. add "Description" element
+	1. add "Description" element 
 	2. change "InnerMargin/OuterMargin" to "LeftMargin/RightMargin", add "POSITION" attribute to "PAGE" element
 	3. add "PROCESSING" attribute to "PAGE" element
 	4. internal changes to validate with Xerces parser
