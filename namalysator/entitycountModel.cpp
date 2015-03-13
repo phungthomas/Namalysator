@@ -43,7 +43,9 @@ QVariant entityCountModel::data(const QModelIndex &index, int role) const {
 
 	if (role == Qt::TextAlignmentRole) {
 		if ( columnIdx > 0 )
-		return Qt::AlignRight;
+			return Qt::AlignRight;
+		else
+			return Qt::AlignCenter;
 	};
 
 	if ( role == Qt::DisplayRole ) {
