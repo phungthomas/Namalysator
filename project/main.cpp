@@ -397,7 +397,8 @@ int start()
 
 			if (parameter.getValueCheck("blocks.blockStructure") == 1)
 			{
-				verifyblockstructure(&df,&hError,currentMetsFile);				
+				bool flag = ( transformCH.getContext().typeIssue.compare ("Monograph")==0 );
+				verifyblockstructure(&df,&hError,currentMetsFile,parameter.getValueCheck("blocks.blockStructureSkip"));				
 			}
 
 			if (parameter.getValueCheck("blocks.coveragePercentAlto") == 1)
