@@ -151,7 +151,7 @@ int start(){
 		return 1;				
 	}
 	std::cerr << parameter.getValue("database")+ ".db" << std::endl;
-	std::cerr << parameter.getValue("input")+ ".db" << std::endl;
+	//std::cerr << parameter.getValue("input")+ ".db" << std::endl;
 	//std::cerr << parameter.getValueCheck("dataintegrity.checkSum") << std::endl;
 	int ret;
 	std :: cout << "Inventory loader" << std::endl;
