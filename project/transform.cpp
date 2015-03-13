@@ -54,7 +54,7 @@ void DivElem::startElement (const char* const name, const xercesc::Attributes &a
 		if ( type.compare("Monograph")==0 ){
 			append = " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://downloads.bnl.lu/schemas/bnl-monograph_v1.0.xsd\" xsi:schemaLocation=\"http://downloads.bnl.lu/schemas/bnl-monograph_v1.0.xsd bnl-monograph_v1.0.xsd\" ";
 		}else if ( type.compare("Newspaper")==0 ){
-			append = " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://downloads.bnl.lu/schemas/bnl-newspaper_v1.3.xsd\" xsi:schemaLocation=\"http://downloads.bnl.lu/schemas/bnl-newspaper_v1.3.xsd bnl-newspaper_v1.3.xsd\" ";
+			append = " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://downloads.bnl.lu/schemas/bnl-newspaper_v1.4.xsd\" xsi:schemaLocation=\"http://downloads.bnl.lu/schemas/bnl-newspaper_v1.4.xsd bnl-newspaper_v1.4.xsd\" ";
 		}else if ( type.compare("Serial")==0 ){
 			append = " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://downloads.bnl.lu/schemas/bnl-serial_v1.0.xsd\" xsi:schemaLocation=\"http://downloads.bnl.lu/schemas/bnl-serial_v1.0.xsd bnl-serial_v1.0.xsd\" ";
 		}else{
