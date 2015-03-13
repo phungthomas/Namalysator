@@ -40,6 +40,6 @@ verifyalto::verifyalto(datafactory *dfverifiers,errorHandler *hError,std::string
 			}
 		}
 	} else {
-		std::cout << "Error No ALTOGRP" << std::endl;
+		hError->getError(cat_nongrpDefine,"METS","FILESEC","Error: No ALTOGRP",pathdirectory,"");
 	}
 }
