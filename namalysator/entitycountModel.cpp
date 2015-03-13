@@ -67,6 +67,8 @@ QVariant entityCountModel::data(const QModelIndex &index, int role) const {
 
 		std::map < std::string , int >::const_iterator itttt = ittt->second .find ( column );
 
+		if ( itttt == ittt->second.end() ) return QVariant(); 
+
 		int count = itttt ->second;
 
 		ret = QVariant(count);
