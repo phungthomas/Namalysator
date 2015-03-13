@@ -17,7 +17,7 @@ void entityCountModel::init(){
 	}
 
 	pos = 0;
-	for ( std::map<int,std::map < string , int > >::iterator it = table.begin();it != table.end(); it++){
+	for ( std::map<std::string,std::map < string , int > >::iterator it = table.begin();it != table.end(); it++){
 		tableIndex[ pos++ ]= it->first;
 	};
 
@@ -32,25 +32,37 @@ int entityCountModel::rowCount(const QModelIndex &parent) const {
 }
 
 int entityCountModel::columnCount(const QModelIndex &parent) const {
-	return headerIndex.size();
+	return headerIndex.size()+1;
 }
 
 QVariant entityCountModel::data(const QModelIndex &index, int role) const {
 	
 	QVariant ret;
 
+	int columnIdx = index.column();
+
 	if ( role == Qt::DisplayRole ) {
+
+		if ( columnIdx == 0 ) {
+			std::map<int,std::string>::const_iterator itt = tableIndex.find( index.row() );
+			if ( itt == tableIndex.end()) return QVariant(); // non existing row
+
+			std::string idx = itt->second;
+			return QVariant(QString(idx.c_str()));
+		}else{
+			columnIdx --;
+		}
 		
-		std::map<int,std::string>::const_iterator it = headerIndex.find( index.column() );
+		std::map<int,std::string>::const_iterator it = headerIndex.find( columnIdx );
 		if ( it == headerIndex.end()) return QVariant(); // non existing column
 		
 		std::string column = it->second ;
 
-		std::map<int,int>::const_iterator itt = tableIndex.find( index.row() );
+		std::map<int,std::string>::const_iterator itt = tableIndex.find( index.row() );
 		if ( itt == tableIndex.end()) return QVariant(); // non existing row
 
-		int idx = itt->second;
-		std::map<int,std::map < std::string , int > >::const_iterator ittt = table.find(idx);
+		std::string idx = itt->second;
+		std::map<std::string,std::map < std::string , int > >::const_iterator ittt = table.find(idx);
 		if ( ittt == table.end() ) return QVariant(); 
 
 		std::map < std::string , int >::const_iterator itttt = ittt->second .find ( column );
@@ -69,7 +81,9 @@ QVariant entityCountModel::headerData ( int section, Qt::Orientation orientation
 	QVariant ret;
 	if ( role == Qt::DisplayRole ){
 		
-		std::map<int,string>::const_iterator it = headerIndex.find(section);
+		if ( section == 0 ) return QVariant ( QString ( "FILENAME" ) );
+
+		std::map<int,string>::const_iterator it = headerIndex.find(section-1);
 		if ( it == headerIndex.end()) return QVariant();
 		ret = QVariant ( QString ( it->second.c_str() ) );
 		

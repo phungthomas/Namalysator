@@ -28,7 +28,7 @@ void w_entitycount::init(){
 	entityView->setEditTriggers(QAbstractItemView::NoEditTriggers);  
     entityView->setSelectionMode(QAbstractItemView::SingleSelection);  
     entityView->setSelectionBehavior(QAbstractItemView::SelectRows);  
-	entityView->setAlternatingRowColors(true);
+	entityView->setAlternatingRowColors(true);	
 	entityView->setShowGrid(false);
 	entityView->setSortingEnabled(true);
 	entityView->resizeColumnsToContents();

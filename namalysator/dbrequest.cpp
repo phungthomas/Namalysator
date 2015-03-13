@@ -2340,7 +2340,7 @@ void  dbrequest::_loadColor(std::map < string , std::map < string , QColor > >& 
 	sqlite3_finalize(pStmt);
 }
 
-void  dbrequest::loadEntityCount(std::map<int, std::map < string , int > >& toFill, std::map< string,int>& headerData){
+void  dbrequest::loadEntityCount(std::map<std::string, std::map < string , int > >& toFill, std::map< string,int>& headerData){
 
 
 	ConnectionDB* conn = g_pool.getConnection(databaseName);	
@@ -2348,7 +2348,7 @@ void  dbrequest::loadEntityCount(std::map<int, std::map < string , int > >& toFi
 
 	const char *zErrMsg= 0; 
 	
-	std::string selectSql = "SELECT a.ID_METS,a.ENTITY,a.TOT FROM METS b, METSDIVCOUNT a  WHERE a.ID_METS = b.ID_METS and b.ID_TESTSET = ?";
+	std::string selectSql = "SELECT b.FILENAME,a.ENTITY,a.TOT FROM METS b, METSDIVCOUNT a  WHERE a.ID_METS = b.ID_METS and b.ID_TESTSET = ?";
 	
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	
@@ -2361,14 +2361,14 @@ void  dbrequest::loadEntityCount(std::map<int, std::map < string , int > >& toFi
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
 		{
 			int col = 0;
-			int id_mets =  sqlite3_column_int(pStmt, col++);
+			std::string filename =   safe_sqlite3_column_text(pStmt, col++);
 
 			std::string entity = safe_sqlite3_column_text(pStmt, col++);
 			int count =  sqlite3_column_int(pStmt, col++);
 			
 
-			toFill [id_mets] [entity] = count;
-			headerData[entity] ++;
+			toFill [filename] [entity] = count;
+			headerData[entity] += count;
 		}
 		
 	}else{

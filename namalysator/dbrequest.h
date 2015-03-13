@@ -197,10 +197,11 @@ public:
 		void insertAccepted (std::string hashkey);
 		void deleteAccepted (std::string hashkey);
 		std::map < string , QColor >& loadColor(std::string schma);
-		private:
+    private:
 		void  _loadColor(std::map < string , std::map < string , QColor > > & toFill);
-		public:
-		void  loadEntityCount(std::map<int,std::map < string , int > >& toFill, std::map< string,int>& headerData);
+	public:
+		void  loadEntityCount(std::map<std::string,std::map < string , int > >& toFill, std::map< string,int>& headerData);
+
 
 };
 #endif // DBREQUEST_H_

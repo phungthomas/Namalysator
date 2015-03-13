@@ -20,8 +20,8 @@ public:
 
 protected:
 	dbrequest& db;
-	std::map<int,std::map < std::string , int > > table;
-	std::map<int,int> tableIndex;
+	std::map<std::string,std::map < std::string , int > > table;
+	std::map<int,std::string> tableIndex;
 	std::map< std::string,int> header;
 	std::map<int,std::string> headerIndex;
 };
