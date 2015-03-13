@@ -28,9 +28,8 @@
 #include "verifydivs.h"
 #include "verifyidentifierinmix.h"
 #include "verifyunlinkedidentifier.h"
-#include "verifypdf.h"
+#include "verifyFile.h"
 #include "verifyalto.h"
-#include "verifyimg.h"
 #include "verifyblockstructure.h"
 #include "verifydatemismatch.h"
 #include "verifymissingissue.h"
@@ -350,12 +349,16 @@ int start()
 
 		if (parameter.getValueCheck("dataintegrity.checkFile") == 1)
 		{
-			verifypdf(&df,&hError,currentMetsPath);
+			verifyFile(&df,&hError,currentMetsPath,"PDFGRP");
 			pt.LogTime("Verify PDF");
 			verifyalto(&df,&hError,currentMetsPath);		
 			pt.LogTime("Verify ALTO");
-			verifyimg(&df,&hError,currentMetsPath);									
+			verifyFile(&df,&hError,currentMetsPath,"IMGGRP");						
 			pt.LogTime("Verify Images");
+			if (parameter.getValueCheck("dataintegrity.checkFilePNG") == 1){
+				verifyFile(&df,&hError,currentMetsPath,"PNGGRP");						
+				pt.LogTime("Verify PNG Images");
+			}
 		}
 
 		// Do transformation of the data factory

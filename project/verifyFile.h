@@ -1,5 +1,5 @@
-#ifndef VERIFYPDF_H_
-#define VERIFYPDF_H_
+#ifndef VERIFYFILE_H_
+#define VERIFYFILE_H_
 
 #include <string>
 #include "datafactory.h"
@@ -7,11 +7,9 @@
 #include <set>
 
 //!verify if the PDF files exist and have the right sequence
-class verifypdf
-{
-
+class verifyFile{
 public:
-	verifypdf(datafactory *df,errorHandler *h,std::string &pathdirectory);
+	verifyFile(datafactory *df,errorHandler *h,std::string &pathdirectory,std::string TYPE);
 };
 
 

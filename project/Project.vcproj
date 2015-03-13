@@ -308,11 +308,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\verifyimg.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\verifypdf.cpp"
+							RelativePath=".\verifyFile.cpp"
 							>
 						</File>
 					</Filter>
@@ -530,11 +526,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\verifyimg.h"
-							>
-						</File>
-						<File
-							RelativePath=".\verifypdf.h"
+							RelativePath=".\verifyFile.h"
 							>
 						</File>
 					</Filter>

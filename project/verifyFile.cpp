@@ -1,11 +1,11 @@
 #include <iostream>
-#include "verifypdf.h"
+#include "verifyFile.h"
 #include "errorhandler.h"
 
 
-verifypdf::verifypdf(datafactory *dfverifiers,errorHandler *hError,std::string &pathdirectory)
+verifyFile::verifyFile(datafactory *dfverifiers,errorHandler *hError,std::string &pathdirectory,std::string TYPE)
 {	
-	File_Group *fg = dfverifiers->get<File_Group>("PDFGRP");
+	File_Group *fg = dfverifiers->get<File_Group>(TYPE.c_str());
 	if ( fg != NULL ) {
 		for (size_t i=0;i < fg->vect.size();i++)
 		{
@@ -29,6 +29,6 @@ verifypdf::verifypdf(datafactory *dfverifiers,errorHandler *hError,std::string &
 			}
 		}
 	}else {
-		hError->getError(cat_nongrpDefine,"METS","FILESEC","Error: No PDFGRP",pathdirectory,"");
+		hError->getError(cat_nongrpDefine,"METS","FILESEC","Error: No "+TYPE,pathdirectory,"");
 	}
 }
