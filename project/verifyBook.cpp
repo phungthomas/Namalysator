@@ -60,6 +60,17 @@ void verifyBook::check(int check,metsparserContext& context){
 	
 	};
 
+	for ( std::map<std::string,std::string>::iterator it = invent.languageTerm.begin() ; it != invent.languageTerm.end(); it++ ){
+
+		if ( context.inventory.inventoryMODSMD_PRINT.languageTerm.find(it->first) == context.inventory.inventoryMODSMD_PRINT.languageTerm.end() ){
+			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong languageTerm:not present" + it->first ,context.currentMetsFile,it->first);
+		};
+
+		if ( context.inventory.inventoryMODSMD_ELEC.languageTerm.find(it->first) == context.inventory.inventoryMODSMD_ELEC.languageTerm.end() ){
+			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MODSMD_ELEC", "wrong languageTerm:not present" + it->first ,context.currentMetsFile,it->first);
+		};
+	};
+
 
 	if ( invent.ITEM_barcode.compare(context.inventory.inventoryMODSMD_PRINT.BIBREC_SYS_NUM /* put there in the xml */ )) {
 		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MODSMD_PRINT", "wrong BARCODE:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_SYS_NUM +" against :"+ invent.ITEM_barcode,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.BIBREC_SYS_NUM);
