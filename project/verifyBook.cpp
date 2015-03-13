@@ -89,6 +89,4 @@ void verifyBook::check(int check,metsparserContext& context){
 void verifyBook::init(metsparserContext& context){
 	hError = context.hError;
 	db = hError -> getDatabase();
-
-
 }
