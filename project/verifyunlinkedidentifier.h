@@ -9,7 +9,7 @@
 class verifyunlinkedidentifier
 {
 	private :
-		std::set<std::pair<std::string, std::string>> block;	
+		std::set<std::pair<std::string, std::string> > block;	
 	public:
 		verifyunlinkedidentifier(datafactory *df,errorHandler *h,std::string &fileName);
 };
