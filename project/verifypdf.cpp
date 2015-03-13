@@ -29,6 +29,6 @@ verifypdf::verifypdf(datafactory *dfverifiers,errorHandler *hError,std::string &
 			}
 		}
 	}else {
-		std::cout << "Error: No PDFGRP" << std::endl;
+		hError->getError(cat_nongrpDefine,"METS","FILESEC","Error: No PDFGRP",pathdirectory,"");
 	}
 }
