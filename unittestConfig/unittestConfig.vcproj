@@ -168,10 +168,6 @@
 				RelativePath=".\main.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\project\xmltostr.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
