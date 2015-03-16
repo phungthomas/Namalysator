@@ -107,7 +107,7 @@ void dataaggregator::createFactoryDivType()
 void dataaggregator::transform()
 {
 	createArticleFactory();
-	createFactoryDivType();	
+	//createFactoryDivType();	
 	createIssue();	
 }
 
