@@ -3,7 +3,7 @@
 <!-- Automatically generated schema definition by CCS docWORKS -->
 <!-- Copyright 2005-2009 CCS Content Conversion Specialists GmbH, Germany -->
 <!-- This schema definition is used to specify and validate logical structmaps in METS files -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://BNL.Namespace/" xmlns="http://BNL.Namespace/"   elementFormDefault="qualified">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://downloads.bnl.lu/schemas/bnl-monograph_v1.0.xsd" xmlns="http://downloads.bnl.lu/schemas/bnl-monograph_v1.0.xsd"  elementFormDefault="qualified">
 	<xsd:element name="Monograph">
 		<xsd:complexType>
 			<xsd:sequence>

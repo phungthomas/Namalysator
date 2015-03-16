@@ -74,6 +74,7 @@ public:
 		if ( cData.length() == 0 ) {
 			CTX.MixContainer[std::string(name)]=cData;
 		}
+		CTX.mandatoryField.erase(name);
 	};
 };
 
@@ -84,11 +85,29 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
 	{
 		CTX.amdsec.amdSecId =val;
 	}
+	if ( CTX.flagMix ){
+		CTX.mandatoryField.insert("ScannerManufacturer");
+		CTX.mandatoryField.insert("ScannerModelName");
+		CTX.mandatoryField.insert("ScannerModelSerialNo");
+		CTX.mandatoryField.insert("ScanningSoftware");
+		CTX.mandatoryField.insert("ScanningSoftwareVersionNo");
+		
+	}
 	
 };
 
 void StateParseramdSecState::endElement (const char* const name){
 	CTX.dfMets->set(CTX.amdsec.amdSecId,CTX.amdsec);
+
+	if ( CTX.flagMix ){
+		if ( CTX.mandatoryField.size() != 0 ){
+			for ( std::set<std::string>::iterator it = CTX.mandatoryField.begin(); it != CTX.mandatoryField.end(); it ++ ) {
+				std::string ret = *it;
+				CTX.MixContainer[ret+" Not define"]="";
+			}
+		}
+	}
+
 };
 
 StateParserState* StateParserRootamdSecState::getNext(const char* const name){
