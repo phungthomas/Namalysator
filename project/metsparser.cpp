@@ -103,7 +103,7 @@ void StateParseramdSecState::endElement (const char* const name){
 		if ( CTX.mandatoryField.size() != 0 ){
 			for ( std::set<std::string>::iterator it = CTX.mandatoryField.begin(); it != CTX.mandatoryField.end(); it ++ ) {
 				std::string ret = *it;
-				CTX.MixContainer[ret+" Not define"]="";
+				CTX.MixContainerNotDefine[ret]="";
 			}
 		}
 	}

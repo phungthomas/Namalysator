@@ -47,6 +47,7 @@ public :
 	//testmix;
 	bool flagMix ; // if true test mix:mix ( ScannerManufacturer )
 	std::map<std::string,std::string> MixContainer;
+	std::map<std::string,std::string> MixContainerNotDefine;
 	std::set<std::string> mandatoryField;
 
 	//DIV structure;
