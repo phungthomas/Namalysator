@@ -25,7 +25,6 @@
 #include "dataaggregator.h"
 #include "verifytitles.h"
 #include "verifyblocks.h"
-#include "verifydivs.h"
 #include "verifyidentifierinmix.h"
 #include "verifyunlinkedidentifier.h"
 #include "verifyFile.h"
@@ -376,11 +375,6 @@ int start()
 			if (parameter.getValueCheck("dataintegrity.checkSum") == 1)
 			{
 				verifychecksum(&df,&hError,currentMetsFile,currentMetsPath);				
-			}
-			
-			if (parameter.getValueCheck("semanticchecks.divs") == 1)
-			{
-				verifydivs vd(&df,&hError,currentMetsFile);				
 			}
 
 			if (parameter.getValueCheck("dataintegrity.unlinkedIdentifier") == 1)

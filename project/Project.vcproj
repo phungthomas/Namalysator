@@ -289,10 +289,6 @@
 						>
 					</File>
 					<File
-						RelativePath=".\verifydivs.cpp"
-						>
-					</File>
-					<File
 						RelativePath=".\verifyidentifierinmix.cpp"
 						>
 					</File>
@@ -508,10 +504,6 @@
 					</File>
 					<File
 						RelativePath=".\verifydatefolder.h"
-						>
-					</File>
-					<File
-						RelativePath=".\verifydivs.h"
 						>
 					</File>
 					<File
