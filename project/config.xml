@@ -25,6 +25,7 @@
 		<blocks>
 			<altoblockPerPage>1</altoblockPerPage>
 			<blockStructure>1</blockStructure>
+      <skipBlockInsidePrintSpace>1</skipBlockInsidePrintSpace>
 			<coveragePercentAlto>1</coveragePercentAlto>
 			<multipleBlockUse>1</multipleBlockUse>
 			<measurementSTD>1</measurementSTD>
