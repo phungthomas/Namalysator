@@ -448,7 +448,9 @@ int start()
 	
 	//exit(0);
 	fclose(fpTimingLog);
-	verifymissingissue(&hError,&db);
+	if (parameter.getValueCheck("dates") == 1) {
+		verifymissingissue(&hError,&db);
+	}
 	
 	db.insertRandomMets(atoi(parameter.getValue("sampling").c_str()),vectorMets.size());	
 
