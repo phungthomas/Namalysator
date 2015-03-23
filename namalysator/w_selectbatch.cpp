@@ -265,11 +265,7 @@ void w_selectBatch::fillBatchDetail()
 		for(size_t j=0; j < vDate.size();j++)
 		{
 			int count = db.getErrorTypeCountWithTestset(vErrorType[iError].id_type,vDate[j].first);			
-			if (count==0 )
-			{
-			
-			}
-			else
+			if (count!=0 )
 			{
 				newItem = new QTableWidgetItem(vErrorType[iError].error.c_str(),0);		
 				newItem->setTextAlignment(Qt::AlignCenter);
@@ -293,10 +289,7 @@ void w_selectBatch::fillBatchDetail()
 		for(size_t j=0; j < vDate.size();j++)
 		{
 			int count = db.getErrorTypeCountWithTestsetDates(vErrorType[iError].id_type,vDate[j].first);			
-			if (count==0 )
-			{			
-			}
-			else
+			if (count!=0 )
 			{
 				newItem = new QTableWidgetItem(vErrorType[iError].error.c_str(),0);		
 				newItem->setTextAlignment(Qt::AlignCenter);
