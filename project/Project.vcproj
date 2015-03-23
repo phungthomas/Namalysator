@@ -699,7 +699,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\bnl-serial_v1.0.xsd"
+				RelativePath=".\bnl-serial_v1.1.xsd"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"

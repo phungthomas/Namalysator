@@ -3,7 +3,7 @@
 <!-- Copyright 2005-2009 CCS Content Conversion Specialists GmbH, Germany -->
 <!-- This schema definition is used to specify and validate logical structmaps in METS files -->
 <!-- Edited by National Library of Luxembourg 2012 for local needs -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://downloads.bnl.lu/schemas/bnl-serial_v1.1.xsd" xmlns="http://downloads.bnl.lu/schemas/bnl-serial_v1.1.xsd" elementFormDefault="qualified">
 	<xsd:element name="Serial">
 		<xsd:complexType>
 			<xsd:sequence>
