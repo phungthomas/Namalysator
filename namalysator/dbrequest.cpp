@@ -581,7 +581,7 @@ std::vector<ErrorType> dbrequest::getErrorType()
 	sqlite3_stmt *pStmt;
 		
 	const char *zErrMsg=0; 
-	const std::string selectSql = "SELECT * FROM ERRORTYPE"; 
+	const std::string selectSql = "SELECT ID,ID_TYPE,ERROR,DETAILS,ID_SEVERITY,ID_CATEGORY FROM ERRORTYPE"; 
 	
 	//std::string selectSql = "SELECT * FROM ERRORTYPE where ID_CATEGORY = 6"; 
 	std::vector<ErrorType> v;

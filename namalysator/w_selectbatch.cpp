@@ -281,6 +281,7 @@ void w_selectBatch::fillBatchDetail()
 			}	
 		}	
 	}
+
 	for (size_t iError =0 ; iError < vErrorType.size(); iError ++)
 	{ 		
 		if (addRow == true)
@@ -291,7 +292,7 @@ void w_selectBatch::fillBatchDetail()
 		
 		for(size_t j=0; j < vDate.size();j++)
 		{
-			int count = db.getErrorTypeCountWithTestsetDates(vErrorType[iError].id,vDate[j].first);			
+			int count = db.getErrorTypeCountWithTestsetDates(vErrorType[iError].id_type,vDate[j].first);			
 			if (count==0 )
 			{			
 			}
