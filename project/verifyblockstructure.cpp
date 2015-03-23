@@ -5,7 +5,7 @@
 
 
 //!verify block structure 
-verifyblockstructure::verifyblockstructure(datafactory *dfverifiers,errorHandler *hError,const std::string &fname,int flag)
+verifyblockstructure::verifyblockstructure(datafactory *dfverifiers,errorHandler *hError,const std::string &fname,int skipBlockInsidePrintSpaceFlag)
 {	
 	hError->begin("Verify: block structure");
 	datafactory_set<altoblock> dfaltoblock= dfverifiers->get_set<altoblock>();
@@ -31,7 +31,7 @@ verifyblockstructure::verifyblockstructure(datafactory *dfverifiers,errorHandler
 				hError->getError(cat_emptyBlock,"LINKEDFILES",it.key(), it2->first + " " + dump_alto_rect2str(it2->second),it.key(),it2->first);			
 
 			}
-			else if ( flag != 1 ) {
+			else if ( skipBlockInsidePrintSpaceFlag != 1 ) {
 				if 
 				(it2->second.vpos < it->printSpaceVpos ||
 				it2->second.vpos > it->printSpaceVpos + it->printSpaceHeight ||

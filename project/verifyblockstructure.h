@@ -13,7 +13,7 @@ class verifyblockstructure
 		std::set<std::pair<std::string, std::string>> block;	
 
 	public:
-		verifyblockstructure(datafactory *dfVerifiers,errorHandler *hError,const std::string &fName,int flag);
+		verifyblockstructure(datafactory *dfVerifiers,errorHandler *hError,const std::string &fName,int skipBlockInsidePrintSpaceFlag);
 	};
 
 
