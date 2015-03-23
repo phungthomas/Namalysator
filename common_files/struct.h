@@ -114,7 +114,7 @@ struct DivType : public dataitem
 struct Item : public dataitem
 {
 	static const size_t DATAITEM_ID =3;
-	//int counter;
+	int counter;
 	std::string id;
 	std::string type;
 	std::string dmdId;
