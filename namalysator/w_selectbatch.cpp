@@ -264,7 +264,7 @@ void w_selectBatch::fillBatchDetail()
 		
 		for(size_t j=0; j < vDate.size();j++)
 		{
-			int count = db.getErrorTypeCountWithTestset(vErrorType[iError].id,vDate[j].first);			
+			int count = db.getErrorTypeCountWithTestset(vErrorType[iError].id_type,vDate[j].first);			
 			if (count==0 )
 			{
 			
