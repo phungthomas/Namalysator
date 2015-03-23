@@ -394,7 +394,7 @@ int start()
 
 			if (parameter.getValueCheck("blocks.blockStructure") == 1)
 			{
-				verifyblockstructure(&df,&hError,currentMetsFile,parameter.getValueCheck("blocks.blockStructureSkip"));				
+				verifyblockstructure(&df,&hError,currentMetsFile,parameter.getValueCheck("blocks.skipBlockInsidePrintSpace"));				
 			}
 
 			if (parameter.getValueCheck("blocks.coveragePercentAlto") == 1)
