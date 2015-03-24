@@ -433,7 +433,7 @@ int start()
 			}
 			
 			verifycutouts(&df,&hError,currentMetsFile);
-			titletocheck(&df,&hError,currentMetsFile);	
+			//titletocheck(&df,&hError,currentMetsFile); No more needed like datafactory_set<Article> contain article to check	
 			verifytitles vt(&df,&hError,currentMetsFile);
 
 			//*/			
