@@ -7,13 +7,13 @@
 
 
 
-void exportDataHelper::exportData(std::string message){
+void exportDataHelper::exportData(std::string filenameToCreate){
 	dbrequest db;
 	db.setDataBaseName(BatchDetail::getBatchDetail().database); 
 
 	headcutter *hc = 0;
 	hc = new headcutter;
-	hc->open_document(message);
+	hc->open_document(filenameToCreate);
 	std::string currentAlto="";
 	std::string currentTif="";
 	std::vector<Title> vTitle = db.getvTitle(BatchDetail::getBatchDetail().idTestSet);
