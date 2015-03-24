@@ -361,7 +361,7 @@ int start()
 		}
 
 		// Do transformation of the data factory
-		dataaggregator da(&df,currentMetsFile);	
+		dataaggregator da(&df,currentMetsFile,db,metsP.getContext().papertype);	
 		pt.LogTime("Creating dataagregator");
 		
 		if (parameter.getValueCheck("semanticchecks.dateFolderIssue") == 1)

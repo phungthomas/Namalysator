@@ -86,7 +86,9 @@ public:
 	bool InventoryChecked(std::string _sysnum);
 	bool insertMetsBook(int id_mets, std::string _sysnum);
 	bool isEntityToCount(std::string type,std::string entity);
+	bool isEntityToTitleCorrection(std::string type,std::string entity);
 	private:
 	void  _loadEntity(std::map < string , std::map < string , int > > & toFill);
+	void  _loadEntityTitleCorrection(std::map < string , std::map < string , int > > & toFill);
 };
 #endif // SQL_H_

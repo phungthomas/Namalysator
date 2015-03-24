@@ -9,8 +9,7 @@ const char *extract_article[] = {
 	"CONTENT",
 	"ILLUSTRATION"};
 	
-dataaggregator::dataaggregator(datafactory *df,std::string fname)
-{
+	dataaggregator::dataaggregator(datafactory *df,std::string fname, database& _db,std::string _typeDocument):db(_db),typeDocument(_typeDocument){
 	dfTemp = df;
 	
 	for (size_t i = 0; i < sizeof(extract_article) / sizeof(extract_article[0]); ++i)
@@ -30,7 +29,7 @@ void dataaggregator::findArticle(Item *item)
 	for (size_t i=0; i< item->children.size();i++)
 	{		
 		currentItem = &item->children[i];	
-		if(currentItem->dmdId.find("MODSMD")== 0)
+		if( db.isEntityToTitleCorrection(this->typeDocument,currentItem->type) )
 		{	
 			vectItem.push_back(currentItem);
 		}

@@ -4,11 +4,14 @@
 #include "datafactory.h"
 #include "../common_files/struct.h"
 #include <set>
+#include "sql.h" 
 
 //! create structs for future verification
 class dataaggregator{
 
 private:
+	database & db;
+	std::string typeDocument;
 	datafactory *dfTemp;
 	Item *currentItem;
 	Item *rootItem;
@@ -18,7 +21,7 @@ private:
 	std::string fileName;
 	std::set<std::string> to_extract;
 public:
-	dataaggregator(datafactory *df,std::string fname);
+	dataaggregator(datafactory *df,std::string fname,database& _db,std::string _typeDocument);
 	
 private:	
 	void transform();
