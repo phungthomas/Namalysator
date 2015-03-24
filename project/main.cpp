@@ -316,12 +316,17 @@ int start()
 				const std::string &path = currentMetsPath + tf.ref;	
 				altoparser altoP(path,tf.id,&hError,&df);
 				altoParserCall->setContentHandler(&altoP);
+				hError.setFilePart(path);
+				hError.setRelatedType("LINKEDFILES");
 
 				if ( altoParserCall->parse(path.c_str()) != 0){
 					hError.getError(cat_xml_error,"LINKEDFILES",tf.id, "Could not parse " + tf.ref ,tf.ref,"");		
 					parseError = true;
 				};
 			}
+
+			hError.setFilePart(currentMetsFile);
+			hError.setRelatedType("METS");
 		
 			pt.LogTime("Parsing ALTO files");
 			if (parameter.getValueCheck("dataintegrity.oddsPages") == 1)
