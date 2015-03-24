@@ -2376,3 +2376,47 @@ void  dbrequest::loadEntityCount(std::map<std::string, std::map < string , int >
 	}
 	sqlite3_finalize(pStmt);
 }
+
+void  dbrequest::_loadEntityTitleCorrection(std::map < string , std::map < string , int > > & toFill){
+	sqlite3_stmt *pStmt;
+	ConnectionDB* conn = g_pool.getConnection(databaseName);
+
+	const char *zErrMsg= 0; 
+	
+	std::string selectSql = "SELECT ENTITYNAME, DOCTYPE FROM ENTITYCONFIGURATION WHERE USEFORTITLECORRECTION=1";
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
+	
+	if(rc == SQLITE_OK)
+	{	 
+		
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{
+			int col = 0;
+
+			std::string entity = safe_sqlite3_column_text(pStmt, col++);
+			std::string doctype = safe_sqlite3_column_text(pStmt, col++);
+
+			toFill [doctype] [entity] = 1;
+		}
+		
+	}else{
+		raiseError(conn,selectSql);	
+	}
+	sqlite3_finalize(pStmt);
+}
+
+bool dbrequest::isEntityToTitleCorrection(std::string type,std::string entity){
+	static std::map < string , std::map < string , int > > cache;
+
+	if ( cache.size() == 0 ) _loadEntityTitleCorrection ( cache );
+
+
+	std::map < string , int >::iterator it = cache[type].find(entity);
+
+	if ( it != cache[type].end() ) return true;
+
+	return false;
+}

@@ -4,18 +4,9 @@
 #include <sstream>
 #include "../common_files/utilities.h"
 
-
-const char *extract_article[] = {
-	"CONTENT",
-	"ILLUSTRATION"};
 	
-	dataaggregator::dataaggregator(datafactory *df,std::string fname, database& _db,std::string _typeDocument):db(_db),typeDocument(_typeDocument){
+dataaggregator::dataaggregator(datafactory *df,std::string fname, database& _db,std::string _typeDocument):db(_db),typeDocument(_typeDocument){
 	dfTemp = df;
-	
-	for (size_t i = 0; i < sizeof(extract_article) / sizeof(extract_article[0]); ++i)
-	{
-		to_extract.insert(extract_article[i]);
-	}
 	
 	currentItem =0;
 	fileName = fname;
@@ -71,15 +62,7 @@ void dataaggregator::createArticleFactory()
 		article.div = vectItem[i]->id;	
 		article.parentType = vectItem[i]->parent->type;
 		article.parentDmdId = vectItem[i]->parent->dmdId;		
-		
-		if ( to_extract.find(article.parentType) != to_extract.end()) 
-		{
-			article.check =1;			
-		}
-		else
-		{
-			article.check =0;
-		}		
+		article.check =1;				
 		vectTypeBlock.clear();
 		dfTemp->set(article.id,article);			
 	}	

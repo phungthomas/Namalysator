@@ -19,7 +19,6 @@ private:
 	std::vector<typeBlock> vectTypeBlock;
 	DivType divType;
 	std::string fileName;
-	std::set<std::string> to_extract;
 public:
 	dataaggregator(datafactory *df,std::string fname,database& _db,std::string _typeDocument);
 	

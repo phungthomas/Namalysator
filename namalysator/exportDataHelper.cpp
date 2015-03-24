@@ -1,6 +1,6 @@
 #include "exportDataHelper.h"
 #include "structgui.h"
-#include "dbrequest.h"
+
 #include "metsoutput.h"
 #include "metsparser.h"
 #include "altoparser.h"
@@ -8,7 +8,7 @@
 
 
 void exportDataHelper::exportData(std::string filenameToCreate){
-	dbrequest db;
+	
 	db.setDataBaseName(BatchDetail::getBatchDetail().database); 
 
 	headcutter *hc = 0;
@@ -38,7 +38,8 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 		std::map<int,LinkedFiles> mapTiffPath;
 		mapTiffPath = mets.mapLinked.find("IMGGRP")->second;
 		mapAltoPath = mets.mapLinked.find("ALTOGRP")->second;
-		findArticle(treeContents);		
+		
+		findArticle(treeContents,mets.docType);		
 	    std::map<std::string,altoblock> mapAlto;
 
 		for(std::map<int,LinkedFiles>::iterator it = mapAltoPath.begin(); it != mapAltoPath.end(); it++)
@@ -89,15 +90,15 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 	hc->close_document();
 }
 
-void exportDataHelper::findArticle(Item *item){
+void exportDataHelper::findArticle(Item *item,std::string docType){
 	for (size_t i=0; i< item->children.size();i++)
 	{		
 		Item *currentItem = &item->children[i];
-		if(currentItem->dmdId.find("MODSMD")== 0)
+		if(db.isEntityToTitleCorrection ( docType, currentItem->type ) )
 		{	
 			vectItem.push_back(currentItem);
 		}
-		findArticle(currentItem);
+		findArticle(currentItem,docType);
 	}
 
 }
