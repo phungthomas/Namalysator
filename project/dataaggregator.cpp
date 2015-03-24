@@ -19,7 +19,8 @@ void dataaggregator::findArticle(Item *item)
 {
 	for (size_t i=0; i< item->children.size();i++)
 	{		
-		currentItem = &item->children[i];	
+		currentItem = &item->children[i];
+
 		if( db.isEntityToTitleCorrection(this->typeDocument,currentItem->type) )
 		{	
 			vectItem.push_back(currentItem);
@@ -62,7 +63,7 @@ void dataaggregator::createArticleFactory()
 		article.div = vectItem[i]->id;	
 		article.parentType = vectItem[i]->parent->type;
 		article.parentDmdId = vectItem[i]->parent->dmdId;		
-		article.check =1;				
+		article.check =1; // will be set by titlecheck				
 		vectTypeBlock.clear();
 		dfTemp->set(article.id,article);			
 	}	
