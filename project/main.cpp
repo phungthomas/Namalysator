@@ -433,7 +433,7 @@ int start()
 			}
 			
 			verifycutouts(&df,&hError,currentMetsFile);
-			titletocheck(&df,&hError,currentMetsFile);
+			titletocheck(&df,&hError);
 			verifytitles vt(&df,&hError,currentMetsFile);
 
 			//*/			

@@ -4,7 +4,7 @@
 #include <iostream>
 
 //! check if the titles has to be check or not
-titletocheck::titletocheck(datafactory *df,errorHandler *hError,std::string &fname)
+titletocheck::titletocheck(datafactory *df,errorHandler *hError)
 {
 	dfverifiers = df;
 	datafactory_set<Article> dfArticle= dfverifiers->get_set<Article>();
@@ -14,7 +14,9 @@ titletocheck::titletocheck(datafactory *df,errorHandler *hError,std::string &fna
 		it->check = false;
 		for(size_t i=0;i < 	it->vectArticle.size();i++)
 		{
-			if (it->vectArticle[i].type == "HEADING" || it->vectArticle[i].type == "CAPTION")
+			if (it->vectArticle[i].type == "HEADING" || 
+				it->vectArticle[i].type == "CAPTION" /*||
+				it->vectArticle[i].type == "TITLE"*/ )
 			{
 				it->check = true;
 				break;
