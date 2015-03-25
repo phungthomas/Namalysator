@@ -7,12 +7,10 @@
 	
 dataaggregator::dataaggregator(datafactory *df,std::string fname, database& _db,std::string _typeDocument):db(_db),typeDocument(_typeDocument){
 	dfTemp = df;
-	
 	currentItem =0;
 	fileName = fname;
 	vectTypeBlock.clear();
 	transform();	
-	
 }
 
 void dataaggregator::findArticle(Item *item)
