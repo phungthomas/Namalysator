@@ -459,7 +459,8 @@ public:
 		{
 			CTX.typeblock.block = val2;
 			CTX.typeblock.alto = val1;	
-			CTX.typeblock.type = CTX.currentItem->parent->type;
+			//CTX.typeblock.type = CTX.currentItem->parent->type;
+			CTX.typeblock.type = CTX.currentItem->type;
 			CTX.currentItem->vectTypeBlock.push_back(CTX.typeblock);			
 		}
 	
