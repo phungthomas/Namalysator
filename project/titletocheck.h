@@ -8,12 +8,8 @@
 //! verify if the title must be checked manually 
 class titletocheck
 {
-
 public:
 	titletocheck(datafactory *dfverifiers,errorHandler *hError);
-private: 
-	datafactory *dfverifiers;
-
 };
 
 

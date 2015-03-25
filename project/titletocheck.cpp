@@ -6,8 +6,8 @@
 //! check if the titles has to be check or not
 titletocheck::titletocheck(datafactory *df,errorHandler *hError)
 {
-	dfverifiers = df;
-	datafactory_set<Article> dfArticle= dfverifiers->get_set<Article>();
+
+	datafactory_set<Article> dfArticle= df->get_set<Article>();
 	
 	for (datafactory_set<Article>::iterator it = dfArticle.begin(); it != dfArticle.end(); ++it)
 	{	
