@@ -32,13 +32,12 @@ void dataaggregator::findBlockToArticle(Item *item)
 	for (size_t i=0; i< item->children.size();i++)
 	{		
 		currentItem = &item->children[i];	
-		if(currentItem->vectTypeBlock.size() >0)
-		{
+
 			for(size_t j=0;j< currentItem->vectTypeBlock.size();j++)
 			{
 				vectTypeBlock.push_back(currentItem->vectTypeBlock[j]);
 			}
-		}		
+		
 		findBlockToArticle(currentItem);			
 	}
 }
