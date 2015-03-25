@@ -76,7 +76,7 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 					}
 				}
 				altoblock at = mapAlto[a.vectArticle[i].alto];					
-				at.mapalto.find(a.vectArticle[i].block);
+				//at.mapalto.find(a.vectArticle[i].block);
 				if (at.mapalto.find(a.vectArticle[i].block) != at.mapalto.end())
 					{
 						Block block = at.mapalto[a.vectArticle[i].block];						

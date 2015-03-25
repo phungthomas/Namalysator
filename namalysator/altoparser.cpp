@@ -68,28 +68,28 @@ void altoparser::XMLstartElement(const char *name, const char **atts)
 	{	
 		if (strcmp(name,"PrintSpace")==0)
 		{		
-			altoBlock.printSpaceHpos = 0;
+			blockPrintspace.hpos = 0;
 			const char *val2 = get_named_attr("HPOS", atts);
 			if (val2 !=0)
 			{
 				blockPrintspace.hpos = atoi(val2);
 			//	altoBlock.printSpaceHpos = atoi(val2);
 			}
-			altoBlock.printSpaceVpos = 0;
+			blockPrintspace.vpos = 0;
 			const char *val3 = get_named_attr("VPOS", atts);
 			if (val3 !=0)
 			{
 				//altoBlock.printSpaceVpos = atoi(val3);
 				blockPrintspace.vpos = atoi(val3);
 			}
-			altoBlock.printSpaceHeight = 0;
+			blockPrintspace.height = 0;
 			const char *val4 = get_named_attr("HEIGHT", atts);
 			if (val4 !=0)
 			{
 				//altoBlock.printSpaceHeight = atoi(val4);
 				blockPrintspace.height = atoi(val4);
 			}
-			altoBlock.printSpaceWidth = 0;
+			blockPrintspace.width = 0;
 			const char *val5 = get_named_attr("WIDTH", atts);
 			if (val5 !=0)
 			{
