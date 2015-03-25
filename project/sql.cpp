@@ -11,7 +11,10 @@
 #include "metsparser.h"
 #include "md5wrapper.h"
 
-typedef std::map<std::string,std::vector<std::string>> my_map_type;
+#pragma warning(disable:4503)
+#pragma warning(disable:4244)
+
+typedef std::map<std::string,std::vector<std::string> > my_map_type;
 md5wrapper g_md5;
 
 database::database(const std::string &batch,const std::string &dataBase,const std::string &logFile)
@@ -848,22 +851,43 @@ bool database::isEntityToCount(std::string type,std::string entity){
 	return false;
 }
 
+static std::map < std::string , std::map < std::string , std::map < std::string ,int > > > cacheEntityToTitleCorrection;
+
 bool database::isEntityToTitleCorrection(std::string type,std::string entity){
 
-	static std::map < string , std::map < string , int > > cache;
+	
 
-	if ( cache.size() == 0 ) _loadEntityTitleCorrection ( cache );
+	if ( cacheEntityToTitleCorrection.size() == 0 ) _loadEntityTitleCorrection ( cacheEntityToTitleCorrection );
 
 
-	std::map < string , int >::iterator it = cache[type].find(entity);
+	std::map < std::string , std::map < std::string ,int > >::iterator it = cacheEntityToTitleCorrection[type].find(entity);
 
-	if ( it != cache[type].end() ) return true;
+	if ( it != cacheEntityToTitleCorrection[type].end() ) return true;
 
 	return false;
 
 }
 
-void  database::_loadEntity(std::map < string , std::map < string ,int > > & toFill){
+bool database::isEntityToTitleCorrectionLink(std::string type,std::string entity,std::string entityLink){
+
+	
+
+	if ( cacheEntityToTitleCorrection.size() == 0 ) _loadEntityTitleCorrection ( cacheEntityToTitleCorrection );
+
+
+	std::map < std::string , std::map < std::string ,int > >::iterator it = cacheEntityToTitleCorrection[type].find(entity);
+
+	if ( it == cacheEntityToTitleCorrection[type].end() ) return false;
+
+	std::map < std::string ,int >::iterator itt = it->second.find(entityLink);
+
+	if (itt != it->second.end() ) return true;
+
+	return false;
+
+}
+
+void  database::_loadEntity(std::map < std::string , std::map < std::string ,int > > & toFill){
 	
 	sqlite3_stmt *pStmt;
 
@@ -884,6 +908,7 @@ void  database::_loadEntity(std::map < string , std::map < string ,int > > & toF
 
 			std::string entity = safe_sqlite3_column_text(pStmt, col++);
 			std::string doctype = safe_sqlite3_column_text(pStmt, col++);
+			
 
 			toFill [doctype] [entity] = 1;
 		}
@@ -894,13 +919,14 @@ void  database::_loadEntity(std::map < string , std::map < string ,int > > & toF
 	sqlite3_finalize(pStmt);
 }
 
-void  database::_loadEntityTitleCorrection(std::map < string , std::map < string ,int > > & toFill){
+void  database::_loadEntityTitleCorrection(std::map < std::string , std::map < std::string , std::map < std::string ,int > > > & toFill){
 	
 	sqlite3_stmt *pStmt;
 
 	const char *zErrMsg= 0; 
 	
-	std::string selectSql = "SELECT ENTITYNAME, DOCTYPE FROM ENTITYCONFIGURATION WHERE USEFORTITLECORRECTION=1";
+	std::string selectSql = "SELECT a.ENTITYNAME, a.DOCTYPE, b.ENTITYNAMELINK FROM ENTITYCONFIGURATION a LEFT JOIN ENTITYCONFIGURATIONLINK b on a.ID_ENTITY = b.ID_ENTITY"
+		                    " WHERE USEFORTITLECORRECTION=1";
 	
 	int rc = sqlite3_prepare_v2(db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 	
@@ -915,8 +941,9 @@ void  database::_loadEntityTitleCorrection(std::map < string , std::map < string
 
 			std::string entity = safe_sqlite3_column_text(pStmt, col++);
 			std::string doctype = safe_sqlite3_column_text(pStmt, col++);
+			std::string entitylink = safe_sqlite3_column_text(pStmt, col++);
 
-			toFill [doctype] [entity] = 1;
+			toFill [doctype] [entity] [entitylink] = 1;
 		}
 		
 	}else{
