@@ -41,10 +41,15 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 		
 		findArticle(treeContents,mets.docType);		
 	    std::map<std::string,altoblock> mapAlto;
+		bool skip = false;
 
 		for(std::map<int,LinkedFiles>::iterator it = mapAltoPath.begin(); it != mapAltoPath.end(); it++)
 		{
 			int dpi = mapTiffPath[it->first].dpi;
+			if ( dpi == 0 ) { // wrong metadata : check your error before exporting title 
+				skip = true;
+				break;
+			}
 			std::string path = BatchDetail::getBatchDetail().path +"/"+ t.mets.path + it->second.fileName;
 			altoparser ap(path,it->second, dpi);	
 			if (ParseDocument(path.c_str(),&ap)!=0)
@@ -56,6 +61,7 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 					mapAlto[it->second.fileId] = ap.getAltoBlock();
 			}
 		}
+		if ( skip ) continue ;
 		createArticle();		
 		std::string path;
 		Article a = mapArticleWithIdDiv.find(vTitle[ij].article.div)->second;
