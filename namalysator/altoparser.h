@@ -61,10 +61,10 @@ protected :
 	long vpos;
 	long height;
 	long width;
-	std::map<std::string,altoblock> *mapAlto;
+	//std::map<std::string,altoblock> *mapAlto;
 
 public:	
-	altoparser(std::string &fname,LinkedFiles lf,std::map<std::string,altoblock> *map,int dpi);
+	altoparser(std::string &fname,LinkedFiles lf,int dpi);
 	virtual void XMLstartElement(const char *name, const char **atts);
 	virtual void XMLendElement(const char *name);
 	virtual void XMLcharacterData(const char *s, int len);	

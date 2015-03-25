@@ -6,13 +6,12 @@ const char *extract_blocks[] = {
 	"Illustration",
 	"ComposedBlock"};
 		
-altoparser::altoparser(std::string &alto_fname,LinkedFiles lf,std::map<std::string,altoblock> *map,int d)//(const std::string &alto_fname,const std::string &altoId,handleerror *h, datafactory *df)
+altoparser::altoparser(std::string &alto_fname,LinkedFiles lf,int d)//(const std::string &alto_fname,const std::string &altoId,handleerror *h, datafactory *df)
 {	
 	convert_to_pixels = true;
 	altoFile = alto_fname;
 	alto =lf.fileId;
 	currentstate = state_alto;	
-	mapAlto = map;	
 	measurement_unit = false;
 	dpi= d;
 	

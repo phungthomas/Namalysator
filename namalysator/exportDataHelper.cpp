@@ -46,7 +46,7 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 		{
 			int dpi = mapTiffPath[it->first].dpi;
 			std::string path = BatchDetail::getBatchDetail().path +"/"+ t.mets.path + it->second.fileName;
-			altoparser ap(path,it->second, &mapAlto, dpi);	
+			altoparser ap(path,it->second, dpi);	
 			if (ParseDocument(path.c_str(),&ap)!=0)
 			{
 					// print error				
