@@ -28,25 +28,25 @@ void altoparser::getElement(const char *name, const char **atts)
 	const char *val = get_named_attr("ID", atts);
 	std::string idBlock = val;		
 
-	const char *val2 = get_named_attr("HPOS", atts);
-	if (val2 !=0)
+	val = get_named_attr("HPOS", atts);
+	if (val !=0)
 	{
-		block.hpos = atoi(val2);
+		block.hpos = atoi(val);
 	}
-	const char *val3 = get_named_attr("VPOS", atts);
-	if (val3 !=0)
+	val = get_named_attr("VPOS", atts);
+	if (val !=0)
 	{
-			block.vpos = atoi(val3);
+			block.vpos = atoi(val);
 	}
-	const char *val4 = get_named_attr("HEIGHT", atts);
-	if (val4 !=0)
+	val = get_named_attr("HEIGHT", atts);
+	if (val !=0)
 	{
-		block.height = atoi(val4);
+		block.height = atoi(val);
 	}
-	const char *val5 = get_named_attr("WIDTH", atts);
-	if (val5 !=0)
+	val = get_named_attr("WIDTH", atts);
+	if (val !=0)
 	{
-		block.width  = atoi(val5);
+		block.width  = atoi(val);
 	}
 
 	if (convert_to_pixels && is_mm10)
@@ -69,32 +69,28 @@ void altoparser::XMLstartElement(const char *name, const char **atts)
 		if (strcmp(name,"PrintSpace")==0)
 		{		
 			blockPrintspace.hpos = 0;
-			const char *val2 = get_named_attr("HPOS", atts);
-			if (val2 !=0)
+			const char *val = get_named_attr("HPOS", atts);
+			if (val !=0)
 			{
-				blockPrintspace.hpos = atoi(val2);
-			//	altoBlock.printSpaceHpos = atoi(val2);
+				blockPrintspace.hpos = atoi(val);
 			}
 			blockPrintspace.vpos = 0;
-			const char *val3 = get_named_attr("VPOS", atts);
-			if (val3 !=0)
+			val = get_named_attr("VPOS", atts);
+			if (val !=0)
 			{
-				//altoBlock.printSpaceVpos = atoi(val3);
-				blockPrintspace.vpos = atoi(val3);
+				blockPrintspace.vpos = atoi(val);
 			}
 			blockPrintspace.height = 0;
-			const char *val4 = get_named_attr("HEIGHT", atts);
-			if (val4 !=0)
+			val = get_named_attr("HEIGHT", atts);
+			if (val !=0)
 			{
-				//altoBlock.printSpaceHeight = atoi(val4);
-				blockPrintspace.height = atoi(val4);
+				blockPrintspace.height = atoi(val);
 			}
 			blockPrintspace.width = 0;
-			const char *val5 = get_named_attr("WIDTH", atts);
-			if (val5 !=0)
+			val = get_named_attr("WIDTH", atts);
+			if (val !=0)
 			{
-				//altoBlock.printSpaceWidth = atoi(val5);
-				blockPrintspace.width = atoi(val5);
+				blockPrintspace.width = atoi(val);
 			}	
 			
 			if (convert_to_pixels && is_mm10)
@@ -113,19 +109,6 @@ void altoparser::XMLstartElement(const char *name, const char **atts)
 			getElement(name,atts);
 		} 	
 	}	
-	/*
-	else if (currentstate ==state_block)
-	{	
-		if (strcmp(name,"String")==0)
-		{
-			const char *val = get_named_attr("CONTENT", atts);
-			if (val!=0)
-			{
-				std::string my_val= val;
-				content += my_val + " ";
-			}
-		}
-	}*/
 }
 
 void altoparser::XMLendElement(const char *name)
