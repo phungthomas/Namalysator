@@ -8,7 +8,8 @@
 class verifyblocks
 {
 private :
-	std::set<std::pair<std::string, std::string>> block;	
+	std::set<std::pair<std::string, std::string>> block;
+	errorHandler *hError;
 
 public:
 	verifyblocks(datafactory *df,errorHandler *h,std::string &fileName);
