@@ -7,7 +7,7 @@ void verifynoissuedefined::browseItem(Item * item){
 	{		
 		currentItem = &item->children[i];
 
-		if ( currentItem->type.find("ISSUE")!=string::npos )findIssue =true;
+		if ( currentItem->type.find("ISSUE")!=string::npos )findIssue = true;
 
 		if ( findIssue ) return;
 
