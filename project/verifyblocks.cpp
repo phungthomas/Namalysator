@@ -53,7 +53,7 @@ void verifyblocks::checkUnlinkedIdentifier(){
 		{
 			for (set<std::pair<std::string,std::string>>::iterator it = block.begin(); it != block.end(); it++)
 			{		
-				hError->getError(cat_unlinkedIdentifier,"METS","Logical Struct",it->first + " - " + it->second ,fileName,it->second);
+				hError->getError(cat_unlinkedIdentifier,"METS","LOGICAL STRUCT",it->first + " - " + it->second ,fileName,it->second);
 			}
 		}
 	}
