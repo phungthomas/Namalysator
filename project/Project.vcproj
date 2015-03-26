@@ -292,10 +292,6 @@
 						RelativePath=".\verifyidentifierinmix.cpp"
 						>
 					</File>
-					<File
-						RelativePath=".\verifyunlinkedidentifier.cpp"
-						>
-					</File>
 					<Filter
 						Name="verifyfile"
 						>
@@ -504,10 +500,6 @@
 					</File>
 					<File
 						RelativePath=".\verifydatefolder.h"
-						>
-					</File>
-					<File
-						RelativePath=".\verifyunlinkedidentifier.h"
 						>
 					</File>
 					<Filter

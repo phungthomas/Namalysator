@@ -26,7 +26,6 @@
 #include "verifytitles.h"
 #include "verifyblocks.h"
 #include "verifyidentifierinmix.h"
-#include "verifyunlinkedidentifier.h"
 #include "verifyFile.h"
 #include "verifyalto.h"
 #include "verifyblockstructure.h"
@@ -382,11 +381,6 @@ int start()
 				verifychecksum(&df,&hError,currentMetsFile,currentMetsPath);				
 			}
 
-			if (parameter.getValueCheck("dataintegrity.unlinkedIdentifier") == 1)
-			{
-				verifyunlinkedidentifier(&df,&hError,currentMetsFile);				
-			}
-
 			if (parameter.getValueCheck("semanticchecks.identifierMix") == 1)
 			{
 				verifyidentifierinmix(&df,&hError,currentMetsFile);				
@@ -407,9 +401,9 @@ int start()
 				verifycoveragepercentagealtoblocks(&df,&hError,currentMetsFile);				
 			}
 
-			if (parameter.getValueCheck("blocks.multipleBlockUse") == 1)
+			if (parameter.getValueCheck("dataintegrity.unlinkedIdentifier") == 1)
 			{
-				verifyblocks(&df,&hError,currentMetsFile);				
+				verifyblocks(&df,&hError,currentMetsFile,parameter.getValueCheck("blocks.multipleBlockUse"));				
 			}
 
 			if (parameter.getValueCheck("semanticchecks.noIssueDefined") == 1)

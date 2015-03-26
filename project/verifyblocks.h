@@ -11,11 +11,14 @@ private :
 	std::set<std::pair<std::string, std::string>> block;
 	errorHandler *hError;
 	std::string fileName;
+	datafactory *dfverifiers;
+	int warnWhenMultipleBlockUse;
 
 	void browseItem(Item * item);
+	void checkUnlinkedIdentifier();
 
 public:
-	verifyblocks(datafactory *df,errorHandler *h,std::string &fileName);
+	verifyblocks(datafactory *df,errorHandler *h,std::string &fileName,int warnWhenMultipleBlockUse);
 };
 
 
