@@ -433,7 +433,7 @@ int start()
 			}
 			
 			verifycutouts(&df,&hError,currentMetsFile);
-			titletocheck(&df,&hError);
+			titletocheck(&df,&hError,metsP.getContext(),db);
 			verifytitles vt(&df,&hError,currentMetsFile);
 
 			//*/			
