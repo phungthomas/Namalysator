@@ -38,7 +38,7 @@ void headcutter::cut_headings(std::string currentTiff, std::string currentAlto, 
 	++sequence_number;
 
 	alto_rectangle ar(block.vpos,block.hpos,block.width,block.height);
-	ow.open_row(int((ar.height * factor * 2.54 / 72 + 0.1f) * 1000.0));
+	ow.open_row(int((ar.height * factor * 2.54 / 72 + 0.6f) * 1000.0));
 	ow.add_text(title);
 	ow.add_number(title.size());
 	ow.add_text("");
