@@ -8,6 +8,9 @@
 //! verify if a issue is defined
 class verifynoissuedefined
 {	
+	errorHandler *hError;
+	bool findIssue;
+	void browseItem(Item * item);
 public:
 	verifynoissuedefined(datafactory *df,errorHandler *h,const std::string &fileName);
 };

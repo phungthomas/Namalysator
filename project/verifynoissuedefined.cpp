@@ -1,19 +1,28 @@
 #include "verifynoissuedefined.h"
 
 
-verifynoissuedefined::verifynoissuedefined(datafactory *dfVerifiers,errorHandler *hError,const std::string &fileName)
+void verifynoissuedefined::browseItem(Item * item){
+	Item * currentItem;
+	for (size_t i=0; i< item->children.size();i++)
+	{		
+		currentItem = &item->children[i];
+
+		if ( currentItem->type.find("ISSUE")!=string::npos )findIssue =true;
+
+		if ( findIssue ) return;
+
+		browseItem(currentItem);				
+	}
+}
+
+verifynoissuedefined::verifynoissuedefined(datafactory *dfverifiers,errorHandler *_hError,const std::string &fileName):hError(_hError)
 {
 	hError->begin("Verify if issue defined ");
-	bool findIssue =false;
-	datafactory_set<Article> dfArticle = dfVerifiers->get_set<Article>();	
-	for (datafactory_set<Article>::iterator it = dfArticle.begin(); it != dfArticle.end(); ++it)
-	{
-		if (it->type.find("ISSUE")!=string::npos)
-		{
-			findIssue =true;
-			break;
-		}		
-	}	
+	findIssue =false;
+
+	Item *item = dfverifiers->get<Item>("Item");
+	browseItem(item);
+	
 	if(findIssue ==false)
 	{
 		hError->getError(cat_noIssueDefined,"METS","LOGICAL STRUCT",fileName,fileName,"");
