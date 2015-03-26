@@ -21,7 +21,7 @@ void dataaggregator::findArticle(Item *item)
 
 		if( db.isEntityToTitleCorrection(this->typeDocument,currentItem->type) )
 		{	
-			vectItem.push_back(currentItem);
+			if ( currentItem ->label.size() > 0 ) vectItem.push_back(currentItem); // Interest only if there is a label
 		}
 		findArticle(currentItem);				
 	}
