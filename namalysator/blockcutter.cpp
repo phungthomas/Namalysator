@@ -1,4 +1,5 @@
 #include <list>
+#include <limits.h>
 #include "blockcutter.h"
 #include <vector>
 
@@ -182,9 +183,13 @@ void block_cutter::clean_up()
 
 // Image functions
 
+static const unsigned char BIT_MASKS[] = {0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
+
 void block_cutter::rescale_buf(tdata_t buf, tdata_t outbuf, uint32 w, int factor)
 // Scales to 8 bits per pixel greyscale
 {
+	unsigned char *ucbuf = (unsigned char *) buf;
+	unsigned char *ucoutbuf = (unsigned char *) outbuf;
 	uint32 neww = w / factor;
 	uint32 o = 0, i;
 	if (m_is_color) {
@@ -192,59 +197,73 @@ void block_cutter::rescale_buf(tdata_t buf, tdata_t outbuf, uint32 w, int factor
 		if (m_bitsperpixel == 8) {
 			if (m_little_endian) {
 				for (i = 0; i < neww; i += 3, o += factor) {
-					((unsigned char *) outbuf)[i] = 255 - ((unsigned char *) buf)[o];
-					((unsigned char *) outbuf)[i + 1] = 255 - ((unsigned char *) buf)[o];
-					((unsigned char *) outbuf)[i + 2] = 255 - ((unsigned char *) buf)[o];
+					ucoutbuf[i] = 255 - ucbuf[o];
+					ucoutbuf[i + 1] = 255 - ucbuf[o];
+					ucoutbuf[i + 2] = 255 - ucbuf[o];
 				}
 			} else {
 				for (i = 0; i < neww; i += 3, o += factor) {
-					((unsigned char *) outbuf)[i] = ((unsigned char *) buf)[o];
-					((unsigned char *) outbuf)[i + 1] = ((unsigned char *) buf)[o];
-					((unsigned char *) outbuf)[i + 2] = ((unsigned char *) buf)[o];
+					ucoutbuf[i] = ucbuf[o];
+					ucoutbuf[i + 1] = ucbuf[o];
+					ucoutbuf[i + 2] = ucbuf[o];
 				}
 			}
 		} else if (m_bitsperpixel == 24) {
 			int fac3 = factor * 3;
 			for (i = 0; i < neww; i += 3, o += fac3) {
-				((unsigned char *) outbuf)[i] = ((unsigned char *) buf)[o];
-				((unsigned char *) outbuf)[i + 1] = ((unsigned char *) buf)[o + 1];
-				((unsigned char *) outbuf)[i + 2] = ((unsigned char *) buf)[o + 2];
+				ucoutbuf[i] = ucbuf[o];
+				ucoutbuf[i + 1] = ucbuf[o + 1];
+				ucoutbuf[i + 2] = ucbuf[o + 2];
 			}
 		}
 	} else {
-		if (m_bitsperpixel == 8) {
-			if (m_little_endian) {
+		if (m_bitsperpixel == 1) {
+			if (m_black_is_zero) {
 				for (i = 0; i < neww; ++i, o += factor) {
-					((unsigned char *) outbuf)[i] = 255 - ((unsigned char *) buf)[o];
+					ucoutbuf[i] = (ucbuf[o / 8] & BIT_MASKS[o % 8] ? 0xFF : 0);
 				}
 			} else {
 				for (i = 0; i < neww; ++i, o += factor) {
-					((unsigned char *) outbuf)[i] = ((unsigned char *) buf)[o];
+					if ((ucbuf[o / 8] & BIT_MASKS[o % 8]) > 0) {
+						ucoutbuf[i] = 0;
+					} else {
+						ucoutbuf[i] = 0xFF;
+					}
+				}
+			}
+		} else if (m_bitsperpixel == 8) {
+			if (m_little_endian) {
+				for (i = 0; i < neww; ++i, o += factor) {
+					ucoutbuf[i] = 255 - ucbuf[o];
+				}
+			} else {
+				for (i = 0; i < neww; ++i, o += factor) {
+					ucoutbuf[i] = ucbuf[o];
 				}
 			}
 		} else if (m_bitsperpixel == 16) {
 			int fac2 = factor * 2;
 			for (i = 0; i < neww; ++i, o += fac2) {
-				int val = ((unsigned char *) buf)[o];
-				val += ((unsigned char *) buf)[o + 1];
-				((unsigned char *) outbuf)[i] = val / 2;
+				int val = ucbuf[o];
+				val += ucbuf[o + 1];
+				ucoutbuf[i] = val / 2;
 			}
 		} else if (m_bitsperpixel == 24) {
 			int fac3 = factor * 3;
 			for (i = 0; i < neww; ++i, o += fac3) {
-				int val = ((unsigned char *) buf)[o];
-				val += ((unsigned char *) buf)[o + 1];
-				val += ((unsigned char *) buf)[o + 2];
-				((unsigned char *) outbuf)[i] = val / 3;
+				int val = ucbuf[o];
+				val += ucbuf[o + 1];
+				val += ucbuf[o + 2];
+				ucoutbuf[i] = val / 3;
 			}	
 		} else if (m_bitsperpixel == 32) {
 			int fac4 = factor * 4;
 			for (i = 0; i < neww; ++i, o += fac4) {
-				int val = ((unsigned char *) buf)[o];
-				val += ((unsigned char *) buf)[o + 1];
-				val += ((unsigned char *) buf)[o + 2];
-				val += ((unsigned char *) buf)[o + 3];
-				((unsigned char *) outbuf)[i] = val / 4;
+				int val = ucbuf[o];
+				val += ucbuf[o + 1];
+				val += ucbuf[o + 2];
+				val += ucbuf[o + 3];
+				ucoutbuf[i] = val / 4;
 			}
 		}
 	}
@@ -270,7 +289,7 @@ int block_cutter::open_tiff(const char *in_name)
     if (!m_tif) {
 		return -1;
 	}
-	uint16 compression = 0; //  n_samples = 0
+	uint16 compression = 0, photometric = 0; //  n_samples = 0
 	uint32 tifheight, tifwidth;
 
 	TIFFGetField(m_tif, TIFFTAG_IMAGELENGTH, &tifheight);
@@ -283,8 +302,14 @@ int block_cutter::open_tiff(const char *in_name)
 	} else {
 		is_uncompressed_tiff = false;
 	}
+	TIFFGetField(m_tif, TIFFTAG_PHOTOMETRIC, &photometric);
+	if (photometric == 0) {
+		m_black_is_zero = false;
+	} else {
+		m_black_is_zero = true;
+	}
 	m_scanlinesize = TIFFScanlineSize(m_tif);
-	m_bitsperpixel = m_scanlinesize / tifwidth * 8;
+	m_bitsperpixel = m_scanlinesize * 8 / tifwidth;
 	if (m_bitsperpixel == 24 || m_bitsperpixel == 32) {
 		m_is_color = true;
 	} else {
@@ -689,6 +714,7 @@ int ThumbCreator::open_tiff(const char *in_name)
 	if (!fp) {
 		return -1;
 	}
+	m_little_endian = false;
 	// Check whether it's big or little endian
 	{
 		char tmp[4];
@@ -699,11 +725,10 @@ int ThumbCreator::open_tiff(const char *in_name)
 		fclose(fp);
 	}
 	
-    m_tif = TIFFOpen(in_name, "r");
-    if (!m_tif) {
+	m_tif = TIFFOpen(in_name, "r");
+	if (!m_tif) {
 		return -1;
 	}
-	// uint16 n_samples = 0, compression = 0;
 	uint32 tifheight, tifwidth;
 
 	TIFFGetField(m_tif, TIFFTAG_IMAGELENGTH, &tifheight);
@@ -720,14 +745,19 @@ int ThumbCreator::open_tiff(const char *in_name)
 	return 0;
 }
 
-void ThumbCreator::init_buf(int maxdim)
+void ThumbCreator::init_buf(int maxwidth, int maxheight)
 {
-	if (ih > iw) {
-		tw = maxdim * iw / ih;
-		th = maxdim;
+	if (maxheight == INT_MAX || maxheight == 0) {
+		tw = maxwidth;
+		th = maxwidth * ih / iw;
 	} else {
-		tw = maxdim;
-		th = maxdim * ih / iw;
+		if (maxwidth > (maxheight * iw / ih)) {
+			tw = maxheight * iw / ih;
+			th = maxheight;
+		} else {
+			tw = maxwidth;
+			th = maxwidth * ih / iw;
+		}
 	}
 	max_height = (((ih << INT_SHIFT) / th) >> INT_SHIFT) + 4;
 	m_buf = new unsigned char *[max_height];
@@ -739,6 +769,9 @@ void ThumbCreator::init_buf(int maxdim)
 
 void ThumbCreator::read_tiff(int starty, int endy)
 {
+	if (endy > ih) {
+		endy = ih;
+	}
 	for (int i = starty; i < endy; ++i) {
 		TIFFReadScanline(m_tif, m_buf[i - starty], i, 0);
 	}
@@ -746,10 +779,12 @@ void ThumbCreator::read_tiff(int starty, int endy)
 	buf_y_end = endy;
 }
 
-void ThumbCreator::CreateThumb(const std::string &inputfile, const std::string &outputfile, int maxdim)
+bool ThumbCreator::CreateThumb(const std::string &inputfile, const std::string &outputfile, int maxwidth, int maxheight, int quality)
 {
-	open_tiff(inputfile.c_str());
-	init_buf(maxdim);
+	if (open_tiff(inputfile.c_str()) != 0) {
+		return false;
+	}
+	init_buf(maxwidth, maxheight);
 	int sx = tw;
 	int sy = th;
 
@@ -757,7 +792,10 @@ void ThumbCreator::CreateThumb(const std::string &inputfile, const std::string &
 	r.x = r.y = 0;
 	r.width = tw;
 	r.height = th;
-	writer.open_jpg(outputfile.c_str(), m_is_color, r, 90);
+	if (writer.open_jpg(outputfile.c_str(), m_is_color, r, quality) != 0) {
+		TIFFClose(m_tif);
+		return false;
+	}
 
 	// resampling the image to thumbnail size
 
@@ -779,6 +817,7 @@ void ThumbCreator::CreateThumb(const std::string &inputfile, const std::string &
 		iy2 = (ry2 >> INT_SHIFT) + 1;
 		jy1 = INT_MASK - (ry1 & INT_MASK);
 		jy2 = ry2 & INT_MASK;
+		if (iy2 >= ih) { iy2 = ih - 1; }
 		read_tiff(iy1, iy2 + 1);
 		for (int x=0; x<sx; x++) {
 			rx1 = ((x * iw) << INT_SHIFT) / sx;
@@ -787,6 +826,7 @@ void ThumbCreator::CreateThumb(const std::string &inputfile, const std::string &
 			ix2 = (rx2 >> INT_SHIFT) + 1;
 			jx1 = INT_MASK - (rx1 & INT_MASK);
 			jx2 = rx2 & INT_MASK;
+			if (ix2 >= iw) { ix2 = iw - 1; }
 
 			int r=0;
 			int g=0;
@@ -850,7 +890,7 @@ void ThumbCreator::CreateThumb(const std::string &inputfile, const std::string &
 				c = c / w;
 				SetPixelGrey(x, c);
 			} else {
-				unsigned int c;
+				unsigned int c = 0;
 				int wx, wy, wz;
 
 				for (int v=iy1; v<=iy2; v++) {
@@ -883,5 +923,5 @@ void ThumbCreator::CreateThumb(const std::string &inputfile, const std::string &
 		TIFFClose(m_tif);
 	}
 	m_tif = 0;
-	return;
+	return true;
 }

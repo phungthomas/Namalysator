@@ -54,6 +54,7 @@ class block_cutter
 
 	bool			m_little_endian;
 	bool			m_is_color;
+	bool			m_black_is_zero;
 	TIFF 			*m_tif;
 	bool			is_uncompressed_tiff;
 	alto_rectangle	m_orig;
@@ -111,7 +112,7 @@ class ThumbCreator
 	bool			m_is_color;
 
 	int open_tiff(const char *in_name);
-	void init_buf(int maxdim);
+	void init_buf(int maxwidth, int maxheight);
 	void read_tiff(int starty, int endy);
 	unsigned char GetPixelGreyBE(int x, int y) {
 		if (x < 0) { return m_buf[y - buf_y_start][0]; }
@@ -144,7 +145,7 @@ class ThumbCreator
 	}
 public:
 	ThumbCreator() : iw(0), ih(0), tw(0), th(0), max_height(0), m_buf(0) {}
-	void CreateThumb(const std::string &inputfile, const std::string &outputfile, int maxdim);
+	bool CreateThumb(const std::string &inputfile, const std::string &outputfile, int maxwidth, int maxheight, int quality);
 	~ThumbCreator();
 };
 
