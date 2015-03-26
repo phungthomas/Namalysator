@@ -10,6 +10,9 @@ class verifyblocks
 private :
 	std::set<std::pair<std::string, std::string>> block;
 	errorHandler *hError;
+	std::string fileName;
+
+	void browseItem(Item * item);
 
 public:
 	verifyblocks(datafactory *df,errorHandler *h,std::string &fileName);

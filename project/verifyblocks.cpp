@@ -4,34 +4,39 @@
 #include <map>
 #include <iostream>
 
+
+void verifyblocks::browseItem(Item * item){
+	Item * currentItem;
+	for (size_t i=0; i< item->children.size();i++)
+	{		
+		currentItem = &item->children[i];
+
+		for(size_t j=0;j < currentItem->vectTypeBlock.size();j++)
+		{
+			std::pair<std::string, std::string> element;
+			element.first = currentItem->vectTypeBlock[j].alto;
+			element.second = currentItem->vectTypeBlock[j].block;
+
+			if (block.find(element)!= block.end())
+			{						
+				hError->getError(cat_multipleBlock,"METS","LOGICAL STRUCT",element.first + " - " + element.second + " used multiple times",fileName,element.second);
+			}
+			else
+			{
+				block.insert(element);						
+			}
+		}
+
+		browseItem(currentItem);				
+	}
+}
+
 //Semantic checks verify :  Multiple block use
-verifyblocks::verifyblocks(datafactory *dfverifiers,errorHandler *_hError,std::string &fileName):hError(_hError)
+verifyblocks::verifyblocks(datafactory *dfverifiers,errorHandler *_hError,std::string &_fileName):hError(_hError),fileName(_fileName)
 {	
 	hError->begin("Verify: multiple block use");
-	datafactory_set<Article> dfArticle = dfverifiers->get_set<Article>();	
-	for (datafactory_set<Article>::iterator it = dfArticle.begin(); it != dfArticle.end(); ++it)
-	{
-		if (it->type.find("ISSUE")==0)
-		{		
-			for (size_t i =0;i< it->vectArticle.size();i++)
-			{
-				std::pair<std::string, std::string> element;
-				element.first = it->vectArticle[i].alto;
-				element.second = it->vectArticle[i].block;
-	
-				if (block.find(element)!= block.end())
-				{						
-					#ifdef _DEBUG
-						std::cout << "multiple use " << it->vectArticle[i].alto << " - " << it->vectArticle[i].block <<std::endl;					
-					#endif // DEBUG
-					hError->getError(cat_multipleBlock,"METS","LOGICAL STRUCT",element.first + " - " + element.second + " used multiple times",fileName,element.second);
-				}
-				else
-				{
-					block.insert(element);						
-				}
-			}
-			break;
-		}			
-	}
+
+	Item *item = dfverifiers->get<Item>("Item");	
+	browseItem(item);	
+
 }
