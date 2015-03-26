@@ -72,7 +72,7 @@ void errorHandler::begin(const std::string &info)
 	}
 	else
 	{
-		std::cout << "could not write to log --> Programm will continue " << std::endl; 	
+		std::cout << "could not write to log --> Programm will continue :" << info << std::endl; 	
 	}
 }
 //! set path of log
