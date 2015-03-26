@@ -199,10 +199,11 @@ public:
 		std::map < string , QColor >& loadColor(std::string schma);
     private:
 		void  _loadColor(std::map < string , std::map < string , QColor > > & toFill);
-		void  _loadEntityTitleCorrection(std::map < string , std::map < string , int > > & toFill);
+		void  _loadEntityTitleCorrection(std::map < string , std::map < string , std::map < string , int > > > & toFill);
 	public:
 		void  loadEntityCount(std::map<std::string,std::map < string , int > >& toFill, std::map< string,int>& headerData);
 		bool isEntityToTitleCorrection(std::string type,std::string entity);
+		bool isEntityToTitleCorrectionLink(std::string type,std::string entity,std::string entityLink);
 
 
 };

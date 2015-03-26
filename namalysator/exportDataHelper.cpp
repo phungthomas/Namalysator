@@ -26,6 +26,7 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 		vectItem.clear();
 		const Title &t = vTitle[ij];	
 		const MetsFile &mets = vTitle[ij].mets;
+		
 		std::string pathMets =  BatchDetail::getBatchDetail().path + mets.path + "/" + mets.fileName;
 		Item itemtree;
 		Item *treeContents;
@@ -41,6 +42,7 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 		
 		findArticle(treeContents,mets.docType);		
 	    std::map<std::string,altoblock> mapAlto;
+
 		bool skip = false;
 
 		for(std::map<int,LinkedFiles>::iterator it = mapAltoPath.begin(); it != mapAltoPath.end(); it++)
@@ -68,7 +70,7 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 		bool found = false;	
 		for (size_t i =0;i < a.vectArticle.size();i++)
 		{
-			if ((a.vectArticle[i].type == "HEADING") ||(a.vectArticle[i].type == "CAPTION") )
+			if ( db.isEntityToTitleCorrectionLink(mets.docType,a.type,a.vectArticle[i].type) )
 			{
 				for (std::map<int,LinkedFiles>::iterator it = mapAltoPath.begin(); it != mapAltoPath.end(); it++)
 				{
