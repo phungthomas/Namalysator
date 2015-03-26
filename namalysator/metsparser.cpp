@@ -68,7 +68,7 @@ void metsParser::XMLstartElement(const char *name, const char **atts)
 			{
 				typeblock.block = val2;
 				typeblock.alto = val1;	
-				typeblock.type = currentItem->parent->type;
+				typeblock.type = currentItem->type;
 				currentItem->vectTypeBlock.push_back(typeblock);			
 			}
 		}
