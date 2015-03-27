@@ -218,7 +218,7 @@ void w_main::exportData(){
     };
 
 	exportDataHelper helper;
-	helper.exportData(message);
+	helper.exportData(message,this);
 
 
 	QMessageBox::information(this, tr("Namalysator"),

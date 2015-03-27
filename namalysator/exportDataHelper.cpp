@@ -1,28 +1,66 @@
 #include "exportDataHelper.h"
 #include "structgui.h"
 
-#include "metsoutput.h"
+
 #include "metsparser.h"
 #include "altoparser.h"
 
-
-
-void exportDataHelper::exportData(std::string filenameToCreate){
+void exportDataHelper::cancel(){
+	cancelled=true;
 	
+}
+
+void exportDataHelper::exportData(std::string filenameToCreate,QWidget *parent){
+
+	cancelled = false;
 	db.setDataBaseName(BatchDetail::getBatchDetail().database); 
 
-	headcutter *hc = 0;
+	
 	hc = new headcutter;
 	hc->open_document(filenameToCreate);
-	std::string currentAlto="";
-	std::string currentTif="";
-	std::vector<Title> vTitle = db.getvTitle(BatchDetail::getBatchDetail().idTestSet);
+	currentAlto="";
+	currentTif="";
+	vTitle = db.getvTitle(BatchDetail::getBatchDetail().idTestSet);
 
+	dlg = new QProgressDialog(parent);
+	timer=new QTimer ();
 
-	for (size_t ij = 0;ij < vTitle.size(); ij++)
-    {	
+	dlg->setWindowTitle("Exporting Title");
+	dlg->setRange(0, vTitle.size());
+	parent->setDisabled(true);
+	
+	connect(dlg, SIGNAL(canceled()), this, SLOT(cancel()));
+	connect(this, SIGNAL(nextValue(int)), dlg, SLOT(setValue(int)));
+	connect(timer, SIGNAL(timeout()), this, SLOT(perform()));
+	
+	dlg->setEnabled(true);
+	dlg->show();
+	ij=-1;
+	timer->start();
+
+	dlg->exec();
+
+	parent->setEnabled(true);
+	
+	hc->close_document();
+	delete timer;
+
+}
+
+void exportDataHelper::perform(){	
+
+	ij++;
+	if ( ij >= vTitle.size() || cancelled ) {
+		dlg->close();
+		timer->stop();
+		return;
+	}
+
+	
 		// prepare for a new METS file
 		// Clear the list of DIVs with a DMDID
+		if ( !cancelled && ( ij % 10 == 0 )) emit nextValue(ij);
+			
 		vectItem.clear();
 		const Title &t = vTitle[ij];	
 		const MetsFile &mets = vTitle[ij].mets;
@@ -63,7 +101,7 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 					mapAlto[it->second.fileId] = ap.getAltoBlock();
 			}
 		}
-		if ( skip ) continue ;
+		if ( skip ) return ;
 		createArticle();		
 		std::string path;
 		Article a = mapArticleWithIdDiv.find(vTitle[ij].article.div)->second;
@@ -95,8 +133,8 @@ void exportDataHelper::exportData(std::string filenameToCreate){
 			}		
 		}	
 	}	
-	hc->close_document();
-}
+
+
 
 void exportDataHelper::findArticle(Item *item,std::string docType){
 	for (size_t i=0; i< item->children.size();i++)
