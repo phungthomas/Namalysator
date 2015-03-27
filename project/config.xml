@@ -8,35 +8,118 @@
 	<outputDir>C:/Data/output</outputDir> <!-- where intermediate generate file are put before analysis, mainly a temp directory -->
 	<verifiers><!-- metsverifier will save a atoi of data for each key under node verifiers-->
 		<dataintegrity>
-			<checkFile>1</checkFile>
-			<checkSum>0</checkSum>
+      
+      <!-- checkFile
+      1. checks whether the  files have the correct sequence number
+      2. checks whether the file exists in the location on the disk where it's referenced
+      3. checks whether there is an group at all ( adding error 53 )
+      remarque : call 3 times for IMGGRP PDFGRP PNGGRP-->
+      <checkFile>1</checkFile>
+
+      <!-- checkSum
+      Checks whether the checksums of linked files correspond to the checksums in the METS -->
+      <checkSum>0</checkSum>
+      
+      <!-- oddsPages : checks whether the number of pages is odd-->
 			<oddsPages>1</oddsPages>
-			<unlinkedIdentifier>1</unlinkedIdentifier>	
+      
+      <!-- 
+          checks whether the logical structures containes references to ALTO blocks in <fptr> elements that reference TextBlocks 
+          (or ComposedBlocks or Illustrations) that do not exist in the ALTO file itself.-->
+			<unlinkedIdentifier>1</unlinkedIdentifier>
+      
+      <!-- checkFilePNG
+      Verify PNG Images 
+      condition : dataintegrity.checkFile = 1 -->
 			<checkFilePNG>0</checkFilePNG>
 		</dataintegrity>
+    
+    <!-- count xml div entity -->
 		<divCount>1</divCount>
-		<semanticchecks>	
+    
+		<semanticchecks>
+        <!-- Folder
+        checks whether the name of the folder corresponds to MODSMD_ELEC's BIBREC_SYSNUM (which is in identifier type="local")-->
 				<Folder>1</Folder>
+      
+        <!-- identifierMix: check that the entries in IMGGRP in the FileSec all have an ADMID attribute which references an existing amdSec -->
 				<identifierMix>1</identifierMix>
+
+        <!-- emptyMix
+        checks whether the metsparser found any fields of type 
+        ScannerManufacturer, ScannerModelName, ScannerModelSerialNo, ScanningSoftware or ScanningSoftwareVersionNo which were empty        
+        Add test of presence of mandatory field-->
 				<emptyMix>1</emptyMix>
+      
+        <!-- dateFolderIssue
+        Checks whether the folder name in which the METS file is corresponds to the METS filename for the first 13 characters -->
 				<dateFolderIssue>1</dateFolderIssue>
+      
+        <!-- noIssueDefined
+        check whether the Logical structMap contains at least one ISSUE -->
 				<noIssueDefined>1</noIssueDefined>
+      
+        <!-- invalidSupplement
+        seems to check whether the MODS:title for MODSMD_SUPPLEMENT is empty or whether the LABEL in the logical structure 
+        for SUPPLEMENT is empty-->
 				<invalidSupplement>1</invalidSupplement>
 		</semanticchecks>
-	    <blocks>
+	  <blocks>
+      <!-- altoblockPerPage
+      Checks whether there are at least two ALTO blocks on each page.  
+      If there is a supplement (identfied by checking for the presence 
+      of a metadata entry with a key starting with the string "MODSMD_SUPPLEMENT"), then this check is disabled-->
 			<altoblockPerPage>1</altoblockPerPage>
+      
+      <!-- blockStructure
+      Does several combined checks:
+      1. it checks whether the printspace of a page is between 0 and 10000 and whether the width and height are more than 100.
+      2. it checks whether there are blocks with a height or width of 0 units
+      3. it checks whether any block is outside of the box 0,0,10000,10000
+      4. it checks whether any block is outside of the printspace
+      Remark: there is a flag blocks.blocks.skipBlockInsidePrintSpace to skip test 4-->
 			<blockStructure>1</blockStructure>
+      <skipBlockInsidePrintSpace>0</skipBlockInsidePrintSpace>
+      
+      <!-- coveragePercentAlto
+      Checks whether the sum of the areas covered by ALTO blocks on a given page is below 75%. 
+      This check is disabled when a metadata entry with a key starting with MODSMD_SUPPLEMENT exists.-->
 			<coveragePercentAlto>1</coveragePercentAlto>
+        
+      <!-- multipleBlockUse
+      Checks whether the logical structure references the same block twice 
+      condition dataintegrity.unlinkedIdentifier must be 1-->
 			<multipleBlockUse>1</multipleBlockUse>
+      
+      <!-- measurementSTD
+      checks whether the measurement unit of the ALTO files is mm10 -->
 			<measurementSTD>1</measurementSTD>
-			<skipBlockInsidePrintSpace>0</skipBlockInsidePrintSpace>
+			
 		</blocks>
+    <!-- inventoryBook
+    performs multiple checks against the inventory:
+    1. BIBREC_SYSNUM is in the inventory
+    2. BIBREC245a is correct in MODSMD_ELEC and MODSMD_PRINT
+    3. BIBREC100a is correct in MODSMD_ELEC and MODSMD_PRINT
+    4. whether the language terms used in MODSMD_ELEC all exist in the inventory
+    5. whether the language terms used in MODSMD_PRINT all exist in the inventory 
+    6. add the opposite test wheter all languages in the inventory are use in MODSMD_PRINT and MODSMD_ELEC
+    7. whether the item barcode from the inventory corresponds to the identifier type="local" from MODSMD_PRINT
+    8. BIBREC_260b in MODSMD_PRINT
+    9. BIBREC_SYS_NUM with MARCMD_ALEPHSYNC BIBREC_SYS_NUM-->
 		<inventoryBook>1</inventoryBook>
+    
 		<dates>0</dates>
 	</verifiers>
+  
+  <!-- rate of title extract for manual checking -->
 	<checkTitle>1000</checkTitle> <!-- per 1000 -->
+  
+  
 	<sampling>100</sampling> <!-- per 1000 -->
 	<issueNumber>1</issueNumber>
+  
+  <!-- definition of parser -->
 	<XSDManager>
 		<type>BNLMonograph</type>
 		<addXSD>bnl-monograph_v1.0.xsd</addXSD>
