@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
+  <!-- working sqlite database : must be define for a campaign -->
 	<database>C:/Data/DB/TESTSERIAL3</database>
+  
+  <!-- file where inventory of book is store in tabbed format : only needed for book checking -->
 	<inventoryFile>file2.txt</inventoryFile>
+  
+  <!-- administrative parameter-->
 	<batchName>batch2</batchName>
 	<subbatchName>socnatbul</subbatchName>
+  
+  <!-- directory to check (see metsverifier.exe)-->
 	<input>C:/SmallTest</input>
-	<outputDir>C:/Data/output</outputDir> <!-- where intermediate generate file are put before analysis, mainly a temp directory -->
-	<verifiers><!-- metsverifier will save a atoi of data for each key under node verifiers-->
+
+  <!-- where intermediate generate file are put before analysis, mainly a temp directory -->
+	<outputDir>C:/Data/output</outputDir> 
+	
+  <verifiers><!-- metsverifier will save a atoi of data for each key under node verifiers-->
 		<dataintegrity>
       
       <!-- checkFile
