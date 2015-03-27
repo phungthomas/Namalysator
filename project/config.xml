@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<database>C:/Data/DB/BIGTEST</database>
-	<inventoryFile></inventoryFile>
-	<batchName>batch1</batchName>
-	<subbatchName>deletz</subbatchName>
-	<input>C:/BIGTEST/batch1/deletz_20140316</input>
+	<database>C:/Data/DB/TESTSERIAL3</database>
+	<inventoryFile>file2.txt</inventoryFile>
+	<batchName>batch2</batchName>
+	<subbatchName>socnatbul</subbatchName>
+	<input>C:/SmallTest</input>
 	<outputDir>C:/Data/output</outputDir> <!-- where intermediate generate file are put before analysis, mainly a temp directory -->
 	<verifiers><!-- metsverifier will save a atoi of data for each key under node verifiers-->
 		<dataintegrity>
 			<checkFile>1</checkFile>
-			<checkSum>1</checkSum>
-			<!--divs>1</divs-->
+			<checkSum>0</checkSum>
 			<oddsPages>1</oddsPages>
 			<unlinkedIdentifier>1</unlinkedIdentifier>	
+			<checkFilePNG>0</checkFilePNG>
 		</dataintegrity>
+		<divCount>1</divCount>
 		<semanticchecks>	
+				<Folder>1</Folder>
 				<identifierMix>1</identifierMix>
-        <emptyMix>1</emptyMix>
+				<emptyMix>1</emptyMix>
 				<dateFolderIssue>1</dateFolderIssue>
 				<noIssueDefined>1</noIssueDefined>
 				<invalidSupplement>1</invalidSupplement>
-				<divs>1</divs>
 		</semanticchecks>
-		<blocks>
+	    <blocks>
 			<altoblockPerPage>1</altoblockPerPage>
 			<blockStructure>1</blockStructure>
-      <skipBlockInsidePrintSpace>1</skipBlockInsidePrintSpace>
 			<coveragePercentAlto>1</coveragePercentAlto>
 			<multipleBlockUse>1</multipleBlockUse>
 			<measurementSTD>1</measurementSTD>
+			<skipBlockInsidePrintSpace>0</skipBlockInsidePrintSpace>
 		</blocks>
-		<inventoryBook>0</inventoryBook>
+		<inventoryBook>1</inventoryBook>
+		<dates>0</dates>
 	</verifiers>
-	<checkTitle>50</checkTitle> <!-- per 1000 -->
-	<sampling>50</sampling> <!-- per 1000 -->
-	<dates>1</dates>
+	<checkTitle>1000</checkTitle> <!-- per 1000 -->
+	<sampling>100</sampling> <!-- per 1000 -->
 	<issueNumber>1</issueNumber>
 	<XSDManager>
 		<type>BNLMonograph</type>
@@ -43,12 +44,12 @@
 	</XSDManager>
 	<XSDManager>
 		<type>BNLSerial</type>
-		<addXSD>bnl-serial_v1.0.xsd</addXSD>
+		<addXSD>bnl-serial_v1.1.xsd</addXSD>
 		<lock/>
 	</XSDManager>
 	<XSDManager>
 		<type>BNLNewspaper</type>
-		<addXSD>bnl-newspaper_v1.3.xsd</addXSD>
+		<addXSD>bnl-newspaper_v1.4.xsd</addXSD>
 		<lock/>
 	</XSDManager>
 	<XSDManager>
@@ -64,6 +65,7 @@
 		<type>ALTO</type>
 		<addXSD>alto-1-2.xsd</addXSD>
 		<addXSD>alto-1-4.xsd</addXSD>
+		<!--addXSD>alto-2-0.xsd</addXSD-->
 		<lock/>
 	</XSDManager>
 	
