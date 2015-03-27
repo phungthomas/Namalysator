@@ -182,7 +182,7 @@ int start()
 	pt.Start();
 
 	cerr << "Database File:" << datab << endl;
-	cerr << "Log File:" << sqlCreateTablePath.str() << endl;
+	cerr << "CreateTable File:" << sqlCreateTablePath.str() << endl;
 
 	//verify if the database exist or not
 	if (!existDatabase(&db, &hError, datab, sqlCreateTablePath.str()))
