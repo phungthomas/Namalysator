@@ -205,9 +205,12 @@ int start()
 
 	pt.LogTime("Inserting DB parameters");
 	
+	// YM : List of known logical structure schemas
+	// CONFIGURATION: Add schemas here
 	parserCheck* parserCheckBNLMono=parameter.getParser("BNLMonograph");
 	parserCheck* parserCheckBNLSerial=parameter.getParser("BNLSerial");
 	parserCheck* parserCheckBNLNews=parameter.getParser("BNLNewspaper");
+	parserCheck* parserCheckBNLStatSerial=parameter.getParser("BNLStatSerial");
 
 	parserCheck* parserCheckBNL=0;
 	parserCheck* metsParserCall=parameter.getParser("METS");
@@ -283,14 +286,16 @@ int start()
 
 		transformCH.getContext().closeFile();
 
-
+		// CONFIGURATION: Add schemas here
 		if ( transformCH.getContext().typeIssue.compare ("Monograph")==0 ){
 			parserCheckBNL = parserCheckBNLMono;
-		}else if ( transformCH.getContext().typeIssue.compare ("Newspaper")==0 ){
+		} else if ( transformCH.getContext().typeIssue.compare ("Newspaper")==0 ){
 			parserCheckBNL = parserCheckBNLNews;
-		}else if ( transformCH.getContext().typeIssue.compare ("Serial")==0 ){
+		} else if ( transformCH.getContext().typeIssue.compare ("Serial")==0 ){
 			parserCheckBNL = parserCheckBNLSerial;
-		}else {
+		} else if ( transformCH.getContext().typeIssue.compare ("StatSerial")==0 ){
+			parserCheckBNL = parserCheckBNLStatSerial;
+		} else {
 			hError.getError(cat_xml_error,"METS",currentMetsFile, "typeIssue not known [\"Monograph\",\"Newspaper\",\"Serial\"] " + transformCH.getContext().typeIssue ,currentMetsFile,"");
 			continue; 
 		}
