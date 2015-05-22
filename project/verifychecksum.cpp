@@ -22,12 +22,12 @@ verifychecksum::verifychecksum(datafactory *dfverifiers,errorHandler *hError,con
 				sha512wrapper sha512;
 				std::string hashcode = sha512.getHashFromFile(filePath);
 				//std::cerr << filePath << ":" << hashcode <<std::endl;
-				if (strcmp(tf.checksum.c_str(),hashcode.c_str())!=0 )
+				if (stricmp(tf.checksum.c_str(),hashcode.c_str())!=0 )
 				{			
 					hError->getError(cat_wrongChecksum,"METS","FileGrp","SHA-512 checksum of " + tf.id + " is " + hashcode,fileName,tf.checksum);
 				}
 			} else {
-				if (strcmp(tf.checksum.c_str(),md5.getHashFromFile(filePath).c_str())!=0 )
+				if (stricmp(tf.checksum.c_str(),md5.getHashFromFile(filePath).c_str())!=0 )
 				{			
 					hError->getError(cat_wrongChecksum,"METS","FileGrp","MD5 checksum of " + tf.id + " is " + md5.getHashFromFile(filePath),fileName,tf.checksum);
 				}
