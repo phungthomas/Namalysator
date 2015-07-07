@@ -296,7 +296,7 @@ int start()
 		} else if ( transformCH.getContext().typeIssue.compare ("StatSerial")==0 ){
 			parserCheckBNL = parserCheckBNLStatSerial;
 		} else {
-			hError.getError(cat_xml_error,"METS",currentMetsFile, "typeIssue not known [\"Monograph\",\"Newspaper\",\"Serial\"] " + transformCH.getContext().typeIssue ,currentMetsFile,"");
+			hError.getError(cat_xml_error,"METS",currentMetsFile, "typeIssue not known [\"Monograph\",\"Newspaper\",\"Serial\",\"StatSerial\"] " + transformCH.getContext().typeIssue ,currentMetsFile,"");
 			continue; 
 		}
 

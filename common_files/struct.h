@@ -183,20 +183,28 @@ struct altoblock : public dataitem {
 };
 
 //! structure of a id group
-struct GroupId : public dataitem {
+
+static const std::string g_group_use_images;
+static const std::string g_group_use_pdf;
+static const std::string g_group_use_alto;
+static const std::string g_group_use_png;
+
+struct GroupID : public dataitem {
 
 	enum fileuse
 	{
 		use_unknown,
 		use_images,
 		use_pdf,
-		use_alto
+		use_alto,
+		use_png
 	};
 
 	static const size_t DATAITEM_ID =9;
-	std::string groupId;
-	int seq;
-	std::map<fileuse,Type_File> map;
+	// Maps the file uses to
+	//  a map which maps
+	//   the GROUPID to the Type_File inside the File_Group's vect inside the same datafactory
+	std::map<fileuse, std::map<std::string, int> > map;
 };
 
 struct StringItem : public dataitem {

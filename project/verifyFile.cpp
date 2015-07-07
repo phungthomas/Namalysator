@@ -10,7 +10,12 @@ verifyFile::verifyFile(datafactory *dfverifiers,errorHandler *hError,std::string
 		for (size_t i=0;i < fg->vect.size();i++)
 		{
 			Type_File tf = fg->vect[i];
-			std::string fname = pathdirectory + tf.ref;	
+			std::string fname = pathdirectory + tf.ref;
+			// The SEQ attribute is only present for the IMGGRP
+			// For the other groups, we have to check it indirectly, through 
+			// 1. get GROUPID
+			// 2. find image with same GROUPID
+			// 3. get the SEQ value from that image
 			if (atoi(fname.substr(fname.length() - 9, 5).c_str()) != tf.seq)
 			{
 				char tmp[20];
