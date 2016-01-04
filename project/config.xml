@@ -73,6 +73,10 @@
         seems to check whether the MODS:title for MODSMD_SUPPLEMENT is empty or whether the LABEL in the logical structure 
         for SUPPLEMENT is empty-->
 				<invalidSupplement>1</invalidSupplement>
+
+        <!-- CutOut
+          enable/disable cutout test:incorrect cut-out original-->
+        <cutout>1</cutout>
 		</semanticchecks>
 	  <blocks>
       <!-- altoblockPerPage

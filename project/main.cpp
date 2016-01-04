@@ -430,8 +430,9 @@ int start()
 			if (parameter.getValueCheck("blocks.measurementSTD") == 1){
 				verifyMeasurement(&df,&hError,currentMetsFile);
 			}
-			
-			verifycutouts(&df,&hError,currentMetsFile);
+			if (parameter.getValueCheck("semanticchecks.cutout") == 1 ){
+				verifycutouts(&df,&hError,currentMetsFile);
+			}
 			titletocheck(&df,&hError,metsP.getContext(),db);
 			verifytitles vt(&df,&hError,currentMetsFile);
 
