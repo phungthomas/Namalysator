@@ -10,6 +10,7 @@
 
 class inventory{
 public:
+	std::string nonSort;
 	std::string BIBREC_245a;
 	std::string BIBREC_100a;
 	std::string BIBREC_260b;

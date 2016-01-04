@@ -40,7 +40,8 @@ void inventoryMapping::setCurrentInventory(std::string type){
 
 void inventoryMapping::setCurrentInventoryValue(std::string field, std::string value){
 	if ( currentInventory == 0) return;
-
+	
+	if ( field.compare("nonSort")==0 ) currentInventory->nonSort=value;
 	if ( field.compare("BIBREC_245a")==0 ) currentInventory->BIBREC_245a=value;
 	//if ( field.compare("BIBREC_245b")==0 ) currentInventory->BIBREC_245b=value;
 	if ( field.compare("BIBREC_100a")==0) currentInventory->BIBREC_100a=value;

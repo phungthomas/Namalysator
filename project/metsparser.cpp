@@ -251,6 +251,7 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 		_onlyOnes(std::map<string,StateParsermodState*>& map){
 			//static int i = 0;
 			//std::cerr << "Only Ones :"<< ++i << std::endl;
+			map["nonSort"]=		new StateParsermodStateInventory("nonSort");
 			map["title"]=		new StateParsermodStateInventory("BIBREC_245a");
 			//map["subTitle"]=	new StateParsermodStateInventory("BIBREC_245b"); // sub state machine
 			map["identifier"]=	new StateParsermodStateInventory("BIBREC_SYS_NUM");

@@ -22,12 +22,13 @@ void verifyBook::check(int check,metsparserContext& context){
 
 	db->InventoryChecked(BIBREC_SYSNUM); // update checked flag in bookinventory to be able to show the rate of full campaign
 
-	if ( invent.BIBREC_245a.compare(context.inventory.inventoryMODSMD_ELEC.BIBREC_245a)) {
+	std::string title = buildTitle( context.inventory.inventoryMODSMD_ELEC);
+	if ( invent.BIBREC_245a.compare(title)) {
 		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_ELEC", "wrong title:" + context.inventory.inventoryMODSMD_ELEC.BIBREC_245a +" against :"+ invent.BIBREC_245a ,context.currentMetsFile,context.inventory.inventoryMODSMD_ELEC.BIBREC_245a);
 	}
 
-
-	if ( invent.BIBREC_245a.compare(context.inventory.inventoryMODSMD_PRINT.BIBREC_245a)) {
+    title = buildTitle( context.inventory.inventoryMODSMD_PRINT);
+	if ( invent.BIBREC_245a.compare(title)) {
 		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong title:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_245a +" against :"+ invent.BIBREC_245a,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.BIBREC_245a);
 	}
 
@@ -84,6 +85,17 @@ void verifyBook::check(int check,metsparserContext& context){
 		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MARCMD_ALEPHSYNC", "wrong BIBREC_SYS_NUM:" + context.inventory.inventoryMARCMD_ALEPHSYNC.BIBREC_SYS_NUM +" against :"+ invent.BIBREC_SYS_NUM,context.currentMetsFile,context.inventory.inventoryMARCMD_ALEPHSYNC.BIBREC_SYS_NUM);
 	}
 
+}
+
+std::string verifyBook::buildTitle(inventory& invent){
+	
+	std::string ret;
+
+	if ( invent.nonSort.empty()) {
+		return invent.BIBREC_245a ;
+	}
+	ret = invent.nonSort + " " + invent.BIBREC_245a;
+	return ret;
 }
 
 void verifyBook::init(metsparserContext& context){
