@@ -1173,7 +1173,7 @@ void dbrequest::getvErrorPerCategory_LINKED(std::vector<MetsError>& v, int id_ca
 	
 	const char *zErrMsg= 0; 	
 	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,"
-		"s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE,l.FILENAME,mm.PATH,mm.year "
+		"s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE,l.FILENAME,mm.PATH,mm.year,mm.FILENAME "
 		"from MetsError s,ERRORTYPE e, LINKEDFILES l, METS  mm"
 		" LEFT JOIN ACCEPTEDERROR b ON b.HASHKEY = s.HASHKEY"
 		" where s.ID_ERRORTYPE = e.ID_TYPE and e.ID_CATEGORY = ? and s.ID_TESTSET = ? "
@@ -1208,6 +1208,7 @@ void dbrequest::getvErrorPerCategory_LINKED(std::vector<MetsError>& v, int id_ca
 			es.filenameShort = safe_sqlite3_column_text(pStmt,col++);
 			es.filenameFullPath = std::string(safe_sqlite3_column_text(pStmt,col++)) + es.filenameShort;
 			es.mets.year = sqlite3_column_int(pStmt,col++);
+			es.mets.fileName = safe_sqlite3_column_text(pStmt,col++);
 
 		 v.push_back(es);		 
 	  }
@@ -1226,7 +1227,7 @@ void dbrequest::getvErrorPerCategory_METS(std::vector<MetsError>& v, int id_cat,
 	
 	const char *zErrMsg= 0; 	
 	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,"
-		"s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE,a.filename,a.path,a.year "
+		"s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE,a.filename,a.path,a.year,a.FILENAME "
 		"from MetsError s,ERRORTYPE e, METS a"
 		" LEFT JOIN ACCEPTEDERROR b ON b.HASHKEY = s.HASHKEY"
 		" where s.ID_ERRORTYPE = e.ID_TYPE and e.ID_CATEGORY = ? and s.ID_TESTSET = ?"
@@ -1258,6 +1259,7 @@ void dbrequest::getvErrorPerCategory_METS(std::vector<MetsError>& v, int id_cat,
 			es.filenameShort = safe_sqlite3_column_text(pStmt,col++);
 			es.filenameFullPath = std::string(safe_sqlite3_column_text(pStmt,col++)) + '/' + es.filenameShort;
 			es.mets.year = sqlite3_column_int(pStmt,col++);
+			es.mets.fileName = safe_sqlite3_column_text(pStmt,col++);
 
 			v.push_back(es);		 
 		}
@@ -1345,7 +1347,7 @@ std::vector<MetsError> dbrequest::getErrorFilter(std::string error,int id_testse
 	sqlite3_stmt *pStmt;	
 		
 	const char *zErrMsg= 0; 
-	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY,b.VALUE "
+	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,s.MESSAGE,s.ID_ERRORTYPE,s.id_search,s.HASHKEY, b.VALUE "
 		"from MetsError s,ERRORTYPE e "
 		" LEFT JOIN ACCEPTEDERROR b ON b.HASHKEY = s.HASHKEY"
 		" where s.ID_ERRORTYPE = e.ID_type  and s.ID_TESTSET = ?";
