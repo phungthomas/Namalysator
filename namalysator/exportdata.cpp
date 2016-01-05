@@ -78,13 +78,13 @@ void exportdata::writeSummary(odswriter *ow, BatchDetail *bdetail,dbrequest *db)
 
 void exportdata::writeCatError(odswriter *ow, BatchDetail *bdetail,dbrequest *db)
 {
-	std::vector<ErrorCategory> vErrorCat = db->getErrorCategory();
-	for(size_t j= 0;j< vErrorCat.size();j++)
+	std::map<int,ErrorCategory> vErrorCat = db->getErrorCategory();
+	for(std::map<int,ErrorCategory>::iterator it=vErrorCat.begin();it != vErrorCat.end() ;it ++)
 	{	
-		std::vector<MetsError> vSchemaE= db->getvErrorPerCategory(vErrorCat[j].id_category,bdetail->idTestSet);
+		std::vector<MetsError> vSchemaE= db->getvErrorPerCategory(it->second.id_category,bdetail->idTestSet);
 		if(vSchemaE.size()!=0)
 		{
-			ow->open_sheet(vErrorCat[j].name);		
+			ow->open_sheet(it->second.name);		
 			ow->open_row();
 			ow->add_text("Severity");
 			ow->add_text("Type");

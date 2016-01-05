@@ -21,6 +21,7 @@ protected:
 private:
     Ui::w_errors *m_ui;
     //BatchDetail batchdetail;
+	map < int,std::vector<MetsError>*> brutoModel;
     void getTaberrors();
 private slots:
 	void exportExcel();

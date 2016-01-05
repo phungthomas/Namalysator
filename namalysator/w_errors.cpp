@@ -18,6 +18,13 @@ w_errors::w_errors(QWidget *parent) :
 w_errors::~w_errors()
 {
     delete m_ui;
+
+	for (map < int,std::vector<MetsError>*>::iterator it = brutoModel.begin(); it != brutoModel.end(); ++it)
+	{
+		delete it->second;
+	}
+	brutoModel.clear();
+
 }
 
 void w_errors::changeEvent(QEvent *e)
@@ -44,18 +51,22 @@ void w_errors::getTaberrors()
 	db.setDataBaseName(BatchDetail::getBatchDetail().database);
 	w_s->setBatchDetail();
 	m_ui->scrollAreaErrorTable->setWidget(w_s);	
-	std::vector<ErrorCategory> vCategory = db.getErrorCategory(); 	
-	for (size_t i=0; i< vCategory.size();i++)
+	std::map<int,ErrorCategory> vCategory = db.getErrorCategory(); 
+	
+	db.getAllvError(brutoModel, BatchDetail::getBatchDetail().idTestSet);
+	for (map < int,std::vector<MetsError>*>::iterator it = brutoModel.begin(); it != brutoModel.end(); ++it)
 	{
-		tabErrors *e = new tabErrors(vCategory[i].id_category,BatchDetail::getBatchDetail());	
+		it->first;
+		tabErrors *e = new tabErrors(it->first,it->second,BatchDetail::getBatchDetail());	
 		if (e->getSizeVError() !=0)
 		{			
-			m_ui->tabWidget->insertTab(i+1,e,vCategory[i].name.c_str());		
+			m_ui->tabWidget->insertTab(it->first+1,e,vCategory[it->first].name.c_str());		
 		}
 	}
 	dateerrortab *d = new dateerrortab(6);		
-	if( d->getSizeVError() !=0)
-		m_ui->tabWidget->addTab(d,"DATES");	
+	if( d->getSizeVError() !=0){
+		m_ui->tabWidget->addTab(d,"DATES");
+	} 
 }
 void w_errors::exportExcel()
 {

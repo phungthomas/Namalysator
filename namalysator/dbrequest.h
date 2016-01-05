@@ -136,6 +136,7 @@ class dbrequest
 	/// <param name="id_testset">id testset</param>
 	/// <returns>int count</returns>
 		std::vector<MetsError>getvErrorPerCategory(int id_cat, int idTestset);
+		void getAllvError(std::map<int,std::vector<MetsError>*> &, int idTestset); // purpose only one request for all
 private:
 		void getvErrorPerCategory_METS(std::vector<MetsError>& , int id_cat, int idTestset);
 		void getvErrorPerCategory_LINKED(std::vector<MetsError>& , int id_cat, int idTestset);
@@ -155,7 +156,7 @@ public:
 	/// <returns>LinkedFiles</returns>	
 		LinkedFiles getLinkedFiles(int id,std::string file_part);
 		
-		std::vector<ErrorCategory> getErrorCategory();
+		std::map<int,ErrorCategory > getErrorCategory();
 	/// <summary>get a vector of Mets errors filter by category or errortype </summary>
 	/// <param name="error">string error</param>
 	/// <param name="id_testset">id testset</param>

@@ -1155,6 +1155,67 @@ int dbrequest::getcountTitleCheck(int id_testset)
 	return count;
 }
 
+void dbrequest::getAllvError(std::map<int,std::vector<MetsError>*>& ret, int idTestset){
+
+	ConnectionDB* conn = g_pool.getConnection(databaseName);
+	MetsError es;
+	sqlite3_stmt *pStmt;
+	int category;
+	
+	const char *zErrMsg= 0; 	
+	std::string selectSql = "select s.ID,s.ID_RELATED,s.RELATED_TYPE,s.FILE_PART,s.ERRORLINE,s.ERRORCOLUMN,"
+		"s.MESSAGE,s.ID_ERRORTYPE,esv.GRAVITY,e.ERROR,s.id_search,s.HASHKEY,b.VALUE,l.FILENAME,mm.PATH,mm.year,mm.FILENAME,e.ID_CATEGORY "
+		"from MetsError s,ERRORTYPE e,ERRORSEVERITY esv, METS  mm"
+		" LEFT JOIN ACCEPTEDERROR b ON b.HASHKEY = s.HASHKEY"
+		" LEFT JOIN LINKEDFILES l ON s.ID_RELATED = l.ID_METS AND s.FILE_PART = l.FILEID"
+		" where s.ID_ERRORTYPE = e.ID_TYPE and s.ID_TESTSET = ? "
+		" AND s.ID_RELATED = mm.ID_METS"
+		" AND e.ID_SEVERITY=esv.ID_SEVERITY";
+	
+
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+
+    if(rc == SQLITE_OK)
+    {	
+		sqlite3_bind_int(pStmt,1,idTestset);
+
+      while(sqlite3_step(pStmt) == SQLITE_ROW)
+      {
+		  int col = 0;
+		  es.id = sqlite3_column_int(pStmt,col++);
+ 							
+			es.idRelatedFile = sqlite3_column_int(pStmt,col++);
+			es.relatedType = safe_sqlite3_column_text(pStmt,col++);
+			es.filePart =safe_sqlite3_column_text(pStmt,col++);
+			es.errorLine = sqlite3_column_int(pStmt,col++);
+			es.errorColumn = sqlite3_column_int(pStmt,col++);
+			es.message = safe_sqlite3_column_text(pStmt,col++);
+			es.errorType.id_type = sqlite3_column_int(pStmt,col++);
+			es.errorType.severity.gravity = safe_sqlite3_column_text(pStmt,col++);
+			es.errorType.error = safe_sqlite3_column_text(pStmt,col++);
+			es.id_search = safe_sqlite3_column_text(pStmt,col++);
+			es.hashkey = safe_sqlite3_column_text(pStmt,col++);
+			es.accepted = sqlite3_column_int(pStmt,col++);
+			es.filenameShort = safe_sqlite3_column_text(pStmt,col++);
+			es.filenameFullPath = std::string(safe_sqlite3_column_text(pStmt,col++)) + es.filenameShort;
+			es.mets.year = sqlite3_column_int(pStmt,col++);
+			es.mets.fileName = safe_sqlite3_column_text(pStmt,col++);
+			category= sqlite3_column_int(pStmt,col++);
+
+			if (ret.find(category) == ret.end()){
+				std::vector<MetsError> *v = new std::vector<MetsError>();
+				v->push_back(es);
+				ret[category]=v;
+			}else{
+				(*ret.find(category)).second->push_back(es);
+			};
+	  }
+	}else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+}
+
 /// <summary>get a vector of Mets errors </summary>
 /// <param name="id_cat">id category</param>
 /// <param name="id_testset">id testset</param>
@@ -1303,36 +1364,33 @@ std::vector<ErrorType> dbrequest::getDistinctErrorType(int id_cat,int id_testset
 
 /// <summary>get a vector of Errorcategory</summary>	
 /// <returns>vector of Errorcategory</returns>	
-std::vector<ErrorCategory> dbrequest::getErrorCategory()
+std::map<int,ErrorCategory> dbrequest::getErrorCategory()
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	std::vector<ErrorCategory> v;
+	std::map<int,ErrorCategory> ret;
 	ErrorCategory ec;	
 	sqlite3_stmt *pStmt;
 	const char *zErrMsg= "";    
-    std::string selectSql = "select * from ERRORCATEGORY";  
-	DEBUG_ME
+    std::string selectSql = "select ID,ID_CATEGORY,NAME from ERRORCATEGORY";  
+
     int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
-	std::map<int,int> mapYearCount;
+
     if(rc == SQLITE_OK)
     {	  
 		while(sqlite3_step(pStmt) == SQLITE_ROW)
-		{
-			int count = sqlite3_data_count(pStmt);		
-			for (int i =0;i<  count ;i++)
-			{
-				const char *result = safe_sqlite3_column_text(pStmt, i);
-				if (i==0) ec.id= atoi(result); 							
-				else if (i==1) ec.id_category = atoi(result);
-				else if (i==2) ec.name = result;				
-			}	
-			v.push_back(ec);		 
+		{				
+				int col = 0;
+				ec.id= sqlite3_column_int(pStmt, col++);	 							
+				ec.id_category = sqlite3_column_int(pStmt, col++);
+				ec.name = safe_sqlite3_column_text(pStmt, col++);					
+			
+			ret[ec.id]=ec;		 
 		}
    } else{
 		raiseError(conn,selectSql);
 	}
 	sqlite3_finalize(pStmt);
-   return v;
+   return ret;
 }
 
 /// <summary>get a vector of Mets errors filter by category or errortype </summary>

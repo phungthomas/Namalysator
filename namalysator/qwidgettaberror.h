@@ -19,7 +19,7 @@ class tabErrors : public QWidget
 	Q_OBJECT
 
 	public :
-		tabErrors(int id_cat,BatchDetail &batch);
+		tabErrors(int id_cat,std::vector<MetsError>*,BatchDetail &batch);
 		int getSizeVError();
 		int id_cat;
 		//QPlainTextEdit *plainTextEdit;
@@ -27,13 +27,13 @@ class tabErrors : public QWidget
 		QStringList labels;
 		QTableWidgetItem *newItem;
 		QTableWidget *table;
-		std::vector<MetsError> vSchemaE;
+		std::vector<MetsError>* vSchemaE;
 		BatchDetail& batch;
-		void fillCombo(int id_cat,const BatchDetail &batchDetail);
+		void fillCombo();
 		QComboBox *comboYear;
 		QComboBox *comboError;		
 		dbrequest db;		
-		void fillTableError(std::vector<MetsError> vSchemaE);
+		void fillTableError(std::vector<MetsError>& vSchemaE);
 		QPlainTextEdit *editor;
 		void findLine(const BatchDetail &batchDetail,MetsError s);
 		void createConnections();
@@ -42,8 +42,8 @@ class tabErrors : public QWidget
 		
 	private slots :
 		void accepted(bool,std::string);
-		void getcbCategory(QString category);
-		void getcbYear(QString year);
+		void getcbCategory(int category);
+		void getcbYear(int year);
 		void lineChanged(int col,int row);
 		void findNext();		
 };

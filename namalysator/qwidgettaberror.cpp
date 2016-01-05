@@ -6,22 +6,22 @@
 #include <QMessageBox>
 #include <fstream>
 #include "w_accepted.h"
-tabErrors::tabErrors(int id, BatchDetail &bd):batch(bd)
+tabErrors::tabErrors(int id,std::vector<MetsError>* v, BatchDetail &bd):batch(bd)
 {
 	id_cat = id;
 	db.setDataBaseName(batch.database);  
-	vSchemaE = db.getvErrorPerCategory(id_cat,batch.idTestSet);
+	vSchemaE = v;
 	labels  <<tr("Accepted")<< tr("Severity") << tr("Error Category") << tr("Location")<<tr("Message") << tr("File") << tr("Year")<<tr("METS Filename");// << tr("Number of issues");
 	editor = new CodeEditor();
 	//plainTextEdit = new QPlainTextEdit();	
 	btnNext = new QPushButton("Next");
 	table = new QTableWidget();
-	fillTableError(vSchemaE);
+	fillTableError(*vSchemaE);
 	comboError = new QComboBox();
 	comboYear = new QComboBox();
 
 	search_item = "";	
-	fillCombo(id_cat,batch);
+	fillCombo();
 	createConnections();
 	QSplitter *splitter = new QSplitter(Qt::Vertical,this);
 	splitter->addWidget(table);
@@ -36,27 +36,30 @@ tabErrors::tabErrors(int id, BatchDetail &bd):batch(bd)
 
 void tabErrors::createConnections()
 {
-	connect(comboError, SIGNAL(currentIndexChanged(QString)),this, SLOT(getcbCategory(QString)));
+	connect(comboError, SIGNAL(currentIndexChanged(int)),this, SLOT(getcbCategory(int)));
 	connect(table,SIGNAL(cellClicked(int,int)),this,SLOT(lineChanged(int,int)));
-	connect(comboYear,SIGNAL(currentIndexChanged(QString)),this, SLOT(getcbYear(QString)));	
+	connect(comboYear,SIGNAL(currentIndexChanged(int)),this, SLOT(getcbYear(int)));	
 	connect(btnNext,SIGNAL(clicked()),this,SLOT(findNext()));
 }
 
-void tabErrors::getcbCategory(QString errortype)
+void tabErrors::getcbCategory(int errortype)
 {	
-	vSchemaE =db.getErrorFilter(errortype.toStdString(),batch.idTestSet,id_cat);	
-	if(comboYear->currentText()=="")
+	//(*vSchemaE) =db.getErrorFilter(errortype.toStdString(),batch.idTestSet,id_cat);
+
+	QVariant data = comboError->itemData(errortype);
+	
+	if(data.toInt() == -1)
 	{
-		fillTableError(vSchemaE);
+		fillTableError(*vSchemaE);
 	}
 	else
 	{
 		std::vector<MetsError> vTemp;
-		for(size_t i =0;i < vSchemaE.size();i++)
+		for(size_t i =0;i < (*vSchemaE).size();i++)
 		{
-			if (vSchemaE[i].mets.year == comboYear->currentText().toInt())
+			if ((*vSchemaE)[i].errorType.id_type == data.toInt())
 			{
-				vTemp.push_back(vSchemaE[i]);
+				vTemp.push_back((*vSchemaE)[i]);
 			}	
 		}	
 		fillTableError(vTemp);			
@@ -64,21 +67,24 @@ void tabErrors::getcbCategory(QString errortype)
 }
 
 
-void tabErrors::getcbYear(QString cbyear)
+void tabErrors::getcbYear(int cbyear)
 {	
-	vSchemaE = db.getErrorFilter(comboError->currentText().toStdString(),batch.idTestSet,id_cat);	
-	if(cbyear=="")
+	//*vSchemaE = db.getErrorFilter(comboError->currentText().toStdString(),batch.idTestSet,id_cat);
+
+	QVariant year = comboYear->itemData(cbyear);
+
+	if(year.toInt()==-1)
 	{
-		fillTableError(vSchemaE);
+		fillTableError(*vSchemaE);
 	}
 	else
 	{
 		std::vector<MetsError> vTemp;
-		for(size_t i =0;i < vSchemaE.size();i++)
+		for(size_t i =0;i < vSchemaE->size();i++)
 		{
-			if (vSchemaE[i].mets.year == cbyear.toInt())
+			if ((*vSchemaE)[i].mets.year == year.toInt())
 			{
-				vTemp.push_back(vSchemaE[i]);
+				vTemp.push_back((*vSchemaE)[i]);
 			}	
 		}	
 		fillTableError(vTemp);		
@@ -94,7 +100,7 @@ void tabErrors::lineChanged(int row,int col)
 	if ((col !=0) && (row!= 0))
 	{
 		std::string link;
-		MetsError s = vSchemaE[row-1];
+		MetsError s = (*vSchemaE)[row-1];
 
 		link = batch.path + s.filenameFullPath;	
 
@@ -109,7 +115,7 @@ void tabErrors::lineChanged(int row,int col)
 
 }
 
-void tabErrors::fillTableError(std::vector<MetsError> vError)
+void tabErrors::fillTableError(std::vector<MetsError>& vError)
 {
 
 	table->setColumnCount(labels.size());
@@ -180,29 +186,37 @@ void tabErrors::fillTableError(std::vector<MetsError> vError)
 	}
 }
 //! changer nom combo
-void tabErrors::fillCombo(int id_cat,const BatchDetail &batch)
+void tabErrors::fillCombo()
 {
-	std::vector<ErrorType> v = db.getDistinctErrorType(id_cat,batch.idTestSet);
-	comboError->addItem("");	
-	for (size_t i = 0;i < v.size();i++)
-	{
-		comboError->addItem(v[i].error.c_str());	
-	}	
 
-	std::map<int,std::pair<int,int> > m = db.getSumMetsYear(batch.idTestSet);
-	comboYear->addItem("");
-	for (std::map<int,std::pair<int,int> >::iterator it = m.begin(); it!= m.end();it++)
-	{
-		QString ss;
-		comboYear->addItem(ss.setNum(it->first));
+	comboError->addItem("",QVariant(-1));
+	comboYear->addItem("",QVariant(-1));
+
+	std::set<int> cats;
+	std::set<int> valyear;
+	
+	for ( size_t i=0; i < (*vSchemaE).size();i++){
+		int errT = (*vSchemaE)[i].errorType.id_type;
+		;
+		if (cats.find(errT) == cats.end()){
+			cats.insert(errT);
+			comboError->addItem((*vSchemaE)[i].errorType.error.c_str(),QVariant(errT));
+		}
+		int year = (*vSchemaE)[i].mets.year;
+		if ( valyear.find(year)==valyear.end()){
+			valyear.insert(year);
+			QString ss;
+			comboYear->addItem(ss.setNum(year),QVariant(year));
+		}
 	}
+	
 	table->setCellWidget(0,2,comboError);
 	table->setCellWidget(0,6,comboYear);
 }
 
 int tabErrors::getSizeVError()
 {
-	return vSchemaE.size();
+	return (*vSchemaE).size();
 }
 
 void tabErrors::findLine(const BatchDetail &batch,MetsError s)
