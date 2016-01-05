@@ -47,8 +47,9 @@ void tabErrors::getcbCategory(int errortype)
 	//(*vSchemaE) =db.getErrorFilter(errortype.toStdString(),batch.idTestSet,id_cat);
 
 	QVariant data = comboError->itemData(errortype);
+	int compInt = data.toInt();
 	
-	if(data.toInt() == -1)
+	if(compInt == -1)
 	{
 		fillTableError(*vSchemaE);
 	}
@@ -57,7 +58,7 @@ void tabErrors::getcbCategory(int errortype)
 		std::vector<MetsError> vTemp;
 		for(size_t i =0;i < (*vSchemaE).size();i++)
 		{
-			if ((*vSchemaE)[i].errorType.id_type == data.toInt())
+			if ((*vSchemaE)[i].errorType.id_type == compInt)
 			{
 				vTemp.push_back((*vSchemaE)[i]);
 			}	
@@ -72,8 +73,8 @@ void tabErrors::getcbYear(int cbyear)
 	//*vSchemaE = db.getErrorFilter(comboError->currentText().toStdString(),batch.idTestSet,id_cat);
 
 	QVariant year = comboYear->itemData(cbyear);
-
-	if(year.toInt()==-1)
+	int compInt = year.toInt();
+	if(compInt==-1)
 	{
 		fillTableError(*vSchemaE);
 	}
@@ -82,7 +83,7 @@ void tabErrors::getcbYear(int cbyear)
 		std::vector<MetsError> vTemp;
 		for(size_t i =0;i < vSchemaE->size();i++)
 		{
-			if ((*vSchemaE)[i].mets.year == year.toInt())
+			if ((*vSchemaE)[i].mets.year == compInt)
 			{
 				vTemp.push_back((*vSchemaE)[i]);
 			}	
