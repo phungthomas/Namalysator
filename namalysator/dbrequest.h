@@ -157,11 +157,6 @@ public:
 		LinkedFiles getLinkedFiles(int id,std::string file_part);
 		
 		std::map<int,ErrorCategory > getErrorCategory();
-	/// <summary>get a vector of Mets errors filter by category or errortype </summary>
-	/// <param name="error">string error</param>
-	/// <param name="id_testset">id testset</param>
-	/// <returns>int count</returns>
-		std::vector<MetsError> getErrorFilter(std::string error,int id_testset,int id_cat);
 	/// <summary>get DateError found by the metsverfier</summary>
 	/// <param name="id_testset">id testset</param>
 	/// <returns>vector of DateError</returns>
