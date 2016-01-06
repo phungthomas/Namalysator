@@ -408,7 +408,7 @@ void w_structview::createTree()
 	}
 		
 	QTreeWidgetItem *widget = new QTreeWidgetItem(m_ui->treeWidget,item2->counter);
-	widget->setText(0,item2->label.c_str());
+	widget->setText(0,QString::fromUtf8((item2->label).c_str()));
 	counter2TreeItem.clear();
 	constructTOCrecursively(item2, widget);
 	m_ui->treeWidget->expandAll();		
