@@ -45,6 +45,7 @@ class tabErrors : public QWidget
 		void getcbCategory(int category);
 		void getcbYear(int year);
 		void lineChanged(int col,int row);
+		void lineChanged(int col,int row,int,int); // adaptation of event
 		void findNext();		
 };
 

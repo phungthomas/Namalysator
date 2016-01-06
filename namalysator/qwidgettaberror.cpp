@@ -6,6 +6,8 @@
 #include <QMessageBox>
 #include <fstream>
 #include "w_accepted.h"
+#include <QLabel>
+
 tabErrors::tabErrors(int id,std::vector<MetsError>* v, BatchDetail &bd):batch(bd)
 {
 	id_cat = id;
@@ -38,6 +40,7 @@ void tabErrors::createConnections()
 {
 	connect(comboError, SIGNAL(currentIndexChanged(int)),this, SLOT(getcbCategory(int)));
 	connect(table,SIGNAL(cellClicked(int,int)),this,SLOT(lineChanged(int,int)));
+	connect(table,SIGNAL(currentCellChanged(int,int,int,int)),this,SLOT(lineChanged(int,int,int,int)));
 	connect(comboYear,SIGNAL(currentIndexChanged(int)),this, SLOT(getcbYear(int)));	
 	connect(btnNext,SIGNAL(clicked()),this,SLOT(findNext()));
 }
@@ -92,6 +95,12 @@ void tabErrors::getcbYear(int cbyear)
 	}
 }
 
+void tabErrors::lineChanged(int row,int col,int,int){
+	if ( col == 5 ){
+		lineChanged(row,col);
+	}
+}
+
 //TODO changer lineChanged
 void tabErrors::lineChanged(int row,int col)
 {
@@ -111,6 +120,44 @@ void tabErrors::lineChanged(int row,int col)
 			editor->setPlainText(QString::fromUtf8(file.readAll()));
 
 		findLine(batch, s);
+		std::string filename  = s.filenameShort;
+		static QWidget* dial = new QWidget();
+		if ( filename.size()!=0 ){
+			std::string str=link;
+			std::string rep="/png/";
+			str = str.replace(str.end()-4,str.end(),".png",4);
+			std::size_t it = str.find("/alto/");
+			str = str.replace(it,6,rep);
+			QImage icon;
+			icon.load(str.c_str());
+
+			//table->item(row,6)->setIcon(icon);
+		
+
+			
+			dial->setVisible(true);
+			//dial->trUtf8("Toto");
+
+
+
+			static QVBoxLayout *layout = new QVBoxLayout;
+			static QLabel *image = new QLabel();
+			image->setPixmap(QPixmap::fromImage(icon.scaled(250,250,Qt::KeepAspectRatio,
+		           Qt::SmoothTransformation /*Qt::FastTransformation*/),
+				   Qt::DiffuseAlphaDither|Qt::ColorOnly));
+			layout->addWidget(image);
+
+			
+			dial->setLayout(layout);
+
+			dial->show();
+			dial->adjustSize();
+            dial->raise();
+			//dial->activateWindow();
+
+
+			
+		}
 		//	ShellExecuteA(NULL, "open",link.c_str(), NULL, NULL, SW_SHOWNORMAL);
 	}
 
