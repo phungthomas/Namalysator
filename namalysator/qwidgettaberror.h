@@ -30,12 +30,14 @@ class tabErrors : public QWidget
 		QTableWidgetItem *newItem;
 		QTableWidget *table;
 		std::vector<MetsError>* vSchemaE;
+		std::vector<MetsError> vTemp;
+		std::vector<MetsError>* workingE;
 		BatchDetail& batch;
 		void fillCombo();
 		QComboBox *comboYear;
 		QComboBox *comboError;		
 		dbrequest db;		
-		void fillTableError(std::vector<MetsError>& vSchemaE);
+		void fillTableError(std::vector<MetsError>* vSchemaE);
 		QPlainTextEdit *editor;
 		void findLine(const BatchDetail &batchDetail,MetsError s);
 		void createConnections();

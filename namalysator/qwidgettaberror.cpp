@@ -18,7 +18,7 @@ tabErrors::tabErrors(int id,std::vector<MetsError>* v, BatchDetail &bd,DialogIma
 	//plainTextEdit = new QPlainTextEdit();	
 	btnNext = new QPushButton("Next");
 	table = new QTableWidget();
-	fillTableError(*vSchemaE);
+	fillTableError(vSchemaE);
 	comboError = new QComboBox();
 	comboYear = new QComboBox();
 
@@ -54,11 +54,11 @@ void tabErrors::getcbCategory(int errortype)
 	
 	if(compInt == -1)
 	{
-		fillTableError(*vSchemaE);
+		fillTableError(vSchemaE);
 	}
 	else
 	{
-		std::vector<MetsError> vTemp;
+		vTemp.clear();
 		for(size_t i =0;i < (*vSchemaE).size();i++)
 		{
 			if ((*vSchemaE)[i].errorType.id_type == compInt)
@@ -66,7 +66,7 @@ void tabErrors::getcbCategory(int errortype)
 				vTemp.push_back((*vSchemaE)[i]);
 			}	
 		}	
-		fillTableError(vTemp);			
+		fillTableError(&vTemp);			
 	}	
 }
 
@@ -79,11 +79,11 @@ void tabErrors::getcbYear(int cbyear)
 	int compInt = year.toInt();
 	if(compInt==-1)
 	{
-		fillTableError(*vSchemaE);
+		fillTableError(vSchemaE);
 	}
 	else
 	{
-		std::vector<MetsError> vTemp;
+		vTemp.clear();
 		for(size_t i =0;i < vSchemaE->size();i++)
 		{
 			if ((*vSchemaE)[i].mets.year == compInt)
@@ -91,7 +91,7 @@ void tabErrors::getcbYear(int cbyear)
 				vTemp.push_back((*vSchemaE)[i]);
 			}	
 		}	
-		fillTableError(vTemp);		
+		fillTableError(&vTemp);		
 	}
 }
 
@@ -110,7 +110,7 @@ void tabErrors::lineChanged(int row,int col)
 	if ((col !=0) && (row!= 0))
 	{
 		std::string link;
-		MetsError s = (*vSchemaE)[row-1];
+		MetsError s = (*workingE)[row-1];
 
 		link = batch.path + s.filenameFullPath;	
 
@@ -141,11 +141,11 @@ void tabErrors::lineChanged(int row,int col)
 
 }
 
-void tabErrors::fillTableError(std::vector<MetsError>& vError)
+void tabErrors::fillTableError(std::vector<MetsError>* vError)
 {
-
+	workingE = vError;
 	table->setColumnCount(labels.size());
-	table->setRowCount(vError.size()+1);		
+	table->setRowCount(vError->size()+1);		
 	table->setEditTriggers(false);
 	table->setHorizontalHeaderLabels(labels);
 	table->setAlternatingRowColors(true);
@@ -161,42 +161,42 @@ void tabErrors::fillTableError(std::vector<MetsError>& vError)
 		table->setColumnWidth(i,100);		
 	}	
 
-	for( size_t i=0;i < vError.size(); i++)
+	for( size_t i=0;i < vError->size(); i++)
 	{
 		QString ss;	
 		int col = 0;
 
-		acceptedW* checkBox = new acceptedW(vError[i].accepted,vError[i].hashkey);
+		acceptedW* checkBox = new acceptedW((*vError)[i].accepted,(*vError)[i].hashkey);
 		table->setCellWidget(i+1, col++,checkBox);
 		connect ( checkBox, SIGNAL(changeHash(bool,std::string)), this, SLOT(accepted(bool,std::string)));
 
-		newItem = new QTableWidgetItem(vError[i].errorType.severity.gravity.c_str(),i);		
+		newItem = new QTableWidgetItem((*vError)[i].errorType.severity.gravity.c_str(),i);		
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1, col++, newItem);
 
-		newItem = new QTableWidgetItem(vError[i].errorType.error.c_str(),i);
+		newItem = new QTableWidgetItem((*vError)[i].errorType.error.c_str(),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1, col++, newItem);
 
-		newItem = new QTableWidgetItem(vError[i].filePart.c_str(),i);
+		newItem = new QTableWidgetItem((*vError)[i].filePart.c_str(),i);
 		//		newItem = new QTableWidgetItem(ss.setNum(vError[i].errorLine),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1, col++, newItem);
 
-		newItem = new QTableWidgetItem(QString::fromUtf8(vError[i].message.c_str()),i);
+		newItem = new QTableWidgetItem(QString::fromUtf8((*vError)[i].message.c_str()),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1, col++, newItem);		
 
-		newItem = new QTableWidgetItem(vError[i].filenameShort.c_str(),i);
+		newItem = new QTableWidgetItem((*vError)[i].filenameShort.c_str(),i);
 
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1,col++, newItem);
 
-		newItem = new QTableWidgetItem(ss.setNum(vError[i].mets.year),i);
+		newItem = new QTableWidgetItem(ss.setNum((*vError)[i].mets.year),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1,col++, newItem);
 
-		newItem = new QTableWidgetItem(vError[i].mets.fileName.c_str(),i);
+		newItem = new QTableWidgetItem((*vError)[i].mets.fileName.c_str(),i);
 		newItem->setTextAlignment(Qt::AlignCenter);
 		table->setItem(i+1,col++, newItem);
 		
