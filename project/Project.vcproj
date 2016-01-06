@@ -253,10 +253,6 @@
 					Name="semanticchecks"
 					>
 					<File
-						RelativePath=".\verifyblocks.cpp"
-						>
-					</File>
-					<File
 						RelativePath=".\verifycutouts.cpp"
 						>
 					</File>
@@ -297,6 +293,10 @@
 						>
 						<File
 							RelativePath=".\verifyalto.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\verifyblocks.cpp"
 							>
 						</File>
 						<File
@@ -935,6 +935,10 @@
 				</FileConfiguration>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\ClassDiagram11.cd"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

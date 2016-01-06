@@ -9,6 +9,7 @@
 #include <QGridLayout>
 #include "structgui.h"
 #include "dbrequest.h"
+#include "dialogImage.h"
 #include <QPlainTextEdit>
 #include <QScrollArea>
 #include "codeeditor.h"
@@ -19,11 +20,12 @@ class tabErrors : public QWidget
 	Q_OBJECT
 
 	public :
-		tabErrors(int id_cat,std::vector<MetsError>*,BatchDetail &batch);
+		tabErrors(int id_cat,std::vector<MetsError>*,BatchDetail &batch,DialogImage* dialogTab);
 		int getSizeVError();
 		int id_cat;
 		//QPlainTextEdit *plainTextEdit;
 	private : 
+		DialogImage* dial;
 		QStringList labels;
 		QTableWidgetItem *newItem;
 		QTableWidget *table;

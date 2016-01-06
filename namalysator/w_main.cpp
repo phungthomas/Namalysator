@@ -138,6 +138,8 @@ void w_main::openSummaryErrorsWindow()
 	titleChange("Error Summary");
 	this->resize(1050,800);
 	this->setCentralWidget(w); 
+
+	//connect(this, SIGNAL(exited()), w, SLOT(exit()));
 }
 
 void w_main::openCalendarWindow()

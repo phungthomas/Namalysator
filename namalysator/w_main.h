@@ -46,8 +46,6 @@ private:
 	QAction *openSelectBatch;
 	QToolBar *fileTools;	
 
-
-
 public slots:
 		void createActions();
 		void newsPaperActions();

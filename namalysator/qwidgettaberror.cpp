@@ -8,7 +8,7 @@
 #include "w_accepted.h"
 #include <QLabel>
 
-tabErrors::tabErrors(int id,std::vector<MetsError>* v, BatchDetail &bd):batch(bd)
+tabErrors::tabErrors(int id,std::vector<MetsError>* v, BatchDetail &bd,DialogImage* dialogTab):batch(bd),dial(dialogTab)
 {
 	id_cat = id;
 	db.setDataBaseName(batch.database);  
@@ -121,7 +121,7 @@ void tabErrors::lineChanged(int row,int col)
 
 		findLine(batch, s);
 		std::string filename  = s.filenameShort;
-		static QWidget* dial = new QWidget();
+		
 		if ( filename.size()!=0 ){
 			std::string str=link;
 			std::string rep="/png/";
@@ -131,29 +131,7 @@ void tabErrors::lineChanged(int row,int col)
 			QImage icon;
 			icon.load(str.c_str());
 
-			//table->item(row,6)->setIcon(icon);
-		
-
-			
-			dial->setVisible(true);
-			//dial->trUtf8("Toto");
-
-
-
-			static QVBoxLayout *layout = new QVBoxLayout;
-			static QLabel *image = new QLabel();
-			image->setPixmap(QPixmap::fromImage(icon.scaled(250,250,Qt::KeepAspectRatio,
-		           Qt::SmoothTransformation /*Qt::FastTransformation*/),
-				   Qt::DiffuseAlphaDither|Qt::ColorOnly));
-			layout->addWidget(image);
-
-			
-			dial->setLayout(layout);
-
-			dial->show();
-			dial->adjustSize();
-            dial->raise();
-			//dial->activateWindow();
+			dial->setQImage ( icon );
 
 
 			

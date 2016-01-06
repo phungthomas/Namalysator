@@ -3,6 +3,8 @@
 
 #include <QtGui/QWidget>
 #include "structgui.h"
+#include "dialogImage.h"
+
 namespace Ui {
     class w_errors;
 }
@@ -20,12 +22,12 @@ protected:
 
 private:
     Ui::w_errors *m_ui;
+	DialogImage* dialogTab;
     //BatchDetail batchdetail;
 	map < int,std::vector<MetsError>*> brutoModel;
     void getTaberrors();
 private slots:
 	void exportExcel();
-
 };
 
 #endif // W_ERRORS_H

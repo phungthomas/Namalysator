@@ -8,7 +8,7 @@
 
 w_errors::w_errors(QWidget *parent) :
     QWidget(parent),
-    m_ui(new Ui::w_errors)
+    m_ui(new Ui::w_errors),dialogTab(new DialogImage(this))
 {
     m_ui->setupUi(this);  
    
@@ -18,6 +18,10 @@ w_errors::w_errors(QWidget *parent) :
 w_errors::~w_errors()
 {
     delete m_ui;
+	
+	dialogTab->close();
+	
+	delete dialogTab;
 
 	for (map < int,std::vector<MetsError>*>::iterator it = brutoModel.begin(); it != brutoModel.end(); ++it)
 	{
@@ -57,7 +61,7 @@ void w_errors::getTaberrors()
 	for (map < int,std::vector<MetsError>*>::iterator it = brutoModel.begin(); it != brutoModel.end(); ++it)
 	{
 		it->first;
-		tabErrors *e = new tabErrors(it->first,it->second,BatchDetail::getBatchDetail());	
+		tabErrors *e = new tabErrors(it->first,it->second,BatchDetail::getBatchDetail(),dialogTab);	
 		if (e->getSizeVError() !=0)
 		{			
 			m_ui->tabWidget->insertTab(it->first+1,e,vCategory[it->first].name.c_str());		
