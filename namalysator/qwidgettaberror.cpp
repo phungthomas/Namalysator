@@ -112,15 +112,20 @@ void tabErrors::lineChanged(int row,int col)
 		std::string link;
 		MetsError s = (*workingE)[row-1];
 
-		link = batch.path + s.filenameFullPath;	
+		std::string filename  = s.filenameShort;
 
+		if ( filename.size() == 0) {
+			link = batch.path + s.filenameFullPath +'/'+ s.mets.fileName;
+		}else{
+			link = batch.path + s.filenameFullPath;	
+		}
 
 		QFile file(link.c_str());
 		if (file.open(QIODevice::ReadOnly))
 			editor->setPlainText(QString::fromUtf8(file.readAll()));
 
 		findLine(batch, s);
-		std::string filename  = s.filenameShort;
+		
 		
 		if ( filename.size()!=0 ){
 			std::string str=link;
