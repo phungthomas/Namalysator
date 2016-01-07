@@ -58,6 +58,8 @@ public:
     QWidget *scrollAreaWidgetContents;
     QHBoxLayout *horizontalLayout_4;
     QListWidget *listErrors;
+    QVBoxLayout *verticalLayout_6;
+    QPushButton *btnDeleteSelectedItem;
     QPushButton *btnViewHtml;
     QVBoxLayout *verticalLayout_4;
     QLabel *label_5;
@@ -267,10 +269,20 @@ public:
 
         horizontalLayout_4->addWidget(listErrors);
 
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        btnDeleteSelectedItem = new QPushButton(w_structview);
+        btnDeleteSelectedItem->setObjectName(QString::fromUtf8("btnDeleteSelectedItem"));
+
+        verticalLayout_6->addWidget(btnDeleteSelectedItem);
+
         btnViewHtml = new QPushButton(w_structview);
         btnViewHtml->setObjectName(QString::fromUtf8("btnViewHtml"));
 
-        horizontalLayout_4->addWidget(btnViewHtml);
+        verticalLayout_6->addWidget(btnViewHtml);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_6);
 
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
@@ -340,6 +352,7 @@ public:
         lblPageEnd->setText(QString());
         btnNext->setText(QApplication::translate("w_structview", ">", 0, QApplication::UnicodeUTF8));
         btnClearPainter->setText(QApplication::translate("w_structview", "Clear highlighting", 0, QApplication::UnicodeUTF8));
+        btnDeleteSelectedItem->setText(QApplication::translate("w_structview", "Delete Selected Error Item", 0, QApplication::UnicodeUTF8));
         btnViewHtml->setText(QApplication::translate("w_structview", "View All Batch Errors", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("w_structview", "Blocking :", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("w_structview", "Major :", 0, QApplication::UnicodeUTF8));

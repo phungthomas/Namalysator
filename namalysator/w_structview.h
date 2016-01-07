@@ -76,6 +76,7 @@ private:
     int currentLevel;
 	Item *currentItem;
 	QTreeWidgetItem *currentWidget;
+	QListWidgetItem *currentWidgetSelected;
     void metsAltoParser();
     void createTree();
     void fillComboBoxError();
@@ -127,6 +128,7 @@ private slots :
 	void getIdMetsII(int);
 	void showThumb(int);
 	void getIdMets(QListWidgetItem*);
+	void showError(QListWidgetItem*);
 	void previous();
 	void next();
 	void showPage(int);
@@ -145,6 +147,8 @@ private slots :
 	void viewHtml();
 	void viewMetsFile();
 	void viewMetsDir();
+	void deleteSelectedItem();
+	void deleteListItem(int item);
 
 	void rbhelperCalendar(bool);
 	void rbhelperSampling(bool);

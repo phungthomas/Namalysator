@@ -1506,7 +1506,64 @@ std::vector<DateComment> dbrequest::getDateCommentid(int idError)
 }
 
 
+void dbrequest::deleteStructureErrorId(int id)
+{
+	ConnectionDB* conn = g_pool.getConnection(databaseName);	
+	sqlite3_stmt *pStmt;
 
+	int rc;	
+	const char *zErrMsg= 0; 
+	std::string selectSql = "DELETE FROM STRUCTUREERROR where ID = ?"; 
+
+	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+  
+	if(rc == SQLITE_OK)
+	{	
+		sqlite3_bind_int(pStmt,1,id);
+
+		if ( sqlite3_step(pStmt)!= SQLITE_DONE ) raiseError(conn,selectSql);
+	
+   }else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+
+}
+
+
+
+StructureError dbrequest::getStructureErrorId(int id)
+{
+	ConnectionDB* conn = g_pool.getConnection(databaseName);	
+	sqlite3_stmt *pStmt;
+
+	int rc;	
+	const char *zErrMsg= 0; 
+	std::string selectSql = "SELECT ID,ID_METS,IMAGEPATH,MESSAGE,ID_ERRORTYPE,FILEID,CUSTOM,PAGENB FROM STRUCTUREERROR where ID = ?"; 
+
+	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	StructureError se;  
+	if(rc == SQLITE_OK)
+	{	
+		sqlite3_bind_int(pStmt,1,id);
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{   int col=0;
+			se.id = sqlite3_column_int(pStmt,col++);
+			se.id_mets = sqlite3_column_int(pStmt,col++);
+			se.pathImage = safe_sqlite3_column_text(pStmt, col++);
+			se.message = safe_sqlite3_column_text(pStmt, col++);
+			se.errorType = getErrorTypeWithId(sqlite3_column_int(pStmt,col++));
+			se.fileid = safe_sqlite3_column_text(pStmt, col++);
+			se.custom = safe_sqlite3_column_text(pStmt, col++);
+			se.pagenb = sqlite3_column_int(pStmt, col++);		 
+		}		
+   }else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+	return se;
+}
 
 std::vector<StructureError> dbrequest::getStructureError(int id_Mets)
 {

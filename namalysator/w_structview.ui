@@ -315,11 +315,22 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnViewHtml">
-       <property name="text">
-        <string>View All Batch Errors</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QPushButton" name="btnDeleteSelectedItem">
+         <property name="text">
+          <string>Delete Selected Error Item</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnViewHtml">
+         <property name="text">
+          <string>View All Batch Errors</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_4">

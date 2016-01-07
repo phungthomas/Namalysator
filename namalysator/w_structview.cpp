@@ -18,6 +18,8 @@
 	
 #include <cstdio>
 #include <cstdlib>
+#include <QMessageBox>
+
 namespace fs = boost::filesystem;
 
 
@@ -50,7 +52,7 @@ void w_structview::setQMainWindow(QMainWindow* _qmain){
 w_structview::w_structview(QWidget *parent) :
     QWidget(parent),
     m_ui(new Ui::w_structview),
-	m_colors()
+	m_colors(),currentWidgetSelected(0)
 {
     m_ui->setupUi(this);
 
@@ -93,6 +95,7 @@ void w_structview::createConnections()
 	connect(m_ui->btnNext,SIGNAL(clicked()),this,SLOT(next()));
 	connect(m_ui->lblPage,SIGNAL(valueChanged(int)),this,SLOT(showPage(int)));
 	connect(m_ui->btnStructure,SIGNAL(clicked()),this,SLOT(structure()));
+	connect(m_ui->btnDeleteSelectedItem,SIGNAL(clicked()),this,SLOT(deleteSelectedItem()));
 	connect(m_ui->btnError,SIGNAL(clicked()),this,SLOT(openErrorScreen()));
 	connect(m_ui->btnClearPainter,SIGNAL(clicked()),this,SLOT(clearPainter()));		
 	connect(m_ui->btnViewHtml,SIGNAL(clicked()),this,SLOT(viewHtml()));
@@ -111,6 +114,45 @@ void w_structview::createConnections()
 	//connect(bookList, SIGNAL(metsThumb(int)), this, SLOT(getIdMetsII(int)));
 	
 }
+
+void w_structview::deleteSelectedItem(){
+	static QMessageBox* qmesg=new QMessageBox();
+	if ( currentWidgetSelected == 0 ){
+		m_ui->btnDeleteSelectedItem->setEnabled(false);
+		return;
+	}
+
+	int idItem = currentWidgetSelected ->data(Qt::UserRole).toInt();
+
+	
+	StructureError s = db.getStructureErrorId(idItem);
+
+	qmesg->setDetailedText((s.getError()+"-"+s.message).c_str());
+	qmesg->setText("Are you sure to delete the selected item?");
+	qmesg->setStandardButtons(QMessageBox::Ok|QMessageBox::Cancel);
+
+	qmesg->show();
+	int ret = qmesg->exec();
+
+	switch (ret){
+	  case QMessageBox::Cancel : break;
+	  case QMessageBox::Ok : deleteListItem( idItem );
+	}
+
+
+}
+
+void w_structview::deleteListItem(int item){
+	db.deleteStructureErrorId(item);
+	this->fillListErrors();
+}
+
+
+void w_structview::showError(QListWidgetItem* qq){
+	m_ui ->btnDeleteSelectedItem ->setEnabled(true);
+	this->currentWidgetSelected = qq;
+}
+
 
 w_structview::~w_structview()
 {
@@ -652,7 +694,11 @@ void w_structview::enableButton(bool enable)
 	m_ui->btnZoomOut->setEnabled(enable);
 	m_ui->lblPage->setEnabled(enable);
 	m_ui->btnPrevious->setEnabled(enable);
-	m_ui->btnClearPainter->setEnabled(enable);	
+	m_ui->btnClearPainter->setEnabled(enable);
+	if ( !enable ) {
+		m_ui->btnDeleteSelectedItem->setEnabled(enable);
+		currentWidgetSelected = 0;
+	}
 }
 
 void w_structview::clear()
@@ -746,7 +792,8 @@ void w_structview::fillListErrors()
 	int blocking=0;
 	
 	//m_ui->btnViewHtml->setEnabled(false);
-	m_ui->listErrors->clear(); 
+	m_ui->listErrors->clear();
+	m_ui->btnDeleteSelectedItem->setEnabled(false);
 	std::vector<StructureError> vListErrors = db.getStructureError(mets.idMets);
 
 	for ( std::vector<StructureError>::iterator it = vListErrors.begin(); it != vListErrors.end(); it++)
@@ -756,7 +803,8 @@ void w_structview::fillListErrors()
 		if (it->fileid.length() != 0)
 			txt << it->fileid <<  ":" ;
 		txt << it->errorType.severity.gravity  << ": " << it->getError() << " - " << it->message;
-		new QListWidgetItem(txt.str().c_str(),  m_ui->listErrors,mets.idMets);	
+		QListWidgetItem* temp  = new QListWidgetItem(txt.str().c_str(),  m_ui->listErrors);	
+		temp->setData(Qt::UserRole,QVariant(it->id));
 		//m_ui->btnViewHtml->setEnabled(true);
 		
 		if (it->errorType.severity.gravity=="MINOR")	minor++;		
