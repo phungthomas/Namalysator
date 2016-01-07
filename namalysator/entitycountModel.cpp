@@ -1,4 +1,7 @@
 #include "entitycountModel.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 entityCountModel::entityCountModel(dbrequest & _db,QObject *parent): QAbstractTableModel(parent), db(_db){
 }
@@ -20,6 +23,55 @@ void entityCountModel::init(){
 	for ( std::map<std::string,std::map < string , int > >::iterator it = table.begin();it != table.end(); it++){
 		tableIndex[ pos++ ]= it->first;
 	};
+
+}
+
+void entityCountModel::exportFile(std::string filename){
+
+	ofstream myfile;
+	myfile.open (filename.c_str());
+	
+	
+  
+	std::stringstream txt;
+
+	txt<<"FILENAME;";
+
+	std::map< int,string> mapHeaderPos;
+	int pos=0;
+	for ( std::map< string,int>::iterator it = header.begin();it != header.end(); it++){
+		//headerIndex[ pos++ ]= it->first;
+		txt<<it->first<<" tot:"<<it->second<<";";
+		mapHeaderPos[ pos++ ]=it->first;
+	}
+	int max = pos;
+
+	txt<<std::endl;
+
+	pos = 0;
+	for ( std::map<std::string,std::map < string , int > >::iterator it = table.begin();it != table.end(); it++){
+		//tableIndex[ pos++ ]= it->first;
+		txt<<it->first<<";";
+		std::map < string , int >& map = it->second;
+		
+		for (int i=0;i < max  ; i++){
+			std::string col=mapHeaderPos[ i ];
+			std::map < string , int >::iterator lineIt;
+			lineIt=map.find(col);
+			if ( lineIt == map.end() ){
+				txt<<";";
+			}else{
+				txt<<lineIt->second<<";";
+			}
+
+			
+		} 
+
+		txt<<std::endl;
+	};
+
+	myfile << txt.str();
+	myfile.close();
 
 }
 

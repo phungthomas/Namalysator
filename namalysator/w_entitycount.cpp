@@ -1,5 +1,5 @@
 #include "w_entitycount.h"
-#include "entitycountModel.h"
+
 
 
 void w_entitycount::setBatchDetail(){
@@ -25,7 +25,7 @@ void w_entitycount::init(QMainWindow* _qmain){
 	QTableView* entityView= new QTableView();
 	mainLayout->addWidget(entityView);
 
-	entityCountModel* entityModel = new entityCountModel(db);
+	entityModel = new entityCountModel(db);
 	entityModel->init();
 	QSortFilterProxyModel* proxyModel = new QSortFilterProxyModel();
 	proxyModel->setSourceModel(entityModel);
@@ -58,6 +58,9 @@ void w_entitycount::exportToFile(){
 	}else{
 		return;
 	};
+
+	entityModel->exportFile(message);
+
 
 	QMessageBox::information(this, tr("Namalysator"),
                                    tr((message+" Export to csv finished").c_str()));

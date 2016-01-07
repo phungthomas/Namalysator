@@ -4,6 +4,7 @@
 #include <QtGui>
 
 #include "dbrequest.h"
+#include "entitycountModel.h"
 
 
 class w_entitycount : public QWidget
@@ -20,8 +21,7 @@ public:
 
 private:
 
-
-
+	entityCountModel* entityModel;
 	QMainWindow* qmain;
 	QMenu* menu;
 	dbrequest db;

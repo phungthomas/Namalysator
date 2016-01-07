@@ -17,6 +17,7 @@ public:
 
 
 	virtual void init();
+	void exportFile(std::string filename);
 
 protected:
 	dbrequest& db;
