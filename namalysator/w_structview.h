@@ -58,6 +58,8 @@ private:
     
     QAction *zoomInAct;   
     QAction *zoomOutAct;
+	QAction *zoomNextAct;   
+    QAction *zoomPreviousAct;
 
 	w_thumb *thumb ;
     
@@ -142,6 +144,7 @@ private slots :
 	void zoomIn();
     void zoomOut();
 	void zoomNon();
+	void zoomFull();
 	void structure();
 	void clearPainter();	
 	void drawRect(QTreeWidgetItem *item,QTreeWidgetItem *item2);

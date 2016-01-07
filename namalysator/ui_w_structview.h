@@ -53,6 +53,7 @@ public:
     QLabel *lblPageEnd;
     QPushButton *btnNext;
     QPushButton *btnClearPainter;
+    QPushButton *btnFull;
     QHBoxLayout *horizontalLayout_2;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
@@ -230,6 +231,11 @@ public:
 
         horizontalLayout_3->addWidget(btnClearPainter);
 
+        btnFull = new QPushButton(w_structview);
+        btnFull->setObjectName(QString::fromUtf8("btnFull"));
+
+        horizontalLayout_3->addWidget(btnFull);
+
 
         verticalLayout->addLayout(horizontalLayout_3);
 
@@ -352,6 +358,7 @@ public:
         lblPageEnd->setText(QString());
         btnNext->setText(QApplication::translate("w_structview", ">", 0, QApplication::UnicodeUTF8));
         btnClearPainter->setText(QApplication::translate("w_structview", "Clear highlighting", 0, QApplication::UnicodeUTF8));
+        btnFull->setText(QApplication::translate("w_structview", "Full", 0, QApplication::UnicodeUTF8));
         btnDeleteSelectedItem->setText(QApplication::translate("w_structview", "Delete Selected Error Item", 0, QApplication::UnicodeUTF8));
         btnViewHtml->setText(QApplication::translate("w_structview", "View All Batch Errors", 0, QApplication::UnicodeUTF8));
         lbl_blocking->setText(QApplication::translate("w_structview", "Blocking :", 0, QApplication::UnicodeUTF8));

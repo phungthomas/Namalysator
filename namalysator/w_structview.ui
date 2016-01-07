@@ -261,6 +261,13 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="btnFull">
+           <property name="text">
+            <string>Full</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>

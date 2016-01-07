@@ -102,6 +102,7 @@ void w_structview::createConnections()
 	connect(m_ui->btnZoomIn, SIGNAL(clicked()), this, SLOT(zoomIn()));
     connect(m_ui->btnZoomOut, SIGNAL(clicked()), this, SLOT(zoomOut()));
 	connect(m_ui->zoomNormal, SIGNAL(clicked()), this, SLOT(zoomNon()));
+	connect(m_ui->btnFull, SIGNAL(clicked()), this, SLOT(zoomFull()));
 	//connect(m_ui->rbCalendar, SIGNAL(clicked()), this, SLOT(viewCalendar()));
 	//connect(m_ui->rbList, SIGNAL(clicked()), this, SLOT(viewList()));
 	//connect(m_ui->rbSampling,SIGNAL(clicked()),this,SLOT(showListSampling()));
@@ -362,6 +363,18 @@ void w_structview::zoomIn()
 	resizeImage();
  }
 
+ void w_structview::zoomFull()
+ {
+	 double height = m_ui->scrollArea->height() *0.995;
+	 if ( originalImage.width() > originalImage.height() ){
+		divImage = originalImage.width()/height;
+	 }else{
+		divImage = originalImage.height()/height;
+	 }
+	multiImage = 1/divImage;
+	resizeImage();
+ }
+
 
 
  
@@ -436,6 +449,18 @@ void w_structview::createActions()
     zoomOutAct->setEnabled(true);
     connect(zoomOutAct, SIGNAL(triggered()), this, SLOT(zoomOut()));
     m_ui->btnZoomOut->addAction(zoomOutAct);
+
+	zoomNextAct = new QAction(tr(""), this);
+    zoomNextAct->setShortcut(Qt::Key_Right);
+    zoomNextAct->setEnabled(true);
+    connect(zoomNextAct, SIGNAL(triggered()), this, SLOT(next()));
+	m_ui->btnNext->addAction(zoomNextAct);
+
+	zoomPreviousAct = new QAction(tr(""), this);
+	zoomPreviousAct->setShortcut(Qt::Key_Left);
+    zoomPreviousAct->setEnabled(true);
+    connect(zoomPreviousAct, SIGNAL(triggered()), this, SLOT(previous()));
+	m_ui->btnPrevious->addAction(zoomPreviousAct);
 }
 
 //! create table of contents
@@ -692,6 +717,7 @@ void w_structview::enableButton(bool enable)
 	m_ui->btnViewHtml->setEnabled(enable);
 	m_ui->btnZoomIn->setEnabled(enable);
 	m_ui->btnZoomOut->setEnabled(enable);
+	m_ui->btnFull->setEnabled(enable);
 	m_ui->lblPage->setEnabled(enable);
 	m_ui->btnPrevious->setEnabled(enable);
 	m_ui->btnClearPainter->setEnabled(enable);
