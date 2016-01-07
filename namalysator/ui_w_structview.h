@@ -62,9 +62,9 @@ public:
     QPushButton *btnDeleteSelectedItem;
     QPushButton *btnViewHtml;
     QVBoxLayout *verticalLayout_4;
-    QLabel *label_5;
-    QLabel *label_4;
-    QLabel *label_3;
+    QLabel *lbl_blocking;
+    QLabel *lbl_major;
+    QLabel *lbl_minor;
     QVBoxLayout *verticalLayout_5;
     QPushButton *btnError;
     QPushButton *btnStructure;
@@ -286,20 +286,20 @@ public:
 
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        label_5 = new QLabel(w_structview);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
+        lbl_blocking = new QLabel(w_structview);
+        lbl_blocking->setObjectName(QString::fromUtf8("lbl_blocking"));
 
-        verticalLayout_4->addWidget(label_5);
+        verticalLayout_4->addWidget(lbl_blocking);
 
-        label_4 = new QLabel(w_structview);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        lbl_major = new QLabel(w_structview);
+        lbl_major->setObjectName(QString::fromUtf8("lbl_major"));
 
-        verticalLayout_4->addWidget(label_4);
+        verticalLayout_4->addWidget(lbl_major);
 
-        label_3 = new QLabel(w_structview);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        lbl_minor = new QLabel(w_structview);
+        lbl_minor->setObjectName(QString::fromUtf8("lbl_minor"));
 
-        verticalLayout_4->addWidget(label_3);
+        verticalLayout_4->addWidget(lbl_minor);
 
 
         horizontalLayout_4->addLayout(verticalLayout_4);
@@ -354,9 +354,9 @@ public:
         btnClearPainter->setText(QApplication::translate("w_structview", "Clear highlighting", 0, QApplication::UnicodeUTF8));
         btnDeleteSelectedItem->setText(QApplication::translate("w_structview", "Delete Selected Error Item", 0, QApplication::UnicodeUTF8));
         btnViewHtml->setText(QApplication::translate("w_structview", "View All Batch Errors", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("w_structview", "Blocking :", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("w_structview", "Major :", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("w_structview", "Minor :", 0, QApplication::UnicodeUTF8));
+        lbl_blocking->setText(QApplication::translate("w_structview", "Blocking :", 0, QApplication::UnicodeUTF8));
+        lbl_major->setText(QApplication::translate("w_structview", "Major :", 0, QApplication::UnicodeUTF8));
+        lbl_minor->setText(QApplication::translate("w_structview", "Minor :", 0, QApplication::UnicodeUTF8));
         btnError->setText(QApplication::translate("w_structview", " Error", 0, QApplication::UnicodeUTF8));
         btnStructure->setText(QApplication::translate("w_structview", "Structure", 0, QApplication::UnicodeUTF8));
         btnViewMets->setText(QApplication::translate("w_structview", "View Mets File", 0, QApplication::UnicodeUTF8));

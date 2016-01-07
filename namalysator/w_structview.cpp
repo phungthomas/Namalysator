@@ -787,9 +787,9 @@ void::w_structview::undo()
 //! fill list of errors of the current Mets
 void w_structview::fillListErrors()
 {
-	int minor=0;
-	int major=0;
-	int blocking=0;
+	minor=0;
+	major=0;
+	blocking=0;
 	
 	//m_ui->btnViewHtml->setEnabled(false);
 	m_ui->listErrors->clear();
@@ -810,6 +810,23 @@ void w_structview::fillListErrors()
 		if (it->errorType.severity.gravity=="MINOR")	minor++;		
 		else if (it->errorType.severity.gravity=="MAJOR") major++;
 		else if (it->errorType.severity.gravity=="BLOCKING") blocking++;		
+	}
+	setLabel(minor,major,blocking);
+}
+
+void w_structview::setLabel(int minor,int major,int blocking){
+	initLabel(m_ui->lbl_blocking,"Blocking :",blocking);
+	initLabel(m_ui->lbl_major,"Major :",major);
+	initLabel(m_ui->lbl_minor,"Minor :",minor);
+}
+
+void w_structview::initLabel(QLabel * lbl,char* mess,int val){
+	if ( val == 0 ) {
+		lbl->setText(mess);
+	}else{
+		std::stringstream ss;
+		ss << mess << " " << val;
+		lbl->setText(ss.str().c_str());
 	}
 }
 

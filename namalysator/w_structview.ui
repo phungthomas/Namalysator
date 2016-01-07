@@ -335,21 +335,21 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="lbl_blocking">
          <property name="text">
           <string>Blocking :</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_4">
+        <widget class="QLabel" name="lbl_major">
          <property name="text">
           <string>Major :</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_3">
+        <widget class="QLabel" name="lbl_minor">
          <property name="text">
           <string>Minor :</string>
          </property>

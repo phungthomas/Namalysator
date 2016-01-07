@@ -26,12 +26,17 @@ public:
 	
 	 void setBatchDetail();
 	 void fillListErrors();
+
 	 void setCurrentMets(MetsFile mets);
 	void setQMainWindow(QMainWindow*);
 protected:
     virtual void changeEvent(QEvent *e);
 
 private:
+	
+	int minor;
+	int major;
+	int blocking;
 	QMenu* menu;
 	QDockWidget*    contentsWindow;
 	QMainWindow* qmain;
@@ -44,7 +49,9 @@ private:
     int currentPage;
     int maxPage;
     MetsFile mets;
-    void showCurrentPage();    
+    void showCurrentPage(); 
+	void setLabel(int,int,int);
+	void initLabel(QLabel * lbl,char* mess,int val);
     Item *treeContents;
     bool changeNewDate;
 	w_booklist * bookList;
