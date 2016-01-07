@@ -1565,6 +1565,33 @@ StructureError dbrequest::getStructureErrorId(int id)
 	return se;
 }
 
+int dbrequest::getStructureErrorMaxId(int id_Mets)
+{
+	ConnectionDB* conn = g_pool.getConnection(databaseName);	
+	sqlite3_stmt *pStmt;
+
+	int rc;	
+	const char *zErrMsg= 0; 
+	std::string selectSql = "SELECT MAX(ID) FROM STRUCTUREERROR where ID_METS = ?"; 
+	
+	rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	int ret;  
+	if(rc == SQLITE_OK)
+	{	
+		sqlite3_bind_int(pStmt,1,id_Mets);
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW)
+		{   int col=0;
+			ret = sqlite3_column_int(pStmt,col++);
+			
+		}		
+   }else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+	return ret;
+}
+
 std::vector<StructureError> dbrequest::getStructureError(int id_Mets)
 {
 	ConnectionDB* conn = g_pool.getConnection(databaseName);	

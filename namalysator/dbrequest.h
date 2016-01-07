@@ -174,6 +174,7 @@ public:
 		std::vector<StructureError> getStructureError(int id_Mets);	
 		StructureError getStructureErrorId(int id);
 		void deleteStructureErrorId(int id);
+		int getStructureErrorMaxId(int id_Mets);
 		std::map<std::string,std::vector<StructureError> > dbrequest::getBatchStructureError(int id_testset);
 		std::vector<Sampling_Structure> getListSamplingStructure(int id_testset);	
 		void updateSamplingStructure(int id,int checked);

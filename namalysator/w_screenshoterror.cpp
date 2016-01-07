@@ -204,10 +204,10 @@ void w_screenshoterror::saveError()
 	}
 	else
 	{
-		std::vector<StructureError> vStructureError = db.getStructureError(mets.idMets);
+		int maxid = db.getStructureErrorMaxId(mets.idMets)+1;
 		std::string pathImg;
 		std::stringstream sid;
-		sid << mets.idMets<<"_"<< vStructureError.size();	// add a diversification per id_Mets : normally uniq 
+		sid << mets.idMets<<"_"<< maxid;	// add a diversification per id_Mets : normally uniq 
 		                                                    // multibatch ok
 		                                                    // take care to not run multiple disk for different campaign from the same location 
 		                                                    // perhaps adding name of campaign could be better too
