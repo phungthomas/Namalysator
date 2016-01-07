@@ -2,6 +2,7 @@
 #define ENTITYCOUNT
 
 #include <QtGui>
+
 #include "dbrequest.h"
 
 
@@ -13,12 +14,19 @@ public:
 	w_entitycount(QWidget *parent = 0);
 	~w_entitycount();
 
-	void init();
+	void init(QMainWindow* _qmain);
 	void setBatchDetail();
 
 
 private:
+
+
+
+	QMainWindow* qmain;
+	QMenu* menu;
 	dbrequest db;
+private slots :	
+	void exportToFile();
 };
 
 #endif
