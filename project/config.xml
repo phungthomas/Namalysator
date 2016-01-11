@@ -131,6 +131,8 @@
   
   
 	<sampling>100</sampling> <!-- per 1000 -->
+  <ratiocoverage>75</ratiocoverage><!-- per 100 --><!-- parameter defining the ratio of block per page namely 75 for newspapers-->
+  
 	<issueNumber>1</issueNumber>
   
   <!-- definition of parser -->

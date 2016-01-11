@@ -403,7 +403,7 @@ int start()
 
 			if (parameter.getValueCheck("blocks.coveragePercentAlto") == 1)
 			{
-				verifycoveragepercentagealtoblocks(&df,&hError,currentMetsFile);				
+				verifycoveragepercentagealtoblocks(&df,&hError,currentMetsFile,atoi(parameter.getValue("ratiocoverage").c_str()));				
 			}
 
 			if (parameter.getValueCheck("dataintegrity.unlinkedIdentifier") == 1)

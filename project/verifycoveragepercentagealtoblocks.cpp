@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 
-verifycoveragepercentagealtoblocks::verifycoveragepercentagealtoblocks(datafactory *dfverifiers,errorHandler *hError,std::string &fname)
+verifycoveragepercentagealtoblocks::verifycoveragepercentagealtoblocks(datafactory *dfverifiers,errorHandler *hError,std::string &fname,int ratio)
 {
 
 	bool supplement= false;
@@ -31,9 +31,11 @@ verifycoveragepercentagealtoblocks::verifycoveragepercentagealtoblocks(datafacto
 		float percentage = sumAreaArticle / sumArea * 100;
 		std::stringstream o;
 		o << percentage;	
-		if (percentage <= 75 &&	supplement == false )
-		{			
-			hError->getError(cat_actualcoverage,"LINKEDFILES",it.key(),"actual coverage :" + o.str() + " is under 75% ",it.key(),"");		
+		if (percentage <= ratio &&	supplement == false )
+		{	
+			std::stringstream mess;
+			mess << "actual coverage :" + o.str() + " is under "<<ratio<<"% ";
+			hError->getError(cat_actualcoverage,"LINKEDFILES",it.key(),mess.str(),it.key(),"");		
 		
 			#ifdef _DEBUG
 				std::cout << it.key() <<" " << o.str()  << " is under 75% " << std::endl;
