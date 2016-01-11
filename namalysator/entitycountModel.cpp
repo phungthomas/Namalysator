@@ -41,7 +41,7 @@ void entityCountModel::exportFile(std::string filename){
 	int pos=0;
 	for ( std::map< string,int>::iterator it = header.begin();it != header.end(); it++){
 		//headerIndex[ pos++ ]= it->first;
-		txt<<it->first<<" tot:"<<it->second<<";";
+		txt<<it->first<<";";
 		mapHeaderPos[ pos++ ]=it->first;
 	}
 	int max = pos;
