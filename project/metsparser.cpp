@@ -456,9 +456,11 @@ public:
 		//cerr << "SateParserstructMapArea :: startElement" << name << endl;
 		const char *val1 = getAttributeValue("FILEID", atts);
 		const char *val2 = getAttributeValue("BEGIN", atts);
-		if (val1 && val2) 
+		if (val1 /*&& val2*/) 
 		{
-			CTX.typeblock.block = val2;
+			if ( val2) {
+				CTX.typeblock.block = val2;
+			}
 			CTX.typeblock.alto = val1;	
 			//CTX.typeblock.type = CTX.currentItem->parent->type;
 			CTX.typeblock.type = CTX.currentItem->type;
