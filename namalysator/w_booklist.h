@@ -14,10 +14,16 @@ public:
 	w_booklist(dbrequest&,QWidget *parent = 0);
 	~w_booklist();
 
-	void init();
+	void init(bool);
+
+	
 
 public slots:
 	void onclick(const QModelIndex &);
+
+	void samplingSelection();
+	void allSelection();
+
 
 signals:
 	void metsIdSelected(int i);
@@ -25,6 +31,8 @@ signals:
 
 
 private:
+	
+
 	
 
 	dbrequest& db;

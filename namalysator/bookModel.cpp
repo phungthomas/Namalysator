@@ -6,8 +6,9 @@ bookModel::bookModel(dbrequest & _db,QObject *parent):db(_db),QAbstractTableMode
 bookModel::~bookModel(){
 }
 
-void bookModel::init(){
-	allMets = db.getAllMets(BatchDetail::getBatchDetail().idTestSet);
+void bookModel::init(bool sampling){
+	allMets = db.getAllMets(BatchDetail::getBatchDetail().idTestSet,sampling);
+	emit endResetModel();
 }
 
 void bookModelInventory::init(){

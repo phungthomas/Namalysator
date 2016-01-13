@@ -183,7 +183,7 @@ public:
 		std::vector<Title> getvTitle(int id_testset);
 		Article getArticle(int id);
 
-		std::vector<std::vector<QVariant> > getAllMets(int id_testset);
+		std::vector<std::vector<QVariant> > getAllMets(int id_testset,bool sampling);
 		std::vector<std::vector<QVariant> > getAllBooks(int id_testset);
 		std::vector<int> getMetsIdInPeriod(int id_testset, int year_from, int month_from, int year_to, int month_to);
 		std::vector<QDate> getMetsDateInPeriod(int id_testset, int year_from, int month_from, int year_to, int month_to);

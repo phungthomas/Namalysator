@@ -17,7 +17,7 @@ public:
 	virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
 
 
-	virtual void init();
+	virtual void init(bool sampling);
 
 	int idMets ( const QModelIndex &index );
 

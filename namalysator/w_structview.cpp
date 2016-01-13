@@ -47,6 +47,8 @@ void w_structview::setQMainWindow(QMainWindow* _qmain){
 
 	act = menu->addAction(tr("List View"));
 	connect(act, SIGNAL(triggered()), this, SLOT(viewList()));
+
+	
 }
 
 w_structview::w_structview(QWidget *parent) :
@@ -57,7 +59,7 @@ w_structview::w_structview(QWidget *parent) :
     m_ui->setupUi(this);
 
 	bookList = new w_booklist(db);
-	bookList ->init();
+	bookList ->init(false);
 	contentsWindow = new QDockWidget();
 
 	thumb = 0;
@@ -786,7 +788,25 @@ void w_structview::rbhelperSampling(bool b){
 }
 void w_structview::rbhelperList(bool b){
 	contentsWindow->setVisible(b);
+	static QMenu* mm = 0;
+	if ( b ) {
+        
+		if ( mm == 0 ){
+			mm =	qmain->menuBar()->addMenu("List View Option"); 
+	       
+			QAction* act = mm->addAction(tr("Sampling Selection"));
+			connect(act, SIGNAL(triggered()), bookList, SLOT(samplingSelection()));
 
+			act = mm->addAction(tr("All Books Selection"));
+			connect(act, SIGNAL(triggered()), bookList, SLOT(allSelection()));
+		}
+	}else{
+		if ( mm  ) {
+			mm->close();
+			delete mm;
+			mm = 0;
+		}
+	}
 }
 
 

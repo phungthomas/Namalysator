@@ -156,6 +156,11 @@
 		<addXSD>bnl-newspaper_v1.4.xsd</addXSD>
 		<lock/>
 	</XSDManager>
+  <XSDManager>
+    <type>BNLStatSerial</type>
+    <addXSD>bnl-statserial_v1.0.xsd</addXSD>
+    <lock/>
+  </XSDManager>
 	<XSDManager>
 		<type>METS</type>
 		<addXSD>mets.xsd</addXSD>

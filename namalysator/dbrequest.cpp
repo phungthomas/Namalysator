@@ -1936,7 +1936,7 @@ Article a;
 	return article;
 }
 
-std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
+std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset,bool sampling){
 	ConnectionDB* conn = g_pool.getConnection(BatchDetail::getBatchDetail().database);	
 	sqlite3_stmt *pStmt;
 	const char *zErrMsg= 0;
@@ -1945,11 +1945,21 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset){
 	
 	
 	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
-	static std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
+	std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
 		                    " c.BIBREC_100a,c.BIBREC_260b,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a"
 							" LEFT JOIN (SELECT * FROM BOOKSINVENTORY h, METSBOOK b WHERE b.BIBREC_SYS_NUM = h.BIBREC_SYS_NUM) c "
 							" ON a.ID_METS = c.ID_METS"
 							" WHERE a.ID_TESTSET=?";
+
+	if ( sampling ) {
+
+		selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
+		                    " c.BIBREC_100a,c.BIBREC_260b,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a, SAMPLING_STRUCTURE ss"
+							" LEFT JOIN (SELECT * FROM BOOKSINVENTORY h, METSBOOK b WHERE b.BIBREC_SYS_NUM = h.BIBREC_SYS_NUM) c "
+							" ON a.ID_METS = c.ID_METS"
+							" WHERE a.ID_TESTSET=? AND ss.ID_METS = a.ID_METS";
+		
+	}
 	
 	std::vector<std::vector<QVariant> > v;
 retry:
