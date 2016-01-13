@@ -17,6 +17,7 @@
 #include "sql.h"
 #include "errorhandler.h"
 #include "transform.h"
+#include "physLogALTO.h"
 
 
 #include <parserCheck.h>
@@ -99,6 +100,43 @@ bool existDatabase(database *db,errorHandler *hError,std::string databasePath,st
 	}	
 	return true;
 }
+
+void printItemPhysical(Item* itemSet,PhysicalLogicalAltoFilter& filter, int count=0){
+
+	if ( itemSet == 0 ) return;
+	
+	if ( itemSet->vectTypeBlock.size()> 0){
+		for ( unsigned int i=0 ; i < itemSet->vectTypeBlock.size() ; i++){
+			filter.appendPhysical(itemSet->vectTypeBlock[i].alto);
+		}
+	}
+
+
+	for ( std::map<int,Item>::iterator it = itemSet->children.begin(); it != itemSet->children.end();it++){
+		printItemPhysical(&(it->second),filter,count+1);
+	}
+	
+}
+
+void printItemLogical(Item* itemSet,PhysicalLogicalAltoFilter& filter, std::string typeConcat="INIT",int count=0){
+
+	if ( itemSet == 0 ) return;
+	typeConcat = typeConcat +"."+itemSet->type;
+	//std::cerr <<count<< " TYPE:" << typeConcat << std::endl;
+	if ( itemSet->vectTypeBlock.size()> 0){
+		for ( unsigned int i=0 ; i < itemSet->vectTypeBlock.size() ; i++){
+			//std::cerr <<"ALTO:"<<itemSet->vectTypeBlock[i].alto;
+			filter.checkLogical(itemSet->vectTypeBlock[i].alto,typeConcat);
+		}
+	}
+
+
+	for ( std::map<int,Item>::iterator it = itemSet->children.begin(); it != itemSet->children.end();it++){
+		printItemLogical(&(it->second),filter,typeConcat, count+1);
+	}
+	
+}
+
 
 
 int start()
@@ -311,7 +349,8 @@ int start()
 		pt.LogTime("Parsing METS file");
 
 
-		//Parse all the Altos from Mets		
+		//Parse all the Altos from Mets	
+
 		File_Group *fg = df.get<File_Group>("ALTOGRP");
 		if ( fg != NULL ){
 			for(size_t j=0;j < fg->vect.size();j++)
@@ -403,7 +442,20 @@ int start()
 
 			if (parameter.getValueCheck("blocks.coveragePercentAlto") == 1)
 			{
-				verifycoveragepercentagealtoblocks(&df,&hError,currentMetsFile,atoi(parameter.getValue("ratiocoverage").c_str()));				
+				PhysicalLogicalAltoFilter filter;
+				if (parameter.getValueCheck("blocks.coveragePercentAltoFilter") == 1){
+
+					printItemPhysical(&metsP.getContext().rootItemPHYSICAL,filter);
+
+					Item* itemSet = df.get<Item>("Item");
+					printItemLogical(itemSet,filter);
+					filter.build();
+
+		
+				}else{
+					filter.setDoNothing();
+				}
+				verifycoveragepercentagealtoblocks(&df,&hError,currentMetsFile,filter,atoi(parameter.getValue("ratiocoverage").c_str()));				
 			}
 
 			if (parameter.getValueCheck("dataintegrity.unlinkedIdentifier") == 1)

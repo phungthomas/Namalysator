@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 
-verifycoveragepercentagealtoblocks::verifycoveragepercentagealtoblocks(datafactory *dfverifiers,errorHandler *hError,std::string &fname,int ratio)
+verifycoveragepercentagealtoblocks::verifycoveragepercentagealtoblocks(datafactory *dfverifiers,errorHandler *hError,std::string &fname,PhysicalLogicalAltoFilter& _filter,int ratio):filter(_filter)
 {
 
 	bool supplement= false;
@@ -23,8 +23,15 @@ verifycoveragepercentagealtoblocks::verifycoveragepercentagealtoblocks(datafacto
 	{	
 		float sumArea = it->printSpaceHeight * it->printSpaceWidth;
 		float sumAreaArticle = 0;	
+
+		
+
+		if ( ! filter.isAltoToCheck ( it.key() ) ) continue; // skip the one to not test
+		std::cout << "KEY:" << it.key() <<std::endl;
+
 		for (std::map<std::string,Block>::iterator it2 = it->mapalto.begin(); it2 != it->mapalto.end(); ++it2)
 		{	
+			
 			sumAreaArticle = sumAreaArticle +  it2->second.height * it2->second.width;
 		}
 		//std::cout << " sum area article = " << sumAreaArticle << std::endl;

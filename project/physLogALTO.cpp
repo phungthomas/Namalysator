@@ -48,7 +48,7 @@ bool PhysicalLogicalAltoFilter::isAltoToCheck(std::string key){
 }
 
 void PhysicalLogicalAltoFilter::setDoNothing(bool flag){
-	donothing = false; 
+	donothing = flag; 
 }
 
 bool PhysicalLogicalAltoFilter::isCheckedType(std::string type){

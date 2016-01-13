@@ -207,6 +207,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\physLogALTO.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\titletocheck.cpp"
 				>
 			</File>
@@ -410,6 +414,10 @@
 			</File>
 			<File
 				RelativePath=".\parameterMETS.h"
+				>
+			</File>
+			<File
+				RelativePath=".\physLogALTO.h"
 				>
 			</File>
 			<File

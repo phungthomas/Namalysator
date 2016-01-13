@@ -99,6 +99,11 @@
       Checks whether the sum of the areas covered by ALTO blocks on a given page is below 75%. 
       This check is disabled when a metadata entry with a key starting with MODSMD_SUPPLEMENT exists.-->
 			<coveragePercentAlto>1</coveragePercentAlto>
+      <!-- define if filter is on
+      0 means test any kind of item
+      1 only one belonging to main
+      -->
+      <coveragePercentAltoFilter>1</coveragePercentAltoFilter>
         
       <!-- multipleBlockUse
       Checks whether the logical structure references the same block twice 
