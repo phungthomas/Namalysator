@@ -445,6 +445,7 @@ int start()
 				PhysicalLogicalAltoFilter filter;
 				if (parameter.getValueCheck("blocks.coveragePercentAltoFilter") == 1){
 
+					//std::cout<< "FILTER UP"<< std::endl;
 					printItemPhysical(&metsP.getContext().rootItemPHYSICAL,filter);
 
 					Item* itemSet = df.get<Item>("Item");
@@ -453,6 +454,7 @@ int start()
 
 		
 				}else{
+					//std::cout<< "FILTER DOWN"<< std::endl;
 					filter.setDoNothing();
 				}
 				verifycoveragepercentagealtoblocks(&df,&hError,currentMetsFile,filter,atoi(parameter.getValue("ratiocoverage").c_str()));				

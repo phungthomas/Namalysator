@@ -27,7 +27,7 @@ verifycoveragepercentagealtoblocks::verifycoveragepercentagealtoblocks(datafacto
 		
 
 		if ( ! filter.isAltoToCheck ( it.key() ) ) continue; // skip the one to not test
-		std::cout << "KEY:" << it.key() <<std::endl;
+		//std::cout << "KEY:" << it.key() <<std::endl;
 
 		for (std::map<std::string,Block>::iterator it2 = it->mapalto.begin(); it2 != it->mapalto.end(); ++it2)
 		{	
