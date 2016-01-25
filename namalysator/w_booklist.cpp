@@ -26,7 +26,7 @@ void w_booklist::init(bool sampling){
     bookView->setSelectionMode(QAbstractItemView::SingleSelection);  
     bookView->setSelectionBehavior(QAbstractItemView::SelectRows);  
 	bookView->setAlternatingRowColors(true);
-	ComboBoxItemDelegate* delegate=new ComboBoxItemDelegate();
+	ComboBoxItemDelegate* delegate=new ComboBoxItemDelegate(db);
 	bookView->setItemDelegateForColumn(0,delegate);
 	bookView->setShowGrid(false);
   	bookView->setHorizontalHeader(new bookColumn(Qt::Horizontal));

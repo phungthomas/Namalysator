@@ -1,5 +1,7 @@
 #include "bookModel.h"
 #include <iostream>
+#include <QErrorMessage>
+#include <sstream>
 
 bookModel::bookModel(dbrequest & _db,QObject *parent):db(_db),QAbstractTableModel(parent){
 }
@@ -29,7 +31,7 @@ int bookModel::columnCount(const QModelIndex &parent ) const{
 }
 
 int bookModel::idMets ( const QModelIndex &index ){
-	QString tmp = allMets[index.row()][0].value<QString>();
+	QString tmp = allMets[index.row()][1].value<QString>();
 	return tmp.toInt(); 
 }
 
@@ -38,12 +40,12 @@ QVariant bookModel::data(const QModelIndex &index, int role ) const{
 
 	if ( role == Qt::CheckStateRole ) return QVariant();
 
-	if(role==Qt::DecorationRole && index.column()==3 ){
+	if(role==Qt::DecorationRole && index.column()==4 ){
 		QVariant ret = allMets[index.row()][index.column()];
 		return ret;
 	}
 
-	if ( role == Qt::DisplayRole && index.column()!=3 ) {
+	if ( role == Qt::DisplayRole && index.column()!=4 ) {
 		QVariant ret = allMets[index.row()][index.column()];
 		return ret;
 	}
@@ -65,11 +67,11 @@ QVariant bookModelInventory::data(const QModelIndex &index, int role ) const{
 
 QVariant bookModel::headerData ( int section, Qt::Orientation orientation, int role ) const{
 	//static char* table[]={"ID","PATH","METS", " ","Page","BIBREC_245a","BIBREC_245b","BIBREC_100a-1","BIBREC_100a-2","BIBREC_008-35-37","BIBREC_260b","BIBREC_260c","ITEMbarCode","BIBREC_SYS_NUM"};
-	static char* table[]={"ID","PATH","METS", " ","BIBREC_245a",
+	static char* table[]={"PROGRESS","ID","PATH","METS", " ","BIBREC_245a",
 		                  "BIBREC_100a","BIBREC_260b","ITEMbarCode","BIBREC_SYS_NUM","CHECKED","R","N","D"};
 
 	QVariant ret=QVariant();
-	if ( role == Qt::DisplayRole && section < 11 && section >= 0 ) {
+	if ( role == Qt::DisplayRole && section < 12 && section >= 0 ) {
 		char * tmp = table [section];
 		QString qs ( tmp );
 		ret = QVariant (qs);
@@ -97,23 +99,6 @@ bookModelE::bookModelE(dbrequest & _db,QObject *parent):bookModel(_db,parent){
 bookModelE::~bookModelE(){
 }
 
-QModelIndex bookModelE::parent(const QModelIndex &child)const{
-	return bookModel::parent (child);
-}
-int bookModelE::columnCount(const QModelIndex &parent)const {	
-	return bookModel::columnCount (parent)+1;
-}
-QVariant bookModelE::data(const QModelIndex &index, int role)const{
-	if ( index.column() == 0 ) return QVariant();
-	return bookModel::data (index.sibling(index.row(),index.column()-1),role);
-}
-
-QVariant bookModelE::headerData ( int section, Qt::Orientation orientation, int role  )const{
-
-	if ( section > 0  ) return bookModel::headerData(section - 1 , orientation, role ); 
-    return QVariant("suivi");
-}
-
 Qt::ItemFlags bookModelE::flags(const QModelIndex &index) const {
 
 	Qt::ItemFlags defaultFlags = QAbstractItemModel::flags(index);
@@ -127,6 +112,15 @@ Qt::ItemFlags bookModelE::flags(const QModelIndex &index) const {
 
 bool bookModelE::setData(const QModelIndex &index, const QVariant &value, int /* role */)
 {
+
+	std::stringstream ss;
+	int valueI = value.value<int>();
+	ss << "DEBUG :" << valueI << std::endl << " COL " << index.column() << " ROW " << index.row() << std::endl ;
+	static QErrorMessage* Qerror= new QErrorMessage();
+	Qerror->showMessage(ss.str().c_str());
+
+	(this->allMets)[index.row()][0]=value;
+
     if (index.column() != 0)
         return false;
 

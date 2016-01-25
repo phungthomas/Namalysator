@@ -1945,18 +1945,26 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset,bool sa
 	
 	
 	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
-	std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
+	std::string selectSql = "SELECT ll.LABEL, a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
 		                    " c.BIBREC_100a,c.BIBREC_260b,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a"
 							" LEFT JOIN (SELECT * FROM BOOKSINVENTORY h, METSBOOK b WHERE b.BIBREC_SYS_NUM = h.BIBREC_SYS_NUM) c "
 							" ON a.ID_METS = c.ID_METS"
+							" LEFT JOIN PROGRESSION_STATE aa"
+							" ON a.ID_METS = aa.ID_METS"
+							" LEFT JOIN LABEL_STATE ll"
+							" ON ll.ID_STATE = aa.ID_STATE"
 							" WHERE a.ID_TESTSET=?";
 
 	if ( sampling ) {
 
-		selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
-		                    " c.BIBREC_100a,c.BIBREC_260b,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a, SAMPLING_STRUCTURE ss"
+		selectSql = "SELECT ll.LABEL,a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
+		                    " c.BIBREC_100a,c.BIBREC_260b,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a, SAMPLING_STRUCTURE ss,LABEL_STATE ll"
 							" LEFT JOIN (SELECT * FROM BOOKSINVENTORY h, METSBOOK b WHERE b.BIBREC_SYS_NUM = h.BIBREC_SYS_NUM) c "
 							" ON a.ID_METS = c.ID_METS"
+							" LEFT JOIN PROGRESSION_STATE aa"
+							" ON a.ID_METS = aa.ID_METS"
+							" LEFT JOIN LABEL_STATE ll"
+							" ON ll.ID_STATE = aa.ID_STATE"
 							" WHERE a.ID_TESTSET=? AND ss.ID_METS = a.ID_METS";
 		
 	}
@@ -1972,6 +1980,7 @@ retry:
 		{
 			std::vector<QVariant> row;
 			int col=0;
+			row.push_back(QString::fromUtf8((char*)sqlite3_column_text(pStmt, col++)) );
 			row.push_back(QVariant( sqlite3_column_int(pStmt, col++) ) );
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ) );
 			row.push_back(QString( (char*)sqlite3_column_text(pStmt, col++) ) );
@@ -2006,6 +2015,7 @@ retry:
 	sqlite3_finalize(pStmt);
 	return v;
 }
+
 
 std::vector<std::vector<QVariant> > dbrequest::getAllBooks(int id_testset){
 	ConnectionDB* conn = g_pool.getConnection(BatchDetail::getBatchDetail().database);	
@@ -2363,6 +2373,37 @@ void dbrequest::deleteAccepted (std::string hashkey){
 	}
 	sqlite3_finalize(pStmt);
 	return;
+}
+
+std::map < string , int >& dbrequest::loadLabel(){
+
+	static std::map < string , int > cache;
+
+	if ( cache.size() != 0 ) return cache;
+
+	ConnectionDB* conn = g_pool.getConnection(databaseName);
+    sqlite3_stmt *pStmt;
+		
+	const char *zErrMsg= ""; 
+
+	static std::string selectSql = "select LABEL,ID_STATE from LABEL_STATE order by ID_STATE";
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+
+	if(rc == SQLITE_OK){
+
+		while(sqlite3_step(pStmt) == SQLITE_ROW){
+			int col=0;
+			string label  = safe_sqlite3_column_text (pStmt,col++);
+			int id = sqlite3_column_int (pStmt,col++);
+			cache[label]=id;
+		}
+	}else{
+		raiseError(conn,selectSql);
+	};
+	sqlite3_finalize(pStmt);
+	return cache;
+
 }
 
 std::map < string , QColor >& dbrequest::loadColor(std::string schma){

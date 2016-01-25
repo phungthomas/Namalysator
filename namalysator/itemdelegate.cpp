@@ -1,9 +1,13 @@
 // —— File itemdelegate.cpp ——
 #include "itemdelegate.h"
-#include <QComboBox>
+
+#include <map>
+#include <string>
+#include <sstream>
+#include <QErrorMessage>
  
-ComboBoxItemDelegate::ComboBoxItemDelegate(QObject *parent)
- : QStyledItemDelegate(parent)
+ComboBoxItemDelegate::ComboBoxItemDelegate(dbrequest & _db,QObject *parent)
+:db(_db), QStyledItemDelegate(parent)
 {
 }
  
@@ -16,15 +20,21 @@ ComboBoxItemDelegate::~ComboBoxItemDelegate()
 QWidget* ComboBoxItemDelegate::createEditor( QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index ) const
 {
  // ComboBox ony in column 2
- if(index.column() != 0)
- return QStyledItemDelegate::createEditor(parent, option, index);
+ if(index.column() != 0)return QStyledItemDelegate::createEditor(parent, option, index);
  
 // Create the combobox and populate it
- QComboBox *cb = new QComboBox(parent);
- int row = index.row();
- cb->addItem(QString("one in row %1").arg(row));
- cb->addItem(QString("two in row %1").arg(row));
- cb->addItem(QString("three in row %1").arg(row));
+ QComboBox* cb = new QComboBox(parent);
+ //QObject::connect(cb,SIGNAL(currentIndexChanged(int)),this,SLOT(setData(int)));
+
+ std::map<std::string,int> label = db.loadLabel();
+
+ cb->addItem(QString(""),QVariant::fromValue(-1));
+
+
+ for ( std::map<std::string,int>::iterator it = label.begin(); it != label.end(); ++it ){
+	 QVariant id (it->second);
+	 cb->addItem(QString((it->first).c_str()),id);
+ }
  return cb;
 }
  
@@ -46,7 +56,7 @@ void ComboBoxItemDelegate::setModelData ( QWidget *editor, QAbstractItemModel *m
 {
  if(QComboBox*cb = qobject_cast<QComboBox*>(editor))
  // save the current text of the combo box as the current value of the item
- model->setData(index, cb->currentText(), Qt::EditRole);
+ model ->setData(index,cb->itemData(cb->currentIndex()));
  else
  QStyledItemDelegate::setModelData(editor, model, index);
 }

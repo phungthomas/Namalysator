@@ -201,6 +201,7 @@ public:
 		void  _loadEntityTitleCorrection(std::map < string , std::map < string , std::map < string , int > > > & toFill);
 	public:
 		void  loadEntityCount(std::map<std::string,std::map < string , int > >& toFill, std::map< string,int>& headerData);
+		std::map < string , int >& loadLabel();
 		bool isEntityToTitleCorrection(std::string type,std::string entity);
 		bool isEntityToTitleCorrectionLink(std::string type,std::string entity,std::string entityLink);
 
