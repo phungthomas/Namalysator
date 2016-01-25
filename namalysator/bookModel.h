@@ -26,6 +26,21 @@ protected:
 	std::vector<std::vector<QVariant> > allMets;
 };
 
+class bookModelE : public bookModel {
+public:
+	bookModelE(dbrequest & _db,QObject *parent = 0);
+	virtual ~bookModelE();
+
+	virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+	virtual bool bookModelE::setData(const QModelIndex &index, const QVariant &value, int /* role */);
+
+    virtual QModelIndex parent(const QModelIndex &child) const ;
+    virtual int columnCount(const QModelIndex &parent = QModelIndex()) const ;
+	virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const ;
+	virtual QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
+};
+
+
 class bookModelInventory : public bookModel {
 public:
 	bookModelInventory(dbrequest & _db,QObject *parent = 0):bookModel(_db,parent){};

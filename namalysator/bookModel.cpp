@@ -17,7 +17,7 @@ void bookModelInventory::init(){
 
 QModelIndex bookModel::parent(const QModelIndex &child) const {
 								 return QModelIndex();
-
+		
 }
 
 int bookModel::rowCount(const QModelIndex &parent ) const{
@@ -89,4 +89,47 @@ QVariant bookModelInventory::headerData ( int section, Qt::Orientation orientati
 		ret = QVariant (qs);
 	}
 	return ret;
+}
+
+bookModelE::bookModelE(dbrequest & _db,QObject *parent):bookModel(_db,parent){
+}
+
+bookModelE::~bookModelE(){
+}
+
+QModelIndex bookModelE::parent(const QModelIndex &child)const{
+	return bookModel::parent (child);
+}
+int bookModelE::columnCount(const QModelIndex &parent)const {	
+	return bookModel::columnCount (parent)+1;
+}
+QVariant bookModelE::data(const QModelIndex &index, int role)const{
+	if ( index.column() == 0 ) return QVariant();
+	return bookModel::data (index.sibling(index.row(),index.column()-1),role);
+}
+
+QVariant bookModelE::headerData ( int section, Qt::Orientation orientation, int role  )const{
+
+	if ( section > 0  ) return bookModel::headerData(section - 1 , orientation, role ); 
+    return QVariant("suivi");
+}
+
+Qt::ItemFlags bookModelE::flags(const QModelIndex &index) const {
+
+	Qt::ItemFlags defaultFlags = QAbstractItemModel::flags(index);
+	if ( index.isValid() ) {
+		if (index.column()==0)
+		return Qt::ItemIsEditable | defaultFlags;
+	}
+	return defaultFlags;
+
+}
+
+bool bookModelE::setData(const QModelIndex &index, const QVariant &value, int /* role */)
+{
+    if (index.column() != 0)
+        return false;
+
+    
+    return true;
 }
