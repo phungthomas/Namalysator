@@ -24,6 +24,7 @@ public slots:
 
 	void samplingSelection();
 	void allSelection();
+	void reload();
 
 
 signals:
@@ -41,6 +42,7 @@ private:
 	QTableView *bookView;
 	bookModel *_bookModel;
 	QSortFilterProxyModel * proxyModel;
+	bool sampling; 
 };
 
 #endif

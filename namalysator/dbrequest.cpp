@@ -1677,7 +1677,10 @@ std::vector<Sampling_Structure> dbrequest::getListSamplingStructure(int id_tests
 		
 	const char *zErrMsg= ""; 
 
-	static std::string selectSql = "select ss.ID,ss.ID_METS,ss.CHECKED from SAMPLING_STRUCTURE ss, METS m where ss.ID_METS = m.ID_METS and m.ID_TESTSET  =?";
+	static std::string selectSql = "select ss.ID,ss.ID_METS,aa.ID_STATE from SAMPLING_STRUCTURE ss, METS m "
+		                           " LEFT JOIN PROGRESSION_STATE aa"
+								   " ON m.ID_METS = aa.ID_METS"
+		                           " where ss.ID_METS = m.ID_METS and m.ID_TESTSET  =?";
 	
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
@@ -1693,7 +1696,7 @@ std::vector<Sampling_Structure> dbrequest::getListSamplingStructure(int id_tests
 			ss.id = sqlite3_column_int (pStmt,col++);
 			ss.id_Mets = sqlite3_column_int (pStmt,col++);
 			ss.checked = sqlite3_column_int (pStmt,col++);
-		 
+			ss.checked = ss.checked == 2 ? 1 : 0;
 			ss.Mets = getMets(ss.id_Mets);	
 			ret.push_back(ss);
 		}
@@ -1706,19 +1709,7 @@ std::vector<Sampling_Structure> dbrequest::getListSamplingStructure(int id_tests
 
 void dbrequest::updateSamplingStructure(int id,int checked)
 {
-	ConnectionDB* conn = g_pool.getConnection(databaseName);
-	char *zErrMsg =0;
-	std::stringstream o,oChecked;
-	o << id;	
-	oChecked << checked;
-	std::string sql =	"UPDATE SAMPLING_STRUCTURE SET CHECKED = '" + oChecked.str() + "' where ID = '"+ o.str() +"'";					
-		
-	int rc = sqlite3_exec(conn->db, sql.c_str(), NULL, 0, &zErrMsg); //null because no calll back needed
-	
-	if( rc )
-	{
-		fprintf(stderr, "Can't update data SAMPLING_STRUCTURE: %s\n",  zErrMsg);
-	}
+	insertupdateProgress(id,checked==1?2:0);
 }
 
 

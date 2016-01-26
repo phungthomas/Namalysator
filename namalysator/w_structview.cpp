@@ -797,8 +797,13 @@ void w_structview::rbhelperSampling(bool b){
 void w_structview::rbhelperList(bool b){
 	contentsWindow->setVisible(b);
 
+
+
 	if ( b ) {
-        
+
+
+		bookList ->reload();
+
 		if ( mm == 0 ){
 			mm =	qmain->menuBar()->addMenu("List View Option"); 
 	       

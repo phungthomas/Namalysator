@@ -9,7 +9,8 @@ w_booklist::w_booklist(dbrequest & _db,QWidget *parent):db(_db),QWidget(parent){
 w_booklist::~w_booklist(){
 }
 
-void w_booklist::init(bool sampling){
+void w_booklist::init(bool _sampling){
+	sampling=_sampling;
 	_mainLayout = new QVBoxLayout();
 	this->setLayout(_mainLayout);
 	bookView= new QTableView();
@@ -39,10 +40,16 @@ void w_booklist::init(bool sampling){
 }
 
 void w_booklist::samplingSelection(){
-	_bookModel->init(true);
+	sampling = true;
+	reload();
 }
 void w_booklist::allSelection(){
-	_bookModel->init(false);
+	sampling = false;
+	reload();
+}
+
+void w_booklist::reload(){
+	_bookModel->init(sampling);
 }
 
 
