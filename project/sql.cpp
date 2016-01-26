@@ -652,8 +652,8 @@ void database::insertRandomMets(int number,int totalMets)
 			std::stringstream oId;
 			oId << id;
 			char *zErrMsg2=0;
-			std::string sql2 = "INSERT INTO SAMPLING_STRUCTURE ('ID_mets', 'CHECKED') \
-							   VALUES  ('" + oId.str()  + "','0')"; 							
+			std::string sql2 = "INSERT INTO SAMPLING_STRUCTURE ('ID_mets') \
+							   VALUES  ('" + oId.str()  + "')"; 							
 
 			int rc = sqlite3_exec(db, sql2.c_str(), NULL, 0, &zErrMsg2);
 			if( rc )

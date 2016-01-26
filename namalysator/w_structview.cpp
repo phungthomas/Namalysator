@@ -829,7 +829,7 @@ void::w_structview::checked()
 	int i = m_ui->listSampling->currentRow();
 	if ( i < 0 ) return;
 
-	db.updateSamplingStructure(vListSampling[i].id,1);
+	db.updateSamplingStructure(vListSampling[i].id_Mets,1);
 	m_ui->listSampling->currentItem()->setTextColor("red");
 }
 
@@ -839,7 +839,7 @@ void::w_structview::undo()
 	int i = m_ui->listSampling->currentRow();
 	if ( i < 0 ) return;
 
-	db.updateSamplingStructure(vListSampling[i].id,0);
+	db.updateSamplingStructure(vListSampling[i].id_Mets,0);
 	m_ui->listSampling->currentItem()->setTextColor("black");
 }
 
