@@ -26,12 +26,12 @@ QWidget* ComboBoxItemDelegate::createEditor( QWidget *parent, const QStyleOption
  QComboBox* cb = new QComboBox(parent);
  //QObject::connect(cb,SIGNAL(currentIndexChanged(int)),this,SLOT(setData(int)));
 
- std::map<std::string,int> label = db.loadLabel();
+ std::vector <std::pair < string , int > > label = db.loadLabel();
 
  cb->addItem(QString(""),QVariant::fromValue(-1));
 
 
- for ( std::map<std::string,int>::iterator it = label.begin(); it != label.end(); ++it ){
+ for ( std::vector <std::pair < string , int > >::iterator it = label.begin(); it != label.end(); ++it ){
 	 QVariant id (it->second);
 	 cb->addItem(QString((it->first).c_str()),id);
  }

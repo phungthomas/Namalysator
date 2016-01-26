@@ -1957,8 +1957,8 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset,bool sa
 
 	if ( sampling ) {
 
-		selectSql = "SELECT ll.LABEL,a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
-		                    " c.BIBREC_100a,c.BIBREC_260b,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a, SAMPLING_STRUCTURE ss,LABEL_STATE ll"
+		selectSql = "SELECT ll.LABEL, a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
+		                    " c.BIBREC_100a,c.BIBREC_260b,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a, SAMPLING_STRUCTURE ss"
 							" LEFT JOIN (SELECT * FROM BOOKSINVENTORY h, METSBOOK b WHERE b.BIBREC_SYS_NUM = h.BIBREC_SYS_NUM) c "
 							" ON a.ID_METS = c.ID_METS"
 							" LEFT JOIN PROGRESSION_STATE aa"
@@ -2328,6 +2328,53 @@ std::string dbrequest::getFirstMetsFilename(int id_testset)
 	return res;
 }
 
+void dbrequest::insertupdateProgress(int metsid, int value){
+	ConnectionDB* conn = g_pool.getConnection(databaseName);	
+	sqlite3_stmt *pStmt;
+
+	const char *zErrMsg= 0; 
+	static std::string selectSql = "UPDATE PROGRESSION_STATE SET ID_STATE = ? WHERE ID_METS = ? ";
+	
+	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
+	
+	
+	if(rc == SQLITE_OK)
+	{	 
+		sqlite3_bind_int(pStmt,1,value);
+		sqlite3_bind_int(pStmt,2,metsid);
+
+		rc = sqlite3_step(pStmt) ;  
+
+		if ( rc == SQLITE_DONE ) {
+			int count = sqlite3_changes(conn->db);
+
+			if ( count == 0 ){
+				sqlite3_finalize(pStmt);
+				static std::string selectSql2 = "INSERT INTO PROGRESSION_STATE ('ID_STATE','ID_METS')  VALUES  (?,?);";
+				rc = sqlite3_prepare_v2(conn->db,selectSql2.c_str(),-1, &pStmt,&zErrMsg);
+					if(rc == SQLITE_OK)
+					{	
+						sqlite3_bind_int(pStmt,1,value);
+						sqlite3_bind_int(pStmt,2,metsid);
+
+						if ( sqlite3_step(pStmt)!=SQLITE_DONE ) {
+							raiseError(conn,selectSql2);
+						}
+
+					}else{
+						raiseError(conn,selectSql2);
+					}
+			}
+		}
+		
+	}else{
+		raiseError(conn,selectSql);
+	}
+	sqlite3_finalize(pStmt);
+	return;
+
+}
+
 void dbrequest::insertAccepted (std::string hashkey){
 	ConnectionDB* conn = g_pool.getConnection(databaseName);	
 	sqlite3_stmt *pStmt;
@@ -2375,9 +2422,9 @@ void dbrequest::deleteAccepted (std::string hashkey){
 	return;
 }
 
-std::map < string , int >& dbrequest::loadLabel(){
+std::vector <std::pair < string , int > > & dbrequest::loadLabel(){
 
-	static std::map < string , int > cache;
+	static std::vector <std::pair < string , int > > cache;
 
 	if ( cache.size() != 0 ) return cache;
 
@@ -2394,9 +2441,10 @@ std::map < string , int >& dbrequest::loadLabel(){
 
 		while(sqlite3_step(pStmt) == SQLITE_ROW){
 			int col=0;
-			string label  = safe_sqlite3_column_text (pStmt,col++);
-			int id = sqlite3_column_int (pStmt,col++);
-			cache[label]=id;
+			std::pair<std::string,int > p;
+			p.first= safe_sqlite3_column_text (pStmt,col++);
+			p.second = sqlite3_column_int (pStmt,col++);
+			cache.push_back(p);
 		}
 	}else{
 		raiseError(conn,selectSql);

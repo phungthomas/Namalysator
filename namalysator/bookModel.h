@@ -27,12 +27,15 @@ protected:
 };
 
 class bookModelE : public bookModel {
+	    Q_OBJECT
 public:
 	bookModelE(dbrequest & _db,QObject *parent = 0);
 	virtual ~bookModelE();
 
 	virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 	virtual bool bookModelE::setData(const QModelIndex &index, const QVariant &value, int /* role */);
+signals:
+	void changeProgressWarn(const QModelIndex &index, int value);
 };
 
 

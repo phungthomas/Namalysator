@@ -31,6 +31,7 @@ void w_booklist::init(bool sampling){
 	bookView->setShowGrid(false);
   	bookView->setHorizontalHeader(new bookColumn(Qt::Horizontal));
 	bookView->setSortingEnabled(true);
+	bookView->sortByColumn(1);
 	bookView->resizeColumnsToContents();
 	bookView->resizeRowsToContents();
 

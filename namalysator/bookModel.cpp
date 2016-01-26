@@ -45,6 +45,11 @@ QVariant bookModel::data(const QModelIndex &index, int role ) const{
 		return ret;
 	}
 
+	if ( role == Qt::EditRole && index.column()==0 ) {
+		QVariant ret = allMets[index.row()][index.column()];
+		return ret;
+	}
+
 	if ( role == Qt::DisplayRole && index.column()!=4 ) {
 		QVariant ret = allMets[index.row()][index.column()];
 		return ret;
@@ -57,7 +62,7 @@ QVariant bookModelInventory::data(const QModelIndex &index, int role ) const{
 
 	if ( role == Qt::CheckStateRole ) return QVariant();
 
-		if ( role == Qt::DisplayRole ) {
+	if ( role == Qt::DisplayRole ) {
 		QVariant ret = allMets[index.row()][index.column()];
 		return ret;
 	}
@@ -113,16 +118,29 @@ Qt::ItemFlags bookModelE::flags(const QModelIndex &index) const {
 bool bookModelE::setData(const QModelIndex &index, const QVariant &value, int /* role */)
 {
 
-	std::stringstream ss;
-	int valueI = value.value<int>();
-	ss << "DEBUG :" << valueI << std::endl << " COL " << index.column() << " ROW " << index.row() << std::endl ;
-	static QErrorMessage* Qerror= new QErrorMessage();
-	Qerror->showMessage(ss.str().c_str());
 
-	(this->allMets)[index.row()][0]=value;
-
-    if (index.column() != 0)
+	if (index.column() != 0)
         return false;
+
+	
+	int valueI = value.value<int>();
+	//std::stringstream ss;
+	//ss << "DEBUG :" << valueI << std::endl << " COL " << index.column() << " ROW " << index.row() << std::endl ;
+	//static QErrorMessage* Qerror= new QErrorMessage();
+	//Qerror->showMessage(ss.str().c_str());
+
+	std::vector <std::pair < string , int > > label = db.loadLabel();
+	if ( valueI != -1 ){
+		(this->allMets)[index.row()][0]=label[valueI].first.c_str();
+	}else{
+		(this->allMets)[index.row()][0]="";
+	}
+	db.insertupdateProgress(this->idMets(index),valueI);
+	
+    // emit changeProgressWarn (  index, valueI ); 
+
+
+    
 
     
     return true;

@@ -21,6 +21,7 @@ public:
 public slots:
 	void onclick(const QModelIndex &);
 
+
 	void samplingSelection();
 	void allSelection();
 
