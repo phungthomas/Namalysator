@@ -64,6 +64,7 @@ w_structview::w_structview(QWidget *parent) :
 
 	thumb = 0;
 	menu = 0;
+	mm = 0;
 
 
   
@@ -176,6 +177,13 @@ w_structview::~w_structview()
 		delete menu;
 		menu = 0;
 	}
+
+	if ( mm ){
+		mm->close();
+		delete mm;
+		mm = 0;
+	}
+
 }
 
 //set detail of the batch
@@ -788,7 +796,7 @@ void w_structview::rbhelperSampling(bool b){
 }
 void w_structview::rbhelperList(bool b){
 	contentsWindow->setVisible(b);
-	static QMenu* mm = 0;
+
 	if ( b ) {
         
 		if ( mm == 0 ){

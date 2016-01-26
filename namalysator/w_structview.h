@@ -38,6 +38,7 @@ private:
 	int major;
 	int blocking;
 	QMenu* menu;
+	QMenu* mm ;
 	QDockWidget*    contentsWindow;
 	QMainWindow* qmain;
     Ui::w_structview *m_ui;
