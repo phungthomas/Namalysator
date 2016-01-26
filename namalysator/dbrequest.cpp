@@ -2433,7 +2433,7 @@ std::vector <std::pair < string , int > > & dbrequest::loadLabel(){
 		
 	const char *zErrMsg= ""; 
 
-	static std::string selectSql = "select LABEL,ID_STATE from LABEL_STATE order by ID_STATE";
+	static std::string selectSql = "select LABEL,ID_STATE from LABEL_STATE order by RANK";
 	
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
