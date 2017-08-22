@@ -36,7 +36,7 @@ bool DiskParser::isMets(const std::string &fName)
 	if (strncmp(buf + i, "<?xml", 5) != 0) {
 		return false;
 	}
-	while (i < 100 && buf[i] != '\n') {
+	while (i < 92 && buf[i] != '\n') {
 		++i;
 	}
 	++i;
