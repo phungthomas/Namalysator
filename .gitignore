@@ -1,0 +1,12 @@
+Release/
+Debug/
+*.dll
+namalysator/GeneratedFiles/
+*.ncb
+*.suo
+*.idb
+*.manifest
+*.user
+*.obj
+project/alto-2-0.h
+project/mods-3-6.h

@@ -25,7 +25,7 @@ std::vector<int> getIssueNumber(const std::string &issueNumber)
 {
 	std::vector<int> result;
 	// issue_numbers (take every single number behind n°)
-	static const char sz_find[4] = {110, -62, -80, 0}; // 0x6E, 0xC2, 0xB0  This is n° in UTF-8
+	static const char sz_find[4] = {110, -62, -70, 0}; // 0x6E, 0xC2, 0xBA  This is n° in UTF-8 with 0xBA : MASCULINE ORDINAL INDICATOR
 	std::string::size_type p = issueNumber.find(sz_find);
 	//std::string::size_type p = issueNumber.find("n°");
 	char lastspacer = 0;
