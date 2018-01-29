@@ -327,7 +327,11 @@ public :
 		CTX.f.groupId ="";
 		if (val2 != 0) 
 		{				
-			CTX.f.groupId = val2;		
+			CTX.f.groupId = val2;	
+
+			if ( std::strspn (val2,"0123456789")!= strlen (val2) ){
+				CTX.hError->getError(cat_missingGroupId,"METS","FILESEC","GROUPID not number",CTX.currentMetsFile,getAttributeValue("CHECKSUM", atts));
+			}
 		}
 		else
 		{
