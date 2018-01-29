@@ -86,12 +86,21 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
 		CTX.amdsec.amdSecId =val;
 	}
 	if ( CTX.flagMix ){
-		CTX.mandatoryField.insert("ScannerManufacturer");
-		CTX.mandatoryField.insert("ScannerModelName");
-		CTX.mandatoryField.insert("ScannerModelSerialNo");
-		CTX.mandatoryField.insert("ScanningSoftware");
-		CTX.mandatoryField.insert("ScanningSoftwareVersionNo");
-		
+		CTX.mandatoryField.insert("scannerManufacturer");
+		CTX.mandatoryField.insert("scannerModelName");
+		CTX.mandatoryField.insert("scannerModelSerialNo");
+		CTX.mandatoryField.insert("scanningSoftware");
+		CTX.mandatoryField.insert("scanningSoftwareVersionNo");
+		CTX.mandatoryField.insert("dateTimeCreated");
+		CTX.mandatoryField.insert("imageProducer");
+		CTX.mandatoryField.insert("captureDevice");
+		CTX.mandatoryField.insert("orientation");
+		CTX.mandatoryField.insert("sourceIDType");
+		CTX.mandatoryField.insert("sourceType");
+		CTX.mandatoryField.insert("formatVersion");
+		CTX.mandatoryField.insert("objectIdentifierValue");
+		CTX.mandatoryField.insert("imageWith");
+		CTX.mandatoryField.insert("imageHeight");
 	}
 	
 };
@@ -118,14 +127,24 @@ StateParserState* StateParserRootamdSecState::getNext(const char* const name){
 	
 	static struct _onlyOnes {
 		_onlyOnes(std::map<string,StateParserState*>& map,bool flagMix){
-			map["SourceData"]=	new StateParserSourceDataResolution();
-			map["XphysScanResolution"]=	new StateParserScanResolution();
+			map["sourceData"]=	new StateParserSourceDataResolution();
+			map["xOpticalResolution"]=	new StateParserScanResolution();
 			if ( flagMix ) {
-				map["ScannerManufacturer"]=new StateEmptyCheck();
-				map["ScannerModelName"]=new StateEmptyCheck();
-				map["ScannerModelSerialNo"]=new StateEmptyCheck();
-				map["ScanningSoftware"]=new StateEmptyCheck();
-				map["ScanningSoftwareVersionNo"]=new StateEmptyCheck();
+				map["scannerManufacturer"]=new StateEmptyCheck();
+				map["scannerModelName"]=new StateEmptyCheck();
+				map["scannerModelSerialNo"]=new StateEmptyCheck();
+				map["scanningSoftware"]=new StateEmptyCheck();
+				map["scanningSoftwareVersionNo"]=new StateEmptyCheck();
+				map["dateTimeCreated"]=new StateEmptyCheck();
+				map["imageProducer"]=new StateEmptyCheck();
+				map["captureDevice"]=new StateEmptyCheck();
+				map["orientation"]=new StateEmptyCheck();
+				map["sourceIDType"]=new StateEmptyCheck();
+				map["sourceType"]=new StateEmptyCheck();
+				map["formatVersion"]=new StateEmptyCheck();
+				map["objectIdentifierValue"]=new StateEmptyCheck();
+				map["imageWith"]=new StateEmptyCheck();
+				map["imageHeight"]=new StateEmptyCheck();
 			};
 		}
 	} onlyOnes (map,CTX.flagMix ); // take care CTX.flagMix: a side effect base on the fact that config.xml is read only ones ( no change on the fly like the map is static ) 
