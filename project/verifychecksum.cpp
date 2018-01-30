@@ -29,7 +29,7 @@ verifychecksum::verifychecksum(datafactory *dfverifiers,errorHandler *hError,con
 			} else {
 				if (stricmp(tf.checksum.c_str(),md5.getHashFromFile(filePath).c_str())!=0 )
 				{			
-					hError->getError(cat_wrongChecksum,"METS","FileGrp","MD5 checksum of " + tf.id + " is " + md5.getHashFromFile(filePath),fileName,tf.checksum);
+					hError->getError(cat_wrongChecksum,"METS","FileGrp","MD5 checksum of " + tf.id + " is " + md5.getHashFromFile(filePath)+ " " + it->vect[i].ref,fileName,tf.checksum);
 				}
 			}
 		}
