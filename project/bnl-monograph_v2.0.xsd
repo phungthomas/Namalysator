@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This schema definition is used to specify and validate logical structmaps in METS files -->
+<!-- Copyright 2005-2009 CCS Content Conversion Specialists GmbH, Germany -->
+<!-- This schema is managed by the National Library of Luxembourg (BnL). -->
+<!--	************************************************************************** 
+										CHANGELOG 
+		************************************************************************** -->
+<!--	2016-06-06: (v1.1)
+			- Changed BIBLIOGRAPHY inside CHAPTER to BIBLIOGRAPHY_LIST and made it recursive. (Yves Maurer (BnL))
+-->
+<!--	2017-12-04: (v2.0)
+			The is a major version upgrade. The BnL schemas for monographs and serials have been merged into this new Monograph 2.0 schema.
+			The schema bnl-serial-* is deprecated. All Serials should be migrated to this schema.
+			This changelog documents all changes relative to the monograph schema.
+			Changes relative to the serial-to-monograph migration are available upon request to the National Library of Luxembourg.
+
+			- Merge elements of ct_BIBLIOGRAPHY_LIST into ct_LIST_LIKE (Ralph Marschall (BnL))
+			- Change elements of type ct_BIBLIOGRAPHY_LIST to type ct_LIST_LIKE (Ralph Marschall (BnL))
+			- Remove ct_BIBLIOGRAPHY_LIST (Ralph Marschall (BnL))
+		
+			- Rename BOOK_REVIEW to REVIEW. (Ralph Marschall (BnL))
+			- Element Body: Move element BODY_CONTENT and FOOTNOTE inside the choice element. (Ralph Marschall (BnL))
+			- Move element ABSTRACT from choice into the sequence and right after the element HEADING.
+
+			- Create a new element HEADING with a new type ct_HEADING. The following elements have been moved into ct_HEADING:
+				TITLE, SUBTITLE, AUTHOR, MOTTOR, HEADING_TEXT
+
+			- Add another root element Serial. Important and simple solution to differentiate Serials from Monographs (Ralph Marschall (BnL))
+
+			- Add MAP_GROUP, ILLUSTRATION_GROUP, CHART_DIAGRAM_GROUP and TABLE_GROUP definitions and 
+				add them to ct_CHAPTER_LIKE for exceptional retro-compatibility of Serials. Those four types are deprecated and
+				should not be used anymore. They will be removed in the next version, once all Serials has been migrated.
+				Challenge: Reasign the illustration inside the *_GROUP to the right XML node at the right hierarchical place. (Ralph Marschall (BnL))
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://downloads.bnl.lu/schemas/bnl-monograph_v2.0.xsd" targetNamespace="http://downloads.bnl.lu/schemas/bnl-monograph_v2.0.xsd" elementFormDefault="qualified">
+	<xsd:element name="Monograph">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VOLUME" type="ct_HIERARCHY"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="Serial">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="VOLUME" type="ct_HIERARCHY"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ct_HIERARCHY">
+		<xsd:sequence>
+			<xsd:element name="FRONT" type="ct_FRONT" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="MAIN" type="ct_MAIN" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="BACK" type="ct_BACK" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_FRONT">
+		<xsd:sequence>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="TITLE_SECTION" type="ct_TITLE_SECTION"/>
+				<xsd:element name="STATEMENT_SECTION" type="ct_PAGE_LIKE"/>
+				<xsd:element name="PICTURE_SECTION" type="ct_PAGE_LIKE"/>
+				<xsd:element name="FRONTISPIECE" type="ct_PAGE_LIKE"/>
+				<xsd:element name="COVER_SECTION" type="ct_PAGE_LIKE"/>
+				<xsd:element name="BASTARD_TITLE_SECTION" type="ct_PAGE_LIKE"/>
+				<xsd:element name="TABLE_OF_CONTENTS" type="ct_LIST_LIKE"/>
+				<xsd:element name="REFERENCE_LIST" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST_OF_PUBLICATIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST_OF_FIGURES" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST" type="ct_LIST_LIKE"/>
+				<xsd:element name="INDEX" type="ct_LIST_LIKE"/>
+				<xsd:element name="CORRECTIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="BIBLIOGRAPHY" type="ct_LIST_LIKE"/>
+				<xsd:element name="ABBREVIATIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="RIDAS" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="PRODUCTION_NOTE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="PREFACE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="NECROLOGY" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="INTRODUCTION" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="DEDICATION" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="CHAPTER" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="ACKNOWLEDGEMENTS" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="ABSTRACT" type="ct_CHAPTER_LIKE"/>
+			</xsd:choice>
+			<xsd:element name="ADVERTISEMENT" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_MAIN">
+		<xsd:sequence>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="TABLE_OF_CONTENTS" type="ct_LIST_LIKE"/>
+				<xsd:element name="REFERENCE_LIST" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST_OF_PUBLICATIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST_OF_FIGURES" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST" type="ct_LIST_LIKE"/>
+				<xsd:element name="INDEX" type="ct_LIST_LIKE"/>
+				<xsd:element name="CORRECTIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="BIBLIOGRAPHY" type="ct_LIST_LIKE"/>
+				<xsd:element name="ABBREVIATIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="RIDAS" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="PRODUCTION_NOTE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="PREFACE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="POSTFACE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="POEM" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="NOTES" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="NECROLOGY" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="INTRODUCTION" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="GROUP" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="DEDICATION" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="DEBATE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="CHAPTER" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="REVIEW" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="CONTRIBUTION" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="APPENDIX" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="ACKNOWLEDGEMENTS" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="ABSTRACT" type="ct_CHAPTER_LIKE"/>
+			</xsd:choice>
+			<xsd:element name="ADVERTISEMENT" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_BACK">
+		<xsd:sequence>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="STATEMENT_SECTION" type="ct_PAGE_LIKE"/>
+				<xsd:element name="PICTURE_SECTION" type="ct_PAGE_LIKE"/>
+				<xsd:element name="COVER_SECTION" type="ct_PAGE_LIKE"/>
+				<xsd:element name="TABLE_OF_CONTENTS" type="ct_LIST_LIKE"/>
+				<xsd:element name="REFERENCE_LIST" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST_OF_PUBLICATIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST_OF_FIGURES" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST" type="ct_LIST_LIKE"/>
+				<xsd:element name="INDEX" type="ct_LIST_LIKE"/>
+				<xsd:element name="CORRECTIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="BIBLIOGRAPHY" type="ct_LIST_LIKE"/>
+				<xsd:element name="ABBREVIATIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="RIDAS" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="POSTFACE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="NECROLOGY" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="CHAPTER" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="APPENDIX" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="ACKNOWLEDGEMENTS" type="ct_CHAPTER_LIKE"/>
+			</xsd:choice>
+			<xsd:element name="ADVERTISEMENT" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_PAGE_LIKE">
+		<xsd:sequence>
+			<xsd:element name="CONTENT" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:choice minOccurs="0" maxOccurs="unbounded">
+						<xsd:element name="TEXTBLOCK" type="ct_FINAL"/>
+						<xsd:element name="TABLE" type="ct_TABLE_LIKE_STRUCT"/>
+						<xsd:element name="PUBLISHING_STMT" type="ct_FINAL"/>
+						<xsd:element name="PARAGRAPH" type="ct_PARAGRAPH"/>
+						<xsd:element name="MAP" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+						<xsd:element name="ILLUSTRATION" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+						<xsd:element name="CHART_DIAGRAM" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+						<xsd:element name="BOOKPLATE" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+						<xsd:element name="BARCODE" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+						<xsd:element name="HEADLINE" type="ct_FINAL"/>
+						<xsd:element name="SUBHEADLINE" type="ct_FINAL"/>
+						<xsd:element name="FORMULA" type="ct_FORMULA"/>
+						<xsd:element name="FOOTNOTE" type="ct_FOOTNOTE_PARAGRAPH"/>
+						<xsd:element name="AUTHOR" type="ct_FINAL"/>
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_TITLE_SECTION">
+		<xsd:sequence>
+			<xsd:element name="TITLE_OF_WORK" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CREATOR_OF_WORK" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="PUBLISHING_STMT" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="STATEMENT" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CONTENT" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:choice minOccurs="0" maxOccurs="unbounded">
+						<xsd:element name="TABLE" type="ct_TABLE_LIKE_STRUCT"/>
+						<xsd:element name="MAP" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+						<xsd:element name="ILLUSTRATION" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+						<xsd:element name="CHART_DIAGRAM" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+						<xsd:element name="BOOKPLATE" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+						<xsd:element name="BARCODE" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+						<xsd:element name="FORMULA" type="ct_FORMULA"/>
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_LIST_LIKE">
+		<xsd:sequence>
+			<xsd:element name="CAPTION" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="DATA" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:choice minOccurs="0" maxOccurs="unbounded">
+						<xsd:element name="TEXTBLOCK" type="ct_FINAL"/>
+						<xsd:element name="PAGE_NUMBER" type="ct_FINAL"/>
+						<xsd:element name="ITEM_CAPTION" type="ct_FINAL"/>
+						<xsd:element name="AUTHOR" type="ct_FINAL"/>
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="TABLE_OF_CONTENTS" type="ct_LIST_LIKE"/>
+				<xsd:element name="REFERENCE_LIST" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST_OF_PUBLICATIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST_OF_FIGURES" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST" type="ct_LIST_LIKE"/>
+				<xsd:element name="INDEX" type="ct_LIST_LIKE"/>
+				<xsd:element name="CORRECTIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="BIBLIOGRAPHY" type="ct_LIST_LIKE"/>
+				<xsd:element name="ABBREVIATIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="ITEM" type="ct_ITEM"/>
+				<xsd:element name="FOOTNOTE" type="ct_FOOTNOTE_PARAGRAPH"/>
+				<xsd:element name="PARAGRAPH" type="ct_PARAGRAPH"/>
+				<xsd:element name="ILLUSTRATION" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_ITEM">
+		<xsd:sequence>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="TEXTBLOCK" type="ct_FINAL"/>
+				<xsd:element name="PAGE_NUMBER" type="ct_FINAL"/>
+				<xsd:element name="ITEM_CAPTION" type="ct_FINAL"/>
+				<xsd:element name="SUBHEADLINE" type="ct_FINAL"/>
+				<xsd:element name="HEADLINE" type="ct_FINAL"/>
+				<xsd:element name="AUTHOR" type="ct_FINAL"/>
+			</xsd:choice>
+			<xsd:element name="ITEM" type="ct_ITEM" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_CHAPTER_LIKE">
+		<xsd:sequence>
+			<xsd:element name="HEADING" type="ct_HEADING" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="ABSTRACT" type="ct_CHAPTER_LIKE" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="BODY" type="ct_BODY" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="TABLE_OF_CONTENTS" type="ct_LIST_LIKE"/>
+				<xsd:element name="REFERENCE_LIST" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST_OF_PUBLICATIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST_OF_FIGURES" type="ct_LIST_LIKE"/>
+				<xsd:element name="LIST" type="ct_LIST_LIKE"/>
+				<xsd:element name="INDEX" type="ct_LIST_LIKE"/>
+				<xsd:element name="CORRECTIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="BIBLIOGRAPHY" type="ct_LIST_LIKE"/>
+				<xsd:element name="ABBREVIATIONS" type="ct_LIST_LIKE"/>
+				<xsd:element name="RIDAS" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="PRODUCTION_NOTE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="PREFACE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="POSTFACE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="POEM" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="NOTES" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="NECROLOGY" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="INTRODUCTION" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="GROUP" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="DEDICATION" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="DEBATE" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="CHAPTER" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="REVIEW" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="CONTRIBUTION" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="APPENDIX" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="ACKNOWLEDGEMENTS" type="ct_CHAPTER_LIKE"/>
+				<xsd:element name="MAP_GROUP" type="ct_MAP_GROUP"/>
+				<xsd:element name="ILLUSTRATION_GROUP" type="ct_ILLUSTRATION_GROUP"/>
+				<xsd:element name="CHART_DIAGRAM_GROUP" type="ct_CHART_DIAGRAM_GROUP"/>
+				<xsd:element name="TABLE_GROUP" type="ct_TABLE_GROUP"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_HEADING">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="TITLE" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="SUBTITLE" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="AUTHOR" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="MOTTO" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="TEXT" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="HEADING_TEXT" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="TEXT" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="ct_MAP_GROUP">
+		<xsd:sequence>
+			<xsd:element name="MAP" type="ct_ILLUSTRATION_LIKE_STRUCT" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_ILLUSTRATION_GROUP">
+		<xsd:sequence>
+			<xsd:element name="ILLUSTRATION" type="ct_ILLUSTRATION_LIKE_STRUCT" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_CHART_DIAGRAM_GROUP">
+		<xsd:sequence>
+			<xsd:element name="CHART_DIAGRAM" type="ct_ILLUSTRATION_LIKE_STRUCT" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_TABLE_GROUP">
+		<xsd:sequence>
+			<xsd:element name="TABLE" type="ct_TABLE_LIKE_STRUCT" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_ILLUSTRATION_LIKE_STRUCT">
+		<xsd:sequence>
+			<xsd:element name="IMAGE" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CAPTION" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="AUTHOR" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_TABLE_LIKE_STRUCT">
+		<xsd:sequence>
+			<xsd:element name="IMAGE" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="CAPTION" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="AUTHOR" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_BODY">
+		<xsd:sequence>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="BODY_CONTENT" type="ct_BODY_CONTENT"/>
+				<xsd:element name="FOOTNOTE" type="ct_FOOTNOTE_PARAGRAPH"/>
+				<xsd:element name="MAP" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+				<xsd:element name="ILLUSTRATION" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+				<xsd:element name="CHART_DIAGRAM" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+				<xsd:element name="BOOKPLATE" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+				<xsd:element name="BARCODE" type="ct_ILLUSTRATION_LIKE_STRUCT"/>
+				<xsd:element name="TABLE" type="ct_TABLE_LIKE_STRUCT"/>
+				<xsd:element name="LIST" type="ct_LIST_LIKE"/>
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_BODY_CONTENT">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="TEXTBLOCK" type="ct_FINAL"/>
+			<xsd:element name="PARAGRAPH" type="ct_PARAGRAPH"/>
+			<xsd:element name="FORMULA" type="ct_FORMULA"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="ct_FORMULA">
+		<xsd:sequence>
+			<xsd:element name="IMAGE" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_PARAGRAPH">
+		<xsd:sequence>
+			<xsd:element name="TEXT" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="MARGINALIA" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_FOOTNOTE_PARAGRAPH">
+		<xsd:sequence>
+			<xsd:element name="ITEM_ID" type="ct_FINAL" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="DATA" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:choice minOccurs="0" maxOccurs="unbounded">
+						<xsd:element name="TEXTBLOCK" type="ct_FINAL"/>
+						<xsd:element name="MARGINALIA" type="ct_FINAL"/>
+						<xsd:element name="TABLE" type="ct_TABLE_LIKE_STRUCT"/>
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_FINAL">
+		<xsd:sequence>
+			<xsd:element name="fptr" type="ct_FPTR"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ct_FPTR">
+		<xsd:choice>
+			<xsd:element name="area"/>
+			<xsd:element name="seq" type="ct_SEQ"/>
+			<xsd:element name="par">
+				<xsd:complexType>
+					<xsd:choice minOccurs="2" maxOccurs="unbounded">
+						<xsd:element name="area"/>
+						<xsd:element name="seq" type="ct_SEQ"/>
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="ct_SEQ">
+		<xsd:choice maxOccurs="unbounded">
+			<xsd:element name="area"/>
+		</xsd:choice>
+	</xsd:complexType>
+</xsd:schema>

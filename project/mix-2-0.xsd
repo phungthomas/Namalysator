@@ -58,7 +58,6 @@
 <!-- referenceType has been changed to URIType. It is assumed that the reference type defined by the DD is always intended to indicate a URI  -->
 <!-- iccProfileURL (7.1.3.2.1.3) element name changed to iccProfileURI  -->
 <!-- localProfileURL (7.1.3.2.2.2) element name changed to localProfileURI  -->
-<!-- Added enumerated value of '0230' to exifVersionType for handling EXIF 2.3 metadata  -->
 <!-- end of Change History Version 1.0 to Version 2.0 -->
 
 <xsd:schema targetNamespace="http://www.loc.gov/mix/v20" 
@@ -2440,7 +2439,6 @@
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="0220"/>
       <xsd:enumeration value="0221"/>
-      <xsd:enumeration value="0230"/>
     </xsd:restriction>
   </xsd:simpleType>
   <!-- end of typeOfExifVersionType   -->

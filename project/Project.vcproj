@@ -889,6 +889,10 @@
 			<File
 				RelativePath=".\mods-3-6.xsd"
 				>
+				<File
+					RelativePath=".\mods-3-6.h"
+					>
+				</File>
 			</File>
 			<File
 				RelativePath=".\open-file-icon.png"

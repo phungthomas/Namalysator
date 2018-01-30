@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2006 rel. 3 sp2 (http://www.altova.com) by Maurer Yves (Bibliothèque Nationale) -->
-<!-- Automatically generated schema definition by CCS docWORKS -->
-<!-- Copyright 2005-2006 CCS Content Conversion Specialists GmbH, Germany -->
 <!-- This schema definition is used to specify and validate logical structmaps in METS files -->
-<!-- v 1.3: Added AUTHOR to ILLUSTRATION -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://downloads.bnl.lu/schemas/bnl-newspaper_v1.4.xsd" xmlns="http://downloads.bnl.lu/schemas/bnl-newspaper_v1.4.xsd" elementFormDefault="qualified">
+<!-- Copyright 2005-2006 CCS Content Conversion Specialists GmbH, Germany -->
+<!-- This schema is managed by the National Library of Luxembourg (BnL). -->
+<!--	************************************************************************** 
+										CHANGELOG 
+		************************************************************************** -->
+<!--	(v1.3)
+			- Add AUTHOR to ILLUSTRATION (Yves Maurer (BnL))
+-->
+<!--	(v1.4)
+			- Add namespace (Yves Maurer (BnL))
+-->
+<!--	16.01.2018 (v1.5)
+			- Remove element PUBLISHING_STMT from ct_LIST_LIKE (Ralph Marschall (BnL))
+			- Update ct_FOOTNOTE_PARAGRAPH definition from a simple sequence of TEXT elements to a more complex and useful structure.
+			  The change was made to be consitent BnL's other schema "bnl-monograph_v2.0.xsd" (Ralph Marschall (BnL))
+-->
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://downloads.bnl.lu/schemas/bnl-newspaper_v1.5.xsd" targetNamespace="http://downloads.bnl.lu/schemas/bnl-newspaper_v1.5.xsd" elementFormDefault="qualified">
 	<xsd:element name="Newspaper">
 		<xsd:complexType>
 			<xsd:sequence>
@@ -112,7 +125,6 @@
 				<xsd:complexType>
 					<xsd:choice minOccurs="0" maxOccurs="unbounded">
 						<xsd:element name="TEXTBLOCK" type="ct_FINAL"/>
-						<xsd:element name="PUBLISHING_STMT" type="ct_FINAL"/>
 						<xsd:element name="PAGE_NUMBER" type="ct_FINAL"/>
 						<xsd:element name="ITEM_CAPTION" type="ct_FINAL"/>
 						<xsd:element name="AUTHOR" type="ct_FINAL"/>
@@ -279,7 +291,16 @@
 	</xsd:complexType>
 	<xsd:complexType name="ct_FOOTNOTE_PARAGRAPH">
 		<xsd:sequence>
-			<xsd:element name="TEXT" type="ct_FINAL" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="ITEM_ID" type="ct_FINAL" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="DATA" minOccurs="0" maxOccurs="1">
+				<xsd:complexType>
+					<xsd:choice minOccurs="0" maxOccurs="unbounded">
+						<xsd:element name="TEXTBLOCK" type="ct_FINAL"/>
+						<xsd:element name="MARGINALIA" type="ct_FINAL"/>
+						<xsd:element name="TABLE" type="ct_TABLE_LIKE_STRUCT"/>
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="ct_FINAL">
