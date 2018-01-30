@@ -417,10 +417,19 @@ int start()
 			pt.LogTime("Verify ALTO");
 			verifyFile(&df,&hError,currentMetsPath,"IMGGRP");						
 			pt.LogTime("Verify Images");
-			if (parameter.getValueCheck("dataintegrity.checkFilePNG") == 1){
-				verifyFile(&df,&hError,currentMetsPath,"PNGGRP");						
-				pt.LogTime("Verify PNG Images");
+			if (parameter.getValueCheck("dataintegrity.checkFileBWGRP") == 1){
+				verifyFile(&df,&hError,currentMetsPath,"BWGRP");						
+				pt.LogTime("Verify BWGRP Images");
 			}
+			if (parameter.getValueCheck("dataintegrity.checkFileTHUMBGRP") == 1){
+				verifyFile(&df,&hError,currentMetsPath,"THUMBGRP");						
+				pt.LogTime("Verify THUMBGRP Images");
+			}
+			// No check on the name of file of completeobjectgrp
+			//if (parameter.getValueCheck("dataintegrity.checkFileCOMPLETEOBJECTGRP") == 1){
+			//	verifyFile(&df,&hError,currentMetsPath,"COMPLETEOBJECTGRP");						
+			//	pt.LogTime("Verify COMPLETEOBJECTGRP Images");
+			//}
 		}
 
 		// Do transformation of the data factory

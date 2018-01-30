@@ -554,6 +554,8 @@ INSERT into ERRORCATEGORY('ID_CATEGORY','NAME')  VALUES ('6','STRUCTURE');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.checkSum','CheckSum');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('semanticchecks.dateFolderIssue','Date Structure of Issue');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('semanticchecks.divs','Div Structure');
+INSERT into KEY2LABEL (KEY,LABEL) VALUES ('semanticchecks.emptyMix','Empty Mix');
+INSERT into KEY2LABEL (KEY,LABEL) VALUES ('semanticchecks.Folder','Folder Name');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.unlinkedIdentifier','not link identifier');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('semanticchecks.identifierMix','Mix');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('blocks.altoblockPerPage','One alto per page');
@@ -564,6 +566,9 @@ INSERT into KEY2LABEL (KEY,LABEL) VALUES ('semanticchecks.noIssueDefined','Issue
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('semanticchecks.invalidSupplement','Invalid Supplement');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('blocks.measurementSTD','Measurement standard');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.checkFile','Check File');
+INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.checkFileBWGRP','Check File BWGRP');
+INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.checkFileTHUMBGRP','Check File THUMBGRP');
+INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.checkFileCOMPLETEOBJECTGRP','Check File COMPLETEOBJECTGRP');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.oddsPages','Odds pages');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('inventoryBook','Inventory Check (Only monograph)');
 

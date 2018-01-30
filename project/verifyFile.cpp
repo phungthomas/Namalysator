@@ -20,7 +20,8 @@ verifyFile::verifyFile(datafactory *dfverifiers,errorHandler *hError,std::string
 			{
 				char tmp[20];
 				sprintf_s(tmp, "%05d", tf.seq);					
-				hError->getError(cat_sequenceIncorrect,"METS","FILESEC",tf.ref +" should end in " + std::string(tmp),fname,tf.ref);		
+				hError->getError(cat_sequenceIncorrect,"METS","FILESEC",tf.ref +" should end in " + std::string(tmp)/*+" "+fname*/,fname,tf.ref);
+				//std::cout<<"DEBUG"<<fname.substr(fname.length() - 9, 5)<<std::endl;
 			}
 			FILE *fp ;
 			fopen_s(&fp,fname.c_str(), "r");

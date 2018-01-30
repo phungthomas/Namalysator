@@ -249,6 +249,9 @@ MetsFile dbrequest::getMets(int id_mets)
 			mets.mapLinked["IMGGRP"] = getMapLinkedFiles(mets.idMets, "IMGGRP");
 			mets.mapLinked["ALTOGRP"] = getMapLinkedFiles(mets.idMets, "ALTOGRP");
 			mets.mapLinked["PDFGRP"] = getMapLinkedFiles(mets.idMets, "PDFGRP");
+			mets.mapLinked["BWGRP"] = getMapLinkedFiles(mets.idMets, "BWGRP");
+			mets.mapLinked["THUMBGRP"] = getMapLinkedFiles(mets.idMets, "THUMBGRP");
+
 			mets.idTestSet = sqlite3_column_int(pStmt, 1);
 			mets.path = safe_sqlite3_column_text(pStmt, 2);
 			mets.fileName = safe_sqlite3_column_text(pStmt, 3);
