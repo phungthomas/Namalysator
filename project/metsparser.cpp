@@ -99,7 +99,7 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
 		CTX.mandatoryField.insert("sourceType");
 		CTX.mandatoryField.insert("formatVersion");
 		CTX.mandatoryField.insert("objectIdentifierValue");
-		CTX.mandatoryField.insert("imageWith");
+		CTX.mandatoryField.insert("imageWidth");
 		CTX.mandatoryField.insert("imageHeight");
 	}
 	
@@ -143,7 +143,7 @@ StateParserState* StateParserRootamdSecState::getNext(const char* const name){
 				map["sourceType"]=new StateEmptyCheck();
 				map["formatVersion"]=new StateEmptyCheck();
 				map["objectIdentifierValue"]=new StateEmptyCheck();
-				map["imageWith"]=new StateEmptyCheck();
+				map["imageWidth"]=new StateEmptyCheck();
 				map["imageHeight"]=new StateEmptyCheck();
 			};
 		}
