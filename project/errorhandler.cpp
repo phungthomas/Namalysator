@@ -48,18 +48,9 @@ void errorHandler::writeToLog(errorType category,const std::string &fileName, co
 	}
 	else
 	{
-		std::cout << "could not write to log --> Programm will continue " << std::endl; 	
+		std::cout << "could not write to log ("<< logFilePath.c_str() <<")--> Programm will continue " << std::endl; 	
 	}
 }
-/*
-//! get error from Mets during parsing files
-void errorHandler::getMetsError(errorType category,const std::string &relatedType,const std::string &file_part,Error e,const std::string &fName)
-{		
-	writeToLog(category,fName,convertStringErrorMessage(e));	
-	db->insertMetsError(category,relatedType,file_part,e);
-}
-*/
-
 //! write to log where the parser currently is
 void errorHandler::begin(const std::string &info)
 {
@@ -72,7 +63,7 @@ void errorHandler::begin(const std::string &info)
 	}
 	else
 	{
-		std::cout << "could not write to log --> Programm will continue :" << info << std::endl; 	
+		std::cout << "could not write to log ("<< logFilePath.c_str() <<")--> Programm will continue :" << info << std::endl; 	
 	}
 }
 //! set path of log

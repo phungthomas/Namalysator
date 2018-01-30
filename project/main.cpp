@@ -173,9 +173,24 @@ int start()
 	sqlCreateTablePath << CurrentPath << "/createtable.txt";
 	
 	std::stringstream logFilePath;
-	logFilePath <<CurrentPath << "/logfiles/" <<  batchName << ".log";	
+	logFilePath << CurrentPath << "/logfiles";
+
+	bool logExist =fs::exists(logFilePath.str());
+
+	if ( ! logExist ){
+
+		errorHandler hLog;		
+		hLog.setlogFilePath("commonLog.log");		
+		hLog.begin("No ./logfiles directory");
+		hLog.begin("return 2");	
+		std::cout<< "No ./logfiles directory" << std::endl;
+		return 2;
+
+	}
+
+	logFilePath <<"/" <<  batchName << ".log";	
 	
-	bool logExist =true;
+	
 	int currentLog=2;
 	while (logExist ==true)
 	{		
