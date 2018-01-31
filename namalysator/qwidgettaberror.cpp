@@ -7,9 +7,11 @@
 #include <fstream>
 #include "w_accepted.h"
 #include <QLabel>
+#include <iostream>
 
 tabErrors::tabErrors(int id,std::vector<MetsError>* v, BatchDetail &bd,DialogImage* dialogTab):batch(bd),dial(dialogTab)
 {
+
 	id_cat = id;
 	db.setDataBaseName(batch.database);  
 	vSchemaE = v;
@@ -129,9 +131,9 @@ void tabErrors::lineChanged(int row,int col)
 		
 		if ( filename.size()!=0 ){
 			std::string str=link;
-			std::string rep="/png/";
+			std::string rep="/blackwhiteimages/";
 			str = str.replace(str.end()-4,str.end(),".png",4);
-			std::size_t it = str.find("/alto/");
+			std::size_t it = str.find("/text/");
 			str = str.replace(it,6,rep);
 			QImage icon;
 			icon.load(str.c_str());

@@ -110,7 +110,7 @@ void dataaggregator::createIssue()
 	datafactory_set<dmdsec> dfissue = dfTemp->get_set<dmdsec>();
 	for (datafactory_set<dmdsec>::iterator it = dfissue.begin(); it != dfissue.end(); ++it)
 	{
-		if (it.key().find("MODSMD_ISSUE")!=string::npos)
+		if (it.key().find("MODSMD_PRINT")!=string::npos)
 		{
 			for (std::map<std::string,std::string>::iterator it2 = it->mapAddStringData.begin();it2!= it->mapAddStringData.end(); it2++)
 			{
