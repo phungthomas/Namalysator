@@ -14,17 +14,17 @@ void verifyBook::check(int check,metsparserContext& context){
 	init (context);
 
 	// check if BIBREC_SYSNUM in database
-	std::string BIBREC_SYSNUM = context.inventory.inventoryMODSMD_ELEC.BIBREC_SYS_NUM;
+	std::string BIBREC_SYSNUM = context.inventory.inventoryMODSMD_COLLECTION.BIBREC_SYS_NUM;
 	if (!db->getInventory(BIBREC_SYSNUM,invent)){
-		hError -> getError(cat_bookinventory,"METS","DMDSEC MODSMD_ELEC", "BIBREC_SYSNUM not found:" + BIBREC_SYSNUM ,context.currentMetsFile,BIBREC_SYSNUM);
+		hError -> getError(cat_bookinventory,"METS","DMDSEC MODSMD_COLLECTION", "BIBREC_SYSNUM not found:" + BIBREC_SYSNUM ,context.currentMetsFile,BIBREC_SYSNUM);
 		return; // skip all
 	};
 
 	db->InventoryChecked(BIBREC_SYSNUM); // update checked flag in bookinventory to be able to show the rate of full campaign
 
-	std::string title = buildTitle( context.inventory.inventoryMODSMD_ELEC);
+	std::string title = buildTitle( context.inventory.inventoryMODSMD_COLLECTION);
 	if ( invent.BIBREC_245a.compare(title)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_ELEC", "wrong title:" + context.inventory.inventoryMODSMD_ELEC.BIBREC_245a +" against :"+ invent.BIBREC_245a ,context.currentMetsFile,context.inventory.inventoryMODSMD_ELEC.BIBREC_245a);
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_COLLECTION", "wrong title:" + context.inventory.inventoryMODSMD_COLLECTION.BIBREC_245a +" against :"+ invent.BIBREC_245a ,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.BIBREC_245a);
 	}
 
     title = buildTitle( context.inventory.inventoryMODSMD_PRINT);
@@ -33,8 +33,8 @@ void verifyBook::check(int check,metsparserContext& context){
 	}
 
 
-	if ( invent.BIBREC_100a.compare(context.inventory.inventoryMODSMD_ELEC.BIBREC_100a)) {
-		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MODSMD_ELEC", "wrong BIBREC_100a:" + context.inventory.inventoryMODSMD_ELEC.BIBREC_100a +" against :"+ invent.BIBREC_100a,context.currentMetsFile,context.inventory.inventoryMODSMD_ELEC.BIBREC_100a);
+	if ( invent.BIBREC_100a.compare(context.inventory.inventoryMODSMD_COLLECTION.BIBREC_100a)) {
+		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MODSMD_COLLECTION", "wrong BIBREC_100a:" + context.inventory.inventoryMODSMD_COLLECTION.BIBREC_100a +" against :"+ invent.BIBREC_100a,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.BIBREC_100a);
 	}
 
 	if ( invent.BIBREC_100a.compare(context.inventory.inventoryMODSMD_PRINT.BIBREC_100a)) {
@@ -43,10 +43,10 @@ void verifyBook::check(int check,metsparserContext& context){
 	
 	// TODO compare must be base on any kind order of list
 	
-	for ( std::map<std::string,std::string>::iterator it = context.inventory.inventoryMODSMD_ELEC.languageTerm.begin() ; it != context.inventory.inventoryMODSMD_ELEC.languageTerm.end() ;it++){
+	for ( std::map<std::string,std::string>::iterator it = context.inventory.inventoryMODSMD_COLLECTION.languageTerm.begin() ; it != context.inventory.inventoryMODSMD_COLLECTION.languageTerm.end() ;it++){
 
 		if ( invent.languageTerm.find(it->first) == invent.languageTerm.end() ) {
-			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MODSMD_ELEC", "wrong languageTerm:" + it->first ,context.currentMetsFile,it->first);
+			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MODSMD_COLLECTION", "wrong languageTerm:" + it->first ,context.currentMetsFile,it->first);
 			
 		}
 	
@@ -67,8 +67,8 @@ void verifyBook::check(int check,metsparserContext& context){
 			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MOD_SMD_PRINT", "wrong languageTerm:not present" + it->first ,context.currentMetsFile,it->first);
 		};
 
-		if ( context.inventory.inventoryMODSMD_ELEC.languageTerm.find(it->first) == context.inventory.inventoryMODSMD_ELEC.languageTerm.end() ){
-			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MODSMD_ELEC", "wrong languageTerm:not present" + it->first ,context.currentMetsFile,it->first);
+		if ( context.inventory.inventoryMODSMD_COLLECTION.languageTerm.find(it->first) == context.inventory.inventoryMODSMD_COLLECTION.languageTerm.end() ){
+			hError -> getError(cat_bookinventoryData,"METS","DMDSEC MODSMD_COLLECTION", "wrong languageTerm:not present" + it->first ,context.currentMetsFile,it->first);
 		};
 	};
 

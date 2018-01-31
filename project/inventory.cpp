@@ -23,12 +23,12 @@ std::string inventory::toString(std::string name){
 
 std::string inventoryMapping::toString(){
 	return  inventoryMODSMD_PRINT.toString("MODSMD_PRINT") +
-			inventoryMODSMD_ELEC.toString("MODSMD_ELEC")+
+			inventoryMODSMD_COLLECTION.toString("MODSMD_COLLECTION")+
 			inventoryMARCMD_ALEPHSYNC.toString("MARCMD_ALEPHSYNC");
 }
 
 inventory* inventoryMapping::getInventory(std::string type){
-	if ( type.compare("MODSMD_ELEC")==0 ) return &inventoryMODSMD_ELEC;
+	if ( type.compare("MODSMD_COLLECTION")==0 ) return &inventoryMODSMD_COLLECTION;
 	if ( type.compare("MODSMD_PRINT")==0) return &inventoryMODSMD_PRINT;
 	if ( type.compare("MARCMD_ALEPHSYNC")==0)return &inventoryMARCMD_ALEPHSYNC;
 	return 0;

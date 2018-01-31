@@ -14,7 +14,7 @@ void verifyFolder::check(int check ,metsparserContext& context){
 	std::string search = "/\\";
 
 	int pos  = path.find_last_of(search);
-	std::string bibrec = context.inventory.getInventory("MODSMD_ELEC")->BIBREC_SYS_NUM;
+	std::string bibrec = context.inventory.getInventory("MODSMD_COLLECTION")->BIBREC_SYS_NUM;
 
 	if ( pos + 1 < path.length() ){ 
 		std::string sub = path.substr(pos+1);

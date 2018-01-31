@@ -524,7 +524,7 @@ bool database::insertALLData(datafactory *df,metsparserContext& ctx,int number)
 	startTransaction();
 		updateMets(current_id_mets,df);
 		if ( ctx.inventory.isActif() ){ 
-			insertMetsBook(current_id_mets,ctx.inventory.inventoryMODSMD_ELEC.BIBREC_SYS_NUM); 
+			insertMetsBook(current_id_mets,ctx.inventory.inventoryMODSMD_COLLECTION.BIBREC_SYS_NUM); 
 		};
 		insertLinkedFiles(current_id_mets,df);
 		datafactory_set<Article> dfarticle = df->get_set<Article>();

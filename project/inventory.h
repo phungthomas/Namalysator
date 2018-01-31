@@ -29,7 +29,7 @@ private :
 	inventory* currentInventory;
 public :
 	inventory inventoryMODSMD_PRINT;
-	inventory inventoryMODSMD_ELEC;
+	inventory inventoryMODSMD_COLLECTION;
 	inventory inventoryMARCMD_ALEPHSYNC;
 
 	inventory* getInventory(std::string type);

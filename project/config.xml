@@ -49,7 +49,7 @@
     
 		<semanticchecks>
         <!-- Folder
-        checks whether the name of the folder corresponds to MODSMD_ELEC's BIBREC_SYSNUM (which is in identifier type="local")-->
+        checks whether the name of the folder corresponds to MODSMD_COLLECTION's BIBREC_SYSNUM (which is in identifier type="local")-->
 				<Folder>1</Folder>
       
         <!-- identifierMix: check that the entries in IMGGRP in the FileSec all have an ADMID attribute which references an existing amdSec -->
@@ -118,11 +118,11 @@
     <!-- inventoryBook
     performs multiple checks against the inventory:
     1. BIBREC_SYSNUM is in the inventory
-    2. BIBREC245a is correct in MODSMD_ELEC and MODSMD_PRINT
-    3. BIBREC100a is correct in MODSMD_ELEC and MODSMD_PRINT
-    4. whether the language terms used in MODSMD_ELEC all exist in the inventory
+    2. BIBREC245a is correct in MODSMD_COLLECTION and MODSMD_PRINT
+    3. BIBREC100a is correct in MODSMD_COLLECTION and MODSMD_PRINT
+    4. whether the language terms used in MODSMD_COLLECTION all exist in the inventory
     5. whether the language terms used in MODSMD_PRINT all exist in the inventory 
-    6. add the opposite test wheter all languages in the inventory are use in MODSMD_PRINT and MODSMD_ELEC
+    6. add the opposite test wheter all languages in the inventory are use in MODSMD_PRINT and MODSMD_COLLECTION
     7. whether the item barcode from the inventory corresponds to the identifier type="local" from MODSMD_PRINT
     8. BIBREC_260b in MODSMD_PRINT
     9. BIBREC_SYS_NUM with MARCMD_ALEPHSYNC BIBREC_SYS_NUM-->
