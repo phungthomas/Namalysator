@@ -4,127 +4,39 @@
 #include <fstream>
 #include <vector>
 #include <configparser.h>
+#include <parserCheck.h>
+#include "inventoryparser.h"
 #include "boost/filesystem/operations.hpp"
 #include "boost/filesystem/path.hpp"
 #include "sqlloadinventory.h"
 
 namespace fs = boost::filesystem;
 
-// analyse csv file separate by ;
-// xxxx;xxxx;"xxxxx";"yyyy;xxxx";"zzzz"" ;""kjhkhkjhkj";xxxxx
-
-void analyse_csv ( const char* line, std::vector<std::string> & vect  ){
-    static char WORD [ 2000 ]; // not nice -> 500 chinese char on 4 byte in UTF-8
-	const char * ptr ;
-	char * ptrW ;
-	int mode=0;
-
-	ptr = line;
-	ptrW = WORD; *ptrW = '\0' ;
-	
-
-	for ( ptr = line ; *ptr ; ptr++ ) {
-	
-		switch ( *ptr ) {
-		case	';' : 
-			      if ( mode == 2 ){
-					// escape mode : true ';' in the content ( not a separator of field )
-					*ptrW = *ptr; ptrW++;
-				  }else{
-					// new WORD START
-					// means previous is finish
-					*ptrW = '\0' ; 
-					vect.push_back(std::string(WORD));
-					ptrW = WORD; *ptrW = '\0' ;
-					mode = 1;
-				  }
-				  break;
-		case '"' : 
-					switch ( mode ) {
-						case 1 :
-							mode = 2;
-							break;
-						case 2 :
-							mode = 3; // perhaps suite of "", but could be "; 
-							break;
-						case 3 :
-							mode = 2; // but copy the " like it is a suite "" 
-						case 0 :
-							*ptrW = *ptr; ptrW++;
-							break;
-					}
-	
-					break;
-		default :
-		          *ptrW = *ptr; ptrW++;  
-				  if ( mode == 1 ) {
-					  mode = 0;
-				  }
-				  break;
-		}
-	}
-	// always add last one;
-	vect.push_back( std::string(WORD) );
-}
-
-void analyse_tab ( const char* line, std::vector<std::string> & vect  ){
-    static char WORD [ 2000 ]; // not nice -> 500 chinese char on 4 byte in UTF-8
-	const char * ptr ;
-	char * ptrW ;
-	
-
-	ptr = line;
-	ptrW = WORD; *ptrW = '\0' ;
-	
-
-	for ( ptr = line ; *ptr ; ptr++ ) {
-	
-		switch ( *ptr ) {
-		case	'\t' : 
-					// new WORD START
-					// means previous is finish
-					*ptrW = '\0' ; 
-					vect.push_back(std::string(WORD));
-					ptrW = WORD; *ptrW = '\0' ;
-				  break;
-		default :
-		          *ptrW = *ptr; ptrW++;  
-				  break;
-		}
-	}
-	// always add last one;
-	*ptrW = '\0' ; 
-	vect.push_back( std::string(WORD) );
-}
 
 int loadInventory (const char * fileName,SQLLoadInventory& db ){
 
 	int skipfirst = 0;
-	std::ifstream infile(fileName);
-	std::string line = "";
+
 	
-	if ( ! infile.is_open() ) {
-		std::cerr << "File ["<<fileName<<"] doesn't exist "<< std::endl;
-		return -1;
-	} 
+
+
+
+
 	db.startTransaction();
 	SQLLoad sql = db.getSQLLoad();
     sql.Start();
 
-    while (getline(infile, line)){
-		std::stringstream strstr(line);
-		std::string word = "";
-		std::vector<std::string> all_words;
+	inventoryparser inventoryp(&sql);
+	parserCheck parser;
+	parser.setContentHandler(&inventoryp);
 
+	if(parser.parse(fileName)!=0){
+		std::cerr << "inventoryFile :" << fileName << std::endl;
+		return -1;
+	}
 		
-		skipfirst ++ ;
-		if ( skipfirst == 1 ) continue;
-
-		analyse_tab (line.c_str(),all_words);
-
-		//std::cerr << "Line :" << skipfirst << " -> " << std::endl;
-		sql.Store(all_words);
-    }
+	//sql.Store(all_words);
+    
 
 	db.endTransaction();
 
@@ -151,8 +63,7 @@ int start(){
 		return 1;				
 	}
 	std::cerr << parameter.getValue("database")+ ".db" << std::endl;
-	//std::cerr << parameter.getValue("input")+ ".db" << std::endl;
-	//std::cerr << parameter.getValueCheck("dataintegrity.checkSum") << std::endl;
+
 	int ret;
 	std :: cout << "Inventory loader" << std::endl;
 	SQLLoadInventory db ( parameter.getValue("database") + ".db" ,"createTable.txt" );
