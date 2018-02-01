@@ -2,12 +2,15 @@
 #include "sqlloadinventory.h"
 
 SQLLoad::SQLLoad():zErrMsg(0),pStmt(0){
-	sql = "INSERT INTO BOOKSINVENTORY "
-		              "( BOX_ID,BIBREC_SYS_NUM,ITEM_barcode,BIBREC_CALL_NUM,"
-		              "  languageTerm,BIBREC_008_7_10,BIBREC_100a,BIBREC_245a,"
-					  "  BIBREC_260b) "
-		              "VALUES (?,?,?,?,?,?,?,?,?);";
+	sql = "INSERT INTO INVENTORY "
+		              "( ID,AUTHOR,TITLE,TITLECOLLECTION,"
+		              "  subTITLE,paperID,languages,issueNumber,"
+					  "  formaldate,type,systemNumber"
+					  ") "
+		              "VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 }
+
+
 
 SQLLoad::~SQLLoad(){
 	if (pStmt)sqlite3_finalize(pStmt);
@@ -28,7 +31,7 @@ void SQLLoad::Start(){
 
 void SQLLoad::Store(std::vector<std::string> allValue){
 	//std::cerr << allValue.size() << std::endl;
-	if ( allValue.size() != 10 ){
+	if ( allValue.size() != 11 ){
 		std::cerr << "Not enough field in file : " << allValue.size() << std::endl;
 		return ;
 	};
@@ -38,10 +41,6 @@ void SQLLoad::Store(std::vector<std::string> allValue){
 	int pt = 0;
 	int vt = 0;
 	for ( int i = 0; i < allValue.size(); i++){
-		if ( i == 1 ) { // skip second column
-			vt ++;
-			continue;
-		};
 		pt++;
 		//std::cerr << "VAL" << pt <<" :" << allValue[vt] << std::endl;//DEBUG
 		//if ( vt!= 5 || allValue[vt].length() != 0 ) { // skip error on inventory
@@ -53,11 +52,10 @@ void SQLLoad::Store(std::vector<std::string> allValue){
 	if (sqlite3_step(pStmt) != SQLITE_DONE) {
 		std::string error ( sqlite3_errmsg(db) );
 		std::cerr << error << std::endl;
-		std::cerr << "SYSNUM " << allValue[1] << std::endl;
+		std::cerr << "SYSNUM " << allValue[0] << std::endl;
 		std::cerr << sql << std::endl;
 		
 		for ( int i = 0; i < allValue.size(); i++){
-			if ( i==1) continue;
 			std::cerr << "'" << allValue[i] << "'," ;
 		}
 		std::cerr << std::endl;
