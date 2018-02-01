@@ -3,6 +3,7 @@
 
 #include "stateparser.h"
 #include "sqlloadinventory.h"
+#include <map>
 
 
 class inventoryparserContext : public StateParserContext{
@@ -11,6 +12,8 @@ public :
 
 	SQLLoad* sql;
 	std::string file;
+	std::string languages;
+	std::map<std::string,std::string> keyValues;
 	
 };
 
@@ -20,7 +23,6 @@ public:
 	virtual ~StateParserInventoryRootState(){};
 
 	virtual StateParserState* getNext(const char* const name);
-	virtual void startElement (const char* const name, const xercesc::Attributes &attrs );
 };
 
 //! parse Inventory files and in map of document

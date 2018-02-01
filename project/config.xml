@@ -4,7 +4,7 @@
 	<database>C:/Data/DB/SMALLTEST</database>
   
   <!-- file where inventory of book is store in tabbed format : only needed for book checking -->
-	<inventoryFile>file2.txt</inventoryFile>
+	<inventoryFile>inventory.xml</inventoryFile>
   
   <!-- administrative parameter-->
 	<batchName>batch2</batchName>
@@ -38,10 +38,18 @@
           (or ComposedBlocks or Illustrations) that do not exist in the ALTO file itself.-->
 			<unlinkedIdentifier>1</unlinkedIdentifier>
       
-      <!-- checkFilePNG
-      Verify PNG Images 
-      condition : dataintegrity.checkFile = 1 -->
-			<checkFilePNG>1</checkFilePNG>
+      <!-- checkFileBWGRP
+      Verify BWGRP Images 
+      condition : dataintegrity.checkFileBWGRP = 1 -->
+			<checkFileBWGRP>1</checkFileBWGRP>
+	  <!-- checkFileTHUMBGRP
+      Verify THUMBGRP Images 
+      condition : dataintegrity.checkFileTHUMBGRP = 1 -->
+			<checkFileTHUMBGRP>1</checkFileTHUMBGRP>
+	  <!-- checkFileCOMPLETEOBJECTGRP
+      Verify COMPLETEOBJECTGRP Images 
+      condition : dataintegrity.checkFileCOMPLETEOBJECTGRP = 1 -->
+			<checkFileCOMPLETEOBJECTGRP>1</checkFileCOMPLETEOBJECTGRP>
 		</dataintegrity>
     
     <!-- count xml div entity -->
