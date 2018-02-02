@@ -1939,9 +1939,9 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset,bool sa
 	
 	
 	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
-	std::string selectSql = "SELECT ll.LABEL, a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
-		                    " c.BIBREC_100a,c.BIBREC_260b,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a"
-							" LEFT JOIN (SELECT * FROM BOOKSINVENTORY h, METSBOOK b WHERE b.BIBREC_SYS_NUM = h.BIBREC_SYS_NUM) c "
+	std::string selectSql = "SELECT ll.LABEL, a.ID_METS, a.PATH, a.FILENAME, c.UNIQUEBUILDKEY," 
+		                    " c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY, c.UNIQUEBUILDKEY/*,c.CHECKED*/ FROM METS a"
+							" LEFT JOIN (SELECT * FROM INVENTORY h, METSINVENTORY b WHERE b.UNIQUEBUILDKEY = h.UNIQUEBUILDKEY) c "
 							" ON a.ID_METS = c.ID_METS"
 							" LEFT JOIN PROGRESSION_STATE aa"
 							" ON a.ID_METS = aa.ID_METS"
@@ -1951,9 +1951,9 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset,bool sa
 
 	if ( sampling ) {
 
-		selectSql = "SELECT ll.LABEL, a.ID_METS, a.PATH, a.FILENAME, c.BIBREC_245a," 
-		                    " c.BIBREC_100a,c.BIBREC_260b,c.ITEM_barcode, c.BIBREC_SYS_NUM/*,c.CHECKED*/ FROM METS a, SAMPLING_STRUCTURE ss"
-							" LEFT JOIN (SELECT * FROM BOOKSINVENTORY h, METSBOOK b WHERE b.BIBREC_SYS_NUM = h.BIBREC_SYS_NUM) c "
+		selectSql = "SELECT ll.LABEL, a.ID_METS, a.PATH, a.FILENAME, c.UNIQUEBUILDKEY," 
+		                    " c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY, c.UNIQUEBUILDKEY/*,c.CHECKED*/ FROM METS a, SAMPLING_STRUCTURE ss"
+							" LEFT JOIN (SELECT * FROM INVENTORY h, METSINVENTORY b WHERE b.UNIQUEBUILDKEY = h.UNIQUEBUILDKEY) c "
 							" ON a.ID_METS = c.ID_METS"
 							" LEFT JOIN PROGRESSION_STATE aa"
 							" ON a.ID_METS = aa.ID_METS"
@@ -1996,8 +1996,8 @@ retry:
 	}else {
 			if ( flagones ){ // probably table non existing so retry without compatibility mode with previous database
 				flagones = false;
-				selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, 'BIBREC_245a'," 
-		                    " 'BIBREC_100a', 'BIBREC_260b','ITEM_barcode', 'BIBREC_SYS_NUM' FROM METS a"
+				selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, 'XXXXX'," 
+		                    " 'YYYYY', 'ZZZZZZZ','BBBBBB', 'SSSSSS' FROM METS a"
 							" WHERE a.ID_TESTSET=?";
 				sqlite3_finalize(pStmt);
 				goto retry; // yes I know :-)
@@ -2018,11 +2018,11 @@ std::vector<std::vector<QVariant> > dbrequest::getAllBooks(int id_testset){
 	
 	
 	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
-	static std::string selectSql = "SELECT  c.CHECKED, a.ID_TESTSET, c.languageTerm, c.BIBREC_SYS_NUM,c.ITEM_barcode, c.BIBREC_245a," 
-		                    " c.BIBREC_100a, c.BIBREC_260b,c.BIBREC_008_7_10 FROM "
-							" BOOKSINVENTORY c"
-							" LEFT JOIN ( SELECT ID_TESTSET, BIBREC_SYS_NUM  FROM METS a, METSBOOK b WHERE a.ID_METS = b.ID_METS AND a.ID_TESTSET=? ) a"
-							" ON a.BIBREC_SYS_NUM = c.BIBREC_SYS_NUM";
+	static std::string selectSql = "SELECT  c.CHECKED, a.ID_TESTSET, c.LANGUAGES, c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY, c.UNIQUEBUILDKEY," 
+		                    " c.UNIQUEBUILDKEY, c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY FROM "
+							" INVENTORY c"
+							" LEFT JOIN ( SELECT ID_TESTSET, UNIQUEBUILDKEY  FROM METS a, METSINVENTORY b WHERE a.ID_METS = b.ID_METS AND a.ID_TESTSET=? ) a"
+							" ON a.UNIQUEBUILDKEY = c.UNIQUEBUILDKEY";
 	
 	std::vector<std::vector<QVariant> > v;
 
@@ -2269,7 +2269,7 @@ std::vector<int> dbrequest::getReport(){
 		
 	const char *zErrMsg= ""; 
 
-	static std::string selectSql = "select checked , count() from booksinventory group by checked order by checked desc";
+	static std::string selectSql = "select checked , count() from inventory group by checked order by checked desc";
 	
 	int rc = sqlite3_prepare_v2(conn->db,selectSql.c_str(),-1, &pStmt,&zErrMsg);
 
