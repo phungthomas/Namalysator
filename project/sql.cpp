@@ -190,10 +190,10 @@ void database::dberror(std::string sql){
 
 bool database::getInventory(std::string _sysnum, inventory& _inventory){
 	bool ret = false;
-	static std::string sql = "SELECT BIBREC_SYS_NUM,ITEM_barcode,BIBREC_CALL_NUM,"
-		              "  languageTerm,BIBREC_008_7_10,BIBREC_100a,BIBREC_245a,"
-					  "  BIBREC_260b,CHECKED"
-					  "  from BOOKSINVENTORY where BIBREC_SYS_NUM=?";
+	static std::string sql = "SELECT UNIQUEBUILDKEY,AUTHOR,PAPERID,"
+		              "  LANGUAGES,FORMALDATE,TYPE,"
+					  "  CHECKED"
+					  "  from INVENTORY where UNIQUEBUILDKEY=?";
 
 	const char *szErrMsg =0;
 	sqlite3_stmt *pStmt =0;
@@ -207,19 +207,18 @@ bool database::getInventory(std::string _sysnum, inventory& _inventory){
 		{
 			int col=0;
 			
-			_inventory.BIBREC_SYS_NUM = safe_sqlite3_column_text(pStmt, col++);
-			_inventory.ITEM_barcode = safe_sqlite3_column_text(pStmt, col++);
-			std::string dummy = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.uniquebuildkey = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.author = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.paperid = safe_sqlite3_column_text(pStmt, col++);
+			
 			std::string lang = safe_sqlite3_column_text(pStmt, col++);
 			std::stringstream ss(lang);
 			std::string item;
 			while (std::getline(ss, item, ',')) {
 				_inventory.languageTerm[item]=item;
 			}
-			_inventory.BIBREC_008_7_10 = safe_sqlite3_column_text(pStmt, col++);
-			_inventory.BIBREC_100a = safe_sqlite3_column_text(pStmt, col++);
-			_inventory.BIBREC_245a = safe_sqlite3_column_text(pStmt, col++);
-			_inventory.BIBREC_260b = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.formaldate = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.type = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.checked = sqlite3_column_int(pStmt, col++);
 
 			//std::cerr << _inventory.toString("DATABASE") << std::endl;
@@ -264,8 +263,8 @@ bool database::insertMetsInventory(int id_mets, std::string _sysnum){
 
 bool database::InventoryChecked(std::string _sysnum){
 	bool ret = false;
-	static std::string sql = "UPDATE BOOKSINVENTORY SET CHECKED=1"
-		              " where BIBREC_SYS_NUM=?";
+	static std::string sql = "UPDATE INVENTORY SET CHECKED=1"
+		              " where UNIQUEBUILDKEY=?";
 
 	const char *szErrMsg =0;
 	sqlite3_stmt *pStmt =0;
@@ -524,7 +523,7 @@ bool database::insertALLData(datafactory *df,metsparserContext& ctx,int number)
 		updateMets(current_id_mets,df);
 		if ( ctx.inventory.isActif() ){ 
 			//TODO Call unique function
-			insertMetsInventory(current_id_mets,ctx.inventory.inventoryMODSMD_COLLECTION.BIBREC_SYS_NUM); 
+			insertMetsInventory(current_id_mets,ctx.inventory.inventoryMODSMD_COLLECTION.uniquebuildkey); 
 		};
 		insertLinkedFiles(current_id_mets,df);
 		datafactory_set<Article> dfarticle = df->get_set<Article>();

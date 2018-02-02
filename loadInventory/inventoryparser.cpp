@@ -1,6 +1,7 @@
 #include "inventoryparser.h"
 #include <string>
 #include <iostream>
+#include <cstdio>
 #include <map>
 #include "../common_files/xmltostr.h"
 using namespace xercesc;
@@ -36,14 +37,17 @@ private:
 		return tmp;
 	}
 
-	std::string buildUnique(std::string type,std::string date,std::string seq,std::string sysnum){
+	std::string buildUnique(std::string type,std::string date,std::string seq,std::string sysnum,std::string paperid){
 
 		if ( type.compare("Monograph") == 0){
 			return sysnum;
 		}
 
+		char* str = strdup (type.c_str());
+
 		char ret[200];
-		sprintf_s(ret, "%s_%s", date.c_str(), seq.c_str());
+		sprintf_s(ret, "%s/%s/%s_%s", _strlwr(str), paperid.c_str(), date.c_str(), seq.c_str());
+		free(str);
 
 		return ret;
 	}
@@ -64,7 +68,8 @@ public:
 	   allValue.push_back(getMap(CTX.keyValues,"title"));
 	   allValue.push_back(getMap(CTX.keyValues,"titleCollection"));
 	   allValue.push_back(getMap(CTX.keyValues,"subTitle"));
-	   allValue.push_back(getMap(CTX.keyValues,"paperID"));
+	   std::string paperID=getMap(CTX.keyValues,"paperID");
+	   allValue.push_back(paperID);
 	   allValue.push_back(getMap(CTX.keyValues,"languages"));
 	   allValue.push_back(getMap(CTX.keyValues,"issueNumber"));
 	   std::string date = getMapDate(CTX.keyValues);
@@ -74,7 +79,7 @@ public:
 	   std::string sysnum = getMap(CTX.keyValues,"systemNumber");
 	   allValue.push_back(sysnum);
 	   std::string seq = getMap(CTX.keyValues,"sequenceNumber");
-	   allValue.push_back(buildUnique(type,date,seq,sysnum));
+	   allValue.push_back(buildUnique(type,date,seq,sysnum,paperID));
        
 	   (CTX . sql) -> Store( allValue);
 

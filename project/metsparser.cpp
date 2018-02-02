@@ -232,34 +232,6 @@ public:
 	};
 };
 
-/*
-class StateParsermodStateInventoryType:public StateParsermodState{
-private:
-	std::string localType;
-public:
-	StateParsermodStateInventoryType(){}
-	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
-		
-		const char *val = getAttributeValue("type", atts);
-		if (val != 0) 
-		{		
-			localType=std::string(val);
-		}
-	};
-
-	virtual void endElement (const char* const name){
-		if ( localType.compare("given")==0 ){
-			CTX.inventory.setCurrentInventoryValue("BIBREC_100a-1",CTX.addStringData);
-		}else if ( localType.compare("family")==0 ){
-			CTX.inventory.setCurrentInventoryValue("BIBREC_100a-2",CTX.addStringData);
-		}
-		StateParsermodState::endElement(name);
-	};
-
-
-};
-*/
-
 
 StateParserState* StateParsermodState::getNext(const char* const name){
 	static std::map<string,StateParsermodState*> map;
@@ -271,15 +243,12 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 		_onlyOnes(std::map<string,StateParsermodState*>& map){
 			//static int i = 0;
 			//std::cerr << "Only Ones :"<< ++i << std::endl;
-			map["nonSort"]=		new StateParsermodStateInventory("nonSort");
-			map["title"]=		new StateParsermodStateInventory("BIBREC_245a");
-			//map["subTitle"]=	new StateParsermodStateInventory("BIBREC_245b"); // sub state machine
-			map["identifier"]=	new StateParsermodStateInventory("BIBREC_SYS_NUM");
+			map["recordIdentifier"]= new StateParsermodStateInventory("recordIdentifier");
+			map["title"]=		new StateParsermodStateInventory("title");
+			map["identifier"]=	new StateParsermodStateInventory("identifier");
 			map["languageTerm"]=new StateParsermodStateInventory("languageTerm");
-			map["publisher"]=	new StateParsermodStateInventory("BIBREC_260b");
-			//map["dateIssued"]=	new StateParsermodStateInventory("BIBREC_260c");
-			map["namePart"]=	new StateParsermodStateInventory("BIBREC_100a"); // case of type
-			map["dateIssued"]=	new StateParsermodStateInventory("BIBREC_008_7_10");
+			map["dateIssued"]=	new StateParsermodStateInventory("dateIssued");
+			map["author"]=	new StateParsermodStateInventory("author");
 		}
 	} onlyOnes (map);
 

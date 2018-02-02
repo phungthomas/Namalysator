@@ -10,14 +10,17 @@
 
 class inventory{
 public:
-	std::string nonSort;
-	std::string BIBREC_245a;
-	std::string BIBREC_100a;
-	std::string BIBREC_260b;
-	std::string BIBREC_008_7_10;
-	std::string ITEM_barcode;
-	std::string BIBREC_SYS_NUM; //could be ITEM_barcode depending of the section
-	std::map<std::string,std::string> languageTerm; //std::string BIBREC_008_35_37;
+	std::string author;
+	std::string title;
+	std::string titlecollection;
+	std::string subtitle;
+	std::string paperid;
+	std::string barcode;
+	std::string issuenumber;
+	std::string formaldate;
+	std::string type;
+	std::string uniquebuildkey;
+	std::map<std::string,std::string> languageTerm; 
 	std::string toString(std::string name);
 	int checked;
 };

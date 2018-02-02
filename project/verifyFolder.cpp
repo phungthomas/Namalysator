@@ -14,13 +14,15 @@ void verifyFolder::check(int check ,metsparserContext& context){
 	std::string search = "/\\";
 
 	int pos  = path.find_last_of(search);
-	std::string bibrec = context.inventory.getInventory("MODSMD_COLLECTION")->BIBREC_SYS_NUM;
+	std::string uniq = context.inventory.getInventory("MODSMD_PRINT")->uniquebuildkey;
+	int poss = uniq.find_last_of('/');
 
+	uniq = uniq.substr(poss+1);
 	if ( pos + 1 < path.length() ){ 
 		std::string sub = path.substr(pos+1);
-		if ( sub.compare( bibrec ) == 0 ) return ; // hoping that inventory is correcltly provided
+		if ( sub.compare( uniq ) == 0 ) return ; // hoping that inventory is correcltly provided
 	};
 
-	hError->getError(cat_wrongFolderName,"METS","FOLDER", path + " is not BIBREC_SYS_NUM : "+ bibrec ,context.currentMetsFile,bibrec);
+	hError->getError(cat_wrongFolderName,"METS","FOLDER", path + " is not UNIQ : "+ uniq ,context.currentMetsFile,uniq);
 
 }

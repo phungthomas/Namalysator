@@ -6,17 +6,16 @@
 std::string inventory::toString(std::string name){
 	std::stringstream ss;
 	ss<<"INVENTORY:"<<name<<std::endl;
-	ss<<"BIBREC_245a:"<<BIBREC_245a<<std::endl;
-	ss<<"BIBREC_100a:"<<BIBREC_100a<<std::endl;
-	ss<<"BIBREC_260b:"<<BIBREC_260b<<std::endl;
-	//ss<<"ITEM_barcode:"<<ITEM_barcode<<std::endl;
-	ss<<"BIBREC_SYS_NUM:"<<BIBREC_SYS_NUM<<std::endl;
+	ss<<"TITLE:"<<title<<std::endl;
+	ss<<"SUBTITLE:"<<subtitle<<std::endl;
+	ss<<"UNIQUE:"<<uniquebuildkey<<std::endl;
+	
 	for ( std::map<std::string,std::string>::iterator it = languageTerm.begin() ; it != languageTerm.end(); it ++) {
 
 		ss<<"languageTerm:"<<it->first<<std::endl;
 	
 	}
-	ss<<"BIBREC_008_7_10:"<<BIBREC_008_7_10<<std::endl;
+	ss<<"AUTHOR:"<<author<<std::endl;
 	ss<<"END INVENTORY:"<<name<<std::endl;
 	return ss.str();
 }
@@ -40,21 +39,20 @@ void inventoryMapping::setCurrentInventory(std::string type){
 
 void inventoryMapping::setCurrentInventoryValue(std::string field, std::string value){
 	if ( currentInventory == 0) return;
+
+	if ( field.compare("recordIdentifier")==0 ) currentInventory->uniquebuildkey=value;
 	
-	if ( field.compare("nonSort")==0 ) currentInventory->nonSort=value;
-	if ( field.compare("BIBREC_245a")==0 ) currentInventory->BIBREC_245a=value;
-	//if ( field.compare("BIBREC_245b")==0 ) currentInventory->BIBREC_245b=value;
-	if ( field.compare("BIBREC_100a")==0) currentInventory->BIBREC_100a=value;
-	//if ( field.compare("BIBREC_100a-2")==0) currentInventory->BIBREC_100a_2=value;
-	if ( field.compare("BIBREC_260b")==0) currentInventory->BIBREC_260b=value;
-	//if ( field.compare("BIBREC_260c")==0) currentInventory->BIBREC_260c=value;
-	//if ( field.compare("ITEM_barcode")==0) currentInventory->ITEM_barcode=value;
-	if ( field.compare("BIBREC_SYS_NUM")==0) currentInventory->BIBREC_SYS_NUM=value;
+	if ( field.compare("title")==0 ) currentInventory->title=value;
+	if ( field.compare("subtitle")==0 ) currentInventory->subtitle=value;
+	if ( field.compare("barcode")==0 ) currentInventory->barcode=value;
+	if ( field.compare("dateIssued")==0 ) currentInventory->formaldate=value;
+	
+	if ( field.compare("author")==0 ) currentInventory->author=value;
+	
 	if ( field.compare("languageTerm")==0) { 
 		currentInventory->languageTerm[value]=value;//
 	}
-	if ( field.compare("BIBREC_008_7_10")==0) currentInventory->BIBREC_008_7_10 =value;
-	;
+	
 }
 
 
