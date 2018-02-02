@@ -36,6 +36,18 @@ private:
 		return tmp;
 	}
 
+	std::string buildUnique(std::string type,std::string date,std::string seq,std::string sysnum){
+
+		if ( type.compare("Monograph") == 0){
+			return sysnum;
+		}
+
+		char ret[200];
+		sprintf_s(ret, "%s_%s", date.c_str(), seq.c_str());
+
+		return ret;
+	}
+
 public:
 	virtual void endElement (const char* const name){
 	   CTX.keyValues["languages"]=CTX.languages+",";
@@ -55,9 +67,14 @@ public:
 	   allValue.push_back(getMap(CTX.keyValues,"paperID"));
 	   allValue.push_back(getMap(CTX.keyValues,"languages"));
 	   allValue.push_back(getMap(CTX.keyValues,"issueNumber"));
-	   allValue.push_back(getMapDate(CTX.keyValues)); // formatted date
-	   allValue.push_back(getMap(CTX.keyValues,"type"));
-	   allValue.push_back(getMap(CTX.keyValues,"systemNumber"));
+	   std::string date = getMapDate(CTX.keyValues);
+	   allValue.push_back(date); // formatted date
+	   std::string type = getMap(CTX.keyValues,"type");
+	   allValue.push_back(type);
+	   std::string sysnum = getMap(CTX.keyValues,"systemNumber");
+	   allValue.push_back(sysnum);
+	   std::string seq = getMap(CTX.keyValues,"sequenceNumber");
+	   allValue.push_back(buildUnique(type,date,seq,sysnum));
        
 	   (CTX . sql) -> Store( allValue);
 
@@ -131,6 +148,7 @@ StateParserState* StateParserInventoryRootState::getNext(const char* const name)
 			map["yearNumber"]=
 			map["odrl"]=
 			map["premis"]=
+			map["sequenceNumber"]=
 			map["issueNumber"]=
 			map["barcode"]=
 				new StateParserParamState();

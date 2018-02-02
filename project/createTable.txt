@@ -9,14 +9,15 @@ CREATE TABLE INVENTORY (
 	ID varchar(20) NOT NULL PRIMARY KEY ,
 	AUTHOR varchar(20),
 	TITLE varchar(100),
-	titleCollection varchar(100),
-	subTitle varchar(400),
-    paperID varchar(30) NOT NULL,
-    languages varchar(30),
-	issueNumber varchar(30),
-	formaldate varchar(40),
-	type varchar(20),
-	systemNumber varchar(40),
+	TITLECOLLECTION varchar(100),
+	SUBTITLE varchar(400),
+    PAPERID varchar(30) NOT NULL,
+    LANGUAGES varchar(30),
+	ISSUENUMBER varchar(30),
+	FORMALDATE varchar(40),
+	TYPE varchar(20),
+	SYSTEMNUMBER varchar(40),
+	UNIQUEBUILDKEY varchar(100) UNIQUE,
 	CHECKED INTEGER
 );
 
@@ -58,11 +59,11 @@ create table METS (
   PAPERTYPE varchar(50)
 );
 
-drop table if exists METSBOOK;
-create table METSBOOK (
+drop table if exists METSINVENTORY;
+create table METSINVENTORY (
   ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   ID_METS INTEGER NOT NULL,
-  BIBREC_SYS_NUM varchar(20)
+  UNIQUEBUILDKEY varchar(100)
 );
 
 drop table if exists METSDIVCOUNT;
