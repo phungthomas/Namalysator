@@ -23,8 +23,9 @@ public:
 		CTX.dfMets->set<StringItem>("METS_PAPERTYPE", papertype);
 		CTX.papertype = papertype.value;
 	
-		if ( papertype.value.compare("Monograph")==0 ) CTX.inventory.setActif(true);
-		else CTX.inventory.setActif(false);
+		CTX.inventory.setActif(true);
+//		if ( papertype.value.compare("Monograph")==0 ) CTX.inventory.setActif(true);
+//		else CTX.inventory.setActif(false);
 	};
 };
 

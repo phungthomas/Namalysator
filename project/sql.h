@@ -84,7 +84,7 @@ public:
 	bool FillSupplements(int idMets, std::vector<string> &supplements);
 	bool getInventory(std::string _sysnum, inventory&);
 	bool InventoryChecked(std::string _sysnum);
-	bool insertMetsBook(int id_mets, std::string _sysnum);
+	bool insertMetsInventory(int id_mets, std::string _uniquenum);
 	bool isEntityToCount(std::string type,std::string entity);
 	bool isEntityToTitleCorrection(std::string type,std::string entity);
 	bool isEntityToTitleCorrectionLink(std::string type,std::string entity,std::string entityLink);

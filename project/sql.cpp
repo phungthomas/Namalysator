@@ -235,12 +235,11 @@ bool database::getInventory(std::string _sysnum, inventory& _inventory){
 	return ret;
 }
 
-bool database::insertMetsBook(int id_mets, std::string _sysnum){
+bool database::insertMetsInventory(int id_mets, std::string _sysnum){
 	bool ret = false;
-	static std::string sql= "INSERT INTO METSBOOK (ID_METS,BIBREC_SYS_NUM)"
+	static std::string sql= "INSERT INTO METSINVENTORY (ID_METS,UNIQUEBUILDKEY)"
 							" VALUES(?,?)";
 
-	//std::cerr << "INSERT METSBOOK:" << id_mets << " SYSNUM:" << _sysnum << std::endl;
 	const char *szErrMsg =0;
 	sqlite3_stmt *pStmt =0;
 
@@ -524,7 +523,8 @@ bool database::insertALLData(datafactory *df,metsparserContext& ctx,int number)
 	startTransaction();
 		updateMets(current_id_mets,df);
 		if ( ctx.inventory.isActif() ){ 
-			insertMetsBook(current_id_mets,ctx.inventory.inventoryMODSMD_COLLECTION.BIBREC_SYS_NUM); 
+			//TODO Call unique function
+			insertMetsInventory(current_id_mets,ctx.inventory.inventoryMODSMD_COLLECTION.BIBREC_SYS_NUM); 
 		};
 		insertLinkedFiles(current_id_mets,df);
 		datafactory_set<Article> dfarticle = df->get_set<Article>();
