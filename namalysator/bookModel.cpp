@@ -71,9 +71,9 @@ QVariant bookModelInventory::data(const QModelIndex &index, int role ) const{
 }
 
 QVariant bookModel::headerData ( int section, Qt::Orientation orientation, int role ) const{
-	//static char* table[]={"ID","PATH","METS", " ","Page","BIBREC_245a","BIBREC_245b","BIBREC_100a-1","BIBREC_100a-2","BIBREC_008-35-37","BIBREC_260b","BIBREC_260c","ITEMbarCode","BIBREC_SYS_NUM"};
+	//static char* table[]={"ID","PATH","METS", " ","Page","UNIQKEY","BIBREC_245b","BIBREC_100a-1","BIBREC_100a-2","BIBREC_008-35-37","BIBREC_260b","BIBREC_260c","ITEMbarCode","BIBREC_SYS_NUM"};
 	static char* table[]={"PROGRESS","ID","PATH","METS", " ","BIBREC_245a",
-		                  "BIBREC_100a","BIBREC_260b","ITEMbarCode","BIBREC_SYS_NUM","CHECKED","R","N","D"};
+		                  "BIBREC_100a","BIBREC_260b","TITLE","BIBREC_SYS_NUM","CHECKED","R","N","D"};
 
 	QVariant ret=QVariant();
 	if ( role == Qt::DisplayRole && section < 12 && section >= 0 ) {
@@ -86,8 +86,8 @@ QVariant bookModel::headerData ( int section, Qt::Orientation orientation, int r
 
 
 QVariant bookModelInventory::headerData ( int section, Qt::Orientation orientation, int role  ) const{
-	static char* table[]={"CHECKED","BATCH","language", "BIBREC_SYS_NUM","ITEMbarCode","BIBREC_245a",
-		                  "BIBREC_100a","BIBREC_260b","BIBREC_008_7_10","N","D"};
+	static char* table[]={"CHECKED","BATCH","language", "UNIQKEY","TITLE","TYPE",
+		                  "FORMALDATE","BIBREC_260b","BIBREC_008_7_10","N","D"};
 
 	QVariant ret=QVariant();
 	if ( role == Qt::DisplayRole && section < 9 && section >= 0 ) {

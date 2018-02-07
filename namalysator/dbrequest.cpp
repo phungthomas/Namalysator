@@ -1940,7 +1940,7 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset,bool sa
 	
 	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
 	std::string selectSql = "SELECT ll.LABEL, a.ID_METS, a.PATH, a.FILENAME, c.UNIQUEBUILDKEY," 
-		                    " c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY, c.UNIQUEBUILDKEY/*,c.CHECKED*/ FROM METS a"
+		                    " c.TITLE,c.TYPE,c.UNIQUEBUILDKEY, c.UNIQUEBUILDKEY/*,c.CHECKED*/ FROM METS a"
 							" LEFT JOIN (SELECT * FROM INVENTORY h, METSINVENTORY b WHERE b.UNIQUEBUILDKEY = h.UNIQUEBUILDKEY) c "
 							" ON a.ID_METS = c.ID_METS"
 							" LEFT JOIN PROGRESSION_STATE aa"
@@ -1952,7 +1952,7 @@ std::vector<std::vector<QVariant> > dbrequest::getAllMets(int id_testset,bool sa
 	if ( sampling ) {
 
 		selectSql = "SELECT ll.LABEL, a.ID_METS, a.PATH, a.FILENAME, c.UNIQUEBUILDKEY," 
-		                    " c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY, c.UNIQUEBUILDKEY/*,c.CHECKED*/ FROM METS a, SAMPLING_STRUCTURE ss"
+		                    " c.TITLE,c.TYPE,c.UNIQUEBUILDKEY, c.UNIQUEBUILDKEY/*,c.CHECKED*/ FROM METS a, SAMPLING_STRUCTURE ss"
 							" LEFT JOIN (SELECT * FROM INVENTORY h, METSINVENTORY b WHERE b.UNIQUEBUILDKEY = h.UNIQUEBUILDKEY) c "
 							" ON a.ID_METS = c.ID_METS"
 							" LEFT JOIN PROGRESSION_STATE aa"
@@ -2017,9 +2017,8 @@ std::vector<std::vector<QVariant> > dbrequest::getAllBooks(int id_testset){
 	const char *zErrMsg= 0;
 	
 	
-	//std::string selectSql = "SELECT a.ID_METS, a.PATH, a.FILENAME, b.PAGENB FROM METS a LEFT JOIN STRUCTUREERROR b ON a.ID_METS = b.ID_METS WHERE a.ID_TESTSET=?";
-	static std::string selectSql = "SELECT  c.CHECKED, a.ID_TESTSET, c.LANGUAGES, c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY, c.UNIQUEBUILDKEY," 
-		                    " c.UNIQUEBUILDKEY, c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY FROM "
+	static std::string selectSql = "SELECT  c.CHECKED, a.ID_TESTSET, c.LANGUAGES, c.UNIQUEBUILDKEY,c.TITLE, c.TYPE," 
+		                    " c.FORMALDATE, c.UNIQUEBUILDKEY,c.UNIQUEBUILDKEY FROM "
 							" INVENTORY c"
 							" LEFT JOIN ( SELECT ID_TESTSET, UNIQUEBUILDKEY  FROM METS a, METSINVENTORY b WHERE a.ID_METS = b.ID_METS AND a.ID_TESTSET=? ) a"
 							" ON a.UNIQUEBUILDKEY = c.UNIQUEBUILDKEY";

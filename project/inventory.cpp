@@ -40,7 +40,9 @@ void inventoryMapping::setCurrentInventory(std::string type){
 void inventoryMapping::setCurrentInventoryValue(std::string field, std::string value){
 	if ( currentInventory == 0) return;
 
-	if ( field.compare("recordIdentifier")==0 ) currentInventory->uniquebuildkey=value;
+
+    if ( field.compare("identifier")==0 ) currentInventory->uniquebuildkey=value; // Attention alimenter pour les monographies
+	if ( field.compare("recordIdentifier")==0 ) currentInventory->uniquebuildkey=value; // overloader pour les issues
 	
 	if ( field.compare("title")==0 ) currentInventory->title=value;
 	if ( field.compare("subtitle")==0 ) currentInventory->subtitle=value;
