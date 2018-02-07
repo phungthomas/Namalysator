@@ -43,6 +43,7 @@
 #include "verifycutouts.h"
 #include "verifymeasurement.h"
 #include "verifybook.h"
+#include "verifyPages.h"
 #include "verifyEmptyMix.h"
 #include "verifyFolder.h"
 #include "titletocheck.h"
@@ -393,6 +394,9 @@ int start()
 			}
 			pt.LogTime("Verify Odds pages");
 		}
+
+		static verifyPages vPages;
+		vPages.check(parameter.getValueCheck("dataintegrity.nbPages"),metsP.getContext(),fg->vect.size());
 		
 
 		static verifyBook vBook;

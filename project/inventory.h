@@ -19,6 +19,7 @@ public:
 	std::string issuenumber;
 	std::string formaldate;
 	std::string type;
+	std::string pages;
 	std::string uniquebuildkey;
 	std::map<std::string,std::string> languageTerm; 
 	std::string toString(std::string name);

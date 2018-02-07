@@ -257,6 +257,7 @@ typedef enum errorTypeEnum {
 	cat_cutoutoriginal =  36,
 	cat_measurement =  37,
 	cat_bookinventory = 38,
+	cat_inventorynbpages = 39,
 	cat_bookinventoryTitle = 50,
 	cat_bookinventoryData = 51,
 	cat_emptymix = 52,

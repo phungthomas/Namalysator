@@ -80,6 +80,8 @@ public:
 	   allValue.push_back(sysnum);
 	   std::string barcode= getMap(CTX.keyValues,"barcode");
 	   allValue.push_back(barcode);
+	   allValue.push_back(getMap(CTX.keyValues,"pages"));
+
 	   std::string seq = getMap(CTX.keyValues,"sequenceNumber");
 	   allValue.push_back(buildUnique(type,date,seq,sysnum,paperID,barcode));
        

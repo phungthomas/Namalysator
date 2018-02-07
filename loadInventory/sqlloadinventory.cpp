@@ -5,9 +5,9 @@ SQLLoad::SQLLoad():zErrMsg(0),pStmt(0){
 	sql = "INSERT INTO INVENTORY "
 		              "( ID,AUTHOR,TITLE,TITLECOLLECTION,"
 		              "  SUBTITLE,PAPERID,LANGUAGES,ISSUENUMBER,"
-					  "  FORMALDATE,TYPE,SYSTEMNUMBER,BARCODE,UNIQUEBUILDKEY"
+					  "  FORMALDATE,TYPE,SYSTEMNUMBER,BARCODE,PAGES,UNIQUEBUILDKEY"
 					  ") "
-		              "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		              "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 }
 
 
@@ -31,8 +31,8 @@ void SQLLoad::Start(){
 
 void SQLLoad::Store(std::vector<std::string> allValue){
 	//std::cerr << allValue.size() << std::endl;
-	if ( allValue.size() != 13 ){
-		std::cerr << "Not enough field in file : " << allValue.size() << std::endl;
+	if ( allValue.size() != 14 ){
+		std::cerr << "Not enough field in file(or to much) : " << allValue.size() << std::endl;
 		return ;
 	};
 	sqlite3_clear_bindings(pStmt);

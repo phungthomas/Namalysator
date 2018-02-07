@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
   <!-- working sqlite database : must be define for a campaign -->
-	<database>C:/Data/DB/SMALLTEST</database>
+	<database>C:/Data/DB/SMALLTEST3</database>
   
   <!-- file where inventory of book is store in tabbed format : only needed for book checking -->
 	<inventoryFile>inventory.xml</inventoryFile>
@@ -32,6 +32,8 @@
       
       <!-- oddsPages : checks whether the number of pages is odd-->
 			<oddsPages>1</oddsPages>
+	  <!-- nbPages : checks the number of pages against the one in the inventory-->
+			<nbPages>1</nbPages>
       
       <!-- 
           checks whether the logical structures containes references to ALTO blocks in <fptr> elements that reference TextBlocks 

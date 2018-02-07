@@ -191,7 +191,7 @@ void database::dberror(std::string sql){
 bool database::getInventory(std::string _sysnum, inventory& _inventory){
 	bool ret = false;
 	static std::string sql = "SELECT UNIQUEBUILDKEY,AUTHOR,PAPERID,"
-		              "  LANGUAGES,FORMALDATE,TYPE,"
+		              "  LANGUAGES,FORMALDATE,TYPE,PAGES"
 					  "  CHECKED"
 					  "  from INVENTORY where UNIQUEBUILDKEY=?";
 
@@ -219,6 +219,7 @@ bool database::getInventory(std::string _sysnum, inventory& _inventory){
 			}
 			_inventory.formaldate = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.type = safe_sqlite3_column_text(pStmt, col++);
+			_inventory.pages = safe_sqlite3_column_text(pStmt, col++);
 			_inventory.checked = sqlite3_column_int(pStmt, col++);
 
 			//std::cerr << _inventory.toString("DATABASE") << std::endl;

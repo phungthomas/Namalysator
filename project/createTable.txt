@@ -18,6 +18,7 @@ CREATE TABLE INVENTORY (
 	TYPE varchar(20),
 	SYSTEMNUMBER varchar(40),
 	BARCODE varchar(40),
+	PAGES varchar(6),
 	UNIQUEBUILDKEY varchar(100) UNIQUE,
 	CHECKED INTEGER
 );
@@ -319,11 +320,13 @@ INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('35','Incorrect Part Number','','2','3'); 
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('33','Actual Coverage','','3','4');
 
+
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('38','Wrong bibrec_sysnum against inventory','','1','2');
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('50','Wrong Title against inventory','','1','2');
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('51','Wrong data against inventory','','1','2');
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('52','Empty Mix Section','','1','2');
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('53','No group defined','','1','2');
+INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('39','bad number of pages against inventory','','3','2');
 
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('100','CUSTOM','','2','6');
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('40','Wrong classification','','2','6');
@@ -344,7 +347,7 @@ INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('26','Big section not cut in articles','','2','6'); 
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('27','Missing article title/caption','','3','6'); 
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('28','Article at wrong level','','3','6'); 
-INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('39','Wrong order of articles','','3','6');
+
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('63','Small section not cut into articles','','3','6');
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('64','Article not recognised','','3','6'); 
 INSERT INTO ERRORTYPE ('ID_TYPE','ERROR', 'DETAILS','ID_SEVERITY','ID_CATEGORY')  VALUES  ('65','Wrong article title/caption','','3','6'); 
@@ -573,6 +576,7 @@ INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.checkFileBWGRP','Check 
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.checkFileTHUMBGRP','Check File THUMBGRP');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.checkFileCOMPLETEOBJECTGRP','Check File COMPLETEOBJECTGRP');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.oddsPages','Odds pages');
+INSERT into KEY2LABEL (KEY,LABEL) VALUES ('dataintegrity.nbPages','Nombre de pages');
 INSERT into KEY2LABEL (KEY,LABEL) VALUES ('inventoryBook','Inventory Check (Only monograph)');
 
 END TRANSACTION;
