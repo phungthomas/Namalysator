@@ -37,10 +37,10 @@ private:
 		return tmp;
 	}
 
-	std::string buildUnique(std::string type,std::string date,std::string seq,std::string sysnum,std::string paperid){
+	std::string buildUnique(std::string type,std::string date,std::string seq,std::string sysnum,std::string paperid, std::string barcode){
 
 		if ( type.compare("Monograph") == 0){
-			return sysnum;
+			return barcode;
 		}
 
 		char* str = strdup (type.c_str());
@@ -78,8 +78,10 @@ public:
 	   allValue.push_back(type);
 	   std::string sysnum = getMap(CTX.keyValues,"systemNumber");
 	   allValue.push_back(sysnum);
+	   std::string barcode= getMap(CTX.keyValues,"barcode");
+	   allValue.push_back(barcode);
 	   std::string seq = getMap(CTX.keyValues,"sequenceNumber");
-	   allValue.push_back(buildUnique(type,date,seq,sysnum,paperID));
+	   allValue.push_back(buildUnique(type,date,seq,sysnum,paperID,barcode));
        
 	   (CTX . sql) -> Store( allValue);
 
