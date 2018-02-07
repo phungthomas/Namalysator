@@ -22,12 +22,17 @@ void verifyBook::check(int check,metsparserContext& context){
 
 	db->InventoryChecked(UNIQ); // update checked flag in bookinventory to be able to show the rate of full campaign
 
+	std::string title = buildTitle( context.inventory.inventoryMODSMD_PRINT);
+	if ( invent.title.compare(title)) {
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong title:" + context.inventory.inventoryMODSMD_PRINT.title +" against :"+ invent.title ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.title);
+	}
+
+    title = buildTitle( context.inventory.inventoryMODSMD_COLLECTION);
+	if ( invent.title.compare(title)) {
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_COLLECTION", "wrong title:" + context.inventory.inventoryMODSMD_COLLECTION.title +" against :"+ invent.title ,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.title);
+	}
 
 	/* //TODO rebuild all those test
-	std::string title = buildTitle( context.inventory.inventoryMODSMD_COLLECTION);
-	if ( invent.BIBREC_245a.compare(title)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_COLLECTION", "wrong title:" + context.inventory.inventoryMODSMD_COLLECTION.BIBREC_245a +" against :"+ invent.BIBREC_245a ,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.BIBREC_245a);
-	}
 
     title = buildTitle( context.inventory.inventoryMODSMD_PRINT);
 	if ( invent.BIBREC_245a.compare(title)) {
