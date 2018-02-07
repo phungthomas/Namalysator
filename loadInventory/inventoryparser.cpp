@@ -93,9 +93,9 @@ public:
 	   CTX.keyValues.clear();
 
 	};
-	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){	
-		std::cout << " Document element:" << name << std::endl;
-	}
+	//virtual void startElement (const char* const name, const xercesc::Attributes &atts ){	
+		//std::cout << " Document element:" << name << std::endl;
+	//}
 };
 
 
