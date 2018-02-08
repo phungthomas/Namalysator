@@ -9,6 +9,7 @@
 #include "boost/filesystem/operations.hpp"
 #include "boost/filesystem/path.hpp"
 #include "sqlloadinventory.h"
+#include <paramMain.h>
 
 namespace fs = boost::filesystem;
 
@@ -43,21 +44,22 @@ int loadInventory (const char * fileName,SQLLoadInventory& db ){
 	return 0;
 }
 
-int start(){
+int start(std::string& configFileName){
 	//get current path of the folder
 	fs::path CurrentPath( fs::initial_path<fs::path>());
 	
-	std::stringstream configPath,sqlCreateTablePath;	
-	configPath << CurrentPath << "/config.xml"; 	
+	std::stringstream sqlCreateTablePath;	
+	fs::path configPath = configFileName;
+	 	
 
 	Parameters parameter;
 
 	configparser config(&parameter);
 	//Parse the config file
 	
-	std::cerr << "Config file :" << configPath.str().c_str() << std::endl;
+	std::cerr << "Config file :" << configPath.string() << std::endl;
 
-	if (config.parse(configPath.str().c_str()) !=0 )	
+	if (config.parse(configPath.string().c_str()) !=0 )	
 	{	
 		std::cerr << "Unable to parse :" << configPath << std::endl;
 		return 1;				
@@ -78,11 +80,15 @@ int start(){
 	return -1;
 }
 
-int main () {
+int main (int argc, char** argv) {
 	int ret;
+	contextParam ctx;
+	if (ctx.analyse(argc,argv)) return -1;
+	//std::cout<< "configFile:" << ctx.configFile <<std::endl;
+
 	XMLPlatformUtils::Initialize ();
 	
-	ret=start();
+	ret=start(std::string(ctx.configFile));
 	
 	XMLPlatformUtils::Terminate ();
     return ret;

@@ -253,6 +253,10 @@
 					RelativePath=".\verifyFolder.cpp"
 					>
 				</File>
+				<File
+					RelativePath=".\verifyPages.cpp"
+					>
+				</File>
 				<Filter
 					Name="semanticchecks"
 					>
@@ -469,6 +473,10 @@
 				</File>
 				<File
 					RelativePath=".\verifyIdentifierInMix.h"
+					>
+				</File>
+				<File
+					RelativePath=".\verifyPages.h"
 					>
 				</File>
 				<Filter

@@ -54,6 +54,8 @@
 #include "boost/filesystem/path.hpp"
 #include "boost/progress.hpp"
 #include "boost/progress.hpp"
+#include <paramMain.h>
+
 
 #include "../common_files/precisiontimer.h"
 
@@ -140,24 +142,24 @@ void printItemLogical(Item* itemSet,PhysicalLogicalAltoFilter& filter, std::stri
 
 
 
-int start()
+int start(std::string &configFileName)
 {	
 	srand(time(NULL));
 	
 	//get current path of the folder
 	fs::path CurrentPath( fs::initial_path<fs::path>());
 	
-	std::stringstream configPath,sqlCreateTablePath;	
-	configPath << CurrentPath << "/config.xml"; 	
+	std::stringstream sqlCreateTablePath;	
+	fs::path configPath = configFileName;	
 
 	ParameterMETS parameter;
 
 	configparser config(&parameter);
 	//Parse the config file
 	
-	std::cerr << "Config file :" << configPath.str().c_str() << std::endl;
+	std::cerr << "Config file :" << configPath.string() << std::endl;
 
-	if (config.parse(configPath.str().c_str()) !=0 )	
+	if (config.parse(configPath.string().c_str()) !=0 )	
 	{	
 		errorHandler hLog;		
 		hLog.setlogFilePath("commonLog.log");		
@@ -550,9 +552,14 @@ int start()
 
 int main(int argc, char** argv){
 
+	int ret;
+	contextParam ctx;
+	if (ctx.analyse(argc,argv)) return -1;
+	
 	XMLPlatformUtils::Initialize ();
 	
-	start ();
-
+	ret=start(std::string(ctx.configFile));
+	
 	XMLPlatformUtils::Terminate ();
+    return ret;
 }

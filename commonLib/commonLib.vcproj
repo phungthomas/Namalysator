@@ -162,6 +162,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\paramMain.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\parserCheck.cpp"
 				>
 			</File>
@@ -189,6 +193,10 @@
 			</File>
 			<File
 				RelativePath=".\dbconnection.h"
+				>
+			</File>
+			<File
+				RelativePath=".\paramMain.h"
 				>
 			</File>
 			<File
