@@ -27,9 +27,9 @@ void verifyBook::check(int check,metsparserContext& context){
 		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong title:" + context.inventory.inventoryMODSMD_PRINT.title +" against :"+ invent.title ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.title);
 	}
 
-    title = buildTitle( context.inventory.inventoryMODSMD_COLLECTION);
-	if ( invent.title.compare(title)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_COLLECTION", "wrong title:" + context.inventory.inventoryMODSMD_COLLECTION.title +" against :"+ invent.title ,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.title);
+    title = buildTitle( context.inventory.inventoryMODSMD_COLLECTION); // in the xml in title
+	if ( invent.titlecollection.compare(title)) {
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_COLLECTION", "wrong title collection:" + context.inventory.inventoryMODSMD_COLLECTION.title +" against :"+ invent.titlecollection ,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.title);
 	}
 
 	/* //TODO rebuild all those test

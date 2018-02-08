@@ -208,6 +208,28 @@ public:
 
 };
 
+class StateTitleState : public StateParserMetsRootState{
+private :
+	std::string value;
+public:
+
+	StateTitleState(std::string _value):value(_value){};
+
+	virtual void characters (const char* const s, const int len){
+		CTX.addStringData += xml2str(s,len);
+	}
+
+	virtual void endElement (const char* const name){
+		CTX.addStringData += value;
+	};
+
+	
+};
+
+class StateDoNothingState : public StateParserMetsRootState{
+public:
+};
+
 class StateParsermodStateInventory:public StateParsermodState{
 private:
 	std::string value;
@@ -218,6 +240,39 @@ public:
 		CTX.inventory.setCurrentInventoryValue(value,CTX.addStringData);
 		StateParsermodState::endElement(name);
 	};
+};
+
+class StateParsermodStateTitleInfoInventory:public StateParsermodState{
+
+public:
+	StateParsermodStateTitleInfoInventory(){};
+
+	StateParserState* getNext(const char* const name){
+	static std::map<string,StateParserMetsRootState*> map;
+	static StateParserState* root=this;
+
+	StateParserState* ret=root;
+	
+	static struct _onlyOnes {
+		_onlyOnes(std::map<string,StateParserMetsRootState*>& map){
+			//static int i = 0;
+			//std::cerr << "Only Ones :"<< ++i << std::endl;
+			map["title"]= new StateParsermodStateInventory("title");
+			map["nonSort"]= new StateTitleState(" ");
+			map["partNumber"]= new StateDoNothingState();
+		}
+	} onlyOnes (map);
+
+	if (CTX.inventory.isActif()){
+		std::map<string,StateParserMetsRootState*>::iterator it = map.find(name);
+		if ( it != map.end()) ret = (*it).second;
+	};
+
+	return ret;
+
+
+};
+
 };
 
 class StateParsermodStateInventoryMarc:public StateParsermodState{
@@ -244,7 +299,7 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 			//static int i = 0;
 			//std::cerr << "Only Ones :"<< ++i << std::endl;
 			map["recordIdentifier"]= new StateParsermodStateInventory("recordIdentifier");
-			map["title"]=		new StateParsermodStateInventory("title");
+			map["titleInfo"]=		new StateParsermodStateTitleInfoInventory();
 			map["identifier"]=	new StateParsermodStateInventory("identifier");
 			map["languageTerm"]=new StateParsermodStateInventory("languageTerm");
 			map["dateIssued"]=	new StateParsermodStateInventory("dateIssued");
