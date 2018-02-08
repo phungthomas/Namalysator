@@ -231,7 +231,7 @@ public:
 };
 
 class StateParsermodStateInventory:public StateParsermodState{
-private:
+protected:
 	std::string value;
 public:
 	StateParsermodStateInventory(std::string _value):value(_value){};
@@ -275,6 +275,52 @@ public:
 
 };
 
+class StateParsermodStateInventory2:public StateParsermodStateInventory{
+private:
+	std::string value2;
+
+public:
+	StateParsermodStateInventory2(std::string value,std::string value2):StateParsermodStateInventory(value){
+		this->value2=value2;
+	};
+
+	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
+		CTX.addStringData.clear();
+		const char *val = getAttributeValue("displayLabel", atts);
+
+		if (val != 0 && strcmp(val, "manufacturer")==0) 
+		{		
+			this->value = value2;
+		}
+	};
+
+	StateParserState* getNext(const char* const name){
+		static std::map<string,StateParserMetsRootState*> map;
+		static StateParserState* root=new StateDoNothingState();;
+
+		StateParserState* ret=root;
+		
+		static struct _onlyOnes {
+			_onlyOnes(std::map<string,StateParserMetsRootState*>& map){
+				//static int i = 0;
+				//std::cerr << "Only Ones :"<< ++i << std::endl;
+				
+				map["publisher"]= new StateTitleState("");
+			}
+		} onlyOnes (map);
+
+		if (CTX.inventory.isActif()){
+			std::map<string,StateParserMetsRootState*>::iterator it = map.find(name);
+			if ( it != map.end()) ret = (*it).second;
+		};
+
+		return ret;
+
+
+	};
+
+};
+
 class StateParsermodStateInventoryMarc:public StateParsermodState{
 private:
 	std::string value;
@@ -301,6 +347,7 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 			map["recordIdentifier"]= new StateParsermodStateInventory("recordIdentifier");
 			map["titleInfo"]=		new StateParsermodStateTitleInfoInventory();
 			map["identifier"]=	new StateParsermodStateInventory("identifier");
+			map["originalInfo"]=	new StateParsermodStateInventory2("publisher","printer");
 			map["languageTerm"]=new StateParsermodStateInventory("languageTerm");
 			map["dateIssued"]=	new StateParsermodStateInventory("dateIssued");
 			map["author"]=	new StateParsermodStateInventory("author");

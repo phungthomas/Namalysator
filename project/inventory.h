@@ -17,6 +17,10 @@ public:
 	std::string paperid;
 	std::string barcode;
 	std::string issuenumber;
+	std::string yearnumber;
+	std::string callnumber;
+	std::string printer;
+	std::string publisher;
 	std::string formaldate;
 	std::string type;
 	std::string pages;
