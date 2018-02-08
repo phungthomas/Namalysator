@@ -88,10 +88,10 @@ int contextParam::analyse(int argc, char** argv){
         if (optopt == 'c')
           fprintf (stderr, "Option -%c requires an argument.\n", optopt);
         else if (isprint (optopt))
-          fprintf (stderr, "Unknown option `-%c'.\n", optopt);
+          fprintf (stderr, "Unknown option -%c.\n", optopt);
         else
           fprintf (stderr,
-                   "Unknown option character `\\x%x'.\n",
+                   "Unknown option character '\\x%x'.\n",
                    optopt);
 		fprintf (stderr, "usage: %s -c config.xml\n", argv[0]);
         return -1;
