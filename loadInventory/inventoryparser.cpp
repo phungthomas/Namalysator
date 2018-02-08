@@ -81,6 +81,10 @@ public:
 	   std::string barcode= getMap(CTX.keyValues,"barcode");
 	   allValue.push_back(barcode);
 	   allValue.push_back(getMap(CTX.keyValues,"pages"));
+	   allValue.push_back(getMap(CTX.keyValues,"printer"));
+	   allValue.push_back(getMap(CTX.keyValues,"publisher"));
+	   allValue.push_back(getMap(CTX.keyValues,"callNumber"));
+	   allValue.push_back(getMap(CTX.keyValues,"yearNumber"));
 
 	   std::string seq = getMap(CTX.keyValues,"sequenceNumber");
 	   allValue.push_back(buildUnique(type,date,seq,sysnum,paperID,barcode));
@@ -146,6 +150,8 @@ StateParserState* StateParserInventoryRootState::getNext(const char* const name)
 			map["paperID"]=
 			map["title"]=	
 			map["titleCollection"]=
+			map["publisher"]=
+			map["printer"]=
 			map["callNumber"]=
 			map["subTitle"]=
 			map["printer"]=

@@ -19,6 +19,10 @@ CREATE TABLE INVENTORY (
 	SYSTEMNUMBER varchar(40),
 	BARCODE varchar(40),
 	PAGES varchar(6),
+	PRINTER varchar(40),
+	PUBLISHER varchar(40),
+	CALLNUMBER varchar(40),
+	YEARNUMBER varchar(40),
 	UNIQUEBUILDKEY varchar(100) UNIQUE,
 	CHECKED INTEGER
 );

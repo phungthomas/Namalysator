@@ -5,9 +5,9 @@ SQLLoad::SQLLoad():zErrMsg(0),pStmt(0){
 	sql = "INSERT INTO INVENTORY "
 		              "( ID,AUTHOR,TITLE,TITLECOLLECTION,"
 		              "  SUBTITLE,PAPERID,LANGUAGES,ISSUENUMBER,"
-					  "  FORMALDATE,TYPE,SYSTEMNUMBER,BARCODE,PAGES,UNIQUEBUILDKEY"
+					  "  FORMALDATE,TYPE,SYSTEMNUMBER,BARCODE,PAGES,PRINTER,PUBLISHER,CALLNUMBER,YEARNUMBER,UNIQUEBUILDKEY"
 					  ") "
-		              "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		              "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 }
 
 
@@ -31,7 +31,7 @@ void SQLLoad::Start(){
 
 void SQLLoad::Store(std::vector<std::string> allValue){
 	//std::cerr << allValue.size() << std::endl;
-	if ( allValue.size() != 14 ){
+	if ( allValue.size() != 18 ){
 		std::cerr << "Not enough field in file(or to much) : " << allValue.size() << std::endl;
 		return ;
 	};
