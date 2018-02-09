@@ -24,6 +24,9 @@ public:
 	std::string formaldate;
 	std::string type;
 	std::string pages;
+
+	std::string partNumber; // from mets file but needed by YearNumber issueNumber
+
 	std::string uniquebuildkey;
 	std::map<std::string,std::string> languageTerm; 
 	std::string toString(std::string name);

@@ -1,6 +1,7 @@
 #include "verifybook.h"
 #include <iostream>
 #include "inventory.h"
+#include <sstream>
 
 
 
@@ -32,22 +33,26 @@ void verifyBook::check(int check,metsparserContext& context){
 		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_COLLECTION", "wrong title collection:" + context.inventory.inventoryMODSMD_COLLECTION.title +" against :"+ invent.titlecollection ,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.title);
 	}
 
-	/* //TODO rebuild all those test
+	if ( invent.publisher.compare(context.inventory.inventoryMODSMD_PRINT.publisher)) {
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong publisher:" + context.inventory.inventoryMODSMD_PRINT.publisher +" against :"+ invent.publisher ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.publisher);
+	}
 
-    title = buildTitle( context.inventory.inventoryMODSMD_PRINT);
-	if ( invent.BIBREC_245a.compare(title)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong title:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_245a +" against :"+ invent.BIBREC_245a,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.BIBREC_245a);
+	if ( invent.printer.compare(context.inventory.inventoryMODSMD_PRINT.printer)) {
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong printer:" + context.inventory.inventoryMODSMD_PRINT.printer +" against :"+ invent.printer ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.printer);
+	}
+
+	
+	if ( invent.callnumber.compare(context.inventory.inventoryMODSMD_PRINT.callnumber)) {
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong callNumber:" + context.inventory.inventoryMODSMD_PRINT.callnumber +" against :"+ invent.callnumber ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.callnumber);
 	}
 
 
-	if ( invent.BIBREC_100a.compare(context.inventory.inventoryMODSMD_COLLECTION.BIBREC_100a)) {
-		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MODSMD_COLLECTION", "wrong BIBREC_100a:" + context.inventory.inventoryMODSMD_COLLECTION.BIBREC_100a +" against :"+ invent.BIBREC_100a,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.BIBREC_100a);
+	string partNumberBuild = buildPartNumber(invent.yearnumber,invent.issuenumber);
+	if ( partNumberBuild . compare(context.inventory.inventoryMODSMD_PRINT.partNumber)){
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong partNumber:" + context.inventory.inventoryMODSMD_PRINT.partNumber +" against :"+ partNumberBuild ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.partNumber);	
 	}
 
-	if ( invent.BIBREC_100a.compare(context.inventory.inventoryMODSMD_PRINT.BIBREC_100a)) {
-		hError -> getError(cat_bookinventoryData,"METS","DMDSEC MODSMD_PRINT", "wrong BIBREC_100a:" + context.inventory.inventoryMODSMD_PRINT.BIBREC_100a +" against :"+ invent.BIBREC_100a ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.BIBREC_100a);
-	}
-	*/
+
 	
 	// TODO compare must be base on any kind order of list
 
@@ -61,6 +66,33 @@ void verifyBook::check(int check,metsparserContext& context){
 	};
 
 
+}
+
+std::string verifyBook::buildPartNumber(std::string& yearNumber, std::string& issueNumber){
+
+	// Generation of : Jg. @yearNumber@, n° @issueNumber@
+	int yearLen = yearNumber.length();
+	int issueLen =	issueNumber.length();
+
+	std::cout << "YEAR NUMBER:" << yearNumber << std::endl;
+	std::cout << "ISSUE NUMBER:" << issueNumber << std::endl;
+
+	std::stringstream ss;
+	if ( yearLen != 0 ){
+		ss << "Jg. " << yearNumber;
+	}
+
+	if ( issueLen != 0){
+		if ( yearLen != 0 ){ // ADD COMMA
+			ss << ", ";
+		}
+
+		ss << "n°" << issueNumber;
+	}
+
+	std::cout << "RESULTE" << ss.str() << std::endl;
+
+	return ss.str();
 }
 
 std::string verifyBook::buildTitle(inventory& invent){

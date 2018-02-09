@@ -53,6 +53,7 @@ void inventoryMapping::setCurrentInventoryValue(std::string field, std::string v
 	if ( field.compare("printer")==0 ) currentInventory->printer=value;
 	if ( field.compare("yearnumber")==0 ) currentInventory->yearnumber=value;
 	if ( field.compare("issuenumber")==0 ) currentInventory->issuenumber=value;
+	if ( field.compare("partNumber")==0 ) currentInventory->partNumber=value;
 	
 	if ( field.compare("author")==0 ) currentInventory->author=value;
 	

@@ -16,6 +16,8 @@ protected :
 
 	virtual void init(metsparserContext&);
 	std::string buildTitle(inventory&);
+	std::string buildPartNumber(std::string&,std::string&);
+
 public :
 	verifyBook();
 	virtual void check(int,metsparserContext&);
