@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
   <!-- working sqlite database : must be define for a campaign -->
-	<database>C:/Data/DB/SMALLTEST3</database>
+	<database>C:/Data/DB/SMALLTEST6</database>
   
   <!-- file where inventory of book is store in tabbed format : only needed for book checking -->
 	<inventoryFile>inventory.xml</inventoryFile>
@@ -126,16 +126,9 @@
 			
 		</blocks>
     <!-- inventoryBook
-    performs multiple checks against the inventory:
-    1. BIBREC_SYSNUM is in the inventory
-    2. BIBREC245a is correct in MODSMD_COLLECTION and MODSMD_PRINT
-    3. BIBREC100a is correct in MODSMD_COLLECTION and MODSMD_PRINT
-    4. whether the language terms used in MODSMD_COLLECTION all exist in the inventory
-    5. whether the language terms used in MODSMD_PRINT all exist in the inventory 
-    6. add the opposite test wheter all languages in the inventory are use in MODSMD_PRINT and MODSMD_COLLECTION
-    7. whether the item barcode from the inventory corresponds to the identifier type="local" from MODSMD_PRINT
-    8. BIBREC_260b in MODSMD_PRINT
-    9. BIBREC_SYS_NUM with MARCMD_ALEPHSYNC BIBREC_SYS_NUM-->
+		the inventory become needed for all type of document
+		so the parser mets must be check active on inventory to check for exemple the name of file agaisnt system number
+	-->
 		<inventoryBook>1</inventoryBook>
     
 		<dates>0</dates>

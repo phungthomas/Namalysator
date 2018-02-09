@@ -165,6 +165,7 @@ StateParserState* StateParserInventoryRootState::getNext(const char* const name)
 			map["premis"]=
 			map["sequenceNumber"]=
 			map["issueNumber"]=
+			map["systemNumber"]=
 			map["barcode"]=
 				new StateParserParamState();
 			map["language"]=

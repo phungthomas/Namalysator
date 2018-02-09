@@ -19,6 +19,7 @@ public:
 	std::string issuenumber;
 	std::string yearnumber;
 	std::string callnumber;
+	std::string systemnumber;
 	std::string printer;
 	std::string publisher;
 	std::string formaldate;

@@ -74,8 +74,8 @@ std::string verifyBook::buildPartNumber(std::string& yearNumber, std::string& is
 	int yearLen = yearNumber.length();
 	int issueLen =	issueNumber.length();
 
-	std::cout << "YEAR NUMBER:" << yearNumber << std::endl;
-	std::cout << "ISSUE NUMBER:" << issueNumber << std::endl;
+	//std::cout << "YEAR NUMBER:" << yearNumber << std::endl;
+	//std::cout << "ISSUE NUMBER:" << issueNumber << std::endl;
 
 	std::stringstream ss;
 	if ( yearLen != 0 ){
@@ -87,10 +87,10 @@ std::string verifyBook::buildPartNumber(std::string& yearNumber, std::string& is
 			ss << ", ";
 		}
 
-		ss << "n°" << issueNumber;
+		ss << "n\xc2\xba" << issueNumber;
 	}
 
-	std::cout << "RESULTE" << ss.str() << std::endl;
+	//std::cout << "RESULTE" << ss.str() << std::endl;
 
 	return ss.str();
 }
