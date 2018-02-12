@@ -25,31 +25,31 @@ void verifyBook::check(int check,metsparserContext& context){
 
 	std::string title = buildTitle( context.inventory.inventoryMODSMD_PRINT);
 	if ( invent.title.compare(title)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong title:" + context.inventory.inventoryMODSMD_PRINT.title +" against :"+ invent.title ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.title);
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "Wrong title. Found '" + context.inventory.inventoryMODSMD_PRINT.title +"' but should be "+ invent.title ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.title);
 	}
 
     title = buildTitle( context.inventory.inventoryMODSMD_COLLECTION); // in the xml in title
 	if ( invent.titlecollection.compare(title)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_COLLECTION", "wrong title collection:" + context.inventory.inventoryMODSMD_COLLECTION.title +" against :"+ invent.titlecollection ,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.title);
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_COLLECTION", "Wrong title collection. Found '" + context.inventory.inventoryMODSMD_COLLECTION.title +"' but should be "+ invent.titlecollection ,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.title);
 	}
 
 	if ( invent.publisher.compare(context.inventory.inventoryMODSMD_PRINT.publisher)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong publisher:" + context.inventory.inventoryMODSMD_PRINT.publisher +" against :"+ invent.publisher ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.publisher);
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "Wrong publisher. Found '" + context.inventory.inventoryMODSMD_PRINT.publisher +"' but should be "+ invent.publisher ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.publisher);
 	}
 
 	if ( invent.printer.compare(context.inventory.inventoryMODSMD_PRINT.printer)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong printer:" + context.inventory.inventoryMODSMD_PRINT.printer +" against :"+ invent.printer ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.printer);
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "Wrong printer. Found '" + context.inventory.inventoryMODSMD_PRINT.printer +"' but should be "+ invent.printer ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.printer);
 	}
 
 	
 	if ( invent.callnumber.compare(context.inventory.inventoryMODSMD_PRINT.callnumber)) {
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong callNumber:" + context.inventory.inventoryMODSMD_PRINT.callnumber +" against :"+ invent.callnumber ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.callnumber);
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "Wrong callNumber. Found '" + context.inventory.inventoryMODSMD_PRINT.callnumber +"' but should be "+ invent.callnumber ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.callnumber);
 	}
 
 
 	string partNumberBuild = buildPartNumber(invent.yearnumber,invent.issuenumber);
 	if ( partNumberBuild . compare(context.inventory.inventoryMODSMD_PRINT.partNumber)){
-		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "wrong partNumber:" + context.inventory.inventoryMODSMD_PRINT.partNumber +" against :"+ partNumberBuild ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.partNumber);	
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "Wrong partNumber. Found '" + context.inventory.inventoryMODSMD_PRINT.partNumber +"' but should be "+ partNumberBuild ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.partNumber);	
 	}
 
 

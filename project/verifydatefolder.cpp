@@ -10,9 +10,9 @@ verifydatefolder::verifydatefolder(errorHandler *hError,std::string &currentMets
 	if ( min <= currentMetsPath.length() ) {
 		if (currentMetsFile.substr(0,13)!=currentMetsPath.substr(currentMetsPath.length()-min,currentMetsPath.length()))
 		{			
-			hError->getError(cat_wrongFolderName,"METS","FOLDER", "Name of Metsfile : " + currentMetsFile.substr(0,13) + " != Name of folder :" + currentMetsPath.substr(currentMetsPath.length()-min,currentMetsPath.length()) ,currentMetsFile,"");		
+			hError->getError(cat_wrongFolderName,"METS","FOLDER", "Wrong naming. Mets file '" + currentMetsFile.substr(0,13) + " and folder '" + currentMetsPath.substr(currentMetsPath.length()-min,currentMetsPath.length())+"'" ,currentMetsFile,"");		
 		}
 	}else{
-			hError->getError(cat_wrongFolderName,"METS","FOLDER", "Name of Metsfile : " + currentMetsFile.substr(0,13) + " != Name of folder :" + currentMetsPath.substr(0,currentMetsPath.length()) ,currentMetsFile,"");			
+			hError->getError(cat_wrongFolderName,"METS","FOLDER", "Wrong naming(bad length). Mets file '" + currentMetsFile.substr(0,13) + " and folder '" + currentMetsPath.substr(0,currentMetsPath.length())+"'"  ,currentMetsFile,"");			
 	}
 }
