@@ -87,7 +87,7 @@ std::string verifyBook::buildPartNumber(std::string& yearNumber, std::string& is
 			ss << ", ";
 		}
 
-		ss << "n\xc2\xba" << issueNumber;
+		ss << "n\xc2\xba " << issueNumber;
 	}
 
 	//std::cout << "RESULTE" << ss.str() << std::endl;
