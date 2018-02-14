@@ -90,7 +90,7 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
 		CTX.mandatoryField.insert("scannerManufacturer");
 		CTX.mandatoryField.insert("scannerModelName");
 		CTX.mandatoryField.insert("scannerModelSerialNo");
-		CTX.mandatoryField.insert("scanningSoftware");
+		CTX.mandatoryField.insert("scanningSoftwareName");
 		CTX.mandatoryField.insert("scanningSoftwareVersionNo");
 		CTX.mandatoryField.insert("dateTimeCreated");
 		CTX.mandatoryField.insert("imageProducer");
@@ -134,7 +134,7 @@ StateParserState* StateParserRootamdSecState::getNext(const char* const name){
 				map["scannerManufacturer"]=new StateEmptyCheck();
 				map["scannerModelName"]=new StateEmptyCheck();
 				map["scannerModelSerialNo"]=new StateEmptyCheck();
-				map["scanningSoftware"]=new StateEmptyCheck();
+				map["scanningSoftwareName"]=new StateEmptyCheck();
 				map["scanningSoftwareVersionNo"]=new StateEmptyCheck();
 				map["dateTimeCreated"]=new StateEmptyCheck();
 				map["imageProducer"]=new StateEmptyCheck();

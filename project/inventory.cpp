@@ -47,6 +47,7 @@ void inventoryMapping::setCurrentInventoryValue(std::string field, std::string v
 	if ( field.compare("title")==0 ) currentInventory->title=value;
 	if ( field.compare("subtitle")==0 ) currentInventory->subtitle=value;
 	if ( field.compare("barcode")==0 ) currentInventory->barcode=value;
+	if ( field.compare("identifier")==0) currentInventory->callnumber=value;
 	if ( field.compare("dateIssued")==0 ) currentInventory->formaldate=value;
 
 	if ( field.compare("publisher")==0 ) currentInventory->publisher=value;
