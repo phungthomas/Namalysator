@@ -259,6 +259,7 @@ public:
 			//std::cerr << "Only Ones :"<< ++i << std::endl;
 			map["title"]= new StateParsermodStateInventory("title");
 			map["nonSort"]= new StateTitleState(" ");
+			map["subTitle"]= new StateParsermodStateInventory("subTitle");
 			map["partNumber"]= new StateParsermodStateInventory("partNumber");
 		}
 	} onlyOnes (map);

@@ -431,11 +431,11 @@ int start(std::string &configFileName)
 				verifyFile(&df,&hError,currentMetsPath,"THUMBGRP");						
 				pt.LogTime("Verify THUMBGRP Images");
 			}
-			// No check on the name of file of completeobjectgrp
-			//if (parameter.getValueCheck("dataintegrity.checkFileCOMPLETEOBJECTGRP") == 1){
-			//	verifyFile(&df,&hError,currentMetsPath,"COMPLETEOBJECTGRP");						
-			//	pt.LogTime("Verify COMPLETEOBJECTGRP Images");
-			//}
+			
+			if (parameter.getValueCheck("dataintegrity.checkFileCOMPLETEOBJECTGRP") == 1){
+				verifyFile(&df,&hError,currentMetsPath,"COMPLETEOBJECTGRP",false);						
+				pt.LogTime("Verify COMPLETEOBJECTGRP Images");
+			}
 		}
 
 		// Do transformation of the data factory

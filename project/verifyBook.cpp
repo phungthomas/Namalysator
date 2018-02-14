@@ -28,6 +28,10 @@ void verifyBook::check(int check,metsparserContext& context){
 		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "Wrong title. Found '" + context.inventory.inventoryMODSMD_PRINT.title +"' but should be "+ invent.title ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.title);
 	}
 
+	if ( invent.subtitle.compare(context.inventory.inventoryMODSMD_PRINT.subtitle)) {
+		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_PRINT", "Wrong subtitle. Found '" + context.inventory.inventoryMODSMD_PRINT.subtitle +"' but should be "+ invent.subtitle ,context.currentMetsFile,context.inventory.inventoryMODSMD_PRINT.title);
+	}
+
     title = buildTitle( context.inventory.inventoryMODSMD_COLLECTION); // in the xml in title
 	if ( invent.titlecollection.compare(title)) {
 		hError -> getError(cat_bookinventoryTitle,"METS","DMDSEC MODSMD_COLLECTION", "Wrong title collection. Found '" + context.inventory.inventoryMODSMD_COLLECTION.title +"' but should be "+ invent.titlecollection ,context.currentMetsFile,context.inventory.inventoryMODSMD_COLLECTION.title);
