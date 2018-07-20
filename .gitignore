@@ -10,3 +10,5 @@ namalysator/GeneratedFiles/
 *.obj
 project/alto-2-0.h
 project/mods-3-6.h
+namalysator/vc90.pdb
+project/commonLog.log
