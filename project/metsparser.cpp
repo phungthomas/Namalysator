@@ -130,7 +130,7 @@ StateParserState* StateParserRootamdSecState::getNext(const char* const name){
 	StateParserState* ret = root;
 	
 	static struct _onlyOnes {
-		_onlyOnes(std::map<string,StateParserState*>& map,bool flagMix){
+		_onlyOnes(std::map<string,StateParserState*>& map, bool flagMix){
 			map["sourceData"]			= new StateParserSourceDataResolution();
 			map["xOpticalResolution"]	= new StateParserScanResolution();
 			if ( flagMix ) {
@@ -621,9 +621,10 @@ StateParserState* StateParserMetsRootState::getNext(const char* const name){
 	
 	static struct _onlyOnes {
 		_onlyOnes(std::map<string,StateParserState*>& map){
+			// Define sub-state-machines for each major tag
 			map["mets"]			= new StateParserMetsState();
 			// structmap 
-			map["structMap"]	= new SateParserstructMap(); // sub state machine
+			map["structMap"]	= new SateParserstructMap();
 			// file -> has his sub state
 			map["fileSec"]		= new StateParserfileSec();
 			// dmdSec
@@ -632,6 +633,11 @@ StateParserState* StateParserMetsRootState::getNext(const char* const name){
 			map["controlfield"]	= new StateParsermodStateInventoryMarc("BIBREC_SYS_NUM"); // could be better if children of dmdsec
             // amd -> has his sub state
 			map["amdSec"]		= new StateParseramdSecState();
+			
+			// TODO:
+			// 1) amdSec will focus on MIX data only
+			// 2) StateParseramdSecState should launch a MIX and ODRL on the sub-state-machine
+			// 3) Implement an ODRL parser to check if not empty
 		}
 	} onlyOnes (map);
 
@@ -640,3 +646,16 @@ StateParserState* StateParserMetsRootState::getNext(const char* const name){
 
 	return ret;
 }
+
+/**
+Example of MIX:
+<amdSec ID="IMGPARAM00002">
+		<techMD ID="IMGPARAM00002TECHMD">
+			<mdWrap MDTYPE="NISOIMG">
+				<xmlData>
+					<mix:mix>
+
+					OR
+
+					<odrl:odrl>
+*/
