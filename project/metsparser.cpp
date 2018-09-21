@@ -73,7 +73,7 @@ public:
 	virtual void endElement (const char* const name){
 		boost::algorithm::trim(cData);
 		if ( cData.length() == 0 ) {
-			CTX.MixContainer[std::string(name)]=cData;
+			CTX.MixContainer[std::string(name)] = cData;
 		}
 		CTX.mandatoryField.erase(name);
 	};
@@ -82,11 +82,11 @@ public:
 
 void StateParseramdSecState::startElement (const char* const name, const xercesc::Attributes &atts ){
 	const char *val = getAttributeValue("ID", atts);
-	if (val!=0)
-	{
-		CTX.amdsec.amdSecId =val;
+	if (val!=0) {
+		CTX.amdsec.amdSecId = val;
 	}
-	if ( CTX.flagMix ){
+
+	if ( CTX.flagMix ) {
 		CTX.mandatoryField.insert("scannerManufacturer");
 		CTX.mandatoryField.insert("scannerModelName");
 		CTX.mandatoryField.insert("scannerModelSerialNo");
@@ -112,11 +112,11 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
 void StateParseramdSecState::endElement (const char* const name){
 	CTX.dfMets->set(CTX.amdsec.amdSecId,CTX.amdsec);
 
-	if ( CTX.flagMix ){
-		if ( CTX.mandatoryField.size() != 0 ){
+	if ( CTX.flagMix ) {
+		if ( CTX.mandatoryField.size() != 0 ) {
 			for ( std::set<std::string>::iterator it = CTX.mandatoryField.begin(); it != CTX.mandatoryField.end(); it ++ ) {
 				std::string ret = *it;
-				CTX.MixContainerNotDefine[ret]="";
+				CTX.MixContainerNotDefine[ret] = "";
 			}
 		}
 	}
@@ -127,28 +127,28 @@ StateParserState* StateParserRootamdSecState::getNext(const char* const name){
 	static std::map<string,StateParserState*> map;
 
 	static StateParserState* root = new StateParserRootamdSecState();
-	StateParserState* ret=root;
+	StateParserState* ret = root;
 	
 	static struct _onlyOnes {
 		_onlyOnes(std::map<string,StateParserState*>& map,bool flagMix){
-			map["sourceData"]=	new StateParserSourceDataResolution();
-			map["xOpticalResolution"]=	new StateParserScanResolution();
+			map["sourceData"]			= new StateParserSourceDataResolution();
+			map["xOpticalResolution"]	= new StateParserScanResolution();
 			if ( flagMix ) {
-				map["scannerManufacturer"]=new StateEmptyCheck();
-				map["scannerModelName"]=new StateEmptyCheck();
-				map["scannerModelSerialNo"]=new StateEmptyCheck();
-				map["scanningSoftwareName"]=new StateEmptyCheck();
-				map["scanningSoftwareVersionNo"]=new StateEmptyCheck();
-				map["dateTimeCreated"]=new StateEmptyCheck();
-				map["imageProducer"]=new StateEmptyCheck();
-				map["captureDevice"]=new StateEmptyCheck();
-				map["orientation"]=new StateEmptyCheck();
-				map["sourceIDType"]=new StateEmptyCheck();
-				map["sourceType"]=new StateEmptyCheck();
-				map["formatVersion"]=new StateEmptyCheck();
-				map["objectIdentifierValue"]=new StateEmptyCheck();
-				map["imageWidth"]=new StateEmptyCheck();
-				map["imageHeight"]=new StateEmptyCheck();
+				map["scannerManufacturer"]			= new StateEmptyCheck();
+				map["scannerModelName"]				= new StateEmptyCheck();
+				map["scannerModelSerialNo"]			= new StateEmptyCheck();
+				map["scanningSoftwareName"]			= new StateEmptyCheck();
+				map["scanningSoftwareVersionNo"]	= new StateEmptyCheck();
+				map["dateTimeCreated"]				= new StateEmptyCheck();
+				map["imageProducer"]				= new StateEmptyCheck();
+				map["captureDevice"]				= new StateEmptyCheck();
+				map["orientation"]					= new StateEmptyCheck();
+				map["sourceIDType"]					= new StateEmptyCheck();
+				map["sourceType"]					= new StateEmptyCheck();
+				map["formatVersion"]				= new StateEmptyCheck();
+				map["objectIdentifierValue"]		= new StateEmptyCheck();
+				map["imageWidth"]					= new StateEmptyCheck();
+				map["imageHeight"]					= new StateEmptyCheck();
 			};
 		}
 	} onlyOnes (map,CTX.flagMix ); // take care CTX.flagMix: a side effect base on the fact that config.xml is read only ones ( no change on the fly like the map is static ) 
@@ -166,8 +166,7 @@ public:
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
 		CTX.addStringData.clear();
 		const char *val = getAttributeValue("ID", atts);
-		if (val != 0) 
-		{		
+		if (val != 0) {		
 			CTX.idItem = val;
 			CTX.inventory.setCurrentInventory(val);
 		}
@@ -193,15 +192,11 @@ public:
 		// trim whitespace, tabs, newlines from character Data
 		boost::algorithm::trim(CTX.addStringData);
 		
-
-		if( CTX.dmdSecStruct.mapAddStringData.find(idkeymap) == CTX.dmdSecStruct.mapAddStringData.end())
-		{
+		if( CTX.dmdSecStruct.mapAddStringData.find(idkeymap) == CTX.dmdSecStruct.mapAddStringData.end()) {
 			boost::algorithm::trim(CTX.addStringData);
 			CTX.dmdSecStruct.mapAddStringData[idkeymap] = CTX.addStringData;
 			CTX.addStringData.clear();
-		}
-		else
-		{			
+		} else {			
 			CTX.dmdSecStruct.mapAddStringData[idkeymap].append(" " +CTX.addStringData);				
 			CTX.addStringData.clear();
 		}	
@@ -252,7 +247,7 @@ public:
 
 	StateParserState* getNext(const char* const name){
 	static std::map<string,StateParserMetsRootState*> map;
-	static StateParserState* root=this;
+	static StateParserState* root = this;
 
 	StateParserState* ret=root;
 	
@@ -260,10 +255,10 @@ public:
 		_onlyOnes(std::map<string,StateParserMetsRootState*>& map){
 			//static int i = 0;
 			//std::cerr << "Only Ones :"<< ++i << std::endl;
-			map["title"]= new StateParsermodStateInventory("title");
-			map["nonSort"]= new StateTitleState(" ");
-			map["subTitle"]= new StateParsermodStateInventory("subTitle");
-			map["partNumber"]= new StateParsermodStateInventory("partNumber");
+			map["title"]		= new StateParsermodStateInventory("title");
+			map["nonSort"]		= new StateTitleState(" ");
+			map["subTitle"]		= new StateParsermodStateInventory("subTitle");
+			map["partNumber"]	= new StateParsermodStateInventory("partNumber");
 		}
 	} onlyOnes (map);
 
@@ -292,24 +287,23 @@ public:
 		CTX.addStringData.clear();
 		const char *val = getAttributeValue("displayLabel", atts);
 
-		if (val != 0 && strcmp(val, "manufacturer")==0) 
-		{		
+		if (val != 0 && strcmp(val, "manufacturer") == 0) {		
 			this->value = value2;
 		}
 	};
 
 	StateParserState* getNext(const char* const name){
 		static std::map<string,StateParserMetsRootState*> map;
-		static StateParserState* root=new StateDoNothingState();;
+		static StateParserState* root = new StateDoNothingState();;
 
-		StateParserState* ret=root;
+		StateParserState* ret = root;
 		
 		static struct _onlyOnes {
 			_onlyOnes(std::map<string,StateParserMetsRootState*>& map){
 				//static int i = 0;
 				//std::cerr << "Only Ones :"<< ++i << std::endl;
 				
-				map["publisher"]= new StateTitleState("");
+				map["publisher"] = new StateTitleState("");
 			}
 		} onlyOnes (map);
 
@@ -348,13 +342,13 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 		_onlyOnes(std::map<string,StateParsermodState*>& map){
 			//static int i = 0;
 			//std::cerr << "Only Ones :"<< ++i << std::endl;
-			map["recordIdentifier"]= new StateParsermodStateInventory("recordIdentifier");
-			map["titleInfo"]=		new StateParsermodStateTitleInfoInventory();
-			map["identifier"]=	new StateParsermodStateInventory("identifier");
-			map["originalInfo"]=	new StateParsermodStateInventory2("publisher","printer");
-			map["languageTerm"]=new StateParsermodStateInventory("languageTerm");
-			map["dateIssued"]=	new StateParsermodStateInventory("dateIssued");
-			map["author"]=	new StateParsermodStateInventory("author");
+			map["recordIdentifier"]	= new StateParsermodStateInventory("recordIdentifier");
+			map["titleInfo"]		= new StateParsermodStateTitleInfoInventory();
+			map["identifier"]		= new StateParsermodStateInventory("identifier");
+			map["originalInfo"]		= new StateParsermodStateInventory2("publisher","printer");
+			map["languageTerm"]		= new StateParsermodStateInventory("languageTerm");
+			map["dateIssued"]		= new StateParsermodStateInventory("dateIssued");
+			map["author"]			= new StateParsermodStateInventory("author");
 		}
 	} onlyOnes (map);
 
@@ -379,8 +373,7 @@ public :
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
 		const char	*val5 = getAttributeValue("xlink:href", atts);
 		CTX.f.ref ="";
-		if (val5 != 0) 
-		{
+		if (val5 != 0) {
 			std::string my_id = val5;
 			//remove file://./
 			my_id = my_id.substr(8,my_id.size());
@@ -394,53 +387,51 @@ class StateParserfile : public StateParserRootfileSec{
 public :
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
 		const char *val = getAttributeValue("ID", atts);
-		CTX.f.id ="";
-		if (val != 0) 
-		{				
+		CTX.f.id = "";
+		if (val != 0) {				
 			CTX.f.id = val;					
-		}			
+		}
+
 		const char *val2 = getAttributeValue("GROUPID", atts);		  
-		CTX.f.groupId ="";
-		if (val2 != 0) 
-		{				
+		CTX.f.groupId = "";
+		if (val2 != 0) {				
 			CTX.f.groupId = val2;	
 
-			if ( std::strspn (val2,"0123456789")!= strlen (val2) ){
+			if ( std::strspn(val2,"0123456789") != strlen (val2) ) {
 				CTX.hError->getError(cat_missingGroupId,"METS","FILESEC","GROUPID not number",CTX.currentMetsFile,getAttributeValue("CHECKSUM", atts));
 			}
-		}
-		else
-		{
+
+		} else {
 			CTX.hError->getError(cat_missingGroupId,"METS","FILESEC","GROUPID missing",CTX.currentMetsFile,getAttributeValue("CHECKSUM", atts));
 		}
+
 		const char *val3 = getAttributeValue("CHECKSUM", atts);			
-		CTX.f.checksum ="";
-		if (val3 != 0) 
-		{				
+		CTX.f.checksum = "";
+		if (val3 != 0) {				
 			CTX.f.checksum = val3;					
 		}
+
 		val3 = getAttributeValue("CHECKSUMTYPE", atts);			
 		CTX.f.checksumtype ="";
-		if (val3 != 0) 
-		{				
+		if (val3 != 0) {				
 			CTX.f.checksumtype = val3;					
 		}
+
 		const char *val4 = getAttributeValue("SIZE", atts);			
-		CTX.f.size =0;
-		if (val4 != 0) 
-		{				
+		CTX.f.size = 0;
+		if (val4 != 0) {				
 			CTX.f.size = atoi(val4);					
 		}
+
 		const char *val5 = getAttributeValue("ADMID", atts);	
-		CTX.f.admid ="";
-		if (val5 != 0) 
-		{				
+		CTX.f.admid = "";
+		if (val5 != 0) {				
 			CTX.f.admid = val5;					
-		}			
+		}
+
 		const char *val6 = getAttributeValue("SEQ", atts);	
-		CTX.f.seq =0;
-		if (val6 != 0) 
-		{				
+		CTX.f.seq = 0;
+		if (val6 != 0)  {				
 			CTX.f.seq = atoi(val6);					
 		}
 
@@ -452,8 +443,7 @@ public :
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){	
 		const char *val = getAttributeValue("ID", atts);	
 		CTX.idGroup = "";
-		if (val != 0) 
-		{
+		if (val != 0) {
 			CTX.idGroup = val;						
 		}	
 	};
@@ -475,9 +465,9 @@ StateParserState* StateParserRootfileSec::getNext(const char *const name){
 	
 	static struct _onlyOnes {
 		_onlyOnes(std::map<string,StateParserState*>& map){
-			map["fileGrp"]=	new StateParserfileGrp(); 
-			map["FLocat"]=	new StateParserFlocat();
-			map["file"]=	new StateParserfile();
+			map["fileGrp"]	= new StateParserfileGrp(); 
+			map["FLocat"]	= new StateParserFlocat();
+			map["file"]		= new StateParserfile();
 		}
 	} onlyOnes (map);
 
@@ -512,7 +502,7 @@ public:
 		const char *val3 = getAttributeValue("LABEL", atts);
 		const char *val4 = getAttributeValue("DMDID", atts);
 
-		if ( CTX.flagDivCount ){
+		if ( CTX.flagDivCount ) {
 
 			std::string entity = (val2 ? val2 : "");
 			if ( CTX.hError->getDatabase()->isEntityToCount(CTX.papertype,entity) ){
@@ -521,21 +511,21 @@ public:
 		
 		}
 
-
-		if (CTX.currentItem ==0) {		
+		if (CTX.currentItem == 0) {		
 			//CTX.rootItem = new Item;
-			CTX.rootItem->id = (val1 ? val1 : "");
-			CTX.rootItem->label = (val3 ? val3 : "");
-			CTX.rootItem->type = (val2 ? val2 : "");
-			CTX.rootItem->dmdId = (val4 ? val4 : "");			
+			CTX.rootItem->id	= (val1 ? val1 : "");
+			CTX.rootItem->label	= (val3 ? val3 : "");
+			CTX.rootItem->type	= (val2 ? val2 : "");
+			CTX.rootItem->dmdId	= (val4 ? val4 : "");			
 			CTX.currentItem = CTX.rootItem;
 		} else {	
 			Item c;				
-			c.id = (val1 ? val1 : "");
-			c.label = (val3 ? val3 : "");
-			c.type = (val2 ? val2 : "");
-			c.dmdId = (val4 ? val4 : "");
-			c.parent = CTX.currentItem; 
+			c.id		= (val1 ? val1 : "");
+			c.label		= (val3 ? val3 : "");
+			c.type		= (val2 ? val2 : "");
+			c.dmdId		= (val4 ? val4 : "");
+			c.parent	= CTX.currentItem;
+
 			CTX.currentItem->children[CTX.currentItem->children.size()] = c;
 			CTX.currentItem = &CTX.currentItem->children[CTX.currentItem->children.size()-1];			
 		};
