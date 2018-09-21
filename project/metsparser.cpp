@@ -35,6 +35,8 @@ public:
 	virtual StateParserState* getNext(const char* const name);
 };
 
+/** This parser handles the root amdSec element.
+*/
 class StateParseramdSecState : public StateParserRootamdSecState{
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts );
 	virtual void endElement (const char* const name);
@@ -79,12 +81,15 @@ public:
 	};
 };
 
-
+/** This parser handles the root amdSec element.
+*/
 void StateParseramdSecState::startElement (const char* const name, const xercesc::Attributes &atts ){
 	const char *val = getAttributeValue("ID", atts);
 	if (val!=0) {
 		CTX.amdsec.amdSecId = val;
 	}
+
+	
 
 	if ( CTX.flagMix ) {
 		CTX.mandatoryField.insert("scannerManufacturer");
@@ -245,32 +250,31 @@ class StateParsermodStateTitleInfoInventory:public StateParsermodState{
 public:
 	StateParsermodStateTitleInfoInventory(){};
 
-	StateParserState* getNext(const char* const name){
-	static std::map<string,StateParserMetsRootState*> map;
-	static StateParserState* root = this;
+	StateParserState* getNext(const char* const name) {
+		static std::map<string,StateParserMetsRootState*> map;
+		static StateParserState* root = this;
 
-	StateParserState* ret=root;
-	
-	static struct _onlyOnes {
-		_onlyOnes(std::map<string,StateParserMetsRootState*>& map){
-			//static int i = 0;
-			//std::cerr << "Only Ones :"<< ++i << std::endl;
-			map["title"]		= new StateParsermodStateInventory("title");
-			map["nonSort"]		= new StateTitleState(" ");
-			map["subTitle"]		= new StateParsermodStateInventory("subTitle");
-			map["partNumber"]	= new StateParsermodStateInventory("partNumber");
-		}
-	} onlyOnes (map);
+		StateParserState* ret=root;
+		
+		static struct _onlyOnes {
+			_onlyOnes(std::map<string,StateParserMetsRootState*>& map){
+				//static int i = 0;
+				//std::cerr << "Only Ones :"<< ++i << std::endl;
+				map["title"]		= new StateParsermodStateInventory("title");
+				map["nonSort"]		= new StateTitleState(" ");
+				map["subTitle"]		= new StateParsermodStateInventory("subTitle");
+				map["partNumber"]	= new StateParsermodStateInventory("partNumber");
+			}
+		} onlyOnes (map);
 
-	if (CTX.inventory.isActif()){
-		std::map<string,StateParserMetsRootState*>::iterator it = map.find(name);
-		if ( it != map.end()) ret = (*it).second;
+		if (CTX.inventory.isActif()){
+			std::map<string,StateParserMetsRootState*>::iterator it = map.find(name);
+			if ( it != map.end()) ret = (*it).second;
+		};
+
+		return ret;
+
 	};
-
-	return ret;
-
-
-};
 
 };
 
