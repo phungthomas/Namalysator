@@ -29,9 +29,21 @@ public:
 	};
 };
 
-class StateParserRootamdSecState : public StateParserMetsRootState{
-public:
+// DO NOTHING
+// ##################################################
 
+class StateDoNothingState : public StateParserMetsRootState {
+public:
+};
+
+// ##################################################
+// ##################################################
+
+// AMDSEC 
+// ##################################################
+
+class StateParserRootamdSecState : public StateParserMetsRootState {
+public:
 	virtual StateParserState* getNext(const char* const name);
 };
 
@@ -41,6 +53,8 @@ class StateParseramdSecState : public StateParserRootamdSecState{
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts );
 	virtual void endElement (const char* const name);
 };
+
+// ##################################################
 
 class StateParserScanResolution : public StateParserRootamdSecState{
 protected:
@@ -211,6 +225,12 @@ public:
 
 };
 
+// ##################################################
+// ##################################################
+
+// TITLE
+// ##################################################
+
 class StateTitleState : public StateParserMetsRootState{
 private :
 	std::string value;
@@ -229,11 +249,9 @@ public:
 	
 };
 
-class StateDoNothingState : public StateParserMetsRootState{
-public:
-};
 
-class StateParsermodStateInventory:public StateParsermodState{
+
+class StateParsermodStateInventory:public StateParsermodState {
 protected:
 	std::string value;
 public:
@@ -463,9 +481,9 @@ class StateParserfileSec : public StateParserRootfileSec{
 
 StateParserState* StateParserRootfileSec::getNext(const char *const name){
 	static std::map<string,StateParserState*> map;
-	static StateParserState* root=this;
+	static StateParserState* root = this;
 
-	StateParserState* ret=root;
+	StateParserState* ret = root;
 	
 	static struct _onlyOnes {
 		_onlyOnes(std::map<string,StateParserState*>& map){
@@ -619,7 +637,7 @@ StateParserState* SateParserstructMapRoot::getNext(const char* const name){
 StateParserState* StateParserMetsRootState::getNext(const char* const name){
 	
 	static std::map<string,StateParserState*> map;
-	static StateParserState* root=new StateParserMetsRootState();
+	static StateParserState* root = new StateParserMetsRootState();
 
 	StateParserState* ret=root;
 	
