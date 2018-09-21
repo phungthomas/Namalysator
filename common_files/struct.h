@@ -57,6 +57,9 @@ struct AmdSec : public dataitem
 	std::string sourceData;				// mix:ChangeHistory/mix:ImageProcessing/mix:SourceData for cut-outs
 	int dpi;
 };
+
+// TODO: Refactor AmdSec to AmdSecMix and add AmdSecOdrl. Break the code and compile.
+
 //! structure of a block type
 struct typeBlock 
 {

@@ -106,6 +106,9 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
 	
 };
 
+/** MixContainerNotDefine stores the keys of mandatoryField that have not been found.
+    Improvement: MixContainerNotDefine should be a set. The value for key is not used.
+*/
 void StateParseramdSecState::endElement (const char* const name){
 	CTX.dfMets->set(CTX.amdsec.amdSecId,CTX.amdsec);
 
@@ -519,17 +522,14 @@ public:
 		}
 
 
-		if (CTX.currentItem ==0)
-		{		
+		if (CTX.currentItem ==0) {		
 			//CTX.rootItem = new Item;
 			CTX.rootItem->id = (val1 ? val1 : "");
 			CTX.rootItem->label = (val3 ? val3 : "");
 			CTX.rootItem->type = (val2 ? val2 : "");
 			CTX.rootItem->dmdId = (val4 ? val4 : "");			
 			CTX.currentItem = CTX.rootItem;
-		}
-		else
-		{	
+		} else {	
 			Item c;				
 			c.id = (val1 ? val1 : "");
 			c.label = (val3 ? val3 : "");
@@ -552,8 +552,7 @@ public:
 		//cerr << "SateParserstructMapArea :: startElement" << name << endl;
 		const char *val1 = getAttributeValue("FILEID", atts);
 		const char *val2 = getAttributeValue("BEGIN", atts);
-		if (val1 /*&& val2*/) 
-		{
+		if (val1 /*&& val2*/) {
 			if ( val2) {
 				CTX.typeblock.block = val2;
 			}
@@ -568,15 +567,15 @@ public:
 
 void SateParserstructMap::startElement (const char* const name, const xercesc::Attributes &atts ){
 	//cerr << "SateParserstructMap :: startElement" << name << endl;
-	CTX.currentItem =0;
-    //CTX.rootItem =0;
+	CTX.currentItem = 0;
+    //CTX.rootItem = 0;
 									
 	std::string val = getAttributeValue("TYPE", atts);
-	if (val.find("LOGICAL")!=string::npos){	
+	if (val.find("LOGICAL") != string::npos) {	
 		LOGICAL = true;
 		CTX.rootItem = &CTX.rootItemLOGICAL;
 		CTX.currentItem = 0;
-	}else{
+	} else {
 		LOGICAL = false;
 		CTX.rootItem = &CTX.rootItemPHYSICAL;
 		CTX.currentItem = 0;
@@ -587,13 +586,14 @@ void SateParserstructMap::startElement (const char* const name, const xercesc::A
 void SateParserstructMap::endElement (const char* const name){
 	if ( LOGICAL ) {
 		Item t;
-		t.id = CTX.rootItem->id;
-		t.children = CTX.rootItem->children;
-		t.dmdId =CTX.rootItem->dmdId;
-		t.label =CTX.rootItem->label;
-		t.parent =CTX.rootItem->parent;
-		t.type =CTX.rootItem->type;
-		t.vectTypeBlock =CTX.rootItem->vectTypeBlock;
+		t.id			= CTX.rootItem->id;
+		t.children		= CTX.rootItem->children;
+		t.dmdId			= CTX.rootItem->dmdId;
+		t.label			= CTX.rootItem->label;
+		t.parent		= CTX.rootItem->parent;
+		t.type			= CTX.rootItem->type;
+		t.vectTypeBlock = CTX.rootItem->vectTypeBlock;
+
 		CTX.dfMets->set("Item",t);
 		//delete CTX.rootItem;
 	};
@@ -608,9 +608,9 @@ StateParserState* SateParserstructMapRoot::getNext(const char* const name){
 	
 	static struct _onlyOnes {
 		_onlyOnes(std::map<string,StateParserState*>& map){
-			map["structMap"]=	new SateParserstructMap();
-			map["div"]=	new SateParserstructMapDiv();
-			map["area"]= new SateParserstructMapArea();
+			map["structMap"]	= new SateParserstructMap();
+			map["div"]			= new SateParserstructMapDiv();
+			map["area"]			= new SateParserstructMapArea();
 		}
 	} onlyOnes (map);
 
@@ -631,19 +631,17 @@ StateParserState* StateParserMetsRootState::getNext(const char* const name){
 	
 	static struct _onlyOnes {
 		_onlyOnes(std::map<string,StateParserState*>& map){
-			map["mets"]=	new StateParserMetsState();
+			map["mets"]			= new StateParserMetsState();
 			// structmap 
-			map["structMap"]=	new SateParserstructMap(); // sub state machine
+			map["structMap"]	= new SateParserstructMap(); // sub state machine
 			// file -> has his sub state
-			map["fileSec"]=	new StateParserfileSec();
+			map["fileSec"]		= new StateParserfileSec();
 			// dmdSec
-			map["dmdSec"]=	new StateParserdmdSecState();
-			map["mods"]=	new StateParsermodState(); // could be better if children of dmdsec
-			map["controlfield"]=	new StateParsermodStateInventoryMarc("BIBREC_SYS_NUM"); // could be better if children of dmdsec
+			map["dmdSec"]		= new StateParserdmdSecState();
+			map["mods"]			= new StateParsermodState(); // could be better if children of dmdsec
+			map["controlfield"]	= new StateParsermodStateInventoryMarc("BIBREC_SYS_NUM"); // could be better if children of dmdsec
             // amd -> has his sub state
-			map["amdSec"]=	new StateParseramdSecState();
-
-
+			map["amdSec"]		= new StateParseramdSecState();
 		}
 	} onlyOnes (map);
 
