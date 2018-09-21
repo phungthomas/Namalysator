@@ -42,6 +42,10 @@ public :
 	// amdsec
 	AmdSec amdsec;
 
+	// TODO: Use kind of Enum
+	// Possible values: MIX, ODRL
+	std::string amdSecType;
+
 	inventoryMappingActif inventory;
 
 	//testmix;

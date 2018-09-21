@@ -36,18 +36,71 @@ class StateDoNothingState : public StateParserMetsRootState {
 public:
 };
 
+
 // ##################################################
+// AMDSEC - GENERAL
 // ##################################################
 
-// AMDSEC 
+/** [NEW] Root element that starts at all amdSec element.
+	It will launche the MIX, ODRL, ... parsers present in the xmlData element.
+*/
+class StateParserRootGeneralAmdSecState : public StateParserMetsRootState {
+public:
+	virtual StateParserState* getNext(const char* const name);
+};
+
+// Need startElement and endElement?
+
+//
+
+/*StateParserState* StateParserRootamdSecState::getNext(const char* const name){
+	static std::map<string,StateParserState*> map;
+
+	static StateParserState* root = new StateParserRootamdSecState();
+	StateParserState* ret = root;
+	
+	static struct _onlyOnes {
+		_onlyOnes(std::map<string,StateParserState*>& map, bool flagMix){
+			map["sourceData"]			= new StateParserSourceDataResolution();
+			map["xOpticalResolution"]	= new StateParserScanResolution();
+			if ( flagMix ) {
+				map["scannerManufacturer"]			= new StateEmptyCheck();
+				map["scannerModelName"]				= new StateEmptyCheck();
+				map["scannerModelSerialNo"]			= new StateEmptyCheck();
+				map["scanningSoftwareName"]			= new StateEmptyCheck();
+				map["scanningSoftwareVersionNo"]	= new StateEmptyCheck();
+				map["dateTimeCreated"]				= new StateEmptyCheck();
+				map["imageProducer"]				= new StateEmptyCheck();
+				map["captureDevice"]				= new StateEmptyCheck();
+				map["orientation"]					= new StateEmptyCheck();
+				map["sourceIDType"]					= new StateEmptyCheck();
+				map["sourceType"]					= new StateEmptyCheck();
+				map["formatVersion"]				= new StateEmptyCheck();
+				map["objectIdentifierValue"]		= new StateEmptyCheck();
+				map["imageWidth"]					= new StateEmptyCheck();
+				map["imageHeight"]					= new StateEmptyCheck();
+			};
+		}
+	} onlyOnes (map, CTX.flagMix); // take care CTX.flagMix: a side effect base on the fact that config.xml is read only ones ( no change on the fly like the map is static ) 
+
+	std::map<string,StateParserState*>::iterator it = map.find(name);
+	if ( it != map.end()) ret = (*it).second;
+	return ret;
+};
+*/
+
+// ##################################################
+// AMDSEC - MIX
 // ##################################################
 
+/** For some reason, we have to be a StateParserMetsRootState parent
+*/
 class StateParserRootamdSecState : public StateParserMetsRootState {
 public:
 	virtual StateParserState* getNext(const char* const name);
 };
 
-/** This parser handles the root amdSec element.
+/** This parser handles the root amdSec element. (MIX)
 */
 class StateParseramdSecState : public StateParserRootamdSecState{
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts );
@@ -133,7 +186,7 @@ void StateParseramdSecState::endElement (const char* const name){
 
 	if ( CTX.flagMix ) {
 		if ( CTX.mandatoryField.size() != 0 ) {
-			for ( std::set<std::string>::iterator it = CTX.mandatoryField.begin(); it != CTX.mandatoryField.end(); it ++ ) {
+			for ( std::set<std::string>::iterator it = CTX.mandatoryField.begin(); it != CTX.mandatoryField.end(); it++ ) {
 				std::string ret = *it;
 				CTX.MixContainerNotDefine[ret] = "";
 			}
@@ -170,14 +223,12 @@ StateParserState* StateParserRootamdSecState::getNext(const char* const name){
 				map["imageHeight"]					= new StateEmptyCheck();
 			};
 		}
-	} onlyOnes (map,CTX.flagMix ); // take care CTX.flagMix: a side effect base on the fact that config.xml is read only ones ( no change on the fly like the map is static ) 
+	} onlyOnes (map, CTX.flagMix); // take care CTX.flagMix: a side effect base on the fact that config.xml is read only ones ( no change on the fly like the map is static ) 
 
 	std::map<string,StateParserState*>::iterator it = map.find(name);
 	if ( it != map.end()) ret = (*it).second;
 	return ret;
 };
-
-
 
 
 class StateParserdmdSecState : public StateParserMetsRootState{
@@ -226,10 +277,15 @@ public:
 };
 
 // ##################################################
+// AMDSEC - ODRL
 // ##################################################
 
+// TODO
+
+// ##################################################
 // TITLE
 // ##################################################
+
 
 class StateTitleState : public StateParserMetsRootState{
 private :
