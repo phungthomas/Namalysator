@@ -37,57 +37,7 @@ public:
 };
 
 
-// ##################################################
-// AMDSEC - GENERAL
-// ##################################################
 
-/** [NEW] Root element that starts at all amdSec element.
-	It will launche the MIX, ODRL, ... parsers present in the xmlData element.
-*/
-class StateParserRootGeneralAmdSecState : public StateParserMetsRootState {
-public:
-	virtual StateParserState* getNext(const char* const name);
-};
-
-// Need startElement and endElement?
-
-//
-
-/*StateParserState* StateParserRootamdSecState::getNext(const char* const name){
-	static std::map<string,StateParserState*> map;
-
-	static StateParserState* root = new StateParserRootamdSecState();
-	StateParserState* ret = root;
-	
-	static struct _onlyOnes {
-		_onlyOnes(std::map<string,StateParserState*>& map, bool flagMix){
-			map["sourceData"]			= new StateParserSourceDataResolution();
-			map["xOpticalResolution"]	= new StateParserScanResolution();
-			if ( flagMix ) {
-				map["scannerManufacturer"]			= new StateEmptyCheck();
-				map["scannerModelName"]				= new StateEmptyCheck();
-				map["scannerModelSerialNo"]			= new StateEmptyCheck();
-				map["scanningSoftwareName"]			= new StateEmptyCheck();
-				map["scanningSoftwareVersionNo"]	= new StateEmptyCheck();
-				map["dateTimeCreated"]				= new StateEmptyCheck();
-				map["imageProducer"]				= new StateEmptyCheck();
-				map["captureDevice"]				= new StateEmptyCheck();
-				map["orientation"]					= new StateEmptyCheck();
-				map["sourceIDType"]					= new StateEmptyCheck();
-				map["sourceType"]					= new StateEmptyCheck();
-				map["formatVersion"]				= new StateEmptyCheck();
-				map["objectIdentifierValue"]		= new StateEmptyCheck();
-				map["imageWidth"]					= new StateEmptyCheck();
-				map["imageHeight"]					= new StateEmptyCheck();
-			};
-		}
-	} onlyOnes (map, CTX.flagMix); // take care CTX.flagMix: a side effect base on the fact that config.xml is read only ones ( no change on the fly like the map is static ) 
-
-	std::map<string,StateParserState*>::iterator it = map.find(name);
-	if ( it != map.end()) ret = (*it).second;
-	return ret;
-};
-*/
 
 // ##################################################
 // AMDSEC - MIX
@@ -151,12 +101,11 @@ public:
 /** This parser handles the root amdSec element.
 */
 void StateParseramdSecState::startElement (const char* const name, const xercesc::Attributes &atts ){
+	/* THIS IS MOVED TO the RootGeneralAmdSecState.startElement method
 	const char *val = getAttributeValue("ID", atts);
 	if (val!=0) {
 		CTX.amdsec.amdSecId = val;
-	}
-
-	
+	}*/
 
 	if ( CTX.flagMix ) {
 		CTX.mandatoryField.insert("scannerManufacturer");
@@ -182,7 +131,7 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
     Improvement: MixContainerNotDefine should be a set. The value for key is not used.
 */
 void StateParseramdSecState::endElement (const char* const name){
-	CTX.dfMets->set(CTX.amdsec.amdSecId,CTX.amdsec);
+	CTX.dfMets->set(CTX.amdsec.amdSecId,CTX.amdsec); // TODO: Should this be moved to RootGeneralAmdSecState.endElement ??
 
 	if ( CTX.flagMix ) {
 		if ( CTX.mandatoryField.size() != 0 ) {
@@ -283,11 +232,61 @@ public:
 // TODO
 
 // ##################################################
+// AMDSEC - GENERAL
+// ##################################################
+
+/** [NEW] Root element that starts at all amdSec element.
+	It will launche the MIX, ODRL, ... parsers present in the xmlData element.
+*/
+class StateParserRootGeneralAmdSecState : public StateParserMetsRootState {
+public:
+	virtual StateParserState* getNext(const char* const name);
+};
+
+class StateParserGeneralAmdSecState : public StateParserRootGeneralAmdSecState {
+public:
+	virtual void startElement (const char* const name, const xercesc::Attributes &atts ) {
+		const char *attribute_id = getAttributeValue("ID", atts);
+		if (attribute_id != 0) {
+			CTX.amdsec.amdSecId = attribute_id;
+		}
+	};
+
+	virtual void endElement (const char* const name) {
+		// N
+	}
+};
+
+//
+
+// TODO: NEED ATTRIBUTES IN getNext PARAMETER ???
+// My guess is no, because (1) GetNext will return this one, then (2) start element is called, then (3) the next getNext will return the mix or odrl
+// Step (2) is where the AMDSec ID is read
+StateParserState* StateParserRootGeneralAmdSecState::getNext(const char* const name) {
+	static std::map<string,StateParserState*> map;
+
+	static StateParserState* root = new StateParserRootGeneralAmdSecState();
+	StateParserState* ret = root;
+
+	static struct _onlyOnes {
+		_onlyOnes(std::map<string,StateParserState*>& map) {
+			map["mix"]	= new StateParseramdSecState();
+			//map["odrl"] = X;
+		}
+	} onlyOnes (map);
+
+	std::map<string,StateParserState*>::iterator it = map.find(name);
+	if ( it != map.end()) ret = (*it).second;
+
+	return ret;
+};
+
+// ##################################################
 // TITLE
 // ##################################################
 
 
-class StateTitleState : public StateParserMetsRootState{
+class StateTitleState : public StateParserMetsRootState {
 private :
 	std::string value;
 public:
@@ -391,13 +390,11 @@ public:
 		};
 
 		return ret;
-
-
 	};
 
 };
 
-class StateParsermodStateInventoryMarc:public StateParsermodState{
+class StateParsermodStateInventoryMarc:public StateParsermodState {
 private:
 	std::string value;
 public:
@@ -410,14 +407,14 @@ public:
 };
 
 
-StateParserState* StateParsermodState::getNext(const char* const name){
+StateParserState* StateParsermodState::getNext(const char* const name) {
 	static std::map<string,StateParsermodState*> map;
-	static StateParserState* root=this;
+	static StateParserState* root = this;
 
-	StateParserState* ret=root;
+	StateParserState* ret = root;
 	
 	static struct _onlyOnes {
-		_onlyOnes(std::map<string,StateParsermodState*>& map){
+		_onlyOnes(std::map<string,StateParsermodState*>& map) {
 			//static int i = 0;
 			//std::cerr << "Only Ones :"<< ++i << std::endl;
 			map["recordIdentifier"]	= new StateParsermodStateInventory("recordIdentifier");
@@ -430,7 +427,7 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 		}
 	} onlyOnes (map);
 
-	if (CTX.inventory.isActif()){
+	if (CTX.inventory.isActif()) {
 		std::map<string,StateParsermodState*>::iterator it = map.find(name);
 		if ( it != map.end()) ret = (*it).second;
 	};
@@ -440,15 +437,15 @@ StateParserState* StateParsermodState::getNext(const char* const name){
 
 };
 
-class StateParserRootfileSec : public StateParserMetsRootState{
+class StateParserRootfileSec : public StateParserMetsRootState {
 public:
 	virtual StateParserState* getNext(const char* const name);
 };
 
 
-class StateParserFlocat : public StateParserRootfileSec{
+class StateParserFlocat : public StateParserRootfileSec {
 public :
-	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
+	virtual void startElement (const char* const name, const xercesc::Attributes &atts ) {
 		const char	*val5 = getAttributeValue("xlink:href", atts);
 		CTX.f.ref ="";
 		if (val5 != 0) {
@@ -461,9 +458,9 @@ public :
 	};
 };
 
-class StateParserfile : public StateParserRootfileSec{
+class StateParserfile : public StateParserRootfileSec {
 public :
-	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
+	virtual void startElement (const char* const name, const xercesc::Attributes &atts ) {
 		const char *val = getAttributeValue("ID", atts);
 		CTX.f.id = "";
 		if (val != 0) {				
@@ -516,33 +513,33 @@ public :
 	};
 };
 
-class StateParserfileGrp : public StateParserRootfileSec{
+class StateParserfileGrp : public StateParserRootfileSec {
 public :
-	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){	
+	virtual void startElement (const char* const name, const xercesc::Attributes &atts ) {
 		const char *val = getAttributeValue("ID", atts);	
 		CTX.idGroup = "";
 		if (val != 0) {
 			CTX.idGroup = val;						
 		}	
 	};
-	virtual void endElement (const char* const name){
+	virtual void endElement (const char* const name) {
 		CTX.dfMets->set(CTX.idGroup,CTX.file_group);
 		CTX.file_group.vect.clear(); 
 	};
 };
 
-class StateParserfileSec : public StateParserRootfileSec{
+class StateParserfileSec : public StateParserRootfileSec {
 };
 
 
-StateParserState* StateParserRootfileSec::getNext(const char *const name){
+StateParserState* StateParserRootfileSec::getNext(const char *const name) {
 	static std::map<string,StateParserState*> map;
 	static StateParserState* root = this;
 
 	StateParserState* ret = root;
 	
 	static struct _onlyOnes {
-		_onlyOnes(std::map<string,StateParserState*>& map){
+		_onlyOnes(std::map<string,StateParserState*>& map) {
 			map["fileGrp"]	= new StateParserfileGrp(); 
 			map["FLocat"]	= new StateParserFlocat();
 			map["file"]		= new StateParserfile();
@@ -555,12 +552,12 @@ StateParserState* StateParserRootfileSec::getNext(const char *const name){
 	return ret;
 }
 
-class SateParserstructMapRoot : public StateParserMetsRootState{
+class SateParserstructMapRoot : public StateParserMetsRootState {
 public:
 	virtual StateParserState* getNext(const char* const name);
 };
 
-class SateParserstructMap : public SateParserstructMapRoot{
+class SateParserstructMap : public SateParserstructMapRoot {
 private:
 	bool LOGICAL;
 public:
@@ -569,11 +566,11 @@ public:
 	virtual void endElement (const char* const name);
 };
 
-class SateParserstructMapDiv : public SateParserstructMapRoot{
-private : 
+class SateParserstructMapDiv : public SateParserstructMapRoot {
+private: 
 public:
 
-	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
+	virtual void startElement (const char* const name, const xercesc::Attributes &atts ) {
 		//cerr << "SateParserstructDiv :: startElement" << name << endl;
 		const char *val1 = getAttributeValue("ID", atts);
 		const char *val2 = getAttributeValue("TYPE", atts);
@@ -609,14 +606,14 @@ public:
 		};
 	};	
 	
-	virtual void endElement (const char* const name){
+	virtual void endElement (const char* const name) {
 		CTX.currentItem = CTX.currentItem->parent;
 	};
 };
 
-class SateParserstructMapArea : public SateParserstructMapRoot{
+class SateParserstructMapArea : public SateParserstructMapRoot {
 public:
-	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
+	virtual void startElement (const char* const name, const xercesc::Attributes &atts ) {
 		//cerr << "SateParserstructMapArea :: startElement" << name << endl;
 		const char *val1 = getAttributeValue("FILEID", atts);
 		const char *val2 = getAttributeValue("BEGIN", atts);
@@ -633,7 +630,7 @@ public:
 	};
 };
 
-void SateParserstructMap::startElement (const char* const name, const xercesc::Attributes &atts ){
+void SateParserstructMap::startElement (const char* const name, const xercesc::Attributes &atts ) {
 	//cerr << "SateParserstructMap :: startElement" << name << endl;
 	CTX.currentItem = 0;
     //CTX.rootItem = 0;
@@ -651,7 +648,7 @@ void SateParserstructMap::startElement (const char* const name, const xercesc::A
 		
 };
 	
-void SateParserstructMap::endElement (const char* const name){
+void SateParserstructMap::endElement (const char* const name) {
 	if ( LOGICAL ) {
 		Item t;
 		t.id			= CTX.rootItem->id;
@@ -667,7 +664,7 @@ void SateParserstructMap::endElement (const char* const name){
 	};
 };
 
-StateParserState* SateParserstructMapRoot::getNext(const char* const name){
+StateParserState* SateParserstructMapRoot::getNext(const char* const name) {
 
 	static std::map<string,StateParserState*> map;
 	static StateParserState* root=new SateParserstructMapRoot() ;
@@ -675,7 +672,7 @@ StateParserState* SateParserstructMapRoot::getNext(const char* const name){
 	StateParserState* ret=root;
 	
 	static struct _onlyOnes {
-		_onlyOnes(std::map<string,StateParserState*>& map){
+		_onlyOnes(std::map<string,StateParserState*>& map) {
 			map["structMap"]	= new SateParserstructMap();
 			map["div"]			= new SateParserstructMapDiv();
 			map["area"]			= new SateParserstructMapArea();
@@ -690,15 +687,15 @@ StateParserState* SateParserstructMapRoot::getNext(const char* const name){
 
 
 
-StateParserState* StateParserMetsRootState::getNext(const char* const name){
+StateParserState* StateParserMetsRootState::getNext(const char* const name) {
 	
 	static std::map<string,StateParserState*> map;
 	static StateParserState* root = new StateParserMetsRootState();
 
-	StateParserState* ret=root;
+	StateParserState* ret = root;
 	
 	static struct _onlyOnes {
-		_onlyOnes(std::map<string,StateParserState*>& map){
+		_onlyOnes(std::map<string,StateParserState*>& map) {
 			// Define sub-state-machines for each major tag
 			map["mets"]			= new StateParserMetsState();
 			// structmap 
@@ -710,11 +707,12 @@ StateParserState* StateParserMetsRootState::getNext(const char* const name){
 			map["mods"]			= new StateParsermodState(); // could be better if children of dmdsec
 			map["controlfield"]	= new StateParsermodStateInventoryMarc("BIBREC_SYS_NUM"); // could be better if children of dmdsec
             // amd -> has his sub state
-			map["amdSec"]		= new StateParseramdSecState();
+			//map["amdSec"]		= new StateParseramdSecState();
+			map["amdSec"]		= new StateParserRootGeneralAmdSecState();
 			
 			// TODO:
 			// 1) amdSec will focus on MIX data only
-			// 2) StateParseramdSecState should launch a MIX and ODRL on the sub-state-machine
+			// 2) new StateParserRootGeneralAmdSecState should launch a MIX and ODRL on the sub-state-machine
 			// 3) Implement an ODRL parser to check if not empty
 		}
 	} onlyOnes (map);
