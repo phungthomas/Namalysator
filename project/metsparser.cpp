@@ -75,6 +75,7 @@ public:
 	virtual void endElement (const char* const name){
 		boost::algorithm::trim(cData);
 		CTX.amdsec.dpi = atoi(cData.c_str());
+		//printf("DPI FOUND: %d\n", CTX.amdsec.dpi);
 	};
 
 };
@@ -124,14 +125,14 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
 		CTX.mandatoryField.insert("imageWidth");
 		CTX.mandatoryField.insert("imageHeight");
 	}
-	
+
 };
 
 /** MixContainerNotDefine stores the keys of mandatoryField that have not been found.
     Improvement: MixContainerNotDefine should be a set. The value for key is not used.
 */
 void StateParseramdSecState::endElement (const char* const name){
-	CTX.dfMets->set(CTX.amdsec.amdSecId,CTX.amdsec); // TODO: Should this be moved to RootGeneralAmdSecState.endElement ??
+	//CTX.dfMets->set(CTX.amdsec.amdSecId,CTX.amdsec); // TODO: Should this be moved to RootGeneralAmdSecState.endElement ??
 
 	if ( CTX.flagMix ) {
 		if ( CTX.mandatoryField.size() != 0 ) {
@@ -250,14 +251,17 @@ public:
 		if (attribute_id != 0) {
 			CTX.amdsec.amdSecId = attribute_id;
 		}
+
+		//std::cout << "StateParserGeneralAmdSecState: START ELEMENT : " << attribute_id << std::endl;
 	};
 
 	virtual void endElement (const char* const name) {
-		// N
+		CTX.dfMets->set(CTX.amdsec.amdSecId,CTX.amdsec);
+		
+		//std::cout << "StateParserGeneralAmdSecState: END ELEMENT" << std::endl;
+
 	}
 };
-
-//
 
 // TODO: NEED ATTRIBUTES IN getNext PARAMETER ???
 // My guess is no, because (1) GetNext will return this one, then (2) start element is called, then (3) the next getNext will return the mix or odrl
@@ -693,7 +697,7 @@ StateParserState* StateParserMetsRootState::getNext(const char* const name) {
 	static StateParserState* root = new StateParserMetsRootState();
 
 	StateParserState* ret = root;
-	
+
 	static struct _onlyOnes {
 		_onlyOnes(std::map<string,StateParserState*>& map) {
 			// Define sub-state-machines for each major tag
@@ -708,7 +712,7 @@ StateParserState* StateParserMetsRootState::getNext(const char* const name) {
 			map["controlfield"]	= new StateParsermodStateInventoryMarc("BIBREC_SYS_NUM"); // could be better if children of dmdsec
             // amd -> has his sub state
 			//map["amdSec"]		= new StateParseramdSecState();
-			map["amdSec"]		= new StateParserRootGeneralAmdSecState();
+			map["amdSec"]		= new StateParserGeneralAmdSecState(); //new StateParserRootGeneralAmdSecState();
 			
 			// TODO:
 			// 1) amdSec will focus on MIX data only
