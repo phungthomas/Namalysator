@@ -392,7 +392,7 @@ void database::insertLinkedFiles(int id_mets,datafactory *df)
 	sqlite3_stmt *pStmt = 0;
 
 	datafactory_set<File_Group> dftypefile = df->get_set<File_Group>();
-	datafactory_set<AmdSec> dfamdsec = df->get_set<AmdSec>();
+	datafactory_set<AmdSecMix> dfamdsec = df->get_set<AmdSecMix>();
 
 	const char *sql = "INSERT INTO LINKEDFILES ('ID_METS', 'TYPE', 'GROUPID', 'CHECKSUM','SIZE','FILENAME','FILEID','DPI') VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	if (sqlite3_prepare_v2(db, sql, -1, &pStmt, &zErrMsg) == SQLITE_OK) {
@@ -404,7 +404,7 @@ void database::insertLinkedFiles(int id_mets,datafactory *df)
 				int dpi =0;
 				if (it.key() == "IMGGRP")
 				{
-					AmdSec *s =	df->get<AmdSec>(tf.admid); // get the dpi of image
+					AmdSecMix *s =	df->get<AmdSecMix>(tf.admid); // get the dpi of image
 					if ( s!= NULL) {
 						dpi = s->dpi;	
 					}else{

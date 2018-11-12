@@ -10,10 +10,10 @@ verifyidentifierinmix::verifyidentifierinmix(datafactory *dfverifiers,errorHandl
 	fg = dfverifiers->get<File_Group>("IMGGRP");
 	for(size_t j=0;j< fg->vect.size();j++)
 	{			
-		AmdSec *amdsec = dfverifiers->get<AmdSec>(fg->vect[j].admid);
-		if (amdsec ==0)
+		AmdSecMix *amdSecMix = dfverifiers->get<AmdSecMix>(fg->vect[j].admid);
+		if (amdSecMix ==0)
 		{					
-			hError->getError(cat_amdsecID,"METS","MIX",fg->vect[j].admid,fileName,"<amdsec");					
+			hError->getError(cat_amdsecID,"METS","MIX",fg->vect[j].admid,fileName,"<amdSecMix");					
 		}
 	}
 }

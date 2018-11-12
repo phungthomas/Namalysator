@@ -50,7 +50,7 @@ struct File_Group : public dataitem
 };
 
 //! structure of an amdsec
-struct AmdSec : public dataitem
+struct AmdSecMix : public dataitem
 {
 	static const size_t DATAITEM_ID =7;
 	std::string amdSecId;
@@ -58,7 +58,7 @@ struct AmdSec : public dataitem
 	int dpi;
 };
 
-// TODO: Refactor AmdSec to AmdSecMix and add AmdSecOdrl. Break the code and compile.
+// TODO: [Refactor AmdSec to AmdSecMix] (OK) and add AmdSecOdrl. Break the code and compile.
 
 //! structure of a block type
 struct typeBlock 

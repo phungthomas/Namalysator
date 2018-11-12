@@ -34,13 +34,13 @@ public :
 	Type_File f;
 	File_Group file_group;
 
-	// dmd
+	// dmdSec
 	std::string idItem;
 	std::string addStringData;
 	dmdsec dmdSecStruct;
 
-	// amdsec
-	AmdSec amdsec;
+	// amdSec
+	AmdSecMix amdSecMix;
 
 	// TODO: Use kind of Enum
 	// Possible values: MIX, ODRL

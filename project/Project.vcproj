@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="metsverifier"
 	ProjectGUID="{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}"
 	RootNamespace="Project"

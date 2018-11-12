@@ -4,9 +4,9 @@ void verifycutouts(datafactory *df, errorHandler *h, std::string &fileName)
 {
 	bool foundOne = false;
 	h->begin("Verify: cut-out references in mix");
-	datafactory_set<AmdSec> dfAmdSec = df->get_set<AmdSec>();
+	datafactory_set<AmdSecMix> dfAmdSec = df->get_set<AmdSecMix>();
 	datafactory_set<File_Group> dfFileGrp = df->get_set<File_Group>();
-	for (datafactory_set<AmdSec>::iterator it = dfAmdSec.begin(); it != dfAmdSec.end(); ++it) {
+	for (datafactory_set<AmdSecMix>::iterator it = dfAmdSec.begin(); it != dfAmdSec.end(); ++it) {
 		if (it->sourceData.length()) {
 			// Look for the identifier in the fileGrp
 			foundOne = false;

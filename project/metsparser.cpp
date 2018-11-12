@@ -64,7 +64,7 @@ protected:
 	std::string cData;
 public:
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts ){
-		//cerr << "StateParserScanResolution:" << name << "   AMID:" << CTX.amdsec.amdSecId << endl;
+		//cerr << "StateParserScanResolution:" << name << "   AMID:" << CTX.amdSecMix.amdSecId << endl;
 		cData.clear();
 	};
 
@@ -74,8 +74,8 @@ public:
 
 	virtual void endElement (const char* const name){
 		boost::algorithm::trim(cData);
-		CTX.amdsec.dpi = atoi(cData.c_str());
-		//printf("DPI FOUND: %d\n", CTX.amdsec.dpi);
+		CTX.amdSecMix.dpi = atoi(cData.c_str());
+		//printf("DPI FOUND: %d\n", CTX.amdSecMix.dpi);
 	};
 
 };
@@ -84,7 +84,7 @@ class StateParserSourceDataResolution : public StateParserScanResolution{
 public:
 	virtual void endElement (const char* const name){
 		boost::algorithm::trim(cData);
-		CTX.amdsec.sourceData = cData;
+		CTX.amdSecMix.sourceData = cData;
 	};
 };
 
@@ -105,7 +105,7 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
 	/* THIS IS MOVED TO the RootGeneralAmdSecState.startElement method
 	const char *val = getAttributeValue("ID", atts);
 	if (val!=0) {
-		CTX.amdsec.amdSecId = val;
+		CTX.amdSecMix.amdSecId = val;
 	}*/
 
 	if ( CTX.flagMix ) {
@@ -132,7 +132,7 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
     Improvement: MixContainerNotDefine should be a set. The value for key is not used.
 */
 void StateParseramdSecState::endElement (const char* const name){
-	//CTX.dfMets->set(CTX.amdsec.amdSecId,CTX.amdsec); // TODO: Should this be moved to RootGeneralAmdSecState.endElement ??
+	//CTX.dfMets->set(CTX.amdSecMix.amdSecId,CTX.amdSecMix); // TODO: Should this be moved to RootGeneralAmdSecState.endElement ??
 
 	if ( CTX.flagMix ) {
 		if ( CTX.mandatoryField.size() != 0 ) {
@@ -249,14 +249,14 @@ public:
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts ) {
 		const char *attribute_id = getAttributeValue("ID", atts);
 		if (attribute_id != 0) {
-			CTX.amdsec.amdSecId = attribute_id;
+			CTX.amdSecMix.amdSecId = attribute_id;
 		}
 
 		//std::cout << "StateParserGeneralAmdSecState: START ELEMENT : " << attribute_id << std::endl;
 	};
 
 	virtual void endElement (const char* const name) {
-		CTX.dfMets->set(CTX.amdsec.amdSecId,CTX.amdsec);
+		CTX.dfMets->set(CTX.amdSecMix.amdSecId,CTX.amdSecMix);
 		
 		//std::cout << "StateParserGeneralAmdSecState: END ELEMENT" << std::endl;
 
