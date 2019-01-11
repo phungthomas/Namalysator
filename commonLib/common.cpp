@@ -3,10 +3,13 @@
 
 const std::string Parameters::prefix="verifiers.";
 
-void Parameters::addParam(std::string Key,std::string Val){
+void Parameters::addParam(std::string Key, std::string Val){
 	
-	mapConfig[Key]+=Val;
-	//std::cerr << "KEY:"<<Key <<" VALUE:"<< Val<< " LENGTH:" <<mapConfig[Key].length()<<std::endl;
+	mapConfig[Key] += Val;
+	std::cerr << "KEY:"<<Key <<" VALUE:"<< Val<< " LENGTH:" <<mapConfig[Key].length()<<std::endl;
+
+	std::cerr << "Key Count: " << mapConfig.count(Key) << std::endl;
+
 }
 
 std::string Parameters::getValue(std::string Key){

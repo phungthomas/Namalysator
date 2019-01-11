@@ -52,7 +52,7 @@ public:
 
 /** This parser handles the root amdSec element. (MIX)
 */
-class StateParseramdSecState : public StateParserRootamdSecState{
+class StateParserAmdSecMixState : public StateParserRootamdSecState{
 	virtual void startElement (const char* const name, const xercesc::Attributes &atts );
 	virtual void endElement (const char* const name);
 };
@@ -101,7 +101,7 @@ public:
 
 /** This parser handles the root amdSec element.
 */
-void StateParseramdSecState::startElement (const char* const name, const xercesc::Attributes &atts ){
+void StateParserAmdSecMixState::startElement (const char* const name, const xercesc::Attributes &atts ){
 	/* THIS IS MOVED TO the RootGeneralAmdSecState.startElement method
 	const char *val = getAttributeValue("ID", atts);
 	if (val!=0) {
@@ -131,7 +131,7 @@ void StateParseramdSecState::startElement (const char* const name, const xercesc
 /** MixContainerNotDefine stores the keys of mandatoryField that have not been found.
     Improvement: MixContainerNotDefine should be a set. The value for key is not used.
 */
-void StateParseramdSecState::endElement (const char* const name){
+void StateParserAmdSecMixState::endElement (const char* const name){
 	//CTX.dfMets->set(CTX.amdSecMix.amdSecId,CTX.amdSecMix); // TODO: Should this be moved to RootGeneralAmdSecState.endElement ??
 
 	if ( CTX.flagMix ) {
@@ -227,13 +227,7 @@ public:
 };
 
 // ##################################################
-// AMDSEC - ODRL
-// ##################################################
-
-// TODO
-
-// ##################################################
-// AMDSEC - GENERAL
+// AMDSEC
 // ##################################################
 
 /** [NEW] Root element that starts at all amdSec element.
@@ -256,6 +250,9 @@ public:
 	};
 
 	virtual void endElement (const char* const name) {
+		
+		// TODO: Check if this is MIX or ODRL and use appropriate context variable
+		
 		CTX.dfMets->set(CTX.amdSecMix.amdSecId,CTX.amdSecMix);
 		
 		//std::cout << "StateParserGeneralAmdSecState: END ELEMENT" << std::endl;
@@ -274,7 +271,7 @@ StateParserState* StateParserRootGeneralAmdSecState::getNext(const char* const n
 
 	static struct _onlyOnes {
 		_onlyOnes(std::map<string,StateParserState*>& map) {
-			map["mix"]	= new StateParseramdSecState();
+			map["mix"]	= new StateParserAmdSecMixState();
 			//map["odrl"] = X;
 		}
 	} onlyOnes (map);
@@ -284,6 +281,7 @@ StateParserState* StateParserRootGeneralAmdSecState::getNext(const char* const n
 
 	return ret;
 };
+
 
 // ##################################################
 // TITLE

@@ -438,6 +438,27 @@ int start(std::string &configFileName)
 			}
 		}
 
+		// ODRL
+		std::cout << "ODRL Enabled: " <<  parameter.getValueCheck("semanticchecks.odrl.enabled") << std::endl;
+
+
+		// TEST
+		
+		std::cout << "ODRL: AmdSec ID		: " << parameter.getValueCheck("semanticchecks.odrl.amdSecBlocks.amdSec.id") << std::endl;
+		std::cout << "ODRL: AmdSec test		: " << parameter.getValueCheck("semanticchecks.odrl.amdSecBlocks.amdSec.policy.permissions.permission") << std::endl;
+
+		/*
+		<amdSecBlocks>
+            <amdSec>
+              <id>ODRL_IMAGES</id>
+              <rightMD>ODRL_IMAGES_MD</rightMD>
+              <policy>
+                <type>http://www.w3.org/ns/odrl/2/agreement</type>
+                <uid>https://persist.lu/ark:/70795/123456789</uid>
+                <permissions>
+                  <permission>
+		*/
+
 		// Do transformation of the data factory
 		dataaggregator da(&df,currentMetsFile,db,metsP.getContext().papertype);	
 		pt.LogTime("Creating dataagregator");

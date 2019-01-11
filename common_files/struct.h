@@ -58,7 +58,13 @@ struct AmdSecMix : public dataitem
 	int dpi;
 };
 
-// TODO: [Refactor AmdSec to AmdSecMix] (OK) and add AmdSecOdrl. Break the code and compile.
+struct AmdSecOdrl : public dataitem
+{
+	static const size_t DATAITEM_ID = 11;
+	std::string amdSecId;
+
+
+};
 
 //! structure of a block type
 struct typeBlock 

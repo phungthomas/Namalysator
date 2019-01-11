@@ -14,29 +14,29 @@ using namespace std;
 
 
 void    configparser::endElement (const XMLCh* const uri,const XMLCh* const localname,const XMLCh* const qname){
-	char* name =XMLString::transcode (qname);
+	char* name = XMLString::transcode (qname);
 	//cout << "END qname : "<< name << endl ;
 	
 	XMLString::release(&name);
 	if ( save && position.length() > 1 ){
 		ctx->addParam(position.substr(1),value);
-		save=false;
+		save = false;
 	}
-	value ="";
+	value = "";
 	currPoss.pop();
-	position=currPoss.top();
+	position = currPoss.top();
 }
 
 void configparser::startElement(const XMLCh *const uri, const XMLCh *const localname, const XMLCh *const qname, const xercesc::Attributes &attrs){
 
-	char* name =XMLString::transcode (qname);
+	char* name = XMLString::transcode (qname);
 	std::string tmpName = std::string(name);
 	save = true;
-	value ="";
+	value = "";
 	if ( tmpName.compare("config") ) {
-		position+="."+tmpName;
-	}else{
-		position="";
+		position += "." + tmpName;
+	} else {
+		position = "";
 		currPoss.push(position);
 	}
 
@@ -47,9 +47,9 @@ void configparser::startElement(const XMLCh *const uri, const XMLCh *const local
 
 void 	configparser::characters (const XMLCh *const chars, const XMLSize_t length){
 	
-	char* _chars =XMLString::transcode (chars);
+	char* _chars = XMLString::transcode(chars);
 
-	value+=_chars;
+	value += _chars;
 	XMLString::release(&_chars);
 
 };
@@ -86,8 +86,6 @@ void configparser::init(){
 #if _XERCES_VERSION >= 30100
        parser->setFeature (XMLUni::fgXercesHandleMultipleImports, false);
 #endif
-	    
-        
 	    
 	    addXSD("xml.xsd");
 		setContentHandler(this);
