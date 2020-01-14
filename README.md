@@ -28,3 +28,9 @@ The software is written in C++ and consist of 3 programs:
 *Note:*
 
 To compile this project, several paths linked to `C:\` might have to be updated for your local development environment.
+
+# License
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+See `COPYING` to see the full text.
