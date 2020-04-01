@@ -2,7 +2,7 @@
 #define W_DIALOGIMAGE_H
 
 
-#include <QtGui/QWidget>
+#include <QtWidgets>
 #include <QImage>
 #include <QLabel>
 #include <QVBoxLayout>

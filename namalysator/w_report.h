@@ -1,7 +1,7 @@
 #ifndef _REPORT_W_H
 #define _REPORT_W_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include "dbrequest.h"
 
 

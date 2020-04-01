@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_disk.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,21 +10,19 @@
 #define UI_W_DISK_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCalendarWidget>
-#include <QtGui/QFormLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QListWidget>
-#include <QtGui/QScrollArea>
-#include <QtGui/QTableWidget>
-#include <QtGui/QTreeView>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QCalendarWidget>
+#include <QtWidgets/QFormLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTreeView>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -231,17 +229,17 @@ public:
 
     void retranslateUi(QWidget *w_disk)
     {
-        w_disk->setWindowTitle(QApplication::translate("w_disk", "Form", 0, QApplication::UnicodeUTF8));
-        groupBox_4->setTitle(QApplication::translate("w_disk", "Details of Mets", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("w_disk", "Filename :", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("w_disk", "Issue number as text:", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("w_disk", "Issue number as parsed :", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("w_disk", "Pages :", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("w_disk", "Supplements :", 0, QApplication::UnicodeUTF8));
-        lbPages->setText(QApplication::translate("w_disk", "No issue selected", 0, QApplication::UnicodeUTF8));
-        lbIssueParsed->setText(QApplication::translate("w_disk", "No issue selected", 0, QApplication::UnicodeUTF8));
-        lbIssueNumber->setText(QApplication::translate("w_disk", "No issue selected", 0, QApplication::UnicodeUTF8));
-        lbFileName->setText(QApplication::translate("w_disk", "No issue selected", 0, QApplication::UnicodeUTF8));
+        w_disk->setWindowTitle(QCoreApplication::translate("w_disk", "Form", nullptr));
+        groupBox_4->setTitle(QCoreApplication::translate("w_disk", "Details of Mets", nullptr));
+        label_11->setText(QCoreApplication::translate("w_disk", "Filename :", nullptr));
+        label_12->setText(QCoreApplication::translate("w_disk", "Issue number as text:", nullptr));
+        label_13->setText(QCoreApplication::translate("w_disk", "Issue number as parsed :", nullptr));
+        label_14->setText(QCoreApplication::translate("w_disk", "Pages :", nullptr));
+        label_15->setText(QCoreApplication::translate("w_disk", "Supplements :", nullptr));
+        lbPages->setText(QCoreApplication::translate("w_disk", "No issue selected", nullptr));
+        lbIssueParsed->setText(QCoreApplication::translate("w_disk", "No issue selected", nullptr));
+        lbIssueNumber->setText(QCoreApplication::translate("w_disk", "No issue selected", nullptr));
+        lbFileName->setText(QCoreApplication::translate("w_disk", "No issue selected", nullptr));
         lblHeader->setText(QString());
     } // retranslateUi
 

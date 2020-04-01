@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_stat.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,13 +10,11 @@
 #define UI_W_STAT_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QTableWidget>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -51,7 +49,7 @@ public:
 
     void retranslateUi(QWidget *w_stat)
     {
-        w_stat->setWindowTitle(QApplication::translate("w_stat", "w_stat", 0, QApplication::UnicodeUTF8));
+        w_stat->setWindowTitle(QCoreApplication::translate("w_stat", "w_stat", nullptr));
     } // retranslateUi
 
 };

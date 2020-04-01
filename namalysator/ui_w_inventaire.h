@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_inventaire.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,15 +10,13 @@
 #define UI_W_INVENTAIRE_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHeaderView>
-#include <QtGui/QPushButton>
-#include <QtGui/QTableWidget>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -92,14 +90,14 @@ public:
 
     void retranslateUi(QWidget *w_inventaire)
     {
-        w_inventaire->setWindowTitle(QApplication::translate("w_inventaire", "w_inventaire", 0, QApplication::UnicodeUTF8));
-        btnViewIssue->setText(QApplication::translate("w_inventaire", "View issue", 0, QApplication::UnicodeUTF8));
-        btnInventaire->setText(QApplication::translate("w_inventaire", "Show inventaire", 0, QApplication::UnicodeUTF8));
-        btnExport->setText(QApplication::translate("w_inventaire", "Export ", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("w_inventaire", "Current line from inventory", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("w_inventaire", "Issues en trop", 0, QApplication::UnicodeUTF8));
-        groupBox_3->setTitle(QApplication::translate("w_inventaire", "Missing from inventaire", 0, QApplication::UnicodeUTF8));
-        btnShowErrors->setText(QApplication::translate("w_inventaire", "Show only errors", 0, QApplication::UnicodeUTF8));
+        w_inventaire->setWindowTitle(QCoreApplication::translate("w_inventaire", "w_inventaire", nullptr));
+        btnViewIssue->setText(QCoreApplication::translate("w_inventaire", "View issue", nullptr));
+        btnInventaire->setText(QCoreApplication::translate("w_inventaire", "Show inventaire", nullptr));
+        btnExport->setText(QCoreApplication::translate("w_inventaire", "Export ", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("w_inventaire", "Current line from inventory", nullptr));
+        groupBox_2->setTitle(QCoreApplication::translate("w_inventaire", "Issues en trop", nullptr));
+        groupBox_3->setTitle(QCoreApplication::translate("w_inventaire", "Missing from inventaire", nullptr));
+        btnShowErrors->setText(QCoreApplication::translate("w_inventaire", "Show only errors", nullptr));
     } // retranslateUi
 
 };

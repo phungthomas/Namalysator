@@ -1,7 +1,7 @@
 #ifndef W_STAT_H
 #define W_STAT_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets>
 #include "structgui.h"
 #include "dbrequest.h"
 #include <map>

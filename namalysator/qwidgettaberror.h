@@ -1,7 +1,7 @@
 #ifndef QWIDGETTABERRORS_H_
 #define QWIDGETTABERRORS_H_
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QTableWidget>
 #include <QComboBox>
 #include <QCheckBox>

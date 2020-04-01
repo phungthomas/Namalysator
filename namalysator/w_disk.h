@@ -1,9 +1,9 @@
 #ifndef W_DISK_H
 #define W_DISK_H
 
-#include <QtGui/QWidget>
-#include <QtGui/QDirModel>
-#include <QtGui>
+#include <QWidget>
+#include <QDirModel>
+#include <QtWidgets>
 #include<QListWidget>
 #include<QListWidgetItem>
 #include "structgui.h"

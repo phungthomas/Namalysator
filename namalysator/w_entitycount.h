@@ -1,7 +1,7 @@
 #ifndef ENTITYCOUNT
 #define ENTITYCOUNT
 
-#include <QtGui>
+#include <QtWidgets>
 
 #include "dbrequest.h"
 #include "entitycountModel.h"

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_selectbatch.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,24 +10,22 @@
 #define UI_W_SELECTBATCH_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QListWidget>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollArea>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QTableView>
-#include <QtGui/QTableWidget>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTableView>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -346,29 +344,29 @@ public:
 
     void retranslateUi(QWidget *w_selectBatch)
     {
-        w_selectBatch->setWindowTitle(QApplication::translate("w_selectBatch", "Form", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("w_selectBatch", "Details", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("w_selectBatch", "Batchname :", 0, QApplication::UnicodeUTF8));
+        w_selectBatch->setWindowTitle(QCoreApplication::translate("w_selectBatch", "Form", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("w_selectBatch", "Details", nullptr));
+        label_3->setText(QCoreApplication::translate("w_selectBatch", "Batchname :", nullptr));
         lbBatchName->setText(QString());
-        label_4->setText(QApplication::translate("w_selectBatch", "Year on disk :", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QCoreApplication::translate("w_selectBatch", "Year on disk :", nullptr));
         lbYear->setText(QString());
-        label_7->setText(QApplication::translate("w_selectBatch", "Number of METS files :", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QCoreApplication::translate("w_selectBatch", "Number of METS files :", nullptr));
         lbNumberMets->setText(QString());
         groupButton->setTitle(QString());
-        btnAnalyze->setText(QApplication::translate("w_selectBatch", "Go to disk analyze", 0, QApplication::UnicodeUTF8));
-        btnCancel->setText(QApplication::translate("w_selectBatch", "Cancel", 0, QApplication::UnicodeUTF8));
-        groupBox_4->setTitle(QApplication::translate("w_selectBatch", "Error summary", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("w_selectBatch", "Parameters", 0, QApplication::UnicodeUTF8));
-        gbBatch->setTitle(QApplication::translate("w_selectBatch", "Batch", 0, QApplication::UnicodeUTF8));
-        btnBrowseDb->setText(QApplication::translate("w_selectBatch", "Browse", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("w_selectBatch", "Select database :", 0, QApplication::UnicodeUTF8));
+        btnAnalyze->setText(QCoreApplication::translate("w_selectBatch", "Go to disk analyze", nullptr));
+        btnCancel->setText(QCoreApplication::translate("w_selectBatch", "Cancel", nullptr));
+        groupBox_4->setTitle(QCoreApplication::translate("w_selectBatch", "Error summary", nullptr));
+        groupBox_2->setTitle(QCoreApplication::translate("w_selectBatch", "Parameters", nullptr));
+        gbBatch->setTitle(QCoreApplication::translate("w_selectBatch", "Batch", nullptr));
+        btnBrowseDb->setText(QCoreApplication::translate("w_selectBatch", "Browse", nullptr));
+        label->setText(QCoreApplication::translate("w_selectBatch", "Select database :", nullptr));
         lineEditSql->setText(QString());
-        label_8->setText(QApplication::translate("w_selectBatch", "Batch Name", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("w_selectBatch", "Sub Batch Name", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("w_selectBatch", "Batch Test on date :", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("w_selectBatch", "Path of the disk :", 0, QApplication::UnicodeUTF8));
-        btnPath->setText(QApplication::translate("w_selectBatch", "Browse", 0, QApplication::UnicodeUTF8));
-        lineEdit->setText(QApplication::translate("w_selectBatch", "C:/", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QCoreApplication::translate("w_selectBatch", "Batch Name", nullptr));
+        label_2->setText(QCoreApplication::translate("w_selectBatch", "Sub Batch Name", nullptr));
+        label_9->setText(QCoreApplication::translate("w_selectBatch", "Batch Test on date :", nullptr));
+        label_10->setText(QCoreApplication::translate("w_selectBatch", "Path of the disk :", nullptr));
+        btnPath->setText(QCoreApplication::translate("w_selectBatch", "Browse", nullptr));
+        lineEdit->setText(QCoreApplication::translate("w_selectBatch", "C:/", nullptr));
     } // retranslateUi
 
 };

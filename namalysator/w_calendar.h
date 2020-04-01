@@ -1,7 +1,7 @@
 #ifndef W_CALENDAR_H
 #define W_CALENDAR_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QDate>
 #include <QCalendarWidget>
 #include<QListWidgetItem>

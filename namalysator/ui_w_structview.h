@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_structview.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,20 +10,18 @@
 #define UI_W_STRUCTVIEW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCalendarWidget>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QListWidget>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollArea>
-#include <QtGui/QSpinBox>
-#include <QtGui/QTreeWidget>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QCalendarWidget>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpinBox>
+#include <QtWidgets/QTreeWidget>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -346,28 +344,28 @@ public:
 
     void retranslateUi(QWidget *w_structview)
     {
-        w_structview->setWindowTitle(QApplication::translate("w_structview", "Form", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("w_structview", "Please select calendar entry for Issue", 0, QApplication::UnicodeUTF8));
-        btnUndo->setText(QApplication::translate("w_structview", "Undo", 0, QApplication::UnicodeUTF8));
-        btnChecked->setText(QApplication::translate("w_structview", "Checked", 0, QApplication::UnicodeUTF8));
-        btnZoomIn->setText(QApplication::translate("w_structview", "Zoom In", 0, QApplication::UnicodeUTF8));
-        zoomNormal->setText(QApplication::translate("w_structview", "100%", 0, QApplication::UnicodeUTF8));
-        btnZoomOut->setText(QApplication::translate("w_structview", "Zoom Out", 0, QApplication::UnicodeUTF8));
-        btnPrevious->setText(QApplication::translate("w_structview", "<", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("w_structview", "  /", 0, QApplication::UnicodeUTF8));
+        w_structview->setWindowTitle(QCoreApplication::translate("w_structview", "Form", nullptr));
+        label->setText(QCoreApplication::translate("w_structview", "Please select calendar entry for Issue", nullptr));
+        btnUndo->setText(QCoreApplication::translate("w_structview", "Undo", nullptr));
+        btnChecked->setText(QCoreApplication::translate("w_structview", "Checked", nullptr));
+        btnZoomIn->setText(QCoreApplication::translate("w_structview", "Zoom In", nullptr));
+        zoomNormal->setText(QCoreApplication::translate("w_structview", "100%", nullptr));
+        btnZoomOut->setText(QCoreApplication::translate("w_structview", "Zoom Out", nullptr));
+        btnPrevious->setText(QCoreApplication::translate("w_structview", "<", nullptr));
+        label_2->setText(QCoreApplication::translate("w_structview", "  /", nullptr));
         lblPageEnd->setText(QString());
-        btnNext->setText(QApplication::translate("w_structview", ">", 0, QApplication::UnicodeUTF8));
-        btnClearPainter->setText(QApplication::translate("w_structview", "Clear highlighting", 0, QApplication::UnicodeUTF8));
-        btnFull->setText(QApplication::translate("w_structview", "Full", 0, QApplication::UnicodeUTF8));
-        btnDeleteSelectedItem->setText(QApplication::translate("w_structview", "Delete Selected Error Item", 0, QApplication::UnicodeUTF8));
-        btnViewHtml->setText(QApplication::translate("w_structview", "View All Batch Errors", 0, QApplication::UnicodeUTF8));
-        lbl_blocking->setText(QApplication::translate("w_structview", "Blocking :", 0, QApplication::UnicodeUTF8));
-        lbl_major->setText(QApplication::translate("w_structview", "Major :", 0, QApplication::UnicodeUTF8));
-        lbl_minor->setText(QApplication::translate("w_structview", "Minor :", 0, QApplication::UnicodeUTF8));
-        btnError->setText(QApplication::translate("w_structview", " Error", 0, QApplication::UnicodeUTF8));
-        btnStructure->setText(QApplication::translate("w_structview", "Structure", 0, QApplication::UnicodeUTF8));
-        btnViewMets->setText(QApplication::translate("w_structview", "View Mets File", 0, QApplication::UnicodeUTF8));
-        btnViewDir->setText(QApplication::translate("w_structview", "View Mets Dir", 0, QApplication::UnicodeUTF8));
+        btnNext->setText(QCoreApplication::translate("w_structview", ">", nullptr));
+        btnClearPainter->setText(QCoreApplication::translate("w_structview", "Clear highlighting", nullptr));
+        btnFull->setText(QCoreApplication::translate("w_structview", "Full", nullptr));
+        btnDeleteSelectedItem->setText(QCoreApplication::translate("w_structview", "Delete Selected Error Item", nullptr));
+        btnViewHtml->setText(QCoreApplication::translate("w_structview", "View All Batch Errors", nullptr));
+        lbl_blocking->setText(QCoreApplication::translate("w_structview", "Blocking :", nullptr));
+        lbl_major->setText(QCoreApplication::translate("w_structview", "Major :", nullptr));
+        lbl_minor->setText(QCoreApplication::translate("w_structview", "Minor :", nullptr));
+        btnError->setText(QCoreApplication::translate("w_structview", " Error", nullptr));
+        btnStructure->setText(QCoreApplication::translate("w_structview", "Structure", nullptr));
+        btnViewMets->setText(QCoreApplication::translate("w_structview", "View Mets File", nullptr));
+        btnViewDir->setText(QCoreApplication::translate("w_structview", "View Mets Dir", nullptr));
     } // retranslateUi
 
 };

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_main.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,14 +10,11 @@
 #define UI_W_MAIN_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QHeaderView>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenuBar>
-#include <QtGui/QStatusBar>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -51,7 +48,7 @@ public:
 
     void retranslateUi(QMainWindow *w_main)
     {
-        w_main->setWindowTitle(QApplication::translate("w_main", "MainWindow", 0, QApplication::UnicodeUTF8));
+        w_main->setWindowTitle(QCoreApplication::translate("w_main", "MainWindow", nullptr));
     } // retranslateUi
 
 };

@@ -1,20 +1,20 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "metsverifier", "Project\Project.vcproj", "{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{FC105D8C-AB16-4172-979D-3E55578EEA91}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "namalysator", "namalysator\namalysator.vcproj", "{80B6A0C6-EA9D-349F-B3E8-0756871F7982}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "metsverifier", "Project\Project.vcproj", "{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "commonLib", "commonLib\commonLib.vcproj", "{C53A8D74-9C50-4456-A741-60736F3B2A40}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "namalysator", "namalysator\namalysator.vcxproj", "{80B6A0C6-EA9D-349F-B3E8-0756871F7982}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadInventory", "loadInventory\loadInventory.vcproj", "{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "commonLib", "commonLib\commonLib.vcxproj", "{C53A8D74-9C50-4456-A741-60736F3B2A40}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadInventory", "loadInventory\loadInventory.vcxproj", "{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "metsverifier2", "project\metsverifier2\metsverifier2.vcxproj", "{B356B408-64F9-43ED-ABEB-B68BA678752F}"
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
@@ -102,9 +102,40 @@ Global
 		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Release|Win32.ActiveCfg = Release|Win32
 		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Release|Win32.Build.0 = Release|Win32
 		{FFAF5983-F1FF-4949-BB4D-DFC1CD40045A}.Static Release|x64.ActiveCfg = Release|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Debug|Win32.Build.0 = Debug|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Debug|x64.ActiveCfg = Debug|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Debug|x64.Build.0 = Debug|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.ICU Debug|Win32.ActiveCfg = Debug|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.ICU Debug|Win32.Build.0 = Debug|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.ICU Debug|x64.ActiveCfg = Debug|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.ICU Debug|x64.Build.0 = Debug|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.ICU Release|Win32.ActiveCfg = Release|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.ICU Release|Win32.Build.0 = Release|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.ICU Release|x64.ActiveCfg = Release|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.ICU Release|x64.Build.0 = Release|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Release|Win32.ActiveCfg = Release|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Release|Win32.Build.0 = Release|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Release|x64.ActiveCfg = Release|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Release|x64.Build.0 = Release|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Static Debug|Win32.ActiveCfg = Debug|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Static Debug|Win32.Build.0 = Debug|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Static Debug|x64.ActiveCfg = Debug|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Static Debug|x64.Build.0 = Debug|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Static Release|Win32.ActiveCfg = Release|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Static Release|Win32.Build.0 = Release|Win32
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Static Release|x64.ActiveCfg = Release|x64
+		{B356B408-64F9-43ED-ABEB-B68BA678752F}.Static Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {19A84527-86E3-446A-84FF-433F8293D56C}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}

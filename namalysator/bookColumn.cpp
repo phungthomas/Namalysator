@@ -3,7 +3,7 @@
 
 
 bookColumn::bookColumn(Qt::Orientation orientation,QWidget * parent): QHeaderView(orientation,parent){
-	this->setClickable(true);
+	this->setSectionsClickable(true);
 }
 
 bookColumn::~bookColumn(){
