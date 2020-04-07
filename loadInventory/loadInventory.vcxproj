@@ -51,6 +51,8 @@
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\NB_dev\boost_1_72_0;C:\NB_dev\sqlite-amalgamation-3310100;C:\NB_dev\lib\include;C:\NB_dev\Namalysator\commonLib;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\NB_dev\boost_1_72_0\stage\lib;C:\NB_dev\Namalysator\Libraries\Release;C:\NB_dev\xerces-c-3.2.2\build\src\Release;C:\NB_dev\sqlite-amalgamation-3310100;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -80,7 +82,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sqlite.lib;xerces-c_3.lib;commonLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sqlite3.lib;xerces-c_3.lib;commonLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(METSVERIFIER)\Libraries\Release;$(METSVERIFY_EXTERNAL)\Libraries\Release;$(BOOST_LIB);$(XERCES_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>

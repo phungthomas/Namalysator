@@ -47,12 +47,13 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <QtModules>core;gui</QtModules>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>msvc2017</QtInstall>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <QtModules>core;gui;widgets</QtModules>
     <QtInstall>msvc2017</QtInstall>
-    <QtBuildConfig>release</QtBuildConfig>
+    <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
@@ -74,6 +75,8 @@
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\NB_dev\CxImage\zlib;C:\NB_dev\Expat\Source\lib;C:\NB_dev\jpeg-6b-4-lib\include;C:\NB_dev\CxImage\tiff;C:\NB_dev\boost_1_72_0;C:\NB_dev\sqlite-amalgamation-3310100;C:\NB_dev\lib\include;C:\NB_dev\Namalysator\commonLib;C:\Qt\5.14.1\msvc2017\include\QtWidgets;C:\Qt\5.14.1\msvc2017\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\NB_dev\Namalysator\Libraries\Release;C:\NB_dev\boost_1_72_0\stage\lib;C:\NB_dev\CxImage\zlib\Release;C:\NB_dev\CxImage\tiff\Release;C:\NB_dev\libdcr\Release;C:\NB_dev\CxImage\mng\Release;C:\NB_dev\CxImage\jasper\Release;C:\NB_dev\CxImage\jpeg\Release;C:\NB_dev\CxImage\jbig\Release;C:\NB_dev\CxImage\png\Release;C:\NB_dev\CxImage\CxImage\Release;C:\NB_dev\xerces-c-3.2.2\build\src\Release;C:\NB_dev\sqlite-amalgamation-3310100;C:\Qt\5.14.1\msvc2017\lib;C:\NB_dev\Expat\Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -106,7 +109,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" "/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>cximage.lib;commonLib.lib;zlib.lib;libexpatMT.lib;Qt5Core.lib;Qt5Gui.lib;sqlite3.lib;Qt5WebView.lib;shell32.lib;png.lib;jbig.lib;jasper.lib;Jpeg.lib;mng.lib;libdcr.lib;tiff.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cximage.lib;commonLib.lib;zlib.lib;libexpatMT.lib;sqlite3.lib;shell32.lib;png.lib;jbig.lib;jasper.lib;Jpeg.lib;mng.lib;libdcr.lib;tiff.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>$(METSVERIFIER)\Libraries\Debug;$(METSVERIFY_EXTERNAL)\Libraries\Debug;$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -144,14 +147,14 @@
       <ExceptionHandling>Sync</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <ObjectFileName>release\</ObjectFileName>
       <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <DebugInformationFormat />
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
@@ -159,7 +162,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" "/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>libexpatMT.lib;QtCore4.lib;QtGui4.lib;sqlite.lib;shell32.lib;Tiff.lib;Jpeg.lib;png.lib;jbig.lib;jasper.lib;mng.lib;libdcr.lib;commonLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cximage.lib;commonLib.lib;zlib.lib;libexpatMT.lib;sqlite3.lib;shell32.lib;png.lib;jbig.lib;jasper.lib;Jpeg.lib;mng.lib;libdcr.lib;tiff.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>$(METSVERIFIER)\Libraries\Release;$(METSVERIFY_EXTERNAL)\Libraries\Release;$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
