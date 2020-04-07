@@ -902,7 +902,11 @@ void w_structview::viewHtml()
 	
 	if(!fp)
 	{			
-		fclose(fp);
+		std::stringstream ss;
+		ss << "Unable to open error file " << path << std::endl;
+		static QErrorMessage* Qerror = new QErrorMessage();
+		Qerror->showMessage(ss.str().c_str());
+		return;
 	}
 	// Write header
 	fprintf(fp, "<html>");
