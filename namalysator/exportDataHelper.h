@@ -1,7 +1,7 @@
 #ifndef EXPORTDATA_H____
 #define EXPORTDATA_H____
 
-#include <QtGui>
+#include <QtWidgets>
 #include <string>
 #include <map>
 #include <vector>

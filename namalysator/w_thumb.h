@@ -1,9 +1,10 @@
 #ifndef W_THUMB_H
 #define W_THUMB_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include <QPushButton>
 #include <QScrollArea>
+#include <QProgressDialog>
 #include <vector>
 #include "flowlayout.h"
 #include "structgui.h"

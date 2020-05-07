@@ -1,9 +1,9 @@
 #ifndef W_SELECTBATCH_H
 #define W_SELECTBATCH_H
 
-#include <QtGui/QWidget>
-#include<QListWidget>
-#include<QListWidgetItem>
+#include <QWidget>
+#include <QListWidget>
+#include <QListWidgetItem>
 #include "dbrequest.h"
 #include "structgui.h"
 #include <map>

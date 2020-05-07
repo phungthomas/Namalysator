@@ -134,12 +134,13 @@ void tabErrors::lineChanged(int row,int col)
 			std::string rep="/blackwhiteimages/";
 			str = str.replace(str.end()-4,str.end(),".png",4);
 			std::size_t it = str.find("/text/");
-			str = str.replace(it,6,rep);
-			QImage icon;
-			icon.load(str.c_str());
+			if (it != string::npos && it < str.length()) { // specific to BnL, prevent crash when using other directory structure such as BnS
+				str = str.replace(it, 6, rep);
+				QImage icon;
+				icon.load(str.c_str());
 
-			dial->setQImage ( icon );
-
+				dial->setQImage(icon);
+			}
 
 			
 		}

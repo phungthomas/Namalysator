@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_errors.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,16 +10,13 @@
 #define UI_W_ERRORS_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollArea>
-#include <QtGui/QTabWidget>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -83,9 +80,9 @@ public:
 
     void retranslateUi(QWidget *w_errors)
     {
-        w_errors->setWindowTitle(QApplication::translate("w_errors", "Form", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("w_errors", "Summary of Errors", 0, QApplication::UnicodeUTF8));
-        btnExport->setText(QApplication::translate("w_errors", "Export Data", 0, QApplication::UnicodeUTF8));
+        w_errors->setWindowTitle(QCoreApplication::translate("w_errors", "Form", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("w_errors", "Summary of Errors", nullptr));
+        btnExport->setText(QCoreApplication::translate("w_errors", "Export Data", nullptr));
     } // retranslateUi
 
 };

@@ -1,7 +1,7 @@
 #ifndef W_SCREENSHOTERROR_H
 #define W_SCREENSHOTERROR_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include "structgui.h"
 #include <QMouseEvent>
 #include <QMoveEvent>

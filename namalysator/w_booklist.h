@@ -1,7 +1,7 @@
 #ifndef _BOOKLIST_H__
 #define _BOOKLIST_H__
 
-#include <QtGui>
+#include <QtWidgets>
 #include "bookModel.h"
 #include "bookColumn.h"
 #include "dbrequest.h"

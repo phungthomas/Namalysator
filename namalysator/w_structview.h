@@ -1,7 +1,10 @@
 #ifndef W_STRUCTVIEW_H
 #define W_STRUCTVIEW_H
 
-#include <QtGui>
+#include <QWidget>
+#include <QMainWindow>
+#include <QListWidgetItem>
+#include <QTreeWidgetItem>
 #include "structgui.h"
 #include <fstream>
 #include <set>

@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\ods">
+      <UniqueIdentifier>{3b3dd599-d412-4a0a-a4d4-9008cdcc51f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\minizip">
+      <UniqueIdentifier>{4882dd21-ed2d-4d1f-8eb2-8b6b1e825168}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\taberror">
+      <UniqueIdentifier>{fc7b30a0-0b8d-4429-b560-608164a3536a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common_files">
+      <UniqueIdentifier>{7ef87981-2139-49e6-bb01-04ee2acc2a12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\widgets">
+      <UniqueIdentifier>{35d9e6de-fcad-446b-8fbe-fee95dd5855c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\ods">
+      <UniqueIdentifier>{95b36bc0-455c-433e-b7a9-5639cb9aef38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\minizip">
+      <UniqueIdentifier>{ad6e1ede-a180-410c-8da9-df3aeb2cfa5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\taberror">
+      <UniqueIdentifier>{e8b9e3e5-8dc4-4e98-8fc6-3da8bc569d35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\common_files">
+      <UniqueIdentifier>{cfe4a232-e7ad-4628-b2a4-b5a0841f1047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\widgets">
+      <UniqueIdentifier>{52c4d61a-7a4a-404b-af6e-adcee512f08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files\Mocking">
+      <UniqueIdentifier>{85e5af99-2a48-4abe-93b5-aa3722857895}</UniqueIdentifier>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="altoparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="blockcutter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bookColumn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bookModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="calendarcommons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="codeeditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dbrequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dialogImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entitycountModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exportdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exportDataHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui_utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="itemdelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logstruct_colors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="metsoutput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="metsparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parammodel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="structgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="odstemplate.cpp">
+      <Filter>Source Files\ods</Filter>
+    </ClCompile>
+    <ClCompile Include="odswriter.cpp">
+      <Filter>Source Files\ods</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\ioapi.c">
+      <Filter>Source Files\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\iowin32.c">
+      <Filter>Source Files\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\minizip.c">
+      <Filter>Source Files\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\mztools.c">
+      <Filter>Source Files\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\unzip.c">
+      <Filter>Source Files\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\zip.c">
+      <Filter>Source Files\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="zipcreator.cpp">
+      <Filter>Source Files\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="dateerrortab.cpp">
+      <Filter>Source Files\taberror</Filter>
+    </ClCompile>
+    <ClCompile Include="qwidgettaberror.cpp">
+      <Filter>Source Files\taberror</Filter>
+    </ClCompile>
+    <ClCompile Include="w_summaryerrors.cpp">
+      <Filter>Source Files\taberror</Filter>
+    </ClCompile>
+    <ClCompile Include="..\project\utilities.cpp">
+      <Filter>Source Files\common_files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\project\xmlparser.cpp">
+      <Filter>Source Files\common_files</Filter>
+    </ClCompile>
+    <ClCompile Include="flowlayout.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_accepted.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_booklist.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_calendar.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_disk.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_entitycount.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_errors.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_main.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_report.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_screenshoterror.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_selectbatch.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_structview.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="w_thumb.cpp">
+      <Filter>Source Files\widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="tif_win32.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="altoparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="altorect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="blockcutter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bookColumn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="calendarcommons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dbrequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entitycountModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="exportdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui_utilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logstruct_colors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="metsoutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="metsparser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parammodel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="structgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="odstemplate.h">
+      <Filter>Header Files\ods</Filter>
+    </ClInclude>
+    <ClInclude Include="odswriter.h">
+      <Filter>Header Files\ods</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\crypt.h">
+      <Filter>Header Files\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\ioapi.h">
+      <Filter>Header Files\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\iowin32.h">
+      <Filter>Header Files\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\mztools.h">
+      <Filter>Header Files\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\unzip.h">
+      <Filter>Header Files\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\zip.h">
+      <Filter>Header Files\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="zipcreator.h">
+      <Filter>Header Files\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="precisiontimer.h">
+      <Filter>Header Files\common_files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common_files\struct.h">
+      <Filter>Header Files\common_files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common_files\utilities.h">
+      <Filter>Header Files\common_files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common_files\xmlparser.h">
+      <Filter>Header Files\common_files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common_files\xmltostr.h">
+      <Filter>Header Files\common_files</Filter>
+    </ClInclude>
+    <ClInclude Include="flowlayout.h">
+      <Filter>Header Files\widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_w_titlecheck.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="bookModel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="codeeditor.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="dialogImage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="exportDataHelper.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="itemdelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="dateerrortab.h">
+      <Filter>Header Files\taberror</Filter>
+    </QtMoc>
+    <QtMoc Include="qwidgettaberror.h">
+      <Filter>Header Files\taberror</Filter>
+    </QtMoc>
+    <QtMoc Include="w_summaryerrors.h">
+      <Filter>Header Files\taberror</Filter>
+    </QtMoc>
+    <QtMoc Include="w_accepted.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_booklist.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_calendar.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_disk.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_entitycount.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_errors.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_main.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_report.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_screenshoterror.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_selectbatch.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_stat.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_structview.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="w_thumb.h">
+      <Filter>Header Files\widgets</Filter>
+    </QtMoc>
+    <QtUic Include="w_calendar.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="w_disk.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="w_errors.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="w_inventaire.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="w_main.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="w_screenshoterror.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="w_selectbatch.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="w_stat.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="w_structview.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="w_summaryerrors.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="w_taberror.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+</Project>

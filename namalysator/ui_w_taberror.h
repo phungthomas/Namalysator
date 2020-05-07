@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_taberror.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,13 +10,11 @@
 #define UI_W_TABERROR_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
-#include <QtGui/QHeaderView>
-#include <QtGui/QTableWidget>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -55,13 +53,13 @@ public:
 
     void retranslateUi(QWidget *w_taberror)
     {
-        w_taberror->setWindowTitle(QApplication::translate("w_taberror", "Form", 0, QApplication::UnicodeUTF8));
+        w_taberror->setWindowTitle(QCoreApplication::translate("w_taberror", "Form", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("w_taberror", "1", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem->setText(QCoreApplication::translate("w_taberror", "1", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("w_taberror", "2", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem1->setText(QCoreApplication::translate("w_taberror", "2", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget->verticalHeaderItem(0);
-        ___qtablewidgetitem2->setText(QApplication::translate("w_taberror", "hg", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem2->setText(QCoreApplication::translate("w_taberror", "hg", nullptr));
     } // retranslateUi
 
 };

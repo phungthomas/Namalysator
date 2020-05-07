@@ -1,4 +1,4 @@
-#include <QtGui/QApplication>
+#include <QApplication>
 #include "w_selectbatch.h"
 #include "w_main.h"
 

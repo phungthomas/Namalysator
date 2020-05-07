@@ -1,7 +1,7 @@
 #ifndef W_MAIN_H
 #define W_MAIN_H
 
-#include <QtGui/QMainWindow>
+#include <QMainWindow>
 #include "structgui.h"
 
 #include <QToolBar>

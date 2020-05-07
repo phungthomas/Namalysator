@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{79C9C255-E6EF-4F82-BD3A-64F7FB930399}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="altoparser.cpp" />
+    <ClCompile Include="amdsecparser.cpp" />
+    <ClCompile Include="configparser.cpp" />
+    <ClCompile Include="dataaggregator.cpp" />
+    <ClCompile Include="datafactory.cpp" />
+    <ClCompile Include="datafactory_templates.cpp" />
+    <ClCompile Include="datehelper.cpp" />
+    <ClCompile Include="diskparser.cpp" />
+    <ClCompile Include="dmdsecparser.cpp" />
+    <ClCompile Include="errorhandler.cpp" />
+    <ClCompile Include="filegroupparser.cpp" />
+    <ClCompile Include="inventory.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="md5.cpp" />
+    <ClCompile Include="md5wrapper.cpp" />
+    <ClCompile Include="metsparser.cpp" />
+    <ClCompile Include="parameterMETS.cpp" />
+    <ClCompile Include="physLogALTO.cpp" />
+    <ClCompile Include="schema_validatordmdsec.cpp" />
+    <ClCompile Include="schema_validatormix.cpp" />
+    <ClCompile Include="sha512.cpp" />
+    <ClCompile Include="sha512wrapper.cpp" />
+    <ClCompile Include="sql.cpp" />
+    <ClCompile Include="structmaphysicalparser.cpp" />
+    <ClCompile Include="structmapparser.cpp" />
+    <ClCompile Include="titletocheck.cpp" />
+    <ClCompile Include="transform.cpp" />
+    <ClCompile Include="utilities.cpp" />
+    <ClCompile Include="verifyalto.cpp" />
+    <ClCompile Include="verifyaltoblockperpage.cpp" />
+    <ClCompile Include="verifyblocks.cpp" />
+    <ClCompile Include="verifyblockstructure.cpp" />
+    <ClCompile Include="verifyBook.cpp" />
+    <ClCompile Include="verifychecksum.cpp" />
+    <ClCompile Include="verifycoveragepercentagealtoblocks.cpp" />
+    <ClCompile Include="verifycutouts.cpp" />
+    <ClCompile Include="verifydatefolder.cpp" />
+    <ClCompile Include="verifydatemismatch.cpp" />
+    <ClCompile Include="verifyEmptyMix.cpp" />
+    <ClCompile Include="verifyFile.cpp" />
+    <ClCompile Include="verifyFolder.cpp" />
+    <ClCompile Include="verifyidentifierinmix.cpp" />
+    <ClCompile Include="verifyinvalidissuenumber.cpp" />
+    <ClCompile Include="verifyinvalidsupplement.cpp" />
+    <ClCompile Include="verifyMeasurement.cpp" />
+    <ClCompile Include="verifymissingissue.cpp" />
+    <ClCompile Include="verifynoissuedefined.cpp" />
+    <ClCompile Include="verifyoddspages.cpp" />
+    <ClCompile Include="verifyPages.cpp" />
+    <ClCompile Include="verifytitles.cpp" />
+    <ClCompile Include="xmlparser.cpp" />
+    <ClCompile Include="xmltostr.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="altoparser.h" />
+    <ClInclude Include="amdsecparser.h" />
+    <ClInclude Include="configparser.h" />
+    <ClInclude Include="dataaggregator.h" />
+    <ClInclude Include="datafactory.h" />
+    <ClInclude Include="dataitem.h" />
+    <ClInclude Include="datehelper.h" />
+    <ClInclude Include="delegatedparser.h" />
+    <ClInclude Include="diskparser.h" />
+    <ClInclude Include="dmdsecparser.h" />
+    <ClInclude Include="errorhandler.h" />
+    <ClInclude Include="filegroupparser.h" />
+    <ClInclude Include="inventory.h" />
+    <ClInclude Include="md5.h" />
+    <ClInclude Include="md5wrapper.h" />
+    <ClInclude Include="metsparser.h" />
+    <ClInclude Include="metsverifier.h" />
+    <ClInclude Include="parameterMETS.h" />
+    <ClInclude Include="physLogALTO.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="schema_validatordmdsec.h" />
+    <ClInclude Include="sha512.h" />
+    <ClInclude Include="sha512wrapper.h" />
+    <ClInclude Include="sql.h" />
+    <ClInclude Include="structmaphysicalparser.h" />
+    <ClInclude Include="structmapparser.h" />
+    <ClInclude Include="titletocheck.h" />
+    <ClInclude Include="transform.h" />
+    <ClInclude Include="verifyalto.h" />
+    <ClInclude Include="verifyaltoblockperpage.h" />
+    <ClInclude Include="verifyblocks.h" />
+    <ClInclude Include="verifyblockstructure.h" />
+    <ClInclude Include="verifybook.h" />
+    <ClInclude Include="verifychecksum.h" />
+    <ClInclude Include="verifycoveragepercentagealtoblocks.h" />
+    <ClInclude Include="verifycutouts.h" />
+    <ClInclude Include="verifydatefolder.h" />
+    <ClInclude Include="verifydatemismatch.h" />
+    <ClInclude Include="verifyEmptyMix.h" />
+    <ClInclude Include="verifyFile.h" />
+    <ClInclude Include="verifyFolder.h" />
+    <ClInclude Include="verifyIdentifierInMix.h" />
+    <ClInclude Include="verifyinvalidissuenumber.h" />
+    <ClInclude Include="verifyinvalidsupplement.h" />
+    <ClInclude Include="verifymeasurement.h" />
+    <ClInclude Include="verifymissingissue.h" />
+    <ClInclude Include="verifynoissuedefined.h" />
+    <ClInclude Include="verifyoddspages.h" />
+    <ClInclude Include="verifyPages.h" />
+    <ClInclude Include="verifytitles.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xsd Include="alto-3-1.xsd" />
+    <Xsd Include="bnl-monograph_v2.0.xsd" />
+    <Xsd Include="bnl-newspaper_v1.5.xsd" />
+    <Xsd Include="mets.xsd" />
+    <Xsd Include="mix-2-0.xsd" />
+    <Xsd Include="mods-3-6.xsd" />
+    <Xsd Include="xlink.xsd" />
+    <Xsd Include="xml.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="metsverifier.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

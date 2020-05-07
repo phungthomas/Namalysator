@@ -1,7 +1,7 @@
 #ifndef QWIDGETDATEERRORTAB_H_
 #define QWIDGETDATEERRORTAB_H_
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QTableWidget>
 #include <QComboBox>
 #include <QCheckBox>

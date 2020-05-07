@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_calendar.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,20 +10,17 @@
 #define UI_W_CALENDAR_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCalendarWidget>
-#include <QtGui/QComboBox>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QListWidget>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollArea>
-#include <QtGui/QTextEdit>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QCalendarWidget>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -218,27 +215,27 @@ public:
 
     void retranslateUi(QWidget *w_calendar)
     {
-        w_calendar->setWindowTitle(QApplication::translate("w_calendar", "Form", 0, QApplication::UnicodeUTF8));
+        w_calendar->setWindowTitle(QCoreApplication::translate("w_calendar", "Form", nullptr));
         lblHeader->setText(QString());
-#ifndef QT_NO_TOOLTIP
+#if QT_CONFIG(tooltip)
         calendarJun->setToolTip(QString());
-#endif // QT_NO_TOOLTIP
-        groupBox_4->setTitle(QApplication::translate("w_calendar", "Details of Mets", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("w_calendar", "Filename :", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("w_calendar", "Issue number as text:", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("w_calendar", "Issue number as parsed :", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("w_calendar", "Pages :", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("w_calendar", "Supplements :", 0, QApplication::UnicodeUTF8));
-        lbFileName->setText(QApplication::translate("w_calendar", "No issue selected", 0, QApplication::UnicodeUTF8));
-        lbIssueNumber->setText(QApplication::translate("w_calendar", "No issue selected", 0, QApplication::UnicodeUTF8));
-        lbIssueParsed->setText(QApplication::translate("w_calendar", "No issue selected", 0, QApplication::UnicodeUTF8));
-        lbPages->setText(QApplication::translate("w_calendar", "No issue selected", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("w_calendar", "Select year :", 0, QApplication::UnicodeUTF8));
-        groupBoxComment->setTitle(QApplication::translate("w_calendar", "Add Comment", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("w_calendar", "Remarks on date :", 0, QApplication::UnicodeUTF8));
-        btnAddComment->setText(QApplication::translate("w_calendar", "Validate", 0, QApplication::UnicodeUTF8));
-        btnCancel->setText(QApplication::translate("w_calendar", "Cancel", 0, QApplication::UnicodeUTF8));
-        btnViewMets->setText(QApplication::translate("w_calendar", "Open Directory", 0, QApplication::UnicodeUTF8));
+#endif // QT_CONFIG(tooltip)
+        groupBox_4->setTitle(QCoreApplication::translate("w_calendar", "Details of Mets", nullptr));
+        label_11->setText(QCoreApplication::translate("w_calendar", "Filename :", nullptr));
+        label_12->setText(QCoreApplication::translate("w_calendar", "Issue number as text:", nullptr));
+        label_13->setText(QCoreApplication::translate("w_calendar", "Issue number as parsed :", nullptr));
+        label_14->setText(QCoreApplication::translate("w_calendar", "Pages :", nullptr));
+        label_15->setText(QCoreApplication::translate("w_calendar", "Supplements :", nullptr));
+        lbFileName->setText(QCoreApplication::translate("w_calendar", "No issue selected", nullptr));
+        lbIssueNumber->setText(QCoreApplication::translate("w_calendar", "No issue selected", nullptr));
+        lbIssueParsed->setText(QCoreApplication::translate("w_calendar", "No issue selected", nullptr));
+        lbPages->setText(QCoreApplication::translate("w_calendar", "No issue selected", nullptr));
+        label->setText(QCoreApplication::translate("w_calendar", "Select year :", nullptr));
+        groupBoxComment->setTitle(QCoreApplication::translate("w_calendar", "Add Comment", nullptr));
+        label_2->setText(QCoreApplication::translate("w_calendar", "Remarks on date :", nullptr));
+        btnAddComment->setText(QCoreApplication::translate("w_calendar", "Validate", nullptr));
+        btnCancel->setText(QCoreApplication::translate("w_calendar", "Cancel", nullptr));
+        btnViewMets->setText(QCoreApplication::translate("w_calendar", "Open Directory", nullptr));
     } // retranslateUi
 
 };

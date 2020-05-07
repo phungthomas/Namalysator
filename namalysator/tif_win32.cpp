@@ -171,7 +171,7 @@ TIFFFdOpen(int ifd, const char* name, const char* mode)
 			fSuppressMap ? _tiffDummyMapProc : _tiffMapProc,
 			fSuppressMap ? _tiffDummyUnmapProc : _tiffUnmapProc);
 	if (tif)
-		tif->tif_fd = reinterpret_cast<void *>(ifd);
+		tif->tif_fd = reinterpret_cast<void*>(ifd);
 	return (tif);
 }
 

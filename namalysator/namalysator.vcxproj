@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{80B6A0C6-EA9D-349F-B3E8-0756871F7982}</ProjectGuid>
+    <RootNamespace>namalysator</RootNamespace>
+    <Keyword>QtVS_v302</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
+    <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>msvc2017</QtInstall>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>msvc2017</QtInstall>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>16.0.29911.84</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <IncludePath>C:\NB_dev\CxImage\zlib;C:\NB_dev\Expat\Source\lib;C:\NB_dev\jpeg-6b-4-lib\include;C:\NB_dev\CxImage\tiff;C:\NB_dev\boost_1_72_0;C:\NB_dev\sqlite-amalgamation-3310100;C:\NB_dev\lib\include;C:\NB_dev\Namalysator\commonLib;C:\Qt\5.14.1\msvc2017\include\QtWidgets;C:\Qt\5.14.1\msvc2017\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\NB_dev\Namalysator\Libraries\Debug;C:\NB_dev\boost_1_72_0\stage\lib;C:\NB_dev\CxImage\zlib\Debug;C:\NB_dev\CxImage\tiff\Debug;C:\NB_dev\libdcr\Debug;C:\NB_dev\CxImage\mng\Debug;C:\NB_dev\CxImage\jasper\Debug;C:\NB_dev\CxImage\jpeg\Debug;C:\NB_dev\CxImage\jbig\Debug;C:\NB_dev\CxImage\png\Debug;C:\NB_dev\CxImage\CxImage\Debug;C:\NB_dev\jpeg-6b-4-lib\lib;C:\NB_dev\xerces-c-3.2.2\build\src\Debug;C:\NB_dev\sqlite-amalgamation-3310100;C:\Qt\5.14.1\msvc2017\lib;C:\NB_dev\Expat\Bin;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\NB_dev\CxImage\zlib;C:\NB_dev\Expat\Source\lib;C:\NB_dev\jpeg-6b-4-lib\include;C:\NB_dev\CxImage\tiff;C:\NB_dev\boost_1_72_0;C:\NB_dev\sqlite-amalgamation-3310100;C:\NB_dev\lib\include;C:\NB_dev\Namalysator\commonLib;C:\Qt\5.14.1\msvc2017\include\QtWidgets;C:\Qt\5.14.1\msvc2017\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\NB_dev\Namalysator\Libraries\Release;C:\NB_dev\boost_1_72_0\stage\lib;C:\NB_dev\CxImage\zlib\Release;C:\NB_dev\CxImage\tiff\Release;C:\NB_dev\libdcr\Release;C:\NB_dev\CxImage\mng\Release;C:\NB_dev\CxImage\jasper\Release;C:\NB_dev\CxImage\jpeg\Release;C:\NB_dev\CxImage\jbig\Release;C:\NB_dev\CxImage\png\Release;C:\NB_dev\CxImage\CxImage\Release;C:\NB_dev\xerces-c-3.2.2\build\src\Release;C:\NB_dev\sqlite-amalgamation-3310100;C:\Qt\5.14.1\msvc2017\lib;C:\NB_dev\Expat\Bin;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <WarningLevel>0</WarningLevel>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 -Zm200 -w34100 -w34189 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(METSVERIFY_EXTERNAL)\Headers;$(METSVERIFIER)\commonLib;$(QTDIR)\include\QtWebKit;$(QTDIR)\include;$(QTDIR)\include\ActiveQt;$(QTDIR)\mkspecs\win32-msvc2008;$(Configuration);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_WEBKIT_LIB;QT_THREAD_SUPPORT;XML_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <ObjectFileName>debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_DLL;QT_WEBKIT_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" "/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>cximage.lib;commonLib.lib;zlib.lib;libexpatMT.lib;sqlite3.lib;shell32.lib;png.lib;jbig.lib;jasper.lib;Jpeg.lib;mng.lib;libdcr.lib;tiff.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(METSVERIFIER)\Libraries\Debug;$(METSVERIFY_EXTERNAL)\Libraries\Debug;$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile />
+      <SubSystem>Windows</SubSystem>
+      <LinkTimeCodeGeneration />
+    </Link>
+    <QtMoc>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>.\GeneratedFiles\MOCKING</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>.</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <WarningLevel>0</WarningLevel>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 -Zm200 -w34100 -w34189 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(METSVERIFY_EXTERNAL)\Headers;$(QTDIR)\include\QtWebKit;$(QTDIR)\include;$(QTDIR)\include\ActiveQt;.\release;.;$(QTDIR)\mkspecs\win32-msvc2008;$(Configuration);$(METSVERIFIER)\commonLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QT_NO_DEBUG;NDEBUG;_WINDOWS;UNICODE;WIN32;_CRT_SECURE_NO_WARNINGS;QT_DLL;QT_WEBKIT_LIB;QT_THREAD_SUPPORT;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <ObjectFileName>release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>QT_NO_DEBUG;NDEBUG;_WINDOWS;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_DLL;QT_NO_DEBUG;QT_WEBKIT_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" "/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>cximage.lib;commonLib.lib;zlib.lib;libexpatMT.lib;sqlite3.lib;shell32.lib;png.lib;jbig.lib;jasper.lib;Jpeg.lib;mng.lib;libdcr.lib;tiff.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(METSVERIFIER)\Libraries\Release;$(METSVERIFY_EXTERNAL)\Libraries\Release;$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <SubSystem>Windows</SubSystem>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <QtMoc>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>.\GeneratedFiles\MOCKING</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>.</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\project\utilities.cpp" />
+    <ClCompile Include="..\project\xmlparser.cpp" />
+    <ClCompile Include="altoparser.cpp" />
+    <ClCompile Include="blockcutter.cpp" />
+    <ClCompile Include="bookColumn.cpp" />
+    <ClCompile Include="bookModel.cpp" />
+    <ClCompile Include="calendarcommons.cpp" />
+    <ClCompile Include="codeeditor.cpp" />
+    <ClCompile Include="dateerrortab.cpp" />
+    <ClCompile Include="dbrequest.cpp" />
+    <ClCompile Include="dialogImage.cpp" />
+    <ClCompile Include="entitycountModel.cpp" />
+    <ClCompile Include="exportdata.cpp" />
+    <ClCompile Include="exportDataHelper.cpp" />
+    <ClCompile Include="flowlayout.cpp" />
+    <ClCompile Include="gui_utilities.cpp" />
+    <ClCompile Include="itemdelegate.cpp" />
+    <ClCompile Include="logstruct_colors.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="metsoutput.cpp" />
+    <ClCompile Include="metsparser.cpp" />
+    <ClCompile Include="minizip\ioapi.c" />
+    <ClCompile Include="minizip\iowin32.c" />
+    <ClCompile Include="minizip\minizip.c" />
+    <ClCompile Include="minizip\mztools.c" />
+    <ClCompile Include="minizip\unzip.c" />
+    <ClCompile Include="minizip\zip.c" />
+    <ClCompile Include="odstemplate.cpp" />
+    <ClCompile Include="odswriter.cpp" />
+    <ClCompile Include="parammodel.cpp" />
+    <ClCompile Include="qwidgettaberror.cpp" />
+    <ClCompile Include="structgui.cpp" />
+    <ClCompile Include="tif_win32.cpp" />
+    <ClCompile Include="w_accepted.cpp" />
+    <ClCompile Include="w_booklist.cpp" />
+    <ClCompile Include="w_calendar.cpp" />
+    <ClCompile Include="w_disk.cpp" />
+    <ClCompile Include="w_entitycount.cpp" />
+    <ClCompile Include="w_errors.cpp" />
+    <ClCompile Include="w_main.cpp" />
+    <ClCompile Include="w_report.cpp" />
+    <ClCompile Include="w_screenshoterror.cpp" />
+    <ClCompile Include="w_selectbatch.cpp" />
+    <ClCompile Include="w_structview.cpp" />
+    <ClCompile Include="w_summaryerrors.cpp" />
+    <ClCompile Include="w_thumb.cpp" />
+    <ClCompile Include="zipcreator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common_files\struct.h" />
+    <ClInclude Include="..\common_files\utilities.h" />
+    <ClInclude Include="..\common_files\xmlparser.h" />
+    <ClInclude Include="..\common_files\xmltostr.h" />
+    <ClInclude Include="altoparser.h" />
+    <ClInclude Include="altorect.h" />
+    <ClInclude Include="blockcutter.h" />
+    <ClInclude Include="bookColumn.h" />
+    <QtMoc Include="bookModel.h">
+    </QtMoc>
+    <ClInclude Include="calendarcommons.h" />
+    <QtMoc Include="codeeditor.h">
+    </QtMoc>
+    <QtMoc Include="dateerrortab.h">
+    </QtMoc>
+    <ClInclude Include="dbrequest.h" />
+    <QtMoc Include="dialogImage.h">
+    </QtMoc>
+    <ClInclude Include="entitycountModel.h" />
+    <ClInclude Include="exportdata.h" />
+    <QtMoc Include="exportDataHelper.h">
+    </QtMoc>
+    <ClInclude Include="flowlayout.h" />
+    <ClInclude Include="gui_utilities.h" />
+    <QtMoc Include="itemdelegate.h">
+    </QtMoc>
+    <ClInclude Include="logstruct_colors.h" />
+    <ClInclude Include="metsoutput.h" />
+    <ClInclude Include="metsparser.h" />
+    <ClInclude Include="minizip\crypt.h" />
+    <ClInclude Include="minizip\ioapi.h" />
+    <ClInclude Include="minizip\iowin32.h" />
+    <ClInclude Include="minizip\mztools.h" />
+    <ClInclude Include="minizip\unzip.h" />
+    <ClInclude Include="minizip\zip.h" />
+    <ClInclude Include="odstemplate.h" />
+    <ClInclude Include="odswriter.h" />
+    <ClInclude Include="parammodel.h" />
+    <ClInclude Include="precisiontimer.h" />
+    <QtMoc Include="qwidgettaberror.h">
+    </QtMoc>
+    <ClInclude Include="structgui.h" />
+    <ClInclude Include="ui_w_titlecheck.h" />
+    <QtMoc Include="w_accepted.h">
+    </QtMoc>
+    <QtMoc Include="w_booklist.h">
+    </QtMoc>
+    <QtMoc Include="w_calendar.h">
+    </QtMoc>
+    <QtMoc Include="w_disk.h">
+    </QtMoc>
+    <QtMoc Include="w_entitycount.h">
+    </QtMoc>
+    <QtMoc Include="w_errors.h">
+    </QtMoc>
+    <QtMoc Include="w_main.h">
+    </QtMoc>
+    <QtMoc Include="w_report.h">
+    </QtMoc>
+    <QtMoc Include="w_screenshoterror.h">
+    </QtMoc>
+    <QtMoc Include="w_selectbatch.h">
+    </QtMoc>
+    <QtMoc Include="w_stat.h">
+    </QtMoc>
+    <QtMoc Include="w_structview.h">
+    </QtMoc>
+    <QtMoc Include="w_summaryerrors.h">
+    </QtMoc>
+    <QtMoc Include="w_thumb.h">
+    </QtMoc>
+    <ClInclude Include="zipcreator.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="w_calendar.ui">
+    </QtUic>
+    <QtUic Include="w_disk.ui">
+    </QtUic>
+    <QtUic Include="w_errors.ui">
+    </QtUic>
+    <QtUic Include="w_inventaire.ui">
+    </QtUic>
+    <QtUic Include="w_main.ui">
+    </QtUic>
+    <QtUic Include="w_screenshoterror.ui">
+    </QtUic>
+    <QtUic Include="w_selectbatch.ui">
+    </QtUic>
+    <QtUic Include="w_stat.ui">
+    </QtUic>
+    <QtUic Include="w_structview.ui">
+    </QtUic>
+    <QtUic Include="w_summaryerrors.ui">
+    </QtUic>
+    <QtUic Include="w_taberror.ui">
+    </QtUic>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties QtVersion="qt" QtVersion_x0020_Win32="$(DefaultQtVersion)" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

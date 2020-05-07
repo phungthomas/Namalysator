@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_screenshoterror.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,19 +10,16 @@
 #define UI_W_SCREENSHOTERROR_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QComboBox>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QTextEdit>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -147,14 +144,14 @@ public:
 
     void retranslateUi(QWidget *w_screenshoterror)
     {
-        w_screenshoterror->setWindowTitle(QApplication::translate("w_screenshoterror", "Form", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("w_screenshoterror", "TextLabel", 0, QApplication::UnicodeUTF8));
-        btnSave->setText(QApplication::translate("w_screenshoterror", "Save Image", 0, QApplication::UnicodeUTF8));
-        btnColor->setText(QApplication::translate("w_screenshoterror", "Color", 0, QApplication::UnicodeUTF8));
-        btnClearPainter->setText(QApplication::translate("w_screenshoterror", "Clear painter", 0, QApplication::UnicodeUTF8));
-        btnClose->setText(QApplication::translate("w_screenshoterror", "Close", 0, QApplication::UnicodeUTF8));
+        w_screenshoterror->setWindowTitle(QCoreApplication::translate("w_screenshoterror", "Form", nullptr));
+        label->setText(QCoreApplication::translate("w_screenshoterror", "TextLabel", nullptr));
+        btnSave->setText(QCoreApplication::translate("w_screenshoterror", "Save Image", nullptr));
+        btnColor->setText(QCoreApplication::translate("w_screenshoterror", "Color", nullptr));
+        btnClearPainter->setText(QCoreApplication::translate("w_screenshoterror", "Clear painter", nullptr));
+        btnClose->setText(QCoreApplication::translate("w_screenshoterror", "Close", nullptr));
         lbComment->setText(QString());
-        label_2->setText(QApplication::translate("w_screenshoterror", "Only for CUSTOM", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QCoreApplication::translate("w_screenshoterror", "Only for CUSTOM", nullptr));
     } // retranslateUi
 
 };

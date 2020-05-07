@@ -1,7 +1,7 @@
 #ifndef W_EXPORTDATA_H
 #define W_EXPORTDATA_H
 
-#include <QtGui/QWidget>
+#include <QtWidgets>
 #include "dbrequest.h"
 
 namespace Ui

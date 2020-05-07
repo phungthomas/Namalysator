@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'w_summaryerrors.ui'
 **
-** Created by: Qt User Interface Compiler version 4.8.5
+** Created by: Qt User Interface Compiler version 5.14.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,18 +10,16 @@
 #define UI_W_SUMMARYERRORS_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QFormLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QTableWidget>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QFormLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -219,35 +217,35 @@ public:
 
     void retranslateUi(QWidget *w_summaryerrors)
     {
-        w_summaryerrors->setWindowTitle(QApplication::translate("w_summaryerrors", "Form", 0, QApplication::UnicodeUTF8));
+        w_summaryerrors->setWindowTitle(QCoreApplication::translate("w_summaryerrors", "Form", nullptr));
         groupBox->setTitle(QString());
-        label->setText(QApplication::translate("w_summaryerrors", "Summary of disk :", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("w_summaryerrors", "Date of test :", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("w_summaryerrors", "Titles to correct :", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("w_summaryerrors", "Number of Mets files :", 0, QApplication::UnicodeUTF8));
-        lbTotal->setText(QApplication::translate("w_summaryerrors", "Total", 0, QApplication::UnicodeUTF8));
-        lbTitles->setText(QApplication::translate("w_summaryerrors", "lbTitles", 0, QApplication::UnicodeUTF8));
-        lbSummary->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
-        lbDate->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
+        label->setText(QCoreApplication::translate("w_summaryerrors", "Summary of disk :", nullptr));
+        label_2->setText(QCoreApplication::translate("w_summaryerrors", "Date of test :", nullptr));
+        label_9->setText(QCoreApplication::translate("w_summaryerrors", "Titles to correct :", nullptr));
+        label_3->setText(QCoreApplication::translate("w_summaryerrors", "Number of Mets files :", nullptr));
+        lbTotal->setText(QCoreApplication::translate("w_summaryerrors", "Total", nullptr));
+        lbTitles->setText(QCoreApplication::translate("w_summaryerrors", "lbTitles", nullptr));
+        lbSummary->setText(QCoreApplication::translate("w_summaryerrors", "TextLabel", nullptr));
+        lbDate->setText(QCoreApplication::translate("w_summaryerrors", "TextLabel", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableSummary->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QApplication::translate("w_summaryerrors", "Severity", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem->setText(QCoreApplication::translate("w_summaryerrors", "Severity", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableSummary->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QApplication::translate("w_summaryerrors", "Error category", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem1->setText(QCoreApplication::translate("w_summaryerrors", "Error category", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = tableSummary->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QApplication::translate("w_summaryerrors", "Count", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem2->setText(QCoreApplication::translate("w_summaryerrors", "Count", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = tableSummary->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QApplication::translate("w_summaryerrors", "New Column", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem3->setText(QCoreApplication::translate("w_summaryerrors", "New Column", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = tableSummary->horizontalHeaderItem(4);
-        ___qtablewidgetitem4->setText(QApplication::translate("w_summaryerrors", "Percentage", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem4->setText(QCoreApplication::translate("w_summaryerrors", "Percentage", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = tableSummary->horizontalHeaderItem(5);
-        ___qtablewidgetitem5->setText(QApplication::translate("w_summaryerrors", "Details on sheet", 0, QApplication::UnicodeUTF8));
+        ___qtablewidgetitem5->setText(QCoreApplication::translate("w_summaryerrors", "Details on sheet", nullptr));
         groupBox_2->setTitle(QString());
-        label_6->setText(QApplication::translate("w_summaryerrors", "Total number of issues :", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("w_summaryerrors", "Correct issues :", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("w_summaryerrors", "Percentage of correct issues :", 0, QApplication::UnicodeUTF8));
-        lbCorrectIssues->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
-        lbTotal2->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
-        lbPercent->setText(QApplication::translate("w_summaryerrors", "TextLabel", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QCoreApplication::translate("w_summaryerrors", "Total number of issues :", nullptr));
+        label_7->setText(QCoreApplication::translate("w_summaryerrors", "Correct issues :", nullptr));
+        label_8->setText(QCoreApplication::translate("w_summaryerrors", "Percentage of correct issues :", nullptr));
+        lbCorrectIssues->setText(QCoreApplication::translate("w_summaryerrors", "TextLabel", nullptr));
+        lbTotal2->setText(QCoreApplication::translate("w_summaryerrors", "TextLabel", nullptr));
+        lbPercent->setText(QCoreApplication::translate("w_summaryerrors", "TextLabel", nullptr));
     } // retranslateUi
 
 };

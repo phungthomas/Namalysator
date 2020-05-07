@@ -1,7 +1,7 @@
 #ifndef W_SUMMARYERRORS_H
 #define W_SUMMARYERRORS_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QTableWidget>
 #include <QHeaderView>
 #include "structgui.h"

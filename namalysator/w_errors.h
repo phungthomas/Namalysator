@@ -1,7 +1,7 @@
 #ifndef W_ERRORS_H
 #define W_ERRORS_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include "structgui.h"
 #include "dialogImage.h"
 
