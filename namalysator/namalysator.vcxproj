@@ -5,9 +5,17 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -21,7 +29,18 @@
     <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
@@ -39,7 +58,13 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -50,9 +75,18 @@
     <QtModules>core;gui;widgets</QtModules>
     <QtInstall>msvc2017</QtInstall>
   </PropertyGroup>
-  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="QtSettings">
     <QtModules>core;gui;widgets</QtModules>
     <QtInstall>msvc2017</QtInstall>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>5.14.2_msvc2017</QtInstall>
+    <QtBuildConfig>debug</QtBuildConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="QtSettings">
+    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>5.14.2_msvc2017_64</QtInstall>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
@@ -66,8 +100,14 @@
     <IntDir>$(Configuration)\</IntDir>
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <IncludePath>C:\NB_dev\CxImage\zlib;C:\NB_dev\Expat\Source\lib;C:\NB_dev\jpeg-6b-4-lib\include;C:\NB_dev\CxImage\tiff;C:\NB_dev\boost_1_72_0;C:\NB_dev\sqlite-amalgamation-3310100;C:\NB_dev\lib\include;C:\NB_dev\Namalysator\commonLib;C:\Qt\5.14.1\msvc2017\include\QtWidgets;C:\Qt\5.14.1\msvc2017\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\NB_dev\Namalysator\Libraries\Debug;C:\NB_dev\boost_1_72_0\stage\lib;C:\NB_dev\CxImage\zlib\Debug;C:\NB_dev\CxImage\tiff\Debug;C:\NB_dev\libdcr\Debug;C:\NB_dev\CxImage\mng\Debug;C:\NB_dev\CxImage\jasper\Debug;C:\NB_dev\CxImage\jpeg\Debug;C:\NB_dev\CxImage\jbig\Debug;C:\NB_dev\CxImage\png\Debug;C:\NB_dev\CxImage\CxImage\Debug;C:\NB_dev\jpeg-6b-4-lib\lib;C:\NB_dev\xerces-c-3.2.2\build\src\Debug;C:\NB_dev\sqlite-amalgamation-3310100;C:\Qt\5.14.1\msvc2017\lib;C:\NB_dev\Expat\Bin;$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\Documents\NB\Namalysator2\libs\misc;F:\Documents\NB\Namalysator2\libs\cximage\zlib;F:\Documents\NB\Namalysator2\libs\cximage\tiff;F:\Documents\NB\Namalysator2\libs\Expat 2.4.1\Source\lib;F:\Documents\NB\Namalysator2\libs\boost_1_76_0;F:\Documents\NB\Namalysator2\libs\sqlite;F:\Documents\NB\Namalysator2\Namalysator\commonLib;F:\Programmes\Qt\Qt5.14.2-mcvs\5.14.2\msvc2017\include\QtWidgets;F:\Programmes\Qt\Qt5.14.2-mcvs\5.14.2\msvc2017\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\Documents\NB\Namalysator2\Namalysator\Libraries\Debug;F:\Documents\NB\Namalysator2\libs\boost_1_76_0\stage\lib;F:\Documents\NB\Namalysator2\libs\cximage\zlib\Debug;F:\Documents\NB\Namalysator2\libs\cximage\tiff\Debug;F:\Documents\NB\Namalysator2\libs\cximage\raw\Debug;F:\Documents\NB\Namalysator2\libs\cximage\mng\Debug;F:\Documents\NB\Namalysator2\libs\cximage\jasper\Debug;F:\Documents\NB\Namalysator2\libs\cximage\jpeg\Debug;F:\Documents\NB\Namalysator2\libs\cximage\jbig\Debug;F:\Documents\NB\Namalysator2\libs\cximage\png\Debug;F:\Documents\NB\Namalysator2\libs\cximage\CxImage\Debug;C:\NB_dev\jpeg-6b-4-lib\lib;F:\Documents\NB\Namalysator2\libs\cximage\jpeg;C:\NB_dev\xerces-c-3.2.2\build\src\Debug;F:\Documents\NB\Namalysator2\libs\sqlite;C:\Qt\5.14.1\msvc2017\lib;F:\Documents\NB\Namalysator2\libs\Expat 2.4.1\Bin;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <IncludePath>F:\Documents\NB\Namalysator2\libs\misc;F:\Documents\NB\Namalysator2\libs\cximage\zlib;F:\Documents\NB\Namalysator2\libs\cximage\tiff;F:\Documents\NB\Namalysator2\libs\Expat 2.4.1\Source\lib;F:\Documents\NB\Namalysator2\libs\boost_1_76_0_2;F:\Documents\NB\Namalysator2\libs\sqlite;F:\Documents\NB\Namalysator2\Namalysator\commonLib;F:\Programmes\Qt\Qt5.14.2-mcvs\5.14.2\msvc2017_64\include\QtWidgets;F:\Programmes\Qt\Qt5.14.2-mcvs\5.14.2\msvc2017_64\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\Documents\NB\Namalysator2\Namalysator\Libraries\Debug;F:\Documents\NB\Namalysator2\libs\boost_1_76_0\stage\lib;F:\Documents\NB\Namalysator2\libs\cximage\zlib\Debug;F:\Documents\NB\Namalysator2\libs\cximage\tiff\Debug;F:\Documents\NB\Namalysator2\libs\cximage\raw\Debug;F:\Documents\NB\Namalysator2\libs\cximage\mng\Debug;F:\Documents\NB\Namalysator2\libs\cximage\jasper\Debug;F:\Documents\NB\Namalysator2\libs\cximage\jpeg\Debug;F:\Documents\NB\Namalysator2\libs\cximage\jbig\Debug;F:\Documents\NB\Namalysator2\libs\cximage\png\Debug;F:\Documents\NB\Namalysator2\libs\cximage\CxImage\Debug;C:\NB_dev\jpeg-6b-4-lib\lib;F:\Documents\NB\Namalysator2\libs\cximage\jpeg;C:\NB_dev\xerces-c-3.2.2\build\src\Debug;F:\Documents\NB\Namalysator2\libs\sqlite;C:\Qt\5.14.1\msvc2017\lib;F:\Documents\NB\Namalysator2\libs\Expat 2.4.1\Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
@@ -76,7 +116,14 @@
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\NB_dev\CxImage\zlib;C:\NB_dev\Expat\Source\lib;C:\NB_dev\jpeg-6b-4-lib\include;C:\NB_dev\CxImage\tiff;C:\NB_dev\boost_1_72_0;C:\NB_dev\sqlite-amalgamation-3310100;C:\NB_dev\lib\include;C:\NB_dev\Namalysator\commonLib;C:\Qt\5.14.1\msvc2017\include\QtWidgets;C:\Qt\5.14.1\msvc2017\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\NB_dev\Namalysator\Libraries\Release;C:\NB_dev\boost_1_72_0\stage\lib;C:\NB_dev\CxImage\zlib\Release;C:\NB_dev\CxImage\tiff\Release;C:\NB_dev\libdcr\Release;C:\NB_dev\CxImage\mng\Release;C:\NB_dev\CxImage\jasper\Release;C:\NB_dev\CxImage\jpeg\Release;C:\NB_dev\CxImage\jbig\Release;C:\NB_dev\CxImage\png\Release;C:\NB_dev\CxImage\CxImage\Release;C:\NB_dev\xerces-c-3.2.2\build\src\Release;C:\NB_dev\sqlite-amalgamation-3310100;C:\Qt\5.14.1\msvc2017\lib;C:\NB_dev\Expat\Bin;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\NB_dev\Namalysator\Libraries\Release;C:\NB_dev\boost_1_72_0\stage\lib;C:\NB_dev\CxImage\zlib\Release;C:\NB_dev\CxImage\tiff\Release;F:\Documents\NB\Namalysator2\libs\cximage\raw\Debug;C:\NB_dev\CxImage\mng\Release;C:\NB_dev\CxImage\jasper\Release;C:\NB_dev\CxImage\jpeg\Release;C:\NB_dev\CxImage\jbig\Release;C:\NB_dev\CxImage\png\Release;C:\NB_dev\CxImage\CxImage\Release;C:\NB_dev\xerces-c-3.2.2\build\src\Release;C:\NB_dev\sqlite-amalgamation-3310100;C:\Qt\5.14.1\msvc2017\lib;C:\NB_dev\Expat\Bin;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\NB_dev\CxImage\zlib;C:\NB_dev\Expat\Source\lib;C:\NB_dev\jpeg-6b-4-lib\include;C:\NB_dev\CxImage\tiff;C:\NB_dev\boost_1_72_0;C:\NB_dev\sqlite-amalgamation-3310100;C:\NB_dev\lib\include;C:\NB_dev\Namalysator\commonLib;C:\Qt\5.14.1\msvc2017\include\QtWidgets;C:\Qt\5.14.1\msvc2017\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);C:\NB_dev\Namalysator\Libraries\Release;C:\NB_dev\boost_1_72_0\stage\lib;C:\NB_dev\CxImage\zlib\Release;C:\NB_dev\CxImage\tiff\Release;F:\Documents\NB\Namalysator2\libs\cximage\raw\Debug;C:\NB_dev\CxImage\mng\Release;C:\NB_dev\CxImage\jasper\Release;C:\NB_dev\CxImage\jpeg\Release;C:\NB_dev\CxImage\jbig\Release;C:\NB_dev\CxImage\png\Release;C:\NB_dev\CxImage\CxImage\Release;C:\NB_dev\xerces-c-3.2.2\build\src\Release;C:\NB_dev\sqlite-amalgamation-3310100;C:\Qt\5.14.1\msvc2017\lib;C:\NB_dev\Expat\Bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -110,9 +157,9 @@
     <Link>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" "/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>cximage.lib;commonLib.lib;zlib.lib;libexpatMT.lib;sqlite3.lib;shell32.lib;png.lib;jbig.lib;jasper.lib;Jpeg.lib;mng.lib;libdcr.lib;tiff.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+	  <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(METSVERIFIER)\Libraries\Debug;$(METSVERIFY_EXTERNAL)\Libraries\Debug;$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>F:\Documents\NB\Namalysator2\libs\sqlite;$(METSVERIFIER)\Libraries\Debug;$(METSVERIFY_EXTERNAL)\Libraries\Debug;$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile />
       <SubSystem>Windows</SubSystem>
@@ -130,7 +177,114 @@
       <QtUicFileName>ui_%(Filename).h</QtUicFileName>
     </QtUic>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <WarningLevel>0</WarningLevel>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 -Zm200 -w34100 -w34189 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(METSVERIFY_EXTERNAL)\Headers;$(METSVERIFIER)\commonLib;$(QTDIR)\include\QtWebKit;$(QTDIR)\include;$(QTDIR)\include\ActiveQt;$(QTDIR)\mkspecs\win32-msvc2008;$(Configuration);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_DLL;QT_WEBKIT_LIB;QT_THREAD_SUPPORT;XML_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <ObjectFileName>debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_DLL;QT_WEBKIT_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" "/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>F:\Documents\NB\Namalysator2\Namalysator\Libraries\Debug;F:\Documents\NB\Namalysator2\libs\boost_1_76_0_2\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>
+      </ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <LinkTimeCodeGeneration>
+      </LinkTimeCodeGeneration>
+    </Link>
+    <QtMoc>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>.\GeneratedFiles\MOCKING</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>.</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <WarningLevel>0</WarningLevel>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>-Zm200 -w34100 -w34189 -Zm200 -w34100 -w34189 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;$(METSVERIFY_EXTERNAL)\Headers;$(QTDIR)\include\QtWebKit;$(QTDIR)\include;$(QTDIR)\include\ActiveQt;.\release;.;$(QTDIR)\mkspecs\win32-msvc2008;$(Configuration);$(METSVERIFIER)\commonLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QT_NO_DEBUG;NDEBUG;_WINDOWS;UNICODE;WIN32;_CRT_SECURE_NO_WARNINGS;QT_DLL;QT_WEBKIT_LIB;QT_THREAD_SUPPORT;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <ObjectFileName>release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>QT_NO_DEBUG;NDEBUG;_WINDOWS;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_DLL;QT_NO_DEBUG;QT_WEBKIT_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" "/MANIFESTDEPENDENCY:type=%27win32%27 name=%27Microsoft.Windows.Common-Controls%27 version=%276.0.0.0%27 publicKeyToken=%276595b64144ccf1df%27 language=%27*%27 processorArchitecture=%27*%27" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>cximage.lib;commonLib.lib;zlib.lib;libexpatMT.lib;sqlite3.lib;shell32.lib;png.lib;jbig.lib;jasper.lib;Jpeg.lib;mng.lib;libdcr.lib;tiff.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(METSVERIFIER)\Libraries\Release;$(METSVERIFY_EXTERNAL)\Libraries\Release;$(BOOST_LIB);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>true</GenerateMapFile>
+      <SubSystem>Windows</SubSystem>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <QtMoc>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>.\GeneratedFiles\MOCKING</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>.</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
       <WarningLevel>0</WarningLevel>
       <DefaultCharType>Unsigned</DefaultCharType>
@@ -217,7 +371,6 @@
     <ClCompile Include="parammodel.cpp" />
     <ClCompile Include="qwidgettaberror.cpp" />
     <ClCompile Include="structgui.cpp" />
-    <ClCompile Include="tif_win32.cpp" />
     <ClCompile Include="w_accepted.cpp" />
     <ClCompile Include="w_booklist.cpp" />
     <ClCompile Include="w_calendar.cpp" />

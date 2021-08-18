@@ -192,9 +192,6 @@
     <ClCompile Include="w_thumb.cpp">
       <Filter>Source Files\widgets</Filter>
     </ClCompile>
-    <ClCompile Include="tif_win32.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="altoparser.h">
