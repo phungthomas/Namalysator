@@ -507,7 +507,7 @@ void w_structview::constructTOCrecursively(Item *item,QTreeWidgetItem *widget)
 			} else {
 				a->setText(0, QString::fromUtf8(currentItem->type.c_str()));
 			}
-			
+			a->setToolTip(0, a->text(0));
 			a->setTextColor(0,Qt::black);			
 			currentWidget->addChild(a);				
 			vectItem.push_back(currentItem);

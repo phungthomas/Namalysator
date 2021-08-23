@@ -7,6 +7,9 @@ TARGET = namalysator
 DESTDIR = ../Debug
 QT += axserver axcontainer webkit
 CONFIG += debug
+CONFIG += console
+CONFIG -= app_bundle
+CONFIG -= qt
 DEFINES += _WINDOWS QT_DLL QT_WEBKIT_LIB XML_STATIC _CRT_SECURE_NO_WARNINGS
 LIBS += -L"$(METSVERIFIER)/Libraries/Debug" \
     -L"$(METSVERIFY_EXTERNAL)/Libraries/Debug" \
