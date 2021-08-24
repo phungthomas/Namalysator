@@ -89,6 +89,7 @@ w_structview::w_structview(QWidget *parent) :
 //! create event / slots
 void w_structview::createConnections()
 {	
+	m_ui->label->installEventFilter(this);
 	connect(m_ui->calendarWidget,SIGNAL(clicked(QDate)),this,SLOT(getDate(QDate)));
 	connect(m_ui->treeWidget,SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),this, SLOT(drawRect(QTreeWidgetItem*,QTreeWidgetItem*)));  
 	connect(m_ui->listMets,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(getIdMets(QListWidgetItem*)));
@@ -118,6 +119,27 @@ void w_structview::createConnections()
 	//connect(bookList, SIGNAL(metsThumb(int)), this, SLOT(getIdMetsII(int)));
 	
 }
+
+bool w_structview::eventFilter(QObject* o, QEvent* e) {
+
+	if (o == m_ui->label && e->type() == QMouseEvent::MouseButtonPress) {
+		QMouseEvent* mEvent = static_cast<QMouseEvent*>(e);
+		switch (mEvent->button()) {
+		case Qt::MouseButton::LeftButton:
+			zoomIn();
+			break;
+		case Qt::MouseButton::RightButton:
+			zoomOut();
+			break;
+		case Qt::MouseButton::MiddleButton:
+			zoomFull();
+			break;
+		}
+	}
+
+	return QObject::eventFilter(o, e);
+}
+
 
 void w_structview::deleteSelectedItem(){
 	static QMessageBox* qmesg=new QMessageBox();

@@ -1,5 +1,6 @@
 Release/
 Debug/
+
 *.dll
 namalysator/GeneratedFiles/
 *.ncb

@@ -1,6 +1,8 @@
 #include <QApplication>
 #include "w_selectbatch.h"
 #include "w_main.h"
+#include <iostream>
+#include <fstream>
 
 int main(int argc, char *argv[])
 {

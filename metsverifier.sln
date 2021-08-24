@@ -48,8 +48,8 @@ Global
 		{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}.Static Release|Win32.ActiveCfg = Release|Win32
 		{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}.Static Release|Win32.Build.0 = Release|Win32
 		{812C7CD2-25D6-4B22-ACE5-2096E654ED0C}.Static Release|x64.ActiveCfg = Release|Win32
-		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Debug|Win32.ActiveCfg = Debug|Win32
-		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Debug|Win32.Build.0 = Debug|Win32
+		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Debug|Win32.ActiveCfg = Release|Win32
+		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Debug|Win32.Build.0 = Release|Win32
 		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Debug|x64.ActiveCfg = Debug|Win32
 		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.ICU Debug|Win32.ActiveCfg = Debug|Win32
 		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.ICU Debug|Win32.Build.0 = Debug|Win32
@@ -66,8 +66,8 @@ Global
 		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Static Release|Win32.ActiveCfg = Release|Win32
 		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Static Release|Win32.Build.0 = Release|Win32
 		{80B6A0C6-EA9D-349F-B3E8-0756871F7982}.Static Release|x64.ActiveCfg = Release|Win32
-		{C53A8D74-9C50-4456-A741-60736F3B2A40}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C53A8D74-9C50-4456-A741-60736F3B2A40}.Debug|Win32.Build.0 = Debug|Win32
+		{C53A8D74-9C50-4456-A741-60736F3B2A40}.Debug|Win32.ActiveCfg = Release|Win32
+		{C53A8D74-9C50-4456-A741-60736F3B2A40}.Debug|Win32.Build.0 = Release|Win32
 		{C53A8D74-9C50-4456-A741-60736F3B2A40}.Debug|x64.ActiveCfg = Debug|Win32
 		{C53A8D74-9C50-4456-A741-60736F3B2A40}.ICU Debug|Win32.ActiveCfg = Debug|Win32
 		{C53A8D74-9C50-4456-A741-60736F3B2A40}.ICU Debug|Win32.Build.0 = Debug|Win32
@@ -131,6 +131,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = 5.14.2_msvc2017
 		SolutionGuid = {19A84527-86E3-446A-84FF-433F8293D56C}
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution

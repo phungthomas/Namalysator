@@ -22,6 +22,7 @@
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "clickablelabel.h"
 
 QT_BEGIN_NAMESPACE
 

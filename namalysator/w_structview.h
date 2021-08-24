@@ -14,6 +14,7 @@
 #include "w_booklist.h"
 #include "w_thumb.h"
 #include <QSortFilterProxyModel>
+#include "clickableLabel.h"
 
 
 namespace Ui {
@@ -36,7 +37,6 @@ protected:
     virtual void changeEvent(QEvent *e);
 
 private:
-	
 	int minor;
 	int major;
 	int blocking;
@@ -75,6 +75,8 @@ private:
 		void createArticle();
 		void findBlockToArticle(Item *item, std::vector<typeBlock> &output);
 		void create_page2toc_entry();
+		bool eventFilter(QObject* obj, QEvent* ev);
+
 		
 	/******* déclarations **********/   
     QImage image,originalImage;

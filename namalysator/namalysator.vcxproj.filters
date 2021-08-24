@@ -192,6 +192,9 @@
     <ClCompile Include="w_thumb.cpp">
       <Filter>Source Files\widgets</Filter>
     </ClCompile>
+    <ClCompile Include="clickableLabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="altoparser.h">
@@ -382,5 +385,8 @@
     <QtUic Include="w_taberror.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtMoc Include="clickableLabel.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>
